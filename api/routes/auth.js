@@ -10,7 +10,12 @@ const { body, validationResult } = require('express-validator');
 const User = require('../models/User');
 const auth = require('../middleware/auth');
 
-const JWT_SECRET = process.env.JWT_SECRET || 'fairgojustice-secret-key';
+const JWT_SECRET = process.env.JWT_SECRET;
+
+// Validate JWT_SECRET is set in production
+if (!JWT_SECRET && process.env.NODE_ENV === 'production') {
+  throw new Error('JWT_SECRET environment variable must be set in production');
+}
 
 // Register new user
 router.post('/register', [

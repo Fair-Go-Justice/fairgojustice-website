@@ -917,6 +917,61 @@
   }
 
   // ==========================================================================
+  // Copy to Clipboard Functionality
+  // ==========================================================================
+  
+  function initCopyButtons() {
+    const copyButtons = document.querySelectorAll('.copy-text-btn');
+    
+    copyButtons.forEach(button => {
+      button.addEventListener('click', async function(e) {
+        e.preventDefault();
+        
+        const textToCopy = this.dataset.copyText;
+        if (!textToCopy) return;
+        
+        try {
+          // Modern clipboard API
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            await navigator.clipboard.writeText(textToCopy);
+          } else {
+            // Fallback for older browsers
+            const textArea = document.createElement('textarea');
+            textArea.value = textToCopy;
+            textArea.style.position = 'fixed';
+            textArea.style.left = '-9999px';
+            document.body.appendChild(textArea);
+            textArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textArea);
+          }
+          
+          // Visual feedback
+          const originalText = this.innerHTML;
+          this.innerHTML = '<i class="fas fa-check"></i> Copied!';
+          this.classList.add('btn-success');
+          
+          setTimeout(() => {
+            this.innerHTML = originalText;
+            this.classList.remove('btn-success');
+          }, 2000);
+          
+          // Track copy
+          if (typeof gtag === 'function') {
+            gtag('event', 'copy_text', {
+              'event_category': 'engagement',
+              'event_label': 'social_media_kit'
+            });
+          }
+        } catch (err) {
+          console.error('Failed to copy text:', err);
+          alert('Failed to copy text. Please select and copy manually.');
+        }
+      });
+    });
+  }
+
+  // ==========================================================================
   // Initialize Everything
   // ==========================================================================
   
@@ -932,6 +987,7 @@
     initLazyLoading();
     initAccessibility();
     initStoryShare();
+    initCopyButtons();
   }
 
   // Run on DOM ready

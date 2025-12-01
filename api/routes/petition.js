@@ -89,18 +89,39 @@ router.post('/sign', [
 
 // Helper: Convert postcode to general location
 function postcodeToLocation(postcode) {
-  const prefix = postcode.substring(0, 2);
-  const states = {
-    '20': 'NSW', '21': 'NSW', '22': 'NSW', '23': 'NSW', '24': 'NSW', '25': 'NSW', '26': 'NSW', '27': 'NSW', '28': 'NSW', '29': 'NSW',
-    '30': 'VIC', '31': 'VIC', '32': 'VIC', '33': 'VIC', '34': 'VIC', '35': 'VIC', '36': 'VIC', '37': 'VIC', '38': 'VIC', '39': 'VIC',
-    '40': 'QLD', '41': 'QLD', '42': 'QLD', '43': 'QLD', '44': 'QLD', '45': 'QLD', '46': 'QLD', '47': 'QLD', '48': 'QLD', '49': 'QLD',
-    '50': 'SA', '51': 'SA', '52': 'SA', '53': 'SA', '54': 'SA', '55': 'SA', '56': 'SA', '57': 'SA',
-    '60': 'WA', '61': 'WA', '62': 'WA', '63': 'WA', '64': 'WA', '65': 'WA', '66': 'WA', '67': 'WA', '68': 'WA', '69': 'WA',
-    '70': 'TAS', '71': 'TAS', '72': 'TAS', '73': 'TAS', '74': 'TAS', '75': 'TAS',
-    '08': 'NT', '09': 'NT',
-    '02': 'ACT', '26': 'ACT'
-  };
-  return states[prefix] || 'Australia';
+  const code = parseInt(postcode, 10);
+  
+  // NSW/ACT ranges
+  if (code >= 2000 && code <= 2599) return 'NSW';
+  if (code >= 2600 && code <= 2618) return 'ACT';
+  if (code >= 2619 && code <= 2898) return 'NSW';
+  if (code >= 2899 && code <= 2920) return 'ACT';
+  if (code >= 2921 && code <= 2999) return 'NSW';
+  
+  // VIC ranges
+  if (code >= 3000 && code <= 3999) return 'VIC';
+  if (code >= 8000 && code <= 8999) return 'VIC';
+  
+  // QLD ranges
+  if (code >= 4000 && code <= 4999) return 'QLD';
+  if (code >= 9000 && code <= 9999) return 'QLD';
+  
+  // SA ranges
+  if (code >= 5000 && code <= 5799) return 'SA';
+  if (code >= 5800 && code <= 5999) return 'SA';
+  
+  // WA ranges
+  if (code >= 6000 && code <= 6797) return 'WA';
+  if (code >= 6800 && code <= 6999) return 'WA';
+  
+  // TAS ranges
+  if (code >= 7000 && code <= 7799) return 'TAS';
+  if (code >= 7800 && code <= 7999) return 'TAS';
+  
+  // NT ranges
+  if (code >= 800 && code <= 899) return 'NT';
+  
+  return 'Australia';
 }
 
 module.exports = router;
