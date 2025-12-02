@@ -72,14 +72,17 @@ router.post('/sign', [
       comment: comment || '',
       displayName: displayName !== false,
       subscribe: subscribe !== false,
-      location: postcodeToLocation(postcode)
+      location: postcodeToLocation(postcode),
+      ipAddress: req.ip || req.connection.remoteAddress || req.headers['x-forwarded-for']
     });
 
+    // Get count BEFORE saving to prevent race condition
+    const count = await Petition.countDocuments();
     await signature.save();
 
     res.status(201).json({
       message: 'Thank you for signing! Your voice matters.',
-      signatureNumber: await Petition.countDocuments() + 12847
+      signatureNumber: count + 1 + 12847
     });
   } catch (error) {
     console.error('Petition sign error:', error);
