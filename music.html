@@ -37,7 +37,7 @@
     <style>
         /* Music Page Specific Styles */
         .music-hero {
-            background: linear-gradient(135deg, var(--color-primary) 0%, #1a3a5c 100%);
+            background: linear-gradient(135deg, var(--primary-blue) 0%, #1a3a5c 100%);
             color: white;
             padding: 6rem 2rem 4rem;
             text-align: center;
@@ -79,7 +79,7 @@
         
         .track-artwork {
             aspect-ratio: 1;
-            background: linear-gradient(135deg, var(--color-secondary) 0%, var(--color-primary) 100%);
+            background: linear-gradient(135deg, var(--accent-gold) 0%, var(--primary-blue) 100%);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -130,7 +130,7 @@
         .track-title {
             font-size: 1.4rem;
             font-weight: 700;
-            color: var(--color-primary);
+            color: var(--primary-blue);
             margin-bottom: 0.5rem;
         }
         
@@ -156,7 +156,7 @@
         
         .track-tag {
             background: #f0f4f8;
-            color: var(--color-primary);
+            color: var(--primary-blue);
             padding: 0.3rem 0.8rem;
             border-radius: 20px;
             font-size: 0.8rem;
@@ -216,8 +216,8 @@
         }
         
         .featured-label {
-            background: var(--color-secondary);
-            color: var(--color-primary);
+            background: var(--accent-gold);
+            color: var(--primary-blue);
             padding: 0.4rem 1rem;
             border-radius: 20px;
             font-size: 0.8rem;
@@ -258,7 +258,7 @@
         
         .lyrics-container h2 {
             font-size: 2rem;
-            color: var(--color-primary);
+            color: var(--primary-blue);
             margin-bottom: 2rem;
         }
         
@@ -280,14 +280,14 @@
         
         /* Call to Action */
         .music-cta {
-            background: var(--color-secondary);
+            background: var(--accent-gold);
             padding: 4rem 2rem;
             text-align: center;
         }
-
+        
         .music-cta h2 {
             font-size: 2rem;
-            color: var(--color-primary);
+            color: var(--primary-blue);
             margin-bottom: 1rem;
         }
         
@@ -322,27 +322,25 @@
 </head>
 <body>
     <!-- Navigation -->
-    <header class="site-header">
-        <div class="header-main">
-            <a href="index.html" class="logo">Fair Go Justice</a>
-            <button id="navToggle" class="nav-toggle" aria-label="Toggle navigation">
-                <span></span>
-                <span></span>
-                <span></span>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <span class="logo-text">Fair Go Justice</span>
+            </a>
+            <button class="nav-toggle" aria-label="Toggle navigation">
+                <span class="hamburger"></span>
             </button>
-            <nav id="mainNav" class="main-nav">
-                <ul class="nav-list">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="pillars.html">5 Pillars</a></li>
-                    <li><a href="stories.html">Stories</a></li>
-                    <li><a href="music.html" class="active">Music</a></li>
-                    <li><a href="resources.html">Resources</a></li>
-                    <li><a href="petition.html" class="btn btn-primary">Sign Petition</a></li>
-                </ul>
-            </nav>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="pillars.html">5 Pillars</a></li>
+                <li><a href="stories.html">Stories</a></li>
+                <li><a href="music.html" class="active">Music</a></li>
+                <li><a href="resources.html">Resources</a></li>
+                <li><a href="petition.html" class="btn btn-primary">Sign Petition</a></li>
+            </ul>
         </div>
-    </header>
+    </nav>
 
     <!-- Hero Section -->
     <section class="music-hero">
@@ -632,9 +630,9 @@ Royal Commission now, the time is here!
     </section>
 
     <!-- Footer -->
-    <footer class="site-footer">
-        <div class="footer-grid">
-            <div class="footer-col">
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
                 <h3>Fair Go Justice</h3>
                 <p>A grassroots movement demanding justice system reform across Australia.</p>
                 <div class="social-links">
@@ -652,7 +650,7 @@ Royal Commission now, the time is here!
                     </a>
                 </div>
             </div>
-            <div class="footer-col">
+            <div class="footer-section">
                 <h4>Quick Links</h4>
                 <ul>
                     <li><a href="about.html">About Us</a></li>
@@ -661,7 +659,7 @@ Royal Commission now, the time is here!
                     <li><a href="petition.html">Sign Petition</a></li>
                 </ul>
             </div>
-            <div class="footer-col">
+            <div class="footer-section">
                 <h4>Resources</h4>
                 <ul>
                     <li><a href="resources.html">Get Help</a></li>
@@ -670,7 +668,7 @@ Royal Commission now, the time is here!
                     <li><a href="social-media-kit.html">Social Media Kit</a></li>
                 </ul>
             </div>
-            <div class="footer-col">
+            <div class="footer-section">
                 <h4>Legal</h4>
                 <ul>
                     <li><a href="privacy.html">Privacy Policy</a></li>
