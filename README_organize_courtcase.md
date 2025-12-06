@@ -1,20 +1,22 @@
-# Court Case Document Organizer
+# Court Case Document Organizer for Google Drive
 
-A Python script that organizes court case PDF documents into categorized directories and optionally indexes them in a Qdrant vector database for similarity search.
+A Python script that organizes court case PDF documents in Google Drive into categorized folders and optionally indexes them in a Qdrant vector database for similarity search.
 
 ## Features
 
-- **PDF Text Extraction**: Extracts text content from PDF documents using PyMuPDF
+- **Google Drive Integration**: Scans and organizes PDFs directly in Google Drive folders
+- **PDF Text Extraction**: Downloads and extracts text content from PDF documents using PyMuPDF
 - **Document Classification**: Automatically categorizes documents into 5 categories:
   - Pleadings (complaints, motions, petitions, etc.)
   - Evidence (exhibits, affidavits, depositions, etc.)
   - Orders (judgments, rulings, decisions, etc.)
   - Correspondence (letters, emails, notices, etc.)
   - Case Management (dockets, calendars, transcripts, etc.)
-- **Duplicate Detection**: Prevents duplicate files using MD5 hash comparison
+- **Duplicate Detection**: Prevents duplicate files using MD5 hash comparison across Drive folders
 - **Vector Indexing**: Optional indexing to Qdrant vector database using SentenceTransformers
+- **Google Drive API**: OAuth2 authentication with automatic token management
 - **Comprehensive Logging**: Detailed logging with configurable verbosity
-- **Dry Run Mode**: Preview changes without modifying files
+- **Dry Run Mode**: Preview changes without modifying Drive files
 - **Summary Reporting**: Generates detailed markdown summary of operations
 
 ## Installation
@@ -22,6 +24,7 @@ A Python script that organizes court case PDF documents into categorized directo
 ### Prerequisites
 
 - Python 3.7+
+- Google Cloud Project with Drive API enabled
 - Access to a Qdrant vector database (optional, only needed for indexing)
 
 ### Dependencies
@@ -29,8 +32,28 @@ A Python script that organizes court case PDF documents into categorized directo
 Install the required Python packages:
 
 ```bash
-pip install qdrant-client PyMuPDF sentence-transformers numpy
+pip install qdrant-client PyMuPDF sentence-transformers numpy google-api-python-client google-auth-oauthlib google-auth-httplib2
 ```
+
+### Google Drive Setup
+
+1. **Create Google Cloud Project**:
+   - Go to [Google Cloud Console](https://console.cloud.google.com/)
+   - Create a new project or select existing one
+
+2. **Enable Google Drive API**:
+   - Navigate to "APIs & Services" > "Library"
+   - Search for "Google Drive API" and enable it
+
+3. **Create OAuth2 Credentials**:
+   - Go to "APIs & Services" > "Credentials"
+   - Click "Create Credentials" > "OAuth 2.0 Client IDs"
+   - Choose "Desktop application"
+   - Download the credentials JSON file as `credentials.json`
+
+4. **Configure API Scopes**:
+   - The script uses `https://www.googleapis.com/auth/drive` scope
+   - This allows read/write access to Google Drive files
 
 ### Qdrant Setup (Optional)
 
@@ -50,28 +73,37 @@ export QDRANT_API_KEY="your-api-key"
 
 ## Usage
 
-### Directory Structure
+### Google Drive Setup
 
-Place your PDF files in a directory called `CourtCase-Raw/` in the same location as the script:
+1. **Create Folders**: In your Google Drive, create a folder called "CourtCase-Raw" and place your PDF files there
+2. **Place credentials.json**: Put your downloaded `credentials.json` file in the same directory as the script
+3. **First Run**: The script will open a browser for Google OAuth2 authentication and save `token.pickle` for future use
+
+### Google Drive Structure
+
+After running, your Google Drive will have this structure:
 
 ```
-your-project/
-├── organize_courtcase.py
+My Drive/
 ├── CourtCase-Raw/
 │   ├── complaint_john_doe.pdf
 │   ├── evidence_exhibit_1.pdf
 │   ├── order_court_ruling.pdf
 │   └── correspondence_lawyer.pdf
-└── CourtCase-Organized/  # Created automatically
-    ├── Pleadings/
-    ├── Evidence/
-    ├── Orders/
-    └── Correspondence/
+├── CourtCase-Organized/  # Created automatically
+│   ├── Pleadings/
+│   │   ├── complaint_john_doe.pdf
+│   ├── Evidence/
+│   │   ├── evidence_exhibit_1.pdf
+│   ├── Orders/
+│   │   └── order_court_ruling.pdf
+│   └── Correspondence/
+│       └── correspondence_lawyer.pdf
 ```
 
 ### Basic Organization
 
-Organize documents into categorized directories:
+Organize documents into categorized Google Drive folders:
 
 ```bash
 python organize_courtcase.py
@@ -111,28 +143,28 @@ Clear existing Qdrant collection and re-index all documents:
 python organize_courtcase.py --index-qdrant --reindex
 ```
 
-### Custom Directories
+### Custom Folders
 
-Specify custom input/output directories:
+Specify custom Google Drive folder names:
 
 ```bash
-python organize_courtcase.py --input-dir "my-pdfs" --output-dir "organized-pdfs"
+python organize_courtcase.py --input-folder "My-Court-Cases" --output-folder "Organized-Cases"
 ```
 
 ### Command-Line Options
 
 ```
-usage: organize_courtcase.py [-h] [--input-dir INPUT_DIR] [--output-dir OUTPUT_DIR]
+usage: organize_courtcase.py [-h] [--input-folder INPUT_FOLDER] [--output-folder OUTPUT_FOLDER]
                             [--index-qdrant] [--reindex] [--dry-run]
                             [--qdrant-url QDRANT_URL] [--qdrant-api-key QDRANT_API_KEY]
                             [--verbose]
 
-Organize court case PDF documents and optionally index them in Qdrant
+Organize court case PDF documents in Google Drive and optionally index them in Qdrant
 
 optional arguments:
   -h, --help            show this help message and exit
-  --input-dir INPUT_DIR Input directory containing PDF files (default: CourtCase-Raw)
-  --output-dir OUTPUT_DIR Output directory for organized files (default: CourtCase-Organized)
+  --input-folder INPUT_FOLDER Google Drive input folder name containing PDF files (default: CourtCase-Raw)
+  --output-folder OUTPUT_FOLDER Google Drive output folder name for organized files (default: CourtCase-Organized)
   --index-qdrant        Enable vector indexing to Qdrant database
   --reindex             Force re-indexing (clear and rebuild Qdrant collection)
   --dry-run             Preview changes without moving files or indexing
@@ -230,19 +262,31 @@ Generated: 2025-12-06 21:10:00
    ```
    Missing required dependency: No module named 'fitz'
    ```
-   Solution: `pip install qdrant-client PyMuPDF sentence-transformers numpy`
+   Solution: `pip install qdrant-client PyMuPDF sentence-transformers numpy google-api-python-client google-auth-oauthlib google-auth-httplib2`
 
-2. **Qdrant Connection Failed**
+2. **Google Drive Authentication Failed**
+   ```
+   credentials.json not found
+   ```
+   Solution: Download OAuth2 credentials from Google Cloud Console and save as `credentials.json`
+
+3. **Google Drive API Access Denied**
+   ```
+   Access denied
+   ```
+   Solution: Ensure Google Drive API is enabled and OAuth2 credentials have correct scopes
+
+4. **Qdrant Connection Failed**
    ```
    Qdrant client error: Connection refused
    ```
    Solution: Check QDRANT_URL and QDRANT_API_KEY environment variables
 
-3. **No PDF Files Found**
+5. **No PDF Files Found**
    ```
-   No PDF files found in CourtCase-Raw
+   No PDF files found in Google Drive folder 'CourtCase-Raw'
    ```
-   Solution: Ensure PDF files exist in the input directory
+   Solution: Ensure PDF files exist in the specified Google Drive folder
 
 ### Verbose Logging
 
