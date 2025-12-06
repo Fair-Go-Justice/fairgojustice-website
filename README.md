@@ -21,7 +21,7 @@ npx serve .
 
 ```
 ├── index.html          # Homepage
-├── about.html          # About the movement  
+├── about.html          # About the movement
 ├── contact.html        # Contact form
 ├── petition.html       # Sign petition
 ├── stories.html        # Share your story
@@ -32,8 +32,39 @@ npx serve .
 ├── css/main.css        # Stylesheet
 ├── js/main.js          # JavaScript
 ├── api/                # Express.js backend
+├── scripts/            # Deployment scripts
 └── docs/               # Documentation
 ```
+
+## 🤖 AI Model Deployment
+
+The website integrates AI capabilities for legal question answering using Google Cloud Vertex AI.
+
+### Prerequisites
+
+- Python 3.7+
+- Google Cloud SDK (gcloud)
+- Access to GCP project `fairgojustice48981`
+
+### Installation
+
+```bash
+# Install Vertex AI SDK
+pip install --upgrade google-cloud-aiplatform
+
+# Authenticate with Google Cloud
+gcloud auth application-default login
+```
+
+### Deploy Model
+
+```bash
+cd scripts
+pip install -r requirements.txt
+python deploy_model.py
+```
+
+This deploys the AusLegalQA Mixtral model for Australian legal Q&A.
 
 ## 📞 Contact
 
