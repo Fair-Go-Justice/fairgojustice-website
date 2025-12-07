@@ -117,11 +117,73 @@
           <h3>How to Register Your Interest</h3>
           <p>Registering your interest is a crucial first step. It helps us understand the scale of the issue and ensures you are kept informed of key developments without any obligation.</p>
           <ol>
+            <li>**Register Below:** Fill out the form below to register your interest in joining the class action.</li>
             <li>**Share Your Story:** Visit our <a href="stories.html">Share Your Story</a> page to provide details of your experience. This is confidential and helps us build a robust case.</li>
             <li>**Contact Us:** If you prefer, you can <a href="contact.html">contact our legal team directly</a> to discuss your situation.</li>
             <li>**Stay Updated:** Subscribe to our <a href="updates.html">Updates</a> page for the latest news on the class action.</li>
           </ol>
           <p>By registering your interest, you are not committing to anything but taking a vital step towards accountability and justice.</p>
+
+          <h3>Register Your Interest</h3>
+          <div class="card" style="margin-top: var(--space-lg);">
+            <form id="classActionForm" data-validate data-form-type="class-action" style="margin-top: var(--space-xl);">
+              <div class="form-group">
+                <label for="caFirstName" class="form-label">First Name *</label>
+                <input type="text" id="caFirstName" name="firstName" class="form-control" placeholder="Your first name" required>
+                <span class="form-error" data-error-for="firstName"></span>
+              </div>
+
+              <div class="form-group">
+                <label for="caLastName" class="form-label">Last Name *</label>
+                <input type="text" id="caLastName" name="lastName" class="form-control" placeholder="Your last name" required>
+                <span class="form-error" data-error-for="lastName"></span>
+              </div>
+
+              <div class="form-group">
+                <label for="caEmail" class="form-label">Email Address *</label>
+                <input type="email" id="caEmail" name="email" class="form-control" placeholder="your.email@example.com" required>
+                <span class="form-error" data-error-for="email"></span>
+              </div>
+
+              <div class="form-group">
+                <label for="caPhone" class="form-label">Phone Number *</label>
+                <input type="tel" id="caPhone" name="phone" class="form-control" placeholder="04XX XXX XXX" required>
+                <span class="form-error" data-error-for="phone"></span>
+              </div>
+
+              <div class="form-group">
+                <label for="caPostcode" class="form-label">Postcode *</label>
+                <input type="text" id="caPostcode" name="postcode" class="form-control" placeholder="2000" pattern="[0-9]{4}" maxlength="4" required>
+                <span class="form-error" data-error-for="postcode"></span>
+                <p class="form-text">Your postcode helps us organize by region.</p>
+              </div>
+
+              <div class="form-group">
+                <label for="caExperience" class="form-label">Briefly describe your experience (Optional)</label>
+                <textarea id="caExperience" name="experienceDetails" class="form-control" placeholder="Please share any relevant details about your experience with vehicle maintenance, incidents, or related issues..." rows="4"></textarea>
+              </div>
+
+              <div class="form-check">
+                <input type="checkbox" id="caDisplayName" name="displayName" value="yes">
+                <label for="caDisplayName">I am willing to have my name displayed publicly as supporting this class action (first name and suburb only)</label>
+              </div>
+
+              <div class="form-check">
+                <input type="checkbox" id="caSubscribe" name="subscribe" value="yes" checked>
+                <label for="caSubscribe">Keep me updated on Fair Go Justice campaigns and class action developments</label>
+              </div>
+
+              <div class="form-check">
+                <input type="checkbox" id="caTerms" name="terms" value="yes" required>
+                <label for="caTerms">I agree to the <a href="terms.html" target="_blank">Terms of Service</a> and <a href="privacy.html" target="_blank">Privacy Policy</a> *</label>
+                <span class="form-error" data-error-for="terms"></span>
+              </div>
+
+              <button type="submit" class="btn btn-primary btn-large" style="width: 100%; margin-top: var(--space-lg);">
+                <i class="fas fa-user-plus"></i> Register My Interest
+              </button>
+            </form>
+          </div>
         </div>
       </div>
     </div>

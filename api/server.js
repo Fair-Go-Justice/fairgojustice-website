@@ -17,6 +17,7 @@ const storiesRoutes = require('./routes/stories');
 const contactRoutes = require('./routes/contact');
 const quizRoutes = require('./routes/quiz');
 const analyticsRoutes = require('./routes/analytics');
+const classActionRoutes = require('./routes/class-action');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -97,6 +98,7 @@ app.use('/api/stories', storiesRoutes);
 app.use('/api/contact', contactRoutes);
 app.use('/api/quiz', quizRoutes);
 app.use('/api/analytics', analyticsRoutes);
+app.use('/api/class-action', classActionRoutes);
 
 // ==========================================================================
 // Error Handling
