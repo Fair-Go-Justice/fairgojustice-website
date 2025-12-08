@@ -161,14 +161,16 @@ fairgojustice-website/
 
 ## 🚀 Deployment Guide
 
-### Netlify (Recommended for Static)
-1. Connect GitHub repository
-2. Configure build:
-   - Build command: (empty)
-   - Publish directory: `.`
-3. Add custom domain
-4. Enable HTTPS
-5. Configure redirects (optional)
+### Google Cloud Platform (Firebase Hosting)
+
+1. Install Firebase CLI: `npm install -g firebase-tools`
+2. Login to Firebase: `firebase login`
+3. Deploy static site: `./deploy-static.sh`
+4. Deploy API: `cd api && ./deploy.sh`
+5. Configure custom domain in Firebase Console:
+   - Go to Hosting section
+   - Add domain: `www.fairgojustice.com.au`
+   - Follow DNS setup instructions
 
 ### Railway.app (Alternative for API)
 1. Import GitHub repository
