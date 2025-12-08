@@ -20,7 +20,7 @@
 - **Framework:** Express.js
 - **Database:** MongoDB with Mongoose ODM
 - **Authentication:** JWT tokens
-- **Deployment:** Railway.app (recommended)
+- **Deployment:** Google Cloud Run (recommended) or Railway.app
 
 ---
 
@@ -170,17 +170,54 @@ fairgojustice-website/
 4. Enable HTTPS
 5. Configure redirects (optional)
 
-### Railway.app (For API)
+### Railway.app (Alternative for API)
 1. Import GitHub repository
 2. Set environment variables:
    ```
    MONGODB_URI=mongodb+srv://...
    JWT_SECRET=your-secret-key
-   PORT=3001
+   PORT=8080
    NODE_ENV=production
    ```
 3. Deploy from main branch
 4. Get public URL
+
+### Google Cloud Run (Recommended for API)
+1. **Prerequisites:**
+   - Google Cloud Project (fairgojustice48981)
+   - Enable Cloud Run API
+   - Enable Cloud Build API
+   - Install Google Cloud SDK
+
+2. **Deploy from source:**
+   ```bash
+   cd api/
+   gcloud builds submit --tag gcr.io/fairgojustice48981/fairgojustice-api
+   gcloud run deploy fairgojustice-api \
+     --image gcr.io/fairgojustice48981/fairgojustice-api \
+     --platform managed \
+     --region us-central1 \
+     --allow-unauthenticated \
+     --port 8080 \
+     --memory 512Mi \
+     --cpu 1 \
+     --max-instances 3 \
+     --concurrency 80 \
+     --timeout 300
+   ```
+
+3. **Set environment variables:**
+   ```bash
+   gcloud run services update fairgojustice-api \
+     --set-env-vars MONGODB_URI="your-mongodb-uri" \
+     --set-env-vars JWT_SECRET="your-jwt-secret" \
+     --set-env-vars NODE_ENV="production" \
+     --set-env-vars ALLOWED_ORIGINS="https://fairgojustice.com.au"
+   ```
+
+4. **Verify deployment:**
+   - Check service URL: https://fairgojustice-api-[hash]-us-central1.run.app
+   - Test health endpoint: `GET /api/health`
 
 ### MongoDB Atlas
 1. Create free M0 cluster

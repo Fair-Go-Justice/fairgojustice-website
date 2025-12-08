@@ -19,7 +19,7 @@ const quizRoutes = require('./routes/quiz');
 const analyticsRoutes = require('./routes/analytics');
 
 const app = express();
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 8080;
 
 // ==========================================================================
 // Middleware
