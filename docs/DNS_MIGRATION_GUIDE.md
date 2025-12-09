@@ -50,7 +50,7 @@ ns-cloud-e04.googledns.com.
 
 ## Step 2: Add DNS Records for Netlify (Website)
 
-We will add the CNAME records for both www.fairgojustice.com.au and the bare domain fairgojustice.com.au to point to your Netlify site. Google Cloud DNS handles CNAME flattening for the root domain, which is perfect for Netlify.
+We will add the CNAME records for both www.fairgojustice.com.au and the bare domain fairgojustice.com.au to point to your Netlify site. Google Cloud DNS supports CNAME records at the apex domain (root domain), which works well with Netlify's hosting infrastructure.
 
 ```bash
 # Define common variables
@@ -108,6 +108,8 @@ This ensures:
 - `http://fairgojustice.com.au` → 301 → `https://www.fairgojustice.com.au`
 - `https://fairgojustice.com.au` → 301 → `https://www.fairgojustice.com.au`
 - All traffic is normalized to `https://www.fairgojustice.com.au`
+
+**Note:** These domain-specific redirects use the force flag (`!`) and will take precedence over the SPA routing configuration in `netlify.toml`. The existing SPA routing (status 200 rewrites) only applies after domain-level redirects are processed.
 
 **✅ This configuration is already deployed in the repository.**
 
