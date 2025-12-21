@@ -6,6 +6,7 @@ const express = require('express');
 const router = express.Router();
 const { body, validationResult } = require('express-validator');
 const Contact = require('../models/Contact');
+const { sendContactNotification } = require('../services/emailService');
 
 // Submit contact form
 router.post('/', [
@@ -33,7 +34,8 @@ router.post('/', [
 
     await contact.save();
 
-    // TODO: Send email notification to admin
+    // Send email notification to admin
+    await sendContactNotification(contact);
 
     res.status(201).json({
       message: 'Thank you for your message. We will respond within 48 hours.'
