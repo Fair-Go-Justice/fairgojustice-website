@@ -177,14 +177,14 @@
         const response = await fetch(CONFIG.apiBaseUrl + '/petition/count');
         if (response.ok) {
           const data = await response.json();
-          this.updateCount(data.count || data.signatures || 12847);
+          this.updateCount(data.count || data.signatures || 0);
         } else {
-          // Fallback to initial count
-          this.updateCount(12847);
+          // Fallback - no signatures yet (honest count)
+          this.updateCount(0);
         }
       } catch (error) {
-        // Use fallback count
-        this.updateCount(12847);
+        // Use fallback count - no signatures yet (honest count)
+        this.updateCount(0);
       }
     }
     
@@ -442,62 +442,82 @@
         // Fall through to default questions
       }
       
-      // Default questions
+      // Default questions with images, infographics, and educational links
       this.questions = [
         {
           id: 1,
           question: "What percentage of Australians cannot afford legal representation?",
+          image: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=700&h=300&fit=crop&q=80",
+          imageAlt: "Scales of justice representing equal access to the legal system",
+          infographic: { icon: "fas fa-users", stat: "850,000+", label: "Australians locked out of legal representation" },
           options: [
             { text: "About 10%", value: 0 },
             { text: "About 25%", value: 0 },
             { text: "About 40%", value: 1 },
             { text: "About 60%", value: 0 }
           ],
-          explanation: "Research shows approximately 40% of Australians cannot afford basic legal representation."
+          explanation: "Research shows approximately 40% of Australians cannot afford basic legal representation, leaving hundreds of thousands without access to justice.",
+          learnMore: { text: "Learn about legal aid access", url: "resources.html" }
         },
         {
           id: 2,
           question: "How much is the average retainer required by lawyers in Australia?",
+          image: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=700&h=300&fit=crop&q=80",
+          imageAlt: "Person reviewing legal documents and costs",
+          infographic: { icon: "fas fa-dollar-sign", stat: "$45,000+", label: "Average cost of civil legal representation" },
           options: [
             { text: "$5,000 - $10,000", value: 0 },
             { text: "$15,000 - $25,000", value: 0 },
             { text: "$30,000 - $50,000", value: 1 },
             { text: "Over $50,000", value: 0 }
           ],
-          explanation: "Many lawyers require retainers of $30,000-$50,000, putting justice out of reach for average Australians."
+          explanation: "Many lawyers require retainers of $30,000-$50,000, putting justice out of reach for average Australians. Some complex cases can cost hundreds of thousands.",
+          learnMore: { text: "Know your legal rights", url: "rights.html" }
         },
         {
           id: 3,
           question: "What is a National Judicial Integrity Commission?",
+          image: "https://images.unsplash.com/photo-1577495508048-b635879837f1?w=700&h=300&fit=crop&q=80",
+          imageAlt: "Parliament House representing government accountability",
+          infographic: { icon: "fas fa-gavel", stat: "Zero", label: "Australia has no federal Judicial Integrity Commission" },
           options: [
             { text: "A court for minor offenses", value: 0 },
             { text: "An independent body to oversee judicial conduct", value: 1 },
             { text: "A legal aid organization", value: 0 },
             { text: "A training academy for judges", value: 0 }
           ],
-          explanation: "A National Judicial Integrity Commission is an independent body that investigates complaints against judges."
+          explanation: "A National Judicial Integrity Commission would be an independent body with real power to investigate complaints against judges and ensure accountability.",
+          learnMore: { text: "Read about the 3 Pillars of reform", url: "pillars.html" }
         },
         {
           id: 4,
           question: "How many signatures are typically needed to trigger a Royal Commission inquiry?",
+          image: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=700&h=300&fit=crop&q=80",
+          imageAlt: "Community members standing together for change",
+          infographic: { icon: "fas fa-file-signature", stat: "100,000", label: "Signatures show overwhelming public support" },
           options: [
             { text: "10,000", value: 0 },
             { text: "50,000", value: 0 },
             { text: "100,000", value: 1 },
             { text: "500,000", value: 0 }
           ],
-          explanation: "While not a legal requirement, 100,000 signatures demonstrates significant public support for a Royal Commission."
+          explanation: "While not a legal requirement, 100,000 signatures demonstrates significant public support and creates political pressure for a Royal Commission inquiry.",
+          learnMore: { text: "Sign the petition now", url: "petition.html" }
         },
         {
           id: 5,
           question: "What is the 'Fair Go' principle in Australian culture?",
+          image: "https://images.unsplash.com/photo-1523482580672-f109ba8cb9be?w=700&h=300&fit=crop&q=80",
+          imageAlt: "Australian landscape representing the Fair Go spirit",
+          infographic: { icon: "fas fa-heart", stat: "Core Value", label: "Fairness is the foundation of Australian identity" },
           options: [
             { text: "A sports betting term", value: 0 },
             { text: "Everyone deserves equal opportunity and treatment", value: 1 },
             { text: "A government welfare program", value: 0 },
             { text: "A legal defense strategy", value: 0 }
           ],
-          explanation: "The 'Fair Go' is a core Australian value meaning everyone deserves equal opportunity and fair treatment."
+          explanation: "The 'Fair Go' is a core Australian value meaning everyone deserves equal opportunity and fair treatment — regardless of wealth, background, or status.",
+          learnMore: { text: "Learn about our movement", url: "about.html" }
         }
       ];
     }
@@ -511,6 +531,22 @@
       const question = this.questions[this.currentQuestion];
       const progress = ((this.currentQuestion) / this.questions.length) * 100;
       
+      // Build image HTML if available
+      const imageHtml = question.image ? `
+        <img class="quiz-image" src="${question.image}" alt="${sanitizeHTML(question.imageAlt || '')}" loading="lazy">
+      ` : '';
+
+      // Build infographic HTML if available
+      const infographicHtml = question.infographic ? `
+        <div class="quiz-infographic">
+          <i class="${question.infographic.icon} infographic-icon"></i>
+          <div>
+            <div class="infographic-stat">${sanitizeHTML(question.infographic.stat)}</div>
+            <div class="infographic-label">${sanitizeHTML(question.infographic.label)}</div>
+          </div>
+        </div>
+      ` : '';
+
       this.container.innerHTML = `
         <div class="quiz-progress">
           <div class="quiz-progress-bar">
@@ -520,6 +556,8 @@
         </div>
         
         <div class="quiz-question">
+          ${imageHtml}
+          ${infographicHtml}
           <h3>${sanitizeHTML(question.question)}</h3>
           <div class="quiz-options">
             ${question.options.map((option, index) => `
@@ -603,6 +641,19 @@
         recommendation = "Check out our resources to understand why reform is crucial.";
       }
       
+      // Build explanation summaries from all questions
+      const explanationSummaries = this.questions.map((q, i) => {
+        const wasCorrect = q.options[this.answers[i]]?.value === 1;
+        const learnMoreHtml = q.learnMore ? `<a href="${q.learnMore.url}" class="quiz-learn-more">${sanitizeHTML(q.learnMore.text)} <i class="fas fa-arrow-right"></i></a>` : '';
+        return `
+          <div class="quiz-explanation">
+            <h4>${wasCorrect ? '<i class="fas fa-check-circle" style="color: var(--color-success);"></i>' : '<i class="fas fa-times-circle" style="color: var(--color-danger);"></i>'} Q${i + 1}: ${sanitizeHTML(q.question)}</h4>
+            <p style="margin-bottom: 0.5rem;">${sanitizeHTML(q.explanation)}</p>
+            ${learnMoreHtml}
+          </div>
+        `;
+      }).join('');
+
       this.container.innerHTML = `
         <div class="quiz-results">
           <h2>Quiz Complete!</h2>
@@ -615,7 +666,18 @@
             <a href="resources.html" class="btn btn-secondary btn-large">Explore Resources</a>
           </div>
           
-          <button class="btn btn-outline mt-3 quiz-restart">Take Quiz Again</button>
+          <h3 style="margin-top: 2rem; margin-bottom: 1rem; color: var(--color-primary);">What You Should Know</h3>
+          ${explanationSummaries}
+          
+          <h3 style="margin-top: 2rem; margin-bottom: 1rem; color: var(--color-primary);">Learn More</h3>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem;">
+            <a href="pillars.html" class="btn btn-outline" style="color: var(--color-primary); border-color: var(--color-primary);"><i class="fas fa-columns"></i> The 3 Pillars</a>
+            <a href="rights.html" class="btn btn-outline" style="color: var(--color-primary); border-color: var(--color-primary);"><i class="fas fa-shield-alt"></i> Know Your Rights</a>
+            <a href="resources.html" class="btn btn-outline" style="color: var(--color-primary); border-color: var(--color-primary);"><i class="fas fa-book"></i> All Resources</a>
+            <a href="about.html" class="btn btn-outline" style="color: var(--color-primary); border-color: var(--color-primary);"><i class="fas fa-info-circle"></i> About the Movement</a>
+          </div>
+          
+          <button class="btn btn-outline mt-3 quiz-restart" style="color: var(--color-primary); border-color: var(--color-primary);">Take Quiz Again</button>
         </div>
       `;
       
