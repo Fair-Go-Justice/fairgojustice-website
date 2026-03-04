@@ -177,14 +177,14 @@
         const response = await fetch(CONFIG.apiBaseUrl + '/petition/count');
         if (response.ok) {
           const data = await response.json();
-          this.updateCount(data.count || data.signatures || 12847);
+          this.updateCount(data.count || data.signatures || 0);
         } else {
-          // Fallback to initial count
-          this.updateCount(12847);
+          // Fallback - no signatures yet (honest count)
+          this.updateCount(0);
         }
       } catch (error) {
-        // Use fallback count
-        this.updateCount(12847);
+        // Use fallback count - no signatures yet (honest count)
+        this.updateCount(0);
       }
     }
     
