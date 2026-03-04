@@ -26,13 +26,14 @@
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600;700&family=Source+Serif+Pro:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@400;600;700&family=Source+Serif+Pro:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
   
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   
-  <!-- Stylesheet -->
+  <!-- Stylesheets -->
   <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/modern.css">
   
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="images/favicon.png">
@@ -43,7 +44,6 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-    
     gtag('config', 'G-DRTFE1VZYP');
   </script>
 </head>
@@ -53,7 +53,7 @@
   <header class="site-header">
     <div class="header-top">
       <div class="container">
-        <p><strong>🇦🇺 A Fair Go Means A Fair Justice System</strong> | Join 12,847 Australians Demanding Change</p>
+        <p><strong>A Fair Go Means A Fair Justice System</strong> | Join 12,847 Australians Demanding Change</p>
       </div>
     </div>
     
@@ -87,147 +87,309 @@
     </div>
   </header>
   
-  <!-- Hero Section -->
-  <section class="hero">
+  <!-- Hero Section (Modern with 3D Effects) -->
+  <section class="hero-modern">
+    <!-- Interactive Particle Grid Canvas -->
+    <canvas id="particleCanvas" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1;"></canvas>
+    
+    <!-- Decorative Floating Shapes -->
+    <div class="hero-decoration">
+      <div class="shape shape-1"></div>
+      <div class="shape shape-2"></div>
+      <div class="shape shape-3"></div>
+      <div class="shape shape-4"></div>
+    </div>
+    
+    <!-- Dot Grid Pattern -->
+    <div class="dot-grid"></div>
+    
     <div class="container">
       <div class="hero-content">
-        <h1>Systematic Fraud Investigation: A Call for Justice.</h1>
-        <p class="hero-subtitle">Thousands of Australians affected by systemic fraud, VIN tampering, and document falsification. If you've been a victim of similar behavior by [Defendants], your story is crucial. Together, we can expose the truth and demand accountability.</p>
+        <!-- Animated Badge -->
+        <div class="hero-badge">
+          <span class="badge-dot"></span>
+          <span>Movement for Justice Reform in Australia</span>
+        </div>
+        
+        <h1>
+          A Fair Go For<br>
+          <span class="gradient-text">Every Australian</span>
+        </h1>
+        
+        <p class="hero-subtitle">
+          Thousands of Australians are calling for transparency, accountability, and reform in our justice system. If you believe everyone deserves equal access to justice, your voice matters. Together, we can build a fairer future.
+        </p>
+        
         <div class="hero-cta">
-          <a href="class-action-info.html" class="btn btn-primary btn-large">Join the Class Action</a>
-          <a href="stories.html" class="btn btn-secondary btn-large">Share Your Story</a>
+          <a href="petition.html" class="btn btn-gold btn-large btn-modern">
+            <i class="fas fa-pen-fancy"></i> Sign the Petition
+          </a>
+          <a href="about.html" class="btn btn-outline btn-large btn-modern" style="color: var(--color-white); border-color: rgba(255,255,255,0.4);">
+            <i class="fas fa-play-circle"></i> Learn Our Story
+          </a>
+        </div>
+        
+        <!-- Hero Image with 3D Perspective -->
+        <div class="hero-image-container reveal" style="margin-top: 3rem;">
+          <div class="hero-image">
+            <img 
+              src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=900&h=500&fit=crop&q=80" 
+              alt="Scales of justice representing fairness and equality in the Australian legal system"
+              width="900"
+              height="500"
+              loading="eager"
+            >
+          </div>
         </div>
       </div>
     </div>
   </section>
   
-  <!-- Stats Section -->
-  <section class="stats-section">
+  <!-- Stats Section (Modern with Icons and Animated Counters) -->
+  <section class="stats-modern">
     <div class="container">
       <div class="stats-grid">
-        <div class="stat-card">
-          <div class="stat-number">850,000</div>
+        <div class="stat-card reveal reveal-delay-1">
+          <div class="stat-icon stat-icon-blue">
+            <i class="fas fa-users"></i>
+          </div>
+          <div class="counter-modern" data-target="850000">850,000</div>
           <div class="stat-label">Australians Can't Afford Legal Representation</div>
         </div>
-        <div class="stat-card">
-          <div class="stat-number">12,847</div>
+        <div class="stat-card reveal reveal-delay-2">
+          <div class="stat-icon stat-icon-gold">
+            <i class="fas fa-file-signature"></i>
+          </div>
+          <div class="counter-modern" data-target="12847">12,847</div>
           <div class="stat-label">Have Signed Our Petition</div>
         </div>
-        <div class="stat-card">
-          <div class="stat-number">100,000</div>
+        <div class="stat-card reveal reveal-delay-3">
+          <div class="stat-icon stat-icon-green">
+            <i class="fas fa-bullseye"></i>
+          </div>
+          <div class="counter-modern" data-target="100000">100,000</div>
           <div class="stat-label">Signatures Needed for Royal Commission</div>
         </div>
       </div>
     </div>
   </section>
   
-  <!-- Main Content Section -->
-  <section class="content-section">
+  <!-- Main Content Section with 3D Tilt Cards -->
+  <section class="content-section" style="background: var(--color-white);">
     <div class="container">
-      <div class="content-intro">
-        <h2>Everyone Deserves A Fair Go — Even When The System Says Otherwise</h2>
-        <p class="lead">Australia's justice system is meant to protect all of us. But for hundreds of thousands of everyday Australians, that promise has been broken.</p>
+      <div class="content-intro reveal">
+        <h2>Everyone Deserves A Fair Go &mdash; Even When The System Says Otherwise</h2>
+        <p class="lead">Australia's justice system is meant to protect all of us. But for hundreds of thousands of everyday Australians, that promise remains unfulfilled.</p>
       </div>
       
       <div class="cards-grid">
-        <div class="card">
-          <div class="card-icon">
-            <i class="fas fa-gavel"></i>
+        <div class="card-3d reveal reveal-delay-1">
+          <div class="card-3d-inner">
+            <div class="icon-modern icon-blue">
+              <i class="fas fa-gavel"></i>
+            </div>
+            <h3>The Problem</h3>
+            <p>If you can't afford a $45,000 retainer, you're left to navigate a complex legal system alone. Court documents get lost, evidence goes missing, and justice becomes a luxury that only the wealthy can access.</p>
+            <a href="about.html" class="card-link">Learn More <i class="fas fa-arrow-right"></i></a>
           </div>
-          <h3>The Problem</h3>
-          <p>If you can't afford a $45,000 retainer, you're left to navigate a complex legal system alone. Evidence mysteriously "disappears." Court documents get backdated. Justice becomes a luxury good.</p>
-          <a href="about.html" class="card-link">Learn More →</a>
         </div>
         
-        <div class="card">
-          <div class="card-icon">
-            <i class="fas fa-users"></i>
+        <div class="card-3d reveal reveal-delay-2">
+          <div class="card-3d-inner">
+            <div class="icon-modern icon-gold">
+              <i class="fas fa-users"></i>
+            </div>
+            <h3>The Movement</h3>
+            <p>We're building a nationwide coalition demanding systemic reform. From students to retirees, workers to professionals &mdash; thousands are standing together for accountability and transparency.</p>
+            <a href="about.html" class="card-link">Join Us <i class="fas fa-arrow-right"></i></a>
           </div>
-          <h3>The Movement</h3>
-          <p>We're building a nationwide coalition demanding systemic reform. From students to retirees, workers to professionals — thousands are standing together for accountability.</p>
-          <a href="about.html#movement" class="card-link">Join Us →</a>
         </div>
         
-        <div class="card">
-          <div class="card-icon">
-            <i class="fas fa-lightbulb"></i>
+        <div class="card-3d reveal reveal-delay-3">
+          <div class="card-3d-inner">
+            <div class="icon-modern icon-green">
+              <i class="fas fa-lightbulb"></i>
+            </div>
+            <h3>The Solution</h3>
+            <p>Three evidence-based reforms: A National Judicial Integrity Commission, expanded legal aid access, and mandatory evidence integrity protocols to ensure fair treatment for all.</p>
+            <a href="pillars.html" class="card-link">Our Framework <i class="fas fa-arrow-right"></i></a>
           </div>
-          <h3>The Solution</h3>
-          <p>Three evidence-based reforms: A National Judicial Integrity Commission, expanded legal aid access, and mandatory evidence integrity protocols.</p>
-          <a href="pillars.html" class="card-link">Our Framework →</a>
         </div>
       </div>
     </div>
   </section>
   
-  <!-- Call to Action Section -->
-  <section class="cta-section">
+  <!-- Image Feature Section with Parallax -->
+  <section class="content-section parallax-section" style="background: var(--color-gray-100); padding: var(--space-4xl) 0;">
     <div class="container">
-      <div class="cta-content">
-        <h2>We Don't Bow. We Don't Break. We Stand Together.</h2>
-        <p>A Royal Commission requires 100,000 signatures. We're already 12,847 strong. Will you be next?</p>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-3xl); align-items: center;">
+        
+        <div class="image-3d reveal-left">
+          <img 
+            src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=600&h=450&fit=crop&q=80" 
+            alt="Person reviewing important legal documents, representing the need for justice reform"
+            width="600"
+            height="450"
+            loading="lazy"
+          >
+        </div>
+        
+        <div class="reveal-right">
+          <h2 style="font-size: var(--text-3xl); margin-bottom: var(--space-lg);">Why Reform Matters Now</h2>
+          <p style="font-size: var(--text-lg); color: var(--color-gray-600); line-height: 1.8; margin-bottom: var(--space-lg);">
+            Across Australia, families and individuals have reported concerns about fairness, transparency, and accountability within the legal system. Our movement brings these voices together to advocate for meaningful reform.
+          </p>
+          <ul style="list-style: none; margin: 0; padding: 0;">
+            <li style="display: flex; align-items: flex-start; gap: var(--space-md); margin-bottom: var(--space-md);">
+              <div class="icon-modern icon-blue" style="width: 40px; height: 40px; font-size: var(--text-base); flex-shrink: 0; margin-bottom: 0;">
+                <i class="fas fa-check"></i>
+              </div>
+              <span style="color: var(--color-gray-700);">Independent judicial oversight and accountability mechanisms</span>
+            </li>
+            <li style="display: flex; align-items: flex-start; gap: var(--space-md); margin-bottom: var(--space-md);">
+              <div class="icon-modern icon-gold" style="width: 40px; height: 40px; font-size: var(--text-base); flex-shrink: 0; margin-bottom: 0;">
+                <i class="fas fa-check"></i>
+              </div>
+              <span style="color: var(--color-gray-700);">Expanded access to legal aid for everyday Australians</span>
+            </li>
+            <li style="display: flex; align-items: flex-start; gap: var(--space-md); margin-bottom: var(--space-md);">
+              <div class="icon-modern icon-green" style="width: 40px; height: 40px; font-size: var(--text-base); flex-shrink: 0; margin-bottom: 0;">
+                <i class="fas fa-check"></i>
+              </div>
+              <span style="color: var(--color-gray-700);">Mandatory evidence integrity and chain-of-custody standards</span>
+            </li>
+          </ul>
+          <a href="pillars.html" class="btn btn-primary btn-modern btn-glow" style="margin-top: var(--space-lg);">
+            Read Our 3 Pillars <i class="fas fa-arrow-right" style="margin-left: var(--space-sm);"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Call to Action Section (Modern with Animated Background) -->
+  <section class="cta-modern">
+    <div class="container" style="text-align: center;">
+      <div class="reveal">
+        <h2 style="color: var(--color-white); font-size: clamp(1.8rem, 4vw, 2.5rem); margin-bottom: var(--space-md);">
+          We Don't Bow. We Don't Break. We Stand Together.
+        </h2>
+        <p style="color: rgba(255,255,255,0.85); font-size: var(--text-lg); max-width: 600px; margin: 0 auto var(--space-xl);">
+          A Royal Commission requires 100,000 signatures. We're already 12,847 strong. Will you be next?
+        </p>
         <div class="cta-buttons">
-          <a href="petition.html" class="btn btn-primary btn-large">Sign the Petition</a>
-          <a href="stories.html" class="btn btn-outline btn-large">Share Your Story</a>
+          <a href="petition.html" class="btn btn-gold btn-large btn-modern">
+            <i class="fas fa-pen-fancy"></i> Sign the Petition
+          </a>
+          <a href="stories.html" class="btn btn-outline btn-large btn-modern" style="color: var(--color-white); border-color: rgba(255,255,255,0.4);">
+            <i class="fas fa-microphone"></i> Share Your Story
+          </a>
         </div>
       </div>
       
-      <div class="petition-progress">
+      <!-- Animated Progress Bar -->
+      <div class="progress-modern reveal" style="margin-top: var(--space-2xl);">
         <div class="progress-bar">
           <div class="progress-fill" style="width: 12.8%"></div>
         </div>
-        <p class="progress-text">12.8% to 100,000 signatures</p>
+        <p style="color: rgba(255,255,255,0.7); font-size: var(--text-sm); margin-top: var(--space-sm);">12.8% of the way to 100,000 signatures</p>
       </div>
     </div>
   </section>
   
-  <!-- Features Section -->
-  <section class="features-section">
-    <div class="container">
-      <h2 class="section-title">Take Action Today</h2>
+  <!-- Features / Take Action Section (Modern Cards) -->
+  <section class="features-modern">
+    <div class="container" style="position: relative; z-index: 1;">
+      <div class="content-intro reveal">
+        <h2>Take Action Today</h2>
+        <p class="lead">Every action counts. Here's how you can make a difference.</p>
+      </div>
+      
       <div class="features-grid">
-        <div class="feature-card">
-          <div class="feature-icon">
+        <div class="feature-card-modern card-3d reveal reveal-delay-1">
+          <div class="feature-number">01</div>
+          <div class="icon-modern icon-blue">
             <i class="fas fa-file-signature"></i>
           </div>
           <h3>Sign the Petition</h3>
-          <p>Demand a Royal Commission into judicial integrity and systemic failures in Australia's justice system.</p>
-          <a href="petition-royal-commission.html" class="btn btn-secondary">Sign Now</a>
+          <p>Demand a Royal Commission into judicial integrity and systemic concerns in Australia's justice system.</p>
+          <a href="petition.html" class="btn btn-primary btn-modern btn-glow">Sign Now</a>
         </div>
         
-        <div class="feature-card">
-          <div class="feature-icon">
+        <div class="feature-card-modern card-3d reveal reveal-delay-2">
+          <div class="feature-number">02</div>
+          <div class="icon-modern icon-gold">
             <i class="fas fa-clipboard-check"></i>
           </div>
           <h3>Take the Quiz</h3>
-          <p>Discover how broken the system really is. 10 questions on systemic failure patterns and institutional pressure.</p>
-          <a href="quiz-systemic.html" class="btn btn-secondary">Start Quiz</a>
+          <p>Discover how the system really works. 5 questions on systemic patterns and institutional accountability.</p>
+          <a href="quiz.html" class="btn btn-primary btn-modern btn-glow">Start Quiz</a>
         </div>
         
-        <div class="feature-card">
-          <div class="feature-icon">
+        <div class="feature-card-modern card-3d reveal reveal-delay-3">
+          <div class="feature-number">03</div>
+          <div class="icon-modern icon-green">
             <i class="fas fa-book-open"></i>
           </div>
-          <h3>Read the Case Study</h3>
-          <p>Michael's story: How a $2.8M fraud spiraled into a decade-long nightmare. Evidence missing. Justice denied.</p>
-          <a href="case-study.html" class="btn btn-secondary">Read Story</a>
+          <h3>Read the Case Overview</h3>
+          <p>Understand the issues driving this movement. See why thousands believe reform is urgently needed.</p>
+          <a href="case-overview.html" class="btn btn-primary btn-modern btn-glow">Read More</a>
         </div>
         
-        <div class="feature-card">
-          <div class="feature-icon">
+        <div class="feature-card-modern card-3d reveal reveal-delay-4">
+          <div class="feature-number">04</div>
+          <div class="icon-modern icon-blue">
             <i class="fas fa-share-alt"></i>
           </div>
           <h3>Spread the Word</h3>
           <p>Download our complete Social Media Launch Kit with ready-to-use content, graphics, and hashtags.</p>
-          <a href="social-media-kit.html" class="btn btn-secondary">Get Kit</a>
+          <a href="social-media-kit.html" class="btn btn-primary btn-modern btn-glow">Get Kit</a>
         </div>
       </div>
     </div>
   </section>
   
-  <!-- Footer -->
-  <footer class="site-footer">
+  <!-- Image Banner Section with Overlay -->
+  <section class="section-image-bg" style="min-height: 400px; display: flex; align-items: center;">
+    <div class="bg-image">
+      <img 
+        src="https://images.unsplash.com/photo-1577495508048-b635879837f1?w=1400&h=500&fit=crop&q=80"
+        alt="The Australian Parliament House in Canberra, representing democratic reform"
+        width="1400"
+        height="500"
+        loading="lazy"
+        style="width: 100%; height: 100%; object-fit: cover;"
+      >
+      <div class="bg-overlay" style="background: linear-gradient(135deg, rgba(0, 69, 124, 0.85) 0%, rgba(0, 51, 102, 0.9) 100%);"></div>
+    </div>
+    <div class="container" style="position: relative; z-index: 2; text-align: center; color: var(--color-white); padding: var(--space-4xl) var(--space-md);">
+      <div class="reveal">
+        <h2 style="color: var(--color-white); font-size: clamp(1.5rem, 3.5vw, 2.25rem); margin-bottom: var(--space-md);">
+          Demanding Accountability. Advocating Reform.
+        </h2>
+        <p style="font-size: var(--text-lg); opacity: 0.9; max-width: 700px; margin: 0 auto var(--space-xl);">
+          Our movement advocates for a Royal Commission to investigate systemic concerns and implement lasting reforms. We believe every Australian deserves a justice system that is transparent, fair, and accountable.
+        </p>
+        <div style="display: flex; justify-content: center; gap: var(--space-md); flex-wrap: wrap;">
+          <a href="pillars.html" class="btn btn-gold btn-large btn-modern">Our Reform Pillars</a>
+          <a href="rights.html" class="btn btn-outline btn-large btn-modern" style="color: var(--color-white); border-color: rgba(255,255,255,0.4);">Know Your Rights</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Footer (Modern) -->
+  <footer class="footer-modern">
     <div class="container">
+      <!-- Footer Brand -->
+      <div class="footer-brand">
+        <div class="logo">
+          <i class="fas fa-balance-scale"></i>
+          <span>Fair Go Justice</span>
+        </div>
+        <p>A grassroots movement advocating for a fairer, more transparent, and accountable justice system for all Australians.</p>
+      </div>
+      
       <div class="footer-grid">
         <div class="footer-col">
           <h4>Take Action</h4>
@@ -236,7 +398,7 @@
             <li><a href="petition.html">Sign the Petition</a></li>
             <li><a href="stories.html">Share Your Story</a></li>
             <li><a href="contact.html">Contact Your MP</a></li>
-            <li><a href="#">Volunteer</a></li>
+            <li><a href="contact.html">Volunteer</a></li>
           </ul>
         </div>
         
@@ -244,18 +406,18 @@
           <h4>Reform Framework</h4>
           <ul>
             <li><a href="pillars.html">The 3 Pillars</a></li>
-            <li><a href="parliament.html">Parliamentary Inquiry</a></li>
-            <li><a href="metadata.html">Metadata Mandate</a></li>
+            <li><a href="pillars.html">Parliamentary Inquiry</a></li>
+            <li><a href="pillars.html#metadata">Metadata Mandate</a></li>
           </ul>
         </div>
         
         <div class="footer-col">
           <h4>Learn More</h4>
           <ul>
-            <li><a href="website/podcast.html">Podcast Series</a></li>
             <li><a href="resources.html">Campaign Resources</a></li>
             <li><a href="rights.html">Know Your Rights</a></li>
             <li><a href="about.html">About the Movement</a></li>
+            <li><a href="social-media-kit.html">Social Media Kit</a></li>
           </ul>
         </div>
         
@@ -269,14 +431,17 @@
         </div>
       </div>
       
+      <div class="footer-divider"></div>
+      
       <div class="footer-bottom">
-        <p>&copy; 2025 Fair Go Justice Movement. All rights reserved.</p>
-        <p class="footer-tagline"><strong>Justice belongs to the people—not the privileged.</strong></p>
+        <p>&copy; 2026 Fair Go Justice Movement. All rights reserved.</p>
+        <p class="footer-tagline"><strong>Justice belongs to the people &mdash; not the privileged.</strong></p>
       </div>
     </div>
   </footer>
   
   <!-- Scripts -->
   <script src="js/main.js"></script>
+  <script src="js/effects.js"></script>
 </body>
 </html>
