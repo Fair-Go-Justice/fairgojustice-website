@@ -62,7 +62,7 @@
           </button>
           
           <nav class="main-nav" id="mainNav">
-            <ul>
+                        <ul>
               <li><a href="index.html">Home</a></li>
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle">Reform Framework <i class="fas fa-chevron-down"></i></a>
@@ -79,13 +79,23 @@
                   <li><a href="contact.html">Contact Us</a></li>
                 </ul>
               </li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle">The Case <i class="fas fa-chevron-down"></i></a>
+                <ul class="dropdown-menu">
+                  <li><a href="case-overview.html">Case Overview</a></li>
+                  <li><a href="class-action-info.html">Class Action Info</a></li>
+                  <li><a href="timeline.html">Timeline</a></li>
+                </ul>
+              </li>
               <li><a href="quiz.html">Take Quiz</a></li>
+              <li><a href="music.html">Music</a></li>
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle">Resources <i class="fas fa-chevron-down"></i></a>
                 <ul class="dropdown-menu">
                   <li><a href="social-media-kit.html">Social Media Kit</a></li>
                   <li><a href="graphics-guide.html">Graphics Guide</a></li>
                   <li><a href="resources.html">All Resources</a></li>
+                  <li><a href="lyrics.html">Song Lyrics</a></li>
                 </ul>
               </li>
               <li><a href="about.html">About</a></li>
@@ -201,9 +211,25 @@
               <p class="form-text">We'll only use this to follow up on your story if needed.</p>
             </div>
             
-            <div class="form-group">
-              <label for="location" class="form-label">Location (City/State)</label>
-              <input type="text" id="location" name="location" class="form-control" placeholder="e.g., Sydney, NSW">
+            <div class="form-group" style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+              <div>
+                <label for="city" class="form-label">City / Town</label>
+                <input type="text" id="city" name="city" class="form-control" placeholder="e.g., Sydney">
+              </div>
+              <div>
+                <label for="state" class="form-label">State / Territory</label>
+                <select id="state" name="state" class="form-control">
+                  <option value="">Select state...</option>
+                  <option value="NSW">New South Wales</option>
+                  <option value="VIC">Victoria</option>
+                  <option value="QLD">Queensland</option>
+                  <option value="WA">Western Australia</option>
+                  <option value="SA">South Australia</option>
+                  <option value="TAS">Tasmania</option>
+                  <option value="ACT">Australian Capital Territory</option>
+                  <option value="NT">Northern Territory</option>
+                </select>
+              </div>
             </div>
             
             <div class="form-group">
@@ -222,6 +248,25 @@
               <span class="form-error" data-error-for="category"></span>
             </div>
             
+            <div class="form-group">
+              <label class="form-label">Which Reform Area Does This Relate To? (Select all that apply)</label>
+              <div style="display:flex;flex-direction:column;gap:0.5rem;padding:0.75rem;background:#f8f9fa;border-radius:8px;">
+                <label style="display:flex;align-items:center;gap:0.5rem;font-weight:normal;cursor:pointer;">
+                  <input type="checkbox" name="pillar[]" value="pillar1"> 
+                  <span><strong><i class="fas fa-gavel"></i> Pillar 1:</strong> Judicial Integrity — misconduct, bias, conflicts of interest</span>
+                </label>
+                <label style="display:flex;align-items:center;gap:0.5rem;font-weight:normal;cursor:pointer;">
+                  <input type="checkbox" name="pillar[]" value="pillar2">
+                  <span><strong><i class="fas fa-hand-holding-heart"></i> Pillar 2:</strong> Legal Aid — cost barriers, unrepresented litigants, legal access</span>
+                </label>
+                <label style="display:flex;align-items:center;gap:0.5rem;font-weight:normal;cursor:pointer;">
+                  <input type="checkbox" name="pillar[]" value="pillar3">
+                  <span><strong><i class="fas fa-file-shield"></i> Pillar 3:</strong> Evidence Integrity — missing/altered evidence, non-disclosure, tampering</span>
+                </label>
+              </div>
+              <a href="pillars.html" target="_blank" style="font-size:0.85rem;">Learn about the 3 Pillars →</a>
+            </div>
+
             <div class="form-group">
               <label for="story" class="form-label">Your Story *</label>
               <textarea id="story" name="story" class="form-control" placeholder="Tell us what happened. Include as much or as little detail as you're comfortable sharing..." rows="8" required></textarea>
@@ -271,8 +316,14 @@
             
             <div class="form-check">
               <input type="checkbox" id="terms" name="terms" value="yes" required>
-              <label for="terms">I confirm this story is true to the best of my knowledge and I agree to the <a href="terms.html" target="_blank">Terms of Service</a> *</label>
+              <label for="terms">I confirm this story is accurate to the best of my knowledge and I agree to the <a href="terms.html" target="_blank">Terms of Service</a> and <a href="privacy.html" target="_blank">Privacy Policy</a> *</label>
               <span class="form-error" data-error-for="terms"></span>
+            </div>
+
+            <div class="form-check">
+              <input type="checkbox" id="data-consent" name="data-consent" value="yes" required>
+              <label for="data-consent">I understand my submission may be used (anonymously, unless I chose otherwise above) in advocacy materials, parliamentary submissions, and public awareness campaigns by the Fair Go Justice Movement *</label>
+              <span class="form-error" data-error-for="data-consent"></span>
             </div>
             
             <button type="submit" class="btn btn-primary btn-large" style="width: 100%; margin-top: var(--space-lg);">
