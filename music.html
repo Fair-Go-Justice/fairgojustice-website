@@ -387,7 +387,7 @@
     <!-- Hero Section -->
     <section class="music-hero">
         <h1><i class="fas fa-music"></i> Music for Justice</h1>
-        <p class="subtitle">Original Aussie tracks that speak truth to power. Over 120 songs — hip-hop, country, blues, folk, rock and more — created to amplify the voices demanding justice reform.</p>
+        <p class="subtitle">Original Aussie tracks that speak truth to power. Over 128 original songs — hip-hop, country, blues, folk, rock and more — created to amplify the voices demanding justice reform. Now streaming on YouTube.</p>
         <div style="margin-top:1.5rem;">
             <a href="https://www.youtube.com/@fairgojustice" target="_blank" rel="noopener"
                class="btn btn-primary btn-lg" style="margin-right:1rem;">
@@ -402,242 +402,256 @@
     <!-- Featured Track -->
     <section class="featured-track">
         <div class="featured-container">
-            <div class="featured-artwork">
-                <div class="track-artwork" style="aspect-ratio: 1;">
-                    <i class="fas fa-compact-disc placeholder-icon fa-spin" style="animation-duration: 8s;"></i>
-                    <!-- Replace with: <img src="images/music/featured-track.jpg" alt="Featured Track Artwork"> -->
+            <div class="featured-artwork" style="width:100%; max-width:560px;">
+                <div style="position:relative; padding-bottom:56.25%; height:0; overflow:hidden; border-radius:12px; border:3px solid var(--color-secondary);">
+                    <iframe
+                        src="https://www.youtube.com/embed/nro_6EZx1z8?rel=0"
+                        title="VEXATIOUS — Fair Go Justice"
+                        style="position:absolute; top:0; left:0; width:100%; height:100%; border:0;"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen loading="lazy">
+                    </iframe>
                 </div>
             </div>
             <div class="featured-content">
                 <span class="featured-label"><i class="fas fa-star"></i> FEATURED TRACK</span>
-                <h2>Fair Go Anthem</h2>
-                <p class="artist">AI-Assisted Production</p>
-                <p>The official anthem of the Fair Go Justice movement. This track captures the spirit of Australians demanding accountability, transparency, and a justice system that serves everyone equally.</p>
-                
-                <div class="audio-player">
-                    <audio controls>
-                        <source src="media/music/fair-go-anthem.mp3" type="audio/mpeg">
-                        Your browser does not support the audio element.
-                    </audio>
+                <h2>VEXATIOUS</h2>
+                <p class="artist">By the Fair Go Movement</p>
+                <p>When the system labels your genuine grievance as "vexatious" to silence you — that's the abuse we're fighting. This track calls out the weaponisation of legal process against everyday Australians.</p>
+                <div class="track-tags" style="margin-bottom:1.5rem;">
+                    <span class="track-tag">Hip-Hop</span>
+                    <span class="track-tag">Judicial Accountability</span>
+                    <span class="track-tag">Protest</span>
                 </div>
-                
                 <div class="track-actions" style="margin-top: 1.5rem;">
-                    <a href="#" class="btn btn-secondary" onclick="shareTrack('Fair Go Anthem'); return false;">
-                        <i class="fas fa-share"></i> Share
+                    <a href="https://www.youtube.com/watch?v=nro_6EZx1z8" target="_blank" rel="noopener" class="btn btn-secondary">
+                        <i class="fab fa-youtube"></i> Watch on YouTube
                     </a>
-                    <a href="media/music/fair-go-anthem.mp3" class="btn btn-primary" download>
-                        <i class="fas fa-download"></i> Download
+                    <a href="https://www.youtube.com/@fairgojustice?sub_confirmation=1" target="_blank" rel="noopener" class="btn btn-primary">
+                        <i class="fas fa-bell"></i> Subscribe
                     </a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Track Grid -->
+    <!-- Track Grid — Latest Uploads -->
+    <section style="padding:1rem 2rem 0.5rem; text-align:center;">
+      <h2 style="font-size:1.8rem; color:var(--color-primary); margin-bottom:0.25rem;"><i class="fab fa-youtube" style="color:#ff0000;"></i> Now Live on YouTube</h2>
+      <p style="color:#555; font-size:1rem; margin-bottom:0;">10 lyric videos — watch, share, and help spread the word.</p>
+    </section>
     <section class="music-grid">
-        <!-- Track 1 -->
+
+        <!-- VEXATIOUS -->
         <div class="track-card">
-            <div class="track-artwork">
-                <i class="fas fa-microphone-alt placeholder-icon"></i>
-                <!-- Replace with actual artwork: <img src="images/music/track-1.jpg" alt="Track Artwork"> -->
-                <div class="play-overlay">
-                    <i class="fas fa-play-circle"></i>
-                </div>
-            </div>
+            <a href="https://www.youtube.com/watch?v=nro_6EZx1z8" target="_blank" rel="noopener" style="display:block; position:relative;">
+                <img src="https://img.youtube.com/vi/nro_6EZx1z8/hqdefault.jpg" alt="VEXATIOUS thumbnail" style="width:100%; display:block;">
+                <div class="play-overlay" style="opacity:1; background:rgba(0,0,0,0.3);"><i class="fas fa-play-circle" style="font-size:3.5rem; color:white;"></i></div>
+            </a>
             <div class="track-info">
-                <h3 class="track-title">System Breakdown</h3>
-                <p class="track-artist">Fair Go Justice</p>
-                <p class="track-description">A hard-hitting track exposing the cracks in our justice system. Raw, honest, and uncompromising.</p>
+                <h3 class="track-title">VEXATIOUS</h3>
+                <p class="track-artist">By the Fair Go Movement</p>
+                <p class="track-description">The system uses "vexatious litigant" labels to silence legitimate grievances — this track calls it out.</p>
                 <div class="track-tags">
-                    <span class="track-tag">Hip Hop</span>
+                    <span class="track-tag">Hip-Hop</span>
                     <span class="track-tag">Protest</span>
-                    <span class="track-tag">Justice</span>
-                </div>
-                <div class="audio-player">
-                    <audio controls>
-                        <source src="media/music/system-breakdown.mp3" type="audio/mpeg">
-                        Your browser does not support the audio element.
-                    </audio>
                 </div>
                 <div class="track-actions">
-                    <button class="btn btn-outline" onclick="shareTrack('System Breakdown')">
-                        <i class="fas fa-share"></i> Share
-                    </button>
-                    <a href="media/music/system-breakdown.mp3" class="btn btn-primary" download>
-                        <i class="fas fa-download"></i> Download
-                    </a>
+                    <a href="https://www.youtube.com/watch?v=nro_6EZx1z8" target="_blank" rel="noopener" class="btn btn-primary"><i class="fab fa-youtube"></i> Watch</a>
+                    <a href="lyrics.html" class="btn btn-outline"><i class="fas fa-scroll"></i> Lyrics</a>
                 </div>
             </div>
         </div>
 
-        <!-- Track 2 -->
+        <!-- SELF-REPRESENTED -->
         <div class="track-card">
-            <div class="track-artwork">
-                <i class="fas fa-fist-raised placeholder-icon"></i>
-                <div class="play-overlay">
-                    <i class="fas fa-play-circle"></i>
-                </div>
-            </div>
+            <a href="https://www.youtube.com/watch?v=IpF6rtveFVU" target="_blank" rel="noopener" style="display:block; position:relative;">
+                <img src="https://img.youtube.com/vi/IpF6rtveFVU/hqdefault.jpg" alt="SELF-REPRESENTED thumbnail" style="width:100%; display:block;">
+                <div class="play-overlay" style="opacity:1; background:rgba(0,0,0,0.3);"><i class="fas fa-play-circle" style="font-size:3.5rem; color:white;"></i></div>
+            </a>
             <div class="track-info">
-                <h3 class="track-title">Voice of the People</h3>
-                <p class="track-artist">Fair Go Justice</p>
-                <p class="track-description">An empowering anthem for everyone who's ever felt silenced by the system. Your voice matters.</p>
+                <h3 class="track-title">SELF-REPRESENTED</h3>
+                <p class="track-artist">By the Fair Go Movement</p>
+                <p class="track-description">For everyone who's had to face the court alone because they couldn't afford a lawyer.</p>
                 <div class="track-tags">
-                    <span class="track-tag">Aussie Hip Hop</span>
-                    <span class="track-tag">Empowerment</span>
-                </div>
-                <div class="audio-player">
-                    <audio controls>
-                        <source src="media/music/voice-of-the-people.mp3" type="audio/mpeg">
-                        Your browser does not support the audio element.
-                    </audio>
+                    <span class="track-tag">Hip-Hop</span>
+                    <span class="track-tag" style="background:#2980b9; color:#fff;">⚖️ Pillar 2</span>
                 </div>
                 <div class="track-actions">
-                    <button class="btn btn-outline" onclick="shareTrack('Voice of the People')">
-                        <i class="fas fa-share"></i> Share
-                    </button>
-                    <a href="media/music/voice-of-the-people.mp3" class="btn btn-primary" download>
-                        <i class="fas fa-download"></i> Download
-                    </a>
+                    <a href="https://www.youtube.com/watch?v=IpF6rtveFVU" target="_blank" rel="noopener" class="btn btn-primary"><i class="fab fa-youtube"></i> Watch</a>
+                    <a href="lyrics.html" class="btn btn-outline"><i class="fas fa-scroll"></i> Lyrics</a>
                 </div>
             </div>
         </div>
 
-        <!-- Track 3 -->
+        <!-- SUPPRESSED -->
         <div class="track-card">
-            <div class="track-artwork">
-                <i class="fas fa-balance-scale placeholder-icon"></i>
-                <div class="play-overlay">
-                    <i class="fas fa-play-circle"></i>
-                </div>
-            </div>
+            <a href="https://www.youtube.com/watch?v=Q05AO-VzQFY" target="_blank" rel="noopener" style="display:block; position:relative;">
+                <img src="https://img.youtube.com/vi/Q05AO-VzQFY/hqdefault.jpg" alt="SUPPRESSED thumbnail" style="width:100%; display:block;">
+                <div class="play-overlay" style="opacity:1; background:rgba(0,0,0,0.3);"><i class="fas fa-play-circle" style="font-size:3.5rem; color:white;"></i></div>
+            </a>
             <div class="track-info">
-                <h3 class="track-title">Scales of Truth</h3>
-                <p class="track-artist">Fair Go Justice</p>
-                <p class="track-description">A reflective track about the weight of truth in a system designed to suppress it.</p>
+                <h3 class="track-title">SUPPRESSED</h3>
+                <p class="track-artist">By the Fair Go Movement</p>
+                <p class="track-description">Evidence that disappears. Witnesses who recant. Truth buried under process. This one hits hard.</p>
                 <div class="track-tags">
-                    <span class="track-tag">Hip Hop</span>
-                    <span class="track-tag">Truth</span>
-                    <span class="track-tag">Reflective</span>
-                </div>
-                <div class="audio-player">
-                    <audio controls>
-                        <source src="media/music/scales-of-truth.mp3" type="audio/mpeg">
-                        Your browser does not support the audio element.
-                    </audio>
+                    <span class="track-tag">Hip-Hop</span>
+                    <span class="track-tag" style="background:#27ae60; color:#fff;">🔍 Pillar 3</span>
                 </div>
                 <div class="track-actions">
-                    <button class="btn btn-outline" onclick="shareTrack('Scales of Truth')">
-                        <i class="fas fa-share"></i> Share
-                    </button>
-                    <a href="media/music/scales-of-truth.mp3" class="btn btn-primary" download>
-                        <i class="fas fa-download"></i> Download
-                    </a>
+                    <a href="https://www.youtube.com/watch?v=Q05AO-VzQFY" target="_blank" rel="noopener" class="btn btn-primary"><i class="fab fa-youtube"></i> Watch</a>
+                    <a href="lyrics.html" class="btn btn-outline"><i class="fas fa-scroll"></i> Lyrics</a>
                 </div>
             </div>
         </div>
 
-        <!-- Track 4 -->
+        <!-- THE APPOINTED -->
         <div class="track-card">
-            <div class="track-artwork">
-                <i class="fas fa-users placeholder-icon"></i>
-                <div class="play-overlay">
-                    <i class="fas fa-play-circle"></i>
-                </div>
-            </div>
+            <a href="https://www.youtube.com/watch?v=x3UqqsYzTPg" target="_blank" rel="noopener" style="display:block; position:relative;">
+                <img src="https://img.youtube.com/vi/x3UqqsYzTPg/hqdefault.jpg" alt="THE APPOINTED thumbnail" style="width:100%; display:block;">
+                <div class="play-overlay" style="opacity:1; background:rgba(0,0,0,0.3);"><i class="fas fa-play-circle" style="font-size:3.5rem; color:white;"></i></div>
+            </a>
             <div class="track-info">
-                <h3 class="track-title">Stand Together</h3>
-                <p class="track-artist">Fair Go Justice</p>
-                <p class="track-description">Unity is our strength. This track celebrates the power of community action and collective voice.</p>
+                <h3 class="track-title">THE APPOINTED</h3>
+                <p class="track-artist">By the Fair Go Movement</p>
+                <p class="track-description">Who appoints the judges? Who watches the watchers? It's time for a real Judicial Integrity Commission.</p>
                 <div class="track-tags">
-                    <span class="track-tag">Aussie Hip Hop</span>
-                    <span class="track-tag">Unity</span>
-                    <span class="track-tag">Community</span>
-                </div>
-                <div class="audio-player">
-                    <audio controls>
-                        <source src="media/music/stand-together.mp3" type="audio/mpeg">
-                        Your browser does not support the audio element.
-                    </audio>
+                    <span class="track-tag">Hip-Hop</span>
+                    <span class="track-tag" style="background:#c0392b; color:#fff;">🏛️ Pillar 1</span>
                 </div>
                 <div class="track-actions">
-                    <button class="btn btn-outline" onclick="shareTrack('Stand Together')">
-                        <i class="fas fa-share"></i> Share
-                    </button>
-                    <a href="media/music/stand-together.mp3" class="btn btn-primary" download>
-                        <i class="fas fa-download"></i> Download
-                    </a>
+                    <a href="https://www.youtube.com/watch?v=x3UqqsYzTPg" target="_blank" rel="noopener" class="btn btn-primary"><i class="fab fa-youtube"></i> Watch</a>
+                    <a href="lyrics.html" class="btn btn-outline"><i class="fas fa-scroll"></i> Lyrics</a>
                 </div>
             </div>
         </div>
 
-        <!-- Track 5 -->
+        <!-- BLINDSIDED: TRUTH UNCUT -->
         <div class="track-card">
-            <div class="track-artwork">
-                <i class="fas fa-landmark placeholder-icon"></i>
-                <div class="play-overlay">
-                    <i class="fas fa-play-circle"></i>
-                </div>
-            </div>
+            <a href="https://www.youtube.com/watch?v=HnnTiCk1CI0" target="_blank" rel="noopener" style="display:block; position:relative;">
+                <img src="https://img.youtube.com/vi/HnnTiCk1CI0/hqdefault.jpg" alt="BLINDSIDED TRUTH UNCUT thumbnail" style="width:100%; display:block;">
+                <div class="play-overlay" style="opacity:1; background:rgba(0,0,0,0.3);"><i class="fas fa-play-circle" style="font-size:3.5rem; color:white;"></i></div>
+            </a>
             <div class="track-info">
-                <h3 class="track-title">Parliament Steps</h3>
-                <p class="track-artist">Fair Go Justice</p>
-                <p class="track-description">Taking our message to the halls of power. A call for political accountability and real change.</p>
+                <h3 class="track-title">BLINDSIDED: TRUTH UNCUT</h3>
+                <p class="track-artist">By the Fair Go Movement</p>
+                <p class="track-description">What happens when the truth is edited out before it reaches the courtroom? We see you.</p>
                 <div class="track-tags">
-                    <span class="track-tag">Political</span>
-                    <span class="track-tag">Hip Hop</span>
-                    <span class="track-tag">Action</span>
-                </div>
-                <div class="audio-player">
-                    <audio controls>
-                        <source src="media/music/parliament-steps.mp3" type="audio/mpeg">
-                        Your browser does not support the audio element.
-                    </audio>
+                    <span class="track-tag">Hip-Hop</span>
+                    <span class="track-tag" style="background:#27ae60; color:#fff;">🔍 Pillar 3</span>
                 </div>
                 <div class="track-actions">
-                    <button class="btn btn-outline" onclick="shareTrack('Parliament Steps')">
-                        <i class="fas fa-share"></i> Share
-                    </button>
-                    <a href="media/music/parliament-steps.mp3" class="btn btn-primary" download>
-                        <i class="fas fa-download"></i> Download
-                    </a>
+                    <a href="https://www.youtube.com/watch?v=HnnTiCk1CI0" target="_blank" rel="noopener" class="btn btn-primary"><i class="fab fa-youtube"></i> Watch</a>
+                    <a href="lyrics.html" class="btn btn-outline"><i class="fas fa-scroll"></i> Lyrics</a>
                 </div>
             </div>
         </div>
 
-        <!-- Track 6 -->
+        <!-- ELDER -->
         <div class="track-card">
-            <div class="track-artwork">
-                <i class="fas fa-dove placeholder-icon"></i>
-                <div class="play-overlay">
-                    <i class="fas fa-play-circle"></i>
-                </div>
-            </div>
+            <a href="https://www.youtube.com/watch?v=WAXn0map22Q" target="_blank" rel="noopener" style="display:block; position:relative;">
+                <img src="https://img.youtube.com/vi/WAXn0map22Q/hqdefault.jpg" alt="ELDER thumbnail" style="width:100%; display:block;">
+                <div class="play-overlay" style="opacity:1; background:rgba(0,0,0,0.3);"><i class="fas fa-play-circle" style="font-size:3.5rem; color:white;"></i></div>
+            </a>
             <div class="track-info">
-                <h3 class="track-title">Hope Rising</h3>
-                <p class="track-artist">Fair Go Justice</p>
-                <p class="track-description">An uplifting closer reminding us that change is possible when we don't give up the fight.</p>
+                <h3 class="track-title">ELDER</h3>
+                <p class="track-artist">By the Fair Go Movement</p>
+                <p class="track-description">Dedicated to those who have endured the longest — the elderly and vulnerable failed by a system that should protect them.</p>
                 <div class="track-tags">
-                    <span class="track-tag">Inspirational</span>
-                    <span class="track-tag">Hip Hop</span>
-                    <span class="track-tag">Hope</span>
-                </div>
-                <div class="audio-player">
-                    <audio controls>
-                        <source src="media/music/hope-rising.mp3" type="audio/mpeg">
-                        Your browser does not support the audio element.
-                    </audio>
+                    <span class="track-tag">Hip-Hop</span>
+                    <span class="track-tag">Elder Justice</span>
                 </div>
                 <div class="track-actions">
-                    <button class="btn btn-outline" onclick="shareTrack('Hope Rising')">
-                        <i class="fas fa-share"></i> Share
-                    </button>
-                    <a href="media/music/hope-rising.mp3" class="btn btn-primary" download>
-                        <i class="fas fa-download"></i> Download
-                    </a>
+                    <a href="https://www.youtube.com/watch?v=WAXn0map22Q" target="_blank" rel="noopener" class="btn btn-primary"><i class="fab fa-youtube"></i> Watch</a>
+                    <a href="lyrics.html" class="btn btn-outline"><i class="fas fa-scroll"></i> Lyrics</a>
                 </div>
             </div>
         </div>
+
+        <!-- FAMILY COURT BLUES -->
+        <div class="track-card">
+            <a href="https://www.youtube.com/watch?v=EqBa_TahlZg" target="_blank" rel="noopener" style="display:block; position:relative;">
+                <img src="https://img.youtube.com/vi/EqBa_TahlZg/hqdefault.jpg" alt="FAMILY COURT BLUES thumbnail" style="width:100%; display:block;">
+                <div class="play-overlay" style="opacity:1; background:rgba(0,0,0,0.3);"><i class="fas fa-play-circle" style="font-size:3.5rem; color:white;"></i></div>
+            </a>
+            <div class="track-info">
+                <h3 class="track-title">FAMILY COURT BLUES</h3>
+                <p class="track-artist">By the Fair Go Movement</p>
+                <p class="track-description">Family law should protect families — not destroy them. For every parent who fought the odds alone.</p>
+                <div class="track-tags">
+                    <span class="track-tag">Hip-Hop</span>
+                    <span class="track-tag" style="background:#2980b9; color:#fff;">⚖️ Pillar 2</span>
+                </div>
+                <div class="track-actions">
+                    <a href="https://www.youtube.com/watch?v=EqBa_TahlZg" target="_blank" rel="noopener" class="btn btn-primary"><i class="fab fa-youtube"></i> Watch</a>
+                    <a href="lyrics.html" class="btn btn-outline"><i class="fas fa-scroll"></i> Lyrics</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- BANKRUPTCY WEAPON -->
+        <div class="track-card">
+            <a href="https://www.youtube.com/watch?v=7skBZ5rVtpI" target="_blank" rel="noopener" style="display:block; position:relative;">
+                <img src="https://img.youtube.com/vi/7skBZ5rVtpI/hqdefault.jpg" alt="BANKRUPTCY WEAPON thumbnail" style="width:100%; display:block;">
+                <div class="play-overlay" style="opacity:1; background:rgba(0,0,0,0.3);"><i class="fas fa-play-circle" style="font-size:3.5rem; color:white;"></i></div>
+            </a>
+            <div class="track-info">
+                <h3 class="track-title">BANKRUPTCY WEAPON</h3>
+                <p class="track-artist">By the Fair Go Movement</p>
+                <p class="track-description">Using bankruptcy proceedings as a weapon to crush opponents. A track about financial abuse of process.</p>
+                <div class="track-tags">
+                    <span class="track-tag">Hip-Hop</span>
+                    <span class="track-tag">Abuse of Process</span>
+                </div>
+                <div class="track-actions">
+                    <a href="https://www.youtube.com/watch?v=7skBZ5rVtpI" target="_blank" rel="noopener" class="btn btn-primary"><i class="fab fa-youtube"></i> Watch</a>
+                    <a href="lyrics.html" class="btn btn-outline"><i class="fas fa-scroll"></i> Lyrics</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- WE ARE NOT DONE -->
+        <div class="track-card">
+            <a href="https://www.youtube.com/watch?v=_UexLVzLSmI" target="_blank" rel="noopener" style="display:block; position:relative;">
+                <img src="https://img.youtube.com/vi/_UexLVzLSmI/hqdefault.jpg" alt="WE ARE NOT DONE thumbnail" style="width:100%; display:block;">
+                <div class="play-overlay" style="opacity:1; background:rgba(0,0,0,0.3);"><i class="fas fa-play-circle" style="font-size:3.5rem; color:white;"></i></div>
+            </a>
+            <div class="track-info">
+                <h3 class="track-title">WE ARE NOT DONE</h3>
+                <p class="track-artist">By the Fair Go Movement</p>
+                <p class="track-description">This fight isn't over. As long as the system fails Australians, we keep our voices loud.</p>
+                <div class="track-tags">
+                    <span class="track-tag">Hip-Hop</span>
+                    <span class="track-tag">Resistance</span>
+                </div>
+                <div class="track-actions">
+                    <a href="https://www.youtube.com/watch?v=_UexLVzLSmI" target="_blank" rel="noopener" class="btn btn-primary"><i class="fab fa-youtube"></i> Watch</a>
+                    <a href="lyrics.html" class="btn btn-outline"><i class="fas fa-scroll"></i> Lyrics</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- CONFLICT OF INTEREST -->
+        <div class="track-card">
+            <a href="https://www.youtube.com/watch?v=Fp_j0BumjQs" target="_blank" rel="noopener" style="display:block; position:relative;">
+                <img src="https://img.youtube.com/vi/Fp_j0BumjQs/hqdefault.jpg" alt="CONFLICT OF INTEREST thumbnail" style="width:100%; display:block;">
+                <div class="play-overlay" style="opacity:1; background:rgba(0,0,0,0.3);"><i class="fas fa-play-circle" style="font-size:3.5rem; color:white;"></i></div>
+            </a>
+            <div class="track-info">
+                <h3 class="track-title">CONFLICT OF INTEREST</h3>
+                <p class="track-artist">By the Fair Go Movement</p>
+                <p class="track-description">When the judge knows the lawyer, knows the opponent — and nobody discloses it. This is why we need reform.</p>
+                <div class="track-tags">
+                    <span class="track-tag">Hip-Hop</span>
+                    <span class="track-tag" style="background:#c0392b; color:#fff;">🏛️ Pillar 1</span>
+                </div>
+                <div class="track-actions">
+                    <a href="https://www.youtube.com/watch?v=Fp_j0BumjQs" target="_blank" rel="noopener" class="btn btn-primary"><i class="fab fa-youtube"></i> Watch</a>
+                    <a href="lyrics.html" class="btn btn-outline"><i class="fas fa-scroll"></i> Lyrics</a>
+                </div>
+            </div>
+        </div>
+
     </section>
 
     <!-- Lyrics Section -->
@@ -670,7 +684,7 @@ Royal Commission now, the time is here!
     <section style="background:#f8f9fa;padding:2rem;text-align:center;border-top:3px solid var(--color-secondary);">
     <div class="container">
       <h3><i class="fas fa-scroll"></i> Read the Lyrics</h3>
-      <p>Every track tells a story. Browse all 112 songs with full lyrics, genre tags, and issue breakdowns.</p>
+      <p>Every track tells a story. Browse all 128 songs with full lyrics, genre tags, and issue breakdowns.</p>
       <a href="lyrics.html" class="btn btn-primary" style="margin-right:1rem;"><i class="fas fa-book-open"></i> Browse All Lyrics</a>
       <a href="pillars.html" class="btn btn-outline"><i class="fas fa-columns"></i> The 3 Pillars</a>
     </div>
@@ -683,7 +697,7 @@ Royal Commission now, the time is here!
         <i class="fab fa-youtube" style="color:#ff0000;"></i> Fair Go Justice on YouTube
       </h2>
       <p style="color:#ccc; margin-bottom:2rem; font-size:1.1rem;">
-        All 120+ tracks with lyric videos — free to share, free to use in your advocacy.
+        128 original tracks with lyric videos — free to share, free to use in your advocacy.
         Subscribe at <a href="https://www.youtube.com/@fairgojustice" target="_blank"
         rel="noopener" style="color:#d4af37;">@fairgojustice</a>
       </p>
