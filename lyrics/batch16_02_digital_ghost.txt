@@ -1,0 +1,90 @@
+---
+title: Digital Ghost
+genre: Synthwave / Electronic / Dark Pop
+pillar: 3
+style: moody synthwave, pulsing bass synth, cold vocals, Blade Runner atmosphere, 98bpm, echoing chorus
+tags: digital evidence, metadata, electronic records, evidence integrity, cyber forensics
+---
+
+[INTRO — synth arpeggio, low pulse]
+(They altered the timestamp.
+Nobody noticed.
+Or nobody wanted to.)
+
+[VERSE 1]
+A file on a server with a modified date
+The metadata screams but the court can't translate
+Nobody asked for the audit log printout
+Nobody subpoenaed the backup cloud account
+
+A PDF submitted with a creation time
+Three weeks after the event — that ain't sublime
+That's fabrication dressed in pixels and code
+And nobody pulled on that thread of the road
+
+[PRE-CHORUS]
+In the digital age, evidence is fragile
+A right-click away from something sinister
+
+[CHORUS]
+I'm a digital ghost in a system that's blind
+They changed the record and they left me behind
+The hash don't lie but the court didn't check
+Digital ghost — sailing a digital wreck
+Digital ghost — truth buried in the tech
+
+[VERSE 2]
+EXIF data stripped from a photo they filed
+The GPS coordinates missing — reconciled?
+They said the image was taken at the scene
+But the camera clock was never what it seemed
+
+Chain of custody for electronic files
+Means signing and hashing across all the miles
+Not printing it out and submitting a scan
+Not hoping the judge doesn't know what he can
+
+[PRE-CHORUS]
+In the digital age, evidence is fragile
+A right-click away from something sinister
+
+[CHORUS]
+I'm a digital ghost in a system that's blind
+They changed the record and they left me behind
+The hash don't lie but the court didn't check
+Digital ghost — sailing a digital wreck
+Digital ghost — truth buried in the tech
+
+[BRIDGE — spoken word over synth pulse]
+Pillar Three exists for exactly this:
+The Evidence Integrity Protocols
+Every digital file submitted to court
+Must carry a hash — an immutable record
+Of what it was when it was made
+Not what they needed it to say
+The ghost in the machine is the lie they embedded
+Pillar Three is the exorcism
+
+[VERSE 3]
+They said my document was the forgery
+When the metadata proved the opposite, clearly
+But no-one in that courtroom was fluent in code
+So the truth sat silent in binary mode
+
+I need a system where forensic IT
+Is standard practice — not a luxury
+Where evidence tampering leaves a permanent trace
+And the digital ghost gets a permanent face
+
+[CHORUS]
+I'm a digital ghost in a system that's blind
+They changed the record and they left me behind
+The hash don't lie but the court didn't check
+Digital ghost — sailing a digital wreck
+Digital ghost — truth buried in the tech
+
+[OUTRO — fading synth]
+(Verify. Hash. Authenticate.
+Every file. Every time.
+That's Pillar Three.
+That's the future of justice.)
