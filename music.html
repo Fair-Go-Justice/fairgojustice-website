@@ -436,14 +436,23 @@
     </section>
 
     <!-- Track Grid — Latest Uploads -->
-    <section style="padding:1rem 2rem 0.5rem; text-align:center;">
+    <section style="padding:1.5rem 2rem 0.5rem; text-align:center;">
       <h2 style="font-size:1.8rem; color:var(--color-primary); margin-bottom:0.25rem;"><i class="fab fa-youtube" style="color:#ff0000;"></i> Now Live on YouTube</h2>
-      <p style="color:#555; font-size:1rem; margin-bottom:0;">10 lyric videos — watch, share, and help spread the word.</p>
+      <p style="color:#555; font-size:1rem; margin-bottom:1rem;">10 lyric videos — watch, share, and help spread the word.</p>
+
+      <!-- Filter Bar -->
+      <div id="track-filters" style="display:flex; flex-wrap:wrap; justify-content:center; gap:0.5rem; margin-bottom:1.5rem;">
+        <button onclick="filterTracks('all')" class="filter-btn active" data-filter="all" style="padding:0.4rem 1rem; border-radius:999px; border:2px solid var(--color-primary); background:var(--color-primary); color:white; cursor:pointer; font-weight:600; font-size:0.85rem;">All Tracks</button>
+        <button onclick="filterTracks('pillar1')" class="filter-btn" data-filter="pillar1" style="padding:0.4rem 1rem; border-radius:999px; border:2px solid #dc2626; background:white; color:#dc2626; cursor:pointer; font-weight:600; font-size:0.85rem;">🏛️ Pillar 1 — Judicial</button>
+        <button onclick="filterTracks('pillar2')" class="filter-btn" data-filter="pillar2" style="padding:0.4rem 1rem; border-radius:999px; border:2px solid #2563eb; background:white; color:#2563eb; cursor:pointer; font-weight:600; font-size:0.85rem;">⚖️ Pillar 2 — Legal Aid</button>
+        <button onclick="filterTracks('pillar3')" class="filter-btn" data-filter="pillar3" style="padding:0.4rem 1rem; border-radius:999px; border:2px solid #16a34a; background:white; color:#16a34a; cursor:pointer; font-weight:600; font-size:0.85rem;">🔍 Pillar 3 — Evidence</button>
+        <button onclick="filterTracks('hiphop')" class="filter-btn" data-filter="hiphop" style="padding:0.4rem 1rem; border-radius:999px; border:2px solid #7c3aed; background:white; color:#7c3aed; cursor:pointer; font-weight:600; font-size:0.85rem;">🎤 Hip-Hop & Drill</button>
+      </div>
     </section>
-    <section class="music-grid">
+    <section class="music-grid" id="track-grid">
 
         <!-- VEXATIOUS -->
-        <div class="track-card">
+        <div class="track-card" data-pillar="pillar1" data-genre="hiphop">
             <a href="https://www.youtube.com/watch?v=nro_6EZx1z8" target="_blank" rel="noopener" style="display:block; position:relative;">
                 <img src="https://img.youtube.com/vi/nro_6EZx1z8/hqdefault.jpg" alt="VEXATIOUS thumbnail" style="width:100%; display:block;">
                 <div class="play-overlay" style="opacity:1; background:rgba(0,0,0,0.3);"><i class="fas fa-play-circle" style="font-size:3.5rem; color:white;"></i></div>
@@ -464,7 +473,7 @@
         </div>
 
         <!-- SELF-REPRESENTED -->
-        <div class="track-card">
+        <div class="track-card" data-pillar="pillar2" data-genre="hiphop">
             <a href="https://www.youtube.com/watch?v=IpF6rtveFVU" target="_blank" rel="noopener" style="display:block; position:relative;">
                 <img src="https://img.youtube.com/vi/IpF6rtveFVU/hqdefault.jpg" alt="SELF-REPRESENTED thumbnail" style="width:100%; display:block;">
                 <div class="play-overlay" style="opacity:1; background:rgba(0,0,0,0.3);"><i class="fas fa-play-circle" style="font-size:3.5rem; color:white;"></i></div>
@@ -485,7 +494,7 @@
         </div>
 
         <!-- SUPPRESSED -->
-        <div class="track-card">
+        <div class="track-card" data-pillar="pillar3" data-genre="hiphop">
             <a href="https://www.youtube.com/watch?v=Q05AO-VzQFY" target="_blank" rel="noopener" style="display:block; position:relative;">
                 <img src="https://img.youtube.com/vi/Q05AO-VzQFY/hqdefault.jpg" alt="SUPPRESSED thumbnail" style="width:100%; display:block;">
                 <div class="play-overlay" style="opacity:1; background:rgba(0,0,0,0.3);"><i class="fas fa-play-circle" style="font-size:3.5rem; color:white;"></i></div>
@@ -506,7 +515,7 @@
         </div>
 
         <!-- THE APPOINTED -->
-        <div class="track-card">
+        <div class="track-card" data-pillar="pillar1" data-genre="hiphop">
             <a href="https://www.youtube.com/watch?v=x3UqqsYzTPg" target="_blank" rel="noopener" style="display:block; position:relative;">
                 <img src="https://img.youtube.com/vi/x3UqqsYzTPg/hqdefault.jpg" alt="THE APPOINTED thumbnail" style="width:100%; display:block;">
                 <div class="play-overlay" style="opacity:1; background:rgba(0,0,0,0.3);"><i class="fas fa-play-circle" style="font-size:3.5rem; color:white;"></i></div>
@@ -527,7 +536,7 @@
         </div>
 
         <!-- BLINDSIDED: TRUTH UNCUT -->
-        <div class="track-card">
+        <div class="track-card" data-pillar="pillar3" data-genre="hiphop">
             <a href="https://www.youtube.com/watch?v=HnnTiCk1CI0" target="_blank" rel="noopener" style="display:block; position:relative;">
                 <img src="https://img.youtube.com/vi/HnnTiCk1CI0/hqdefault.jpg" alt="BLINDSIDED TRUTH UNCUT thumbnail" style="width:100%; display:block;">
                 <div class="play-overlay" style="opacity:1; background:rgba(0,0,0,0.3);"><i class="fas fa-play-circle" style="font-size:3.5rem; color:white;"></i></div>
@@ -548,7 +557,7 @@
         </div>
 
         <!-- ELDER -->
-        <div class="track-card">
+        <div class="track-card" data-pillar="pillar1" data-genre="hiphop">
             <a href="https://www.youtube.com/watch?v=WAXn0map22Q" target="_blank" rel="noopener" style="display:block; position:relative;">
                 <img src="https://img.youtube.com/vi/WAXn0map22Q/hqdefault.jpg" alt="ELDER thumbnail" style="width:100%; display:block;">
                 <div class="play-overlay" style="opacity:1; background:rgba(0,0,0,0.3);"><i class="fas fa-play-circle" style="font-size:3.5rem; color:white;"></i></div>
@@ -569,7 +578,7 @@
         </div>
 
         <!-- FAMILY COURT BLUES -->
-        <div class="track-card">
+        <div class="track-card" data-pillar="pillar2" data-genre="hiphop">
             <a href="https://www.youtube.com/watch?v=EqBa_TahlZg" target="_blank" rel="noopener" style="display:block; position:relative;">
                 <img src="https://img.youtube.com/vi/EqBa_TahlZg/hqdefault.jpg" alt="FAMILY COURT BLUES thumbnail" style="width:100%; display:block;">
                 <div class="play-overlay" style="opacity:1; background:rgba(0,0,0,0.3);"><i class="fas fa-play-circle" style="font-size:3.5rem; color:white;"></i></div>
@@ -590,7 +599,7 @@
         </div>
 
         <!-- BANKRUPTCY WEAPON -->
-        <div class="track-card">
+        <div class="track-card" data-pillar="pillar2" data-genre="hiphop">
             <a href="https://www.youtube.com/watch?v=7skBZ5rVtpI" target="_blank" rel="noopener" style="display:block; position:relative;">
                 <img src="https://img.youtube.com/vi/7skBZ5rVtpI/hqdefault.jpg" alt="BANKRUPTCY WEAPON thumbnail" style="width:100%; display:block;">
                 <div class="play-overlay" style="opacity:1; background:rgba(0,0,0,0.3);"><i class="fas fa-play-circle" style="font-size:3.5rem; color:white;"></i></div>
@@ -611,7 +620,7 @@
         </div>
 
         <!-- WE ARE NOT DONE -->
-        <div class="track-card">
+        <div class="track-card" data-pillar="pillar1" data-genre="hiphop">
             <a href="https://www.youtube.com/watch?v=_UexLVzLSmI" target="_blank" rel="noopener" style="display:block; position:relative;">
                 <img src="https://img.youtube.com/vi/_UexLVzLSmI/hqdefault.jpg" alt="WE ARE NOT DONE thumbnail" style="width:100%; display:block;">
                 <div class="play-overlay" style="opacity:1; background:rgba(0,0,0,0.3);"><i class="fas fa-play-circle" style="font-size:3.5rem; color:white;"></i></div>
@@ -632,7 +641,7 @@
         </div>
 
         <!-- CONFLICT OF INTEREST -->
-        <div class="track-card">
+        <div class="track-card" data-pillar="pillar1" data-genre="hiphop">
             <a href="https://www.youtube.com/watch?v=Fp_j0BumjQs" target="_blank" rel="noopener" style="display:block; position:relative;">
                 <img src="https://img.youtube.com/vi/Fp_j0BumjQs/hqdefault.jpg" alt="CONFLICT OF INTEREST thumbnail" style="width:100%; display:block;">
                 <div class="play-overlay" style="opacity:1; background:rgba(0,0,0,0.3);"><i class="fas fa-play-circle" style="font-size:3.5rem; color:white;"></i></div>
@@ -858,5 +867,38 @@ Royal Commission now, the time is here!
             });
         });
     </script>
+  <script>
+    function filterTracks(filter) {
+      // Update button styles
+      document.querySelectorAll('.filter-btn').forEach(btn => {
+        const isActive = btn.dataset.filter === filter;
+        const colors = {
+          all:     { bg: 'var(--color-primary)', border: 'var(--color-primary)', text: 'white' },
+          pillar1: { bg: '#dc2626', border: '#dc2626', text: 'white' },
+          pillar2: { bg: '#2563eb', border: '#2563eb', text: 'white' },
+          pillar3: { bg: '#16a34a', border: '#16a34a', text: 'white' },
+          hiphop:  { bg: '#7c3aed', border: '#7c3aed', text: 'white' },
+        };
+        if (isActive) {
+          btn.style.background = colors[btn.dataset.filter]?.bg || 'var(--color-primary)';
+          btn.style.color = 'white';
+        } else {
+          btn.style.background = 'white';
+          btn.style.color = btn.style.borderColor;
+        }
+      });
+
+      // Show/hide cards
+      document.querySelectorAll('#track-grid .track-card').forEach(card => {
+        if (filter === 'all') {
+          card.style.display = '';
+        } else if (filter === 'hiphop') {
+          card.style.display = card.dataset.genre === 'hiphop' ? '' : 'none';
+        } else {
+          card.style.display = card.dataset.pillar === filter ? '' : 'none';
+        }
+      });
+    }
+  </script>
 </body>
 </html>
