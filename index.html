@@ -3,1683 +3,887 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Fair Go Justice — National Justice Reform Movement</title>
-  <meta name="description" content="A national campaign for transparent courts, verified evidence, independent judicial oversight, and equal access to justice for all Australians.">
-  <meta property="og:title" content="Fair Go Justice — The Chain Is Broken">
-  <meta property="og:description" content="Join 12,847+ Australians demanding judicial accountability and justice reform.">
-  <meta property="og:image" content="images/hero_chain_parliament.png">
-  <meta name="theme-color" content="#0D1117">
-  <link rel="stylesheet" href="css/main.css">
+  <title>Fair Go Justice — Australia's Justice Reform Movement</title>
+  <link rel="stylesheet" href="main_v3.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    /* =====================================================================
-       PAGE-LEVEL OVERRIDES — v4 enhancements
-       ===================================================================== */
+    :root {
+      --bg: #0D1117;
+      --navy: #0E3A5B;
+      --orange: #D66B2D;
+      --gold: #D4AF37;
+      --white: #F5F5F5;
+      --red: #C0392B;
+      --text-muted: #8B9DB0;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--white); font-family: 'Space Grotesk', sans-serif; overflow-x: hidden; }
 
-    /* HERO — full-bleed chain parliament image */
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      background: rgba(13,17,23,0.0); backdrop-filter: blur(0);
+      border-bottom: 1px solid transparent;
+      padding: 0 2.5rem; height: 75px;
+      display: flex; align-items: center; justify-content: space-between;
+      transition: all 0.4s ease;
+    }
+    nav.scrolled {
+      background: rgba(13,17,23,0.97); backdrop-filter: blur(20px);
+      border-bottom-color: rgba(214,107,45,0.2);
+    }
+    .nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.7rem; color: var(--orange); letter-spacing: 3px; text-decoration: none; }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; align-items: center; }
+    .nav-links a { color: var(--white); text-decoration: none; font-size: 0.8rem; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase; opacity: 0.85; transition: opacity 0.2s, color 0.2s; }
+    .nav-links a:hover { opacity: 1; color: var(--orange); }
+    .nav-cta { padding: 0.5rem 1.4rem; background: var(--orange); color: #fff !important; border-radius: 1px; opacity: 1 !important; }
+    .nav-cta:hover { background: #e8793a !important; color: #fff !important; }
+    .nav-mobile-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+    .nav-mobile-toggle span { width: 24px; height: 2px; background: var(--white); }
+
+    /* ── HERO ── */
     .hero {
       min-height: 100vh;
-      display: flex;
-      align-items: center;
-      position: relative;
-      overflow: hidden;
-      padding: 0;
+      background:
+        linear-gradient(to bottom, rgba(13,17,23,0.35) 0%, rgba(13,17,23,0.55) 50%, rgba(13,17,23,0.95) 90%, var(--bg) 100%),
+        url('https://raw.githubusercontent.com/Fair-Go-Justice/fairgojustice-website/main/thumbnails/fgj_master_hero_web.jpg') center/cover no-repeat fixed;
+      display: flex; align-items: center;
+      position: relative; overflow: hidden;
     }
-    .hero-bg {
-      position: absolute; inset: 0;
-      background: url('images/hero_chain_parliament.png') center center / cover no-repeat;
-      transform: scale(1.08);
-      animation: heroZoom 20s ease-in-out infinite alternate;
-      will-change: transform;
+    .hero-content {
+      max-width: 1100px; margin: 0 auto; padding: 0 2.5rem;
+      padding-top: 100px;
+      position: relative; z-index: 2;
     }
-    @keyframes heroZoom {
-      from { transform: scale(1.08); }
-      to   { transform: scale(1.00); }
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 0.7rem;
+      font-size: 0.72rem; letter-spacing: 4px; text-transform: uppercase;
+      color: var(--orange); margin-bottom: 1.8rem;
+      border: 1px solid rgba(214,107,45,0.3); padding: 0.4rem 1rem; border-radius: 1px;
     }
-    .hero-overlay {
-      position: absolute; inset: 0;
-      background: linear-gradient(
-        135deg,
-        rgba(13,17,23,0.82) 0%,
-        rgba(14,58,91,0.55) 45%,
-        rgba(13,17,23,0.75) 100%
-      );
-    }
-    .hero-content { position: relative; z-index: 2; padding: 120px 0 80px; }
-
-    .hero-title {
+    .hero-eyebrow::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--orange); animation: pulse-dot 2s infinite; }
+    @keyframes pulse-dot { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(1.3)} }
+    .hero h1 {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(4rem, 12vw, 10rem);
-      line-height: 0.92;
-      letter-spacing: 0.02em;
-      color: var(--white);
-      text-shadow: 0 4px 40px rgba(0,0,0,0.8);
-      margin-bottom: 1.2rem;
-    }
-    .hero-title .line-1 {
-      display: block;
-      color: var(--white);
-    }
-    .hero-title .line-2 {
-      display: block;
-      color: var(--orange);
-      text-shadow: 0 0 60px rgba(214,107,45,0.7), 0 4px 40px rgba(0,0,0,0.8);
-      animation: glowPulse 3s ease-in-out infinite;
-    }
-    @keyframes glowPulse {
-      0%, 100% { text-shadow: 0 0 60px rgba(214,107,45,0.7), 0 4px 40px rgba(0,0,0,0.8); }
-      50%       { text-shadow: 0 0 100px rgba(214,107,45,1.0), 0 4px 40px rgba(0,0,0,0.8); }
-    }
-    .hero-subtitle {
-      font-size: clamp(1rem, 2.2vw, 1.3rem);
-      color: rgba(245,245,245,0.88);
-      max-width: 620px;
-      margin-bottom: 2.4rem;
-      line-height: 1.65;
-    }
-    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 3rem; }
-    .hero-badge {
-      display: inline-flex; align-items: center; gap: 0.5rem;
-      font-size: 0.72rem; font-weight: 600; letter-spacing: 0.14em;
-      text-transform: uppercase; color: var(--orange);
-      border: 1px solid rgba(214,107,45,0.4);
-      background: rgba(214,107,45,0.1);
-      padding: 0.4rem 1rem; border-radius: 100px;
-      margin-bottom: 1.5rem;
-    }
-    .hero-badge-dot {
-      width: 7px; height: 7px; border-radius: 50%;
-      background: var(--orange);
-      animation: blink 1.4s ease-in-out infinite;
-    }
-    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
-
-    .hero-stats {
-      display: flex; gap: 2.5rem; flex-wrap: wrap;
-    }
-    .hero-stat-item { text-align: left; }
-    .hero-stat-num {
-      display: block;
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(1.8rem, 4vw, 2.8rem);
-      color: var(--gold);
-      line-height: 1;
-    }
-    .hero-stat-label {
-      display: block; font-size: 0.72rem; color: rgba(245,245,245,0.6);
-      text-transform: uppercase; letter-spacing: 0.1em; margin-top: 0.2rem;
-    }
-    .hero-scroll {
-      position: absolute; bottom: 2rem; left: 50%;
-      transform: translateX(-50%);
-      display: flex; flex-direction: column; align-items: center; gap: 0.4rem;
-      font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase;
-      color: rgba(245,245,245,0.4);
-      animation: scrollBob 2.5s ease-in-out infinite;
-    }
-    .hero-scroll-line {
-      width: 1px; height: 40px;
-      background: linear-gradient(to bottom, rgba(245,245,245,0.5), transparent);
-    }
-    @keyframes scrollBob { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(6px)} }
-
-    /* =====================================================================
-       TRAILER SECTION
-       ===================================================================== */
-    .trailer-section {
-      background: var(--bg);
-      padding: 80px 0;
-      position: relative;
-      overflow: hidden;
-    }
-    .trailer-section::before {
-      content: '';
-      position: absolute; inset: 0;
-      background: radial-gradient(ellipse at center, rgba(14,58,91,0.3) 0%, transparent 70%);
-      pointer-events: none;
-    }
-    .trailer-inner {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
-      align-items: center;
-    }
-    @media (max-width: 768px) {
-      .trailer-inner { grid-template-columns: 1fr; gap: 2rem; }
-    }
-    .trailer-text .eyebrow { margin-bottom: 1rem; }
-    .trailer-text h2 { margin-bottom: 1.2rem; }
-    .trailer-text p { color: var(--grey); margin-bottom: 2rem; line-height: 1.7; }
-    .trailer-text .trailer-list {
-      list-style: none; padding: 0;
-      display: flex; flex-direction: column; gap: 0.7rem;
+      font-size: clamp(5rem, 14vw, 11rem);
+      line-height: 0.88; letter-spacing: 2px;
       margin-bottom: 2rem;
     }
-    .trailer-text .trailer-list li {
-      display: flex; align-items: center; gap: 0.6rem;
-      font-size: 0.9rem; color: rgba(245,245,245,0.8);
+    .hero h1 .line-1 { display: block; color: var(--white); }
+    .hero h1 .line-2 { display: block; color: var(--orange); text-shadow: 0 0 60px rgba(214,107,45,0.5); }
+    .hero h1 .line-3 { display: block; color: var(--white); font-size: 0.55em; letter-spacing: 6px; margin-top: 0.3em; }
+    .hero-sub {
+      font-size: clamp(1rem, 2vw, 1.2rem); color: rgba(245,245,245,0.75);
+      max-width: 580px; line-height: 1.8; margin-bottom: 3rem;
+      font-weight: 300;
     }
-    .trailer-text .trailer-list li::before {
-      content: '▶';
-      color: var(--orange); font-size: 0.6rem;
+    .hero-buttons { display: flex; gap: 1.2rem; flex-wrap: wrap; }
+    .btn-primary {
+      padding: 1.1rem 2.8rem; background: var(--orange); color: #fff;
+      font-family: 'Bebas Neue', sans-serif; font-size: 1.2rem; letter-spacing: 3px;
+      text-decoration: none; border-radius: 1px; border: none; cursor: pointer;
+      transition: all 0.25s; display: inline-block;
     }
-    .trailer-embed {
-      position: relative;
-      border-radius: var(--radius-lg);
-      overflow: hidden;
-      border: 1px solid rgba(214,107,45,0.25);
-      box-shadow: 0 0 60px rgba(214,107,45,0.2), var(--shadow);
-      aspect-ratio: 16/9;
+    .btn-primary:hover { background: #e8793a; transform: translateY(-2px); box-shadow: 0 8px 30px rgba(214,107,45,0.4); }
+    .btn-secondary {
+      padding: 1.1rem 2.8rem; background: transparent; color: var(--white);
+      font-family: 'Bebas Neue', sans-serif; font-size: 1.2rem; letter-spacing: 3px;
+      text-decoration: none; border-radius: 1px; border: 1px solid rgba(245,245,245,0.4); cursor: pointer;
+      transition: all 0.25s; display: inline-block;
     }
-    .trailer-embed iframe {
-      width: 100%; height: 100%;
-      display: block; border: none;
+    .btn-secondary:hover { border-color: var(--white); transform: translateY(-2px); }
+    .hero-scroll {
+      position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+      font-size: 0.7rem; letter-spacing: 3px; text-transform: uppercase; color: rgba(245,245,245,0.4);
+      animation: bounce 2.5s infinite;
     }
-    .trailer-embed-label {
-      position: absolute; top: 1rem; left: 1rem;
-      background: rgba(214,107,45,0.9);
-      color: white; font-size: 0.65rem; font-weight: 700;
-      letter-spacing: 0.12em; text-transform: uppercase;
-      padding: 0.3rem 0.7rem; border-radius: 4px;
-      z-index: 2;
-    }
+    .hero-scroll::after { content: '▼'; font-size: 0.8rem; }
+    @keyframes bounce { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(8px)} }
 
-    /* =====================================================================
-       MUSIC FOR JUSTICE — v4 (moved up, cinematic)
-       ===================================================================== */
-    .music-section {
-      background: linear-gradient(180deg, #0D1117 0%, #0a0e14 50%, #0D1117 100%);
-      padding: 100px 0;
-      position: relative;
-      overflow: hidden;
-    }
-    .music-section::before {
-      content: '';
-      position: absolute; inset: 0;
-      background:
-        radial-gradient(ellipse at 20% 50%, rgba(212,175,55,0.06) 0%, transparent 60%),
-        radial-gradient(ellipse at 80% 50%, rgba(214,107,45,0.06) 0%, transparent 60%);
-      pointer-events: none;
-    }
-
-    /* Featured track embed */
-    .jukebox-featured {
-      display: grid;
-      grid-template-columns: 1fr 1.2fr;
-      gap: 3rem;
-      align-items: stretch;
-      margin-bottom: 4rem;
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(212,175,55,0.15);
-      border-radius: var(--radius-lg);
-      overflow: hidden;
-    }
-    @media (max-width: 768px) {
-      .jukebox-featured { grid-template-columns: 1fr; }
-    }
-    .jukebox-featured-video {
-      position: relative;
-      aspect-ratio: 16/9;
-      overflow: hidden;
-    }
-    .jukebox-featured-video iframe {
-      width: 100%; height: 100%; border: none;
-    }
-    .jukebox-featured-info {
-      padding: 2.5rem;
-      display: flex; flex-direction: column; justify-content: center;
-    }
-    .jukebox-featured-info .eyebrow { margin-bottom: 0.8rem; }
-    .jukebox-featured-info h3 {
-      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
-      font-family: 'Bebas Neue', sans-serif;
-      letter-spacing: 0.04em;
-      color: var(--gold);
-      margin-bottom: 1rem;
-    }
-    .jukebox-featured-info p {
-      color: var(--grey); line-height: 1.7; margin-bottom: 1.5rem;
-    }
-    .jukebox-actions { display: flex; gap: 0.8rem; flex-wrap: wrap; }
-
-    /* Album grid */
-    .album-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 1.5rem;
-    }
-    .album-card {
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.07);
-      border-radius: var(--radius);
-      overflow: hidden;
-      transition: var(--transition);
-      cursor: pointer;
-      position: relative;
-    }
-    .album-card:hover {
-      border-color: rgba(212,175,55,0.4);
-      transform: translateY(-4px);
-      box-shadow: 0 12px 40px rgba(0,0,0,0.5), 0 0 20px rgba(212,175,55,0.15);
-    }
-    .album-art {
-      aspect-ratio: 1/1;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 4rem;
-      position: relative;
-      overflow: hidden;
-    }
-    .album-art img {
-      width: 100%; height: 100%; object-fit: cover;
-      transition: transform 0.5s ease;
-    }
-    .album-card:hover .album-art img { transform: scale(1.05); }
-    .album-art-placeholder {
-      width: 100%; height: 100%;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 3.5rem;
-    }
-    .album-play-overlay {
-      position: absolute; inset: 0;
-      background: rgba(0,0,0,0.5);
-      display: flex; align-items: center; justify-content: center;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
-    .album-card:hover .album-play-overlay { opacity: 1; }
-    .album-play-btn {
-      width: 52px; height: 52px; border-radius: 50%;
-      background: var(--orange);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.1rem; color: white;
-      box-shadow: 0 0 30px rgba(214,107,45,0.6);
-      transition: transform 0.2s;
-    }
-    .album-play-btn:hover { transform: scale(1.1); }
-    .album-info { padding: 1rem; }
-    .album-title {
-      font-size: 0.88rem; font-weight: 700;
-      color: var(--white); margin-bottom: 0.25rem;
-      line-height: 1.3;
-    }
-    .album-meta { font-size: 0.72rem; color: var(--grey); }
-    .album-pillar {
-      display: inline-block;
-      font-size: 0.65rem; font-weight: 600;
-      letter-spacing: 0.1em; text-transform: uppercase;
-      padding: 0.2rem 0.55rem; border-radius: 4px;
-      margin-top: 0.4rem;
-      background: rgba(214,107,45,0.15); color: var(--orange);
-      border: 1px solid rgba(214,107,45,0.25);
-    }
-
-    /* =====================================================================
-       STATS — dark bar
-       ===================================================================== */
-    .stats-bar {
-      background: var(--bg-1);
-      border-top: 1px solid rgba(255,255,255,0.06);
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-      padding: 2.5rem 0;
-    }
-    .stats-bar-grid {
-      display: flex;
-      justify-content: space-around;
-      flex-wrap: wrap;
-      gap: 2rem;
-    }
-    .stats-bar-item { text-align: center; }
-    .stats-bar-num {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(2.2rem, 5vw, 3.5rem);
-      color: var(--gold); line-height: 1;
-    }
-    .stats-bar-label {
-      font-size: 0.72rem; color: var(--grey);
-      text-transform: uppercase; letter-spacing: 0.12em; margin-top: 0.3rem;
-    }
-    .stats-bar-icon { font-size: 1.3rem; margin-bottom: 0.4rem; }
-
-    /* =====================================================================
-       THREE PILLARS
-       ===================================================================== */
-    .pillars-section { padding: 100px 0; }
-    .pillars-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.5rem;
-      margin-top: 3rem;
-    }
-    .pillar-card {
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: var(--radius-lg);
-      padding: 2.5rem;
-      position: relative;
-      overflow: hidden;
-      transition: var(--transition);
-    }
-    .pillar-card:hover {
-      border-color: var(--orange);
-      box-shadow: var(--glow-orange);
-      transform: translateY(-3px);
-    }
-    .pillar-num {
-      position: absolute; top: 1.5rem; right: 1.5rem;
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 5rem; line-height: 1;
-      color: rgba(255,255,255,0.04);
-      pointer-events: none;
-    }
-    .pillar-icon { font-size: 2.5rem; margin-bottom: 1.2rem; display: block; }
-    .pillar-title {
-      font-size: 1.25rem; font-weight: 700;
-      color: var(--white); margin-bottom: 0.8rem;
-    }
-    .pillar-desc { color: var(--grey); line-height: 1.7; font-size: 0.9rem; margin-bottom: 1.2rem; }
-    .pillar-link {
-      font-size: 0.85rem; font-weight: 600;
-      color: var(--orange); transition: var(--transition);
-    }
-    .pillar-link:hover { color: var(--gold); }
-
-    /* =====================================================================
-       EVIDENCE VAULT
-       ===================================================================== */
-    .evidence-section {
-      background: linear-gradient(180deg, #0D1117 0%, #0a0e14 100%);
-      padding: 100px 0;
-      position: relative;
-    }
-    .evidence-section::before {
-      content: '';
-      position: absolute; inset: 0;
-      background: radial-gradient(ellipse at 50% 0%, rgba(196,0,0,0.06) 0%, transparent 60%);
-    }
-    .evidence-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 1.25rem;
-      margin-top: 3rem;
-    }
-    .evidence-card {
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.07);
-      border-radius: var(--radius);
-      padding: 2rem;
-      position: relative;
-      overflow: hidden;
-      cursor: pointer;
-      transition: var(--transition);
-    }
-    .evidence-card::before {
-      content: '';
-      position: absolute; left: 0; top: 0; bottom: 0;
-      width: 3px;
-      background: linear-gradient(to bottom, var(--orange), transparent);
-      transform: scaleY(0);
-      transform-origin: top;
-      transition: transform 0.3s ease;
-    }
-    .evidence-card:hover { border-color: rgba(214,107,45,0.4); transform: translateY(-3px); }
-    .evidence-card:hover::before { transform: scaleY(1); }
-    .evidence-icon { font-size: 2rem; margin-bottom: 1rem; display: block; }
-    .evidence-title { font-size: 1rem; font-weight: 700; margin-bottom: 0.6rem; color: var(--white); }
-    .evidence-desc { font-size: 0.83rem; color: var(--grey); line-height: 1.6; margin-bottom: 1rem; }
-    .evidence-count {
-      font-size: 0.72rem; font-weight: 700;
-      color: var(--orange); letter-spacing: 0.08em; text-transform: uppercase;
-    }
-    .evidence-arrow {
-      position: absolute; top: 1.5rem; right: 1.5rem;
-      font-size: 1.2rem; color: rgba(255,255,255,0.2);
-      transition: var(--transition);
-    }
-    .evidence-card:hover .evidence-arrow { color: var(--orange); transform: translate(2px,-2px); }
-
-    /* =====================================================================
-       WALL OF STORIES
-       ===================================================================== */
-    .stories-section { padding: 100px 0; }
-    .stories-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      grid-template-rows: auto auto;
-      gap: 1.25rem;
-      margin-top: 3rem;
-    }
-    .story-featured { grid-row: span 2; }
-    @media (max-width: 900px) {
-      .stories-grid { grid-template-columns: 1fr 1fr; }
-      .story-featured { grid-row: span 1; }
-    }
-    @media (max-width: 600px) {
-      .stories-grid { grid-template-columns: 1fr; }
-    }
-    .story-card {
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.07);
-      border-radius: var(--radius);
-      overflow: hidden;
-      transition: var(--transition);
-    }
-    .story-card:hover { border-color: rgba(212,175,55,0.3); transform: translateY(-2px); }
-    .story-card-top {
-      height: 5px;
-      background: linear-gradient(90deg, var(--orange), var(--gold));
-    }
-    .story-featured .story-card-top { height: 4px; }
-    .story-featured-img {
-      height: 200px; display: flex; align-items: center; justify-content: center;
-      font-size: 5rem;
-      background: linear-gradient(135deg, rgba(14,58,91,0.5), rgba(214,107,45,0.15));
-    }
-    .story-card-body { padding: 1.5rem; }
-    .story-meta { display: flex; gap: 0.5rem; margin-bottom: 0.6rem; align-items: center; }
-    .story-badge {
-      font-size: 0.62rem; font-weight: 700; letter-spacing: 0.1em;
-      text-transform: uppercase; padding: 0.2rem 0.55rem; border-radius: 4px;
-    }
-    .story-badge.urgent { background: rgba(192,57,43,0.2); color: #E74C3C; border: 1px solid rgba(192,57,43,0.3); }
-    .story-badge { background: rgba(212,175,55,0.15); color: var(--gold); border: 1px solid rgba(212,175,55,0.25); }
-    .story-badge.resolved { background: rgba(39,174,96,0.15); color: #2ECC71; border: 1px solid rgba(39,174,96,0.25); }
-    .story-state {
-      font-size: 0.72rem; font-weight: 700;
-      color: var(--orange); letter-spacing: 0.08em;
-    }
-    .story-name { font-size: 0.8rem; color: var(--grey); margin-bottom: 0.2rem; }
-    .story-issue { font-size: 1rem; font-weight: 700; color: var(--white); margin-bottom: 0.7rem; }
-    .story-text { font-size: 0.85rem; color: var(--grey); line-height: 1.6; margin-bottom: 1rem; font-style: italic; }
-    .story-read { font-size: 0.8rem; font-weight: 600; color: var(--orange); transition: var(--transition); }
-    .story-read:hover { color: var(--gold); }
-    .stories-cta {
-      text-align: center; margin-top: 3rem;
-      padding: 3rem; border: 1px dashed rgba(255,255,255,0.1);
-      border-radius: var(--radius-lg);
-    }
-    .stories-cta h3 { margin-bottom: 0.6rem; }
-    .stories-cta p { color: var(--grey); margin-bottom: 1.5rem; }
-
-    /* =====================================================================
-       AUSTRALIA MAP
-       ===================================================================== */
-    .map-section {
-      background: var(--bg-1);
-      padding: 100px 0;
-    }
-    .map-container {
-      display: grid;
-      grid-template-columns: 1.3fr 1fr;
-      gap: 3rem; align-items: start;
-      margin-top: 3rem;
-    }
-    @media (max-width: 768px) { .map-container { grid-template-columns: 1fr; } }
-    .aus-map { width: 100%; max-width: 500px; }
-    .state-path {
-      fill: rgba(14,58,91,0.6);
-      stroke: rgba(255,255,255,0.15); stroke-width: 1.5;
-      cursor: pointer; transition: fill 0.2s;
-    }
-    .state-path:hover { fill: rgba(214,107,45,0.5); }
-    .state-path.active { fill: rgba(214,107,45,0.7); stroke: var(--orange); stroke-width: 2; }
-    .state-label { fill: rgba(245,245,245,0.7); font-size: 12px; font-weight: 700; pointer-events: none; }
-    .map-info {
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: var(--radius-lg); padding: 2rem;
-    }
-    .map-panel-title {
-      font-size: 1rem; font-weight: 700; color: var(--orange);
-      margin-bottom: 1.5rem; padding-bottom: 1rem;
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-    }
-    .map-stat-row {
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 0.75rem 0;
-      border-bottom: 1px solid rgba(255,255,255,0.05);
-      cursor: pointer; transition: var(--transition);
-    }
-    .map-stat-row:hover { color: var(--orange); }
-    .map-state-name { font-size: 0.85rem; font-weight: 600; }
-    .map-state-num { font-size: 1.1rem; font-weight: 800; color: var(--gold); }
-    .map-state-sub { font-size: 0.7rem; color: var(--grey); }
-    .map-state-data { text-align: right; }
-
-    /* =====================================================================
-       PETITION CTA
-       ===================================================================== */
-    .petition-section {
-      position: relative; overflow: hidden;
-      padding: 120px 0;
-      text-align: center;
-    }
-    .petition-bg {
-      position: absolute; inset: 0;
-      background: url('images/hero_chain_parliament.png') center 60% / cover no-repeat;
-      filter: brightness(0.25) saturate(0.5);
-    }
-    .petition-overlay {
-      position: absolute; inset: 0;
-      background: linear-gradient(180deg,
-        rgba(13,17,23,0.7) 0%,
-        rgba(14,58,91,0.6) 50%,
-        rgba(13,17,23,0.8) 100%
-      );
-    }
-    .petition-content { position: relative; z-index: 2; max-width: 700px; margin: 0 auto; }
-    .petition-content h2 {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(2.5rem, 7vw, 5rem);
-      letter-spacing: 0.05em;
-      margin-bottom: 1.2rem;
-    }
-    .petition-content p { color: rgba(245,245,245,0.8); margin-bottom: 2.5rem; font-size: 1.05rem; }
-    .progress-container { margin: 2rem 0; }
-    .progress-header {
-      display: flex; justify-content: space-between;
-      font-size: 0.85rem; color: var(--grey); margin-bottom: 0.6rem;
-    }
-    .progress-count { font-weight: 700; color: var(--white); font-size: 1rem; }
-    .progress-bar-track {
-      height: 8px; background: rgba(255,255,255,0.1);
-      border-radius: 100px; overflow: hidden;
-    }
-    .progress-bar-fill {
-      height: 100%;
-      background: linear-gradient(90deg, var(--orange), var(--gold));
-      border-radius: 100px;
-      transition: width 2s cubic-bezier(0.4,0,0.2,1);
-    }
-    .progress-pct { font-size: 0.75rem; color: var(--grey); margin-top: 0.5rem; }
-    .petition-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 2rem; }
-
-    /* =====================================================================
-       SHARE HUB
-       ===================================================================== */
-    .share-section { padding: 100px 0; }
-    .share-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 1.25rem; margin-top: 3rem;
-    }
-    .share-card {
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.07);
-      border-radius: var(--radius);
-      padding: 1.75rem 1.5rem;
-      text-align: center; transition: var(--transition);
-    }
-    .share-card:hover { border-color: rgba(212,175,55,0.35); transform: translateY(-3px); }
-    .share-icon { font-size: 2rem; margin-bottom: 0.8rem; display: block; }
-    .share-title { font-size: 0.9rem; font-weight: 700; color: var(--white); margin-bottom: 0.3rem; }
-    .share-format { font-size: 0.72rem; color: var(--grey); margin-bottom: 1rem; }
-    .share-dl {
-      font-size: 0.78rem; font-weight: 600; color: var(--gold);
-      transition: var(--transition);
-    }
-    .share-dl:hover { color: var(--orange); }
-
-    /* =====================================================================
-       TICKER
-       ===================================================================== */
+    /* ── TICKER ── */
     .ticker {
-      background: var(--orange);
-      overflow: hidden;
-      padding: 0.7rem 0;
-      position: sticky; top: 70px; z-index: 90;
+      background: var(--orange); padding: 0.6rem 0; overflow: hidden;
+      border-top: 2px solid rgba(255,255,255,0.1);
+      border-bottom: 2px solid rgba(255,255,255,0.1);
     }
     .ticker-track {
-      display: flex; gap: 3rem;
-      animation: tickerScroll 35s linear infinite;
-      white-space: nowrap;
-      width: max-content;
+      display: flex; gap: 4rem; white-space: nowrap;
+      animation: ticker-scroll 35s linear infinite;
     }
-    .ticker:hover .ticker-track { animation-play-state: paused; }
-    @keyframes tickerScroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-    .ticker-item {
-      font-size: 0.75rem; font-weight: 700;
-      letter-spacing: 0.1em; text-transform: uppercase;
-      color: white;
-    }
-    .ticker-item::after { content: ' ◆ '; margin-left: 3rem; color: rgba(255,255,255,0.5); }
+    .ticker-track:hover { animation-play-state: paused; }
+    .ticker-item { font-size: 0.78rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #fff; }
+    .ticker-sep { color: rgba(255,255,255,0.5); }
+    @keyframes ticker-scroll { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
 
-    /* =====================================================================
-       SECTION HEADERS
-       ===================================================================== */
-    .section-header {
-      text-align: center; max-width: 700px;
-      margin: 0 auto 3rem;
-    }
-    .section-header .eyebrow { margin-bottom: 0.8rem; justify-content: center; }
-    .section-header h2 { margin-bottom: 1rem; }
-    .section-header p { color: var(--grey); line-height: 1.7; }
+    /* ── MUSIC FOR JUSTICE ── */
+    .music-section { padding: 6rem 2.5rem; background: linear-gradient(180deg, var(--bg) 0%, #0a0e14 50%, var(--bg) 100%); }
+    .section-header { text-align: center; margin-bottom: 4rem; }
+    .section-eyebrow { font-size: 0.72rem; letter-spacing: 4px; text-transform: uppercase; color: var(--orange); margin-bottom: 1rem; display: block; }
+    .section-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(3rem, 7vw, 5.5rem); letter-spacing: 3px; margin-bottom: 1rem; }
+    .section-title span { color: var(--orange); }
+    .section-sub { color: var(--text-muted); font-size: 0.95rem; max-width: 600px; margin: 0 auto; line-height: 1.7; }
 
-    .eyebrow {
-      display: flex; align-items: center; gap: 0.6rem;
-      font-size: 0.72rem; font-weight: 700;
-      letter-spacing: 0.2em; text-transform: uppercase;
-      color: var(--orange);
+    .music-featured { max-width: 1300px; margin: 0 auto; }
+    .music-hero-card {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+      background: rgba(255,255,255,0.02); border: 1px solid rgba(214,107,45,0.15);
+      margin-bottom: 2px; overflow: hidden;
     }
-    .eyebrow::before {
-      content: '';
-      display: block; width: 24px; height: 2px;
-      background: var(--orange);
+    .music-hero-img { position: relative; overflow: hidden; aspect-ratio: 1; }
+    .music-hero-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s; }
+    .music-hero-card:hover .music-hero-img img { transform: scale(1.04); }
+    .music-hero-info {
+      padding: 3.5rem; display: flex; flex-direction: column; justify-content: center;
+      background: linear-gradient(135deg, rgba(14,58,91,0.3), rgba(13,17,23,0.9));
     }
+    .music-hero-label { font-size: 0.7rem; letter-spacing: 4px; text-transform: uppercase; color: var(--orange); margin-bottom: 1rem; }
+    .music-hero-info h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.5rem, 5vw, 4.5rem); letter-spacing: 3px; line-height: 0.9; margin-bottom: 1.5rem; }
+    .music-hero-info p { color: var(--text-muted); font-size: 0.9rem; line-height: 1.7; margin-bottom: 2rem; }
+    .music-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 2rem; }
+    .music-tag { padding: 0.25rem 0.8rem; font-size: 0.68rem; letter-spacing: 1.5px; text-transform: uppercase; border: 1px solid rgba(214,107,45,0.35); color: var(--orange); border-radius: 1px; }
+    .music-hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .play-btn { display: inline-flex; align-items: center; gap: 0.6rem; padding: 0.85rem 2rem; background: var(--orange); color: #fff; text-decoration: none; font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem; letter-spacing: 2px; border-radius: 1px; transition: all 0.2s; }
+    .play-btn:hover { background: #e8793a; transform: translateY(-2px); }
+    .play-btn-secondary { background: transparent; border: 1px solid rgba(245,245,245,0.3); color: var(--white); }
+    .play-btn-secondary:hover { border-color: var(--white); background: rgba(255,255,255,0.05); }
 
-    .text-orange { color: var(--orange); }
-    .text-gold   { color: var(--gold); }
+    .music-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 2px; margin-top: 2px; }
+    .music-card {
+      position: relative; overflow: hidden; cursor: pointer;
+      background: rgba(255,255,255,0.02);
+    }
+    .music-card-img { position: relative; aspect-ratio: 1; overflow: hidden; }
+    .music-card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s, filter 0.5s; filter: brightness(0.8); }
+    .music-card:hover .music-card-img img { transform: scale(1.08); filter: brightness(0.5); }
+    .music-play-overlay {
+      position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+      opacity: 0; transition: opacity 0.3s;
+    }
+    .music-card:hover .music-play-overlay { opacity: 1; }
+    .music-play-btn { width: 60px; height: 60px; border-radius: 50%; background: var(--orange); display: flex; align-items: center; justify-content: center; font-size: 1.4rem; box-shadow: 0 0 30px rgba(214,107,45,0.6); transition: transform 0.2s; }
+    .music-play-btn:hover { transform: scale(1.1); }
+    .music-card-info { padding: 1.2rem 1.4rem; border-top: 1px solid rgba(255,255,255,0.05); }
+    .music-card-info h4 { font-family: 'Bebas Neue', sans-serif; font-size: 1.3rem; letter-spacing: 2px; margin-bottom: 0.3rem; }
+    .music-card-info p { font-size: 0.78rem; color: var(--text-muted); }
+    .music-card-info .genre { font-size: 0.65rem; letter-spacing: 2px; text-transform: uppercase; color: var(--orange); margin-top: 0.4rem; }
 
-    /* =====================================================================
-       BUTTONS
-       ===================================================================== */
-    .btn {
-      display: inline-flex; align-items: center; gap: 0.5rem;
-      padding: 0.75rem 1.6rem;
-      border-radius: var(--radius);
-      font-family: var(--font-body); font-size: 0.88rem;
-      font-weight: 700; letter-spacing: 0.04em;
-      transition: var(--transition); cursor: pointer;
-      white-space: nowrap;
-    }
-    .btn-primary {
-      background: var(--orange); color: white;
-      box-shadow: 0 4px 20px rgba(214,107,45,0.4);
-    }
-    .btn-primary:hover { background: var(--orange-dark); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(214,107,45,0.5); }
-    .btn-secondary {
-      background: transparent; color: var(--white);
-      border: 1px solid rgba(255,255,255,0.3);
-    }
-    .btn-secondary:hover { border-color: var(--white); background: rgba(255,255,255,0.07); }
-    .btn-ghost {
-      background: transparent; color: rgba(245,245,245,0.7);
-      border: 1px solid rgba(255,255,255,0.12);
-    }
-    .btn-ghost:hover { border-color: var(--orange); color: var(--orange); }
-    .btn-gold {
-      background: var(--gold); color: #0D1117;
-      box-shadow: 0 4px 20px rgba(212,175,55,0.3);
-    }
-    .btn-gold:hover { background: #c4a030; transform: translateY(-2px); }
-    .btn-lg { padding: 1rem 2rem; font-size: 0.95rem; }
-    .btn-sm { padding: 0.5rem 1rem; font-size: 0.8rem; }
+    /* ── STATS ── */
+    .stats-bar { background: linear-gradient(135deg, rgba(14,58,91,0.5), rgba(13,17,23,0.9)); border-top: 1px solid rgba(212,175,55,0.2); border-bottom: 1px solid rgba(212,175,55,0.2); padding: 4rem 2.5rem; }
+    .stats-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; text-align: center; }
+    .stat-item { padding: 1.5rem; }
+    .stat-num { font-family: 'Bebas Neue', sans-serif; font-size: clamp(3rem, 6vw, 5rem); color: var(--gold); letter-spacing: 2px; line-height: 1; }
+    .stat-label { font-size: 0.78rem; letter-spacing: 2px; text-transform: uppercase; color: var(--text-muted); margin-top: 0.5rem; }
 
-    /* =====================================================================
-       FADE-UP ANIMATION
-       ===================================================================== */
-    .fade-up {
-      opacity: 0; transform: translateY(28px);
-      transition: opacity 0.65s ease, transform 0.65s ease;
+    /* ── THREE PILLARS ── */
+    .pillars-section { padding: 6rem 2.5rem; }
+    .pillars-grid { max-width: 1300px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+    .pillar-card {
+      position: relative; overflow: hidden; cursor: pointer;
+      background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05);
+      padding: 3.5rem 2.5rem; transition: all 0.4s;
+      display: flex; flex-direction: column;
     }
-    .fade-up.visible { opacity: 1; transform: translateY(0); }
+    .pillar-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: var(--orange); transform: scaleX(0); transform-origin: left;
+      transition: transform 0.4s;
+    }
+    .pillar-card:hover::before { transform: scaleX(1); }
+    .pillar-card:hover { background: rgba(214,107,45,0.04); border-color: rgba(214,107,45,0.2); transform: translateY(-4px); }
+    .pillar-watermark { font-family: 'Bebas Neue', sans-serif; font-size: 8rem; color: rgba(255,255,255,0.03); position: absolute; right: -10px; bottom: -20px; line-height: 1; pointer-events: none; }
+    .pillar-icon { font-size: 2.5rem; margin-bottom: 1.5rem; }
+    .pillar-card h3 { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; letter-spacing: 2px; margin-bottom: 1rem; line-height: 1; }
+    .pillar-card p { color: var(--text-muted); font-size: 0.88rem; line-height: 1.7; flex: 1; }
+    .pillar-link { margin-top: 2rem; font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; color: var(--orange); text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem; transition: gap 0.2s; }
+    .pillar-link:hover { gap: 0.8rem; }
 
-    /* =====================================================================
-       NAVIGATION
-       ===================================================================== */
-    .nav {
-      position: fixed; top: 0; left: 0; right: 0;
-      z-index: 1000;
-      background: rgba(13,17,23,0.0);
-      backdrop-filter: blur(0px);
-      transition: background 0.4s ease, backdrop-filter 0.4s ease;
-      border-bottom: 1px solid transparent;
-    }
-    .nav.scrolled {
-      background: rgba(13,17,23,0.95);
-      backdrop-filter: blur(20px);
-      border-bottom-color: rgba(255,255,255,0.06);
-    }
-    .nav-inner {
-      max-width: 1280px; margin: 0 auto;
-      padding: 0 2rem;
-      height: 70px;
-      display: flex; align-items: center; gap: 2rem;
-    }
-    .nav-logo {
-      display: flex; align-items: center; gap: 0.7rem;
-      font-size: 1rem; font-weight: 800; color: var(--white);
-      text-decoration: none; white-space: nowrap;
-    }
-    .nav-logo-icon { font-size: 1.4rem; }
-    .nav-logo-text span { display: block; font-size: 0.6rem; font-weight: 400; color: var(--grey); letter-spacing: 0.1em; }
-    .nav-links {
-      display: flex; gap: 0.2rem; align-items: center;
-      margin: 0; padding: 0; list-style: none; margin-left: auto;
-    }
-    .nav-links a {
-      font-size: 0.83rem; font-weight: 500; color: rgba(245,245,245,0.75);
-      padding: 0.4rem 0.75rem; border-radius: 6px;
-      transition: var(--transition);
-    }
-    .nav-links a:hover, .nav-links a.active { color: var(--white); background: rgba(255,255,255,0.07); }
-    .nav-dropdown { position: relative; }
-    .nav-dropdown-menu {
-      position: absolute; top: calc(100% + 0.5rem); left: 50%;
-      transform: translateX(-50%);
-      background: rgba(17,24,32,0.98);
-      backdrop-filter: blur(20px);
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: var(--radius);
-      padding: 0.5rem;
-      min-width: 280px;
-      opacity: 0; visibility: hidden;
-      transform: translateX(-50%) translateY(-8px);
-      transition: opacity 0.2s, transform 0.2s, visibility 0.2s;
-      z-index: 100;
-    }
-    .nav-dropdown:hover .nav-dropdown-menu {
-      opacity: 1; visibility: visible;
-      transform: translateX(-50%) translateY(0);
-    }
-    .nav-dropdown-menu a {
-      display: block; padding: 0.7rem 1rem; border-radius: 6px;
-      font-size: 0.83rem; color: rgba(245,245,245,0.8);
-      transition: var(--transition);
-    }
-    .nav-dropdown-menu a:hover { background: rgba(255,255,255,0.06); color: var(--orange); }
-    .nav-dropdown-menu a span { display: block; font-size: 0.7rem; color: var(--grey); font-weight: 400; margin-top: 0.1rem; }
-    .nav-cta { margin-left: 0.5rem; }
-    .nav-burger { display: none; flex-direction: column; gap: 5px; padding: 8px; margin-left: auto; }
-    .nav-burger span { display: block; width: 22px; height: 2px; background: var(--white); border-radius: 2px; transition: var(--transition); }
-    .nav-mobile {
-      display: none; position: fixed; inset: 0; z-index: 999;
-      background: rgba(13,17,23,0.98); backdrop-filter: blur(20px);
-      flex-direction: column; align-items: center; justify-content: center;
-      gap: 1.5rem;
-    }
-    .nav-mobile.open { display: flex; }
-    .nav-mobile a { font-size: 1.4rem; font-weight: 700; color: var(--white); }
-    .nav-mobile-close {
-      position: absolute; top: 1.5rem; right: 1.5rem;
-      font-size: 1.5rem; color: var(--grey); background: none; border: none;
-      cursor: pointer; padding: 0.5rem;
-    }
-    @media (max-width: 900px) {
-      .nav-links, .nav-cta { display: none; }
-      .nav-burger { display: flex; }
-    }
+    /* ── TRAILER / VIDEO ── */
+    .trailer-section { padding: 6rem 2.5rem; background: linear-gradient(180deg, var(--bg), #070B0F 50%, var(--bg)); }
+    .trailer-inner { max-width: 1300px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1.2fr; gap: 4rem; align-items: center; }
+    .trailer-text .section-eyebrow { text-align: left; }
+    .trailer-text h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.5rem, 5vw, 4.5rem); letter-spacing: 3px; line-height: 0.95; margin-bottom: 1.5rem; }
+    .trailer-text h2 span { color: var(--orange); }
+    .trailer-text p { color: var(--text-muted); font-size: 0.9rem; line-height: 1.8; margin-bottom: 2rem; }
+    .trailer-bullets { list-style: none; margin-bottom: 2rem; }
+    .trailer-bullets li { padding: 0.5rem 0; font-size: 0.88rem; color: rgba(245,245,245,0.7); display: flex; align-items: center; gap: 0.8rem; }
+    .trailer-bullets li::before { content: '▸'; color: var(--orange); }
+    .trailer-embed { position: relative; }
+    .trailer-embed::before { content: ''; position: absolute; inset: -2px; background: linear-gradient(135deg, var(--orange), var(--gold), transparent); border-radius: 2px; z-index: -1; opacity: 0.6; }
+    .trailer-embed iframe { width: 100%; aspect-ratio: 16/9; border: none; display: block; border-radius: 1px; }
 
-    /* =====================================================================
-       FOOTER
-       ===================================================================== */
-    .footer {
-      background: #080B10;
-      border-top: 1px solid rgba(255,255,255,0.06);
-      padding: 4rem 0 2rem;
+    /* ── EVIDENCE VAULT PREVIEW ── */
+    .vault-preview { padding: 6rem 2.5rem; }
+    .vault-preview-inner { max-width: 1300px; margin: 0 auto; }
+    .vault-tiles { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 2px; margin-top: 3rem; }
+    .vault-tile {
+      position: relative; overflow: hidden; cursor: pointer;
+      aspect-ratio: 16/9; background: var(--navy);
     }
-    .footer-grid {
+    .vault-tile img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s, filter 0.6s; filter: brightness(0.6) saturate(1.1); }
+    .vault-tile:hover img { transform: scale(1.07); filter: brightness(0.4) saturate(1.4); }
+    .vault-tile-overlay {
+      position: absolute; inset: 0; padding: 1.5rem;
+      background: linear-gradient(to top, rgba(13,17,23,0.95) 0%, transparent 60%);
+      display: flex; flex-direction: column; justify-content: flex-end;
+    }
+    .vault-tile-tag { font-size: 0.62rem; letter-spacing: 3px; text-transform: uppercase; color: var(--orange); margin-bottom: 0.4rem; }
+    .vault-tile h4 { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; letter-spacing: 2px; }
+    .vault-tile-arrow { position: absolute; top: 1.2rem; right: 1.2rem; font-size: 1.2rem; opacity: 0; transition: opacity 0.3s, transform 0.3s; }
+    .vault-tile:hover .vault-tile-arrow { opacity: 1; transform: translate(3px, -3px); }
+    .vault-cta { text-align: center; margin-top: 3rem; }
+
+    /* ── WALL OF STORIES ── */
+    .stories-section { padding: 6rem 2.5rem; background: linear-gradient(180deg, var(--bg), #080b10 50%, var(--bg)); }
+    .stories-grid { max-width: 1300px; margin: 0 auto; display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 2px; }
+    .story-card {
+      background: rgba(255,255,255,0.025); border: 1px solid rgba(255,255,255,0.06);
+      padding: 2.5rem; cursor: pointer; transition: all 0.3s; position: relative; overflow: hidden;
+    }
+    .story-card::after { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: var(--orange); transform: scaleY(0); transform-origin: bottom; transition: transform 0.4s; }
+    .story-card:hover::after { transform: scaleY(1); }
+    .story-card:hover { background: rgba(214,107,45,0.04); border-color: rgba(214,107,45,0.15); }
+    .story-card.featured { grid-row: span 2; display: flex; flex-direction: column; justify-content: space-between; }
+    .story-state { display: inline-block; padding: 0.25rem 0.7rem; background: rgba(14,58,91,0.5); font-size: 0.65rem; letter-spacing: 2px; text-transform: uppercase; color: #5dade2; margin-bottom: 1rem; border-radius: 1px; }
+    .story-type { font-size: 0.65rem; letter-spacing: 2px; text-transform: uppercase; color: var(--orange); margin-bottom: 0.8rem; }
+    .story-card h3 { font-size: 1.15rem; font-weight: 600; margin-bottom: 0.8rem; line-height: 1.4; }
+    .story-card p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.7; }
+    .story-read { margin-top: 1.5rem; font-size: 0.72rem; letter-spacing: 2px; text-transform: uppercase; color: var(--orange); text-decoration: none; display: inline-flex; align-items: center; gap: 0.4rem; }
+
+    /* ── MAP ── */
+    .map-section { padding: 6rem 2.5rem; }
+    .map-inner { max-width: 1100px; margin: 0 auto; }
+    .australia-map {
       display: grid;
-      grid-template-columns: 2fr 1fr 1fr 1fr;
-      gap: 3rem; margin-bottom: 3rem;
+      grid-template-areas:
+        ". . WA . . NT . . QLD ."
+        ". . WA . . NT . . QLD ."
+        ". . WA . SA . NSW . QLD ."
+        ". . WA . SA . NSW . ACT ."
+        ". . WA . SA . VIC . VIC ."
+        ". . . . . . TAS . . .";
+      gap: 4px; margin: 3rem 0;
     }
-    @media (max-width: 900px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
-    @media (max-width: 600px) { .footer-grid { grid-template-columns: 1fr; } }
-    .footer-logo {
-      display: flex; align-items: center; gap: 0.6rem;
-      font-size: 1.1rem; font-weight: 800; margin-bottom: 1rem;
+    .map-state {
+      background: rgba(14,58,91,0.3); border: 1px solid rgba(14,58,91,0.5);
+      border-radius: 2px; padding: 1.5rem 1rem; cursor: pointer; text-align: center;
+      transition: all 0.3s;
     }
-    .footer-logo-icon { font-size: 1.4rem; }
-    .footer-tagline { font-size: 0.83rem; color: var(--grey); line-height: 1.7; margin-bottom: 1.5rem; }
-    .footer-socials { display: flex; gap: 0.6rem; }
-    .social-btn {
-      width: 36px; height: 36px; border-radius: 50%;
-      background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 0.85rem; transition: var(--transition);
-    }
-    .social-btn:hover { background: var(--orange); border-color: var(--orange); }
-    .footer-col h4 { font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--grey); margin-bottom: 1rem; }
-    .footer-col ul { display: flex; flex-direction: column; gap: 0.6rem; }
-    .footer-col a { font-size: 0.85rem; color: rgba(245,245,245,0.6); transition: var(--transition); }
-    .footer-col a:hover { color: var(--orange); }
-    .footer-bottom {
-      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;
-      padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.06);
-    }
-    .footer-copy { font-size: 0.78rem; color: var(--grey); }
-    .footer-legal { display: flex; gap: 1.5rem; }
-    .footer-legal a { font-size: 0.78rem; color: var(--grey); transition: var(--transition); }
-    .footer-legal a:hover { color: var(--white); }
+    .map-state:hover, .map-state.active { background: rgba(214,107,45,0.2); border-color: var(--orange); }
+    .map-state-name { font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; letter-spacing: 2px; }
+    .map-state-count { font-size: 0.7rem; color: var(--text-muted); margin-top: 0.2rem; }
+    .map-simple-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin: 3rem 0; max-width: 700px; margin-left: auto; margin-right: auto; }
 
-    /* =====================================================================
-       CONTAINER
-       ===================================================================== */
-    .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
-    @media (max-width: 600px) { .container { padding: 0 1.2rem; } }
+    /* ── PETITION ── */
+    .petition-section {
+      padding: 7rem 2.5rem;
+      background: linear-gradient(rgba(13,17,23,0.85), rgba(13,17,23,0.95)),
+                  url('https://raw.githubusercontent.com/Fair-Go-Justice/fairgojustice-website/main/thumbnails/vault_legal_aid_web.jpg') center/cover no-repeat fixed;
+      text-align: center;
+    }
+    .petition-inner { max-width: 700px; margin: 0 auto; }
+    .petition-section h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(3rem, 7vw, 5.5rem); letter-spacing: 3px; margin-bottom: 1rem; }
+    .petition-section h2 span { color: var(--orange); }
+    .petition-section p { color: var(--text-muted); font-size: 1rem; line-height: 1.8; margin-bottom: 2.5rem; }
+    .petition-bar-wrap { background: rgba(255,255,255,0.08); height: 6px; border-radius: 3px; margin-bottom: 0.8rem; overflow: hidden; }
+    .petition-bar { height: 100%; background: linear-gradient(90deg, var(--orange), var(--gold)); width: 0; border-radius: 3px; transition: width 2s ease; }
+    .petition-progress-text { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 2.5rem; }
+    .petition-progress-text strong { color: var(--orange); }
+    .petition-input-row { display: flex; gap: 0; max-width: 500px; margin: 0 auto 1.5rem; }
+    .petition-input { flex: 1; padding: 1rem 1.5rem; background: rgba(255,255,255,0.06); border: 1px solid rgba(214,107,45,0.3); border-right: none; color: var(--white); font-family: 'Space Grotesk', sans-serif; font-size: 0.9rem; border-radius: 1px 0 0 1px; }
+    .petition-input:focus { outline: none; border-color: var(--orange); }
+    .petition-input::placeholder { color: var(--text-muted); }
+    .petition-submit { padding: 1rem 2rem; background: var(--orange); color: #fff; border: none; font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem; letter-spacing: 2px; cursor: pointer; border-radius: 0 1px 1px 0; transition: background 0.2s; }
+    .petition-submit:hover { background: #e8793a; }
+    .petition-privacy { font-size: 0.75rem; color: var(--text-muted); }
+
+    /* ── SHARE HUB ── */
+    .share-section { padding: 5rem 2.5rem; background: #080B10; }
+    .share-grid { max-width: 1100px; margin: 3rem auto 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 1rem; }
+    .share-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); padding: 1.8rem 1.2rem; text-align: center; cursor: pointer; transition: all 0.3s; border-radius: 2px; text-decoration: none; color: var(--white); }
+    .share-card:hover { background: rgba(214,107,45,0.08); border-color: rgba(214,107,45,0.3); transform: translateY(-3px); }
+    .share-platform { font-size: 2rem; margin-bottom: 0.8rem; }
+    .share-card h4 { font-size: 0.82rem; font-weight: 600; margin-bottom: 0.3rem; }
+    .share-card p { font-size: 0.72rem; color: var(--text-muted); }
+
+    /* ── FOOTER ── */
+    footer { background: #060910; border-top: 1px solid rgba(214,107,45,0.12); padding: 5rem 2.5rem 2rem; }
+    .footer-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; }
+    .footer-brand p { color: var(--text-muted); font-size: 0.85rem; line-height: 1.7; margin: 1rem 0 1.5rem; max-width: 280px; }
+    .footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; color: var(--orange); letter-spacing: 3px; text-decoration: none; display: block; }
+    .footer-socials { display: flex; gap: 0.8rem; }
+    .footer-social { width: 36px; height: 36px; border: 1px solid rgba(255,255,255,0.15); border-radius: 1px; display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 0.9rem; color: var(--text-muted); transition: all 0.2s; }
+    .footer-social:hover { border-color: var(--orange); color: var(--orange); }
+    .footer-col h4 { font-size: 0.72rem; letter-spacing: 3px; text-transform: uppercase; color: var(--orange); margin-bottom: 1.5rem; }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 0.8rem; }
+    .footer-col a { color: var(--text-muted); text-decoration: none; font-size: 0.85rem; transition: color 0.2s; }
+    .footer-col a:hover { color: var(--white); }
+    .footer-bottom { max-width: 1200px; margin: 3rem auto 0; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.06); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+    .footer-bottom p { font-size: 0.78rem; color: var(--text-muted); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1024px) {
+      .pillars-grid { grid-template-columns: 1fr; }
+      .trailer-inner { grid-template-columns: 1fr; }
+      .stories-grid { grid-template-columns: 1fr; }
+      .story-card.featured { grid-row: span 1; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .music-hero-card { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .stats-grid { grid-template-columns: 1fr 1fr; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .share-grid { grid-template-columns: repeat(3,1fr); }
+    }
+    @media (max-width: 480px) {
+      .share-grid { grid-template-columns: repeat(2,1fr); }
+      .stats-grid { grid-template-columns: 1fr 1fr; }
+    }
   </style>
 </head>
 <body>
 
-<!-- =====================================================================
-     NAVIGATION
-     ===================================================================== -->
-<nav class="nav" id="mainNav">
-  <div class="nav-inner">
-    <a href="index.html" class="nav-logo" aria-label="Fair Go Justice Home">
-      <div class="nav-logo-icon">⚖</div>
-      <div class="nav-logo-text">
-        Fair Go Justice
-        <span>National Reform Movement</span>
-      </div>
-    </a>
-    <ul class="nav-links" role="list">
-      <li><a href="index.html" class="active">Home</a></li>
-      <li><a href="evidence.html">The Evidence</a></li>
-      <li class="nav-dropdown">
-        <a href="pillars.html">The Reforms ▾</a>
-        <div class="nav-dropdown-menu">
-          <a href="pillars.html#jic">🛡 Judicial Integrity Commission<span>Independent oversight of the judiciary</span></a>
-          <a href="pillars.html#eip">📹 Evidence Integrity Protocols<span>Mandatory chain-of-custody standards</span></a>
-          <a href="pillars.html#lar">⚖ Legal Aid Reform<span>Equal access to justice for all</span></a>
-        </div>
-      </li>
-      <li><a href="stories.html">Stories</a></li>
-      <li><a href="music.html">Music for Justice</a></li>
-      <li><a href="take-action.html">Take Action</a></li>
-    </ul>
-    <a href="take-action.html" class="btn btn-primary btn-sm nav-cta">🔴 Join the Movement</a>
-    <button class="nav-burger" id="navBurger" aria-label="Open menu" aria-expanded="false">
-      <span></span><span></span><span></span>
-    </button>
-  </div>
+<!-- NAV -->
+<nav id="mainNav">
+  <a href="#" class="nav-logo">FAIR GO JUSTICE</a>
+  <ul class="nav-links">
+    <li><a href="#home">Home</a></li>
+    <li><a href="evidence.html">The Evidence</a></li>
+    <li><a href="pillars.html">The Reforms</a></li>
+    <li><a href="stories.html">Stories</a></li>
+    <li><a href="music.html">Music</a></li>
+    <li><a href="take-action.html" class="nav-cta">Take Action</a></li>
+  </ul>
 </nav>
 
-<!-- Mobile Nav -->
-<nav class="nav-mobile" id="navMobile" role="navigation" aria-label="Mobile menu">
-  <button class="nav-mobile-close" id="navClose" aria-label="Close menu">✕</button>
-  <a href="index.html">Home</a>
-  <a href="evidence.html">The Evidence</a>
-  <a href="pillars.html">The Reforms</a>
-  <a href="stories.html">Stories</a>
-  <a href="music.html">Music for Justice</a>
-  <a href="take-action.html" style="color:var(--orange)">🔴 Take Action</a>
-</nav>
-
-<!-- =====================================================================
-     HERO — Full cinematic, chain parliament image
-     ===================================================================== -->
-<section class="hero" aria-label="Hero">
-  <div class="hero-bg"></div>
-  <div class="hero-overlay"></div>
-
-  <div class="container">
-    <div class="hero-content">
-      <div class="hero-badge">
-        <span class="hero-badge-dot"></span>
-        Movement Active — Australia Wide
-      </div>
-
-      <h1 class="hero-title">
-        <span class="line-1">THE CHAIN</span>
-        <span class="line-2">IS BROKEN</span>
-      </h1>
-
-      <p class="hero-subtitle">
-        Restore trust. Restore accountability. Australia deserves transparent courts, verified evidence, independent judicial oversight, and equal access to justice for every single citizen.
-      </p>
-
-      <div class="hero-actions">
-        <a href="take-action.html" class="btn btn-primary btn-lg">🔴 Join the Movement</a>
-        <a href="#trailer" class="btn btn-secondary btn-lg">▶ Watch the Evidence</a>
-        <a href="#music" class="btn btn-ghost btn-lg">🎵 Music for Justice</a>
-      </div>
-
-      <div class="hero-stats">
-        <div class="hero-stat-item">
-          <span class="hero-stat-num" data-count="850000" data-suffix="+">850,000+</span>
-          <span class="hero-stat-label">Australians Represented</span>
-        </div>
-        <div class="hero-stat-item">
-          <span class="hero-stat-num" data-count="12847" data-suffix="+">12,847+</span>
-          <span class="hero-stat-label">Petition Signatures</span>
-        </div>
-        <div class="hero-stat-item">
-          <span class="hero-stat-num" data-count="3">3</span>
-          <span class="hero-stat-label">National Reforms</span>
-        </div>
-        <div class="hero-stat-item">
-          <span class="hero-stat-num" data-count="128" data-suffix="+">128+</span>
-          <span class="hero-stat-label">Songs for Justice</span>
-        </div>
-      </div>
+<!-- ══════════════════════════════════════
+     HERO
+══════════════════════════════════════ -->
+<section class="hero" id="home">
+  <div class="hero-content">
+    <div class="hero-eyebrow">Australia's Justice Reform Movement</div>
+    <h1>
+      <span class="line-1">THE CHAIN</span>
+      <span class="line-2">IS BROKEN</span>
+      <span class="line-3">Restore Trust · Restore Accountability</span>
+    </h1>
+    <p class="hero-sub">Australia deserves transparent courts, verified evidence, independent oversight, and equal access to justice for every citizen — not just those who can afford it.</p>
+    <div class="hero-buttons">
+      <a href="take-action.html" class="btn-primary">Join the Movement</a>
+      <a href="#trailer" class="btn-secondary">▶ Watch the Trailer</a>
     </div>
   </div>
-
-  <div class="hero-scroll" aria-hidden="true">
-    <div class="hero-scroll-line"></div>
-    <span>Scroll</span>
-  </div>
+  <div class="hero-scroll">Scroll</div>
 </section>
 
-<!-- =====================================================================
-     TICKER
-     ===================================================================== -->
-<div class="ticker" role="marquee" aria-label="Movement news ticker">
+<!-- TICKER -->
+<div class="ticker">
   <div class="ticker-track">
-    <span class="ticker-item">Justice Requires Accountability</span>
-    <span class="ticker-item">12,847 Australians Have Signed</span>
-    <span class="ticker-item">Three Reforms — One Movement</span>
-    <span class="ticker-item">Evidence Cannot Disappear</span>
-    <span class="ticker-item">Independent Oversight Now</span>
-    <span class="ticker-item">Equal Access to Justice</span>
-    <span class="ticker-item">The Chain Is Broken — We Will Fix It</span>
-    <span class="ticker-item">Justice Requires Accountability</span>
-    <span class="ticker-item">12,847 Australians Have Signed</span>
-    <span class="ticker-item">Three Reforms — One Movement</span>
-    <span class="ticker-item">Evidence Cannot Disappear</span>
-    <span class="ticker-item">Independent Oversight Now</span>
-    <span class="ticker-item">Equal Access to Justice</span>
-    <span class="ticker-item">The Chain Is Broken — We Will Fix It</span>
+    <span class="ticker-item">850,000+ AUSTRALIANS REPRESENTED</span>
+    <span class="ticker-sep">◆</span>
+    <span class="ticker-item">3 NATIONAL REFORMS PROPOSED</span>
+    <span class="ticker-sep">◆</span>
+    <span class="ticker-item">JUDICIAL INTEGRITY COMMISSION</span>
+    <span class="ticker-sep">◆</span>
+    <span class="ticker-item">EVIDENCE INTEGRITY PROTOCOLS</span>
+    <span class="ticker-sep">◆</span>
+    <span class="ticker-item">LEGAL AID REFORM NOW</span>
+    <span class="ticker-sep">◆</span>
+    <span class="ticker-item">100+ COMMUNITY STORIES</span>
+    <span class="ticker-sep">◆</span>
+    <span class="ticker-item">THE CHAIN IS BROKEN</span>
+    <span class="ticker-sep">◆</span>
+    <span class="ticker-item">850,000+ AUSTRALIANS REPRESENTED</span>
+    <span class="ticker-sep">◆</span>
+    <span class="ticker-item">3 NATIONAL REFORMS PROPOSED</span>
+    <span class="ticker-sep">◆</span>
+    <span class="ticker-item">JUDICIAL INTEGRITY COMMISSION</span>
+    <span class="ticker-sep">◆</span>
+    <span class="ticker-item">EVIDENCE INTEGRITY PROTOCOLS</span>
+    <span class="ticker-sep">◆</span>
+    <span class="ticker-item">LEGAL AID REFORM NOW</span>
+    <span class="ticker-sep">◆</span>
+    <span class="ticker-item">100+ COMMUNITY STORIES</span>
+    <span class="ticker-sep">◆</span>
+    <span class="ticker-item">THE CHAIN IS BROKEN</span>
+    <span class="ticker-sep">◆</span>
   </div>
 </div>
 
-<!-- =====================================================================
-     DOCUMENTARY TRAILER — Section 2 (Watch the Evidence)
-     ===================================================================== -->
-<section class="trailer-section" id="trailer" aria-labelledby="trailer-heading">
-  <div class="container">
-    <div class="trailer-inner fade-up">
-      <div class="trailer-text">
-        <div class="eyebrow">Watch the Evidence</div>
-        <h2 id="trailer-heading">The Movement <span class="text-orange">In Motion</span></h2>
-        <p>From Parliament House to outback courtrooms — this is the story of an Australian justice system that has failed the very citizens it was built to protect. Watch the movement's flagship track, and feel what reform sounds like.</p>
-        <ul class="trailer-list">
-          <li>Missing bodycam footage — documented</li>
-          <li>Backdated court orders — on the record</li>
-          <li>Legal aid denied — case after case</li>
-          <li>Judicial oversight — absent</li>
-          <li>Three reforms that would change everything</li>
-        </ul>
-        <div style="display:flex;gap:1rem;flex-wrap:wrap">
-          <a href="evidence.html" class="btn btn-primary">🔍 Enter the Evidence Vault</a>
-          <a href="https://www.youtube.com/@fairgojustice" target="_blank" rel="noopener" class="btn btn-ghost">▶ YouTube Channel</a>
+<!-- ══════════════════════════════════════
+     MUSIC FOR JUSTICE
+══════════════════════════════════════ -->
+<section class="music-section" id="music">
+  <div class="section-header">
+    <span class="section-eyebrow">🎵 The Movement Has a Soundtrack</span>
+    <h2 class="section-title">MUSIC FOR <span>JUSTICE</span></h2>
+    <p class="section-sub">Original music that turns evidence into emotion and reform into culture. Something no other advocacy movement has.</p>
+  </div>
+
+  <div class="music-featured">
+    <!-- Featured: The Appointed -->
+    <div class="music-hero-card">
+      <div class="music-hero-img">
+        <img src="https://raw.githubusercontent.com/Fair-Go-Justice/fairgojustice-website/main/thumbnails/the_appointed_v1_thumb.jpg" alt="The Appointed">
+      </div>
+      <div class="music-hero-info">
+        <div class="music-hero-label">🔴 Featured Track</div>
+        <h2>THE APPOINTED</h2>
+        <p>When those appointed to deliver justice become the architects of its denial — who holds them to account? A cinematic indictment of judicial accountability failure.</p>
+        <div class="music-tags">
+          <span class="music-tag">Judicial Integrity</span>
+          <span class="music-tag">Reform Anthem</span>
+          <span class="music-tag">Documentary</span>
+        </div>
+        <div class="music-hero-btns">
+          <a href="https://www.youtube.com/watch?v=x3UqqsYzTPg" target="_blank" class="play-btn">▶ Play on YouTube</a>
+          <a href="music.html" class="play-btn play-btn-secondary">Full Catalogue →</a>
         </div>
       </div>
-      <div class="trailer-embed">
-        <div class="trailer-embed-label">Featured Track</div>
-        <iframe
-          src="https://www.youtube.com/embed/x3UqqsYzTPg?autoplay=0&rel=0&modestbranding=1&color=white"
-          title="The Appointed — Fair Go Justice"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
-          loading="lazy">
-        </iframe>
+    </div>
+
+    <!-- Track grid -->
+    <div class="music-grid">
+      <div class="music-card">
+        <div class="music-card-img">
+          <img src="https://raw.githubusercontent.com/Fair-Go-Justice/fairgojustice-website/main/thumbnails/album_legal_aid_reform.png" alt="Legal Aid Reform">
+          <div class="music-play-overlay">
+            <a href="music.html" class="music-play-btn">▶</a>
+          </div>
+        </div>
+        <div class="music-card-info">
+          <h4>LEGAL AID REFORM</h4>
+          <p>Equal scales, equal rights</p>
+          <div class="genre">Reform · Protest</div>
+        </div>
+      </div>
+      <div class="music-card">
+        <div class="music-card-img">
+          <img src="https://raw.githubusercontent.com/Fair-Go-Justice/fairgojustice-website/main/thumbnails/album_evidence_integrity.png" alt="Evidence Integrity Protocols">
+          <div class="music-play-overlay">
+            <a href="music.html" class="music-play-btn">▶</a>
+          </div>
+        </div>
+        <div class="music-card-info">
+          <h4>EVIDENCE INTEGRITY</h4>
+          <p>Protect the truth, protect the chain</p>
+          <div class="genre">Documentary · Dark</div>
+        </div>
+      </div>
+      <div class="music-card">
+        <div class="music-card-img">
+          <img src="https://raw.githubusercontent.com/Fair-Go-Justice/fairgojustice-website/main/thumbnails/album_conflict_of_interest.png" alt="Conflict of Interest">
+          <div class="music-play-overlay">
+            <a href="music.html" class="music-play-btn">▶</a>
+          </div>
+        </div>
+        <div class="music-card-info">
+          <h4>CONFLICT OF INTEREST</h4>
+          <p>When the judge has skin in the game</p>
+          <div class="genre">Investigative · Cinematic</div>
+        </div>
+      </div>
+      <div class="music-card">
+        <div class="music-card-img" style="background: linear-gradient(135deg, #1a0533, #3d0b6e); display:flex; align-items:center; justify-content:center; font-size:3rem;">🎤</div>
+        <div class="music-card-info">
+          <h4>VEXATIOUS</h4>
+          <p>Weaponised law, weaponised courts</p>
+          <div class="genre">Hip-Hop · Spoken Word</div>
+        </div>
+      </div>
+      <div class="music-card">
+        <div class="music-card-img" style="background: linear-gradient(135deg, #0a2a0a, #1a5c1a); display:flex; align-items:center; justify-content:center; font-size:3rem;">🌿</div>
+        <div class="music-card-info">
+          <h4>WE ARE NOT DONE</h4>
+          <p>The movement continues</p>
+          <div class="genre">Anthem · Hope</div>
+        </div>
+      </div>
+      <div class="music-card">
+        <div class="music-card-img" style="background: linear-gradient(135deg, #1a1a0a, #5c5c00); display:flex; align-items:center; justify-content:center; font-size:3rem;">📜</div>
+        <div class="music-card-info">
+          <h4>SIGNED. DENIED. BETRAYED.</h4>
+          <p>The paper trail of injustice</p>
+          <div class="genre">Folk · Documentary</div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- =====================================================================
-     MUSIC FOR JUSTICE — Section 3 (FRONT AND CENTRE)
-     ===================================================================== -->
-<section class="music-section" id="music" aria-labelledby="music-heading">
-  <div class="container">
-    <div class="section-header fade-up">
-      <div class="eyebrow">Music for Justice</div>
-      <h2 id="music-heading">The <span class="text-gold">Justice Jukebox</span></h2>
-      <p>Songs, albums, and anthems created for the movement. 128+ tracks and growing — the music that no other advocacy campaign in Australia has.</p>
+<!-- ══════════════════════════════════════
+     STATS
+══════════════════════════════════════ -->
+<div class="stats-bar" id="stats">
+  <div class="stats-grid">
+    <div class="stat-item">
+      <div class="stat-num" data-target="850000" data-suffix="+">0</div>
+      <div class="stat-label">Australians Represented</div>
     </div>
-
-    <!-- Featured track with live YouTube embed -->
-    <div class="jukebox-featured fade-up">
-      <div class="jukebox-featured-video">
-        <iframe
-          src="https://www.youtube.com/embed/x3UqqsYzTPg?rel=0&modestbranding=1&color=white"
-          title="The Appointed — Fair Go Justice"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
-          loading="lazy">
-        </iframe>
-      </div>
-      <div class="jukebox-featured-info">
-        <div class="eyebrow">Featured Track</div>
-        <h3>THE APPOINTED</h3>
-        <p>"Who watches those who are appointed to watch us?" A cinematic anthem about judicial accountability — raw, powerful, and relentless. The most-watched track in the collection.</p>
-        <div class="jukebox-actions">
-          <a href="https://www.youtube.com/watch?v=x3UqqsYzTPg" target="_blank" rel="noopener" class="btn btn-primary">▶ Watch on YouTube</a>
-          <a href="music.html" class="btn btn-ghost">View All Songs</a>
-        </div>
-      </div>
+    <div class="stat-item">
+      <div class="stat-num" data-target="12847" data-suffix="+">0</div>
+      <div class="stat-label">Movement Supporters</div>
     </div>
-
-    <!-- Album art grid -->
-    <div class="album-grid">
-
-      <article class="album-card fade-up">
-        <div class="album-art">
-          <img src="https://raw.githubusercontent.com/Fair-Go-Justice/fairgojustice-website/main/thumbnails/the_appointed_v1_thumb.jpg"
-               alt="The Appointed album art"
-               onerror="this.parentNode.classList.add('art-fallback');this.remove()">
-          <div class="album-play-overlay">
-            <a href="https://www.youtube.com/watch?v=x3UqqsYzTPg" target="_blank" rel="noopener" class="album-play-btn" aria-label="Play The Appointed">▶</a>
-          </div>
-        </div>
-        <div class="album-info">
-          <div class="album-title">The Appointed</div>
-          <div class="album-meta">Judicial Integrity Anthem</div>
-          <div class="album-pillar">Pillar 1</div>
-        </div>
-      </article>
-
-      <article class="album-card fade-up" style="transition-delay:0.08s">
-        <div class="album-art">
-          <div class="album-art-placeholder" style="background:linear-gradient(135deg,#0E3A5B,#1A5276)">📹</div>
-          <div class="album-play-overlay">
-            <a href="music.html" class="album-play-btn" aria-label="Play Evidence Integrity Protocols">▶</a>
-          </div>
-        </div>
-        <div class="album-info">
-          <div class="album-title">Evidence Integrity Protocols</div>
-          <div class="album-meta">Documentary Style</div>
-          <div class="album-pillar">Pillar 2</div>
-        </div>
-      </article>
-
-      <article class="album-card fade-up" style="transition-delay:0.16s">
-        <div class="album-art">
-          <div class="album-art-placeholder" style="background:linear-gradient(135deg,#3d1a00,#8B3A0F)">⚖</div>
-          <div class="album-play-overlay">
-            <a href="music.html" class="album-play-btn" aria-label="Play Legal Aid Reform">▶</a>
-          </div>
-        </div>
-        <div class="album-info">
-          <div class="album-title">Legal Aid Reform</div>
-          <div class="album-meta">Protest Anthem</div>
-          <div class="album-pillar">Pillar 3</div>
-        </div>
-      </article>
-
-      <article class="album-card fade-up" style="transition-delay:0.24s">
-        <div class="album-art">
-          <div class="album-art-placeholder" style="background:linear-gradient(135deg,#2c0000,#5c0000)">🔥</div>
-          <div class="album-play-overlay">
-            <a href="music.html" class="album-play-btn" aria-label="Play Conflict of Interest">▶</a>
-          </div>
-        </div>
-        <div class="album-info">
-          <div class="album-title">Conflict of Interest</div>
-          <div class="album-meta">Dark Documentary</div>
-          <div class="album-pillar">Judicial Integrity</div>
-        </div>
-      </article>
-
-      <article class="album-card fade-up" style="transition-delay:0.32s">
-        <div class="album-art">
-          <div class="album-art-placeholder" style="background:linear-gradient(135deg,#1a3a00,#2d6a1f)">✊</div>
-          <div class="album-play-overlay">
-            <a href="music.html" class="album-play-btn" aria-label="Play We Are Not Done">▶</a>
-          </div>
-        </div>
-        <div class="album-info">
-          <div class="album-title">We Are Not Done</div>
-          <div class="album-meta">Movement Anthem</div>
-          <div class="album-pillar">Reform</div>
-        </div>
-      </article>
-
-      <article class="album-card fade-up" style="transition-delay:0.40s">
-        <div class="album-art">
-          <div class="album-art-placeholder" style="background:linear-gradient(135deg,#1a1a2e,#16213e)">🎵</div>
-          <div class="album-play-overlay">
-            <a href="music.html" class="album-play-btn" aria-label="View all songs">▶</a>
-          </div>
-        </div>
-        <div class="album-info">
-          <div class="album-title">Signed. Denied. Betrayed.</div>
-          <div class="album-meta">Protest Ballad</div>
-          <div class="album-pillar">Legal Aid</div>
-        </div>
-      </article>
-
+    <div class="stat-item">
+      <div class="stat-num" data-target="3" data-suffix="">0</div>
+      <div class="stat-label">National Reforms Proposed</div>
     </div>
-
-    <div style="text-align:center; margin-top:3rem;" class="fade-up">
-      <a href="music.html" class="btn btn-gold btn-lg">🎵 Explore All 128+ Songs →</a>
-    </div>
-  </div>
-</section>
-
-<!-- =====================================================================
-     STATS BAR
-     ===================================================================== -->
-<div class="stats-bar" aria-label="Movement statistics">
-  <div class="container">
-    <div class="stats-bar-grid">
-      <div class="stats-bar-item fade-up">
-        <div class="stats-bar-icon">📋</div>
-        <div class="stats-bar-num" data-count="850000" data-suffix="+">850,000+</div>
-        <div class="stats-bar-label">Australians Represented</div>
-      </div>
-      <div class="stats-bar-item fade-up" style="transition-delay:0.1s">
-        <div class="stats-bar-icon">✍️</div>
-        <div class="stats-bar-num" data-count="12847" data-suffix="+">12,847+</div>
-        <div class="stats-bar-label">Petition Signatures</div>
-      </div>
-      <div class="stats-bar-item fade-up" style="transition-delay:0.2s">
-        <div class="stats-bar-icon">🏛️</div>
-        <div class="stats-bar-num" data-count="3">3</div>
-        <div class="stats-bar-label">National Reforms Proposed</div>
-      </div>
-      <div class="stats-bar-item fade-up" style="transition-delay:0.3s">
-        <div class="stats-bar-icon">🎵</div>
-        <div class="stats-bar-num" data-count="128" data-suffix="+">128+</div>
-        <div class="stats-bar-label">Songs for Justice</div>
-      </div>
-      <div class="stats-bar-item fade-up" style="transition-delay:0.4s">
-        <div class="stats-bar-icon">🗺️</div>
-        <div class="stats-bar-num" data-count="8">8</div>
-        <div class="stats-bar-label">States &amp; Territories</div>
-      </div>
+    <div class="stat-item">
+      <div class="stat-num" data-target="100" data-suffix="+">0</div>
+      <div class="stat-label">Community Stories</div>
     </div>
   </div>
 </div>
 
-<!-- =====================================================================
+<!-- ══════════════════════════════════════
      THREE PILLARS
-     ===================================================================== -->
-<section class="pillars-section" aria-labelledby="pillars-heading">
-  <div class="container">
-    <div class="section-header fade-up">
-      <div class="eyebrow">The Three Reforms</div>
-      <h2 id="pillars-heading">What We Are <span class="text-orange">Fighting For</span></h2>
-      <p>Three targeted, evidence-based reforms that would transform the Australian justice system — and restore public trust in our courts.</p>
+══════════════════════════════════════ -->
+<section class="pillars-section" id="reforms">
+  <div class="section-header">
+    <span class="section-eyebrow">The Three Reforms</span>
+    <h2 class="section-title">THE <span>PILLARS</span> OF CHANGE</h2>
+    <p class="section-sub">Three evidence-based national reforms that would transform justice outcomes for every Australian.</p>
+  </div>
+  <div class="pillars-grid">
+    <div class="pillar-card" onclick="location.href='pillars.html#jic'">
+      <div class="pillar-watermark">01</div>
+      <div class="pillar-icon">🛡</div>
+      <h3>JUDICIAL INTEGRITY COMMISSION</h3>
+      <p>An independent body with real powers to investigate judicial conduct, conflict of interest, and systemic bias — with full transparency and public reporting.</p>
+      <a href="pillars.html#jic" class="pillar-link">Read the Proposal →</a>
     </div>
-
-    <div class="pillars-grid">
-      <article class="pillar-card fade-up">
-        <span class="pillar-num" aria-hidden="true">01</span>
-        <div class="pillar-icon">🛡</div>
-        <h3 class="pillar-title">Judicial Integrity Commission</h3>
-        <p class="pillar-desc">An independent body with real investigative powers to receive and investigate complaints against judicial officers — free from political influence.</p>
-        <a href="pillars.html#jic" class="pillar-link">Learn more →</a>
-      </article>
-      <article class="pillar-card fade-up" style="transition-delay:0.15s">
-        <span class="pillar-num" aria-hidden="true">02</span>
-        <div class="pillar-icon">📹</div>
-        <h3 class="pillar-title">Evidence Integrity Protocols</h3>
-        <p class="pillar-desc">Mandatory tamper-proof chain-of-custody standards for all evidence — body camera footage, documents, exhibits — in every Australian court.</p>
-        <a href="pillars.html#eip" class="pillar-link">Learn more →</a>
-      </article>
-      <article class="pillar-card fade-up" style="transition-delay:0.3s">
-        <span class="pillar-num" aria-hidden="true">03</span>
-        <div class="pillar-icon">⚖</div>
-        <h3 class="pillar-title">Legal Aid Reform</h3>
-        <p class="pillar-desc">Expanded, properly funded legal aid so that the quality of your justice is never determined by the size of your bank account.</p>
-        <a href="pillars.html#lar" class="pillar-link">Learn more →</a>
-      </article>
+    <div class="pillar-card" onclick="location.href='pillars.html#eip'">
+      <div class="pillar-watermark">02</div>
+      <div class="pillar-icon">📹</div>
+      <h3>EVIDENCE INTEGRITY PROTOCOLS</h3>
+      <p>Mandated tamper-evident bodycam recording, real-time chain of custody tracking, and independent audit of all evidence from collection to verdict.</p>
+      <a href="pillars.html#eip" class="pillar-link">Read the Proposal →</a>
+    </div>
+    <div class="pillar-card" onclick="location.href='pillars.html#lar'">
+      <div class="pillar-watermark">03</div>
+      <div class="pillar-icon">⚖</div>
+      <h3>LEGAL AID REFORM</h3>
+      <p>Equal access to quality legal representation regardless of income. Self-represented litigants should not face corporations with unlimited legal budgets in silence.</p>
+      <a href="pillars.html#lar" class="pillar-link">Read the Proposal →</a>
     </div>
   </div>
 </section>
 
-<!-- =====================================================================
-     EVIDENCE VAULT
-     ===================================================================== -->
-<section class="evidence-section" aria-labelledby="evidence-heading">
-  <div class="container">
-    <div class="section-header fade-up">
-      <div class="eyebrow">Evidence Vault</div>
-      <h2 id="evidence-heading">The <span class="text-orange">Smoking Guns</span></h2>
-      <p>Click any category to explore documented evidence exhibits — interactive, sourced, and growing with every submission from across Australia.</p>
+<!-- ══════════════════════════════════════
+     TRAILER
+══════════════════════════════════════ -->
+<section class="trailer-section" id="trailer">
+  <div class="trailer-inner">
+    <div class="trailer-text">
+      <span class="section-eyebrow">Watch the Evidence</span>
+      <h2>THE MOVEMENT<br>HAS A <span>STORY</span></h2>
+      <p>Music, evidence, and stories collide in a movement that refuses to be silenced. Watch the documentary that started it all.</p>
+      <ul class="trailer-bullets">
+        <li>Missing bodycam evidence</li>
+        <li>Chain of custody failures</li>
+        <li>Legal aid denied</li>
+        <li>Judicial accountability gaps</li>
+        <li>Community voices from every state</li>
+      </ul>
+      <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+        <a href="evidence.html" class="btn-primary">Enter the Evidence Vault</a>
+        <a href="https://www.youtube.com/@fairgojustice" target="_blank" class="btn-secondary">YouTube Channel →</a>
+      </div>
     </div>
-
-    <div class="evidence-grid">
-      <article class="evidence-card fade-up" onclick="location.href='evidence.html#missing'">
-        <span class="evidence-arrow" aria-hidden="true">↗</span>
-        <span class="evidence-icon">🧾</span>
-        <div class="evidence-title">Missing Evidence</div>
-        <p class="evidence-desc">Exhibits that disappeared from court records after submission — documented, logged, unresolved.</p>
-        <div class="evidence-count">47 Documented Cases</div>
-      </article>
-      <article class="evidence-card fade-up" style="transition-delay:0.1s" onclick="location.href='evidence.html#bodycam'">
-        <span class="evidence-arrow" aria-hidden="true">↗</span>
-        <span class="evidence-icon">📹</span>
-        <div class="evidence-title">Missing Bodycam Footage</div>
-        <p class="evidence-desc">Body-worn camera recordings listed as unavailable, corrupted, or permanently deleted at critical moments.</p>
-        <div class="evidence-count">23 Documented Cases</div>
-      </article>
-      <article class="evidence-card fade-up" style="transition-delay:0.2s" onclick="location.href='evidence.html#oversight'">
-        <span class="evidence-arrow" aria-hidden="true">↗</span>
-        <span class="evidence-icon">⚖</span>
-        <div class="evidence-title">Judicial Oversight Failures</div>
-        <p class="evidence-desc">Undisclosed conflicts of interest, improper conduct, and bias — with no recourse and no oversight.</p>
-        <div class="evidence-count">31 Documented Cases</div>
-      </article>
-      <article class="evidence-card fade-up" style="transition-delay:0.3s" onclick="location.href='evidence.html#documents'">
-        <span class="evidence-arrow" aria-hidden="true">↗</span>
-        <span class="evidence-icon">📄</span>
-        <div class="evidence-title">Document Discrepancies</div>
-        <p class="evidence-desc">Court orders, witness statements, and exhibits returned with unexplained alterations — words changed, dates shifted.</p>
-        <div class="evidence-count">19 Documented Cases</div>
-      </article>
-      <article class="evidence-card fade-up" style="transition-delay:0.4s" onclick="location.href='evidence.html#legalaid'">
-        <span class="evidence-arrow" aria-hidden="true">↗</span>
-        <span class="evidence-icon">💼</span>
-        <div class="evidence-title">Legal Aid Denials</div>
-        <p class="evidence-desc">Legitimate cases refused legal aid — forcing self-representation against fully resourced legal teams.</p>
-        <div class="evidence-count">62 Documented Cases</div>
-      </article>
-      <article class="evidence-card fade-up" style="transition-delay:0.5s" onclick="location.href='evidence.html#custody'">
-        <span class="evidence-arrow" aria-hidden="true">↗</span>
-        <span class="evidence-icon">🔗</span>
-        <div class="evidence-title">Chain of Custody Breaks</div>
-        <p class="evidence-desc">Evidence handling failures where tamper-evident seals were broken, bypassed, or simply never applied.</p>
-        <div class="evidence-count">28 Documented Cases</div>
-      </article>
-    </div>
-
-    <div style="text-align:center; margin-top:3rem;" class="fade-up">
-      <a href="evidence.html" class="btn btn-secondary btn-lg">🔍 Enter the Full Evidence Vault</a>
+    <div class="trailer-embed">
+      <iframe src="https://www.youtube.com/embed/x3UqqsYzTPg?rel=0&modestbranding=1" allowfullscreen title="The Appointed — Fair Go Justice"></iframe>
     </div>
   </div>
 </section>
 
-<!-- =====================================================================
+<!-- ══════════════════════════════════════
+     EVIDENCE VAULT PREVIEW
+══════════════════════════════════════ -->
+<section class="vault-preview" id="evidence">
+  <div class="vault-preview-inner">
+    <div class="section-header">
+      <span class="section-eyebrow">Forensic Evidence Library</span>
+      <h2 class="section-title">THE EVIDENCE <span>VAULT</span></h2>
+      <p class="section-sub">Click any exhibit to enter the full investigation. This is not a document dump — it is a living forensic archive.</p>
+    </div>
+    <div class="vault-tiles">
+      <div class="vault-tile" onclick="location.href='evidence.html#chain-of-custody'">
+        <img src="https://raw.githubusercontent.com/Fair-Go-Justice/fairgojustice-website/main/thumbnails/vault_chain_of_custody_web.jpg" alt="Chain of Custody">
+        <div class="vault-tile-overlay">
+          <div class="vault-tile-tag">🔗 Evidence Integrity</div>
+          <h4>CHAIN OF CUSTODY</h4>
+        </div>
+        <div class="vault-tile-arrow">↗</div>
+      </div>
+      <div class="vault-tile" onclick="location.href='evidence.html#missing-bodycam'">
+        <img src="https://raw.githubusercontent.com/Fair-Go-Justice/fairgojustice-website/main/thumbnails/vault_missing_bodycam_web.jpg" alt="Missing Bodycam">
+        <div class="vault-tile-overlay">
+          <div class="vault-tile-tag">📹 Missing Evidence</div>
+          <h4>MISSING BODYCAM</h4>
+        </div>
+        <div class="vault-tile-arrow">↗</div>
+      </div>
+      <div class="vault-tile" onclick="location.href='evidence.html#oversight'">
+        <img src="https://raw.githubusercontent.com/Fair-Go-Justice/fairgojustice-website/main/thumbnails/vault_who_watches_web.jpg" alt="Judicial Oversight">
+        <div class="vault-tile-overlay">
+          <div class="vault-tile-tag">⚖ Judicial Oversight</div>
+          <h4>WHO WATCHES THE WATCHMEN?</h4>
+        </div>
+        <div class="vault-tile-arrow">↗</div>
+      </div>
+      <div class="vault-tile" onclick="location.href='evidence.html#forensic'">
+        <img src="https://raw.githubusercontent.com/Fair-Go-Justice/fairgojustice-website/main/thumbnails/vault_forensic_truth_web.jpg" alt="Forensic Truth">
+        <div class="vault-tile-overlay">
+          <div class="vault-tile-tag">🔬 Forensic Analysis</div>
+          <h4>THE EVIDENCE NEVER LIES</h4>
+        </div>
+        <div class="vault-tile-arrow">↗</div>
+      </div>
+      <div class="vault-tile" onclick="location.href='evidence.html#jic'">
+        <img src="https://raw.githubusercontent.com/Fair-Go-Justice/fairgojustice-website/main/thumbnails/vault_jic_web.jpg" alt="Judicial Integrity Commission">
+        <div class="vault-tile-overlay">
+          <div class="vault-tile-tag">🛡 Reform</div>
+          <h4>JUDICIAL INTEGRITY COMMISSION</h4>
+        </div>
+        <div class="vault-tile-arrow">↗</div>
+      </div>
+      <div class="vault-tile" onclick="location.href='evidence.html#legal-aid'">
+        <img src="https://raw.githubusercontent.com/Fair-Go-Justice/fairgojustice-website/main/thumbnails/vault_legal_aid_web.jpg" alt="Legal Aid">
+        <div class="vault-tile-overlay">
+          <div class="vault-tile-tag">⚖ Access to Justice</div>
+          <h4>LEGAL AID OR LEGAL RAID?</h4>
+        </div>
+        <div class="vault-tile-arrow">↗</div>
+      </div>
+    </div>
+    <div class="vault-cta">
+      <a href="evidence.html" class="btn-primary">Enter the Full Evidence Vault →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
      WALL OF STORIES
-     ===================================================================== -->
-<section class="stories-section" aria-labelledby="stories-heading">
-  <div class="container">
-    <div class="section-header fade-up">
-      <div class="eyebrow">Real Australians</div>
-      <h2 id="stories-heading">Wall of <span class="text-gold">Stories</span></h2>
-      <p>Hundreds of Australians share their experiences. Every story is a case for reform. Names have been changed or omitted to protect privacy.</p>
+══════════════════════════════════════ -->
+<section class="stories-section" id="stories">
+  <div class="section-header">
+    <span class="section-eyebrow">Community Voices</span>
+    <h2 class="section-title">WALL OF <span>STORIES</span></h2>
+    <p class="section-sub">Real Australians. Real experiences. Anonymous where requested. Because stories are what move people to act.</p>
+  </div>
+  <div class="stories-grid" style="max-width:1300px;margin:0 auto;">
+    <div class="story-card featured">
+      <div>
+        <span class="story-state">NSW</span>
+        <div class="story-type">Legal Aid Denial</div>
+        <h3>"I spent three years in court without a lawyer. The other side had a team of four."</h3>
+        <p>A self-represented litigant from regional New South Wales describes navigating a complex civil matter against a well-resourced institution. Legal aid was denied twice. The cost — financial, emotional, and physical — was devastating. But she didn't stop.</p>
+      </div>
+      <a href="stories.html" class="story-read">Read Full Story →</a>
     </div>
-
-    <div class="stories-grid">
-      <article class="story-card story-featured fade-up">
-        <div class="story-featured-img">📁</div>
-        <div class="story-card-body">
-          <div class="story-card-top"></div>
-          <div class="story-meta">
-            <span class="story-badge urgent">Ongoing</span>
-            <span class="story-state">NSW</span>
-          </div>
-          <div class="story-name">Respondent A</div>
-          <div class="story-issue">Missing Evidence — 10-Year Battle</div>
-          <p class="story-text">"Evidence I submitted was never entered into the court record. My solicitor was told it didn't exist. It took years — and this movement — before anyone listened."</p>
-          <a href="stories.html" class="story-read">Read full story →</a>
-        </div>
-      </article>
-
-      <article class="story-card fade-up" style="transition-delay:0.1s">
-        <div class="story-card-top"></div>
-        <div class="story-card-body">
-          <div class="story-meta">
-            <span class="story-badge urgent">Urgent</span>
-            <span class="story-state">QLD</span>
-          </div>
-          <div class="story-name">Respondent B</div>
-          <div class="story-issue">Legal Aid Denied</div>
-          <p class="story-text">"Self-represented against a legal team of four. The judge showed no interest in helping me navigate procedure. I never stood a chance."</p>
-          <a href="stories.html" class="story-read">Read story →</a>
-        </div>
-      </article>
-
-      <article class="story-card fade-up" style="transition-delay:0.2s">
-        <div class="story-card-top"></div>
-        <div class="story-card-body">
-          <div class="story-meta">
-            <span class="story-badge">Documented</span>
-            <span class="story-state">VIC</span>
-          </div>
-          <div class="story-name">The Grey-Haired Witness</div>
-          <div class="story-issue">Statement Altered</div>
-          <p class="story-text">"My witness statement was returned to me — different from what I signed. Three words changed. Three words that changed the entire meaning."</p>
-          <a href="stories.html" class="story-read">Read story →</a>
-        </div>
-      </article>
-
-      <article class="story-card fade-up" style="transition-delay:0.3s">
-        <div class="story-card-top"></div>
-        <div class="story-card-body">
-          <div class="story-meta">
-            <span class="story-badge urgent">Ongoing</span>
-            <span class="story-state">WA</span>
-          </div>
-          <div class="story-name">The Outback Farmer</div>
-          <div class="story-issue">Bodycam Footage Vanished</div>
-          <p class="story-text">"Police bodycam footage that would have proven my innocence was 'unavailable'. The file simply didn't exist in their system."</p>
-          <a href="stories.html" class="story-read">Read story →</a>
-        </div>
-      </article>
-
-      <article class="story-card fade-up" style="transition-delay:0.4s">
-        <div class="story-card-top"></div>
-        <div class="story-card-body">
-          <div class="story-meta">
-            <span class="story-badge resolved">Resolved</span>
-            <span class="story-state">SA</span>
-          </div>
-          <div class="story-name">The Single Mother</div>
-          <div class="story-issue">Conflict of Interest</div>
-          <p class="story-text">"The judge had a prior professional relationship with the opposing barrister. No disclosure. No recusal. We only found out after the judgment."</p>
-          <a href="stories.html" class="story-read">Read story →</a>
-        </div>
-      </article>
-
-      <article class="story-card fade-up" style="transition-delay:0.5s">
-        <div class="story-card-top"></div>
-        <div class="story-card-body">
-          <div class="story-meta">
-            <span class="story-badge">Documented</span>
-            <span class="story-state">TAS</span>
-          </div>
-          <div class="story-name">The Elderly Couple</div>
-          <div class="story-issue">Document Discrepancies</div>
-          <p class="story-text">"Two versions of the same court order. Different dates. Both bearing the court seal. Nobody could explain how this happened."</p>
-          <a href="stories.html" class="story-read">Read story →</a>
-        </div>
-      </article>
+    <div class="story-card">
+      <span class="story-state">QLD</span>
+      <div class="story-type">Missing Evidence</div>
+      <h3>"The bodycam was there. The footage wasn't."</h3>
+      <p>A Queensland resident describes how critical footage from a documented incident was never produced — despite the officer's camera being present and active throughout.</p>
+      <a href="stories.html" class="story-read">Read →</a>
     </div>
-
-    <div class="stories-cta fade-up">
-      <h3>Your Story Matters</h3>
-      <p>Anonymous submissions welcome. Every story strengthens the case for reform.</p>
-      <a href="stories.html#submit" class="btn btn-primary">Share Your Story</a>
+    <div class="story-card">
+      <span class="story-state">VIC</span>
+      <div class="story-type">Judicial Conduct</div>
+      <h3>"The complaint took 14 months to be dismissed without reasons."</h3>
+      <p>When a formal complaint about judicial conduct received a one-paragraph dismissal after over a year, this Victorian resident knew the system was not designed to hold itself accountable.</p>
+      <a href="stories.html" class="story-read">Read →</a>
     </div>
+    <div class="story-card">
+      <span class="story-state">WA</span>
+      <div class="story-type">Chain of Custody</div>
+      <h3>"Evidence that changed hands three times with no documentation."</h3>
+      <p>A Western Australian family traces how critical physical evidence moved through the system without a single entry in the custody log — and what that meant for their case.</p>
+      <a href="stories.html" class="story-read">Read →</a>
+    </div>
+    <div class="story-card">
+      <span class="story-state">SA</span>
+      <div class="story-type">Access to Justice</div>
+      <h3>"I was told to represent myself. I didn't even know what a brief was."</h3>
+      <p>A South Australian pensioner recounts the moment a court clerk handed them a procedural guide and wished them luck — moments before a scheduled hearing against a legal team.</p>
+      <a href="stories.html" class="story-read">Read →</a>
+    </div>
+  </div>
+  <div style="text-align:center;margin-top:3rem;">
+    <a href="stories.html" class="btn-primary" style="margin-right:1rem;">Read All Stories</a>
+    <a href="stories.html#submit" class="btn-secondary">Share Your Story</a>
   </div>
 </section>
 
-<!-- =====================================================================
-     AUSTRALIA MAP
-     ===================================================================== -->
-<section class="map-section" aria-labelledby="map-heading">
-  <div class="container">
-    <div class="section-header fade-up">
-      <div class="eyebrow">The Movement</div>
-      <h2 id="map-heading">Australia is <span class="text-orange">Watching</span></h2>
-      <p>The movement spans every state and territory. Click a state to see local signatures, stories, and volunteers.</p>
+<!-- ══════════════════════════════════════
+     PETITION
+══════════════════════════════════════ -->
+<section class="petition-section" id="petition">
+  <div class="petition-inner">
+    <h2>JOIN THE <span>MOVEMENT</span></h2>
+    <p>Over 12,800 Australians have already added their name to the national reform petition. Every signature matters. Every voice counts.</p>
+    <div class="petition-bar-wrap">
+      <div class="petition-bar" id="petitionBar" style="width:0%"></div>
     </div>
-
-    <div class="map-container">
-      <div class="map-svg-wrapper fade-up">
-        <svg class="aus-map" viewBox="0 0 700 600" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Interactive map of Australia">
-          <path class="state-path" id="map-WA"  d="M30 80 L220 80 L220 420 L80 460 L30 380 Z" onclick="selectState('WA')"  tabindex="0" aria-label="Western Australia"/>
-          <text class="state-label" x="100" y="260" text-anchor="middle">WA</text>
-          <path class="state-path" id="map-NT"  d="M220 80 L360 80 L360 280 L220 280 Z"       onclick="selectState('NT')"  tabindex="0" aria-label="Northern Territory"/>
-          <text class="state-label" x="290" y="190" text-anchor="middle">NT</text>
-          <path class="state-path" id="map-SA"  d="M220 280 L360 280 L360 420 L280 440 L220 420 Z" onclick="selectState('SA')" tabindex="0" aria-label="South Australia"/>
-          <text class="state-label" x="290" y="360" text-anchor="middle">SA</text>
-          <path class="state-path" id="map-QLD" d="M360 80 L540 80 L540 300 L440 300 L360 280 Z"   onclick="selectState('QLD')" tabindex="0" aria-label="Queensland"/>
-          <text class="state-label" x="450" y="190" text-anchor="middle">QLD</text>
-          <path class="state-path" id="map-NSW" d="M360 300 L540 300 L540 430 L420 460 L360 420 Z" onclick="selectState('NSW')" tabindex="0" aria-label="New South Wales"/>
-          <text class="state-label" x="455" y="375" text-anchor="middle">NSW</text>
-          <path class="state-path" id="map-VIC" d="M360 420 L500 430 L480 490 L360 490 Z"         onclick="selectState('VIC')" tabindex="0" aria-label="Victoria"/>
-          <text class="state-label" x="420" y="465" text-anchor="middle">VIC</text>
-          <path class="state-path" id="map-TAS" d="M430 510 L490 510 L490 560 L430 560 Z"         onclick="selectState('TAS')" tabindex="0" aria-label="Tasmania"/>
-          <text class="state-label" x="460" y="540" text-anchor="middle">TAS</text>
-          <path class="state-path" id="map-ACT" d="M460 400 L490 400 L490 425 L460 425 Z"         onclick="selectState('ACT')" tabindex="0" aria-label="Australian Capital Territory"/>
-          <text class="state-label" x="475" y="417" text-anchor="middle" font-size="8">ACT</text>
-        </svg>
-      </div>
-
-      <div class="map-info fade-up" style="transition-delay:0.2s">
-        <div class="map-panel-title" id="mapStateTitle">Select a State or Territory</div>
-        <div class="map-stat-list" id="mapStatList">
-          <div class="map-stat-row" onclick="selectState('NSW')">
-            <div class="map-state-name">🟠 NSW</div>
-            <div class="map-state-data"><span class="map-state-num">3,241</span><span class="map-state-sub">Signatures</span></div>
-          </div>
-          <div class="map-stat-row" onclick="selectState('VIC')">
-            <div class="map-state-name">🟠 VIC</div>
-            <div class="map-state-data"><span class="map-state-num">2,817</span><span class="map-state-sub">Signatures</span></div>
-          </div>
-          <div class="map-stat-row" onclick="selectState('QLD')">
-            <div class="map-state-name">🟠 QLD</div>
-            <div class="map-state-data"><span class="map-state-num">2,109</span><span class="map-state-sub">Signatures</span></div>
-          </div>
-          <div class="map-stat-row" onclick="selectState('WA')">
-            <div class="map-state-name">🟠 WA</div>
-            <div class="map-state-data"><span class="map-state-num">1,876</span><span class="map-state-sub">Signatures</span></div>
-          </div>
-          <div class="map-stat-row" onclick="selectState('SA')">
-            <div class="map-state-name">🟠 SA</div>
-            <div class="map-state-data"><span class="map-state-num">1,204</span><span class="map-state-sub">Signatures</span></div>
-          </div>
-          <div class="map-stat-row" onclick="selectState('TAS')">
-            <div class="map-state-name">🟠 TAS</div>
-            <div class="map-state-data"><span class="map-state-num">487</span><span class="map-state-sub">Signatures</span></div>
-          </div>
-        </div>
-      </div>
+    <div class="petition-progress-text"><strong>12,847</strong> of 50,000 signatures — <strong>25.7%</strong> to next milestone</div>
+    <div class="petition-input-row">
+      <input type="email" class="petition-input" placeholder="your@email.com — join 12,847 Australians">
+      <button class="petition-submit">SIGN NOW</button>
     </div>
+    <p class="petition-privacy">🔒 Your email is never sold or shared. Unsubscribe anytime.</p>
   </div>
 </section>
 
-<!-- =====================================================================
-     PETITION CTA
-     ===================================================================== -->
-<section class="petition-section" aria-labelledby="petition-heading">
-  <div class="petition-bg"></div>
-  <div class="petition-overlay"></div>
-  <div class="container">
-    <div class="petition-content fade-up">
-      <div class="eyebrow" style="justify-content:center">Take Action</div>
-      <h2 id="petition-heading">JUSTICE REQUIRES <span class="text-orange">ACCOUNTABILITY</span></h2>
-      <p>Sign the national petition calling on the Australian Government to implement all three reforms. Every signature counts — and every share multiplies it.</p>
-
-      <div class="progress-container">
-        <div class="progress-header">
-          <span class="progress-count">12,847 signatures</span>
-          <span class="progress-goal">Goal: 100,000</span>
-        </div>
-        <div class="progress-bar-track">
-          <div class="progress-bar-fill" style="width: 12.847%"></div>
-        </div>
-        <div class="progress-pct">12.8% of goal reached — help us get there</div>
-      </div>
-
-      <div class="petition-actions">
-        <a href="take-action.html#petition" class="btn btn-primary btn-lg">✍️ Sign the Petition</a>
-        <a href="take-action.html#volunteer" class="btn btn-secondary btn-lg">🙋 Volunteer</a>
-        <a href="take-action.html#media" class="btn btn-ghost btn-lg">📰 Media Contact</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- =====================================================================
+<!-- ══════════════════════════════════════
      SOCIAL SHARE HUB
-     ===================================================================== -->
-<section class="share-section" aria-labelledby="share-heading">
-  <div class="container">
-    <div class="section-header fade-up">
-      <div class="eyebrow">Spread the Word</div>
-      <h2 id="share-heading">Social <span class="text-gold">Share Hub</span></h2>
-      <p>Download ready-made graphics and become a broadcaster for justice. Movements grow when supporters share.</p>
-    </div>
-
-    <div class="share-grid">
-      <div class="share-card fade-up">
-        <span class="share-icon">📱</span>
-        <div class="share-title">Instagram Stories</div>
-        <div class="share-format">9:16 · PNG · Pack of 6</div>
-        <a href="take-action.html#share" class="share-dl">⬇ Download Free</a>
-      </div>
-      <div class="share-card fade-up" style="transition-delay:0.1s">
-        <span class="share-icon">📘</span>
-        <div class="share-title">Facebook Graphics</div>
-        <div class="share-format">1200×630 · PNG · Pack of 4</div>
-        <a href="take-action.html#share" class="share-dl">⬇ Download Free</a>
-      </div>
-      <div class="share-card fade-up" style="transition-delay:0.2s">
-        <span class="share-icon">🎬</span>
-        <div class="share-title">TikTok Slides</div>
-        <div class="share-format">1080×1920 · MP4 · 3 Clips</div>
-        <a href="take-action.html#share" class="share-dl">⬇ Download Free</a>
-      </div>
-      <div class="share-card fade-up" style="transition-delay:0.3s">
-        <span class="share-icon">📄</span>
-        <div class="share-title">Printable Poster</div>
-        <div class="share-format">A3 · PDF · High Res</div>
-        <a href="take-action.html#share" class="share-dl">⬇ Download Free</a>
-      </div>
-      <div class="share-card fade-up" style="transition-delay:0.4s">
-        <span class="share-icon">🖼</span>
-        <div class="share-title">Phone Wallpaper</div>
-        <div class="share-format">1080×1920 · PNG · 3 Designs</div>
-        <a href="take-action.html#share" class="share-dl">⬇ Download Free</a>
-      </div>
-      <div class="share-card fade-up" style="transition-delay:0.5s">
-        <span class="share-icon">▶️</span>
-        <div class="share-title">YouTube Template</div>
-        <div class="share-format">1280×720 · PNG · Editable</div>
-        <a href="take-action.html#share" class="share-dl">⬇ Download Free</a>
-      </div>
-    </div>
+══════════════════════════════════════ -->
+<section class="share-section" id="share">
+  <div class="section-header">
+    <span class="section-eyebrow">Spread the Word</span>
+    <h2 class="section-title">SOCIAL <span>SHARE HUB</span></h2>
+    <p class="section-sub">Ready-made campaign graphics. Download, post, tag. Help the movement grow.</p>
+  </div>
+  <div class="share-grid">
+    <a href="#" class="share-card">
+      <div class="share-platform">📘</div>
+      <h4>Facebook</h4>
+      <p>Share post + graphic</p>
+    </a>
+    <a href="#" class="share-card">
+      <div class="share-platform">🎵</div>
+      <h4>TikTok</h4>
+      <p>Video clip + caption</p>
+    </a>
+    <a href="#" class="share-card">
+      <div class="share-platform">📸</div>
+      <h4>Instagram</h4>
+      <p>Story + post tiles</p>
+    </a>
+    <a href="https://www.youtube.com/@fairgojustice" target="_blank" class="share-card">
+      <div class="share-platform">▶</div>
+      <h4>YouTube</h4>
+      <p>Subscribe + share</p>
+    </a>
+    <a href="#" class="share-card">
+      <div class="share-platform">🐦</div>
+      <h4>X / Twitter</h4>
+      <p>Tweet thread</p>
+    </a>
+    <a href="#" class="share-card">
+      <div class="share-platform">📩</div>
+      <h4>Email</h4>
+      <p>Forward to friends</p>
+    </a>
   </div>
 </section>
 
-<!-- =====================================================================
-     FOOTER
-     ===================================================================== -->
-<footer class="footer" role="contentinfo">
-  <div class="container">
-    <div class="footer-grid">
-      <div class="footer-brand">
-        <div class="footer-logo">
-          <div class="footer-logo-icon">⚖</div>
-          Fair Go Justice
-        </div>
-        <p class="footer-tagline">A national campaign for judicial accountability, evidence integrity, and equal access to justice for all Australians.</p>
-        <div class="footer-socials">
-          <a href="https://www.youtube.com/@fairgojustice" target="_blank" rel="noopener" class="social-btn" aria-label="YouTube">▶</a>
-          <a href="https://facebook.com" target="_blank" rel="noopener" class="social-btn" aria-label="Facebook">f</a>
-          <a href="https://instagram.com" target="_blank" rel="noopener" class="social-btn" aria-label="Instagram">◉</a>
-          <a href="https://tiktok.com" target="_blank" rel="noopener" class="social-btn" aria-label="TikTok">♪</a>
-        </div>
-      </div>
-      <div class="footer-col">
-        <h4>The Movement</h4>
-        <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="evidence.html">The Evidence</a></li>
-          <li><a href="stories.html">Wall of Stories</a></li>
-          <li><a href="take-action.html">Take Action</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>The Reforms</h4>
-        <ul>
-          <li><a href="pillars.html#jic">Judicial Integrity Commission</a></li>
-          <li><a href="pillars.html#eip">Evidence Integrity Protocols</a></li>
-          <li><a href="pillars.html#lar">Legal Aid Reform</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Resources</h4>
-        <ul>
-          <li><a href="music.html">Music for Justice</a></li>
-          <li><a href="take-action.html#petition">Sign the Petition</a></li>
-          <li><a href="take-action.html#share">Share Hub</a></li>
-          <li><a href="take-action.html#media">Media Contact</a></li>
-        </ul>
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="#" class="footer-logo">FAIR GO JUSTICE</a>
+      <p>A national movement for judicial integrity, evidence transparency, and equal access to justice for every Australian.</p>
+      <div class="footer-socials">
+        <a href="https://www.youtube.com/@fairgojustice" class="footer-social" target="_blank">▶</a>
+        <a href="#" class="footer-social">📘</a>
+        <a href="#" class="footer-social">🐦</a>
+        <a href="#" class="footer-social">📸</a>
       </div>
     </div>
-    <div class="footer-bottom">
-      <div class="footer-copy">© 2025 Fair Go Justice. All rights reserved. Fair Go Justice is a community-led advocacy movement.</div>
-      <div class="footer-legal">
-        <a href="privacy.html">Privacy Policy</a>
-        <a href="terms.html">Terms of Use</a>
-      </div>
+    <div class="footer-col">
+      <h4>The Movement</h4>
+      <ul>
+        <li><a href="#">About FGJ</a></li>
+        <li><a href="pillars.html">The Three Reforms</a></li>
+        <li><a href="evidence.html">Evidence Vault</a></li>
+        <li><a href="stories.html">Wall of Stories</a></li>
+      </ul>
     </div>
+    <div class="footer-col">
+      <h4>Media</h4>
+      <ul>
+        <li><a href="music.html">Music for Justice</a></li>
+        <li><a href="https://www.youtube.com/@fairgojustice" target="_blank">YouTube Channel</a></li>
+        <li><a href="#">Press Kit</a></li>
+        <li><a href="#">Media Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Take Action</h4>
+      <ul>
+        <li><a href="take-action.html">Sign the Petition</a></li>
+        <li><a href="stories.html#submit">Share Your Story</a></li>
+        <li><a href="evidence.html#submit">Submit Evidence</a></li>
+        <li><a href="#">Volunteer</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 Fair Go Justice Movement. All rights reserved.</p>
+    <p><a href="#">Privacy Policy</a> · <a href="#">Terms of Use</a> · <a href="#">Accessibility</a></p>
   </div>
 </footer>
 
-<!-- =====================================================================
-     JAVASCRIPT
-     ===================================================================== -->
 <script>
-/* --- Navbar scroll --- */
+// Nav scroll
 const nav = document.getElementById('mainNav');
 window.addEventListener('scroll', () => {
-  nav.classList.toggle('scrolled', window.scrollY > 20);
-}, { passive: true });
-
-/* --- Mobile nav --- */
-const burger = document.getElementById('navBurger');
-const mobileNav = document.getElementById('navMobile');
-const closeBtn = document.getElementById('navClose');
-burger.addEventListener('click', () => {
-  mobileNav.classList.add('open');
-  burger.setAttribute('aria-expanded', 'true');
-  document.body.style.overflow = 'hidden';
-});
-closeBtn.addEventListener('click', () => {
-  mobileNav.classList.remove('open');
-  burger.setAttribute('aria-expanded', 'false');
-  document.body.style.overflow = '';
-});
-document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') closeBtn.click();
+  nav.classList.toggle('scrolled', window.scrollY > 60);
 });
 
-/* --- Animated counters --- */
-function animateCounter(el) {
-  const target = parseInt(el.dataset.count, 10);
-  const suffix = el.dataset.suffix || '';
-  const duration = 2200;
-  const start = performance.now();
-  function update(now) {
-    const p = Math.min((now - start) / duration, 1);
-    const ease = 1 - Math.pow(1 - p, 3);
-    el.textContent = Math.floor(ease * target).toLocaleString('en-AU') + suffix;
-    if (p < 1) requestAnimationFrame(update);
-  }
-  requestAnimationFrame(update);
-}
-
-/* --- Intersection Observer --- */
-const io = new IntersectionObserver((entries) => {
+// Animated counters
+const counters = document.querySelectorAll('[data-target]');
+const countObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (!entry.isIntersecting) return;
-    entry.target.classList.add('visible');
-    entry.target.querySelectorAll('[data-count]').forEach(animateCounter);
-    if (entry.target.dataset.count) animateCounter(entry.target);
-    io.unobserve(entry.target);
+    const el = entry.target;
+    const target = parseInt(el.dataset.target);
+    const suffix = el.dataset.suffix || '';
+    const duration = 2000;
+    const step = target / (duration / 16);
+    let current = 0;
+    const timer = setInterval(() => {
+      current = Math.min(current + step, target);
+      if (target >= 10000) {
+        el.textContent = Math.floor(current).toLocaleString() + suffix;
+      } else {
+        el.textContent = Math.floor(current) + suffix;
+      }
+      if (current >= target) clearInterval(timer);
+    }, 16);
+    countObserver.unobserve(el);
   });
-}, { threshold: 0.12 });
+}, { threshold: 0.5 });
+counters.forEach(c => countObserver.observe(c));
 
-document.querySelectorAll('.fade-up, [data-count]').forEach(el => io.observe(el));
-
-/* --- Progress bar animate on scroll --- */
-const progressFill = document.querySelector('.progress-bar-fill');
-if (progressFill) {
-  const target = parseFloat(progressFill.style.width);
-  progressFill.style.width = '0%';
-  const progressObserver = new IntersectionObserver(entries => {
-    if (entries[0].isIntersecting) {
-      setTimeout(() => { progressFill.style.width = target + '%'; }, 300);
-      progressObserver.disconnect();
+// Petition bar
+const barObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      document.getElementById('petitionBar').style.width = '25.7%';
+      barObserver.unobserve(e.target);
     }
-  }, { threshold: 0.5 });
-  progressObserver.observe(progressFill);
-}
+  });
+}, { threshold: 0.3 });
+const petBar = document.getElementById('petitionBar');
+if (petBar) barObserver.observe(petBar);
 
-/* --- State data --- */
-const stateData = {
-  NSW: { sigs: '3,241', stories: 47, issue: 'Evidence integrity', volunteers: 124 },
-  VIC: { sigs: '2,817', stories: 38, issue: 'Judicial oversight', volunteers: 98 },
-  QLD: { sigs: '2,109', stories: 31, issue: 'Legal aid access', volunteers: 76 },
-  WA:  { sigs: '1,876', stories: 29, issue: 'Bodycam compliance', volunteers: 61 },
-  SA:  { sigs: '1,204', stories: 18, issue: 'Court transparency', volunteers: 43 },
-  TAS: { sigs: '487',   stories: 8,  issue: 'Legal aid access', volunteers: 19 },
-  NT:  { sigs: '298',   stories: 5,  issue: 'Evidence integrity', volunteers: 12 },
-  ACT: { sigs: '815',   stories: 11, issue: 'Judicial oversight', volunteers: 34 },
-};
-function selectState(code) {
-  document.querySelectorAll('.state-path').forEach(p => p.classList.remove('active'));
-  const el = document.getElementById('map-' + code);
-  if (el) el.classList.add('active');
-  const d = stateData[code];
-  if (!d) return;
-  document.getElementById('mapStateTitle').textContent = '📍 ' + code + ' — ' + d.issue;
-  document.getElementById('mapStatList').innerHTML = `
-    <div class="map-stat-row"><div class="map-state-name">✍️ Signatures</div><div class="map-state-data"><span class="map-state-num">${d.sigs}</span></div></div>
-    <div class="map-stat-row"><div class="map-state-name">📖 Stories Submitted</div><div class="map-state-data"><span class="map-state-num">${d.stories}</span></div></div>
-    <div class="map-stat-row"><div class="map-state-name">🙋 Volunteers</div><div class="map-state-data"><span class="map-state-num">${d.volunteers}</span></div></div>
-    <div class="map-stat-row"><div class="map-state-name">⚠️ Top Issue</div><div class="map-state-data"><span class="map-state-num" style="font-size:0.85rem;color:var(--orange)">${d.issue}</span></div></div>
-    <div style="margin-top:1rem"><a href="stories.html?state=${code}" class="btn btn-ghost btn-sm" style="width:100%;justify-content:center">View ${code} Stories →</a></div>
-  `;
-}
+// Scroll-triggered reveal
+const revealObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.style.opacity = 1; e.target.style.transform = 'translateY(0)'; }
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.vault-tile, .story-card, .pillar-card, .music-card').forEach((el, i) => {
+  el.style.opacity = 0; el.style.transform = 'translateY(25px)';
+  el.style.transition = `opacity 0.6s ease ${i * 0.07}s, transform 0.6s ease ${i * 0.07}s`;
+  revealObs.observe(el);
+});
 </script>
 </body>
 </html>
