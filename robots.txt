@@ -1,0 +1,13 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://fair-go-justice.github.io/fairgojustice-website/sitemap.xml
+
+# Block old/dev variants
+Disallow: /index_v2.html
+Disallow: /index_v3.html
+Disallow: /main_v2.css
+Disallow: /main_v3.css
+Disallow: /evidence_v2.html
+Disallow: /pillars_v2.html
+Disallow: /pillars_v3.html
