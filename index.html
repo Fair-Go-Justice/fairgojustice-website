@@ -71,18 +71,9 @@
       line-height: 0.88; letter-spacing: 2px;
       margin-bottom: 2rem;
     }
-    .hero h1 .line-1 { display: block; color: var(--white); animation: glitch-flash 5s infinite; }
-    .hero h1 .line-2 { display: block; color: var(--orange); text-shadow: 0 0 60px rgba(214,107,45,0.5); animation: glitch-flash 5s infinite 0.4s; }
+    .hero h1 .line-1 { display: block; color: var(--white); }
+    .hero h1 .line-2 { display: block; color: var(--orange); text-shadow: 0 0 60px rgba(214,107,45,0.5); }
     .hero h1 .line-3 { display: block; color: var(--white); font-size: 0.55em; letter-spacing: 6px; margin-top: 0.3em; }
-    @keyframes glitch-flash {
-      0%, 92%, 100% { text-shadow: inherit; transform: none; }
-      93%  { text-shadow: -3px 0 #cf2e2e, 3px 0 #46d9ff; transform: translateX(-2px); }
-      94%  { text-shadow:  3px 0 #cf2e2e, -3px 0 #46d9ff; transform: translateX(2px); clip-path: inset(10% 0 60% 0); }
-      95%  { text-shadow: -2px 0 #46d9ff, 2px 0 #cf2e2e; transform: translateX(-1px); clip-path: inset(55% 0 10% 0); }
-      96%  { text-shadow:  2px 0 #d4af37; transform: translateX(1px); clip-path: none; }
-      97%  { text-shadow: none; transform: translateX(-1px); }
-      98%  { text-shadow: -1px 0 #46d9ff; transform: none; }
-    }
     .hero-sub {
       font-size: clamp(1rem, 2vw, 1.2rem); color: rgba(245,245,245,0.75);
       max-width: 580px; line-height: 1.8; margin-bottom: 3rem;
