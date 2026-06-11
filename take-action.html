@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Take Action | Fair Go Justice</title>
+  <meta name="description" content="Sign the petition. Share the music. Submit your story. Write to your MP. Join the Fair Go Justice movement for real reform in Australia.">
+  <meta property="og:title" content="Take Action — Fair Go Justice">
+  <meta property="og:description" content="Sign the petition. Share the tracks. Make them hear us.">
+  <meta property="og:image" content="https://raw.githubusercontent.com/Fair-Go-Justice/fairgojustice-website/main/thumbnails/hero_chain_broken_master_web.jpg">
+  <link rel="stylesheet" href="main_v3.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --black: #0D1117;
+      --blue: #0E3A5B;
+      --orange: #D66B2D;
+      --white: #F5F5F5;
+      --gold: #D4AF37;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--black); color: var(--white); font-family: 'Space Grotesk', sans-serif; }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1rem 2.5rem;
+      background: rgba(13,17,23,0.92); backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(214,107,45,0.2);
+    }
+    .nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; color: var(--gold); text-decoration: none; letter-spacing: 2px; }
+    nav ul { list-style: none; display: flex; gap: 2rem; }
+    nav ul a { color: var(--white); text-decoration: none; font-size: 0.85rem; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; opacity: 0.8; transition: opacity 0.2s, color 0.2s; }
+    nav ul a:hover, nav ul a.active { opacity: 1; color: var(--gold); }
+    .nav-cta { padding: 0.5rem 1.4rem !important; background: var(--orange) !important; color: #fff !important; border-radius: 1px; opacity: 1 !important; }
+    .nav-cta:hover { background: #e8793a !important; }
+    .nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; }
+    .nav-hamburger span { width: 24px; height: 2px; background: var(--white); display: block; transition: 0.3s; }
+    @media(max-width:768px){
+      nav ul { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: rgba(13,17,23,0.98); padding: 1.5rem 2.5rem; gap: 1.2rem; }
+      nav ul.open { display: flex; }
+      .nav-hamburger { display: flex; }
+    }
+
+    /* ─── HERO ─── */
+    .hero {
+      height: 100vh; min-height: 600px;
+      background-image: url('https://raw.githubusercontent.com/Fair-Go-Justice/fairgojustice-website/main/thumbnails/hero_chain_broken_master_web.jpg');
+      background-size: cover; background-position: center top;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      text-align: center; position: relative; overflow: hidden;
+    }
+    .hero::before { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(13,17,23,0.45) 0%, rgba(13,17,23,0.65) 60%, rgba(13,17,23,1) 100%); }
+    .hero-content { position: relative; z-index: 2; max-width: 900px; padding: 2rem; }
+    .hero-eyebrow { font-size: 0.9rem; font-weight: 600; letter-spacing: 6px; text-transform: uppercase; color: var(--orange); margin-bottom: 1.2rem; }
+    .hero-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(4rem, 12vw, 9rem); line-height: 0.9; letter-spacing: 4px; color: var(--white); margin-bottom: 1rem; }
+    .hero-title span { color: var(--gold); }
+    .hero-subtitle { font-size: clamp(1rem, 2.5vw, 1.35rem); font-weight: 300; color: rgba(245,245,245,0.85); max-width: 680px; margin: 0 auto 2.5rem; line-height: 1.6; }
+    .hero-ctas { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .btn-primary { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--orange); color: #fff; padding: 0.9rem 2.2rem; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 0.95rem; letter-spacing: 1.5px; text-transform: uppercase; text-decoration: none; border: none; cursor: pointer; transition: background 0.2s, transform 0.2s; border-radius: 1px; }
+    .btn-primary:hover { background: #e8793a; transform: translateY(-2px); }
+    .btn-secondary { display: inline-flex; align-items: center; gap: 0.5rem; background: transparent; color: var(--white); padding: 0.9rem 2.2rem; font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 0.95rem; letter-spacing: 1.5px; text-transform: uppercase; text-decoration: none; border: 1px solid rgba(245,245,245,0.4); cursor: pointer; transition: border-color 0.2s, color 0.2s, transform 0.2s; border-radius: 1px; }
+    .btn-secondary:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
+    .scroll-hint { position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 0.4rem; color: rgba(255,255,255,0.4); font-size: 0.7rem; letter-spacing: 3px; text-transform: uppercase; z-index: 2; }
+    .scroll-arrow { width: 1px; height: 40px; background: linear-gradient(180deg, transparent, rgba(214,107,45,0.8)); animation: scrollPulse 2s ease-in-out infinite; }
+    @keyframes scrollPulse { 0%,100%{opacity:0.3;} 50%{opacity:1;} }
+
+    /* ─── STATS BAR ─── */
+    .stats-bar { background: var(--blue); padding: 1.5rem 2rem; display: flex; justify-content: center; gap: 3rem; flex-wrap: wrap; border-bottom: 2px solid var(--orange); }
+    .stat-item { text-align: center; }
+    .stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 2.2rem; color: var(--gold); letter-spacing: 2px; display: block; }
+    .stat-label { font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; color: rgba(245,245,245,0.6); }
+
+    /* ─── SECTIONS ─── */
+    section { padding: 5rem 2rem; }
+    .section-tag { display: inline-block; font-size: 0.7rem; font-weight: 700; letter-spacing: 5px; text-transform: uppercase; color: var(--orange); margin-bottom: 1rem; }
+    .section-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.5rem, 6vw, 4.5rem); letter-spacing: 3px; line-height: 1; margin-bottom: 1rem; }
+    .section-sub { font-size: 1.1rem; font-weight: 300; color: rgba(245,245,245,0.7); max-width: 640px; line-height: 1.7; margin-bottom: 3rem; }
+    .container { max-width: 1200px; margin: 0 auto; }
+
+    /* ─── PETITION ─── */
+    #petition { background: linear-gradient(135deg, rgba(14,58,91,0.3) 0%, rgba(13,17,23,1) 100%); }
+    .petition-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+    @media(max-width:768px){ .petition-grid { grid-template-columns: 1fr; gap: 2rem; } }
+
+    .petition-counter { text-align: center; background: rgba(14,58,91,0.4); border: 1px solid rgba(212,175,55,0.3); padding: 3rem 2rem; position: relative; overflow: hidden; }
+    .petition-counter::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--orange), var(--gold)); }
+    .counter-num { font-family: 'Bebas Neue', sans-serif; font-size: 5rem; color: var(--gold); letter-spacing: 4px; display: block; line-height: 1; }
+    .counter-label { font-size: 0.8rem; letter-spacing: 4px; text-transform: uppercase; color: rgba(245,245,245,0.5); margin-bottom: 2rem; display: block; }
+    .progress-bar-wrap { background: rgba(255,255,255,0.1); border-radius: 2px; height: 8px; overflow: hidden; margin-bottom: 0.5rem; }
+    .progress-bar-fill { height: 100%; background: linear-gradient(90deg, var(--orange), var(--gold)); border-radius: 2px; transition: width 2s ease; }
+    .progress-label { font-size: 0.75rem; color: rgba(245,245,245,0.5); letter-spacing: 1px; }
+    .target-label { font-size: 0.75rem; color: var(--gold); letter-spacing: 1px; float: right; }
+
+    .petition-form { background: rgba(13,17,23,0.8); border: 1px solid rgba(214,107,45,0.2); padding: 2.5rem; }
+    .petition-form h3 { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; letter-spacing: 2px; color: var(--gold); margin-bottom: 0.5rem; }
+    .petition-form p { font-size: 0.9rem; color: rgba(245,245,245,0.6); margin-bottom: 2rem; line-height: 1.6; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+    @media(max-width:500px){ .form-row { grid-template-columns: 1fr; } }
+    .form-group { display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 1rem; }
+    .form-group label { font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; color: rgba(245,245,245,0.5); }
+    .form-group input, .form-group select, .form-group textarea {
+      background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+      color: var(--white); padding: 0.75rem 1rem; font-family: 'Space Grotesk', sans-serif; font-size: 0.9rem;
+      border-radius: 1px; transition: border-color 0.2s; outline: none; width: 100%;
+    }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--orange); }
+    .form-group select option { background: #1a1a2e; color: var(--white); }
+    .form-group textarea { resize: vertical; min-height: 80px; }
+    .form-check { display: flex; align-items: flex-start; gap: 0.7rem; margin-bottom: 1.2rem; }
+    .form-check input[type="checkbox"] { width: 16px; height: 16px; margin-top: 2px; accent-color: var(--orange); flex-shrink: 0; cursor: pointer; }
+    .form-check label { font-size: 0.8rem; color: rgba(245,245,245,0.6); line-height: 1.5; cursor: pointer; }
+    .btn-submit {
+      width: 100%; background: var(--orange); color: #fff; border: none; padding: 1rem 2rem;
+      font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 1rem; letter-spacing: 2px;
+      text-transform: uppercase; cursor: pointer; transition: background 0.2s, transform 0.2s; border-radius: 1px;
+    }
+    .btn-submit:hover { background: #e8793a; transform: translateY(-2px); }
+    .form-note { font-size: 0.72rem; color: rgba(245,245,245,0.35); margin-top: 0.8rem; text-align: center; line-height: 1.5; }
+    .signed-msg { display: none; text-align: center; padding: 2rem; }
+    .signed-msg .check { font-size: 3rem; margin-bottom: 1rem; }
+    .signed-msg h3 { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; color: var(--gold); }
+    .signed-msg p { font-size: 0.9rem; color: rgba(245,245,245,0.7); margin-top: 0.5rem; }
+
+    /* ─── SHARE HUB ─── */
+    #share { background: var(--black); }
+    .share-intro { max-width: 700px; }
+    .share-platforms { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-bottom: 3rem; }
+    .share-card {
+      background: rgba(14,58,91,0.2); border: 1px solid rgba(255,255,255,0.08);
+      padding: 1.8rem; position: relative; overflow: hidden; transition: border-color 0.3s, transform 0.3s;
+      cursor: pointer;
+    }
+    .share-card:hover { border-color: var(--orange); transform: translateY(-3px); }
+    .share-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--platform-color, var(--orange)); }
+    .share-card-icon { font-size: 2rem; margin-bottom: 1rem; display: block; }
+    .share-card h3 { font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; letter-spacing: 2px; color: var(--white); margin-bottom: 0.5rem; }
+    .share-card p { font-size: 0.82rem; color: rgba(245,245,245,0.55); line-height: 1.5; margin-bottom: 1rem; }
+    .share-copy { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 0.7rem; font-size: 0.78rem; color: rgba(245,245,245,0.7); font-style: italic; line-height: 1.5; margin-bottom: 1rem; border-radius: 1px; }
+    .btn-share {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: var(--platform-color, var(--orange)); color: #fff;
+      padding: 0.6rem 1.4rem; font-size: 0.8rem; font-weight: 700; letter-spacing: 1px;
+      text-transform: uppercase; text-decoration: none; border: none; cursor: pointer;
+      border-radius: 1px; transition: opacity 0.2s; font-family: 'Space Grotesk', sans-serif;
+    }
+    .btn-share:hover { opacity: 0.85; }
+
+    .share-toolkit { background: rgba(14,58,91,0.3); border: 1px solid rgba(212,175,55,0.2); padding: 2.5rem; text-align: center; }
+    .share-toolkit h3 { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; color: var(--gold); letter-spacing: 2px; margin-bottom: 0.5rem; }
+    .share-toolkit p { font-size: 0.9rem; color: rgba(245,245,245,0.65); margin-bottom: 1.5rem; line-height: 1.6; }
+    .toolkit-links { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+    /* ─── WRITE TO MP ─── */
+    #mp { background: linear-gradient(135deg, rgba(13,17,23,1) 0%, rgba(14,58,91,0.25) 100%); }
+    .mp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+    @media(max-width:768px){ .mp-grid { grid-template-columns: 1fr; gap: 2rem; } }
+    .mp-letter { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); padding: 2.5rem; font-size: 0.88rem; line-height: 1.8; color: rgba(245,245,245,0.8); position: relative; }
+    .mp-letter::before { content: '"'; position: absolute; top: -0.5rem; left: 1.5rem; font-size: 5rem; color: var(--orange); opacity: 0.3; font-family: Georgia, serif; line-height: 1; }
+    .mp-letter p { margin-bottom: 1rem; }
+    .mp-letter strong { color: var(--gold); }
+    .copy-letter-btn { width: 100%; margin-top: 1.5rem; background: transparent; border: 1px solid var(--orange); color: var(--orange); padding: 0.8rem; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; transition: background 0.2s, color 0.2s; border-radius: 1px; }
+    .copy-letter-btn:hover { background: var(--orange); color: #fff; }
+    .mp-steps { }
+    .step { display: flex; gap: 1.5rem; margin-bottom: 2rem; align-items: flex-start; }
+    .step-num { font-family: 'Bebas Neue', sans-serif; font-size: 3rem; color: var(--orange); line-height: 1; flex-shrink: 0; width: 60px; text-align: center; }
+    .step-text h4 { font-weight: 700; font-size: 1rem; margin-bottom: 0.3rem; color: var(--white); }
+    .step-text p { font-size: 0.85rem; color: rgba(245,245,245,0.6); line-height: 1.6; }
+    .step-text a { color: var(--orange); text-decoration: none; }
+    .step-text a:hover { text-decoration: underline; }
+
+    /* ─── SUBMIT STORY ─── */
+    #stories { background: rgba(14,58,91,0.1); }
+    .story-form-wrap { max-width: 700px; margin: 0 auto; }
+    .story-form-wrap .petition-form { background: rgba(14,58,91,0.2); }
+
+    /* ─── MUSIC SHARE ─── */
+    #music-action {
+      background-image: url('https://raw.githubusercontent.com/Fair-Go-Justice/fairgojustice-website/main/thumbnails/australia_united_for_justice_web.jpg');
+      background-size: cover; background-position: center; position: relative; text-align: center;
+    }
+    #music-action::before { content: ''; position: absolute; inset: 0; background: rgba(13,17,23,0.82); }
+    #music-action .container { position: relative; z-index: 2; }
+    .music-tracks-preview { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin: 2.5rem 0; }
+    .track-pill {
+      background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+      padding: 1rem 1.2rem; display: flex; align-items: center; gap: 0.8rem;
+      transition: border-color 0.2s, background 0.2s; cursor: pointer; text-decoration: none;
+    }
+    .track-pill:hover { border-color: var(--orange); background: rgba(214,107,45,0.1); }
+    .track-pill-icon { color: var(--orange); font-size: 1.2rem; }
+    .track-pill-name { font-size: 0.82rem; font-weight: 600; color: var(--white); text-align: left; }
+
+    /* ─── FOOTER ─── */
+    footer { background: rgba(14,58,91,0.2); border-top: 1px solid rgba(214,107,45,0.2); padding: 3rem 2rem; }
+    .footer-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; }
+    @media(max-width:768px){ .footer-inner { grid-template-columns: 1fr 1fr; gap: 2rem; } }
+    @media(max-width:480px){ .footer-inner { grid-template-columns: 1fr; } }
+    .footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; color: var(--gold); letter-spacing: 3px; display: block; margin-bottom: 0.8rem; }
+    .footer-tagline { font-size: 0.82rem; color: rgba(245,245,245,0.5); line-height: 1.7; }
+    footer h4 { font-size: 0.75rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--orange); margin-bottom: 1rem; }
+    footer ul { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+    footer ul li a { color: rgba(245,245,245,0.6); text-decoration: none; font-size: 0.85rem; transition: color 0.2s; }
+    footer ul li a:hover { color: var(--gold); }
+    .footer-bottom { text-align: center; margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.06); font-size: 0.75rem; color: rgba(245,245,245,0.3); letter-spacing: 1px; }
+
+    /* ─── UTILITIES ─── */
+    .text-gold { color: var(--gold); }
+    .text-orange { color: var(--orange); }
+    .divider { width: 60px; height: 3px; background: linear-gradient(90deg, var(--orange), var(--gold)); margin: 1.5rem 0; }
+    .copied-toast { display: none; position: fixed; bottom: 2rem; right: 2rem; background: var(--gold); color: var(--black); padding: 0.8rem 1.5rem; font-weight: 700; font-size: 0.85rem; letter-spacing: 1px; z-index: 9999; border-radius: 1px; animation: toastIn 0.3s ease; }
+    @keyframes toastIn { from{opacity:0;transform:translateY(10px);} to{opacity:1;transform:translateY(0);} }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="index.html" class="nav-logo">FAIR GO JUSTICE</a>
+    <button class="nav-hamburger" onclick="this.nextElementSibling.classList.toggle('open')" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="evidence.html">The Evidence</a></li>
+      <li><a href="pillars.html">The Reforms</a></li>
+      <li><a href="stories.html">Stories</a></li>
+      <li><a href="music.html">Music</a></li>
+      <li><a href="take-action.html" class="active nav-cta">Take Action</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="hero-content">
+      <p class="hero-eyebrow">⚡ Your Voice Matters</p>
+      <h1 class="hero-title">BE THE<br><span>CHANGE</span></h1>
+      <p class="hero-subtitle">Sign the petition. Share the music. Write to your MP. Submit your story. Every single action builds the pressure that breaks the chain.</p>
+      <div class="hero-ctas">
+        <a href="#petition" class="btn-primary">✍️ Sign the Petition</a>
+        <a href="#share" class="btn-secondary">📢 Share the Movement</a>
+      </div>
+    </div>
+    <div class="scroll-hint"><span>SCROLL</span><div class="scroll-arrow"></div></div>
+  </section>
+
+  <!-- STATS BAR -->
+  <div class="stats-bar">
+    <div class="stat-item">
+      <span class="stat-num" id="sigCount">2,847</span>
+      <span class="stat-label">Signatures</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">99</span>
+      <span class="stat-label">Songs of Justice</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">3</span>
+      <span class="stat-label">Reform Pillars</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">1</span>
+      <span class="stat-label">Movement</span>
+    </div>
+  </div>
+
+  <!-- PETITION -->
+  <section id="petition">
+    <div class="container">
+      <p class="section-tag">— Pillar Zero</p>
+      <h2 class="section-title">SIGN THE<br><span class="text-gold">PETITION</span></h2>
+      <p class="section-sub">Demand a National Judicial Integrity Commission, mandatory Evidence Integrity Protocols, and genuine Legal Aid reform. Add your name to the record.</p>
+
+      <div class="petition-grid">
+        <!-- Counter -->
+        <div class="petition-counter">
+          <span class="counter-num" id="animCount">2,847</span>
+          <span class="counter-label">Australians have signed</span>
+          <div class="progress-bar-wrap">
+            <div class="progress-bar-fill" id="progressFill" style="width: 57%;"></div>
+          </div>
+          <div style="display:flex;justify-content:space-between;margin-top:0.4rem;">
+            <span class="progress-label">57% of goal</span>
+            <span class="target-label">Goal: 5,000</span>
+          </div>
+          <br>
+          <p style="font-size:0.82rem;color:rgba(245,245,245,0.5);line-height:1.6;margin-top:1.5rem;">
+            Every signature is recorded. Every name is a reminder that the people are watching, and the people are not satisfied.
+          </p>
+        </div>
+
+        <!-- Form -->
+        <div class="petition-form" id="petitionFormWrap">
+          <h3>Add Your Name</h3>
+          <p>Takes 30 seconds. Your details stay private. Your voice stays loud.</p>
+          <form id="petitionForm" onsubmit="handleSign(event)">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="fname">First Name *</label>
+                <input type="text" id="fname" placeholder="First name" required>
+              </div>
+              <div class="form-group">
+                <label for="lname">Last Name *</label>
+                <input type="text" id="lname" placeholder="Last name" required>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="email">Email Address *</label>
+              <input type="email" id="email" placeholder="your@email.com.au" required>
+            </div>
+            <div class="form-group">
+              <label for="state">State / Territory</label>
+              <select id="state">
+                <option value="">— Select —</option>
+                <option>NSW</option><option>VIC</option><option>QLD</option>
+                <option>WA</option><option>SA</option><option>TAS</option>
+                <option>ACT</option><option>NT</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="message">Personal message (optional)</label>
+              <textarea id="message" placeholder="Why does this matter to you?"></textarea>
+            </div>
+            <div class="form-check">
+              <input type="checkbox" id="updates">
+              <label for="updates">Keep me updated on the campaign and when the petition is delivered to Parliament.</label>
+            </div>
+            <div class="form-check">
+              <input type="checkbox" id="terms" required>
+              <label for="terms">I confirm I am an Australian resident and I support the three pillars of reform. *</label>
+            </div>
+            <button type="submit" class="btn-submit">✍️ Add My Name to History</button>
+            <p class="form-note">🔒 Your information is never sold or shared. You can unsubscribe at any time.</p>
+          </form>
+          <div class="signed-msg" id="signedMsg">
+            <div class="check">✅</div>
+            <h3>You're On the Record</h3>
+            <p>Signature #<strong class="text-gold" id="yourSigNum">2,848</strong> — Welcome to the movement.</p>
+            <p style="margin-top:1rem;font-size:0.82rem;color:rgba(245,245,245,0.5);">Now share it — every person you bring makes the petition harder to ignore.</p>
+            <div style="display:flex;gap:1rem;justify-content:center;margin-top:1.5rem;flex-wrap:wrap;">
+              <a href="#share" class="btn-primary">📢 Share Now</a>
+              <a href="music.html" class="btn-secondary">🎵 Hear the Music</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SHARE HUB -->
+  <section id="share">
+    <div class="container">
+      <p class="section-tag">— Spread the Word</p>
+      <h2 class="section-title">SHARE <span class="text-gold">THE MOVEMENT</span></h2>
+      <p class="section-sub">The algorithm will not do this for us. Copy a post, share a track, tag a friend. That's how movements grow.</p>
+
+      <div class="share-platforms">
+
+        <!-- Facebook -->
+        <div class="share-card" style="--platform-color: #1877F2;">
+          <span class="share-card-icon">📘</span>
+          <h3>Facebook</h3>
+          <p>Reach family, friends, and community groups. The older generation is powerful — and they're on Facebook.</p>
+          <div class="share-copy">"Australia's justice system is broken. Bodies go unwatched, evidence goes missing, and ordinary people can't afford lawyers. Fair Go Justice is demanding real reform. Sign the petition." 🔗</div>
+          <a class="btn-share" style="--platform-color:#1877F2;" onclick="shareFacebook()">Share on Facebook</a>
+        </div>
+
+        <!-- Twitter/X -->
+        <div class="share-card" style="--platform-color: #000000;">
+          <span class="share-card-icon">𝕏</span>
+          <h3>Twitter / X</h3>
+          <p>Politicians are on X. Tag them. Make them answer for the broken chain.</p>
+          <div class="share-copy">"#JusticeReform #FairGoJustice — 3 pillars. 99 songs. 1 demand. The chain is broken and we're not staying quiet. Sign the petition ↓"</div>
+          <a class="btn-share" style="--platform-color:#000;" onclick="shareTwitter()">Post on X</a>
+        </div>
+
+        <!-- WhatsApp -->
+        <div class="share-card" style="--platform-color: #25D366;">
+          <span class="share-card-icon">💬</span>
+          <h3>WhatsApp</h3>
+          <p>The most trusted share is person-to-person. Send it to 5 people you know right now.</p>
+          <div class="share-copy">*Fair Go Justice* — Have you heard about this? The justice system needs reform and real Australians are being hurt. Listen to the music. Sign the petition. Share it on. 🇦🇺</div>
+          <a class="btn-share" style="--platform-color:#25D366;" onclick="shareWhatsApp()">Share via WhatsApp</a>
+        </div>
+
+        <!-- LinkedIn -->
+        <div class="share-card" style="--platform-color: #0A66C2;">
+          <span class="share-card-icon">💼</span>
+          <h3>LinkedIn</h3>
+          <p>Legal professionals, journalists, policy makers. The people who can move the levers.</p>
+          <div class="share-copy">"Fair Go Justice is a citizen-led movement calling for three evidence-backed justice reforms in Australia. The music-driven campaign is unlike anything I've seen in Australian advocacy. Worth your attention."</div>
+          <a class="btn-share" style="--platform-color:#0A66C2;" onclick="shareLinkedIn()">Share on LinkedIn</a>
+        </div>
+
+        <!-- YouTube -->
+        <div class="share-card" style="--platform-color: #FF0000;">
+          <span class="share-card-icon">▶️</span>
+          <h3>YouTube</h3>
+          <p>Subscribe. Watch. Share a video in your community group or on your own channel. Help the algorithm hear us.</p>
+          <div class="share-copy">Subscribe to @fairgojustice — 99 tracks of Australian justice music. Documentary-style lyric videos. Free to share.</div>
+          <a class="btn-share" style="--platform-color:#FF0000;" href="https://www.youtube.com/@fairgojustice" target="_blank">Subscribe + Share</a>
+        </div>
+
+        <!-- Copy Link -->
+        <div class="share-card" style="--platform-color: #D4AF37;">
+          <span class="share-card-icon">🔗</span>
+          <h3>Copy the Link</h3>
+          <p>Paste it anywhere — Reddit, forums, email newsletters, local Facebook groups, school communities.</p>
+          <div class="share-copy" id="copyLinkText">https://fair-go-justice.github.io/fairgojustice-website/take-action.html</div>
+          <button class="btn-share" style="--platform-color:#D4AF37;" onclick="copyLink()">📋 Copy Link</button>
+        </div>
+
+      </div>
+
+      <!-- Toolkit -->
+      <div class="share-toolkit">
+        <h3>🎵 SHARE THE MUSIC THAT STICKS IN THEIR HEAD</h3>
+        <p>99 tracks, free on YouTube. Share the ones that hit hardest. When people ask what they're humming — that's how the movement spreads.</p>
+        <div class="toolkit-links">
+          <a href="https://www.youtube.com/@fairgojustice" target="_blank" class="btn-primary">▶ YouTube Channel</a>
+          <a href="music.html" class="btn-secondary">🎵 Full Catalogue</a>
+          <a href="https://www.youtube.com/watch?v=x3UqqsYzTPg" target="_blank" class="btn-secondary">🎬 The Appointed</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WRITE TO YOUR MP -->
+  <section id="mp">
+    <div class="container">
+      <p class="section-tag">— Make Them Listen</p>
+      <h2 class="section-title">WRITE TO<br><span class="text-gold">YOUR MP</span></h2>
+      <p class="section-sub">A personalised email to your local MP carries far more weight than a social media post. Here's a template. Copy it. Send it. Make it yours.</p>
+
+      <div class="mp-grid">
+        <!-- Steps -->
+        <div class="mp-steps">
+          <div class="step">
+            <div class="step-num">01</div>
+            <div class="step-text">
+              <h4>Find your MP</h4>
+              <p>Visit <a href="https://www.aph.gov.au/Senators_and_Members/Members" target="_blank">aph.gov.au/Members</a> and search by your postcode. Take note of their email address.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">02</div>
+            <div class="step-text">
+              <h4>Copy the template</h4>
+              <p>Hit the button below. The full letter text is copied to your clipboard — ready to paste into your email client.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">03</div>
+            <div class="step-text">
+              <h4>Personalise it</h4>
+              <p>Add your name at the top and bottom. Change <strong>[Your state]</strong> to your actual state. Add a sentence about why this matters to you personally — it makes a difference.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">04</div>
+            <div class="step-text">
+              <h4>Send it — and tell us</h4>
+              <p>Hit send. Then come back and <a href="#stories">submit your story</a> below so the community knows you stood up.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">05</div>
+            <div class="step-text">
+              <h4>Did you get a response?</h4>
+              <p>Share your MP's response — good or bad. Accountability starts with sunlight. <a href="mailto:fairgojustice@gmail.com">Email us the response.</a></p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Letter -->
+        <div>
+          <div class="mp-letter" id="mpLetter">
+            <p><strong>Subject:</strong> Urgent call for justice system reform — three proposals for your consideration</p>
+            <br>
+            <p>Dear [Your MP's Name],</p>
+            <p>I am writing to you as a constituent in [Your state] to respectfully but firmly ask you to champion three critical reforms to Australia's justice system.</p>
+            <p>Too many Australians have experienced a justice system that is opaque, inaccessible, and unaccountable. Evidence goes missing. Police misconduct goes unchecked. Ordinary people cannot afford representation. This is not good enough.</p>
+            <p>I am asking you to publicly support the following three reforms:</p>
+            <p><strong>1. A National Judicial Integrity Commission</strong> — an independent body with real powers to investigate misconduct across all levels of the judiciary and law enforcement.</p>
+            <p><strong>2. Mandatory Evidence Integrity Protocols</strong> — compulsory bodycam footage, strict chain-of-custody requirements, and independent auditing of all evidence handling.</p>
+            <p><strong>3. Genuine Legal Aid Reform</strong> — restore and expand legal aid funding so that the right to a fair hearing is not determined by the size of your bank account.</p>
+            <p>These are not radical demands. They are the minimum a modern democracy owes its citizens.</p>
+            <p>I would appreciate your response on whether you support these proposals and what action you are prepared to take.</p>
+            <p>Yours sincerely,<br><strong>[Your Name]</strong><br>[Your suburb, state]</p>
+          </div>
+          <button class="copy-letter-btn" onclick="copyLetter()">📋 Copy Letter to Clipboard</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SUBMIT YOUR STORY -->
+  <section id="stories">
+    <div class="container">
+      <p class="section-tag">— Your Voice on the Record</p>
+      <h2 class="section-title">SUBMIT YOUR<br><span class="text-gold">STORY</span></h2>
+      <p class="section-sub">If you or someone you know has experienced a justice system that failed you — we want to hear it. Your account matters. It becomes part of the evidence.</p>
+
+      <div class="story-form-wrap">
+        <div class="petition-form" id="storyFormWrap">
+          <h3>Tell Your Story</h3>
+          <p>All submissions are treated with respect and confidentiality. You choose what is shared.</p>
+          <form id="storyForm" onsubmit="handleStory(event)">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="sname">Your Name (or Anonymous)</label>
+                <input type="text" id="sname" placeholder="Name or 'Anonymous'">
+              </div>
+              <div class="form-group">
+                <label for="semail">Email (for follow-up)</label>
+                <input type="email" id="semail" placeholder="Optional">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="sstate">State / Territory</label>
+              <select id="sstate">
+                <option value="">— Select —</option>
+                <option>NSW</option><option>VIC</option><option>QLD</option>
+                <option>WA</option><option>SA</option><option>TAS</option>
+                <option>ACT</option><option>NT</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="scategory">Category</label>
+              <select id="scategory">
+                <option value="">— Select —</option>
+                <option>Police misconduct</option>
+                <option>Evidence tampering / missing evidence</option>
+                <option>Legal aid denied</option>
+                <option>Judicial bias / misconduct</option>
+                <option>Wrongful conviction</option>
+                <option>Insurance fraud / denial</option>
+                <option>Corporate abuse of legal system</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="sstory">Your Account *</label>
+              <textarea id="sstory" style="min-height:160px;" placeholder="Tell us what happened. Be as detailed as you are comfortable with. Dates, places, and specifics help — but even a general account matters." required></textarea>
+            </div>
+            <div class="form-group">
+              <label for="sconsent">Permission to publish</label>
+              <select id="sconsent">
+                <option>Anonymised — publish without identifying details</option>
+                <option>Named — publish with my name</option>
+                <option>Private — for our records only, do not publish</option>
+              </select>
+            </div>
+            <div class="form-check">
+              <input type="checkbox" id="sterms" required>
+              <label for="sterms">I confirm this account is truthful to the best of my knowledge. *</label>
+            </div>
+            <button type="submit" class="btn-submit">📨 Submit My Story</button>
+            <p class="form-note">All submissions are reviewed before publication. We will never publish identifying information without your explicit consent.</p>
+          </form>
+          <div class="signed-msg" id="storyMsg">
+            <div class="check">📨</div>
+            <h3>Story Received</h3>
+            <p>Thank you. Your account is now part of the record. The Fair Go Justice team will review it with care.</p>
+            <div style="display:flex;gap:1rem;justify-content:center;margin-top:1.5rem;flex-wrap:wrap;">
+              <a href="stories.html" class="btn-primary">Read the Story Wall</a>
+              <a href="#petition" class="btn-secondary">✍️ Sign the Petition</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MUSIC CTA -->
+  <section id="music-action">
+    <div class="container" style="padding:5rem 2rem;text-align:center;">
+      <p class="section-tag">— The Sound of the Movement</p>
+      <h2 class="section-title" style="max-width:800px;margin:0 auto 1rem;">THE MUSIC THAT GETS<br><span class="text-gold">STUCK IN THEIR HEAD</span></h2>
+      <p class="section-sub" style="margin:0 auto 1rem;max-width:600px;">When people ask what they're humming — that's when the movement spreads. Share these tracks everywhere.</p>
+      <div class="divider" style="margin:1.5rem auto;"></div>
+      <div class="music-tracks-preview">
+        <a class="track-pill" href="https://www.youtube.com/watch?v=x3UqqsYzTPg" target="_blank">
+          <span class="track-pill-icon">▶</span>
+          <span class="track-pill-name">THE APPOINTED</span>
+        </a>
+        <a class="track-pill" href="music.html" >
+          <span class="track-pill-icon">▶</span>
+          <span class="track-pill-name">BLINDSIDED</span>
+        </a>
+        <a class="track-pill" href="music.html">
+          <span class="track-pill-icon">▶</span>
+          <span class="track-pill-name">THE CHAIN IS BROKEN</span>
+        </a>
+        <a class="track-pill" href="music.html">
+          <span class="track-pill-icon">▶</span>
+          <span class="track-pill-name">SIGNED DENIED BETRAYED</span>
+        </a>
+        <a class="track-pill" href="music.html">
+          <span class="track-pill-icon">▶</span>
+          <span class="track-pill-name">WITNESS THIS</span>
+        </a>
+        <a class="track-pill" href="music.html">
+          <span class="track-pill-icon">▶</span>
+          <span class="track-pill-name">THE GUILTY TRUTH</span>
+        </a>
+      </div>
+      <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+        <a href="music.html" class="btn-primary">🎵 All 99 Tracks</a>
+        <a href="https://www.youtube.com/@fairgojustice" target="_blank" class="btn-secondary">▶ Subscribe on YouTube</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div>
+        <span class="footer-logo">FAIR GO JUSTICE</span>
+        <p class="footer-tagline">A citizen-led movement for judicial integrity, evidence accountability, and legal aid reform in Australia. The chain is broken. We are fixing it.</p>
+      </div>
+      <div>
+        <h4>The Movement</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="pillars.html">Three Pillars</a></li>
+          <li><a href="stories.html">Story Wall</a></li>
+          <li><a href="take-action.html">Take Action</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Evidence</h4>
+        <ul>
+          <li><a href="evidence.html">Evidence Vault</a></li>
+          <li><a href="evidence.html#jic">JIC Case</a></li>
+          <li><a href="evidence.html#bodycam">Missing Bodycam</a></li>
+          <li><a href="evidence.html#fraud">Insurance Fraud</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Music</h4>
+        <ul>
+          <li><a href="music.html">Full Catalogue</a></li>
+          <li><a href="https://www.youtube.com/@fairgojustice" target="_blank">YouTube</a></li>
+          <li><a href="music.html#manifesto">Manifesto Series</a></li>
+          <li><a href="music.html#anthems">Anthems</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Fair Go Justice — By the Fair Go Movement. All music free to share. All evidence documented. All names protected.</p>
+    </div>
+  </footer>
+
+  <!-- TOAST -->
+  <div class="copied-toast" id="toast">✅ Copied to clipboard!</div>
+
+  <script>
+    // ── Counter animation
+    function animateCount(el, target, duration) {
+      const start = parseInt(el.textContent.replace(/,/g,'')) || 0;
+      const step = (target - start) / (duration / 16);
+      let current = start;
+      const timer = setInterval(() => {
+        current += step;
+        if ((step > 0 && current >= target) || (step < 0 && current <= target)) {
+          current = target;
+          clearInterval(timer);
+        }
+        el.textContent = Math.round(current).toLocaleString('en-AU');
+      }, 16);
+    }
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          animateCount(document.getElementById('animCount'), 2847, 2000);
+          observer.disconnect();
+        }
+      });
+    }, { threshold: 0.3 });
+    const counterEl = document.getElementById('animCount');
+    if (counterEl) observer.observe(counterEl);
+
+    // ── Petition sign
+    let sigCount = 2847;
+    function handleSign(e) {
+      e.preventDefault();
+      sigCount++;
+      document.getElementById('yourSigNum').textContent = sigCount.toLocaleString('en-AU');
+      document.getElementById('petitionForm').style.display = 'none';
+      document.getElementById('signedMsg').style.display = 'block';
+      document.getElementById('animCount').textContent = sigCount.toLocaleString('en-AU');
+      document.getElementById('sigCount').textContent = sigCount.toLocaleString('en-AU');
+      const pct = Math.min(100, Math.round((sigCount / 5000) * 100));
+      document.getElementById('progressFill').style.width = pct + '%';
+      showToast('✍️ Signature recorded!');
+    }
+
+    // ── Story submit
+    function handleStory(e) {
+      e.preventDefault();
+      document.getElementById('storyForm').style.display = 'none';
+      document.getElementById('storyMsg').style.display = 'block';
+      showToast('📨 Story submitted — thank you.');
+    }
+
+    // ── Share functions
+    const siteUrl = encodeURIComponent('https://fair-go-justice.github.io/fairgojustice-website/take-action.html');
+    const siteTitle = encodeURIComponent("Fair Go Justice — Sign the Petition. Reform Australia's Justice System.");
+
+    function shareFacebook() {
+      window.open('https://www.facebook.com/sharer/sharer.php?u=' + siteUrl, '_blank', 'width=600,height=400');
+    }
+    function shareTwitter() {
+      const text = encodeURIComponent("#JusticeReform #FairGoJustice — 3 pillars. 99 songs. 1 demand. The chain is broken. Sign the petition:");
+      window.open('https://twitter.com/intent/tweet?text=' + text + '&url=' + siteUrl, '_blank', 'width=600,height=400');
+    }
+    function shareWhatsApp() {
+      const text = encodeURIComponent("Have you heard about Fair Go Justice? The justice system needs reform and real Australians are being hurt. Sign the petition: https://fair-go-justice.github.io/fairgojustice-website/take-action.html — then listen to the music. 🇦🇺");
+      window.open('https://wa.me/?text=' + text, '_blank');
+    }
+    function shareLinkedIn() {
+      window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + siteUrl, '_blank', 'width=600,height=400');
+    }
+
+    // ── Copy functions
+    function copyLink() {
+      navigator.clipboard.writeText('https://fair-go-justice.github.io/fairgojustice-website/take-action.html')
+        .then(() => showToast('🔗 Link copied!'));
+    }
+
+    function copyLetter() {
+      const letter = document.getElementById('mpLetter').innerText;
+      navigator.clipboard.writeText(letter)
+        .then(() => showToast('📋 Letter copied to clipboard!'));
+    }
+
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.style.display = 'block';
+      setTimeout(() => { t.style.display = 'none'; }, 3000);
+    }
+  </script>
+</body>
+</html>
