@@ -206,6 +206,15 @@
       content:""; position:absolute; right:-50px; bottom:-70px; width:160px; height:160px;
       background:rgba(214,107,45,.11); border-radius:50%; filter:blur(2px);
     }
+    /* === SCANNER HOVER EFFECT === */
+    .card::before{
+      content:""; position:absolute; top:0; left:-100%; width:100%; height:100%;
+      background:linear-gradient(90deg, transparent, rgba(212,175,55,.13), transparent);
+      pointer-events:none; z-index:4; transition:none;
+    }
+    .card:hover{border-color:rgba(212,175,55,.38); box-shadow:0 0 24px rgba(212,175,55,.18), var(--shadow)}
+    .card:hover::before{animation:scanBeam 1.4s linear infinite}
+    @keyframes scanBeam{0%{left:-100%}100%{left:100%}}
     .num{font-family:'Bebas Neue', sans-serif; font-size:clamp(38px,4.5vw,72px); color:var(--gold); line-height:1; letter-spacing:.02em}
     .label{text-transform:uppercase; letter-spacing:.12em; color:#9eaabb; font-weight:700; font-size:11px; margin-top:4px}
 
@@ -250,7 +259,16 @@
     .chain-link:first-child::before{display:none}
     .chain-link.warn{border-color:rgba(214,107,45,.72); background:linear-gradient(180deg,rgba(214,107,45,.14),rgba(255,255,255,.025))}
     .chain-link.bad{border-color:rgba(207,46,46,.90); background:linear-gradient(180deg,rgba(207,46,46,.16),rgba(255,255,255,.025))}
+    .chain-link{overflow:hidden}
+    .chain-link::after{
+      content:""; position:absolute; top:0; left:-100%; width:100%; height:100%;
+      background:linear-gradient(90deg, transparent, rgba(70,217,255,.12), transparent);
+      pointer-events:none; z-index:4;
+    }
     .chain-link:hover,.chain-link.active{transform:translateY(-5px); box-shadow:0 18px 60px rgba(0,0,0,.44)}
+    .chain-link:hover::after{animation:scanBeam 1.2s linear infinite}
+    .chain-link.bad:hover::after{background:linear-gradient(90deg, transparent, rgba(207,46,46,.18), transparent)}
+    .chain-link.warn:hover::after{background:linear-gradient(90deg, transparent, rgba(214,107,45,.16), transparent)}
     .chain-link h3{font-family:'Space Grotesk', sans-serif; text-transform:uppercase; margin:10px 0 6px; font-size:14px; font-weight:700}
     .chain-link p{color:#8fa0b2; font-size:12px; margin:0}
     .status{font-size:10px; text-transform:uppercase; letter-spacing:.14em; color:var(--gold); font-weight:700}
