@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chain of Custody — Full Forensic Exhibit | Fair Go Justice</title>
+  <meta name="description" content="The full forensic chain of custody exhibit — every stage, every requirement, every failure point documented and explained." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#05070b;
+      --panel:#0d1117;
+      --ink:#f5f5f5;
+      --muted:#aab2bd;
+      --blue:#0e3a5b;
+      --orange:#d66b2d;
+      --gold:#d4af37;
+      --red:#d13b35;
+      --cyan:#46d9ff;
+      --green:#27ae60;
+      --border:rgba(245,245,245,.14);
+      --shadow:0 20px 80px rgba(0,0,0,.65);
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:'Space Grotesk', Inter, system-ui, sans-serif;
+      background:var(--bg);
+      color:var(--ink);
+      overflow-x:hidden;
+    }
+
+    body::before{
+      content:"";
+      position:fixed; inset:0;
+      background:
+        linear-gradient(rgba(255,255,255,.018) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.018) 1px, transparent 1px);
+      background-size:42px 42px;
+      opacity:.3;
+      pointer-events:none;
+      z-index:0;
+    }
+
+    .noise{
+      position:fixed; inset:0; z-index:1; pointer-events:none; opacity:.06;
+      background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='.7'/%3E%3C/svg%3E");
+    }
+
+    .wrap{position:relative; z-index:2}
+
+    /* ── SITE NAV ── */
+    .site-nav{
+      position:fixed; top:0; left:0; right:0; z-index:200;
+      background:rgba(5,7,11,.90); backdrop-filter:blur(18px);
+      border-bottom:1px solid rgba(212,175,55,.12);
+      padding:10px 28px; display:flex; align-items:center; justify-content:space-between;
+    }
+    .site-nav-brand{
+      font-family:'Bebas Neue',sans-serif; font-size:22px; letter-spacing:.18em;
+      color:var(--gold); text-decoration:none;
+    }
+    .site-nav-links{display:flex; gap:6px; align-items:center}
+    .site-nav-links a{
+      color:rgba(245,245,245,.6); text-decoration:none; font-size:12px;
+      letter-spacing:.15em; text-transform:uppercase; padding:7px 13px;
+      border-radius:999px; transition:.2s ease;
+    }
+    .site-nav-links a:hover{color:var(--gold); background:rgba(212,175,55,.06)}
+    .site-nav-cta{
+      font-family:'Bebas Neue',sans-serif; font-size:15px; letter-spacing:.15em;
+      background:var(--gold); color:#000; text-decoration:none;
+      padding:8px 20px; border-radius:999px; transition:.2s ease;
+    }
+    .site-nav-cta:hover{background:#e8c94a}
+    @media(max-width:768px){
+      .site-nav-links{display:none}
+      .site-nav{padding:10px 16px}
+    }
+
+    /* ── HERO ── */
+    .exhibit-hero{
+      min-height:70vh; display:flex; flex-direction:column;
+      align-items:center; justify-content:center; text-align:center;
+      padding:120px 24px 60px;
+      background:
+        radial-gradient(circle at 50% 0%, rgba(209,59,53,.14), transparent 30%),
+        radial-gradient(circle at 80% 80%, rgba(212,175,55,.06), transparent 30%),
+        var(--bg);
+      position:relative; overflow:hidden;
+    }
+    .exhibit-hero::before{
+      content:"EXHIBIT A-7";
+      position:absolute; top:80px; right:32px;
+      font-family:'Bebas Neue',sans-serif; font-size:13px; letter-spacing:.5em;
+      color:rgba(212,175,55,.25);
+    }
+    .exhibit-eyebrow{
+      font-family:'Space Grotesk',sans-serif; font-size:12px; letter-spacing:.5em;
+      color:rgba(212,175,55,.6); text-transform:uppercase; margin-bottom:16px;
+    }
+    .exhibit-hero h1{
+      font-family:'Bebas Neue',sans-serif;
+      font-size:clamp(42px,9vw,120px); line-height:.9;
+      letter-spacing:.04em; text-transform:uppercase; margin:0 0 20px;
+      text-shadow:0 0 60px rgba(209,59,53,.2);
+    }
+    .exhibit-hero-sub{
+      font-size:clamp(16px,2vw,22px); max-width:720px; color:#c9d0d8;
+      line-height:1.5; margin-bottom:36px;
+    }
+    .integrity-status{
+      display:inline-flex; align-items:center; gap:24px;
+      background:rgba(0,0,0,.5); border:1px solid var(--border);
+      border-radius:16px; padding:16px 28px; flex-wrap:wrap; justify-content:center;
+    }
+    .is-item{text-align:center}
+    .is-num{
+      font-family:'Bebas Neue',sans-serif; font-size:36px; line-height:1;
+      display:block;
+    }
+    .is-num.gold{color:var(--gold)}
+    .is-num.red{color:var(--red)}
+    .is-num.orange{color:var(--orange)}
+    .is-label{font-size:11px; letter-spacing:.18em; color:rgba(245,245,245,.4); text-transform:uppercase}
+    .is-divider{width:1px; height:40px; background:rgba(245,245,245,.1)}
+
+    /* ── BREADCRUMB ── */
+    .breadcrumb{
+      padding:16px 28px; display:flex; align-items:center; gap:10px;
+      font-size:13px; color:rgba(245,245,245,.4); letter-spacing:.08em;
+    }
+    .breadcrumb a{color:var(--gold); text-decoration:none}
+    .breadcrumb a:hover{text-decoration:underline}
+
+    /* ── CHAIN EXHIBIT ── */
+    .chain-exhibit{
+      max-width:980px; margin:0 auto; padding:40px 24px 80px;
+    }
+    .exhibit-intro{
+      background:rgba(255,255,255,.03); border:1px solid var(--border);
+      border-radius:20px; padding:28px 32px; margin-bottom:48px;
+    }
+    .exhibit-intro h2{
+      font-family:'Bebas Neue',sans-serif; font-size:28px; letter-spacing:.08em;
+      color:var(--gold); margin-bottom:12px;
+    }
+    .exhibit-intro p{color:#c9d0d8; line-height:1.7; font-size:15px}
+
+    /* Chain vertical layout */
+    .chain-vertical{position:relative; padding:0 0 40px}
+    .chain-vertical::before{
+      content:""; position:absolute; left:32px; top:0; bottom:0;
+      width:2px; background:linear-gradient(to bottom, var(--gold), rgba(212,175,55,.15));
+      z-index:0;
+    }
+
+    .stage{
+      position:relative; margin-bottom:12px; padding-left:80px;
+    }
+    .stage-connector{
+      position:absolute; left:22px; top:32px;
+      width:46px; height:2px; z-index:1;
+    }
+    .stage-connector.gold{background:linear-gradient(to right, var(--gold), rgba(212,175,55,.5))}
+    .stage-connector.red{background:var(--red); box-shadow:0 0 8px var(--red); animation:pulseLine 1.5s infinite}
+    .stage-connector.orange{background:var(--orange)}
+    @keyframes pulseLine{0%,100%{opacity:.6} 50%{opacity:1}}
+
+    .stage-node{
+      position:absolute; left:20px; top:28px;
+      width:26px; height:26px; border-radius:50%;
+      display:flex; align-items:center; justify-content:center;
+      font-size:13px; z-index:2; flex-shrink:0;
+    }
+    .stage-node.gold{background:var(--gold); box-shadow:0 0 16px rgba(212,175,55,.5)}
+    .stage-node.red{background:var(--red); box-shadow:0 0 16px rgba(209,59,53,.6); animation:pulseNode 1.5s infinite}
+    .stage-node.orange{background:var(--orange); box-shadow:0 0 16px rgba(214,107,45,.4)}
+    @keyframes pulseNode{0%,100%{box-shadow:0 0 16px rgba(209,59,53,.6)} 50%{box-shadow:0 0 32px rgba(209,59,53,.9), 0 0 60px rgba(209,59,53,.3)}}
+
+    .stage-card{
+      border:2px solid; border-radius:20px; padding:0;
+      overflow:hidden; transition:.3s ease; cursor:pointer;
+    }
+    .stage-card.gold{border-color:rgba(212,175,55,.35); background:rgba(212,175,55,.04)}
+    .stage-card.gold:hover{border-color:var(--gold); box-shadow:0 0 40px rgba(212,175,55,.12)}
+    .stage-card.red{border-color:rgba(209,59,53,.5); background:rgba(209,59,53,.06); animation:pulseBorder 2s infinite}
+    @keyframes pulseBorder{0%,100%{box-shadow:0 0 10px rgba(209,59,53,.15)} 50%{box-shadow:0 0 30px rgba(209,59,53,.4), 0 0 60px rgba(209,59,53,.1)}}
+    .stage-card.orange{border-color:rgba(214,107,45,.45); background:rgba(214,107,45,.05)}
+    .stage-card.orange:hover{border-color:var(--orange); box-shadow:0 0 30px rgba(214,107,45,.1)}
+
+    .stage-header{
+      padding:20px 24px; display:flex; align-items:center; gap:16px;
+    }
+    .stage-num{
+      font-family:'Bebas Neue',sans-serif; font-size:32px; line-height:1;
+      opacity:.3; flex-shrink:0; width:40px;
+    }
+    .stage-header-info{flex:1}
+    .stage-title{
+      font-family:'Bebas Neue',sans-serif; font-size:26px; letter-spacing:.06em;
+      text-transform:uppercase; line-height:1; margin-bottom:4px;
+    }
+    .stage-card.gold .stage-title{color:var(--gold)}
+    .stage-card.red .stage-title{color:#ff7777}
+    .stage-card.orange .stage-title{color:var(--orange)}
+    .stage-status-pill{
+      display:inline-block; padding:3px 12px; border-radius:999px;
+      font-size:11px; letter-spacing:.18em; font-weight:700; text-transform:uppercase;
+    }
+    .gold-pill{background:rgba(212,175,55,.15); border:1px solid rgba(212,175,55,.35); color:var(--gold)}
+    .red-pill{background:rgba(209,59,53,.15); border:1px solid rgba(209,59,53,.4); color:#ff8888}
+    .orange-pill{background:rgba(214,107,45,.15); border:1px solid rgba(214,107,45,.35); color:var(--orange)}
+    .stage-toggle{
+      font-size:20px; color:rgba(245,245,245,.3); flex-shrink:0; transition:.3s;
+    }
+    .stage-card.open .stage-toggle{transform:rotate(180deg); color:rgba(245,245,245,.7)}
+
+    .stage-body{
+      display:none; padding:0 24px 24px; border-top:1px solid rgba(255,255,255,.05);
+    }
+    .stage-card.open .stage-body{display:block}
+    .stage-body-intro{
+      padding:16px 0; color:#c9d0d8; line-height:1.7; font-size:15px;
+    }
+
+    .requirements-grid{
+      display:grid; grid-template-columns:1fr 1fr; gap:12px; margin:16px 0;
+    }
+    @media(max-width:600px){.requirements-grid{grid-template-columns:1fr}}
+    .req-card{
+      background:rgba(0,0,0,.3); border:1px solid rgba(255,255,255,.07);
+      border-radius:12px; padding:14px 16px;
+    }
+    .req-card-title{
+      font-size:11px; letter-spacing:.2em; text-transform:uppercase;
+      color:rgba(245,245,245,.4); margin-bottom:8px; font-weight:700;
+    }
+    .req-items{list-style:none; padding:0; margin:0}
+    .req-items li{
+      font-size:13px; color:rgba(245,245,245,.7); padding:3px 0 3px 18px;
+      position:relative;
+    }
+    .req-items li::before{
+      content:'✓'; position:absolute; left:0; font-size:11px;
+      color:var(--green);
+    }
+    .req-items li.fail::before{content:'✗'; color:var(--red)}
+    .req-items li.warn::before{content:'⚠'; color:var(--orange)}
+
+    .failure-alert{
+      background:rgba(209,59,53,.08); border:1px solid rgba(209,59,53,.3);
+      border-radius:12px; padding:16px 20px; margin-top:16px;
+    }
+    .failure-alert-title{
+      font-family:'Bebas Neue',sans-serif; font-size:18px; letter-spacing:.1em;
+      color:var(--red); margin-bottom:8px;
+    }
+    .failure-alert p{font-size:14px; color:rgba(245,245,245,.7); line-height:1.65; margin:0}
+
+    .legal-ref{
+      background:rgba(14,58,91,.15); border:1px solid rgba(14,58,91,.4);
+      border-radius:12px; padding:14px 18px; margin-top:14px;
+    }
+    .legal-ref-title{
+      font-size:11px; letter-spacing:.2em; text-transform:uppercase;
+      color:rgba(70,217,255,.5); margin-bottom:6px; font-weight:700;
+    }
+    .legal-ref p{font-size:13px; color:rgba(245,245,245,.55); line-height:1.6; margin:0}
+
+    /* ── CHAIN SUMMARY ── */
+    .chain-verdict{
+      margin:48px 0; background:rgba(0,0,0,.4); border:1px solid var(--border);
+      border-radius:24px; padding:32px; text-align:center;
+    }
+    .chain-verdict h2{
+      font-family:'Bebas Neue',sans-serif; font-size:clamp(32px,5vw,60px);
+      letter-spacing:.04em; margin-bottom:16px;
+    }
+    .chain-verdict p{color:#c9d0d8; max-width:680px; margin:0 auto 28px; line-height:1.65}
+    .verdict-stats{
+      display:flex; gap:20px; justify-content:center; flex-wrap:wrap; margin-bottom:28px;
+    }
+    .vs-item{text-align:center; padding:16px 24px; border-radius:12px}
+    .vs-item.v-gold{background:rgba(212,175,55,.08); border:1px solid rgba(212,175,55,.25)}
+    .vs-item.v-red{background:rgba(209,59,53,.08); border:1px solid rgba(209,59,53,.25)}
+    .vs-item.v-orange{background:rgba(214,107,45,.08); border:1px solid rgba(214,107,45,.25)}
+    .vs-num{
+      font-family:'Bebas Neue',sans-serif; font-size:44px; line-height:1; display:block;
+    }
+    .v-gold .vs-num{color:var(--gold)}
+    .v-red .vs-num{color:var(--red)}
+    .v-orange .vs-num{color:var(--orange)}
+    .vs-label{font-size:12px; letter-spacing:.15em; text-transform:uppercase; opacity:.6}
+
+    /* ── BTNS ── */
+    .btnrow{display:flex; gap:14px; justify-content:center; flex-wrap:wrap}
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center; gap:10px;
+      padding:13px 22px; border-radius:999px; text-decoration:none; font-weight:700;
+      text-transform:uppercase; letter-spacing:.1em; font-size:13px;
+      border:1px solid var(--border); background:rgba(255,255,255,.06);
+      transition:.25s ease; font-family:'Space Grotesk',sans-serif;
+    }
+    .btn.primary{background:linear-gradient(135deg,var(--orange),#a82420); border-color:rgba(214,107,45,.6)}
+    .btn.gold{background:linear-gradient(135deg,var(--gold),#b8941f); border-color:var(--gold); color:#000}
+    .btn:hover{transform:translateY(-2px); box-shadow:0 16px 45px rgba(0,0,0,.45)}
+
+    /* ── FOOTER ── */
+    footer{
+      padding:36px 24px; border-top:1px solid var(--border);
+      text-align:center; color:rgba(245,245,245,.35); font-size:13px;
+    }
+    footer a{color:var(--gold); text-decoration:none}
+  </style>
+</head>
+<body>
+<div class="noise"></div>
+
+<!-- SITE NAV -->
+<nav class="site-nav">
+  <a href="index.html" class="site-nav-brand">FGJ</a>
+  <div class="site-nav-links">
+    <a href="evidence.html">← Evidence Vault</a>
+    <a href="pillars.html">Pillars</a>
+    <a href="music.html">Music</a>
+  </div>
+  <a href="take-action.html" class="site-nav-cta">Take Action</a>
+</nav>
+
+<div class="wrap">
+  <!-- BREADCRUMB -->
+  <div class="breadcrumb">
+    <a href="index.html">Home</a> /
+    <a href="evidence.html">Evidence Vault</a> /
+    Chain of Custody Exhibit
+  </div>
+
+  <!-- HERO -->
+  <div class="exhibit-hero">
+    <div class="exhibit-eyebrow">Fair Go Justice — Forensic Exhibit</div>
+    <h1>Chain of<br>Custody</h1>
+    <p class="exhibit-hero-sub">A forensic breakdown of every stage in the chain of custody — what each stage requires, where failures occur, and why broken links destroy justice.</p>
+    <div class="integrity-status">
+      <div class="is-item">
+        <span class="is-num gold">5</span>
+        <span class="is-label">Verified Stages</span>
+      </div>
+      <div class="is-divider"></div>
+      <div class="is-item">
+        <span class="is-num red">2</span>
+        <span class="is-label">Broken Links</span>
+      </div>
+      <div class="is-divider"></div>
+      <div class="is-item">
+        <span class="is-num orange">2</span>
+        <span class="is-label">Warning Flags</span>
+      </div>
+      <div class="is-divider"></div>
+      <div class="is-item">
+        <span class="is-num" style="color:var(--cyan)">9</span>
+        <span class="is-label">Total Stages</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN EXHIBIT -->
+  <div class="chain-exhibit">
+    <div class="exhibit-intro">
+      <h2>What is Chain of Custody?</h2>
+      <p>Chain of custody is the documented, unbroken trail that records who had access to evidence, when, where, and why — from the moment evidence is first identified through to its presentation in court. A single undocumented gap, unexplained transfer, or late disclosure can render evidence unreliable. When the chain breaks, the integrity of the entire case is compromised. This exhibit documents every stage, every requirement, and where failures demand accountability.</p>
+    </div>
+
+    <div class="chain-vertical" id="chainVertical">
+      <!-- Stages rendered by JS -->
+    </div>
+
+    <!-- VERDICT -->
+    <div class="chain-verdict">
+      <h2>Integrity Assessment</h2>
+      <p>A chain of custody with two broken links and two warning-stage failures does not meet the standard required for reliable evidence presentation. Every broken link is a point where truth could have been altered, suppressed, or lost. The public has a right to know.</p>
+      <div class="verdict-stats">
+        <div class="vs-item v-gold">
+          <span class="vs-num">5</span>
+          <div class="vs-label">Verified</div>
+        </div>
+        <div class="vs-item v-orange">
+          <span class="vs-num">2</span>
+          <div class="vs-label">Warnings</div>
+        </div>
+        <div class="vs-item v-red">
+          <span class="vs-num">2</span>
+          <div class="vs-label">Broken</div>
+        </div>
+      </div>
+      <div class="btnrow">
+        <a href="take-action.html#petition" class="btn gold">Sign the Reform Petition</a>
+        <a href="pillars.html" class="btn primary">The Three Pillars</a>
+        <a href="evidence.html" class="btn">← Back to Vault</a>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <a href="evidence.html">← Back to Evidence Vault</a> &nbsp;|&nbsp;
+    <a href="index.html">Fair Go Justice</a> &nbsp;|&nbsp;
+    <a href="take-action.html">Take Action</a>
+    <div style="margin-top:10px">All records presented for public education and accountability purposes only.</div>
+  </footer>
+</div>
+
+<script>
+const stages = [
+  {
+    id: 1,
+    status: 'gold',
+    title: 'Evidence Collection',
+    pill: 'Verified',
+    pillClass: 'gold-pill',
+    intro: 'The first and most critical stage. Every piece of evidence must be identified, photographed in situ, logged with precise metadata, and assigned a unique exhibit reference before being touched or moved.',
+    requirements: [
+      {
+        title: 'Required at Collection',
+        items: [
+          { text: 'Exact timestamp (date/time/timezone)', ok: true },
+          { text: 'GPS location coordinates', ok: true },
+          { text: 'Collector identity and credentials', ok: true },
+          { text: 'Device/instrument serial number', ok: true },
+          { text: 'Initial condition documented', ok: true },
+          { text: 'Photographic record pre-handling', ok: true },
+        ]
+      },
+      {
+        title: 'Control Requirements',
+        items: [
+          { text: 'Unique exhibit reference assigned', ok: true },
+          { text: 'Tamper-evident seal applied', ok: true },
+          { text: 'Seal number logged', ok: true },
+          { text: 'Collection form signed', ok: true },
+        ]
+      }
+    ],
+    legal: 'Evidence collection standards are governed by forensic procedure legislation in each jurisdiction. Failure to document collection properly can result in evidence being ruled inadmissible or its weight significantly reduced at trial.'
+  },
+  {
+    id: 2,
+    status: 'gold',
+    title: 'Sealing & Packaging',
+    pill: 'Verified',
+    pillClass: 'gold-pill',
+    intro: 'Once collected, evidence must be sealed in tamper-evident packaging. The seal number becomes the integrity anchor for all subsequent chain records. Any subsequent seal breaks must be formally documented.',
+    requirements: [
+      {
+        title: 'Sealing Standards',
+        items: [
+          { text: 'Tamper-evident container used', ok: true },
+          { text: 'Seal number recorded on exhibit form', ok: true },
+          { text: 'Sealed in presence of witness', ok: true },
+          { text: 'Digital hash assigned (electronic evidence)', ok: true },
+        ]
+      },
+      {
+        title: 'Packaging Requirements',
+        items: [
+          { text: 'Appropriate container for evidence type', ok: true },
+          { text: 'Environmental controls noted', ok: true },
+          { text: 'Label applied: exhibit ref, date, officer', ok: true },
+        ]
+      }
+    ],
+    legal: 'Packaging integrity forms the foundation of physical evidence authentication. Courts have excluded evidence where sealing was not witnessed, documented, or where seal numbers were inconsistent across records.'
+  },
+  {
+    id: 3,
+    status: 'gold',
+    title: 'Evidence Storage',
+    pill: 'Verified',
+    pillClass: 'gold-pill',
+    intro: 'Evidence must be stored in a controlled, restricted-access environment with full access logging. Every person who enters the storage area, handles evidence, or accesses an exhibit record must be logged.',
+    requirements: [
+      {
+        title: 'Storage Controls',
+        items: [
+          { text: 'Restricted access facility', ok: true },
+          { text: 'Access log maintained', ok: true },
+          { text: 'Environmental monitoring for physical evidence', ok: true },
+          { text: 'Digital integrity verification for electronic evidence', ok: true },
+        ]
+      },
+      {
+        title: 'Documentation',
+        items: [
+          { text: 'Entry/exit log signed', ok: true },
+          { text: 'Reason for access documented', ok: true },
+          { text: 'Seal checked on each access', ok: true },
+        ]
+      }
+    ],
+    legal: 'Storage integrity breaches — including unsupervised access, missing log entries, or unexplained environmental exposure — undermine the reliability of physical evidence and can form the basis of successful admissibility challenges.'
+  },
+  {
+    id: 4,
+    status: 'orange',
+    title: 'Transfer',
+    pill: 'Warning — Gap Identified',
+    pillClass: 'orange-pill',
+    intro: 'Transfer is statistically the most common point of chain of custody failure. Every movement of evidence between persons or locations must be documented with both parties signing off. A 14-day unaccounted gap has been identified at this stage.',
+    requirements: [
+      {
+        title: 'Transfer Requirements',
+        items: [
+          { text: 'Sending officer identity logged', ok: true },
+          { text: 'Receiving officer identity logged', ok: true },
+          { text: 'Transfer timestamp recorded', ok: true },
+          { text: 'Method of transfer documented', ok: true },
+          { text: 'Seal integrity verified on handover', ok: false },
+          { text: 'All 14 days accounted for', ok: false },
+        ]
+      },
+      {
+        title: 'Gap Analysis',
+        items: [
+          { text: 'Movement logged: 15 March', ok: true },
+          { text: 'Next log entry: 29 March', ok: false },
+          { text: '14-day gap explanation on file', ok: false },
+          { text: 'Supervisor sign-off on gap', ok: false },
+        ]
+      }
+    ],
+    failure: {
+      title: 'Warning: 14-Day Unaccounted Gap',
+      text: 'A 14-day period between 15 March and 29 March has no corresponding movement log, access record, or storage entry. The whereabouts and condition of the evidence during this period cannot be verified from available records. This gap raises material questions about evidence integrity that must be answered.'
+    },
+    legal: 'Unexplained gaps in custody transfer records are a recognised basis for challenging evidence reliability. Courts have excluded evidence where similar gaps could not be satisfactorily explained, particularly when the gap coincides with a contested period in the case.'
+  },
+  {
+    id: 5,
+    status: 'gold',
+    title: 'Forensic Examination',
+    pill: 'Verified',
+    pillClass: 'gold-pill',
+    intro: 'Forensic examination must use validated, documented methods that preserve original material and produce reproducible results. Both the primary examination and any subsequent independent examinations must be logged.',
+    requirements: [
+      {
+        title: 'Examination Standards',
+        items: [
+          { text: 'Validated examination methodology', ok: true },
+          { text: 'Original material preserved', ok: true },
+          { text: 'All instruments and versions documented', ok: true },
+          { text: 'Results independently reproducible', ok: true },
+        ]
+      },
+      {
+        title: 'Report Requirements',
+        items: [
+          { text: 'Examiner credentials stated', ok: true },
+          { text: 'Chain reference number included', ok: true },
+          { text: 'Limitations disclosed', ok: true },
+        ]
+      }
+    ],
+    legal: 'Expert forensic evidence is held to a high standard of methodology and disclosure. Where primary and secondary forensic reports contradict each other, both must be disclosed and the basis for each conclusion must be available for scrutiny.'
+  },
+  {
+    id: 6,
+    status: 'red',
+    title: 'Disclosure',
+    pill: 'BROKEN LINK — Disclosure Failure',
+    pillClass: 'red-pill',
+    intro: 'The prosecution or relevant authority has an obligation to disclose all evidence — including evidence that may assist the defence or contradict the prosecution case. Disclosure must occur within specified timeframes. Here, the required disclosure date was 01 May; actual delivery was 23 August — a 114-day delay.',
+    requirements: [
+      {
+        title: 'Disclosure Obligations',
+        items: [
+          { text: 'Disclosure served by required date', ok: false },
+          { text: 'All relevant material included', ok: false },
+          { text: 'Bodycam footage produced intact', ok: false },
+          { text: 'Metadata accompanies electronic evidence', ok: false },
+        ]
+      },
+      {
+        title: 'Timeline',
+        items: [
+          { text: 'Required disclosure date: 01 May', ok: true },
+          { text: 'Actual disclosure date: 23 August', ok: false },
+          { text: 'Delay explained on record', ok: false },
+          { text: 'Missing material identified', ok: false },
+        ]
+      }
+    ],
+    failure: {
+      title: 'Critical: 114-Day Disclosure Breach',
+      text: 'Evidence required by 01 May was not produced until 23 August — a 114-day delay that breached procedural fairness obligations. Late disclosure prevented adequate preparation time. Material that should have been included was absent from the disclosure package. This is a direct breach of fundamental procedural fairness standards and warrants formal investigation.'
+    },
+    legal: 'Disclosure obligations are fundamental to the right to a fair trial. Both domestic procedural rules and international human rights standards require timely, complete disclosure. Breaches of disclosure obligations are grounds for appeal, stays of proceedings, and professional conduct complaints.'
+  },
+  {
+    id: 7,
+    status: 'orange',
+    title: 'Secondary Examination',
+    pill: 'Warning — Contradictory Findings',
+    pillClass: 'orange-pill',
+    intro: 'An independent secondary examination was conducted on 12 September. The findings materially contradict the primary forensic report. Both reports must be disclosed and the contradictions must be addressed on the record.',
+    requirements: [
+      {
+        title: 'Secondary Examination Record',
+        items: [
+          { text: 'Independent examiner engaged', ok: true },
+          { text: 'Same exhibit reference used', ok: true },
+          { text: 'Primary report available to second examiner', ok: true },
+          { text: 'Contradictions formally noted', ok: true },
+          { text: 'Both reports disclosed', ok: false },
+          { text: 'Contradictions addressed in proceedings', ok: false },
+        ]
+      }
+    ],
+    failure: {
+      title: 'Warning: Contradictory Expert Reports',
+      text: 'The secondary examination contradicts key findings in the primary forensic report. Where expert evidence is contradictory, both reports must be disclosed, the basis for each conclusion must be available for scrutiny, and the court must be informed. Presenting only one report without disclosing the other is a material breach of evidence obligations.'
+    },
+    legal: 'The duty to disclose extends to contradictory expert opinions. Suppressing secondary expert analysis that undermines the primary evidence constitutes a serious breach of procedural fairness and professional obligations.'
+  },
+  {
+    id: 8,
+    status: 'red',
+    title: 'Metadata Integrity',
+    pill: 'BROKEN LINK — Tampering Flag',
+    pillClass: 'red-pill',
+    intro: 'Forensic metadata analysis has identified a critical anomaly: documents recorded as created on 14 March 2019 show a "last modified" timestamp of 09 January 2021 — nearly two years after the stated creation date. This anomaly must be formally explained.',
+    requirements: [
+      {
+        title: 'Metadata Verification',
+        items: [
+          { text: 'Creation date matches collection date', ok: true },
+          { text: 'Last modified date unexplained', ok: false },
+          { text: 'Hash verification on original vs current', ok: false },
+          { text: 'Modification log produced', ok: false },
+        ]
+      },
+      {
+        title: 'Anomaly Record',
+        items: [
+          { text: 'Document creation: 14 March 2019', ok: true },
+          { text: 'Last modified: 09 January 2021', ok: false },
+          { text: 'Explanation on file', ok: false },
+          { text: 'Modification disclosed to parties', ok: false },
+        ]
+      }
+    ],
+    failure: {
+      title: 'Critical: Unexplained Metadata Modification',
+      text: 'Documents stamped as created on 14 March 2019 contain metadata showing modification on 09 January 2021 — 22 months after the stated creation date, and 2 months before the March 2021 court submission. No explanation for this modification has been produced. No modification log has been disclosed. This anomaly raises serious questions about document integrity that must be answered under oath.'
+    },
+    legal: 'Metadata evidence of document modification is a recognised form of forensic evidence. Unexplained modification timestamps — particularly where they precede court submission dates — are material to authentication and can support allegations of document tampering.'
+  },
+  {
+    id: 9,
+    status: 'gold',
+    title: 'Court Submission',
+    pill: 'Submitted — Chain Gaps On Record',
+    pillClass: 'gold-pill',
+    intro: 'Evidence was submitted to court on 15 March 2021 as Exhibit A-7. However, the chain of custody presented with the exhibit did not disclose the transfer gap (Stage 4), the disclosure breach (Stage 6), or the metadata anomaly (Stage 8). These omissions are a matter of record.',
+    requirements: [
+      {
+        title: 'Submission Requirements',
+        items: [
+          { text: 'Full chain of custody provided', ok: false },
+          { text: 'All known integrity issues disclosed', ok: false },
+          { text: 'Both expert reports before court', ok: false },
+          { text: 'Metadata anomaly disclosed', ok: false },
+          { text: 'Transfer gap explanation provided', ok: false },
+          { text: 'Exhibit reference documented', ok: true },
+        ]
+      }
+    ],
+    failure: {
+      title: 'Chain Submitted With Undisclosed Integrity Failures',
+      text: 'The evidence was submitted to court without disclosure of the 14-day transfer gap, the 114-day disclosure breach, the contradictory secondary report, or the metadata modification anomaly. A court cannot properly assess evidence reliability without complete chain of custody information. These undisclosed failures go directly to the weight and admissibility of the exhibit.'
+    },
+    legal: 'The obligation to present complete chain of custody documentation to the court is fundamental. Where known integrity issues are not disclosed at the time of evidence presentation, parties and courts are denied the opportunity to properly assess reliability — a breach that can found grounds for appeal or review.'
+  }
+];
+
+function renderStages() {
+  const container = document.getElementById('chainVertical');
+
+  stages.forEach((stage, idx) => {
+    const div = document.createElement('div');
+    div.className = 'stage';
+    div.id = `stage-${stage.id}`;
+
+    // Build requirements HTML
+    let reqHTML = '';
+    if (stage.requirements) {
+      reqHTML = `<div class="requirements-grid">`;
+      stage.requirements.forEach(req => {
+        reqHTML += `<div class="req-card">
+          <div class="req-card-title">${req.title}</div>
+          <ul class="req-items">`;
+        req.items.forEach(item => {
+          reqHTML += `<li class="${item.ok === false ? 'fail' : ''}">${item.text}</li>`;
+        });
+        reqHTML += `</ul></div>`;
+      });
+      reqHTML += `</div>`;
+    }
+
+    const failHTML = stage.failure ? `
+      <div class="failure-alert">
+        <div class="failure-alert-title">⚠ ${stage.failure.title}</div>
+        <p>${stage.failure.text}</p>
+      </div>` : '';
+
+    const legalHTML = stage.legal ? `
+      <div class="legal-ref">
+        <div class="legal-ref-title">Legal Reference</div>
+        <p>${stage.legal}</p>
+      </div>` : '';
+
+    div.innerHTML = `
+      <div class="stage-node ${stage.status}">${stage.status === 'gold' ? '✓' : stage.status === 'red' ? '✗' : '!'}</div>
+      <div class="stage-card ${stage.status}" onclick="toggleStage(this)">
+        <div class="stage-header">
+          <div class="stage-num">${String(stage.id).padStart(2,'0')}</div>
+          <div class="stage-header-info">
+            <div class="stage-title">${stage.title}</div>
+            <span class="stage-status-pill ${stage.pillClass}">${stage.pill}</span>
+          </div>
+          <div class="stage-toggle">▼</div>
+        </div>
+        <div class="stage-body">
+          <div class="stage-body-intro">${stage.intro}</div>
+          ${reqHTML}
+          ${failHTML}
+          ${legalHTML}
+        </div>
+      </div>
+    `;
+
+    container.appendChild(div);
+
+    // Add vertical connector between stages
+    if (idx < stages.length - 1) {
+      const next = stages[idx + 1];
+      const connColor = (stage.status === 'red' || next.status === 'red') ? 'red' : (stage.status === 'orange' || next.status === 'orange') ? 'orange' : 'gold';
+      const conn = document.createElement('div');
+      conn.className = 'stage';
+      conn.style.padding = '0 0 0 80px';
+      conn.innerHTML = `<div style="width:2px;height:24px;margin-left:-58px;background:${connColor==='red'?'var(--red)':connColor==='orange'?'var(--orange)':'rgba(212,175,55,.3)'}"></div>`;
+      container.appendChild(conn);
+    }
+  });
+
+  // Auto-open any stage targeted by URL hash
+  const hash = window.location.hash;
+  if (hash && hash.startsWith('#stage-')) {
+    const target = document.querySelector(hash + ' .stage-card');
+    if (target) {
+      target.classList.add('open');
+      setTimeout(() => target.closest('.stage').scrollIntoView({behavior:'smooth', block:'start'}), 400);
+    }
+  }
+}
+
+function toggleStage(card) {
+  card.classList.toggle('open');
+}
+
+renderStages();
+</script>
+</body>
+</html>
