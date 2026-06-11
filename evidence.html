@@ -326,24 +326,6 @@
     .doc h4{margin:0 0 10px; text-transform:uppercase; font-size:13px; font-weight:800}
     .doc p{font-size:12px; margin:6px 0; color:#333}
     .redact{height:13px; background:#111; margin:10px 0; border-radius:2px}
-
-    /* ── REDACTION ROOM ── */
-    .redaction-room{margin-top:48px; background:linear-gradient(135deg,rgba(17,23,35,.95),rgba(13,17,23,.98)); border:1px solid rgba(214,107,45,.25); border-radius:18px; padding:36px; position:relative; overflow:hidden;}
-    .redaction-room::before{content:''; position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg,transparent,var(--orange),transparent);}
-    .redaction-room-header{text-align:center; margin-bottom:28px;}
-    .rr-badge{display:inline-block; background:rgba(0,0,0,.8); color:var(--orange); font-size:11px; font-weight:700; letter-spacing:.18em; text-transform:uppercase; border:1px solid var(--orange); border-radius:4px; padding:4px 12px; margin-bottom:12px;}
-    .rr-title{font-family:'Bebas Neue',sans-serif; font-size:clamp(28px,5vw,48px); letter-spacing:.04em; margin:0 0 8px; color:var(--text);}
-    .rr-subtitle{color:var(--grey); font-size:13px; letter-spacing:.06em; text-transform:uppercase; margin:0;}
-    .rr-doc{background:rgba(5,7,11,.7); border:1px solid rgba(245,245,245,.08); border-radius:12px; padding:28px; font-family:'Space Grotesk',monospace; font-size:14px; line-height:2;}
-    .rr-doc-header{display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; padding-bottom:16px; border-bottom:1px solid rgba(245,245,245,.1); font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--muted);}
-    .rr-stamp{background:rgba(207,46,46,.15); color:#cf2e2e; border:1px solid rgba(207,46,46,.4); padding:3px 10px; border-radius:4px; font-weight:700; letter-spacing:.14em;}
-    .rr-line{color:var(--muted); margin:0 0 12px; line-height:2;}
-    .rr-redact{display:inline; background:#000; color:transparent; cursor:help; position:relative; padding:0 4px; border-bottom:2px solid var(--orange); border-radius:2px; transition:background .35s ease; user-select:none;}
-    .rr-redact::after{content:attr(data-reveal); position:absolute; left:0; top:0; white-space:nowrap; color:var(--gold); font-weight:600; opacity:0; transition:opacity .3s ease; pointer-events:none; z-index:2; background:rgba(13,17,23,.95); padding:0 4px; border-radius:2px; border:1px solid rgba(212,175,55,.3);}
-    .rr-redact:hover{background:rgba(214,107,45,.18);}
-    .rr-redact:hover::after{opacity:1;}
-    .rr-footer{margin-top:24px; padding-top:16px; border-top:1px solid rgba(245,245,245,.08);}
-    .rr-hint{color:var(--muted); font-size:12px; font-style:italic; letter-spacing:.03em;}
     .doc.a{left:11%; top:12%; --r:-8deg}
     .doc.b{left:40%; top:20%; --r:4deg}
     .doc.c{right:11%; top:12%; --r:8deg}
@@ -700,29 +682,6 @@
       </div>
       <div class="doc-tag">Layered Document Comparison Engine</div>
     </div>
-
-    <!-- REDACTION ROOM -->
-    <div class="redaction-room">
-      <div class="redaction-room-header">
-        <div class="rr-badge">⬛ EXHIBIT 08</div>
-        <h3 class="rr-title">The Redaction Room</h3>
-        <p class="rr-subtitle">Hover over the black bars to reveal what was hidden.</p>
-      </div>
-      <div class="rr-doc">
-        <div class="rr-doc-header">
-          <span>INTERNAL TRIBUNAL RECORD — CLASSIFIED</span>
-          <span class="rr-stamp">REDACTED</span>
-        </div>
-        <p class="rr-line">The reviewing officer determined that <span class="rr-redact" data-reveal="a clear conflict of interest existed between the assessor and the outcome">[REDACTED]</span> and therefore the original determination was <span class="rr-redact" data-reveal="fundamentally compromised and procedurally invalid">[REDACTED]</span>.</p>
-        <p class="rr-line">Internal correspondence dated <span class="rr-redact" data-reveal="14 days before the public determination">[REDACTED]</span> referenced <span class="rr-redact" data-reveal="financial exposure and settlement strategy, not evidentiary merit">[REDACTED]</span> as the primary decision factor.</p>
-        <p class="rr-line">The disclosure that was withheld included <span class="rr-redact" data-reveal="a prior professional relationship between the appointed assessor and the institutional respondent">[REDACTED]</span>, which was known to <span class="rr-redact" data-reveal="three senior officers at the time of appointment">[REDACTED]</span>.</p>
-        <p class="rr-line">The delay between the event and formal documentation was <span class="rr-redact" data-reveal="114 days — well outside mandatory reporting windows">[REDACTED]</span>. This was recorded internally as <span class="rr-redact" data-reveal="an administrative oversight">[REDACTED]</span>.</p>
-        <div class="rr-footer">
-          <span class="rr-hint">💡 Each redaction is a real pattern — anonymised for this exhibit. Evidence Integrity Protocols would make these disclosures mandatory.</span>
-        </div>
-      </div>
-    </div>
-
   </div>
 </section>
 
