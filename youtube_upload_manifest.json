@@ -1,0 +1,168 @@
+{
+  "vexatious": {
+    "videoId": "nro_6EZx1z8",
+    "title": "VEXATIOUS",
+    "pillar": null,
+    "playlists": [
+      "complete_collection",
+      "hip_hop"
+    ],
+    "uploadedAt": "2026-06-10T17:45:25Z"
+  },
+  "self_represented": {
+    "videoId": "IpF6rtveFVU",
+    "title": "SELF-REPRESENTED",
+    "pillar": 2,
+    "playlists": [
+      "complete_collection",
+      "hip_hop",
+      "pillar_2_legal_aid"
+    ],
+    "uploadedAt": "2026-06-10T17:45:41Z"
+  },
+  "suppressed": {
+    "videoId": "Q05AO-VzQFY",
+    "title": "SUPPRESSED",
+    "pillar": 3,
+    "playlists": [
+      "complete_collection",
+      "hip_hop",
+      "pillar_3_evidence"
+    ],
+    "uploadedAt": "2026-06-10T17:45:39Z"
+  },
+  "the_appointed": {
+    "videoId": "x3UqqsYzTPg",
+    "title": "THE APPOINTED",
+    "pillar": 1,
+    "playlists": [
+      "complete_collection",
+      "hip_hop",
+      "pillar_1_judicial"
+    ],
+    "uploadedAt": "2026-06-10T17:56:47Z"
+  },
+  "blindsided_truth_uncut": {
+    "videoId": "HnnTiCk1CI0",
+    "title": "BLINDSIDED: TRUTH UNCUT",
+    "pillar": 3,
+    "playlists": [
+      "complete_collection",
+      "hip_hop",
+      "pillar_3_evidence"
+    ],
+    "uploadedAt": "2026-06-10T17:45:43Z"
+  },
+  "elder": {
+    "videoId": "WAXn0map22Q",
+    "title": "ELDER",
+    "pillar": null,
+    "playlists": [
+      "complete_collection",
+      "hip_hop"
+    ],
+    "uploadedAt": "2026-06-10T17:46:21Z"
+  },
+  "family_court_blues": {
+    "videoId": "EqBa_TahlZg",
+    "title": "FAMILY COURT BLUES",
+    "pillar": 2,
+    "playlists": [
+      "complete_collection",
+      "hip_hop",
+      "pillar_2_legal_aid"
+    ],
+    "uploadedAt": "2026-06-10T17:46:26Z"
+  },
+  "bankruptcy_weapon": {
+    "videoId": "7skBZ5rVtpI",
+    "title": "BANKRUPTCY WEAPON",
+    "pillar": null,
+    "playlists": [
+      "complete_collection",
+      "hip_hop"
+    ],
+    "uploadedAt": "2026-06-10T17:46:20Z"
+  },
+  "we_are_not_done": {
+    "videoId": "_UexLVzLSmI",
+    "title": "WE ARE NOT DONE",
+    "pillar": null,
+    "playlists": [
+      "complete_collection",
+      "hip_hop"
+    ],
+    "uploadedAt": "2026-06-10T17:46:22Z"
+  },
+  "conflict_of_interest": {
+    "videoId": "Fp_j0BumjQs",
+    "title": "CONFLICT OF INTEREST",
+    "pillar": 1,
+    "playlists": [
+      "complete_collection",
+      "hip_hop",
+      "pillar_1_judicial"
+    ],
+    "uploadedAt": "2026-06-10T17:56:47Z"
+  },
+  "cold_comfort": {
+    "videoId": "NeiMDNmLS6E",
+    "title": "COLD COMFORT",
+    "pillar": 2,
+    "uploadedAt": "2026-06-11T04:31:45Z"
+  },
+  "costs_order": {
+    "videoId": "o9Kv1NrQe-Q",
+    "title": "COSTS ORDER",
+    "pillar": 1,
+    "uploadedAt": "2026-06-11T04:33:27Z"
+  },
+  "double_standard": {
+    "videoId": "FyBXteycll0",
+    "title": "DOUBLE STANDARD",
+    "pillar": null,
+    "uploadedAt": "2026-06-11T04:33:49Z"
+  },
+  "forensic_fraud": {
+    "videoId": "4kb1kgaFgUs",
+    "title": "FORENSIC FRAUD",
+    "pillar": 3,
+    "uploadedAt": "2026-06-11T04:33:51Z"
+  },
+  "guardian_ad_litem": {
+    "videoId": "IvfSWOPjHr4",
+    "title": "GUARDIAN AD LITEM",
+    "pillar": 1,
+    "uploadedAt": "2026-06-11T04:33:57Z"
+  },
+  "media_blackout": {
+    "videoId": "fj_hxETi6Vw",
+    "title": "MEDIA BLACKOUT",
+    "pillar": 1,
+    "uploadedAt": "2026-06-11T04:34:00Z"
+  },
+  "offshore_account": {
+    "videoId": "cujaRm9wMPk",
+    "title": "OFFSHORE ACCOUNT",
+    "pillar": 1,
+    "uploadedAt": "2026-06-11T04:34:44Z"
+  },
+  "paper_trail": {
+    "videoId": "_dRFS3HIOWE",
+    "title": "PAPER TRAIL",
+    "pillar": 1,
+    "uploadedAt": "2026-06-11T04:34:46Z"
+  },
+  "rise_again": {
+    "videoId": "nwrbaqAYaxY",
+    "title": "RISE AGAIN",
+    "pillar": 1,
+    "uploadedAt": "2026-06-11T04:35:19Z"
+  },
+  "silent_victim": {
+    "videoId": "0wDwcMTqeaA",
+    "title": "SILENT VICTIM",
+    "pillar": 1,
+    "uploadedAt": "2026-06-11T04:35:21Z"
+  }
+}
