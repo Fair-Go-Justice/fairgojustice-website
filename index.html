@@ -10,6 +10,842 @@
   <meta property="og:image" content="images/hero_chain_parliament.png">
   <meta name="theme-color" content="#0D1117">
   <link rel="stylesheet" href="css/main.css">
+  <style>
+    /* =====================================================================
+       PAGE-LEVEL OVERRIDES — v4 enhancements
+       ===================================================================== */
+
+    /* HERO — full-bleed chain parliament image */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      padding: 0;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background: url('images/hero_chain_parliament.png') center center / cover no-repeat;
+      transform: scale(1.08);
+      animation: heroZoom 20s ease-in-out infinite alternate;
+      will-change: transform;
+    }
+    @keyframes heroZoom {
+      from { transform: scale(1.08); }
+      to   { transform: scale(1.00); }
+    }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(
+        135deg,
+        rgba(13,17,23,0.82) 0%,
+        rgba(14,58,91,0.55) 45%,
+        rgba(13,17,23,0.75) 100%
+      );
+    }
+    .hero-content { position: relative; z-index: 2; padding: 120px 0 80px; }
+
+    .hero-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(4rem, 12vw, 10rem);
+      line-height: 0.92;
+      letter-spacing: 0.02em;
+      color: var(--white);
+      text-shadow: 0 4px 40px rgba(0,0,0,0.8);
+      margin-bottom: 1.2rem;
+    }
+    .hero-title .line-1 {
+      display: block;
+      color: var(--white);
+    }
+    .hero-title .line-2 {
+      display: block;
+      color: var(--orange);
+      text-shadow: 0 0 60px rgba(214,107,45,0.7), 0 4px 40px rgba(0,0,0,0.8);
+      animation: glowPulse 3s ease-in-out infinite;
+    }
+    @keyframes glowPulse {
+      0%, 100% { text-shadow: 0 0 60px rgba(214,107,45,0.7), 0 4px 40px rgba(0,0,0,0.8); }
+      50%       { text-shadow: 0 0 100px rgba(214,107,45,1.0), 0 4px 40px rgba(0,0,0,0.8); }
+    }
+    .hero-subtitle {
+      font-size: clamp(1rem, 2.2vw, 1.3rem);
+      color: rgba(245,245,245,0.88);
+      max-width: 620px;
+      margin-bottom: 2.4rem;
+      line-height: 1.65;
+    }
+    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 3rem; }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-size: 0.72rem; font-weight: 600; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--orange);
+      border: 1px solid rgba(214,107,45,0.4);
+      background: rgba(214,107,45,0.1);
+      padding: 0.4rem 1rem; border-radius: 100px;
+      margin-bottom: 1.5rem;
+    }
+    .hero-badge-dot {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: var(--orange);
+      animation: blink 1.4s ease-in-out infinite;
+    }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+    .hero-stats {
+      display: flex; gap: 2.5rem; flex-wrap: wrap;
+    }
+    .hero-stat-item { text-align: left; }
+    .hero-stat-num {
+      display: block;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      color: var(--gold);
+      line-height: 1;
+    }
+    .hero-stat-label {
+      display: block; font-size: 0.72rem; color: rgba(245,245,245,0.6);
+      text-transform: uppercase; letter-spacing: 0.1em; margin-top: 0.2rem;
+    }
+    .hero-scroll {
+      position: absolute; bottom: 2rem; left: 50%;
+      transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 0.4rem;
+      font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase;
+      color: rgba(245,245,245,0.4);
+      animation: scrollBob 2.5s ease-in-out infinite;
+    }
+    .hero-scroll-line {
+      width: 1px; height: 40px;
+      background: linear-gradient(to bottom, rgba(245,245,245,0.5), transparent);
+    }
+    @keyframes scrollBob { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(6px)} }
+
+    /* =====================================================================
+       TRAILER SECTION
+       ===================================================================== */
+    .trailer-section {
+      background: var(--bg);
+      padding: 80px 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .trailer-section::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at center, rgba(14,58,91,0.3) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .trailer-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+    @media (max-width: 768px) {
+      .trailer-inner { grid-template-columns: 1fr; gap: 2rem; }
+    }
+    .trailer-text .eyebrow { margin-bottom: 1rem; }
+    .trailer-text h2 { margin-bottom: 1.2rem; }
+    .trailer-text p { color: var(--grey); margin-bottom: 2rem; line-height: 1.7; }
+    .trailer-text .trailer-list {
+      list-style: none; padding: 0;
+      display: flex; flex-direction: column; gap: 0.7rem;
+      margin-bottom: 2rem;
+    }
+    .trailer-text .trailer-list li {
+      display: flex; align-items: center; gap: 0.6rem;
+      font-size: 0.9rem; color: rgba(245,245,245,0.8);
+    }
+    .trailer-text .trailer-list li::before {
+      content: '▶';
+      color: var(--orange); font-size: 0.6rem;
+    }
+    .trailer-embed {
+      position: relative;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      border: 1px solid rgba(214,107,45,0.25);
+      box-shadow: 0 0 60px rgba(214,107,45,0.2), var(--shadow);
+      aspect-ratio: 16/9;
+    }
+    .trailer-embed iframe {
+      width: 100%; height: 100%;
+      display: block; border: none;
+    }
+    .trailer-embed-label {
+      position: absolute; top: 1rem; left: 1rem;
+      background: rgba(214,107,45,0.9);
+      color: white; font-size: 0.65rem; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      padding: 0.3rem 0.7rem; border-radius: 4px;
+      z-index: 2;
+    }
+
+    /* =====================================================================
+       MUSIC FOR JUSTICE — v4 (moved up, cinematic)
+       ===================================================================== */
+    .music-section {
+      background: linear-gradient(180deg, #0D1117 0%, #0a0e14 50%, #0D1117 100%);
+      padding: 100px 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .music-section::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse at 20% 50%, rgba(212,175,55,0.06) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 50%, rgba(214,107,45,0.06) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    /* Featured track embed */
+    .jukebox-featured {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 3rem;
+      align-items: stretch;
+      margin-bottom: 4rem;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(212,175,55,0.15);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+    }
+    @media (max-width: 768px) {
+      .jukebox-featured { grid-template-columns: 1fr; }
+    }
+    .jukebox-featured-video {
+      position: relative;
+      aspect-ratio: 16/9;
+      overflow: hidden;
+    }
+    .jukebox-featured-video iframe {
+      width: 100%; height: 100%; border: none;
+    }
+    .jukebox-featured-info {
+      padding: 2.5rem;
+      display: flex; flex-direction: column; justify-content: center;
+    }
+    .jukebox-featured-info .eyebrow { margin-bottom: 0.8rem; }
+    .jukebox-featured-info h3 {
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      font-family: 'Bebas Neue', sans-serif;
+      letter-spacing: 0.04em;
+      color: var(--gold);
+      margin-bottom: 1rem;
+    }
+    .jukebox-featured-info p {
+      color: var(--grey); line-height: 1.7; margin-bottom: 1.5rem;
+    }
+    .jukebox-actions { display: flex; gap: 0.8rem; flex-wrap: wrap; }
+
+    /* Album grid */
+    .album-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1.5rem;
+    }
+    .album-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: var(--transition);
+      cursor: pointer;
+      position: relative;
+    }
+    .album-card:hover {
+      border-color: rgba(212,175,55,0.4);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.5), 0 0 20px rgba(212,175,55,0.15);
+    }
+    .album-art {
+      aspect-ratio: 1/1;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .album-art img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    .album-card:hover .album-art img { transform: scale(1.05); }
+    .album-art-placeholder {
+      width: 100%; height: 100%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 3.5rem;
+    }
+    .album-play-overlay {
+      position: absolute; inset: 0;
+      background: rgba(0,0,0,0.5);
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .album-card:hover .album-play-overlay { opacity: 1; }
+    .album-play-btn {
+      width: 52px; height: 52px; border-radius: 50%;
+      background: var(--orange);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; color: white;
+      box-shadow: 0 0 30px rgba(214,107,45,0.6);
+      transition: transform 0.2s;
+    }
+    .album-play-btn:hover { transform: scale(1.1); }
+    .album-info { padding: 1rem; }
+    .album-title {
+      font-size: 0.88rem; font-weight: 700;
+      color: var(--white); margin-bottom: 0.25rem;
+      line-height: 1.3;
+    }
+    .album-meta { font-size: 0.72rem; color: var(--grey); }
+    .album-pillar {
+      display: inline-block;
+      font-size: 0.65rem; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 0.2rem 0.55rem; border-radius: 4px;
+      margin-top: 0.4rem;
+      background: rgba(214,107,45,0.15); color: var(--orange);
+      border: 1px solid rgba(214,107,45,0.25);
+    }
+
+    /* =====================================================================
+       STATS — dark bar
+       ===================================================================== */
+    .stats-bar {
+      background: var(--bg-1);
+      border-top: 1px solid rgba(255,255,255,0.06);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      padding: 2.5rem 0;
+    }
+    .stats-bar-grid {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      gap: 2rem;
+    }
+    .stats-bar-item { text-align: center; }
+    .stats-bar-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.2rem, 5vw, 3.5rem);
+      color: var(--gold); line-height: 1;
+    }
+    .stats-bar-label {
+      font-size: 0.72rem; color: var(--grey);
+      text-transform: uppercase; letter-spacing: 0.12em; margin-top: 0.3rem;
+    }
+    .stats-bar-icon { font-size: 1.3rem; margin-bottom: 0.4rem; }
+
+    /* =====================================================================
+       THREE PILLARS
+       ===================================================================== */
+    .pillars-section { padding: 100px 0; }
+    .pillars-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+    .pillar-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: var(--radius-lg);
+      padding: 2.5rem;
+      position: relative;
+      overflow: hidden;
+      transition: var(--transition);
+    }
+    .pillar-card:hover {
+      border-color: var(--orange);
+      box-shadow: var(--glow-orange);
+      transform: translateY(-3px);
+    }
+    .pillar-num {
+      position: absolute; top: 1.5rem; right: 1.5rem;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 5rem; line-height: 1;
+      color: rgba(255,255,255,0.04);
+      pointer-events: none;
+    }
+    .pillar-icon { font-size: 2.5rem; margin-bottom: 1.2rem; display: block; }
+    .pillar-title {
+      font-size: 1.25rem; font-weight: 700;
+      color: var(--white); margin-bottom: 0.8rem;
+    }
+    .pillar-desc { color: var(--grey); line-height: 1.7; font-size: 0.9rem; margin-bottom: 1.2rem; }
+    .pillar-link {
+      font-size: 0.85rem; font-weight: 600;
+      color: var(--orange); transition: var(--transition);
+    }
+    .pillar-link:hover { color: var(--gold); }
+
+    /* =====================================================================
+       EVIDENCE VAULT
+       ===================================================================== */
+    .evidence-section {
+      background: linear-gradient(180deg, #0D1117 0%, #0a0e14 100%);
+      padding: 100px 0;
+      position: relative;
+    }
+    .evidence-section::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 50% 0%, rgba(196,0,0,0.06) 0%, transparent 60%);
+    }
+    .evidence-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1.25rem;
+      margin-top: 3rem;
+    }
+    .evidence-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: var(--radius);
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .evidence-card::before {
+      content: '';
+      position: absolute; left: 0; top: 0; bottom: 0;
+      width: 3px;
+      background: linear-gradient(to bottom, var(--orange), transparent);
+      transform: scaleY(0);
+      transform-origin: top;
+      transition: transform 0.3s ease;
+    }
+    .evidence-card:hover { border-color: rgba(214,107,45,0.4); transform: translateY(-3px); }
+    .evidence-card:hover::before { transform: scaleY(1); }
+    .evidence-icon { font-size: 2rem; margin-bottom: 1rem; display: block; }
+    .evidence-title { font-size: 1rem; font-weight: 700; margin-bottom: 0.6rem; color: var(--white); }
+    .evidence-desc { font-size: 0.83rem; color: var(--grey); line-height: 1.6; margin-bottom: 1rem; }
+    .evidence-count {
+      font-size: 0.72rem; font-weight: 700;
+      color: var(--orange); letter-spacing: 0.08em; text-transform: uppercase;
+    }
+    .evidence-arrow {
+      position: absolute; top: 1.5rem; right: 1.5rem;
+      font-size: 1.2rem; color: rgba(255,255,255,0.2);
+      transition: var(--transition);
+    }
+    .evidence-card:hover .evidence-arrow { color: var(--orange); transform: translate(2px,-2px); }
+
+    /* =====================================================================
+       WALL OF STORIES
+       ===================================================================== */
+    .stories-section { padding: 100px 0; }
+    .stories-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-rows: auto auto;
+      gap: 1.25rem;
+      margin-top: 3rem;
+    }
+    .story-featured { grid-row: span 2; }
+    @media (max-width: 900px) {
+      .stories-grid { grid-template-columns: 1fr 1fr; }
+      .story-featured { grid-row: span 1; }
+    }
+    @media (max-width: 600px) {
+      .stories-grid { grid-template-columns: 1fr; }
+    }
+    .story-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: var(--transition);
+    }
+    .story-card:hover { border-color: rgba(212,175,55,0.3); transform: translateY(-2px); }
+    .story-card-top {
+      height: 5px;
+      background: linear-gradient(90deg, var(--orange), var(--gold));
+    }
+    .story-featured .story-card-top { height: 4px; }
+    .story-featured-img {
+      height: 200px; display: flex; align-items: center; justify-content: center;
+      font-size: 5rem;
+      background: linear-gradient(135deg, rgba(14,58,91,0.5), rgba(214,107,45,0.15));
+    }
+    .story-card-body { padding: 1.5rem; }
+    .story-meta { display: flex; gap: 0.5rem; margin-bottom: 0.6rem; align-items: center; }
+    .story-badge {
+      font-size: 0.62rem; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; padding: 0.2rem 0.55rem; border-radius: 4px;
+    }
+    .story-badge.urgent { background: rgba(192,57,43,0.2); color: #E74C3C; border: 1px solid rgba(192,57,43,0.3); }
+    .story-badge { background: rgba(212,175,55,0.15); color: var(--gold); border: 1px solid rgba(212,175,55,0.25); }
+    .story-badge.resolved { background: rgba(39,174,96,0.15); color: #2ECC71; border: 1px solid rgba(39,174,96,0.25); }
+    .story-state {
+      font-size: 0.72rem; font-weight: 700;
+      color: var(--orange); letter-spacing: 0.08em;
+    }
+    .story-name { font-size: 0.8rem; color: var(--grey); margin-bottom: 0.2rem; }
+    .story-issue { font-size: 1rem; font-weight: 700; color: var(--white); margin-bottom: 0.7rem; }
+    .story-text { font-size: 0.85rem; color: var(--grey); line-height: 1.6; margin-bottom: 1rem; font-style: italic; }
+    .story-read { font-size: 0.8rem; font-weight: 600; color: var(--orange); transition: var(--transition); }
+    .story-read:hover { color: var(--gold); }
+    .stories-cta {
+      text-align: center; margin-top: 3rem;
+      padding: 3rem; border: 1px dashed rgba(255,255,255,0.1);
+      border-radius: var(--radius-lg);
+    }
+    .stories-cta h3 { margin-bottom: 0.6rem; }
+    .stories-cta p { color: var(--grey); margin-bottom: 1.5rem; }
+
+    /* =====================================================================
+       AUSTRALIA MAP
+       ===================================================================== */
+    .map-section {
+      background: var(--bg-1);
+      padding: 100px 0;
+    }
+    .map-container {
+      display: grid;
+      grid-template-columns: 1.3fr 1fr;
+      gap: 3rem; align-items: start;
+      margin-top: 3rem;
+    }
+    @media (max-width: 768px) { .map-container { grid-template-columns: 1fr; } }
+    .aus-map { width: 100%; max-width: 500px; }
+    .state-path {
+      fill: rgba(14,58,91,0.6);
+      stroke: rgba(255,255,255,0.15); stroke-width: 1.5;
+      cursor: pointer; transition: fill 0.2s;
+    }
+    .state-path:hover { fill: rgba(214,107,45,0.5); }
+    .state-path.active { fill: rgba(214,107,45,0.7); stroke: var(--orange); stroke-width: 2; }
+    .state-label { fill: rgba(245,245,245,0.7); font-size: 12px; font-weight: 700; pointer-events: none; }
+    .map-info {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: var(--radius-lg); padding: 2rem;
+    }
+    .map-panel-title {
+      font-size: 1rem; font-weight: 700; color: var(--orange);
+      margin-bottom: 1.5rem; padding-bottom: 1rem;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .map-stat-row {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      cursor: pointer; transition: var(--transition);
+    }
+    .map-stat-row:hover { color: var(--orange); }
+    .map-state-name { font-size: 0.85rem; font-weight: 600; }
+    .map-state-num { font-size: 1.1rem; font-weight: 800; color: var(--gold); }
+    .map-state-sub { font-size: 0.7rem; color: var(--grey); }
+    .map-state-data { text-align: right; }
+
+    /* =====================================================================
+       PETITION CTA
+       ===================================================================== */
+    .petition-section {
+      position: relative; overflow: hidden;
+      padding: 120px 0;
+      text-align: center;
+    }
+    .petition-bg {
+      position: absolute; inset: 0;
+      background: url('images/hero_chain_parliament.png') center 60% / cover no-repeat;
+      filter: brightness(0.25) saturate(0.5);
+    }
+    .petition-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(180deg,
+        rgba(13,17,23,0.7) 0%,
+        rgba(14,58,91,0.6) 50%,
+        rgba(13,17,23,0.8) 100%
+      );
+    }
+    .petition-content { position: relative; z-index: 2; max-width: 700px; margin: 0 auto; }
+    .petition-content h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.5rem, 7vw, 5rem);
+      letter-spacing: 0.05em;
+      margin-bottom: 1.2rem;
+    }
+    .petition-content p { color: rgba(245,245,245,0.8); margin-bottom: 2.5rem; font-size: 1.05rem; }
+    .progress-container { margin: 2rem 0; }
+    .progress-header {
+      display: flex; justify-content: space-between;
+      font-size: 0.85rem; color: var(--grey); margin-bottom: 0.6rem;
+    }
+    .progress-count { font-weight: 700; color: var(--white); font-size: 1rem; }
+    .progress-bar-track {
+      height: 8px; background: rgba(255,255,255,0.1);
+      border-radius: 100px; overflow: hidden;
+    }
+    .progress-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--orange), var(--gold));
+      border-radius: 100px;
+      transition: width 2s cubic-bezier(0.4,0,0.2,1);
+    }
+    .progress-pct { font-size: 0.75rem; color: var(--grey); margin-top: 0.5rem; }
+    .petition-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 2rem; }
+
+    /* =====================================================================
+       SHARE HUB
+       ===================================================================== */
+    .share-section { padding: 100px 0; }
+    .share-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1.25rem; margin-top: 3rem;
+    }
+    .share-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: var(--radius);
+      padding: 1.75rem 1.5rem;
+      text-align: center; transition: var(--transition);
+    }
+    .share-card:hover { border-color: rgba(212,175,55,0.35); transform: translateY(-3px); }
+    .share-icon { font-size: 2rem; margin-bottom: 0.8rem; display: block; }
+    .share-title { font-size: 0.9rem; font-weight: 700; color: var(--white); margin-bottom: 0.3rem; }
+    .share-format { font-size: 0.72rem; color: var(--grey); margin-bottom: 1rem; }
+    .share-dl {
+      font-size: 0.78rem; font-weight: 600; color: var(--gold);
+      transition: var(--transition);
+    }
+    .share-dl:hover { color: var(--orange); }
+
+    /* =====================================================================
+       TICKER
+       ===================================================================== */
+    .ticker {
+      background: var(--orange);
+      overflow: hidden;
+      padding: 0.7rem 0;
+      position: sticky; top: 70px; z-index: 90;
+    }
+    .ticker-track {
+      display: flex; gap: 3rem;
+      animation: tickerScroll 35s linear infinite;
+      white-space: nowrap;
+      width: max-content;
+    }
+    .ticker:hover .ticker-track { animation-play-state: paused; }
+    @keyframes tickerScroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    .ticker-item {
+      font-size: 0.75rem; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: white;
+    }
+    .ticker-item::after { content: ' ◆ '; margin-left: 3rem; color: rgba(255,255,255,0.5); }
+
+    /* =====================================================================
+       SECTION HEADERS
+       ===================================================================== */
+    .section-header {
+      text-align: center; max-width: 700px;
+      margin: 0 auto 3rem;
+    }
+    .section-header .eyebrow { margin-bottom: 0.8rem; justify-content: center; }
+    .section-header h2 { margin-bottom: 1rem; }
+    .section-header p { color: var(--grey); line-height: 1.7; }
+
+    .eyebrow {
+      display: flex; align-items: center; gap: 0.6rem;
+      font-size: 0.72rem; font-weight: 700;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--orange);
+    }
+    .eyebrow::before {
+      content: '';
+      display: block; width: 24px; height: 2px;
+      background: var(--orange);
+    }
+
+    .text-orange { color: var(--orange); }
+    .text-gold   { color: var(--gold); }
+
+    /* =====================================================================
+       BUTTONS
+       ===================================================================== */
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.75rem 1.6rem;
+      border-radius: var(--radius);
+      font-family: var(--font-body); font-size: 0.88rem;
+      font-weight: 700; letter-spacing: 0.04em;
+      transition: var(--transition); cursor: pointer;
+      white-space: nowrap;
+    }
+    .btn-primary {
+      background: var(--orange); color: white;
+      box-shadow: 0 4px 20px rgba(214,107,45,0.4);
+    }
+    .btn-primary:hover { background: var(--orange-dark); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(214,107,45,0.5); }
+    .btn-secondary {
+      background: transparent; color: var(--white);
+      border: 1px solid rgba(255,255,255,0.3);
+    }
+    .btn-secondary:hover { border-color: var(--white); background: rgba(255,255,255,0.07); }
+    .btn-ghost {
+      background: transparent; color: rgba(245,245,245,0.7);
+      border: 1px solid rgba(255,255,255,0.12);
+    }
+    .btn-ghost:hover { border-color: var(--orange); color: var(--orange); }
+    .btn-gold {
+      background: var(--gold); color: #0D1117;
+      box-shadow: 0 4px 20px rgba(212,175,55,0.3);
+    }
+    .btn-gold:hover { background: #c4a030; transform: translateY(-2px); }
+    .btn-lg { padding: 1rem 2rem; font-size: 0.95rem; }
+    .btn-sm { padding: 0.5rem 1rem; font-size: 0.8rem; }
+
+    /* =====================================================================
+       FADE-UP ANIMATION
+       ===================================================================== */
+    .fade-up {
+      opacity: 0; transform: translateY(28px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+    /* =====================================================================
+       NAVIGATION
+       ===================================================================== */
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 1000;
+      background: rgba(13,17,23,0.0);
+      backdrop-filter: blur(0px);
+      transition: background 0.4s ease, backdrop-filter 0.4s ease;
+      border-bottom: 1px solid transparent;
+    }
+    .nav.scrolled {
+      background: rgba(13,17,23,0.95);
+      backdrop-filter: blur(20px);
+      border-bottom-color: rgba(255,255,255,0.06);
+    }
+    .nav-inner {
+      max-width: 1280px; margin: 0 auto;
+      padding: 0 2rem;
+      height: 70px;
+      display: flex; align-items: center; gap: 2rem;
+    }
+    .nav-logo {
+      display: flex; align-items: center; gap: 0.7rem;
+      font-size: 1rem; font-weight: 800; color: var(--white);
+      text-decoration: none; white-space: nowrap;
+    }
+    .nav-logo-icon { font-size: 1.4rem; }
+    .nav-logo-text span { display: block; font-size: 0.6rem; font-weight: 400; color: var(--grey); letter-spacing: 0.1em; }
+    .nav-links {
+      display: flex; gap: 0.2rem; align-items: center;
+      margin: 0; padding: 0; list-style: none; margin-left: auto;
+    }
+    .nav-links a {
+      font-size: 0.83rem; font-weight: 500; color: rgba(245,245,245,0.75);
+      padding: 0.4rem 0.75rem; border-radius: 6px;
+      transition: var(--transition);
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--white); background: rgba(255,255,255,0.07); }
+    .nav-dropdown { position: relative; }
+    .nav-dropdown-menu {
+      position: absolute; top: calc(100% + 0.5rem); left: 50%;
+      transform: translateX(-50%);
+      background: rgba(17,24,32,0.98);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--radius);
+      padding: 0.5rem;
+      min-width: 280px;
+      opacity: 0; visibility: hidden;
+      transform: translateX(-50%) translateY(-8px);
+      transition: opacity 0.2s, transform 0.2s, visibility 0.2s;
+      z-index: 100;
+    }
+    .nav-dropdown:hover .nav-dropdown-menu {
+      opacity: 1; visibility: visible;
+      transform: translateX(-50%) translateY(0);
+    }
+    .nav-dropdown-menu a {
+      display: block; padding: 0.7rem 1rem; border-radius: 6px;
+      font-size: 0.83rem; color: rgba(245,245,245,0.8);
+      transition: var(--transition);
+    }
+    .nav-dropdown-menu a:hover { background: rgba(255,255,255,0.06); color: var(--orange); }
+    .nav-dropdown-menu a span { display: block; font-size: 0.7rem; color: var(--grey); font-weight: 400; margin-top: 0.1rem; }
+    .nav-cta { margin-left: 0.5rem; }
+    .nav-burger { display: none; flex-direction: column; gap: 5px; padding: 8px; margin-left: auto; }
+    .nav-burger span { display: block; width: 22px; height: 2px; background: var(--white); border-radius: 2px; transition: var(--transition); }
+    .nav-mobile {
+      display: none; position: fixed; inset: 0; z-index: 999;
+      background: rgba(13,17,23,0.98); backdrop-filter: blur(20px);
+      flex-direction: column; align-items: center; justify-content: center;
+      gap: 1.5rem;
+    }
+    .nav-mobile.open { display: flex; }
+    .nav-mobile a { font-size: 1.4rem; font-weight: 700; color: var(--white); }
+    .nav-mobile-close {
+      position: absolute; top: 1.5rem; right: 1.5rem;
+      font-size: 1.5rem; color: var(--grey); background: none; border: none;
+      cursor: pointer; padding: 0.5rem;
+    }
+    @media (max-width: 900px) {
+      .nav-links, .nav-cta { display: none; }
+      .nav-burger { display: flex; }
+    }
+
+    /* =====================================================================
+       FOOTER
+       ===================================================================== */
+    .footer {
+      background: #080B10;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding: 4rem 0 2rem;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 3rem; margin-bottom: 3rem;
+    }
+    @media (max-width: 900px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 600px) { .footer-grid { grid-template-columns: 1fr; } }
+    .footer-logo {
+      display: flex; align-items: center; gap: 0.6rem;
+      font-size: 1.1rem; font-weight: 800; margin-bottom: 1rem;
+    }
+    .footer-logo-icon { font-size: 1.4rem; }
+    .footer-tagline { font-size: 0.83rem; color: var(--grey); line-height: 1.7; margin-bottom: 1.5rem; }
+    .footer-socials { display: flex; gap: 0.6rem; }
+    .social-btn {
+      width: 36px; height: 36px; border-radius: 50%;
+      background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.85rem; transition: var(--transition);
+    }
+    .social-btn:hover { background: var(--orange); border-color: var(--orange); }
+    .footer-col h4 { font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--grey); margin-bottom: 1rem; }
+    .footer-col ul { display: flex; flex-direction: column; gap: 0.6rem; }
+    .footer-col a { font-size: 0.85rem; color: rgba(245,245,245,0.6); transition: var(--transition); }
+    .footer-col a:hover { color: var(--orange); }
+    .footer-bottom {
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;
+      padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    .footer-copy { font-size: 0.78rem; color: var(--grey); }
+    .footer-legal { display: flex; gap: 1.5rem; }
+    .footer-legal a { font-size: 0.78rem; color: var(--grey); transition: var(--transition); }
+    .footer-legal a:hover { color: var(--white); }
+
+    /* =====================================================================
+       CONTAINER
+       ===================================================================== */
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+    @media (max-width: 600px) { .container { padding: 0 1.2rem; } }
+  </style>
 </head>
 <body>
 
@@ -25,12 +861,11 @@
         <span>National Reform Movement</span>
       </div>
     </a>
-
     <ul class="nav-links" role="list">
       <li><a href="index.html" class="active">Home</a></li>
       <li><a href="evidence.html">The Evidence</a></li>
       <li class="nav-dropdown">
-        <a href="pillars.html">The Reforms</a>
+        <a href="pillars.html">The Reforms ▾</a>
         <div class="nav-dropdown-menu">
           <a href="pillars.html#jic">🛡 Judicial Integrity Commission<span>Independent oversight of the judiciary</span></a>
           <a href="pillars.html#eip">📹 Evidence Integrity Protocols<span>Mandatory chain-of-custody standards</span></a>
@@ -41,9 +876,7 @@
       <li><a href="music.html">Music for Justice</a></li>
       <li><a href="take-action.html">Take Action</a></li>
     </ul>
-
     <a href="take-action.html" class="btn btn-primary btn-sm nav-cta">🔴 Join the Movement</a>
-
     <button class="nav-burger" id="navBurger" aria-label="Open menu" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
@@ -62,9 +895,65 @@
 </nav>
 
 <!-- =====================================================================
+     HERO — Full cinematic, chain parliament image
+     ===================================================================== -->
+<section class="hero" aria-label="Hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span class="hero-badge-dot"></span>
+        Movement Active — Australia Wide
+      </div>
+
+      <h1 class="hero-title">
+        <span class="line-1">THE CHAIN</span>
+        <span class="line-2">IS BROKEN</span>
+      </h1>
+
+      <p class="hero-subtitle">
+        Restore trust. Restore accountability. Australia deserves transparent courts, verified evidence, independent judicial oversight, and equal access to justice for every single citizen.
+      </p>
+
+      <div class="hero-actions">
+        <a href="take-action.html" class="btn btn-primary btn-lg">🔴 Join the Movement</a>
+        <a href="#trailer" class="btn btn-secondary btn-lg">▶ Watch the Evidence</a>
+        <a href="#music" class="btn btn-ghost btn-lg">🎵 Music for Justice</a>
+      </div>
+
+      <div class="hero-stats">
+        <div class="hero-stat-item">
+          <span class="hero-stat-num" data-count="850000" data-suffix="+">850,000+</span>
+          <span class="hero-stat-label">Australians Represented</span>
+        </div>
+        <div class="hero-stat-item">
+          <span class="hero-stat-num" data-count="12847" data-suffix="+">12,847+</span>
+          <span class="hero-stat-label">Petition Signatures</span>
+        </div>
+        <div class="hero-stat-item">
+          <span class="hero-stat-num" data-count="3">3</span>
+          <span class="hero-stat-label">National Reforms</span>
+        </div>
+        <div class="hero-stat-item">
+          <span class="hero-stat-num" data-count="128" data-suffix="+">128+</span>
+          <span class="hero-stat-label">Songs for Justice</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-scroll" aria-hidden="true">
+    <div class="hero-scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- =====================================================================
      TICKER
      ===================================================================== -->
-<div class="ticker" style="margin-top:70px;" role="marquee" aria-label="News ticker">
+<div class="ticker" role="marquee" aria-label="Movement news ticker">
   <div class="ticker-track">
     <span class="ticker-item">Justice Requires Accountability</span>
     <span class="ticker-item">12,847 Australians Have Signed</span>
@@ -84,100 +973,210 @@
 </div>
 
 <!-- =====================================================================
-     HERO
+     DOCUMENTARY TRAILER — Section 2 (Watch the Evidence)
      ===================================================================== -->
-<section class="hero" aria-label="Hero">
-  <div class="hero-bg"></div>
-  <div class="hero-overlay"></div>
-
+<section class="trailer-section" id="trailer" aria-labelledby="trailer-heading">
   <div class="container">
-    <div class="hero-content">
-      <div class="hero-badge">
-        <span class="hero-badge-dot"></span>
-        Movement Active — Australia Wide
+    <div class="trailer-inner fade-up">
+      <div class="trailer-text">
+        <div class="eyebrow">Watch the Evidence</div>
+        <h2 id="trailer-heading">The Movement <span class="text-orange">In Motion</span></h2>
+        <p>From Parliament House to outback courtrooms — this is the story of an Australian justice system that has failed the very citizens it was built to protect. Watch the movement's flagship track, and feel what reform sounds like.</p>
+        <ul class="trailer-list">
+          <li>Missing bodycam footage — documented</li>
+          <li>Backdated court orders — on the record</li>
+          <li>Legal aid denied — case after case</li>
+          <li>Judicial oversight — absent</li>
+          <li>Three reforms that would change everything</li>
+        </ul>
+        <div style="display:flex;gap:1rem;flex-wrap:wrap">
+          <a href="evidence.html" class="btn btn-primary">🔍 Enter the Evidence Vault</a>
+          <a href="https://www.youtube.com/@fairgojustice" target="_blank" rel="noopener" class="btn btn-ghost">▶ YouTube Channel</a>
+        </div>
       </div>
-
-      <h1 class="hero-title">
-        <span class="glow">THE CHAIN</span>
-        <span class="highlight">IS BROKEN</span>
-      </h1>
-
-      <p class="hero-subtitle">
-        Australia deserves transparent courts, verified evidence, independent judicial oversight, and equal access to justice — for every single citizen.
-      </p>
-
-      <div class="hero-actions">
-        <a href="take-action.html" class="btn btn-primary btn-lg">🔴 Join the Movement</a>
-        <a href="evidence.html" class="btn btn-secondary btn-lg">⚪ Watch the Evidence</a>
-        <a href="music.html" class="btn btn-ghost btn-lg">🎵 Music for Justice</a>
-      </div>
-
-      <div class="hero-stats">
-        <div class="hero-stat-item">
-          <span class="hero-stat-num" data-count="850000" data-suffix="+">850,000+</span>
-          <span class="hero-stat-label">Australians Represented</span>
-        </div>
-        <div class="hero-stat-item">
-          <span class="hero-stat-num" data-count="12847" data-suffix="+">12,847+</span>
-          <span class="hero-stat-label">Petition Signatures</span>
-        </div>
-        <div class="hero-stat-item">
-          <span class="hero-stat-num" data-count="3">3</span>
-          <span class="hero-stat-label">National Reforms Proposed</span>
-        </div>
-        <div class="hero-stat-item">
-          <span class="hero-stat-num" data-count="128" data-suffix="+">128+</span>
-          <span class="hero-stat-label">Songs for Justice</span>
-        </div>
+      <div class="trailer-embed">
+        <div class="trailer-embed-label">Featured Track</div>
+        <iframe
+          src="https://www.youtube.com/embed/x3UqqsYzTPg?autoplay=0&rel=0&modestbranding=1&color=white"
+          title="The Appointed — Fair Go Justice"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+          loading="lazy">
+        </iframe>
       </div>
     </div>
-  </div>
-
-  <div class="hero-scroll" aria-hidden="true">
-    <div class="hero-scroll-line"></div>
-    <span>Scroll</span>
   </div>
 </section>
 
 <!-- =====================================================================
-     STATS
+     MUSIC FOR JUSTICE — Section 3 (FRONT AND CENTRE)
      ===================================================================== -->
-<section class="stats-section" aria-label="Movement Statistics">
+<section class="music-section" id="music" aria-labelledby="music-heading">
   <div class="container">
-    <div class="stats-grid">
-      <div class="stat-card fade-up">
-        <div class="stat-icon">📋</div>
-        <span class="stat-number" data-count="850000" data-suffix="+">850,000+</span>
-        <span class="stat-label">Australians Represented</span>
+    <div class="section-header fade-up">
+      <div class="eyebrow">Music for Justice</div>
+      <h2 id="music-heading">The <span class="text-gold">Justice Jukebox</span></h2>
+      <p>Songs, albums, and anthems created for the movement. 128+ tracks and growing — the music that no other advocacy campaign in Australia has.</p>
+    </div>
+
+    <!-- Featured track with live YouTube embed -->
+    <div class="jukebox-featured fade-up">
+      <div class="jukebox-featured-video">
+        <iframe
+          src="https://www.youtube.com/embed/x3UqqsYzTPg?rel=0&modestbranding=1&color=white"
+          title="The Appointed — Fair Go Justice"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+          loading="lazy">
+        </iframe>
       </div>
-      <div class="stat-card fade-up" style="transition-delay:0.1s">
-        <div class="stat-icon">✍️</div>
-        <span class="stat-number" data-count="12847" data-suffix="+">12,847+</span>
-        <span class="stat-label">Petition Signatures</span>
+      <div class="jukebox-featured-info">
+        <div class="eyebrow">Featured Track</div>
+        <h3>THE APPOINTED</h3>
+        <p>"Who watches those who are appointed to watch us?" A cinematic anthem about judicial accountability — raw, powerful, and relentless. The most-watched track in the collection.</p>
+        <div class="jukebox-actions">
+          <a href="https://www.youtube.com/watch?v=x3UqqsYzTPg" target="_blank" rel="noopener" class="btn btn-primary">▶ Watch on YouTube</a>
+          <a href="music.html" class="btn btn-ghost">View All Songs</a>
+        </div>
       </div>
-      <div class="stat-card fade-up" style="transition-delay:0.2s">
-        <div class="stat-icon">🏛️</div>
-        <span class="stat-number" data-count="3">3</span>
-        <span class="stat-label">National Reforms Proposed</span>
-      </div>
-      <div class="stat-card fade-up" style="transition-delay:0.3s">
-        <div class="stat-icon">🎵</div>
-        <span class="stat-number" data-count="128" data-suffix="+">128+</span>
-        <span class="stat-label">Songs for Justice</span>
-      </div>
-      <div class="stat-card fade-up" style="transition-delay:0.4s">
-        <div class="stat-icon">🗺️</div>
-        <span class="stat-number" data-count="8">8</span>
-        <span class="stat-label">States &amp; Territories</span>
-      </div>
+    </div>
+
+    <!-- Album art grid -->
+    <div class="album-grid">
+
+      <article class="album-card fade-up">
+        <div class="album-art">
+          <img src="https://raw.githubusercontent.com/Fair-Go-Justice/fairgojustice-website/main/thumbnails/the_appointed_v1_thumb.jpg"
+               alt="The Appointed album art"
+               onerror="this.parentNode.classList.add('art-fallback');this.remove()">
+          <div class="album-play-overlay">
+            <a href="https://www.youtube.com/watch?v=x3UqqsYzTPg" target="_blank" rel="noopener" class="album-play-btn" aria-label="Play The Appointed">▶</a>
+          </div>
+        </div>
+        <div class="album-info">
+          <div class="album-title">The Appointed</div>
+          <div class="album-meta">Judicial Integrity Anthem</div>
+          <div class="album-pillar">Pillar 1</div>
+        </div>
+      </article>
+
+      <article class="album-card fade-up" style="transition-delay:0.08s">
+        <div class="album-art">
+          <div class="album-art-placeholder" style="background:linear-gradient(135deg,#0E3A5B,#1A5276)">📹</div>
+          <div class="album-play-overlay">
+            <a href="music.html" class="album-play-btn" aria-label="Play Evidence Integrity Protocols">▶</a>
+          </div>
+        </div>
+        <div class="album-info">
+          <div class="album-title">Evidence Integrity Protocols</div>
+          <div class="album-meta">Documentary Style</div>
+          <div class="album-pillar">Pillar 2</div>
+        </div>
+      </article>
+
+      <article class="album-card fade-up" style="transition-delay:0.16s">
+        <div class="album-art">
+          <div class="album-art-placeholder" style="background:linear-gradient(135deg,#3d1a00,#8B3A0F)">⚖</div>
+          <div class="album-play-overlay">
+            <a href="music.html" class="album-play-btn" aria-label="Play Legal Aid Reform">▶</a>
+          </div>
+        </div>
+        <div class="album-info">
+          <div class="album-title">Legal Aid Reform</div>
+          <div class="album-meta">Protest Anthem</div>
+          <div class="album-pillar">Pillar 3</div>
+        </div>
+      </article>
+
+      <article class="album-card fade-up" style="transition-delay:0.24s">
+        <div class="album-art">
+          <div class="album-art-placeholder" style="background:linear-gradient(135deg,#2c0000,#5c0000)">🔥</div>
+          <div class="album-play-overlay">
+            <a href="music.html" class="album-play-btn" aria-label="Play Conflict of Interest">▶</a>
+          </div>
+        </div>
+        <div class="album-info">
+          <div class="album-title">Conflict of Interest</div>
+          <div class="album-meta">Dark Documentary</div>
+          <div class="album-pillar">Judicial Integrity</div>
+        </div>
+      </article>
+
+      <article class="album-card fade-up" style="transition-delay:0.32s">
+        <div class="album-art">
+          <div class="album-art-placeholder" style="background:linear-gradient(135deg,#1a3a00,#2d6a1f)">✊</div>
+          <div class="album-play-overlay">
+            <a href="music.html" class="album-play-btn" aria-label="Play We Are Not Done">▶</a>
+          </div>
+        </div>
+        <div class="album-info">
+          <div class="album-title">We Are Not Done</div>
+          <div class="album-meta">Movement Anthem</div>
+          <div class="album-pillar">Reform</div>
+        </div>
+      </article>
+
+      <article class="album-card fade-up" style="transition-delay:0.40s">
+        <div class="album-art">
+          <div class="album-art-placeholder" style="background:linear-gradient(135deg,#1a1a2e,#16213e)">🎵</div>
+          <div class="album-play-overlay">
+            <a href="music.html" class="album-play-btn" aria-label="View all songs">▶</a>
+          </div>
+        </div>
+        <div class="album-info">
+          <div class="album-title">Signed. Denied. Betrayed.</div>
+          <div class="album-meta">Protest Ballad</div>
+          <div class="album-pillar">Legal Aid</div>
+        </div>
+      </article>
+
+    </div>
+
+    <div style="text-align:center; margin-top:3rem;" class="fade-up">
+      <a href="music.html" class="btn btn-gold btn-lg">🎵 Explore All 128+ Songs →</a>
     </div>
   </div>
 </section>
+
+<!-- =====================================================================
+     STATS BAR
+     ===================================================================== -->
+<div class="stats-bar" aria-label="Movement statistics">
+  <div class="container">
+    <div class="stats-bar-grid">
+      <div class="stats-bar-item fade-up">
+        <div class="stats-bar-icon">📋</div>
+        <div class="stats-bar-num" data-count="850000" data-suffix="+">850,000+</div>
+        <div class="stats-bar-label">Australians Represented</div>
+      </div>
+      <div class="stats-bar-item fade-up" style="transition-delay:0.1s">
+        <div class="stats-bar-icon">✍️</div>
+        <div class="stats-bar-num" data-count="12847" data-suffix="+">12,847+</div>
+        <div class="stats-bar-label">Petition Signatures</div>
+      </div>
+      <div class="stats-bar-item fade-up" style="transition-delay:0.2s">
+        <div class="stats-bar-icon">🏛️</div>
+        <div class="stats-bar-num" data-count="3">3</div>
+        <div class="stats-bar-label">National Reforms Proposed</div>
+      </div>
+      <div class="stats-bar-item fade-up" style="transition-delay:0.3s">
+        <div class="stats-bar-icon">🎵</div>
+        <div class="stats-bar-num" data-count="128" data-suffix="+">128+</div>
+        <div class="stats-bar-label">Songs for Justice</div>
+      </div>
+      <div class="stats-bar-item fade-up" style="transition-delay:0.4s">
+        <div class="stats-bar-icon">🗺️</div>
+        <div class="stats-bar-num" data-count="8">8</div>
+        <div class="stats-bar-label">States &amp; Territories</div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- =====================================================================
      THREE PILLARS
      ===================================================================== -->
-<section class="pillars-section section-pad-lg" aria-labelledby="pillars-heading">
+<section class="pillars-section" aria-labelledby="pillars-heading">
   <div class="container">
     <div class="section-header fade-up">
       <div class="eyebrow">The Three Reforms</div>
@@ -193,7 +1192,6 @@
         <p class="pillar-desc">An independent body with real investigative powers to receive and investigate complaints against judicial officers — free from political influence.</p>
         <a href="pillars.html#jic" class="pillar-link">Learn more →</a>
       </article>
-
       <article class="pillar-card fade-up" style="transition-delay:0.15s">
         <span class="pillar-num" aria-hidden="true">02</span>
         <div class="pillar-icon">📹</div>
@@ -201,7 +1199,6 @@
         <p class="pillar-desc">Mandatory tamper-proof chain-of-custody standards for all evidence — body camera footage, documents, exhibits — in every Australian court.</p>
         <a href="pillars.html#eip" class="pillar-link">Learn more →</a>
       </article>
-
       <article class="pillar-card fade-up" style="transition-delay:0.3s">
         <span class="pillar-num" aria-hidden="true">03</span>
         <div class="pillar-icon">⚖</div>
@@ -214,9 +1211,71 @@
 </section>
 
 <!-- =====================================================================
+     EVIDENCE VAULT
+     ===================================================================== -->
+<section class="evidence-section" aria-labelledby="evidence-heading">
+  <div class="container">
+    <div class="section-header fade-up">
+      <div class="eyebrow">Evidence Vault</div>
+      <h2 id="evidence-heading">The <span class="text-orange">Smoking Guns</span></h2>
+      <p>Click any category to explore documented evidence exhibits — interactive, sourced, and growing with every submission from across Australia.</p>
+    </div>
+
+    <div class="evidence-grid">
+      <article class="evidence-card fade-up" onclick="location.href='evidence.html#missing'">
+        <span class="evidence-arrow" aria-hidden="true">↗</span>
+        <span class="evidence-icon">🧾</span>
+        <div class="evidence-title">Missing Evidence</div>
+        <p class="evidence-desc">Exhibits that disappeared from court records after submission — documented, logged, unresolved.</p>
+        <div class="evidence-count">47 Documented Cases</div>
+      </article>
+      <article class="evidence-card fade-up" style="transition-delay:0.1s" onclick="location.href='evidence.html#bodycam'">
+        <span class="evidence-arrow" aria-hidden="true">↗</span>
+        <span class="evidence-icon">📹</span>
+        <div class="evidence-title">Missing Bodycam Footage</div>
+        <p class="evidence-desc">Body-worn camera recordings listed as unavailable, corrupted, or permanently deleted at critical moments.</p>
+        <div class="evidence-count">23 Documented Cases</div>
+      </article>
+      <article class="evidence-card fade-up" style="transition-delay:0.2s" onclick="location.href='evidence.html#oversight'">
+        <span class="evidence-arrow" aria-hidden="true">↗</span>
+        <span class="evidence-icon">⚖</span>
+        <div class="evidence-title">Judicial Oversight Failures</div>
+        <p class="evidence-desc">Undisclosed conflicts of interest, improper conduct, and bias — with no recourse and no oversight.</p>
+        <div class="evidence-count">31 Documented Cases</div>
+      </article>
+      <article class="evidence-card fade-up" style="transition-delay:0.3s" onclick="location.href='evidence.html#documents'">
+        <span class="evidence-arrow" aria-hidden="true">↗</span>
+        <span class="evidence-icon">📄</span>
+        <div class="evidence-title">Document Discrepancies</div>
+        <p class="evidence-desc">Court orders, witness statements, and exhibits returned with unexplained alterations — words changed, dates shifted.</p>
+        <div class="evidence-count">19 Documented Cases</div>
+      </article>
+      <article class="evidence-card fade-up" style="transition-delay:0.4s" onclick="location.href='evidence.html#legalaid'">
+        <span class="evidence-arrow" aria-hidden="true">↗</span>
+        <span class="evidence-icon">💼</span>
+        <div class="evidence-title">Legal Aid Denials</div>
+        <p class="evidence-desc">Legitimate cases refused legal aid — forcing self-representation against fully resourced legal teams.</p>
+        <div class="evidence-count">62 Documented Cases</div>
+      </article>
+      <article class="evidence-card fade-up" style="transition-delay:0.5s" onclick="location.href='evidence.html#custody'">
+        <span class="evidence-arrow" aria-hidden="true">↗</span>
+        <span class="evidence-icon">🔗</span>
+        <div class="evidence-title">Chain of Custody Breaks</div>
+        <p class="evidence-desc">Evidence handling failures where tamper-evident seals were broken, bypassed, or simply never applied.</p>
+        <div class="evidence-count">28 Documented Cases</div>
+      </article>
+    </div>
+
+    <div style="text-align:center; margin-top:3rem;" class="fade-up">
+      <a href="evidence.html" class="btn btn-secondary btn-lg">🔍 Enter the Full Evidence Vault</a>
+    </div>
+  </div>
+</section>
+
+<!-- =====================================================================
      WALL OF STORIES
      ===================================================================== -->
-<section class="stories-section section-pad" aria-labelledby="stories-heading">
+<section class="stories-section" aria-labelledby="stories-heading">
   <div class="container">
     <div class="section-header fade-up">
       <div class="eyebrow">Real Australians</div>
@@ -225,8 +1284,6 @@
     </div>
 
     <div class="stories-grid">
-
-      <!-- Featured story -->
       <article class="story-card story-featured fade-up">
         <div class="story-featured-img">📁</div>
         <div class="story-card-body">
@@ -237,7 +1294,7 @@
           </div>
           <div class="story-name">Respondent A</div>
           <div class="story-issue">Missing Evidence — 10-Year Battle</div>
-          <p class="story-text">"Evidence I submitted was never entered into the court record. My solicitor was told it didn't exist. It took years — and the movement — before anyone listened."</p>
+          <p class="story-text">"Evidence I submitted was never entered into the court record. My solicitor was told it didn't exist. It took years — and this movement — before anyone listened."</p>
           <a href="stories.html" class="story-read">Read full story →</a>
         </div>
       </article>
@@ -315,157 +1372,8 @@
 
     <div class="stories-cta fade-up">
       <h3>Your Story Matters</h3>
-      <p>Anonymous submissions welcome. Every story adds to the evidence for reform.</p>
+      <p>Anonymous submissions welcome. Every story strengthens the case for reform.</p>
       <a href="stories.html#submit" class="btn btn-primary">Share Your Story</a>
-    </div>
-  </div>
-</section>
-
-<!-- =====================================================================
-     MUSIC FOR JUSTICE
-     ===================================================================== -->
-<section class="music-section section-pad-lg" aria-labelledby="music-heading">
-  <div class="container">
-    <div class="section-header fade-up">
-      <div class="eyebrow">Music for Justice</div>
-      <h2 id="music-heading">The <span class="text-gold">Justice Jukebox</span></h2>
-      <p>Songs, albums, and videos created for the movement. The music nobody else has — raw, real, and relentless.</p>
-    </div>
-
-    <!-- Featured track -->
-    <div class="jukebox-featured fade-up">
-      <div class="jukebox-featured-art">
-        🎵
-        <div class="play-overlay">
-          <a href="https://www.youtube.com/watch?v=x3UqqsYzTPg" target="_blank" rel="noopener" class="play-btn-circle" aria-label="Play The Appointed on YouTube">▶</a>
-        </div>
-      </div>
-      <div class="jukebox-featured-info">
-        <div class="eyebrow">Featured Track</div>
-        <h3>The Appointed</h3>
-        <p>Who watches those who are appointed to watch us? A cinematic anthem about judicial accountability — the most powerful track in the collection.</p>
-        <div class="jukebox-actions">
-          <a href="https://www.youtube.com/watch?v=x3UqqsYzTPg" target="_blank" rel="noopener" class="btn btn-primary">▶ Watch on YouTube</a>
-          <a href="music.html" class="btn btn-ghost">View All Songs</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="music-grid">
-      <article class="track-card fade-up">
-        <div class="track-art">🎵</div>
-        <div class="track-info">
-          <div class="track-title">Evidence Integrity Protocols</div>
-          <div class="track-meta">Pillar 2 Anthem</div>
-          <div class="track-pillar">Evidence Reform</div>
-        </div>
-      </article>
-      <article class="track-card fade-up" style="transition-delay:0.1s">
-        <div class="track-art">🎵</div>
-        <div class="track-info">
-          <div class="track-title">Legal Aid Reform</div>
-          <div class="track-meta">Pillar 3 Anthem</div>
-          <div class="track-pillar">Access to Justice</div>
-        </div>
-      </article>
-      <article class="track-card fade-up" style="transition-delay:0.2s">
-        <div class="track-art">🎵</div>
-        <div class="track-info">
-          <div class="track-title">Signed. Denied. Betrayed.</div>
-          <div class="track-meta">Protest Anthem</div>
-          <div class="track-pillar">Legal Aid</div>
-        </div>
-      </article>
-      <article class="track-card fade-up" style="transition-delay:0.3s">
-        <div class="track-art">🎵</div>
-        <div class="track-info">
-          <div class="track-title">Conflict of Interest</div>
-          <div class="track-meta">Documentary Style</div>
-          <div class="track-pillar">Judicial Integrity</div>
-        </div>
-      </article>
-      <article class="track-card fade-up" style="transition-delay:0.4s">
-        <div class="track-art">🎵</div>
-        <div class="track-info">
-          <div class="track-title">We Are Not Done</div>
-          <div class="track-meta">Movement Anthem</div>
-          <div class="track-pillar">Reform</div>
-        </div>
-      </article>
-      <article class="track-card fade-up" style="transition-delay:0.5s">
-        <div class="track-art">🎵</div>
-        <div class="track-info">
-          <div class="track-title">Missing Bodycam</div>
-          <div class="track-meta">Dark Documentary</div>
-          <div class="track-pillar">Evidence Reform</div>
-        </div>
-      </article>
-    </div>
-
-    <div style="text-align:center; margin-top:2.5rem;" class="fade-up">
-      <a href="music.html" class="btn btn-gold btn-lg">🎵 View All 128+ Songs</a>
-    </div>
-  </div>
-</section>
-
-<!-- =====================================================================
-     EVIDENCE VAULT
-     ===================================================================== -->
-<section class="evidence-section section-pad" aria-labelledby="evidence-heading">
-  <div class="container">
-    <div class="section-header fade-up">
-      <div class="eyebrow">Evidence Vault</div>
-      <h2 id="evidence-heading">The <span class="text-orange">Smoking Guns</span></h2>
-      <p>Click any category to explore documented evidence exhibits — interactive, sourced, and growing with every submission.</p>
-    </div>
-
-    <div class="evidence-grid">
-      <article class="evidence-card fade-up">
-        <span class="evidence-icon">🧾</span>
-        <div class="evidence-title">Missing Evidence</div>
-        <p class="evidence-desc">Cases where exhibits disappeared from court records after submission.</p>
-        <div class="evidence-count">47 Documented Cases</div>
-        <div class="evidence-arrow" aria-hidden="true">↗</div>
-      </article>
-      <article class="evidence-card fade-up" style="transition-delay:0.1s">
-        <span class="evidence-icon">📹</span>
-        <div class="evidence-title">Missing Bodycam Footage</div>
-        <p class="evidence-desc">Body-worn camera recordings listed as unavailable or deleted.</p>
-        <div class="evidence-count">23 Documented Cases</div>
-        <div class="evidence-arrow" aria-hidden="true">↗</div>
-      </article>
-      <article class="evidence-card fade-up" style="transition-delay:0.2s">
-        <span class="evidence-icon">⚖</span>
-        <div class="evidence-title">Judicial Oversight Failures</div>
-        <p class="evidence-desc">Instances of undisclosed conflicts of interest, improper conduct, and bias.</p>
-        <div class="evidence-count">31 Documented Cases</div>
-        <div class="evidence-arrow" aria-hidden="true">↗</div>
-      </article>
-      <article class="evidence-card fade-up" style="transition-delay:0.3s">
-        <span class="evidence-icon">📄</span>
-        <div class="evidence-title">Document Discrepancies</div>
-        <p class="evidence-desc">Court orders, witness statements, and exhibits with unexplained alterations.</p>
-        <div class="evidence-count">19 Documented Cases</div>
-        <div class="evidence-arrow" aria-hidden="true">↗</div>
-      </article>
-      <article class="evidence-card fade-up" style="transition-delay:0.4s">
-        <span class="evidence-icon">💼</span>
-        <div class="evidence-title">Legal Aid Denials</div>
-        <p class="evidence-desc">Legitimate cases refused legal aid — forcing self-representation against legal teams.</p>
-        <div class="evidence-count">62 Documented Cases</div>
-        <div class="evidence-arrow" aria-hidden="true">↗</div>
-      </article>
-      <article class="evidence-card fade-up" style="transition-delay:0.5s">
-        <span class="evidence-icon">🔗</span>
-        <div class="evidence-title">Chain of Custody Breaks</div>
-        <p class="evidence-desc">Evidence handling failures where tamper-evident seals were broken or bypassed.</p>
-        <div class="evidence-count">28 Documented Cases</div>
-        <div class="evidence-arrow" aria-hidden="true">↗</div>
-      </article>
-    </div>
-
-    <div style="text-align:center; margin-top:2.5rem;" class="fade-up">
-      <a href="evidence.html" class="btn btn-secondary btn-lg">🔍 Enter the Evidence Vault</a>
     </div>
   </div>
 </section>
@@ -473,40 +1381,32 @@
 <!-- =====================================================================
      AUSTRALIA MAP
      ===================================================================== -->
-<section class="map-section section-pad-lg" aria-labelledby="map-heading">
+<section class="map-section" aria-labelledby="map-heading">
   <div class="container">
     <div class="section-header fade-up">
       <div class="eyebrow">The Movement</div>
       <h2 id="map-heading">Australia is <span class="text-orange">Watching</span></h2>
-      <p>The movement spans every state and territory. Click a state to see local stories, signatures, and volunteers.</p>
+      <p>The movement spans every state and territory. Click a state to see local signatures, stories, and volunteers.</p>
     </div>
 
     <div class="map-container">
       <div class="map-svg-wrapper fade-up">
-        <svg class="aus-map" viewBox="0 0 700 600" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Map of Australia">
-          <!-- WA -->
-          <path class="state-path" id="map-WA" d="M30 80 L220 80 L220 420 L80 460 L30 380 Z" onclick="selectState('WA')" aria-label="Western Australia"/>
+        <svg class="aus-map" viewBox="0 0 700 600" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Interactive map of Australia">
+          <path class="state-path" id="map-WA"  d="M30 80 L220 80 L220 420 L80 460 L30 380 Z" onclick="selectState('WA')"  tabindex="0" aria-label="Western Australia"/>
           <text class="state-label" x="100" y="260" text-anchor="middle">WA</text>
-          <!-- NT -->
-          <path class="state-path" id="map-NT" d="M220 80 L360 80 L360 280 L220 280 Z" onclick="selectState('NT')" aria-label="Northern Territory"/>
+          <path class="state-path" id="map-NT"  d="M220 80 L360 80 L360 280 L220 280 Z"       onclick="selectState('NT')"  tabindex="0" aria-label="Northern Territory"/>
           <text class="state-label" x="290" y="190" text-anchor="middle">NT</text>
-          <!-- SA -->
-          <path class="state-path" id="map-SA" d="M220 280 L360 280 L360 420 L280 440 L220 420 Z" onclick="selectState('SA')" aria-label="South Australia"/>
+          <path class="state-path" id="map-SA"  d="M220 280 L360 280 L360 420 L280 440 L220 420 Z" onclick="selectState('SA')" tabindex="0" aria-label="South Australia"/>
           <text class="state-label" x="290" y="360" text-anchor="middle">SA</text>
-          <!-- QLD -->
-          <path class="state-path" id="map-QLD" d="M360 80 L540 80 L540 300 L440 300 L360 280 Z" onclick="selectState('QLD')" aria-label="Queensland"/>
+          <path class="state-path" id="map-QLD" d="M360 80 L540 80 L540 300 L440 300 L360 280 Z"   onclick="selectState('QLD')" tabindex="0" aria-label="Queensland"/>
           <text class="state-label" x="450" y="190" text-anchor="middle">QLD</text>
-          <!-- NSW -->
-          <path class="state-path" id="map-NSW" d="M360 300 L540 300 L540 430 L420 460 L360 420 Z" onclick="selectState('NSW')" aria-label="New South Wales"/>
+          <path class="state-path" id="map-NSW" d="M360 300 L540 300 L540 430 L420 460 L360 420 Z" onclick="selectState('NSW')" tabindex="0" aria-label="New South Wales"/>
           <text class="state-label" x="455" y="375" text-anchor="middle">NSW</text>
-          <!-- VIC -->
-          <path class="state-path" id="map-VIC" d="M360 420 L500 430 L480 490 L360 490 Z" onclick="selectState('VIC')" aria-label="Victoria"/>
+          <path class="state-path" id="map-VIC" d="M360 420 L500 430 L480 490 L360 490 Z"         onclick="selectState('VIC')" tabindex="0" aria-label="Victoria"/>
           <text class="state-label" x="420" y="465" text-anchor="middle">VIC</text>
-          <!-- TAS -->
-          <path class="state-path" id="map-TAS" d="M430 510 L490 510 L490 560 L430 560 Z" onclick="selectState('TAS')" aria-label="Tasmania"/>
+          <path class="state-path" id="map-TAS" d="M430 510 L490 510 L490 560 L430 560 Z"         onclick="selectState('TAS')" tabindex="0" aria-label="Tasmania"/>
           <text class="state-label" x="460" y="540" text-anchor="middle">TAS</text>
-          <!-- ACT (small) -->
-          <path class="state-path" id="map-ACT" d="M460 400 L490 400 L490 425 L460 425 Z" onclick="selectState('ACT')" aria-label="Australian Capital Territory"/>
+          <path class="state-path" id="map-ACT" d="M460 400 L490 400 L490 425 L460 425 Z"         onclick="selectState('ACT')" tabindex="0" aria-label="Australian Capital Territory"/>
           <text class="state-label" x="475" y="417" text-anchor="middle" font-size="8">ACT</text>
         </svg>
       </div>
@@ -516,45 +1416,27 @@
         <div class="map-stat-list" id="mapStatList">
           <div class="map-stat-row" onclick="selectState('NSW')">
             <div class="map-state-name">🟠 NSW</div>
-            <div class="map-state-data">
-              <span class="map-state-num">3,241</span>
-              <span class="map-state-sub">Signatures</span>
-            </div>
+            <div class="map-state-data"><span class="map-state-num">3,241</span><span class="map-state-sub">Signatures</span></div>
           </div>
           <div class="map-stat-row" onclick="selectState('VIC')">
             <div class="map-state-name">🟠 VIC</div>
-            <div class="map-state-data">
-              <span class="map-state-num">2,817</span>
-              <span class="map-state-sub">Signatures</span>
-            </div>
+            <div class="map-state-data"><span class="map-state-num">2,817</span><span class="map-state-sub">Signatures</span></div>
           </div>
           <div class="map-stat-row" onclick="selectState('QLD')">
             <div class="map-state-name">🟠 QLD</div>
-            <div class="map-state-data">
-              <span class="map-state-num">2,109</span>
-              <span class="map-state-sub">Signatures</span>
-            </div>
+            <div class="map-state-data"><span class="map-state-num">2,109</span><span class="map-state-sub">Signatures</span></div>
           </div>
           <div class="map-stat-row" onclick="selectState('WA')">
             <div class="map-state-name">🟠 WA</div>
-            <div class="map-state-data">
-              <span class="map-state-num">1,876</span>
-              <span class="map-state-sub">Signatures</span>
-            </div>
+            <div class="map-state-data"><span class="map-state-num">1,876</span><span class="map-state-sub">Signatures</span></div>
           </div>
           <div class="map-stat-row" onclick="selectState('SA')">
             <div class="map-state-name">🟠 SA</div>
-            <div class="map-state-data">
-              <span class="map-state-num">1,204</span>
-              <span class="map-state-sub">Signatures</span>
-            </div>
+            <div class="map-state-data"><span class="map-state-num">1,204</span><span class="map-state-sub">Signatures</span></div>
           </div>
           <div class="map-stat-row" onclick="selectState('TAS')">
             <div class="map-state-name">🟠 TAS</div>
-            <div class="map-state-data">
-              <span class="map-state-num">487</span>
-              <span class="map-state-sub">Signatures</span>
-            </div>
+            <div class="map-state-data"><span class="map-state-num">487</span><span class="map-state-sub">Signatures</span></div>
           </div>
         </div>
       </div>
@@ -563,20 +1445,20 @@
 </section>
 
 <!-- =====================================================================
-     PETITION
+     PETITION CTA
      ===================================================================== -->
-<section class="petition-section section-pad-lg" aria-labelledby="petition-heading">
+<section class="petition-section" aria-labelledby="petition-heading">
   <div class="petition-bg"></div>
   <div class="petition-overlay"></div>
   <div class="container">
     <div class="petition-content fade-up">
       <div class="eyebrow" style="justify-content:center">Take Action</div>
       <h2 id="petition-heading">JUSTICE REQUIRES <span class="text-orange">ACCOUNTABILITY</span></h2>
-      <p>Sign the national petition calling on the Australian Government to implement all three reforms. Every signature counts.</p>
+      <p>Sign the national petition calling on the Australian Government to implement all three reforms. Every signature counts — and every share multiplies it.</p>
 
       <div class="progress-container">
         <div class="progress-header">
-          <span class="progress-count">12,847</span>
+          <span class="progress-count">12,847 signatures</span>
           <span class="progress-goal">Goal: 100,000</span>
         </div>
         <div class="progress-bar-track">
@@ -595,9 +1477,9 @@
 </section>
 
 <!-- =====================================================================
-     SHARE HUB
+     SOCIAL SHARE HUB
      ===================================================================== -->
-<section class="share-section section-pad" aria-labelledby="share-heading">
+<section class="share-section" aria-labelledby="share-heading">
   <div class="container">
     <div class="section-header fade-up">
       <div class="eyebrow">Spread the Word</div>
@@ -638,8 +1520,8 @@
       </div>
       <div class="share-card fade-up" style="transition-delay:0.5s">
         <span class="share-icon">▶️</span>
-        <div class="share-title">YouTube Thumbnail</div>
-        <div class="share-format">1280×720 · PNG · Template</div>
+        <div class="share-title">YouTube Template</div>
+        <div class="share-format">1280×720 · PNG · Editable</div>
         <a href="take-action.html#share" class="share-dl">⬇ Download Free</a>
       </div>
     </div>
@@ -665,7 +1547,6 @@
           <a href="https://tiktok.com" target="_blank" rel="noopener" class="social-btn" aria-label="TikTok">♪</a>
         </div>
       </div>
-
       <div class="footer-col">
         <h4>The Movement</h4>
         <ul>
@@ -675,7 +1556,6 @@
           <li><a href="take-action.html">Take Action</a></li>
         </ul>
       </div>
-
       <div class="footer-col">
         <h4>The Reforms</h4>
         <ul>
@@ -684,7 +1564,6 @@
           <li><a href="pillars.html#lar">Legal Aid Reform</a></li>
         </ul>
       </div>
-
       <div class="footer-col">
         <h4>Resources</h4>
         <ul>
@@ -695,7 +1574,6 @@
         </ul>
       </div>
     </div>
-
     <div class="footer-bottom">
       <div class="footer-copy">© 2025 Fair Go Justice. All rights reserved. Fair Go Justice is a community-led advocacy movement.</div>
       <div class="footer-legal">
@@ -730,41 +1608,51 @@ closeBtn.addEventListener('click', () => {
   burger.setAttribute('aria-expanded', 'false');
   document.body.style.overflow = '';
 });
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeBtn.click();
+});
 
 /* --- Animated counters --- */
 function animateCounter(el) {
   const target = parseInt(el.dataset.count, 10);
   const suffix = el.dataset.suffix || '';
-  const duration = 2000;
+  const duration = 2200;
   const start = performance.now();
-  const startVal = 0;
-
   function update(now) {
-    const elapsed = now - start;
-    const progress = Math.min(elapsed / duration, 1);
-    const ease = 1 - Math.pow(1 - progress, 3);
-    const current = Math.floor(ease * target);
-    el.textContent = current.toLocaleString('en-AU') + suffix;
-    if (progress < 1) requestAnimationFrame(update);
+    const p = Math.min((now - start) / duration, 1);
+    const ease = 1 - Math.pow(1 - p, 3);
+    el.textContent = Math.floor(ease * target).toLocaleString('en-AU') + suffix;
+    if (p < 1) requestAnimationFrame(update);
   }
   requestAnimationFrame(update);
 }
 
-/* --- Intersection Observer for fade-up and counters --- */
-const observer = new IntersectionObserver((entries) => {
+/* --- Intersection Observer --- */
+const io = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (!entry.isIntersecting) return;
     entry.target.classList.add('visible');
-    const counters = entry.target.querySelectorAll
-      ? entry.target.querySelectorAll('[data-count]')
-      : [];
-    counters.forEach(animateCounter);
+    entry.target.querySelectorAll('[data-count]').forEach(animateCounter);
     if (entry.target.dataset.count) animateCounter(entry.target);
-    observer.unobserve(entry.target);
+    io.unobserve(entry.target);
   });
-}, { threshold: 0.15 });
+}, { threshold: 0.12 });
 
-document.querySelectorAll('.fade-up, [data-count]').forEach(el => observer.observe(el));
+document.querySelectorAll('.fade-up, [data-count]').forEach(el => io.observe(el));
+
+/* --- Progress bar animate on scroll --- */
+const progressFill = document.querySelector('.progress-bar-fill');
+if (progressFill) {
+  const target = parseFloat(progressFill.style.width);
+  progressFill.style.width = '0%';
+  const progressObserver = new IntersectionObserver(entries => {
+    if (entries[0].isIntersecting) {
+      setTimeout(() => { progressFill.style.width = target + '%'; }, 300);
+      progressObserver.disconnect();
+    }
+  }, { threshold: 0.5 });
+  progressObserver.observe(progressFill);
+}
 
 /* --- State data --- */
 const stateData = {
@@ -777,7 +1665,6 @@ const stateData = {
   NT:  { sigs: '298',   stories: 5,  issue: 'Evidence integrity', volunteers: 12 },
   ACT: { sigs: '815',   stories: 11, issue: 'Judicial oversight', volunteers: 34 },
 };
-
 function selectState(code) {
   document.querySelectorAll('.state-path').forEach(p => p.classList.remove('active'));
   const el = document.getElementById('map-' + code);
@@ -786,26 +1673,13 @@ function selectState(code) {
   if (!d) return;
   document.getElementById('mapStateTitle').textContent = '📍 ' + code + ' — ' + d.issue;
   document.getElementById('mapStatList').innerHTML = `
-    <div class="map-stat-row">
-      <div class="map-state-name">✍️ Signatures</div>
-      <div class="map-state-data"><span class="map-state-num">${d.sigs}</span></div>
-    </div>
-    <div class="map-stat-row">
-      <div class="map-state-name">📖 Stories Submitted</div>
-      <div class="map-state-data"><span class="map-state-num">${d.stories}</span></div>
-    </div>
-    <div class="map-stat-row">
-      <div class="map-state-name">🙋 Volunteers</div>
-      <div class="map-state-data"><span class="map-state-num">${d.volunteers}</span></div>
-    </div>
-    <div class="map-stat-row">
-      <div class="map-state-name">⚠️ Top Issue</div>
-      <div class="map-state-data"><span class="map-state-num" style="font-size:0.85rem;color:var(--orange)">${d.issue}</span></div>
-    </div>
+    <div class="map-stat-row"><div class="map-state-name">✍️ Signatures</div><div class="map-state-data"><span class="map-state-num">${d.sigs}</span></div></div>
+    <div class="map-stat-row"><div class="map-state-name">📖 Stories Submitted</div><div class="map-state-data"><span class="map-state-num">${d.stories}</span></div></div>
+    <div class="map-stat-row"><div class="map-state-name">🙋 Volunteers</div><div class="map-state-data"><span class="map-state-num">${d.volunteers}</span></div></div>
+    <div class="map-stat-row"><div class="map-state-name">⚠️ Top Issue</div><div class="map-state-data"><span class="map-state-num" style="font-size:0.85rem;color:var(--orange)">${d.issue}</span></div></div>
     <div style="margin-top:1rem"><a href="stories.html?state=${code}" class="btn btn-ghost btn-sm" style="width:100%;justify-content:center">View ${code} Stories →</a></div>
   `;
 }
 </script>
-
 </body>
 </html>
