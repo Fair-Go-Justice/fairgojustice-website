@@ -1,904 +1,852 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Music for Justice | Fair Go Justice</title>
-    <meta name="description" content="Original Aussie hip hop tracks supporting the Fair Go Justice movement. Music that speaks truth to power.">
-    
-    <!-- Open Graph -->
-    <meta property="og:title" content="Music for Justice | Fair Go Justice">
-    <meta property="og:description" content="Original Aussie hip hop tracks supporting justice reform in Australia.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://fairgojustice.com.au/music.html">
-    <meta property="og:image" content="https://fairgojustice.com.au/images/social/music-share.jpg">
-    
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Music for Justice | Fair Go Justice">
-    <meta name="twitter:description" content="Original Aussie hip hop tracks supporting justice reform.">
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
-    
-    <!-- Stylesheets -->
-    <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DRTFE1VZYP"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-DRTFE1VZYP');
-    </script>
-    
-    <style>
-        /* Music Page Specific Styles */
-        .music-hero {
-            background: linear-gradient(135deg, var(--color-primary) 0%, #1a3a5c 100%);
-            color: white;
-            padding: 6rem 2rem 4rem;
-            text-align: center;
-        }
-        
-        .music-hero h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-        }
-        
-        .music-hero .subtitle {
-            font-size: 1.3rem;
-            opacity: 0.9;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-        
-        .music-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-            padding: 4rem 2rem;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-        
-        .track-card {
-            background: white;
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        
-        .track-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
-        }
-        
-        .track-artwork {
-            aspect-ratio: 1;
-            background: linear-gradient(135deg, var(--color-secondary) 0%, var(--color-primary) 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .track-artwork img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        
-        .track-artwork .placeholder-icon {
-            font-size: 5rem;
-            color: white;
-            opacity: 0.8;
-        }
-        
-        .track-artwork .play-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0,0,0,0.4);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            cursor: pointer;
-        }
-        
-        .track-card:hover .play-overlay {
-            opacity: 1;
-        }
-        
-        .play-overlay i {
-            font-size: 4rem;
-            color: white;
-        }
-        
-        .track-info {
-            padding: 1.5rem;
-        }
-        
-        .track-title {
-            font-size: 1.4rem;
-            font-weight: 700;
-            color: var(--color-primary);
-            margin-bottom: 0.5rem;
-        }
-        
-        .track-artist {
-            color: #666;
-            font-size: 1rem;
-            margin-bottom: 1rem;
-        }
-        
-        .track-description {
-            color: #444;
-            font-size: 0.95rem;
-            line-height: 1.6;
-            margin-bottom: 1.5rem;
-        }
-        
-        .track-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-bottom: 1rem;
-        }
-        
-        .track-tag {
-            background: #f0f4f8;
-            color: var(--color-primary);
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 500;
-        }
-        
-        .audio-player {
-            width: 100%;
-            margin-top: 1rem;
-        }
-        
-        .audio-player audio {
-            width: 100%;
-            border-radius: 8px;
-        }
-        
-        .track-actions {
-            display: flex;
-            gap: 0.5rem;
-            margin-top: 1rem;
-        }
-        
-        .track-actions .btn {
-            flex: 1;
-            padding: 0.8rem;
-            font-size: 0.9rem;
-        }
-        
-        /* Featured Track */
-        .featured-track {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            padding: 4rem 2rem;
-        }
-        
-        .featured-container {
-            max-width: 1000px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            align-items: center;
-        }
-        
-        .featured-artwork {
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.4);
-        }
-        
-        .featured-artwork img {
-            width: 100%;
-            display: block;
-        }
-        
-        .featured-content {
-            color: white;
-        }
-        
-        .featured-label {
-            background: var(--color-secondary);
-            color: var(--color-primary);
-            padding: 0.4rem 1rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 700;
-            display: inline-block;
-            margin-bottom: 1rem;
-        }
-        
-        .featured-content h2 {
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
-        }
-        
-        .featured-content .artist {
-            font-size: 1.2rem;
-            opacity: 0.8;
-            margin-bottom: 1.5rem;
-        }
-        
-        .featured-content p {
-            font-size: 1.1rem;
-            line-height: 1.8;
-            opacity: 0.9;
-            margin-bottom: 2rem;
-        }
-        
-        /* Lyrics Section */
-        .lyrics-section {
-            background: #f8f9fa;
-            padding: 4rem 2rem;
-        }
-        
-        .lyrics-container {
-            max-width: 800px;
-            margin: 0 auto;
-            text-align: center;
-        }
-        
-        .lyrics-container h2 {
-            font-size: 2rem;
-            color: var(--color-primary);
-            margin-bottom: 2rem;
-        }
-        
-        .lyrics-box {
-            background: white;
-            padding: 3rem;
-            border-radius: 16px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-            text-align: left;
-        }
-        
-        .lyrics-box pre {
-            font-family: 'Georgia', serif;
-            font-size: 1.1rem;
-            line-height: 1.8;
-            color: #333;
-            white-space: pre-wrap;
-        }
-        
-        /* Call to Action */
-        .music-cta {
-            background: var(--color-secondary);
-            padding: 4rem 2rem;
-            text-align: center;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Music for Justice | Fair Go Justice</title>
+  <meta name="description" content="99 original tracks. The sound of a movement demanding accountability, transparency, and a fair go for every Australian.">
+  <meta property="og:title" content="Music for Justice | Fair Go Justice">
+  <meta property="og:description" content="99 original tracks. The sound of a movement. When people ask what you're singing — play them this.">
+  <meta property="og:image" content="https://raw.githubusercontent.com/Fair-Go-Justice/fairgojustice-website/main/thumbnails/fgj_master_poster_web.jpg">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
 
-        .music-cta h2 {
-            font-size: 2rem;
-            color: var(--color-primary);
-            margin-bottom: 1rem;
-        }
-        
-        .music-cta p {
-            font-size: 1.2rem;
-            color: #333;
-            max-width: 600px;
-            margin: 0 auto 2rem;
-        }
-        
-        /* Responsive */
-        @media (max-width: 768px) {
-            .music-hero h1 {
-                font-size: 2rem;
-            }
-            
-            .featured-container {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-            
-            .featured-content h2 {
-                font-size: 1.8rem;
-            }
-            
-            .music-grid {
-                grid-template-columns: 1fr;
-                padding: 2rem 1rem;
-            }
-        }
-    </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DRTFE1VZYP"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-DRTFE1VZYP');</script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black: #0D1117;
+      --navy: #0E3A5B;
+      --orange: #D66B2D;
+      --gold: #D4AF37;
+      --white: #F5F5F5;
+      --muted: #8B9DB0;
+      --glass: rgba(255,255,255,0.04);
+      --glass-border: rgba(255,255,255,0.08);
+    }
+
+    html { scroll-behavior: smooth; }
+    body { background: var(--black); color: var(--white); font-family: 'Space Grotesk', sans-serif; overflow-x: hidden; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      background: rgba(13,17,23,0.0); backdrop-filter: blur(0);
+      border-bottom: 1px solid transparent;
+      padding: 0 2.5rem; height: 75px;
+      display: flex; align-items: center; justify-content: space-between;
+      transition: all 0.4s ease;
+    }
+    nav.scrolled { background: rgba(13,17,23,0.97); backdrop-filter: blur(20px); border-bottom-color: rgba(214,107,45,0.2); }
+    .nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.7rem; color: var(--orange); letter-spacing: 3px; text-decoration: none; }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; align-items: center; }
+    .nav-links a { color: var(--white); text-decoration: none; font-size: 0.8rem; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase; opacity: 0.85; transition: opacity 0.2s, color 0.2s; }
+    .nav-links a:hover, .nav-links a.active { opacity: 1; color: var(--orange); }
+    .nav-cta { padding: 0.5rem 1.4rem; background: var(--orange); color: #fff !important; border-radius: 1px; opacity: 1 !important; }
+    .nav-cta:hover { background: #e8793a !important; }
+    .nav-mobile-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+    .nav-mobile-toggle span { width: 24px; height: 2px; background: var(--white); }
+    .nav-mobile-menu { display: none; position: fixed; top: 75px; left: 0; right: 0; background: rgba(13,17,23,0.98); backdrop-filter: blur(20px); padding: 2rem; flex-direction: column; gap: 1.5rem; border-bottom: 1px solid rgba(214,107,45,0.3); z-index: 999; }
+    .nav-mobile-menu a { color: var(--white); text-decoration: none; font-size: 1rem; letter-spacing: 2px; text-transform: uppercase; font-weight: 600; padding: 0.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .nav-mobile-menu.open { display: flex; }
+
+    /* ── HERO ── */
+    .music-hero {
+      min-height: 100vh;
+      position: relative;
+      display: flex; align-items: center; justify-content: center;
+      text-align: center;
+      background:
+        linear-gradient(to bottom, rgba(13,17,23,0.3) 0%, rgba(13,17,23,0.6) 50%, rgba(13,17,23,0.97) 100%),
+        url('https://raw.githubusercontent.com/Fair-Go-Justice/fairgojustice-website/main/thumbnails/fgj_master_poster_web.jpg') center/cover no-repeat fixed;
+      overflow: hidden;
+    }
+    .hero-content { position: relative; z-index: 2; padding: 2rem; max-width: 900px; }
+    .hero-eyebrow {
+      display: inline-block;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 0.85rem; letter-spacing: 6px;
+      color: var(--orange); margin-bottom: 1.5rem;
+      border: 1px solid rgba(214,107,45,0.4);
+      padding: 0.4rem 1.2rem; border-radius: 1px;
+    }
+    .hero-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(4rem, 12vw, 10rem);
+      line-height: 0.9;
+      letter-spacing: 4px;
+      background: linear-gradient(135deg, #fff 0%, var(--gold) 60%, var(--orange) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      margin-bottom: 1.5rem;
+    }
+    .hero-subtitle {
+      font-size: clamp(1rem, 2.5vw, 1.35rem);
+      color: rgba(245,245,245,0.8);
+      font-weight: 400;
+      line-height: 1.6;
+      max-width: 650px;
+      margin: 0 auto 2.5rem;
+    }
+    .hero-stats {
+      display: flex; gap: 3rem; justify-content: center; flex-wrap: wrap;
+      margin-bottom: 2.5rem;
+    }
+    .hero-stat { text-align: center; }
+    .hero-stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 3rem; color: var(--gold); line-height: 1; }
+    .hero-stat-label { font-size: 0.7rem; letter-spacing: 3px; color: var(--muted); text-transform: uppercase; margin-top: 0.3rem; }
+    .hero-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .btn-primary {
+      padding: 0.9rem 2.5rem; background: var(--orange); color: #fff;
+      font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem; letter-spacing: 2px;
+      text-decoration: none; border-radius: 1px;
+      border: none; cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+      display: inline-flex; align-items: center; gap: 0.5rem;
+    }
+    .btn-primary:hover { background: #e8793a; transform: translateY(-2px); }
+    .btn-secondary {
+      padding: 0.9rem 2.5rem; background: transparent; color: var(--white);
+      font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem; letter-spacing: 2px;
+      text-decoration: none; border-radius: 1px;
+      border: 1px solid rgba(245,245,245,0.3); cursor: pointer;
+      transition: all 0.2s;
+      display: inline-flex; align-items: center; gap: 0.5rem;
+    }
+    .btn-secondary:hover { border-color: var(--orange); color: var(--orange); transform: translateY(-2px); }
+    .hero-scroll {
+      position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+      color: var(--muted); font-size: 0.7rem; letter-spacing: 3px; text-transform: uppercase;
+      animation: bounce 2s infinite;
+    }
+    @keyframes bounce { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(6px)} }
+
+    /* ── SOUND WAVE DIVIDER ── */
+    .wave-divider {
+      width: 100%; overflow: hidden; line-height: 0;
+      background: var(--black);
+    }
+
+    /* ── SECTION COMMON ── */
+    .section { padding: 5rem 2rem; max-width: 1400px; margin: 0 auto; }
+    .section-label {
+      font-family: 'Bebas Neue', sans-serif; font-size: 0.8rem; letter-spacing: 6px;
+      color: var(--orange); margin-bottom: 0.75rem;
+    }
+    .section-title {
+      font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.5rem, 6vw, 4.5rem);
+      line-height: 1; letter-spacing: 2px; color: var(--white);
+      margin-bottom: 1rem;
+    }
+    .section-desc { color: var(--muted); font-size: 1rem; line-height: 1.7; max-width: 600px; }
+
+    /* ── MANIFESTO SERIES FEATURE ── */
+    .manifesto-section {
+      background: linear-gradient(135deg, rgba(14,58,91,0.4) 0%, rgba(13,17,23,0) 100%);
+      border-top: 1px solid rgba(212,175,55,0.2);
+      border-bottom: 1px solid rgba(212,175,55,0.2);
+      padding: 5rem 2rem;
+    }
+    .manifesto-inner { max-width: 1400px; margin: 0 auto; }
+    .manifesto-header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 3rem; flex-wrap: wrap; gap: 1rem; }
+    .manifesto-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+    .manifesto-card {
+      background: linear-gradient(135deg, rgba(212,175,55,0.08) 0%, rgba(14,58,91,0.15) 100%);
+      border: 1px solid rgba(212,175,55,0.25);
+      border-radius: 2px;
+      padding: 1.5rem;
+      position: relative; overflow: hidden;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+    .manifesto-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, var(--gold), var(--orange));
+      transform: scaleX(0); transform-origin: left;
+      transition: transform 0.3s ease;
+    }
+    .manifesto-card:hover { border-color: rgba(212,175,55,0.5); transform: translateY(-3px); }
+    .manifesto-card:hover::before { transform: scaleX(1); }
+    .manifesto-num { font-family: 'Bebas Neue', sans-serif; font-size: 3.5rem; color: rgba(212,175,55,0.15); line-height: 1; margin-bottom: 0.5rem; }
+    .manifesto-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; letter-spacing: 1px; color: var(--white); margin-bottom: 0.5rem; }
+    .manifesto-badge { display: inline-block; font-size: 0.65rem; letter-spacing: 2px; color: var(--gold); border: 1px solid rgba(212,175,55,0.4); padding: 0.2rem 0.6rem; margin-bottom: 0.75rem; }
+    .manifesto-desc { font-size: 0.85rem; color: var(--muted); line-height: 1.5; }
+    .manifesto-actions { display: flex; gap: 0.75rem; margin-top: 1rem; }
+    .mini-btn {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      padding: 0.4rem 0.9rem; font-size: 0.75rem; font-weight: 600; letter-spacing: 1px;
+      text-decoration: none; border-radius: 1px; cursor: pointer; border: none;
+      transition: all 0.2s;
+    }
+    .mini-btn-play { background: var(--orange); color: #fff; }
+    .mini-btn-play:hover { background: #e8793a; }
+    .mini-btn-yt { background: rgba(255,255,255,0.06); color: var(--white); border: 1px solid rgba(255,255,255,0.12); }
+    .mini-btn-yt:hover { border-color: var(--orange); color: var(--orange); }
+
+    /* ── CATALOGUE ── */
+    .catalogue-section { padding: 5rem 2rem; }
+    .catalogue-inner { max-width: 1400px; margin: 0 auto; }
+
+    /* Filter bar */
+    .filter-bar {
+      display: flex; flex-wrap: wrap; gap: 0.75rem;
+      margin-bottom: 2rem; align-items: center;
+    }
+    .filter-btn {
+      padding: 0.45rem 1.1rem;
+      font-family: 'Bebas Neue', sans-serif; font-size: 0.85rem; letter-spacing: 2px;
+      border: 1px solid rgba(255,255,255,0.15);
+      background: transparent; color: var(--muted);
+      cursor: pointer; border-radius: 1px;
+      transition: all 0.2s;
+    }
+    .filter-btn:hover { border-color: var(--orange); color: var(--orange); }
+    .filter-btn.active { background: var(--orange); border-color: var(--orange); color: #fff; }
+
+    /* Search */
+    .search-wrap { position: relative; flex: 1; min-width: 200px; max-width: 350px; margin-left: auto; }
+    .search-wrap input {
+      width: 100%; padding: 0.5rem 1rem 0.5rem 2.4rem;
+      background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+      color: var(--white); border-radius: 1px; font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.85rem;
+      outline: none; transition: border-color 0.2s;
+    }
+    .search-wrap input:focus { border-color: var(--orange); }
+    .search-wrap input::placeholder { color: var(--muted); }
+    .search-wrap .search-icon { position: absolute; left: 0.75rem; top: 50%; transform: translateY(-50%); color: var(--muted); font-size: 0.85rem; pointer-events: none; }
+
+    /* Track counter */
+    .track-counter { font-size: 0.8rem; color: var(--muted); margin-bottom: 1.5rem; letter-spacing: 1px; }
+    .track-counter span { color: var(--orange); font-weight: 700; }
+
+    /* Track grid */
+    .track-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1rem;
+    }
+
+    /* Track card */
+    .track-card {
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      border-radius: 2px;
+      padding: 1.25rem 1.25rem 1rem;
+      position: relative; overflow: hidden;
+      transition: all 0.25s ease;
+      cursor: pointer;
+      display: flex; flex-direction: column; gap: 0.75rem;
+    }
+    .track-card:hover {
+      border-color: rgba(214,107,45,0.35);
+      transform: translateY(-2px);
+      background: rgba(255,255,255,0.06);
+    }
+    .track-card-top { display: flex; align-items: flex-start; gap: 0.75rem; }
+    .track-num {
+      font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; line-height: 1;
+      color: rgba(255,255,255,0.12); min-width: 2rem; flex-shrink: 0;
+    }
+    .track-info { flex: 1; min-width: 0; }
+    .track-title {
+      font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem; letter-spacing: 1px;
+      color: var(--white); line-height: 1.2; margin-bottom: 0.4rem;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .track-card:hover .track-title { color: var(--white); white-space: normal; }
+    .cat-badge {
+      display: inline-block; font-size: 0.6rem; font-weight: 700;
+      letter-spacing: 2px; text-transform: uppercase;
+      padding: 0.2rem 0.6rem; border-radius: 1px;
+    }
+    .play-btn-wrap { flex-shrink: 0; }
+    .play-btn {
+      width: 40px; height: 40px;
+      background: rgba(214,107,45,0.15);
+      border: 1px solid rgba(214,107,45,0.3);
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      cursor: pointer; transition: all 0.2s; flex-shrink: 0;
+      position: relative;
+    }
+    .play-btn:hover, .track-card:hover .play-btn { background: var(--orange); border-color: var(--orange); }
+    .play-btn i { color: var(--orange); font-size: 0.8rem; margin-left: 2px; }
+    .track-card:hover .play-btn i, .play-btn:hover i { color: #fff; }
+    .play-btn.playing { background: var(--orange); border-color: var(--orange); animation: pulse-ring 1.5s ease-in-out infinite; }
+    .play-btn.playing i { color: #fff; }
+    @keyframes pulse-ring {
+      0%{ box-shadow: 0 0 0 0 rgba(214,107,45,0.4); }
+      70%{ box-shadow: 0 0 0 8px rgba(214,107,45,0); }
+      100%{ box-shadow: 0 0 0 0 rgba(214,107,45,0); }
+    }
+
+    .track-actions { display: flex; gap: 0.5rem; align-items: center; margin-top: 0.25rem; }
+    .track-link {
+      display: inline-flex; align-items: center; gap: 0.3rem;
+      font-size: 0.7rem; color: var(--muted); text-decoration: none;
+      padding: 0.25rem 0.6rem; border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 1px; transition: all 0.2s;
+      letter-spacing: 0.5px;
+    }
+    .track-link:hover { color: var(--orange); border-color: rgba(214,107,45,0.4); }
+
+    /* Audio player bar */
+    .audio-player {
+      position: fixed; bottom: 0; left: 0; right: 0; z-index: 900;
+      background: rgba(13,17,23,0.97); backdrop-filter: blur(20px);
+      border-top: 1px solid rgba(214,107,45,0.3);
+      padding: 0.75rem 2rem;
+      display: flex; align-items: center; gap: 1.5rem;
+      transform: translateY(100%); transition: transform 0.3s ease;
+    }
+    .audio-player.visible { transform: translateY(0); }
+    .player-info { flex: 1; min-width: 0; }
+    .player-title { font-family: 'Bebas Neue', sans-serif; font-size: 1rem; letter-spacing: 1px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .player-cat { font-size: 0.7rem; color: var(--muted); letter-spacing: 1px; }
+    .player-controls { display: flex; align-items: center; gap: 1rem; }
+    .player-btn {
+      background: none; border: none; color: var(--white); cursor: pointer;
+      font-size: 1.2rem; padding: 0.5rem; transition: color 0.2s;
+    }
+    .player-btn:hover { color: var(--orange); }
+    .player-progress-wrap { flex: 2; max-width: 400px; display: flex; flex-direction: column; gap: 0.25rem; }
+    .player-progress {
+      -webkit-appearance: none; width: 100%; height: 3px;
+      background: rgba(255,255,255,0.15); border-radius: 2px; outline: none; cursor: pointer;
+    }
+    .player-progress::-webkit-slider-thumb { -webkit-appearance: none; width: 12px; height: 12px; background: var(--orange); border-radius: 50%; }
+    .player-time { display: flex; justify-content: space-between; font-size: 0.65rem; color: var(--muted); }
+    .player-volume-wrap { display: flex; align-items: center; gap: 0.5rem; }
+    .player-volume { -webkit-appearance: none; width: 80px; height: 3px; background: rgba(255,255,255,0.15); border-radius: 2px; cursor: pointer; }
+    .player-volume::-webkit-slider-thumb { -webkit-appearance: none; width: 10px; height: 10px; background: var(--white); border-radius: 50%; }
+    .player-close { background: none; border: none; color: var(--muted); cursor: pointer; font-size: 1.1rem; padding: 0.5rem; transition: color 0.2s; }
+    .player-close:hover { color: var(--white); }
+
+    /* ── PLAYLISTS ── */
+    .playlists-section {
+      background: rgba(14,58,91,0.12);
+      border-top: 1px solid rgba(255,255,255,0.05);
+      padding: 5rem 2rem;
+    }
+    .playlists-inner { max-width: 1400px; margin: 0 auto; }
+    .playlists-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1rem; margin-top: 3rem; }
+    .playlist-card {
+      background: var(--glass); border: 1px solid var(--glass-border);
+      border-radius: 2px; padding: 1.5rem;
+      text-decoration: none; display: block;
+      transition: all 0.25s ease; position: relative; overflow: hidden;
+    }
+    .playlist-card::after {
+      content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, var(--orange), var(--gold));
+      transform: scaleX(0); transform-origin: left;
+      transition: transform 0.3s ease;
+    }
+    .playlist-card:hover { border-color: rgba(214,107,45,0.3); transform: translateY(-3px); }
+    .playlist-card:hover::after { transform: scaleX(1); }
+    .playlist-icon { font-size: 2rem; margin-bottom: 0.75rem; }
+    .playlist-name { font-family: 'Bebas Neue', sans-serif; font-size: 1.2rem; letter-spacing: 1px; color: var(--white); margin-bottom: 0.4rem; }
+    .playlist-meta { font-size: 0.75rem; color: var(--muted); }
+    .playlist-arrow { position: absolute; right: 1.25rem; top: 50%; transform: translateY(-50%); color: var(--muted); font-size: 0.9rem; transition: all 0.2s; }
+    .playlist-card:hover .playlist-arrow { color: var(--orange); transform: translateY(-50%) translateX(3px); }
+
+    /* ── CTA ── */
+    .cta-section {
+      padding: 7rem 2rem;
+      text-align: center;
+      background:
+        linear-gradient(to bottom, rgba(13,17,23,0.97) 0%, rgba(14,58,91,0.3) 50%, rgba(13,17,23,0.97) 100%),
+        url('https://raw.githubusercontent.com/Fair-Go-Justice/fairgojustice-website/main/thumbnails/hero_australia_united_web.jpg') center/cover no-repeat fixed;
+      position: relative;
+    }
+    .cta-inner { max-width: 700px; margin: 0 auto; position: relative; z-index: 2; }
+    .cta-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.5rem, 6vw, 5rem); letter-spacing: 3px; margin-bottom: 1rem; color: var(--white); }
+    .cta-title span { color: var(--gold); }
+    .cta-desc { color: rgba(245,245,245,0.75); font-size: 1.05rem; line-height: 1.7; margin-bottom: 2.5rem; }
+    .cta-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: rgba(0,0,0,0.6); border-top: 1px solid rgba(255,255,255,0.05);
+      padding: 2.5rem 2rem; text-align: center;
+    }
+    .footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; color: var(--orange); letter-spacing: 4px; margin-bottom: 0.5rem; }
+    .footer-tagline { font-size: 0.8rem; color: var(--muted); letter-spacing: 2px; margin-bottom: 1.5rem; }
+    .footer-links { display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap; margin-bottom: 1.5rem; }
+    .footer-links a { color: var(--muted); text-decoration: none; font-size: 0.8rem; letter-spacing: 1px; text-transform: uppercase; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--orange); }
+    .footer-copy { font-size: 0.75rem; color: rgba(139,157,176,0.5); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .nav-mobile-toggle { display: flex; }
+      .hero-stats { gap: 1.5rem; }
+      .filter-bar { gap: 0.5rem; }
+      .search-wrap { max-width: 100%; margin-left: 0; min-width: 100%; }
+      .track-grid { grid-template-columns: 1fr; }
+      .audio-player { flex-wrap: wrap; padding: 0.75rem 1rem; gap: 0.75rem; }
+      .player-progress-wrap { order: 10; flex-basis: 100%; max-width: 100%; }
+      .playlists-grid { grid-template-columns: 1fr 1fr; }
+      .manifesto-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 480px) {
+      .playlists-grid { grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
 <body>
-    <!-- Navigation -->
-  <header class="site-header">
-    <div class="header-top">
-      <div class="container">
-        <p><strong>🇦🇺 A Fair Go Means A Fair Justice System</strong> | Join 12,847 Australians Demanding Change</p>
+
+<!-- NAV -->
+<nav id="mainNav">
+  <a href="index.html" class="nav-logo">FAIR GO JUSTICE</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="pillars.html">Three Pillars</a></li>
+    <li><a href="music.html" class="active">Music</a></li>
+    <li><a href="evidence.html">Evidence Vault</a></li>
+    <li><a href="stories.html">Stories</a></li>
+    <li><a href="take-action.html" class="nav-cta">Take Action</a></li>
+  </ul>
+  <div class="nav-mobile-toggle" onclick="toggleMobileMenu()" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+<div class="nav-mobile-menu" id="mobileMenu">
+  <a href="index.html" onclick="toggleMobileMenu()">Home</a>
+  <a href="pillars.html" onclick="toggleMobileMenu()">Three Pillars</a>
+  <a href="music.html" onclick="toggleMobileMenu()">Music</a>
+  <a href="evidence.html" onclick="toggleMobileMenu()">Evidence Vault</a>
+  <a href="stories.html" onclick="toggleMobileMenu()">Stories</a>
+  <a href="take-action.html" onclick="toggleMobileMenu()">Take Action</a>
+</div>
+
+<!-- HERO -->
+<section class="music-hero">
+  <div class="hero-content">
+    <div class="hero-eyebrow">THE FAIR GO JUSTICE SOUNDTRACK</div>
+    <h1 class="hero-title">THE SOUND<br>OF JUSTICE</h1>
+    <p class="hero-subtitle">
+      99 original tracks. When people ask what you're singing —<br>
+      this is what the movement sounds like.
+    </p>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="hero-stat-num">99</div>
+        <div class="hero-stat-label">Original Tracks</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">8</div>
+        <div class="hero-stat-label">Genres</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">1</div>
+        <div class="hero-stat-label">Movement</div>
       </div>
     </div>
-    <div class="header-main">
-      <div class="container">
-        <div class="header-content">
-          <a href="index.html" class="logo">
-            <i class="fas fa-balance-scale"></i>
-            <span>Fair Go Justice</span>
-          </a>
-          <button class="nav-toggle" aria-label="Toggle navigation" id="navToggle">
-            <i class="fas fa-bars"></i>
-          </button>
-          <nav class="main-nav" id="mainNav">
-                        <ul>
-              <li><a href="index.html">Home</a></li>
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle">Reform Framework <i class="fas fa-chevron-down"></i></a>
-                <ul class="dropdown-menu">
-                  <li><a href="pillars.html">The 3 Pillars</a></li>
-                  <li><a href="rights.html">Know Your Rights</a></li>
-                </ul>
-              </li>
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle">Take Action <i class="fas fa-chevron-down"></i></a>
-                <ul class="dropdown-menu">
-                  <li><a href="petition.html">Sign Petition</a></li>
-                  <li><a href="stories.html">Share Your Story</a></li>
-                  <li><a href="contact.html">Contact Us</a></li>
-                </ul>
-              </li>
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle">The Case <i class="fas fa-chevron-down"></i></a>
-                <ul class="dropdown-menu">
-                  <li><a href="case-overview.html">Case Overview</a></li>
-                  <li><a href="class-action-info.html">Class Action Info</a></li>
-                  <li><a href="timeline.html">Timeline</a></li>
-                </ul>
-              </li>
-              <li><a href="quiz.html">Take Quiz</a></li>
-              <li><a href="music.html" class="active">Music</a></li>
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle">Resources <i class="fas fa-chevron-down"></i></a>
-                <ul class="dropdown-menu">
-                  <li><a href="social-media-kit.html">Social Media Kit</a></li>
-                  <li><a href="graphics-guide.html">Graphics Guide</a></li>
-                  <li><a href="resources.html">All Resources</a></li>
-                  <li><a href="lyrics.html">Song Lyrics</a></li>
-                </ul>
-              </li>
-              <li><a href="about.html">About</a></li>
-              <li><a href="petition.html" class="btn-cta">Get Involved</a></li>
-            </ul>
-          </nav>
-        </div>
+    <div class="hero-actions">
+      <a href="#catalogue" class="btn-primary"><i class="fas fa-music"></i> BROWSE THE CATALOGUE</a>
+      <a href="https://www.youtube.com/@fairgojustice" target="_blank" rel="noopener" class="btn-secondary"><i class="fab fa-youtube"></i> YOUTUBE CHANNEL</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <span>SCROLL</span>
+    <i class="fas fa-chevron-down"></i>
+  </div>
+</section>
+
+<!-- MANIFESTO SERIES -->
+<section class="manifesto-section">
+  <div class="manifesto-inner">
+    <div class="manifesto-header">
+      <div>
+        <div class="section-label">THE FLAGSHIP ALBUM</div>
+        <h2 class="section-title">THE MANIFESTO<br>SERIES</h2>
+        <p class="section-desc">The story of a broken system — told in song. One ordinary Australian's fight against institutional failure, told track by track. This is where the movement was born.</p>
+      </div>
+      <a href="https://www.youtube.com/@fairgojustice" target="_blank" rel="noopener" class="btn-secondary" style="align-self:flex-end"><i class="fab fa-youtube"></i> FULL PLAYLIST</a>
+    </div>
+    <div class="manifesto-grid" id="manifestoGrid">
+      <!-- Injected by JS -->
+    </div>
+  </div>
+</section>
+
+<!-- FULL CATALOGUE -->
+<section class="catalogue-section" id="catalogue">
+  <div class="catalogue-inner">
+    <div class="section-label">COMPLETE LIBRARY</div>
+    <h2 class="section-title" style="margin-bottom:0.5rem">ALL 99 TRACKS</h2>
+    <p class="section-desc" style="margin-bottom:2.5rem">Every song, every story. Filter by theme or search for a track. Hit play — it streams right here.</p>
+
+    <div class="filter-bar" id="filterBar">
+      <button class="filter-btn active" data-cat="all" onclick="filterTracks('all', this)">ALL (99)</button>
+      <button class="filter-btn" data-cat="Pillar 1 — JIC" onclick="filterTracks('Pillar 1 — JIC', this)" style="--c:#4A90D9">🏛️ PILLAR 1</button>
+      <button class="filter-btn" data-cat="Pillar 2 — Legal Aid" onclick="filterTracks('Pillar 2 — Legal Aid', this)" style="--c:#D66B2D">⚖️ PILLAR 2</button>
+      <button class="filter-btn" data-cat="Pillar 3 — Evidence" onclick="filterTracks('Pillar 3 — Evidence', this)" style="--c:#2DB5B5">🔍 PILLAR 3</button>
+      <button class="filter-btn" data-cat="Movement Anthem" onclick="filterTracks('Movement Anthem', this)" style="--c:#5DBB5D">🇦🇺 ANTHEMS</button>
+      <button class="filter-btn" data-cat="Court & System" onclick="filterTracks('Court & System', this)" style="--c:#9B6BCC">⚖️ COURT</button>
+      <button class="filter-btn" data-cat="Corporate Fraud" onclick="filterTracks('Corporate Fraud', this)" style="--c:#C0392B">💰 FRAUD</button>
+      <button class="filter-btn" data-cat="Personal Stories" onclick="filterTracks('Personal Stories', this)" style="--c:#7A9BB5">🎤 STORIES</button>
+      <div class="search-wrap">
+        <i class="fas fa-search search-icon"></i>
+        <input type="text" id="trackSearch" placeholder="Search tracks…" oninput="searchTracks(this.value)">
       </div>
     </div>
-  </header>
 
-    <!-- Hero Section -->
-    <section class="music-hero">
-        <h1><i class="fas fa-music"></i> Music for Justice</h1>
-        <p class="subtitle">Original Aussie tracks that speak truth to power. Over 128 original songs — hip-hop, country, blues, folk, rock and more — created to amplify the voices demanding justice reform. Now streaming on YouTube.</p>
-        <div style="margin-top:1.5rem;">
-            <a href="https://www.youtube.com/@fairgojustice" target="_blank" rel="noopener"
-               class="btn btn-primary btn-lg" style="margin-right:1rem;">
-                <i class="fab fa-youtube"></i> Watch on YouTube
-            </a>
-            <a href="lyrics.html" class="btn btn-outline btn-lg">
-                <i class="fas fa-book-open"></i> Browse All Lyrics
-            </a>
-        </div>
-    </section>
-
-    <!-- Featured Track -->
-    <section class="featured-track">
-        <div class="featured-container">
-            <div class="featured-artwork" style="width:100%; max-width:560px;">
-                <div style="position:relative; padding-bottom:56.25%; height:0; overflow:hidden; border-radius:12px; border:3px solid var(--color-secondary);">
-                    <iframe
-                        src="https://www.youtube.com/embed/nro_6EZx1z8?rel=0"
-                        title="VEXATIOUS — Fair Go Justice"
-                        style="position:absolute; top:0; left:0; width:100%; height:100%; border:0;"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowfullscreen loading="lazy">
-                    </iframe>
-                </div>
-            </div>
-            <div class="featured-content">
-                <span class="featured-label"><i class="fas fa-star"></i> FEATURED TRACK</span>
-                <h2>VEXATIOUS</h2>
-                <p class="artist">By the Fair Go Movement</p>
-                <p>When the system labels your genuine grievance as "vexatious" to silence you — that's the abuse we're fighting. This track calls out the weaponisation of legal process against everyday Australians.</p>
-                <div class="track-tags" style="margin-bottom:1.5rem;">
-                    <span class="track-tag">Hip-Hop</span>
-                    <span class="track-tag">Judicial Accountability</span>
-                    <span class="track-tag">Protest</span>
-                </div>
-                <div class="track-actions" style="margin-top: 1.5rem;">
-                    <a href="https://www.youtube.com/watch?v=nro_6EZx1z8" target="_blank" rel="noopener" class="btn btn-secondary">
-                        <i class="fab fa-youtube"></i> Watch on YouTube
-                    </a>
-                    <a href="https://www.youtube.com/@fairgojustice?sub_confirmation=1" target="_blank" rel="noopener" class="btn btn-primary">
-                        <i class="fas fa-bell"></i> Subscribe
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Track Grid — Latest Uploads -->
-    <section style="padding:1.5rem 2rem 0.5rem; text-align:center;">
-      <h2 style="font-size:1.8rem; color:var(--color-primary); margin-bottom:0.25rem;"><i class="fab fa-youtube" style="color:#ff0000;"></i> Now Live on YouTube</h2>
-      <p style="color:#555; font-size:1rem; margin-bottom:1rem;">10 lyric videos — watch, share, and help spread the word.</p>
-
-      <!-- Filter Bar -->
-      <div id="track-filters" style="display:flex; flex-wrap:wrap; justify-content:center; gap:0.5rem; margin-bottom:1.5rem;">
-        <button onclick="filterTracks('all')" class="filter-btn active" data-filter="all" style="padding:0.4rem 1rem; border-radius:999px; border:2px solid var(--color-primary); background:var(--color-primary); color:white; cursor:pointer; font-weight:600; font-size:0.85rem;">All Tracks</button>
-        <button onclick="filterTracks('pillar1')" class="filter-btn" data-filter="pillar1" style="padding:0.4rem 1rem; border-radius:999px; border:2px solid #dc2626; background:white; color:#dc2626; cursor:pointer; font-weight:600; font-size:0.85rem;">🏛️ Pillar 1 — Judicial</button>
-        <button onclick="filterTracks('pillar2')" class="filter-btn" data-filter="pillar2" style="padding:0.4rem 1rem; border-radius:999px; border:2px solid #2563eb; background:white; color:#2563eb; cursor:pointer; font-weight:600; font-size:0.85rem;">⚖️ Pillar 2 — Legal Aid</button>
-        <button onclick="filterTracks('pillar3')" class="filter-btn" data-filter="pillar3" style="padding:0.4rem 1rem; border-radius:999px; border:2px solid #16a34a; background:white; color:#16a34a; cursor:pointer; font-weight:600; font-size:0.85rem;">🔍 Pillar 3 — Evidence</button>
-        <button onclick="filterTracks('hiphop')" class="filter-btn" data-filter="hiphop" style="padding:0.4rem 1rem; border-radius:999px; border:2px solid #7c3aed; background:white; color:#7c3aed; cursor:pointer; font-weight:600; font-size:0.85rem;">🎤 Hip-Hop & Drill</button>
-      </div>
-    </section>
-    <section class="music-grid" id="track-grid">
-
-        <!-- VEXATIOUS -->
-        <div class="track-card" data-pillar="pillar1" data-genre="hiphop">
-            <a href="https://www.youtube.com/watch?v=nro_6EZx1z8" target="_blank" rel="noopener" style="display:block; position:relative;">
-                <img src="https://img.youtube.com/vi/nro_6EZx1z8/hqdefault.jpg" alt="VEXATIOUS thumbnail" style="width:100%; display:block;">
-                <div class="play-overlay" style="opacity:1; background:rgba(0,0,0,0.3);"><i class="fas fa-play-circle" style="font-size:3.5rem; color:white;"></i></div>
-            </a>
-            <div class="track-info">
-                <h3 class="track-title">VEXATIOUS</h3>
-                <p class="track-artist">By the Fair Go Movement</p>
-                <p class="track-description">The system uses "vexatious litigant" labels to silence legitimate grievances — this track calls it out.</p>
-                <div class="track-tags">
-                    <span class="track-tag">Hip-Hop</span>
-                    <span class="track-tag">Protest</span>
-                </div>
-                <div class="track-actions">
-                    <a href="https://www.youtube.com/watch?v=nro_6EZx1z8" target="_blank" rel="noopener" class="btn btn-primary"><i class="fab fa-youtube"></i> Watch</a>
-                    <a href="lyrics.html" class="btn btn-outline"><i class="fas fa-scroll"></i> Lyrics</a>
-                </div>
-            </div>
-        </div>
-
-        <!-- SELF-REPRESENTED -->
-        <div class="track-card" data-pillar="pillar2" data-genre="hiphop">
-            <a href="https://www.youtube.com/watch?v=IpF6rtveFVU" target="_blank" rel="noopener" style="display:block; position:relative;">
-                <img src="https://img.youtube.com/vi/IpF6rtveFVU/hqdefault.jpg" alt="SELF-REPRESENTED thumbnail" style="width:100%; display:block;">
-                <div class="play-overlay" style="opacity:1; background:rgba(0,0,0,0.3);"><i class="fas fa-play-circle" style="font-size:3.5rem; color:white;"></i></div>
-            </a>
-            <div class="track-info">
-                <h3 class="track-title">SELF-REPRESENTED</h3>
-                <p class="track-artist">By the Fair Go Movement</p>
-                <p class="track-description">For everyone who's had to face the court alone because they couldn't afford a lawyer.</p>
-                <div class="track-tags">
-                    <span class="track-tag">Hip-Hop</span>
-                    <span class="track-tag" style="background:#2980b9; color:#fff;">⚖️ Pillar 2</span>
-                </div>
-                <div class="track-actions">
-                    <a href="https://www.youtube.com/watch?v=IpF6rtveFVU" target="_blank" rel="noopener" class="btn btn-primary"><i class="fab fa-youtube"></i> Watch</a>
-                    <a href="lyrics.html" class="btn btn-outline"><i class="fas fa-scroll"></i> Lyrics</a>
-                </div>
-            </div>
-        </div>
-
-        <!-- SUPPRESSED -->
-        <div class="track-card" data-pillar="pillar3" data-genre="hiphop">
-            <a href="https://www.youtube.com/watch?v=Q05AO-VzQFY" target="_blank" rel="noopener" style="display:block; position:relative;">
-                <img src="https://img.youtube.com/vi/Q05AO-VzQFY/hqdefault.jpg" alt="SUPPRESSED thumbnail" style="width:100%; display:block;">
-                <div class="play-overlay" style="opacity:1; background:rgba(0,0,0,0.3);"><i class="fas fa-play-circle" style="font-size:3.5rem; color:white;"></i></div>
-            </a>
-            <div class="track-info">
-                <h3 class="track-title">SUPPRESSED</h3>
-                <p class="track-artist">By the Fair Go Movement</p>
-                <p class="track-description">Evidence that disappears. Witnesses who recant. Truth buried under process. This one hits hard.</p>
-                <div class="track-tags">
-                    <span class="track-tag">Hip-Hop</span>
-                    <span class="track-tag" style="background:#27ae60; color:#fff;">🔍 Pillar 3</span>
-                </div>
-                <div class="track-actions">
-                    <a href="https://www.youtube.com/watch?v=Q05AO-VzQFY" target="_blank" rel="noopener" class="btn btn-primary"><i class="fab fa-youtube"></i> Watch</a>
-                    <a href="lyrics.html" class="btn btn-outline"><i class="fas fa-scroll"></i> Lyrics</a>
-                </div>
-            </div>
-        </div>
-
-        <!-- THE APPOINTED -->
-        <div class="track-card" data-pillar="pillar1" data-genre="hiphop">
-            <a href="https://www.youtube.com/watch?v=x3UqqsYzTPg" target="_blank" rel="noopener" style="display:block; position:relative;">
-                <img src="https://img.youtube.com/vi/x3UqqsYzTPg/hqdefault.jpg" alt="THE APPOINTED thumbnail" style="width:100%; display:block;">
-                <div class="play-overlay" style="opacity:1; background:rgba(0,0,0,0.3);"><i class="fas fa-play-circle" style="font-size:3.5rem; color:white;"></i></div>
-            </a>
-            <div class="track-info">
-                <h3 class="track-title">THE APPOINTED</h3>
-                <p class="track-artist">By the Fair Go Movement</p>
-                <p class="track-description">Who appoints the judges? Who watches the watchers? It's time for a real Judicial Integrity Commission.</p>
-                <div class="track-tags">
-                    <span class="track-tag">Hip-Hop</span>
-                    <span class="track-tag" style="background:#c0392b; color:#fff;">🏛️ Pillar 1</span>
-                </div>
-                <div class="track-actions">
-                    <a href="https://www.youtube.com/watch?v=x3UqqsYzTPg" target="_blank" rel="noopener" class="btn btn-primary"><i class="fab fa-youtube"></i> Watch</a>
-                    <a href="lyrics.html" class="btn btn-outline"><i class="fas fa-scroll"></i> Lyrics</a>
-                </div>
-            </div>
-        </div>
-
-        <!-- BLINDSIDED: TRUTH UNCUT -->
-        <div class="track-card" data-pillar="pillar3" data-genre="hiphop">
-            <a href="https://www.youtube.com/watch?v=HnnTiCk1CI0" target="_blank" rel="noopener" style="display:block; position:relative;">
-                <img src="https://img.youtube.com/vi/HnnTiCk1CI0/hqdefault.jpg" alt="BLINDSIDED TRUTH UNCUT thumbnail" style="width:100%; display:block;">
-                <div class="play-overlay" style="opacity:1; background:rgba(0,0,0,0.3);"><i class="fas fa-play-circle" style="font-size:3.5rem; color:white;"></i></div>
-            </a>
-            <div class="track-info">
-                <h3 class="track-title">BLINDSIDED: TRUTH UNCUT</h3>
-                <p class="track-artist">By the Fair Go Movement</p>
-                <p class="track-description">What happens when the truth is edited out before it reaches the courtroom? We see you.</p>
-                <div class="track-tags">
-                    <span class="track-tag">Hip-Hop</span>
-                    <span class="track-tag" style="background:#27ae60; color:#fff;">🔍 Pillar 3</span>
-                </div>
-                <div class="track-actions">
-                    <a href="https://www.youtube.com/watch?v=HnnTiCk1CI0" target="_blank" rel="noopener" class="btn btn-primary"><i class="fab fa-youtube"></i> Watch</a>
-                    <a href="lyrics.html" class="btn btn-outline"><i class="fas fa-scroll"></i> Lyrics</a>
-                </div>
-            </div>
-        </div>
-
-        <!-- ELDER -->
-        <div class="track-card" data-pillar="pillar1" data-genre="hiphop">
-            <a href="https://www.youtube.com/watch?v=WAXn0map22Q" target="_blank" rel="noopener" style="display:block; position:relative;">
-                <img src="https://img.youtube.com/vi/WAXn0map22Q/hqdefault.jpg" alt="ELDER thumbnail" style="width:100%; display:block;">
-                <div class="play-overlay" style="opacity:1; background:rgba(0,0,0,0.3);"><i class="fas fa-play-circle" style="font-size:3.5rem; color:white;"></i></div>
-            </a>
-            <div class="track-info">
-                <h3 class="track-title">ELDER</h3>
-                <p class="track-artist">By the Fair Go Movement</p>
-                <p class="track-description">Dedicated to those who have endured the longest — the elderly and vulnerable failed by a system that should protect them.</p>
-                <div class="track-tags">
-                    <span class="track-tag">Hip-Hop</span>
-                    <span class="track-tag">Elder Justice</span>
-                </div>
-                <div class="track-actions">
-                    <a href="https://www.youtube.com/watch?v=WAXn0map22Q" target="_blank" rel="noopener" class="btn btn-primary"><i class="fab fa-youtube"></i> Watch</a>
-                    <a href="lyrics.html" class="btn btn-outline"><i class="fas fa-scroll"></i> Lyrics</a>
-                </div>
-            </div>
-        </div>
-
-        <!-- FAMILY COURT BLUES -->
-        <div class="track-card" data-pillar="pillar2" data-genre="hiphop">
-            <a href="https://www.youtube.com/watch?v=EqBa_TahlZg" target="_blank" rel="noopener" style="display:block; position:relative;">
-                <img src="https://img.youtube.com/vi/EqBa_TahlZg/hqdefault.jpg" alt="FAMILY COURT BLUES thumbnail" style="width:100%; display:block;">
-                <div class="play-overlay" style="opacity:1; background:rgba(0,0,0,0.3);"><i class="fas fa-play-circle" style="font-size:3.5rem; color:white;"></i></div>
-            </a>
-            <div class="track-info">
-                <h3 class="track-title">FAMILY COURT BLUES</h3>
-                <p class="track-artist">By the Fair Go Movement</p>
-                <p class="track-description">Family law should protect families — not destroy them. For every parent who fought the odds alone.</p>
-                <div class="track-tags">
-                    <span class="track-tag">Hip-Hop</span>
-                    <span class="track-tag" style="background:#2980b9; color:#fff;">⚖️ Pillar 2</span>
-                </div>
-                <div class="track-actions">
-                    <a href="https://www.youtube.com/watch?v=EqBa_TahlZg" target="_blank" rel="noopener" class="btn btn-primary"><i class="fab fa-youtube"></i> Watch</a>
-                    <a href="lyrics.html" class="btn btn-outline"><i class="fas fa-scroll"></i> Lyrics</a>
-                </div>
-            </div>
-        </div>
-
-        <!-- BANKRUPTCY WEAPON -->
-        <div class="track-card" data-pillar="pillar2" data-genre="hiphop">
-            <a href="https://www.youtube.com/watch?v=7skBZ5rVtpI" target="_blank" rel="noopener" style="display:block; position:relative;">
-                <img src="https://img.youtube.com/vi/7skBZ5rVtpI/hqdefault.jpg" alt="BANKRUPTCY WEAPON thumbnail" style="width:100%; display:block;">
-                <div class="play-overlay" style="opacity:1; background:rgba(0,0,0,0.3);"><i class="fas fa-play-circle" style="font-size:3.5rem; color:white;"></i></div>
-            </a>
-            <div class="track-info">
-                <h3 class="track-title">BANKRUPTCY WEAPON</h3>
-                <p class="track-artist">By the Fair Go Movement</p>
-                <p class="track-description">Using bankruptcy proceedings as a weapon to crush opponents. A track about financial abuse of process.</p>
-                <div class="track-tags">
-                    <span class="track-tag">Hip-Hop</span>
-                    <span class="track-tag">Abuse of Process</span>
-                </div>
-                <div class="track-actions">
-                    <a href="https://www.youtube.com/watch?v=7skBZ5rVtpI" target="_blank" rel="noopener" class="btn btn-primary"><i class="fab fa-youtube"></i> Watch</a>
-                    <a href="lyrics.html" class="btn btn-outline"><i class="fas fa-scroll"></i> Lyrics</a>
-                </div>
-            </div>
-        </div>
-
-        <!-- WE ARE NOT DONE -->
-        <div class="track-card" data-pillar="pillar1" data-genre="hiphop">
-            <a href="https://www.youtube.com/watch?v=_UexLVzLSmI" target="_blank" rel="noopener" style="display:block; position:relative;">
-                <img src="https://img.youtube.com/vi/_UexLVzLSmI/hqdefault.jpg" alt="WE ARE NOT DONE thumbnail" style="width:100%; display:block;">
-                <div class="play-overlay" style="opacity:1; background:rgba(0,0,0,0.3);"><i class="fas fa-play-circle" style="font-size:3.5rem; color:white;"></i></div>
-            </a>
-            <div class="track-info">
-                <h3 class="track-title">WE ARE NOT DONE</h3>
-                <p class="track-artist">By the Fair Go Movement</p>
-                <p class="track-description">This fight isn't over. As long as the system fails Australians, we keep our voices loud.</p>
-                <div class="track-tags">
-                    <span class="track-tag">Hip-Hop</span>
-                    <span class="track-tag">Resistance</span>
-                </div>
-                <div class="track-actions">
-                    <a href="https://www.youtube.com/watch?v=_UexLVzLSmI" target="_blank" rel="noopener" class="btn btn-primary"><i class="fab fa-youtube"></i> Watch</a>
-                    <a href="lyrics.html" class="btn btn-outline"><i class="fas fa-scroll"></i> Lyrics</a>
-                </div>
-            </div>
-        </div>
-
-        <!-- CONFLICT OF INTEREST -->
-        <div class="track-card" data-pillar="pillar1" data-genre="hiphop">
-            <a href="https://www.youtube.com/watch?v=Fp_j0BumjQs" target="_blank" rel="noopener" style="display:block; position:relative;">
-                <img src="https://img.youtube.com/vi/Fp_j0BumjQs/hqdefault.jpg" alt="CONFLICT OF INTEREST thumbnail" style="width:100%; display:block;">
-                <div class="play-overlay" style="opacity:1; background:rgba(0,0,0,0.3);"><i class="fas fa-play-circle" style="font-size:3.5rem; color:white;"></i></div>
-            </a>
-            <div class="track-info">
-                <h3 class="track-title">CONFLICT OF INTEREST</h3>
-                <p class="track-artist">By the Fair Go Movement</p>
-                <p class="track-description">When the judge knows the lawyer, knows the opponent — and nobody discloses it. This is why we need reform.</p>
-                <div class="track-tags">
-                    <span class="track-tag">Hip-Hop</span>
-                    <span class="track-tag" style="background:#c0392b; color:#fff;">🏛️ Pillar 1</span>
-                </div>
-                <div class="track-actions">
-                    <a href="https://www.youtube.com/watch?v=Fp_j0BumjQs" target="_blank" rel="noopener" class="btn btn-primary"><i class="fab fa-youtube"></i> Watch</a>
-                    <a href="lyrics.html" class="btn btn-outline"><i class="fas fa-scroll"></i> Lyrics</a>
-                </div>
-            </div>
-        </div>
-
-    </section>
-
-    <!-- Lyrics Section -->
-    <section class="lyrics-section">
-        <div class="lyrics-container">
-            <h2><i class="fas fa-scroll"></i> Sample Lyrics</h2>
-            <div class="lyrics-box">
-                <pre>
-We came from the outback, city streets and shores,
-Everyday Aussies knocking on justice's doors,
-They said "trust the system," but the system don't care,
-When the scales tip heavy for those without a prayer.
-
-CHORUS:
-Fair go, fair go, that's our cry,
-Stand up, speak out, reach for the sky,
-Twelve thousand voices and counting more,
-We're the tide of change you can't ignore.
-
-From Cairns to Perth, Melbourne to the Top End,
-Real stories of Aussies the courts won't defend,
-But together we're stronger, our message is clear,
-Royal Commission now, the time is here!
-                </pre>
-            </div>
-        </div>
-    </section>
-
-    <!-- CTA Section -->
-    <section style="background:#f8f9fa;padding:2rem;text-align:center;border-top:3px solid var(--color-secondary);">
-    <div class="container">
-      <h3><i class="fas fa-scroll"></i> Read the Lyrics</h3>
-      <p>Every track tells a story. Browse all 128 songs with full lyrics, genre tags, and issue breakdowns.</p>
-      <a href="lyrics.html" class="btn btn-primary" style="margin-right:1rem;"><i class="fas fa-book-open"></i> Browse All Lyrics</a>
-      <a href="pillars.html" class="btn btn-outline"><i class="fas fa-columns"></i> The 3 Pillars</a>
+    <div class="track-counter">Showing <span id="trackCount">99</span> tracks</div>
+    <div class="track-grid" id="trackGrid">
+      <!-- Injected by JS -->
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- YouTube Channel Section -->
-  <section style="background:#0a0a0a; padding:4rem 2rem; text-align:center;">
-    <div style="max-width:900px; margin:0 auto;">
-      <h2 style="color:#d4af37; font-size:2rem; margin-bottom:0.5rem;">
-        <i class="fab fa-youtube" style="color:#ff0000;"></i> Fair Go Justice on YouTube
-      </h2>
-      <p style="color:#ccc; margin-bottom:2rem; font-size:1.1rem;">
-        128 original tracks with lyric videos — free to share, free to use in your advocacy.
-        Subscribe at <a href="https://www.youtube.com/@fairgojustice" target="_blank"
-        rel="noopener" style="color:#d4af37;">@fairgojustice</a>
-      </p>
-
-      <!-- Playlist embed — Complete Collection -->
-      <div style="position:relative; padding-bottom:56.25%; height:0; overflow:hidden; border-radius:12px; border:2px solid #d4af37; max-width:800px; margin:0 auto 2rem;">
-        <iframe
-          src="https://www.youtube.com/embed/videoseries?list=PLF04BQKL-tlNt_Hw-hQ9vyYy7gW0AVB1G&rel=0"
-          title="Fair Go Justice — Complete Collection"
-          style="position:absolute; top:0; left:0; width:100%; height:100%; border:0;"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
-          loading="lazy">
-        </iframe>
-      </div>
-
-      <!-- Genre playlist links -->
-      <div style="display:flex; flex-wrap:wrap; gap:0.75rem; justify-content:center; margin-bottom:2rem;">
-        <a href="https://www.youtube.com/playlist?list=PLF04BQKL-tlPZ_BdQCXgnmYpnq10mOhDa"
-           target="_blank" rel="noopener"
-           style="background:#1a1a2e; color:#d4af37; border:1px solid #d4af37; padding:0.5rem 1rem; border-radius:20px; text-decoration:none; font-size:0.9rem;">
-          🎙️ Hip-Hop &amp; Drill
-        </a>
-        <a href="https://www.youtube.com/playlist?list=PLF04BQKL-tlPKjEfL_77w5w9Ei2KAqbj0"
-           target="_blank" rel="noopener"
-           style="background:#1a1a2e; color:#d4af37; border:1px solid #d4af37; padding:0.5rem 1rem; border-radius:20px; text-decoration:none; font-size:0.9rem;">
-          🎸 Hard Rock &amp; Blues
-        </a>
-        <a href="https://www.youtube.com/playlist?list=PLF04BQKL-tlMQXOX4_RYEiFpRAI4sK85N"
-           target="_blank" rel="noopener"
-           style="background:#1a1a2e; color:#d4af37; border:1px solid #d4af37; padding:0.5rem 1rem; border-radius:20px; text-decoration:none; font-size:0.9rem;">
-          🤠 Aussie Country &amp; Bush Ballads
-        </a>
-        <a href="https://www.youtube.com/playlist?list=PLF04BQKL-tlPNdY2950i90Gl6P4pr6JYE"
-           target="_blank" rel="noopener"
-           style="background:#1a1a2e; color:#d4af37; border:1px solid #d4af37; padding:0.5rem 1rem; border-radius:20px; text-decoration:none; font-size:0.9rem;">
-          🎻 Protest Folk &amp; Acoustic
-        </a>
-        <a href="https://www.youtube.com/playlist?list=PLF04BQKL-tlOa-e9I6NOYW5BCm2kH6yGC"
-           target="_blank" rel="noopener"
-           style="background:#1a1a2e; color:#c0392b; border:1px solid #c0392b; padding:0.5rem 1rem; border-radius:20px; text-decoration:none; font-size:0.9rem;">
-          🏛️ Pillar 1: Judicial Integrity
-        </a>
-        <a href="https://www.youtube.com/playlist?list=PLF04BQKL-tlOcVZKCyJ08q7yTmwa-OZKq"
-           target="_blank" rel="noopener"
-           style="background:#1a1a2e; color:#2980b9; border:1px solid #2980b9; padding:0.5rem 1rem; border-radius:20px; text-decoration:none; font-size:0.9rem;">
-          ⚖️ Pillar 2: Legal Aid
-        </a>
-        <a href="https://www.youtube.com/playlist?list=PLF04BQKL-tlMlojJN48rRe3aPKV4VN7XA"
-           target="_blank" rel="noopener"
-           style="background:#1a1a2e; color:#27ae60; border:1px solid #27ae60; padding:0.5rem 1rem; border-radius:20px; text-decoration:none; font-size:0.9rem;">
-          🔍 Pillar 3: Evidence Integrity
-        </a>
-      </div>
-
-      <a href="https://www.youtube.com/@fairgojustice?sub_confirmation=1"
-         target="_blank" rel="noopener"
-         style="display:inline-block; background:#ff0000; color:#fff; padding:0.75rem 2rem; border-radius:6px; text-decoration:none; font-weight:700; font-size:1.1rem;">
-        <i class="fab fa-youtube"></i> Subscribe to @fairgojustice
+<!-- PLAYLISTS -->
+<section class="playlists-section">
+  <div class="playlists-inner">
+    <div class="section-label">STREAM ON YOUTUBE</div>
+    <h2 class="section-title">FIND YOUR PLAYLIST</h2>
+    <p class="section-desc">Eight curated playlists across every genre and pillar. Subscribe for new tracks every week.</p>
+    <div class="playlists-grid">
+      <a class="playlist-card" href="https://www.youtube.com/playlist?list=PLF04BQKL-tlNt_Hw-hQ9vyYy7gW0AVB1G" target="_blank" rel="noopener">
+        <div class="playlist-icon">🎵</div>
+        <div class="playlist-name">Complete Collection</div>
+        <div class="playlist-meta">All 99 tracks</div>
+        <i class="fas fa-arrow-right playlist-arrow"></i>
+      </a>
+      <a class="playlist-card" href="https://www.youtube.com/playlist?list=PLF04BQKL-tlOa-e9I6NOYW5BCm2kH6yGC" target="_blank" rel="noopener">
+        <div class="playlist-icon">🏛️</div>
+        <div class="playlist-name">Pillar 1: JIC</div>
+        <div class="playlist-meta">Judicial Integrity Commission</div>
+        <i class="fas fa-arrow-right playlist-arrow"></i>
+      </a>
+      <a class="playlist-card" href="https://www.youtube.com/playlist?list=PLF04BQKL-tlOcVZKCyJ08q7yTmwa-OZKq" target="_blank" rel="noopener">
+        <div class="playlist-icon">⚖️</div>
+        <div class="playlist-name">Pillar 2: Legal Aid</div>
+        <div class="playlist-meta">Access to justice for all</div>
+        <i class="fas fa-arrow-right playlist-arrow"></i>
+      </a>
+      <a class="playlist-card" href="https://www.youtube.com/playlist?list=PLF04BQKL-tlMlojJN48rRe3aPKV4VN7XA" target="_blank" rel="noopener">
+        <div class="playlist-icon">🔍</div>
+        <div class="playlist-name">Pillar 3: Evidence</div>
+        <div class="playlist-meta">Evidence integrity protocols</div>
+        <i class="fas fa-arrow-right playlist-arrow"></i>
+      </a>
+      <a class="playlist-card" href="https://www.youtube.com/playlist?list=PLF04BQKL-tlPZ_BdQCXgnmYpnq10mOhDa" target="_blank" rel="noopener">
+        <div class="playlist-icon">🎤</div>
+        <div class="playlist-name">Hip-Hop & Drill</div>
+        <div class="playlist-meta">Hard-hitting Aussie flow</div>
+        <i class="fas fa-arrow-right playlist-arrow"></i>
+      </a>
+      <a class="playlist-card" href="https://www.youtube.com/playlist?list=PLF04BQKL-tlPKjEfL_77w5w9Ei2KAqbj0" target="_blank" rel="noopener">
+        <div class="playlist-icon">🎸</div>
+        <div class="playlist-name">Hard Rock & Blues</div>
+        <div class="playlist-meta">Cinematic, gritty, powerful</div>
+        <i class="fas fa-arrow-right playlist-arrow"></i>
+      </a>
+      <a class="playlist-card" href="https://www.youtube.com/playlist?list=PLF04BQKL-tlMQXOX4_RYEiFpRAI4sK85N" target="_blank" rel="noopener">
+        <div class="playlist-icon">🤠</div>
+        <div class="playlist-name">Country & Bush Ballads</div>
+        <div class="playlist-meta">True blue Aussie stories</div>
+        <i class="fas fa-arrow-right playlist-arrow"></i>
+      </a>
+      <a class="playlist-card" href="https://www.youtube.com/playlist?list=PLF04BQKL-tlPNdY2950i90Gl6P4pr6JYE" target="_blank" rel="noopener">
+        <div class="playlist-icon">🎻</div>
+        <div class="playlist-name">Protest Folk & Acoustic</div>
+        <div class="playlist-meta">Voices that carry truth</div>
+        <i class="fas fa-arrow-right playlist-arrow"></i>
       </a>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section class="music-cta">
-        <h2><i class="fas fa-bullhorn"></i> Use Our Music in Your Advocacy</h2>
-        <p>All Fair Go Justice tracks are free to use for advocacy, social media, rallies, and spreading awareness. Help amplify our message!</p>
-        <div class="cta-buttons">
-            <a href="social-media-kit.html" class="btn btn-primary btn-lg">
-                <i class="fas fa-download"></i> Download Social Media Kit
-            </a>
-            <a href="petition.html" class="btn btn-secondary btn-lg">
-                <i class="fas fa-signature"></i> Sign the Petition
-            </a>
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-inner">
+    <h2 class="cta-title">THIS MUSIC IS <span>FREE</span>.<br>SHARE IT.</h2>
+    <p class="cta-desc">
+      Every time someone hears a Fair Go Justice track, the movement grows.
+      Share a song with someone who needs to hear it.
+      Make it their earworm. Make it their anthem.
+    </p>
+    <div class="cta-actions">
+      <a href="take-action.html" class="btn-primary"><i class="fas fa-fist-raised"></i> JOIN THE MOVEMENT</a>
+      <a href="https://www.youtube.com/@fairgojustice" target="_blank" rel="noopener" class="btn-secondary"><i class="fab fa-youtube"></i> SUBSCRIBE ON YOUTUBE</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">FAIR GO JUSTICE</div>
+  <div class="footer-tagline">RESTORE TRUST. RESTORE ACCOUNTABILITY.</div>
+  <div class="footer-links">
+    <a href="index.html">Home</a>
+    <a href="pillars.html">Three Pillars</a>
+    <a href="music.html">Music</a>
+    <a href="evidence.html">Evidence Vault</a>
+    <a href="stories.html">Stories</a>
+    <a href="take-action.html">Take Action</a>
+  </div>
+  <div class="footer-copy">© 2026 Fair Go Justice Movement — By the Fair Go Movement</div>
+</footer>
+
+<!-- AUDIO PLAYER BAR -->
+<div class="audio-player" id="audioPlayer">
+  <div class="player-controls">
+    <button class="player-btn" id="playerPrev" onclick="prevTrack()" title="Previous"><i class="fas fa-step-backward"></i></button>
+    <button class="player-btn" id="playerPlayPause" onclick="togglePlayPause()" title="Play/Pause"><i class="fas fa-pause" id="playIcon"></i></button>
+    <button class="player-btn" id="playerNext" onclick="nextTrack()" title="Next"><i class="fas fa-step-forward"></i></button>
+  </div>
+  <div class="player-info">
+    <div class="player-title" id="playerTitle">—</div>
+    <div class="player-cat" id="playerCat">—</div>
+  </div>
+  <div class="player-progress-wrap">
+    <input type="range" class="player-progress" id="playerProgress" value="0" min="0" max="100" step="0.1" oninput="seekAudio(this.value)">
+    <div class="player-time"><span id="playerCurrent">0:00</span><span id="playerDuration">0:00</span></div>
+  </div>
+  <div class="player-volume-wrap">
+    <i class="fas fa-volume-up" style="color:var(--muted);font-size:0.8rem"></i>
+    <input type="range" class="player-volume" id="playerVolume" value="80" min="0" max="100" oninput="setVolume(this.value)">
+  </div>
+  <button class="player-close" onclick="closePlayer()" title="Close"><i class="fas fa-times"></i></button>
+</div>
+
+<audio id="mainAudio" preload="none"></audio>
+
+<script>
+// ── DATA ──
+const TRACKS = [{"n": 1, "title": "6946", "cat": "Movement Anthem", "short": "ANTHEM", "color": "#5DBB5D", "suno": "", "audio": "audio/6946_MOVEMENT_CUT.mp3", "file": "6946_MOVEMENT_CUT.mp3"}, {"n": 2, "title": "Bankruptcy Weapon", "cat": "Corporate Fraud", "short": "FRAUD", "color": "#C0392B", "suno": "https://suno.com/song/663651f9-eff4-4cb8-854a-7101aea997d1", "audio": "audio/BANKRUPTCY_WEAPON.mp3", "file": "BANKRUPTCY_WEAPON.mp3"}, {"n": 3, "title": "Behind the Stamp", "cat": "Pillar 1 \u2014 JIC", "short": "PILLAR 1", "color": "#4A90D9", "suno": "", "audio": "audio/BEHIND_THE_STAMP_PILLAR_1_CUT.mp3", "file": "BEHIND_THE_STAMP_PILLAR_1_CUT.mp3"}, {"n": 4, "title": "Bloodline", "cat": "Personal Stories", "short": "STORY", "color": "#7A9BB5", "suno": "https://suno.com/song/c8ab9a26-5bbc-4b17-9f26-200dd25dd25e", "audio": "audio/BLOODLINE.mp3", "file": "BLOODLINE.mp3"}, {"n": 5, "title": "Brake Lines Bottom Lines", "cat": "Corporate Fraud", "short": "FRAUD", "color": "#C0392B", "suno": "", "audio": "audio/BRAKE_LINES_BOTTOM_LINES_INSURANCE_CUT.mp3", "file": "BRAKE_LINES_BOTTOM_LINES_INSURANCE_CUT.mp3"}, {"n": 6, "title": "Built the Roads Paid the Price", "cat": "Personal Stories", "short": "STORY", "color": "#7A9BB5", "suno": "", "audio": "audio/BUILT_THE_ROADS_PAID_THE_PRICE_WORKING_CLASS_CUT.mp3", "file": "BUILT_THE_ROADS_PAID_THE_PRICE_WORKING_CLASS_CUT.mp3"}, {"n": 7, "title": "Caveat Over Home", "cat": "Pillar 2 \u2014 Legal Aid", "short": "PILLAR 2", "color": "#D66B2D", "suno": "", "audio": "audio/CAVEAT_OVER_HOME_LEGALPROPERTY_CUT.mp3", "file": "CAVEAT_OVER_HOME_LEGALPROPERTY_CUT.mp3"}, {"n": 8, "title": "Chain of Custody", "cat": "Pillar 3 \u2014 Evidence", "short": "PILLAR 3", "color": "#2DB5B5", "suno": "https://suno.com/song/61f299f6-4c68-49f8-b089-5d852527cd40", "audio": "audio/CHAIN_OF_CUSTODY.mp3", "file": "CHAIN_OF_CUSTODY.mp3"}, {"n": 9, "title": "Chain of Custody", "cat": "Pillar 3 \u2014 Evidence", "short": "PILLAR 3", "color": "#2DB5B5", "suno": "https://suno.com/song/61f299f6-4c68-49f8-b089-5d852527cd40", "audio": "audio/CHAIN_OF_CUSTODY_PILLAR_3_CUT.mp3", "file": "CHAIN_OF_CUSTODY_PILLAR_3_CUT.mp3"}, {"n": 10, "title": "Cold Comfort", "cat": "Personal Stories", "short": "STORY", "color": "#7A9BB5", "suno": "https://suno.com/song/b86daba3-4e33-4a7a-b03d-c0e83eab3b7f", "audio": "audio/COLD_COMFORT.mp3", "file": "COLD_COMFORT.mp3"}, {"n": 11, "title": "Conflict of Interest", "cat": "Pillar 1 \u2014 JIC", "short": "PILLAR 1", "color": "#4A90D9", "suno": "https://suno.com/song/cbfd8b39-83bd-4014-9e05-a740f2255879", "audio": "audio/CONFLICT_OF_INTEREST.mp3", "file": "CONFLICT_OF_INTEREST.mp3"}, {"n": 12, "title": "Corporate Shell", "cat": "Corporate Fraud", "short": "FRAUD", "color": "#C0392B", "suno": "https://suno.com/song/d94f2dad-34da-475f-ae96-d2df7ab707b8", "audio": "audio/CORPORATE_SHELL.mp3", "file": "CORPORATE_SHELL.mp3"}, {"n": 13, "title": "Costs Order", "cat": "Pillar 2 \u2014 Legal Aid", "short": "PILLAR 2", "color": "#D66B2D", "suno": "https://suno.com/song/bbff7710-d8ec-447a-9712-adaa6c6deb9a", "audio": "audio/COSTS_ORDER.mp3", "file": "COSTS_ORDER.mp3"}, {"n": 14, "title": "Courthouse Blues", "cat": "Court & System", "short": "COURT", "color": "#9B6BCC", "suno": "https://suno.com/song/518e3742-1da0-48d7-9cfa-2f9e684ddf5b", "audio": "audio/COURTHOUSE_BLUES.mp3", "file": "COURTHOUSE_BLUES.mp3"}, {"n": 15, "title": "Debt Recycling Blues", "cat": "Corporate Fraud", "short": "FRAUD", "color": "#C0392B", "suno": "", "audio": "audio/DEBT_RECYCLING_BLUES_FINANCIAL_FRAUD_CUT.mp3", "file": "DEBT_RECYCLING_BLUES_FINANCIAL_FRAUD_CUT.mp3"}, {"n": 16, "title": "Defect Notice", "cat": "Pillar 3 \u2014 Evidence", "short": "PILLAR 3", "color": "#2DB5B5", "suno": "", "audio": "audio/DEFECT_NOTICE_EVIDENCE_CUT.mp3", "file": "DEFECT_NOTICE_EVIDENCE_CUT.mp3"}, {"n": 17, "title": "Dominance by Design", "cat": "Pillar 1 \u2014 JIC", "short": "PILLAR 1", "color": "#4A90D9", "suno": "", "audio": "audio/DOMINANCE_BY_DESIGN_PILLAR_1_CUT.mp3", "file": "DOMINANCE_BY_DESIGN_PILLAR_1_CUT.mp3"}, {"n": 18, "title": "Double Standard", "cat": "Pillar 1 \u2014 JIC", "short": "PILLAR 1", "color": "#4A90D9", "suno": "https://suno.com/song/fed4bd4d-1313-49e5-b58f-297933d15db5", "audio": "audio/DOUBLE_STANDARD.mp3", "file": "DOUBLE_STANDARD.mp3"}, {"n": 19, "title": "Elder", "cat": "Personal Stories", "short": "STORY", "color": "#7A9BB5", "suno": "https://suno.com/song/c026153b-b2d2-4c11-8015-1318188e7bf4", "audio": "audio/ELDER.mp3", "file": "ELDER.mp3"}, {"n": 20, "title": "Everything to Hide Track 12 Cut", "cat": "Personal Stories", "short": "STORY", "color": "#7A9BB5", "suno": "", "audio": "audio/EVERYTHING_TO_HIDE_TRACK_12_CUT.mp3", "file": "EVERYTHING_TO_HIDE_TRACK_12_CUT.mp3"}, {"n": 21, "title": "Exhibit a", "cat": "Pillar 3 \u2014 Evidence", "short": "PILLAR 3", "color": "#2DB5B5", "suno": "https://suno.com/song/f70d65c0-c1f8-4173-b550-cbbfe8b3a553", "audio": "audio/EXHIBIT_A.mp3", "file": "EXHIBIT_A.mp3"}, {"n": 22, "title": "Exhibit a Rebirth", "cat": "Pillar 3 \u2014 Evidence", "short": "PILLAR 3", "color": "#2DB5B5", "suno": "https://suno.com/song/f70d65c0-c1f8-4173-b550-cbbfe8b3a553", "audio": "audio/EXHIBIT_A_REBIRTH_EVIDENCE_CUT.mp3", "file": "EXHIBIT_A_REBIRTH_EVIDENCE_CUT.mp3"}, {"n": 23, "title": "Fake Me", "cat": "Personal Stories", "short": "STORY", "color": "#7A9BB5", "suno": "https://suno.com/song/e9db5a56-74e8-4630-a448-d29f6c872c8c", "audio": "audio/FAKE_ME.mp3", "file": "FAKE_ME.mp3"}, {"n": 24, "title": "Family Court Blues", "cat": "Pillar 2 \u2014 Legal Aid", "short": "PILLAR 2", "color": "#D66B2D", "suno": "https://suno.com/song/69f25dd9-5998-4469-bcb3-7f1fb53644f6", "audio": "audio/FAMILY_COURT_BLUES.mp3", "file": "FAMILY_COURT_BLUES.mp3"}, {"n": 25, "title": "Filed and Forgotten", "cat": "Court & System", "short": "COURT", "color": "#9B6BCC", "suno": "https://suno.com/song/a954b1a6-9d6b-49b4-90c9-b2b9c066a2e3", "audio": "audio/FILED_AND_FORGOTTEN.mp3", "file": "FILED_AND_FORGOTTEN.mp3"}, {"n": 26, "title": "Fingerprint the Frame Job", "cat": "Pillar 3 \u2014 Evidence", "short": "PILLAR 3", "color": "#2DB5B5", "suno": "", "audio": "audio/FINGERPRINT_THE_FRAME_JOB_MOVEMENT_CUT.mp3", "file": "FINGERPRINT_THE_FRAME_JOB_MOVEMENT_CUT.mp3"}, {"n": 27, "title": "Forced Mediation", "cat": "Pillar 2 \u2014 Legal Aid", "short": "PILLAR 2", "color": "#D66B2D", "suno": "https://suno.com/song/743dfbdd-c25f-4175-ae9a-cb4f6f1f87e7", "audio": "audio/FORCED_MEDIATION.mp3", "file": "FORCED_MEDIATION.mp3"}, {"n": 28, "title": "Forensic Fraud", "cat": "Pillar 3 \u2014 Evidence", "short": "PILLAR 3", "color": "#2DB5B5", "suno": "https://suno.com/song/fd9ea71a-9a6d-4faf-8ca5-230673876d14", "audio": "audio/FORENSIC_FRAUD.mp3", "file": "FORENSIC_FRAUD.mp3"}, {"n": 29, "title": "Freedom on Credit", "cat": "Pillar 2 \u2014 Legal Aid", "short": "PILLAR 2", "color": "#D66B2D", "suno": "", "audio": "audio/FREEDOM_ON_CREDIT_PILLAR_2_CUT.mp3", "file": "FREEDOM_ON_CREDIT_PILLAR_2_CUT.mp3"}, {"n": 30, "title": "From Little Lies", "cat": "Personal Stories", "short": "STORY", "color": "#7A9BB5", "suno": "https://suno.com/song/57cce487-a290-4409-977c-d21cf27139e3", "audio": "audio/FROM_LITTLE_LIES.mp3", "file": "FROM_LITTLE_LIES.mp3"}, {"n": 31, "title": "Ghost Employee", "cat": "Pillar 2 \u2014 Legal Aid", "short": "PILLAR 2", "color": "#D66B2D", "suno": "", "audio": "audio/GHOST_EMPLOYEE_PILLAR_2_CUT.mp3", "file": "GHOST_EMPLOYEE_PILLAR_2_CUT.mp3"}, {"n": 32, "title": "Ghost in the System", "cat": "Personal Stories", "short": "STORY", "color": "#7A9BB5", "suno": "https://suno.com/song/e36b4fce-c9d7-487f-b831-86447e9eaece", "audio": "audio/GHOST_IN_THE_SYSTEM.mp3", "file": "GHOST_IN_THE_SYSTEM.mp3"}, {"n": 33, "title": "Guardian Ad Litem", "cat": "Court & System", "short": "COURT", "color": "#9B6BCC", "suno": "https://suno.com/song/f732444b-ae33-4413-83e4-9abfd100e4ac", "audio": "audio/GUARDIAN_AD_LITEM.mp3", "file": "GUARDIAN_AD_LITEM.mp3"}, {"n": 34, "title": "Hansard Hearts", "cat": "Court & System", "short": "COURT", "color": "#9B6BCC", "suno": "https://suno.com/song/c1b564c8-9430-4a7b-86c3-31389c0ae161", "audio": "audio/HANSARD_HEARTS.mp3", "file": "HANSARD_HEARTS.mp3"}, {"n": 35, "title": "House Built on Sand", "cat": "Movement Anthem", "short": "ANTHEM", "color": "#5DBB5D", "suno": "", "audio": "audio/HOUSE_BUILT_ON_SAND_SYSTEMIC_FAILURE_CUT.mp3", "file": "HOUSE_BUILT_ON_SAND_SYSTEMIC_FAILURE_CUT.mp3"}, {"n": 36, "title": "Litigation Funder", "cat": "Pillar 2 \u2014 Legal Aid", "short": "PILLAR 2", "color": "#D66B2D", "suno": "https://suno.com/song/80d21404-eabc-4ded-a300-8c137976f10e", "audio": "audio/LITIGATION_FUNDER.mp3", "file": "LITIGATION_FUNDER.mp3"}, {"n": 37, "title": "Lucky Country Not for Me", "cat": "Movement Anthem", "short": "ANTHEM", "color": "#5DBB5D", "suno": "", "audio": "audio/LUCKY_COUNTRY_NOT_FOR_ME_REFORM_CUT.mp3", "file": "LUCKY_COUNTRY_NOT_FOR_ME_REFORM_CUT.mp3"}, {"n": 38, "title": "March to the Gate", "cat": "Movement Anthem", "short": "ANTHEM", "color": "#5DBB5D", "suno": "https://suno.com/song/8031b2a3-8fe7-4c93-9c3b-21565c168606", "audio": "audio/MARCH_TO_THE_GATE.mp3", "file": "MARCH_TO_THE_GATE.mp3"}, {"n": 39, "title": "Means Test", "cat": "Pillar 2 \u2014 Legal Aid", "short": "PILLAR 2", "color": "#D66B2D", "suno": "https://suno.com/song/9a280e1c-8bda-4969-b0e8-ff06c1020a04", "audio": "audio/MEANS_TEST.mp3", "file": "MEANS_TEST.mp3"}, {"n": 40, "title": "Media Blackout", "cat": "Corporate Fraud", "short": "FRAUD", "color": "#C0392B", "suno": "https://suno.com/song/f701fb04-30b7-432d-b6ad-5a0fad6b5a4b", "audio": "audio/MEDIA_BLACKOUT.mp3", "file": "MEDIA_BLACKOUT.mp3"}, {"n": 41, "title": "Modern Slave", "cat": "Movement Anthem", "short": "ANTHEM", "color": "#5DBB5D", "suno": "", "audio": "audio/MODERN_SLAVE_MOVEMENT_CUT.mp3", "file": "MODERN_SLAVE_MOVEMENT_CUT.mp3"}, {"n": 42, "title": "No Aid No Justice", "cat": "Pillar 2 \u2014 Legal Aid", "short": "PILLAR 2", "color": "#D66B2D", "suno": "", "audio": "audio/NO_AID_NO_JUSTICE.mp3", "file": "NO_AID_NO_JUSTICE.mp3"}, {"n": 43, "title": "No Brief", "cat": "Pillar 2 \u2014 Legal Aid", "short": "PILLAR 2", "color": "#D66B2D", "suno": "https://suno.com/song/4135fc7c-bd00-48fd-b790-f779105e22e2", "audio": "audio/NO_BRIEF.mp3", "file": "NO_BRIEF.mp3"}, {"n": 44, "title": "Offshore Account", "cat": "Corporate Fraud", "short": "FRAUD", "color": "#C0392B", "suno": "https://suno.com/song/b9b6e7ee-a97d-48e7-b656-f0b3206fa64d", "audio": "audio/OFFSHORE_ACCOUNT.mp3", "file": "OFFSHORE_ACCOUNT.mp3"}, {"n": 45, "title": "One Hundred", "cat": "Movement Anthem", "short": "ANTHEM", "color": "#5DBB5D", "suno": "https://suno.com/song/ec378cdd-1d3a-458f-b3c3-483cd723764b", "audio": "audio/ONE_HUNDRED.mp3", "file": "ONE_HUNDRED.mp3"}, {"n": 46, "title": "Paper Skin", "cat": "Personal Stories", "short": "STORY", "color": "#7A9BB5", "suno": "https://suno.com/song/83c194b3-8e48-41da-8cad-a555ed0c07c9", "audio": "audio/PAPER_SKIN.mp3", "file": "PAPER_SKIN.mp3"}, {"n": 47, "title": "Paper Trail", "cat": "Court & System", "short": "COURT", "color": "#9B6BCC", "suno": "https://suno.com/song/da2cad15-d26e-438d-b7b2-7a17fd515f2f", "audio": "audio/PAPER_TRAIL.mp3", "file": "PAPER_TRAIL.mp3"}, {"n": 48, "title": "Pattern Recognition", "cat": "Pillar 3 \u2014 Evidence", "short": "PILLAR 3", "color": "#2DB5B5", "suno": "", "audio": "audio/PATTERN_RECOGNITION_AI_EVIDENCE_CUT.mp3", "file": "PATTERN_RECOGNITION_AI_EVIDENCE_CUT.mp3"}, {"n": 49, "title": "Redacted", "cat": "Pillar 3 \u2014 Evidence", "short": "PILLAR 3", "color": "#2DB5B5", "suno": "", "audio": "audio/REDACTED_EVIDENCE_CUT.mp3", "file": "REDACTED_EVIDENCE_CUT.mp3"}, {"n": 50, "title": "Rise Again", "cat": "Movement Anthem", "short": "ANTHEM", "color": "#5DBB5D", "suno": "https://suno.com/song/c3bb8550-cd48-4762-8be3-d7b7556a0524", "audio": "audio/RISE_AGAIN.mp3", "file": "RISE_AGAIN.mp3"}, {"n": 51, "title": "Royal Pattern", "cat": "Pillar 1 \u2014 JIC", "short": "PILLAR 1", "color": "#4A90D9", "suno": "", "audio": "audio/ROYAL_PATTERN_JUDICIAL_INTEGRITY_CUT.mp3", "file": "ROYAL_PATTERN_JUDICIAL_INTEGRITY_CUT.mp3"}, {"n": 52, "title": "Satchel Took the Stand", "cat": "Pillar 3 \u2014 Evidence", "short": "PILLAR 3", "color": "#2DB5B5", "suno": "", "audio": "audio/SATCHEL_TOOK_THE_STAND_EVIDENCE_CUT.mp3", "file": "SATCHEL_TOOK_THE_STAND_EVIDENCE_CUT.mp3"}, {"n": 53, "title": "Self Represented", "cat": "Personal Stories", "short": "STORY", "color": "#7A9BB5", "suno": "https://suno.com/song/2ac679bd-716d-4703-b1d1-1c86c5aa9466", "audio": "audio/SELF-REPRESENTED.mp3", "file": "SELF-REPRESENTED.mp3"}, {"n": 54, "title": "Signed Sealed Pursued Second Bite Cut", "cat": "Personal Stories", "short": "STORY", "color": "#7A9BB5", "suno": "", "audio": "audio/SIGNED_SEALED_PURSUED_SECOND_BITE_CUT.mp3", "file": "SIGNED_SEALED_PURSUED_SECOND_BITE_CUT.mp3"}, {"n": 55, "title": "Signed Without Asking", "cat": "Manifesto Series", "short": "MANIFESTO", "color": "#D4AF37", "suno": "https://suno.com/song/37d93446-b1d9-4a3f-abb4-7e795d9ec2ec", "audio": "audio/SIGNED_WITHOUT_ASKING.mp3", "file": "SIGNED_WITHOUT_ASKING.mp3"}, {"n": 56, "title": "Silence of the State", "cat": "Personal Stories", "short": "STORY", "color": "#7A9BB5", "suno": "", "audio": "audio/SILENCE_OF_THE_STATE_JUDICIAL_CUT.mp3", "file": "SILENCE_OF_THE_STATE_JUDICIAL_CUT.mp3"}, {"n": 57, "title": "Silent Victim", "cat": "Personal Stories", "short": "STORY", "color": "#7A9BB5", "suno": "https://suno.com/song/86935c65-18a7-4cbf-848d-d90c41ffd827", "audio": "audio/SILENT_VICTIM.mp3", "file": "SILENT_VICTIM.mp3"}, {"n": 58, "title": "Sovereign Sons", "cat": "Movement Anthem", "short": "ANTHEM", "color": "#5DBB5D", "suno": "", "audio": "audio/SOVEREIGN_SONS_MOVEMENT_CUT.mp3", "file": "SOVEREIGN_SONS_MOVEMENT_CUT.mp3"}, {"n": 59, "title": "Stand Together", "cat": "Movement Anthem", "short": "ANTHEM", "color": "#5DBB5D", "suno": "https://suno.com/song/950c59f7-217a-479e-bd73-91a3a82d990d", "audio": "audio/STAND_TOGETHER.mp3", "file": "STAND_TOGETHER.mp3"}, {"n": 60, "title": "Statute of Limitations", "cat": "Court & System", "short": "COURT", "color": "#9B6BCC", "suno": "https://suno.com/song/cf062df5-d74b-4a1d-83b5-d237bca96fd6", "audio": "audio/STATUTE_OF_LIMITATIONS.mp3", "file": "STATUTE_OF_LIMITATIONS.mp3"}, {"n": 61, "title": "Stolen Value Offshore Chains", "cat": "Corporate Fraud", "short": "FRAUD", "color": "#C0392B", "suno": "", "audio": "audio/STOLEN_VALUE_OFFSHORE_CHAINS.mp3", "file": "STOLEN_VALUE_OFFSHORE_CHAINS.mp3"}, {"n": 62, "title": "Suppressed", "cat": "Pillar 3 \u2014 Evidence", "short": "PILLAR 3", "color": "#2DB5B5", "suno": "https://suno.com/song/d2a5f41f-8a28-4748-8728-f64852116b36", "audio": "audio/SUPPRESSED.mp3", "file": "SUPPRESSED.mp3"}, {"n": 63, "title": "Sworn to Lie", "cat": "Pillar 1 \u2014 JIC", "short": "PILLAR 1", "color": "#4A90D9", "suno": "https://suno.com/song/3e0f4783-59e2-4fa5-8eca-b5b89b451090", "audio": "audio/SWORN_TO_LIE.mp3", "file": "SWORN_TO_LIE.mp3"}, {"n": 64, "title": "They Blamed the Bag", "cat": "Personal Stories", "short": "STORY", "color": "#7A9BB5", "suno": "", "audio": "audio/THEY_BLAMED_THE_BAG_THREE_PILLARS_CUT.mp3", "file": "THEY_BLAMED_THE_BAG_THREE_PILLARS_CUT.mp3"}, {"n": 65, "title": "They Called It Lawful", "cat": "Corporate Fraud", "short": "FRAUD", "color": "#C0392B", "suno": "https://suno.com/song/7205dbac-4b2f-449a-97a8-5c7e3a6bfc31", "audio": "audio/THEY_CALLED_IT_LAWFUL.mp3", "file": "THEY_CALLED_IT_LAWFUL.mp3"}, {"n": 66, "title": "They Sank the Truth", "cat": "Corporate Fraud", "short": "FRAUD", "color": "#C0392B", "suno": "https://suno.com/song/1ecc9a94-be1b-4264-85f2-f340016b5d6b", "audio": "audio/THEY_SANK_THE_TRUTH.mp3", "file": "THEY_SANK_THE_TRUTH.mp3"}, {"n": 67, "title": "the Affidavit They Buried", "cat": "Pillar 3 \u2014 Evidence", "short": "PILLAR 3", "color": "#2DB5B5", "suno": "https://suno.com/song/e84e7d70-a962-4833-b3b2-325fe5a27c41", "audio": "audio/THE_AFFIDAVIT_THEY_BURIED.mp3", "file": "THE_AFFIDAVIT_THEY_BURIED.mp3"}, {"n": 68, "title": "the Appointed", "cat": "Pillar 1 \u2014 JIC", "short": "PILLAR 1", "color": "#4A90D9", "suno": "https://suno.com/song/e370095c-f552-4dbf-8100-f6cc3c1bacfc", "audio": "audio/THE_APPOINTED.mp3", "file": "THE_APPOINTED.mp3"}, {"n": 69, "title": "the Bag That Walked", "cat": "Pillar 3 \u2014 Evidence", "short": "PILLAR 3", "color": "#2DB5B5", "suno": "", "audio": "audio/THE_BAG_THAT_WALKED_EVIDENCE_CUT.mp3", "file": "THE_BAG_THAT_WALKED_EVIDENCE_CUT.mp3"}, {"n": 70, "title": "the Bailiff", "cat": "Court & System", "short": "COURT", "color": "#9B6BCC", "suno": "https://suno.com/song/9f85c7bf-5cfd-41af-99b1-72ff04221f19", "audio": "audio/THE_BAILIFF.mp3", "file": "THE_BAILIFF.mp3"}, {"n": 71, "title": "the Case They Cant Redact", "cat": "Movement Anthem", "short": "ANTHEM", "color": "#5DBB5D", "suno": "", "audio": "audio/THE_CASE_THEY_CANT_REDACT_MOVEMENT_CUT.mp3", "file": "THE_CASE_THEY_CANT_REDACT_MOVEMENT_CUT.mp3"}, {"n": 72, "title": "the Cost of Asking", "cat": "Personal Stories", "short": "STORY", "color": "#7A9BB5", "suno": "https://suno.com/song/d590c785-2f9c-4b98-81a1-c8e8e196bba6", "audio": "audio/THE_COST_OF_ASKING.mp3", "file": "THE_COST_OF_ASKING.mp3"}, {"n": 73, "title": "the Crown Dont Speak Silence Cut", "cat": "Personal Stories", "short": "STORY", "color": "#7A9BB5", "suno": "", "audio": "audio/THE_CROWN_DONT_SPEAK_SILENCE_CUT.mp3", "file": "THE_CROWN_DONT_SPEAK_SILENCE_CUT.mp3"}, {"n": 74, "title": "the Expert Witness", "cat": "Personal Stories", "short": "STORY", "color": "#7A9BB5", "suno": "https://suno.com/song/bbb1aede-0206-48f0-8a63-ff71a5c2542f", "audio": "audio/THE_EXPERT_WITNESS.mp3", "file": "THE_EXPERT_WITNESS.mp3"}, {"n": 75, "title": "the Fair Go That Never Came", "cat": "Movement Anthem", "short": "ANTHEM", "color": "#5DBB5D", "suno": "https://suno.com/song/1f37e41d-013d-42bb-92ab-c7983d0c43be", "audio": "audio/THE_FAIR_GO_THAT_NEVER_CAME.mp3", "file": "THE_FAIR_GO_THAT_NEVER_CAME.mp3"}, {"n": 76, "title": "the Final Appeal", "cat": "Personal Stories", "short": "STORY", "color": "#7A9BB5", "suno": "https://suno.com/song/6cd627f1-3791-4537-b705-1dbcd62b96a6", "audio": "audio/THE_FINAL_APPEAL.mp3", "file": "THE_FINAL_APPEAL.mp3"}, {"n": 77, "title": "the Gauntlet", "cat": "Personal Stories", "short": "STORY", "color": "#7A9BB5", "suno": "https://suno.com/song/1e47d3da-0ff1-45cc-adfc-6b52dfe3b7c3", "audio": "audio/THE_GAUNTLET.mp3", "file": "THE_GAUNTLET.mp3"}, {"n": 78, "title": "the Ghost in the Trailer", "cat": "Pillar 3 \u2014 Evidence", "short": "PILLAR 3", "color": "#2DB5B5", "suno": "", "audio": "audio/THE_GHOST_IN_THE_TRAILER_EVIDENCE_CUT.mp3", "file": "THE_GHOST_IN_THE_TRAILER_EVIDENCE_CUT.mp3"}, {"n": 79, "title": "the Guilty Truth", "cat": "Pillar 1 \u2014 JIC", "short": "PILLAR 1", "color": "#4A90D9", "suno": "", "audio": "audio/THE_GUILTY_TRUTH_PILLAR_1_CUT.mp3", "file": "THE_GUILTY_TRUTH_PILLAR_1_CUT.mp3"}, {"n": 80, "title": "the Last Witness", "cat": "Personal Stories", "short": "STORY", "color": "#7A9BB5", "suno": "https://suno.com/song/a1a5ed1c-d536-4ea0-864b-d341fadefd9e", "audio": "audio/THE_LAST_WITNESS.mp3", "file": "THE_LAST_WITNESS.mp3"}, {"n": 81, "title": "the Long Road", "cat": "Personal Stories", "short": "STORY", "color": "#7A9BB5", "suno": "https://suno.com/song/70ffdce9-88fb-4f10-af9b-4483cc64bca4", "audio": "audio/THE_LONG_ROAD.mp3", "file": "THE_LONG_ROAD.mp3"}, {"n": 82, "title": "the Name They Own", "cat": "Personal Stories", "short": "STORY", "color": "#7A9BB5", "suno": "https://suno.com/song/719b88e3-9078-45d6-9979-5eafa7e4d6d2", "audio": "audio/THE_NAME_THEY_OWN.mp3", "file": "THE_NAME_THEY_OWN.mp3"}, {"n": 83, "title": "the Receiver", "cat": "Court & System", "short": "COURT", "color": "#9B6BCC", "suno": "https://suno.com/song/fc4e9e9d-0c7e-444b-ab0c-4a06e3fed0b7", "audio": "audio/THE_RECEIVER.mp3", "file": "THE_RECEIVER.mp3"}, {"n": 84, "title": "the Registrar", "cat": "Court & System", "short": "COURT", "color": "#9B6BCC", "suno": "https://suno.com/song/edcd576d-0428-4717-9b42-1fe2a3c2ebce", "audio": "audio/THE_REGISTRAR.mp3", "file": "THE_REGISTRAR.mp3"}, {"n": 85, "title": "the Selector", "cat": "Court & System", "short": "COURT", "color": "#9B6BCC", "suno": "https://suno.com/song/24948025-cf82-4cd4-8be7-2cc6572fc25d", "audio": "audio/THE_SELECTOR.mp3", "file": "THE_SELECTOR.mp3"}, {"n": 86, "title": "the Settlement Trap", "cat": "Court & System", "short": "COURT", "color": "#9B6BCC", "suno": "https://suno.com/song/f88e8be7-c558-4f1e-be15-5ffd7cb6bfe1", "audio": "audio/THE_SETTLEMENT_TRAP.mp3", "file": "THE_SETTLEMENT_TRAP.mp3"}, {"n": 87, "title": "the Tipstaff", "cat": "Court & System", "short": "COURT", "color": "#9B6BCC", "suno": "https://suno.com/song/a4e060eb-14b5-47b1-bbfe-268db22e4f11", "audio": "audio/THE_TIPSTAFF.mp3", "file": "THE_TIPSTAFF.mp3"}, {"n": 88, "title": "Unclean Hands", "cat": "Pillar 1 \u2014 JIC", "short": "PILLAR 1", "color": "#4A90D9", "suno": "", "audio": "audio/UNCLEAN_HANDS_PILLAR_1_CUT.mp3", "file": "UNCLEAN_HANDS_PILLAR_1_CUT.mp3"}, {"n": 89, "title": "Under Oath Royal Truth", "cat": "Court & System", "short": "COURT", "color": "#9B6BCC", "suno": "", "audio": "audio/UNDER_OATH_ROYAL_TRUTH.mp3", "file": "UNDER_OATH_ROYAL_TRUTH.mp3"}, {"n": 90, "title": "Unregistered", "cat": "Corporate Fraud", "short": "FRAUD", "color": "#C0392B", "suno": "https://suno.com/song/23e9378f-c321-4148-aca6-3242d59cb426", "audio": "audio/UNREGISTERED.mp3", "file": "UNREGISTERED.mp3"}, {"n": 91, "title": "Unsigned Affidavit Cut", "cat": "Pillar 3 \u2014 Evidence", "short": "PILLAR 3", "color": "#2DB5B5", "suno": "", "audio": "audio/UNSIGNED_AFFIDAVIT_CUT.mp3", "file": "UNSIGNED_AFFIDAVIT_CUT.mp3"}, {"n": 92, "title": "Vexatious", "cat": "Pillar 1 \u2014 JIC", "short": "PILLAR 1", "color": "#4A90D9", "suno": "https://suno.com/song/4a8a110d-c71d-4c29-9551-a6dbcdbb3225", "audio": "audio/VEXATIOUS.mp3", "file": "VEXATIOUS.mp3"}, {"n": 93, "title": "We Are Not Done", "cat": "Movement Anthem", "short": "ANTHEM", "color": "#5DBB5D", "suno": "https://suno.com/song/61b17448-ba22-4d90-88fa-682676653619", "audio": "audio/WE_ARE_NOT_DONE.mp3", "file": "WE_ARE_NOT_DONE.mp3"}, {"n": 94, "title": "We Raised the Flag", "cat": "Movement Anthem", "short": "ANTHEM", "color": "#5DBB5D", "suno": "", "audio": "audio/WE_RAISED_THE_FLAG_MOVEMENT_ANTHEM.mp3", "file": "WE_RAISED_THE_FLAG_MOVEMENT_ANTHEM.mp3"}, {"n": 95, "title": "What They Stole", "cat": "Pillar 3 \u2014 Evidence", "short": "PILLAR 3", "color": "#2DB5B5", "suno": "", "audio": "audio/WHAT_THEY_STOLE_EVIDENCE_CUT.mp3", "file": "WHAT_THEY_STOLE_EVIDENCE_CUT.mp3"}, {"n": 96, "title": "Whistleblower", "cat": "Personal Stories", "short": "STORY", "color": "#7A9BB5", "suno": "https://suno.com/song/a29e98a7-72ee-46df-b562-09a2dd8a1a42", "audio": "audio/WHISTLEBLOWER.mp3", "file": "WHISTLEBLOWER.mp3"}, {"n": 97, "title": "White Out", "cat": "Pillar 3 \u2014 Evidence", "short": "PILLAR 3", "color": "#2DB5B5", "suno": "", "audio": "audio/WHITE_OUT_EVIDENCE_CUT.mp3", "file": "WHITE_OUT_EVIDENCE_CUT.mp3"}, {"n": 98, "title": "Widows Title", "cat": "Personal Stories", "short": "STORY", "color": "#7A9BB5", "suno": "", "audio": "audio/WIDOWS_TITLE.mp3", "file": "WIDOWS_TITLE.mp3"}, {"n": 99, "title": "Wrecking Ball Law", "cat": "Corporate Fraud", "short": "FRAUD", "color": "#C0392B", "suno": "https://suno.com/song/17a3cd8d-508e-4967-807f-df7302038709", "audio": "audio/WRECKING_BALL_LAW.mp3", "file": "WRECKING_BALL_LAW.mp3"}];
+
+const CAT_COLORS = {
+  "Manifesto Series":    "#D4AF37",
+  "Pillar 1 — JIC":     "#4A90D9",
+  "Pillar 2 — Legal Aid": "#D66B2D",
+  "Pillar 3 — Evidence": "#2DB5B5",
+  "Movement Anthem":    "#5DBB5D",
+  "Court & System":     "#9B6BCC",
+  "Corporate Fraud":    "#C0392B",
+  "Personal Stories":   "#7A9BB5"
+};
+
+// Manifesto featured tracks (hand-curated from catalogue)
+const MANIFESTO_TRACKS = [
+  { n:1, title:"BLINDSIDED", sub:"Manifesto Series — Song #1", desc:"The case that started everything. Evidence buried. Testimony ignored. The moment the system looked away.", file:"BLINDSIDED.mp3" },
+  { n:2, title:"SIGNED. DENIED. BETRAYED.", sub:"Manifesto Series — Song #2", desc:"They asked for a signature without disclosure. The ink dried before the truth was told.", file:"SIGNED_DENIED_BETRAYED.mp3" },
+  { n:3, title:"WITNESS THIS", sub:"Manifesto Series — Song #3", desc:"A witness statement ghosted. A voice silenced by process. But the record doesn't lie.", file:"WITNESS_THIS.mp3" },
+  { n:4, title:"THE CHAIN IS BROKEN", sub:"Movement Anthem", desc:"When the chain of custody breaks, justice breaks with it. This is the moment the movement was named.", file:"CHAIN_OF_CUSTODY.mp3" },
+  { n:5, title:"THE GUILTY TRUTH", sub:"Pillar 1 — JIC", desc:"Accountability starts here. The evidence speaks when institutions refuse to.", file:"THE_GUILTY_TRUTH_PILLAR_1_CUT.mp3" },
+  { n:6, title:"SATCHEL TOOK THE STAND", sub:"Pillar 3 — Evidence", desc:"A drug bag. A courtroom. A truth no one wanted to hear. The stand was taken anyway.", file:"SATCHEL_TOOK_THE_STAND_EVIDENCE_CUT.mp3" },
+];
+
+// ── NAV SCROLL ──
+window.addEventListener('scroll', () => {
+  document.getElementById('mainNav').classList.toggle('scrolled', window.scrollY > 50);
+});
+
+function toggleMobileMenu() {
+  document.getElementById('mobileMenu').classList.toggle('open');
+}
+
+// ── MANIFESTO GRID ──
+function buildManifestoGrid() {
+  const grid = document.getElementById('manifestoGrid');
+  grid.innerHTML = MANIFESTO_TRACKS.map(t => {
+    const audioFile = 'audio/' + t.file;
+    return `
+    <div class="manifesto-card" onclick="playTrackByFile('${audioFile}', '${t.title}', '${t.sub}')">
+      <div class="manifesto-num">0${t.n}</div>
+      <div class="manifesto-badge">FEATURED TRACK</div>
+      <div class="manifesto-title">${t.title}</div>
+      <div class="manifesto-desc">${t.desc}</div>
+      <div class="manifesto-actions">
+        <button class="mini-btn mini-btn-play" onclick="event.stopPropagation(); playTrackByFile('${audioFile}', '${t.title}', '${t.sub}')">
+          <i class="fas fa-play"></i> PLAY
+        </button>
+        <a class="mini-btn mini-btn-yt" href="https://www.youtube.com/@fairgojustice" target="_blank" rel="noopener" onclick="event.stopPropagation()">
+          <i class="fab fa-youtube"></i> YOUTUBE
+        </a>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// ── TRACK GRID ──
+let currentFilter = 'all';
+let currentSearch = '';
+let currentTrackIndex = -1;
+let isPlaying = false;
+
+function buildTrackGrid(filteredTracks) {
+  const grid = document.getElementById('trackGrid');
+  document.getElementById('trackCount').textContent = filteredTracks.length;
+  if (filteredTracks.length === 0) {
+    grid.innerHTML = '<div style="color:var(--muted);font-size:0.9rem;grid-column:1/-1;padding:2rem 0">No tracks found.</div>';
+    return;
+  }
+  grid.innerHTML = filteredTracks.map(t => {
+    const color = CAT_COLORS[t.cat] || '#888';
+    const isActive = currentTrackIndex >= 0 && TRACKS[currentTrackIndex]?.file === t.file;
+    return `
+    <div class="track-card${isActive ? ' active-card' : ''}" id="card-${t.n}" onclick="playTrack(${t.n-1})">
+      <div class="track-card-top">
+        <div class="track-num">${String(t.n).padStart(2,'0')}</div>
+        <div class="track-info">
+          <div class="track-title">${t.title}</div>
+          <span class="cat-badge" style="background:${color}22;color:${color};border:1px solid ${color}44">${t.short}</span>
         </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="site-footer">
-        <div class="footer-grid">
-            <div class="footer-col">
-                <h3>Fair Go Justice</h3>
-                <p>A grassroots movement demanding justice system reform across Australia.</p>
-                <div class="social-links">
-                    <a href="https://www.facebook.com/profile.php?id=61584635392580" target="_blank" rel="noopener" aria-label="Facebook">
-                        <i class="fab fa-facebook-f"></i>
-                    </a>
-                    <a href="#" target="_blank" rel="noopener" aria-label="Twitter">
-                        <i class="fab fa-twitter"></i>
-                    </a>
-                    <a href="#" target="_blank" rel="noopener" aria-label="Instagram">
-                        <i class="fab fa-instagram"></i>
-                    </a>
-                    <a href="https://www.youtube.com/@fairgojustice" target="_blank" rel="noopener" aria-label="YouTube">
-                        <i class="fab fa-youtube"></i>
-                    </a>
-                </div>
-            </div>
-            <div class="footer-col">
-                <h4>Quick Links</h4>
-                <ul>
-                    <li><a href="about.html">About Us</a></li>
-                    <li><a href="pillars.html">5 Pillars</a></li>
-                    <li><a href="stories.html">Stories</a></li>
-                    <li><a href="petition.html">Sign Petition</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h4>Resources</h4>
-                <ul>
-                    <li><a href="resources.html">Get Help</a></li>
-                    <li><a href="rights.html">Know Your Rights</a></li>
-                    <li><a href="music.html">Music</a></li>
-                    <li><a href="social-media-kit.html">Social Media Kit</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h4>Legal</h4>
-                <ul>
-                    <li><a href="privacy.html">Privacy Policy</a></li>
-                    <li><a href="terms.html">Terms of Use</a></li>
-                    <li><a href="contact.html">Contact Us</a></li>
-                </ul>
-            </div>
+        <div class="play-btn-wrap">
+          <div class="play-btn${isActive && isPlaying ? ' playing' : ''}" id="btn-${t.n}">
+            <i class="fas ${isActive && isPlaying ? 'fa-pause' : 'fa-play'}"></i>
+          </div>
         </div>
-        <div class="footer-bottom">
-            <p>&copy; 2025 Fair Go Justice. All rights reserved. | <a href="mailto:bretharding69@gmail.com">bretharding69@gmail.com</a></p>
-        </div>
-    </footer>
+      </div>
+      <div class="track-actions">
+        ${t.suno ? `<a class="track-link" href="${t.suno}" target="_blank" rel="noopener" onclick="event.stopPropagation()"><i class="fas fa-external-link-alt"></i> SUNO</a>` : ''}
+        <a class="track-link" href="https://www.youtube.com/@fairgojustice" target="_blank" rel="noopener" onclick="event.stopPropagation()"><i class="fab fa-youtube"></i> YT</a>
+        <button class="track-link" onclick="event.stopPropagation();shareTrack('${t.title}')" style="cursor:pointer;background:none"><i class="fas fa-share-alt"></i> SHARE</button>
+      </div>
+    </div>`;
+  }).join('');
+}
 
-    <!-- Scripts -->
-    <script src="js/main.js"></script>
-    <script>
-        // Track sharing function
-        function shareTrack(trackName) {
-            const url = encodeURIComponent(window.location.href);
-            const text = encodeURIComponent(`🎵 Listen to "${trackName}" - Aussie hip hop for justice reform! #FairGoJustice #AussieHipHop`);
-            
-            // Show share modal
-            const shareUrl = `https://twitter.com/intent/tweet?text=${text}&url=${url}`;
-            window.open(shareUrl, '_blank', 'width=600,height=400');
-            
-            // Track analytics
-            if (typeof gtag === 'function') {
-                gtag('event', 'share_track', {
-                    'event_category': 'music',
-                    'event_label': trackName
-                });
-            }
-        }
-        
-        // Play overlay click handlers
-        document.querySelectorAll('.play-overlay').forEach(overlay => {
-            overlay.addEventListener('click', function() {
-                const audio = this.closest('.track-card').querySelector('audio');
-                if (audio) {
-                    audio.play();
-                }
-            });
-        });
-    </script>
-  <script>
-    function filterTracks(filter) {
-      // Update button styles
-      document.querySelectorAll('.filter-btn').forEach(btn => {
-        const isActive = btn.dataset.filter === filter;
-        const colors = {
-          all:     { bg: 'var(--color-primary)', border: 'var(--color-primary)', text: 'white' },
-          pillar1: { bg: '#dc2626', border: '#dc2626', text: 'white' },
-          pillar2: { bg: '#2563eb', border: '#2563eb', text: 'white' },
-          pillar3: { bg: '#16a34a', border: '#16a34a', text: 'white' },
-          hiphop:  { bg: '#7c3aed', border: '#7c3aed', text: 'white' },
-        };
-        if (isActive) {
-          btn.style.background = colors[btn.dataset.filter]?.bg || 'var(--color-primary)';
-          btn.style.color = 'white';
-        } else {
-          btn.style.background = 'white';
-          btn.style.color = btn.style.borderColor;
-        }
-      });
+function getFilteredTracks() {
+  return TRACKS.filter(t => {
+    const matchCat = currentFilter === 'all' || t.cat === currentFilter;
+    const matchSearch = !currentSearch || t.title.toLowerCase().includes(currentSearch.toLowerCase());
+    return matchCat && matchSearch;
+  });
+}
 
-      // Show/hide cards
-      document.querySelectorAll('#track-grid .track-card').forEach(card => {
-        if (filter === 'all') {
-          card.style.display = '';
-        } else if (filter === 'hiphop') {
-          card.style.display = card.dataset.genre === 'hiphop' ? '' : 'none';
-        } else {
-          card.style.display = card.dataset.pillar === filter ? '' : 'none';
-        }
-      });
-    }
-  </script>
+function filterTracks(cat, btn) {
+  currentFilter = cat;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  buildTrackGrid(getFilteredTracks());
+}
+
+function searchTracks(val) {
+  currentSearch = val;
+  buildTrackGrid(getFilteredTracks());
+}
+
+// ── AUDIO ENGINE ──
+const audio = document.getElementById('mainAudio');
+const player = document.getElementById('audioPlayer');
+const BASE = 'audio/';
+
+audio.addEventListener('timeupdate', () => {
+  if (!audio.duration) return;
+  const pct = (audio.currentTime / audio.duration) * 100;
+  document.getElementById('playerProgress').value = pct;
+  document.getElementById('playerCurrent').textContent = fmt(audio.currentTime);
+  document.getElementById('playerDuration').textContent = fmt(audio.duration);
+});
+
+audio.addEventListener('ended', () => nextTrack());
+
+function fmt(s) {
+  const m = Math.floor(s/60), sec = Math.floor(s%60);
+  return `${m}:${sec<10?'0'+sec:sec}`;
+}
+
+function playTrack(idx) {
+  if (idx < 0 || idx >= TRACKS.length) return;
+  const t = TRACKS[idx];
+  if (currentTrackIndex === idx) {
+    togglePlayPause();
+    return;
+  }
+  currentTrackIndex = idx;
+  audio.src = BASE + t.file;
+  audio.volume = (document.getElementById('playerVolume').value || 80) / 100;
+  audio.play().then(() => {
+    isPlaying = true;
+    updatePlayerUI(t);
+    buildTrackGrid(getFilteredTracks());
+  }).catch(e => console.warn('Audio play failed:', e));
+}
+
+function playTrackByFile(audioFile, title, cat) {
+  const idx = TRACKS.findIndex(t => t.audio === audioFile || 'audio/'+t.file === audioFile);
+  if (idx >= 0) {
+    playTrack(idx);
+  } else {
+    audio.src = audioFile;
+    audio.volume = (document.getElementById('playerVolume').value || 80) / 100;
+    audio.play().then(() => {
+      isPlaying = true;
+      document.getElementById('playerTitle').textContent = title;
+      document.getElementById('playerCat').textContent = cat;
+      player.classList.add('visible');
+    }).catch(e => console.warn('Play failed:', e));
+  }
+}
+
+function updatePlayerUI(t) {
+  document.getElementById('playerTitle').textContent = t.title;
+  document.getElementById('playerCat').textContent = t.cat;
+  document.getElementById('playIcon').className = 'fas fa-pause';
+  player.classList.add('visible');
+}
+
+function togglePlayPause() {
+  if (audio.paused) {
+    audio.play(); isPlaying = true;
+    document.getElementById('playIcon').className = 'fas fa-pause';
+  } else {
+    audio.pause(); isPlaying = false;
+    document.getElementById('playIcon').className = 'fas fa-play';
+  }
+  buildTrackGrid(getFilteredTracks());
+}
+
+function nextTrack() {
+  const filtered = getFilteredTracks();
+  if (filtered.length === 0) return;
+  const ci = filtered.findIndex(t => t.n === (TRACKS[currentTrackIndex]?.n));
+  const ni = (ci + 1) % filtered.length;
+  playTrack(TRACKS.findIndex(t => t.n === filtered[ni].n));
+}
+
+function prevTrack() {
+  const filtered = getFilteredTracks();
+  if (filtered.length === 0) return;
+  const ci = filtered.findIndex(t => t.n === (TRACKS[currentTrackIndex]?.n));
+  const ni = (ci - 1 + filtered.length) % filtered.length;
+  playTrack(TRACKS.findIndex(t => t.n === filtered[ni].n));
+}
+
+function seekAudio(val) { if (audio.duration) audio.currentTime = (val / 100) * audio.duration; }
+function setVolume(val) { audio.volume = val / 100; }
+function closePlayer() { audio.pause(); isPlaying = false; player.classList.remove('visible'); buildTrackGrid(getFilteredTracks()); }
+
+function shareTrack(title) {
+  const url = window.location.href.split('#')[0];
+  if (navigator.share) {
+    navigator.share({ title: `Fair Go Justice — ${title}`, text: `Listening to "${title}" — the sound of the movement. #FairGoJustice`, url });
+  } else {
+    navigator.clipboard.writeText(`${title} — ${url}`).then(() => alert('Track link copied to clipboard!'));
+  }
+}
+
+// ── INIT ──
+buildManifestoGrid();
+buildTrackGrid(TRACKS);
+</script>
 </body>
 </html>
