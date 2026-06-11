@@ -3,382 +3,825 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="The Three Pillars of Justice Reform - Fair Go Justice's evidence-based framework for transforming Australia's legal system.">
-  <meta name="keywords" content="justice reform, three pillars, judicial integrity, legal aid, evidence integrity, Australia">
-  <meta name="author" content="Fair Go Justice Movement">
-  
-  <!-- Open Graph -->
-  <meta property="og:type" content="website">
+  <meta name="description" content="The Three Pillars of Justice Reform — Fair Go Justice's framework for transforming Australia's broken legal system.">
+  <meta property="og:title" content="The Three Pillars — Fair Go Justice">
+  <meta property="og:description" content="A National Judicial Integrity Commission. Expanded Legal Aid. Evidence Integrity Protocols. Three reforms. One movement.">
+  <meta property="og:image" content="https://raw.githubusercontent.com/Fair-Go-Justice/fairgojustice-website/main/thumbnails/pillar_jic_headquarters_web.jpg">
   <meta property="og:url" content="https://fairgojustice.com.au/pillars.html">
-  <meta property="og:title" content="The 3 Pillars of Justice Reform - Fair Go Justice">
-  <meta property="og:description" content="Our evidence-based framework for transforming Australia's legal system.">
-  <meta property="og:image" content="https://fairgojustice.com.au/images/social-share.jpg">
-  
-  <title>The 3 Pillars - Fair Go Justice</title>
-  
-  <!-- Fonts -->
+  <title>The Three Pillars — Fair Go Justice</title>
+  <link rel="stylesheet" href="main_v3.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600;700&family=Source+Serif+Pro:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
-  
-  <!-- Font Awesome -->
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  
-  <!-- Stylesheet -->
-  <link rel="stylesheet" href="css/main.css">
-  
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="images/favicon.png">
-  
-  <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-DRTFE1VZYP"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-DRTFE1VZYP');
-  </script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-DRTFE1VZYP');</script>
+
+  <style>
+    :root {
+      --black: #0D1117;
+      --justice-blue: #0E3A5B;
+      --burnt-orange: #D66B2D;
+      --white: #F5F5F5;
+      --gold: #D4AF37;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: 'Space Grotesk', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* ─── NAV ─────────────────────────────────────── */
+    .nav {
+      position: fixed; top: 0; width: 100%; z-index: 999;
+      background: rgba(13,17,23,0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(212,175,55,0.15);
+      padding: 0 2rem;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 64px;
+    }
+    .nav-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.4rem;
+      color: var(--gold);
+      text-decoration: none;
+      letter-spacing: 2px;
+    }
+    .nav-links { list-style: none; display: flex; gap: 2rem; align-items: center; }
+    .nav-links a {
+      color: rgba(245,245,245,0.8);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      transition: color 0.3s;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--gold); }
+    .nav-cta {
+      background: var(--burnt-orange) !important;
+      color: white !important;
+      padding: 0.5rem 1.2rem;
+      border-radius: 4px;
+      font-weight: 600 !important;
+    }
+    .nav-toggle {
+      display: none;
+      background: none; border: none;
+      color: var(--white); font-size: 1.4rem; cursor: pointer;
+    }
+    @media(max-width:768px){
+      .nav-toggle { display: block; }
+      .nav-links { display: none; flex-direction: column; position: absolute; top: 64px; left: 0; width: 100%; background: rgba(13,17,23,0.98); padding: 1rem 2rem 2rem; gap: 1rem; }
+      .nav-links.open { display: flex; }
+    }
+
+    /* ─── PAGE HERO ───────────────────────────────── */
+    .page-hero {
+      min-height: 70vh;
+      display: flex; align-items: center; justify-content: center;
+      text-align: center;
+      padding: 100px 2rem 4rem;
+      position: relative;
+      background: url('https://raw.githubusercontent.com/Fair-Go-Justice/fairgojustice-website/main/thumbnails/pillar_jic_headquarters_web.jpg') center/cover no-repeat;
+    }
+    .page-hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom, rgba(13,17,23,0.6) 0%, rgba(13,17,23,0.4) 50%, rgba(13,17,23,0.9) 100%);
+    }
+    .page-hero-content { position: relative; z-index: 2; max-width: 900px; }
+    .page-hero-label {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1rem;
+    }
+    .page-hero h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(4rem, 10vw, 8rem);
+      letter-spacing: 4px;
+      line-height: 0.95;
+      color: var(--white);
+      text-shadow: 0 4px 30px rgba(0,0,0,0.8);
+      margin-bottom: 1.5rem;
+    }
+    .page-hero h1 span { color: var(--gold); }
+    .page-hero p {
+      font-size: 1.15rem;
+      color: rgba(245,245,245,0.85);
+      line-height: 1.7;
+      max-width: 680px;
+      margin: 0 auto 2.5rem;
+    }
+    .pillar-nav-pills {
+      display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: center;
+    }
+    .pillar-nav-pill {
+      padding: 0.6rem 1.5rem;
+      border-radius: 40px;
+      font-weight: 600; font-size: 0.85rem;
+      text-decoration: none;
+      transition: all 0.3s;
+      letter-spacing: 0.5px;
+    }
+    .pill-1 { background: rgba(14,58,91,0.8); border: 1px solid #0E3A5B; color: var(--white); }
+    .pill-1:hover { background: #0E3A5B; }
+    .pill-2 { background: rgba(212,175,55,0.2); border: 1px solid var(--gold); color: var(--gold); }
+    .pill-2:hover { background: rgba(212,175,55,0.35); }
+    .pill-3 { background: rgba(214,107,45,0.2); border: 1px solid var(--burnt-orange); color: var(--burnt-orange); }
+    .pill-3:hover { background: rgba(214,107,45,0.35); }
+
+    /* ─── INTRO STRIP ─────────────────────────────── */
+    .intro-strip {
+      background: var(--justice-blue);
+      padding: 3rem 2rem;
+      text-align: center;
+    }
+    .intro-strip p {
+      max-width: 800px; margin: 0 auto;
+      font-size: 1.1rem; line-height: 1.8;
+      color: rgba(245,245,245,0.9);
+    }
+    .intro-strip strong { color: var(--gold); }
+
+    /* ─── PILLAR SECTION ──────────────────────────── */
+    .pillar-section {
+      padding: 0;
+    }
+
+    .pillar-hero {
+      min-height: 50vh;
+      display: flex; align-items: flex-end;
+      padding: 4rem 2rem 3rem;
+      position: relative;
+    }
+    .pillar-hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom, rgba(13,17,23,0.3) 0%, rgba(13,17,23,0.85) 100%);
+    }
+    .pillar-hero-1 { background: url('https://raw.githubusercontent.com/Fair-Go-Justice/fairgojustice-website/main/thumbnails/pillar_jic_headquarters_web.jpg') center/cover no-repeat; }
+    .pillar-hero-2 { background: url('https://raw.githubusercontent.com/Fair-Go-Justice/fairgojustice-website/main/thumbnails/pillar_justice_for_all_web.jpg') center/cover no-repeat; }
+    .pillar-hero-3 { background: url('https://raw.githubusercontent.com/Fair-Go-Justice/fairgojustice-website/main/thumbnails/vault_evidence_integrity_protocols_web.jpg') center/cover no-repeat; }
+
+    .pillar-hero-content {
+      position: relative; z-index: 2;
+      max-width: 1100px; margin: 0 auto; width: 100%;
+    }
+    .pillar-number {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 5rem;
+      line-height: 1;
+      opacity: 0.25;
+      display: block;
+      margin-bottom: -1rem;
+    }
+    .pillar-number.p1 { color: #5B9BD5; }
+    .pillar-number.p2 { color: var(--gold); }
+    .pillar-number.p3 { color: var(--burnt-orange); }
+
+    .pillar-tag {
+      display: inline-block;
+      padding: 0.3rem 0.9rem;
+      border-radius: 20px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+    }
+    .tag-1 { background: rgba(91,155,213,0.25); border: 1px solid #5B9BD5; color: #5B9BD5; }
+    .tag-2 { background: rgba(212,175,55,0.25); border: 1px solid var(--gold); color: var(--gold); }
+    .tag-3 { background: rgba(214,107,45,0.25); border: 1px solid var(--burnt-orange); color: var(--burnt-orange); }
+
+    .pillar-hero h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.2rem, 5vw, 4rem);
+      letter-spacing: 3px;
+      color: var(--white);
+      text-shadow: 0 2px 20px rgba(0,0,0,0.8);
+      margin-bottom: 0.75rem;
+    }
+    .pillar-hero h2 span.p1 { color: #5B9BD5; }
+    .pillar-hero h2 span.p2 { color: var(--gold); }
+    .pillar-hero h2 span.p3 { color: var(--burnt-orange); }
+    .pillar-hero p {
+      font-size: 1.05rem;
+      color: rgba(245,245,245,0.85);
+      max-width: 650px;
+      line-height: 1.65;
+    }
+
+    /* ─── PILLAR BODY ─────────────────────────────── */
+    .pillar-body {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+    }
+    @media(max-width:768px){ .pillar-body { grid-template-columns: 1fr; gap: 2rem; } }
+
+    .pillar-block h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.5rem;
+      letter-spacing: 2px;
+      margin-bottom: 1rem;
+    }
+    .h3-1 { color: #5B9BD5; }
+    .h3-2 { color: var(--gold); }
+    .h3-3 { color: var(--burnt-orange); }
+
+    .pillar-block p {
+      font-size: 0.95rem;
+      line-height: 1.75;
+      color: rgba(245,245,245,0.8);
+      margin-bottom: 0.75rem;
+    }
+    .pillar-block ul {
+      list-style: none;
+      padding: 0;
+    }
+    .pillar-block ul li {
+      padding: 0.5rem 0 0.5rem 1.5rem;
+      position: relative;
+      font-size: 0.9rem;
+      color: rgba(245,245,245,0.8);
+      line-height: 1.6;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .pillar-block ul li::before {
+      content: '›';
+      position: absolute; left: 0;
+      font-size: 1.2rem;
+      font-weight: 700;
+    }
+    .li-1::before { color: #5B9BD5; }
+    .li-2::before { color: var(--gold); }
+    .li-3::before { color: var(--burnt-orange); }
+
+    .stat-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+    .stat-box {
+      background: rgba(255,255,255,0.04);
+      border-radius: 8px;
+      padding: 1.25rem;
+      text-align: center;
+      border: 1px solid rgba(255,255,255,0.07);
+    }
+    .stat-box .stat-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.2rem;
+      letter-spacing: 2px;
+      display: block;
+      margin-bottom: 0.3rem;
+    }
+    .stat-box .stat-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: rgba(245,245,245,0.55);
+    }
+    .sn-1 { color: #5B9BD5; }
+    .sn-2 { color: var(--gold); }
+    .sn-3 { color: var(--burnt-orange); }
+
+    /* ─── SONG RAIL ───────────────────────────────── */
+    .song-rail {
+      padding: 2.5rem 2rem;
+      border-top: 1px solid rgba(255,255,255,0.07);
+    }
+    .song-rail-inner { max-width: 1100px; margin: 0 auto; }
+    .song-rail-header {
+      display: flex; align-items: center; gap: 0.75rem;
+      margin-bottom: 1.25rem;
+    }
+    .song-rail-header i { font-size: 1.1rem; }
+    .song-rail-header span {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.2rem;
+      letter-spacing: 2px;
+    }
+    .song-pills {
+      display: flex; flex-wrap: wrap; gap: 0.6rem;
+    }
+    .song-pill {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      padding: 0.45rem 0.9rem;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-decoration: none;
+      transition: all 0.25s;
+    }
+    .sp-1 { background: rgba(91,155,213,0.12); border: 1px solid rgba(91,155,213,0.4); color: #5B9BD5; }
+    .sp-1:hover { background: rgba(91,155,213,0.25); border-color: #5B9BD5; }
+    .sp-2 { background: rgba(212,175,55,0.1); border: 1px solid rgba(212,175,55,0.4); color: var(--gold); }
+    .sp-2:hover { background: rgba(212,175,55,0.22); border-color: var(--gold); }
+    .sp-3 { background: rgba(214,107,45,0.1); border: 1px solid rgba(214,107,45,0.4); color: var(--burnt-orange); }
+    .sp-3:hover { background: rgba(214,107,45,0.22); border-color: var(--burnt-orange); }
+
+    /* ─── SECTION DIVIDER ─────────────────────────── */
+    .pillar-divider {
+      height: 4px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      opacity: 0.3;
+    }
+
+    /* ─── WATCHMEN BANNER ─────────────────────────── */
+    .watchmen-banner {
+      min-height: 40vh;
+      display: flex; align-items: center; justify-content: center;
+      text-align: center;
+      padding: 4rem 2rem;
+      position: relative;
+      background: url('https://raw.githubusercontent.com/Fair-Go-Justice/fairgojustice-website/main/thumbnails/vault_who_watches_them_web.jpg') center/cover no-repeat;
+    }
+    .watchmen-banner::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: rgba(13,17,23,0.75);
+    }
+    .watchmen-banner-content { position: relative; z-index: 2; max-width: 700px; }
+    .watchmen-banner h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      letter-spacing: 4px;
+      color: var(--white);
+      margin-bottom: 0.75rem;
+    }
+    .watchmen-banner h2 span { color: var(--burnt-orange); }
+    .watchmen-banner p {
+      font-size: 1rem;
+      color: rgba(245,245,245,0.8);
+      line-height: 1.7;
+      margin-bottom: 2rem;
+    }
+
+    /* ─── CTA SECTION ─────────────────────────────── */
+    .pillars-cta {
+      background: var(--justice-blue);
+      padding: 5rem 2rem;
+      text-align: center;
+    }
+    .pillars-cta h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      letter-spacing: 3px;
+      color: var(--white);
+      margin-bottom: 1rem;
+    }
+    .pillars-cta h2 span { color: var(--gold); }
+    .pillars-cta p {
+      font-size: 1.05rem;
+      color: rgba(245,245,245,0.8);
+      max-width: 600px; margin: 0 auto 2.5rem;
+      line-height: 1.7;
+    }
+    .cta-buttons { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; }
+    .btn-primary {
+      background: var(--burnt-orange);
+      color: white;
+      padding: 0.9rem 2.2rem;
+      border-radius: 4px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      letter-spacing: 1px;
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: all 0.3s;
+    }
+    .btn-primary:hover { background: #e07535; transform: translateY(-2px); }
+    .btn-secondary {
+      background: transparent;
+      color: var(--gold);
+      padding: 0.9rem 2.2rem;
+      border-radius: 4px;
+      border: 1px solid var(--gold);
+      font-weight: 600;
+      font-size: 0.9rem;
+      letter-spacing: 1px;
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: all 0.3s;
+    }
+    .btn-secondary:hover { background: rgba(212,175,55,0.1); transform: translateY(-2px); }
+
+    /* ─── FOOTER ──────────────────────────────────── */
+    footer {
+      background: rgba(0,0,0,0.6);
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding: 2rem;
+      text-align: center;
+      font-size: 0.8rem;
+      color: rgba(245,245,245,0.4);
+    }
+    footer a { color: var(--gold); text-decoration: none; }
+
+    /* ─── SIDE DOT NAV ────────────────────────────── */
+    .dot-nav {
+      position: fixed; right: 1.5rem; top: 50%; transform: translateY(-50%);
+      z-index: 100;
+      display: flex; flex-direction: column; gap: 0.75rem;
+    }
+    .dot-nav a {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: rgba(245,245,245,0.2);
+      border: 1px solid rgba(245,245,245,0.4);
+      display: block;
+      transition: all 0.3s;
+      position: relative;
+    }
+    .dot-nav a:hover, .dot-nav a.active { background: var(--gold); border-color: var(--gold); }
+    .dot-nav a span {
+      position: absolute; right: 18px; top: 50%; transform: translateY(-50%);
+      white-space: nowrap;
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--gold);
+      background: rgba(13,17,23,0.9);
+      padding: 2px 8px;
+      border-radius: 4px;
+      opacity: 0;
+      transition: opacity 0.2s;
+      pointer-events: none;
+    }
+    .dot-nav a:hover span { opacity: 1; }
+    @media(max-width:768px){ .dot-nav { display: none; } }
+
+    /* bg alternates */
+    .bg-dark { background: var(--black); }
+    .bg-mid { background: #0a0f14; }
+  </style>
 </head>
 <body>
-  
-  <!-- Header -->
-  <header class="site-header">
-    <div class="header-top">
-      <div class="container">
-        <p><strong>🇦🇺 A Fair Go Means A Fair Justice System</strong> | Join 12,847 Australians Demanding Change</p>
-      </div>
-    </div>
-    
-    <div class="header-main">
-      <div class="container">
-        <div class="header-content">
-          <a href="index.html" class="logo">
-            <i class="fas fa-balance-scale"></i>
-            <span>Fair Go Justice</span>
-          </a>
-          
-          <button class="nav-toggle" aria-label="Toggle navigation" id="navToggle">
-            <i class="fas fa-bars"></i>
-          </button>
-          
-          <nav class="main-nav" id="mainNav">
-                        <ul>
-              <li><a href="index.html">Home</a></li>
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle">Reform Framework <i class="fas fa-chevron-down"></i></a>
-                <ul class="dropdown-menu">
-                  <li><a href="pillars.html">The 3 Pillars</a></li>
-                  <li><a href="rights.html">Know Your Rights</a></li>
-                </ul>
-              </li>
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle">Take Action <i class="fas fa-chevron-down"></i></a>
-                <ul class="dropdown-menu">
-                  <li><a href="petition.html">Sign Petition</a></li>
-                  <li><a href="stories.html">Share Your Story</a></li>
-                  <li><a href="contact.html">Contact Us</a></li>
-                </ul>
-              </li>
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle">The Case <i class="fas fa-chevron-down"></i></a>
-                <ul class="dropdown-menu">
-                  <li><a href="case-overview.html">Case Overview</a></li>
-                  <li><a href="class-action-info.html">Class Action Info</a></li>
-                  <li><a href="timeline.html">Timeline</a></li>
-                </ul>
-              </li>
-              <li><a href="quiz.html">Take Quiz</a></li>
-              <li><a href="music.html">Music</a></li>
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle">Resources <i class="fas fa-chevron-down"></i></a>
-                <ul class="dropdown-menu">
-                  <li><a href="social-media-kit.html">Social Media Kit</a></li>
-                  <li><a href="graphics-guide.html">Graphics Guide</a></li>
-                  <li><a href="resources.html">All Resources</a></li>
-                  <li><a href="lyrics.html">Song Lyrics</a></li>
-                </ul>
-              </li>
-              <li><a href="about.html">About</a></li>
-              <li><a href="petition.html" class="btn-cta">Get Involved</a></li>
-            </ul>
-          </nav>
-        </div>
-      </div>
-    </div>
-  </header>
-  
-  <!-- Page Header -->
-  <section class="page-header">
-    <div class="container">
-      <h1>The Three Pillars of Reform</h1>
-      <p class="lead">Evidence-based solutions for systemic change in Australia's justice system.</p>
-    </div>
-  </section>
-  
-  <!-- Introduction -->
-  <section class="content-section">
-    <div class="container">
-      <div class="content-intro">
-        <p class="lead">After extensive research and community consultation, Fair Go Justice has developed a three-pillar framework for meaningful justice reform. These interconnected pillars address the root causes of systemic failure and provide a roadmap for lasting change.</p>
-      </div>
-    </div>
-  </section>
-  
-  <!-- Pillar 1 -->
-  <section class="content-section" id="pillar-1" style="background-color: var(--color-gray-100);">
-    <div class="container">
-      <div style="display: grid; grid-template-columns: 1fr 2fr; gap: var(--space-3xl); align-items: center;">
-        <div class="card-icon" style="width: 150px; height: 150px; font-size: var(--text-5xl); margin: 0 auto;">
-          <i class="fas fa-gavel"></i>
-        </div>
-        <div>
-          <h2 style="color: var(--color-primary);">Pillar 1: National Judicial Integrity Commission</h2>
-          <p class="lead">An independent body to investigate complaints against judicial officers and ensure accountability at all levels.</p>
-          
-          <h4>The Problem</h4>
-          <p>Currently, Australia lacks a national body to investigate serious complaints about judicial conduct. State-based systems are fragmented, under-resourced, and often perceived as lacking independence. When judges act improperly, there's often no meaningful remedy.</p>
-          
-          <h4>Our Solution</h4>
-          <ul>
-            <li>Establish a federally-funded National Judicial Integrity Commission</li>
-            <li>Grant genuine investigative powers, including the ability to compel witnesses and documents</li>
-            <li>Ensure complete independence from the judiciary and government</li>
-            <li>Implement transparent reporting and public accountability mechanisms</li>
-            <li>Provide meaningful remedies for proven misconduct, including removal in serious cases</li>
-          </ul>
-          
-          <h4>International Precedent</h4>
-          <p>Similar bodies operate successfully in New Zealand, the United Kingdom, and Canada, demonstrating that judicial accountability and judicial independence can coexist.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-  
 
-  <!-- Pillar 1 Songs -->
-  <section class="content-section" style="background-color: #fff8f0; border-top: 3px solid var(--color-secondary);">
-    <div class="container">
-      <h3 style="color: var(--color-primary); margin-bottom: 0.5rem;"><i class="fas fa-music"></i> Songs That Speak to Pillar 1 — Judicial Integrity</h3>
-      <p style="color: var(--color-gray-600); margin-bottom: 1.5rem;">Original tracks from the Fair Go Justice music catalogue exploring judicial misconduct, conflicts of interest, and the need for accountability.</p>
-      <div style="display: flex; flex-wrap: wrap; gap: 0.75rem; margin-bottom: 1.5rem;">
-        <a href="https://www.youtube.com/watch?v=Fp_j0BumjQs" target="_blank" rel="noopener" class="btn btn-outline btn-small" style="font-size:0.85rem;"><i class="fab fa-youtube"></i> CONFLICT OF INTEREST</a>
-        <a href="https://www.youtube.com/watch?v=x3UqqsYzTPg" target="_blank" rel="noopener" class="btn btn-outline btn-small" style="font-size:0.85rem;"><i class="fab fa-youtube"></i> THE APPOINTED</a>
-        <a href="https://www.youtube.com/watch?v=nro_6EZx1z8" target="_blank" rel="noopener" class="btn btn-outline btn-small" style="font-size:0.85rem;"><i class="fab fa-youtube"></i> VEXATIOUS</a>
-        <a href="music.html" class="btn btn-outline btn-small" style="font-size:0.85rem;"><i class="fas fa-play-circle"></i> THE REGISTRAR</a>
-        <a href="music.html" class="btn btn-outline btn-small" style="font-size:0.85rem;"><i class="fas fa-play-circle"></i> THE TIPSTAFF</a>
-        <a href="music.html" class="btn btn-outline btn-small" style="font-size:0.85rem;"><i class="fas fa-play-circle"></i> COURTHOUSE BLUES</a>
-        <a href="music.html" class="btn btn-outline btn-small" style="font-size:0.85rem;"><i class="fas fa-play-circle"></i> SWORN TO LIE</a>
-        <a href="music.html" class="btn btn-outline btn-small" style="font-size:0.85rem;"><i class="fas fa-play-circle"></i> DOUBLE STANDARD</a>
+  <!-- NAV -->
+  <nav class="nav">
+    <a href="index.html" class="nav-logo">FAIR GO JUSTICE</a>
+    <button class="nav-toggle" onclick="this.nextElementSibling.classList.toggle('open')">☰</button>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="evidence.html">The Evidence</a></li>
+      <li><a href="pillars.html" class="active">The Reforms</a></li>
+      <li><a href="stories.html">Stories</a></li>
+      <li><a href="music.html">Music</a></li>
+      <li><a href="take-action.html" class="nav-cta">Take Action</a></li>
+    </ul>
+  </nav>
+
+  <!-- DOT NAV -->
+  <nav class="dot-nav">
+    <a href="#overview"><span>Overview</span></a>
+    <a href="#jic"><span>Pillar 1 — JIC</span></a>
+    <a href="#legal-aid"><span>Pillar 2 — Legal Aid</span></a>
+    <a href="#eip"><span>Pillar 3 — Evidence</span></a>
+    <a href="#watchmen"><span>Who Watches</span></a>
+  </nav>
+
+  <!-- PAGE HERO -->
+  <section id="overview" class="page-hero">
+    <div class="page-hero-content">
+      <div class="page-hero-label">Fair Go Justice — Reform Framework</div>
+      <h1>THE <span>THREE</span><br>PILLARS</h1>
+      <p>Australia's justice system is broken. Not by accident — by design. Three systemic failures. Three targeted reforms. One movement demanding change.</p>
+      <div class="pillar-nav-pills">
+        <a href="#jic" class="pillar-nav-pill pill-1">① National Judicial Integrity Commission</a>
+        <a href="#legal-aid" class="pillar-nav-pill pill-2">② Expanded Legal Aid</a>
+        <a href="#eip" class="pillar-nav-pill pill-3">③ Evidence Integrity Protocols</a>
       </div>
-      <a href="https://www.youtube.com/playlist?list=PLiS3JkFbAFr73OuH7fNlOQGw4YH7CWUOY" target="_blank" rel="noopener" class="btn btn-primary btn-small"><i class="fab fa-youtube"></i> Watch All 128 Tracks on YouTube</a>
     </div>
   </section>
 
-  <!-- Pillar 2 -->
-  <section class="content-section" id="pillar-2">
-    <div class="container">
-      <div style="display: grid; grid-template-columns: 2fr 1fr; gap: var(--space-3xl); align-items: center;">
-        <div>
-          <h2 style="color: var(--color-primary);">Pillar 2: Expanded Legal Aid Access</h2>
-          <p class="lead">Ensuring every Australian can access quality legal representation, regardless of income or location.</p>
-          
-          <h4>The Problem</h4>
-          <p>Over 850,000 Australians cannot afford legal representation. Legal aid funding has failed to keep pace with demand, leaving many facing complex legal matters without professional help. Average lawyer retainers of $30,000-$50,000 put justice out of reach for ordinary families.</p>
-          
-          <h4>Our Solution</h4>
-          <ul>
-            <li>Double federal funding for Legal Aid commissions within five years</li>
-            <li>Expand Community Legal Centre networks, particularly in regional areas</li>
-            <li>Raise income thresholds for legal aid eligibility to reflect actual living costs</li>
-            <li>Introduce duty lawyer services in all Magistrates' Courts</li>
-            <li>Fund technology initiatives to improve remote access to legal services</li>
-            <li>Support pro bono legal clinics and law school partnerships</li>
-          </ul>
-          
-          <h4>The Case for Investment</h4>
-          <p>Every dollar spent on legal aid saves an estimated $18 in downstream costs to courts, prisons, hospitals, and social services. Access to justice is not just fair—it's economically sound.</p>
-        </div>
-        <div class="card-icon" style="width: 150px; height: 150px; font-size: var(--text-5xl); margin: 0 auto;">
-          <i class="fas fa-hand-holding-heart"></i>
-        </div>
+  <!-- INTRO STRIP -->
+  <div class="intro-strip">
+    <p>After years of documented failure — suppressed evidence, unrepresented families, and zero accountability for judicial misconduct — Fair Go Justice has developed a <strong>three-pillar reform framework</strong> built on real cases, real data, and the voices of ordinary Australians who were failed by the system that was supposed to protect them.</p>
+  </div>
+
+  <!-- ════════════════════════════════════════════ -->
+  <!-- PILLAR 1 — JIC                               -->
+  <!-- ════════════════════════════════════════════ -->
+  <section id="jic" class="pillar-section bg-dark">
+
+    <div class="pillar-hero pillar-hero-1">
+      <div class="pillar-hero-content">
+        <span class="pillar-number p1">01</span>
+        <div class="pillar-tag tag-1">Pillar One</div>
+        <h2>NATIONAL JUDICIAL<br><span class="p1">INTEGRITY COMMISSION</span></h2>
+        <p>An independent, fully-funded body with real powers to investigate complaints against judicial officers, magistrates, and tribunal members — at every level of Australia's court system.</p>
       </div>
     </div>
-  </section>
-  
 
-  <!-- Pillar 2 Songs -->
-  <section class="content-section" style="background-color: #f0f8ff; border-top: 3px solid var(--color-secondary);">
-    <div class="container">
-      <h3 style="color: var(--color-primary); margin-bottom: 0.5rem;"><i class="fas fa-music"></i> Songs That Speak to Pillar 2 — Legal Aid Reform</h3>
-      <p style="color: var(--color-gray-600); margin-bottom: 1.5rem;">Tracks exploring what it means to face the legal system without representation — the cost, the fear, and the human toll.</p>
-      <div style="display: flex; flex-wrap: wrap; gap: 0.75rem; margin-bottom: 1.5rem;">
-        <a href="music.html" class="btn btn-outline btn-small" style="font-size:0.85rem;"><i class="fas fa-play-circle"></i> NO AID NO JUSTICE</a>
-        <a href="https://www.youtube.com/watch?v=IpF6rtveFVU" target="_blank" rel="noopener" class="btn btn-outline btn-small" style="font-size:0.85rem;"><i class="fab fa-youtube"></i> SELF-REPRESENTED</a>
-        <a href="https://www.youtube.com/watch?v=EqBa_TahlZg" target="_blank" rel="noopener" class="btn btn-outline btn-small" style="font-size:0.85rem;"><i class="fab fa-youtube"></i> FAMILY COURT BLUES</a>
-        <a href="music.html" class="btn btn-outline btn-small" style="font-size:0.85rem;"><i class="fas fa-play-circle"></i> THE SETTLEMENT TRAP</a>
-        <a href="music.html" class="btn btn-outline btn-small" style="font-size:0.85rem;"><i class="fas fa-play-circle"></i> LITIGATION FUNDER</a>
-        <a href="music.html" class="btn btn-outline btn-small" style="font-size:0.85rem;"><i class="fas fa-play-circle"></i> FORCED MEDIATION</a>
-        <a href="music.html" class="btn btn-outline btn-small" style="font-size:0.85rem;"><i class="fas fa-play-circle"></i> NO BRIEF</a>
-        <a href="https://www.youtube.com/watch?v=7skBZ5rVtpI" target="_blank" rel="noopener" class="btn btn-outline btn-small" style="font-size:0.85rem;"><i class="fab fa-youtube"></i> BANKRUPTCY WEAPON</a>
+    <div class="pillar-body">
+      <div class="pillar-block">
+        <h3 class="h3-1">The Problem</h3>
+        <p>Australia is the only comparable common-law nation with no independent body to investigate judicial misconduct. Complaints are currently handled by the very courts and judicial councils under scrutiny — a textbook conflict of interest.</p>
+        <p>Cases of bias, corruption, undisclosed relationships, and procedural abuse are dismissed internally, with no independent review and no recourse for victims.</p>
+        <ul>
+          <li class="li-1">No national independent body exists for judicial oversight</li>
+          <li class="li-1">Judicial councils in each state self-regulate — closed, opaque processes</li>
+          <li class="li-1">Complainants are frequently threatened with cost orders for raising concerns</li>
+          <li class="li-1">Undisclosed conflicts of interest go unpunished and unrecorded</li>
+          <li class="li-1">Whistleblowers inside courts face career destruction</li>
+        </ul>
       </div>
-      <a href="https://www.youtube.com/playlist?list=PLiS3JkFbAFr73OuH7fNlOQGw4YH7CWUOY" target="_blank" rel="noopener" class="btn btn-primary btn-small"><i class="fab fa-youtube"></i> Watch All 128 Tracks on YouTube</a>
-    </div>
-  </section>
 
-  <!-- Pillar 3 -->
-  <section class="content-section" id="pillar-3" style="background-color: var(--color-gray-100);">
-    <div class="container">
-      <div style="display: grid; grid-template-columns: 1fr 2fr; gap: var(--space-3xl); align-items: center;">
-        <div class="card-icon" style="width: 150px; height: 150px; font-size: var(--text-5xl); margin: 0 auto;">
-          <i class="fas fa-file-shield"></i>
-        </div>
-        <div>
-          <h2 style="color: var(--color-primary);">Pillar 3: Evidence Integrity Protocols</h2>
-          <p class="lead">Mandatory standards for handling, storing, and disclosing evidence in all legal proceedings.</p>
-          
-          <h4>The Problem</h4>
-          <p>Too often, evidence goes missing, documents get backdated, and crucial information is withheld from courts. Without proper chain-of-custody protocols and disclosure requirements, the truth can be manipulated—and justice denied.</p>
-          
-          <h4>Our Solution</h4>
-          <ul>
-            <li>Implement mandatory digital chain-of-custody tracking for all court evidence</li>
-            <li>Require timestamped metadata for all documents filed in legal proceedings</li>
-            <li>Establish strict penalties for evidence tampering and non-disclosure</li>
-            <li>Create standardised evidence handling protocols across all jurisdictions</li>
-            <li>Fund digital forensics capability within court systems</li>
-            <li>Mandate disclosure of exculpatory evidence with enforcement mechanisms</li>
-          </ul>
-          
-          <h4>Technology as Enabler</h4>
-          <p>Modern blockchain and digital verification technologies can make evidence integrity affordable and reliable. The tools exist—we just need the political will to implement them.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-  
+      <div class="pillar-block">
+        <h3 class="h3-1">The Reform</h3>
+        <p>Establish a <strong style="color:#5B9BD5">National Judicial Integrity Commission</strong> — modelled on international best practice, with the following powers:</p>
+        <ul>
+          <li class="li-1">Receive and independently investigate complaints from any person</li>
+          <li class="li-1">Power to compel production of documents and testimony</li>
+          <li class="li-1">Public reporting of outcomes — no sealed decisions</li>
+          <li class="li-1">Binding power to recommend suspension, removal, or criminal referral</li>
+          <li class="li-1">Protected pathways for court insiders to report misconduct safely</li>
+          <li class="li-1">Annual transparency reports tabled in Parliament</li>
+        </ul>
 
-  <!-- Pillar 3 Songs -->
-  <section class="content-section" style="background-color: #f0fff4; border-top: 3px solid var(--color-secondary);">
-    <div class="container">
-      <h3 style="color: var(--color-primary); margin-bottom: 0.5rem;"><i class="fas fa-music"></i> Songs That Speak to Pillar 3 — Evidence Integrity</h3>
-      <p style="color: var(--color-gray-600); margin-bottom: 1.5rem;">Tracks about vanishing documents, backdated records, false testimony, and what happens when truth becomes the casualty of a broken system.</p>
-      <div style="display: flex; flex-wrap: wrap; gap: 0.75rem; margin-bottom: 1.5rem;">
-        <a href="music.html" class="btn btn-outline btn-small" style="font-size:0.85rem;"><i class="fas fa-play-circle"></i> FORENSIC FRAUD</a>
-        <a href="music.html" class="btn btn-outline btn-small" style="font-size:0.85rem;"><i class="fas fa-play-circle"></i> THE AFFIDAVIT THEY BURIED</a>
-        <a href="music.html" class="btn btn-outline btn-small" style="font-size:0.85rem;"><i class="fas fa-play-circle"></i> PAPER TRAIL</a>
-        <a href="music.html" class="btn btn-outline btn-small" style="font-size:0.85rem;"><i class="fas fa-play-circle"></i> THE EXPERT WITNESS</a>
-        <a href="https://www.youtube.com/watch?v=Q05AO-VzQFY" target="_blank" rel="noopener" class="btn btn-outline btn-small" style="font-size:0.85rem;"><i class="fab fa-youtube"></i> SUPPRESSED</a>
-        <a href="music.html" class="btn btn-outline btn-small" style="font-size:0.85rem;"><i class="fas fa-play-circle"></i> THE LAST WITNESS</a>
-        <a href="music.html" class="btn btn-outline btn-small" style="font-size:0.85rem;"><i class="fas fa-play-circle"></i> SWORN TO LIE</a>
-        <a href="https://www.youtube.com/watch?v=HnnTiCk1CI0" target="_blank" rel="noopener" class="btn btn-outline btn-small" style="font-size:0.85rem;"><i class="fab fa-youtube"></i> BLINDSIDED: TRUTH UNCUT</a>
-      </div>
-      <a href="https://www.youtube.com/playlist?list=PLiS3JkFbAFr73OuH7fNlOQGw4YH7CWUOY" target="_blank" rel="noopener" class="btn btn-primary btn-small"><i class="fab fa-youtube"></i> Watch All 128 Tracks on YouTube</a>
-    </div>
-  </section>
-
-  <!-- Working Together Section -->
-  <section class="content-section">
-    <div class="container">
-      <div class="content-intro">
-        <h2>Working Together for Change</h2>
-        <p class="lead">These three pillars are interconnected. A Judicial Integrity Commission can only function if evidence is reliable. Legal aid only helps if the system itself is fair. Reform requires a comprehensive approach.</p>
-      </div>
-      
-      <div class="cards-grid">
-        <div class="card">
-          <div class="card-icon">
-            <i class="fas fa-file-signature"></i>
+        <div class="stat-grid">
+          <div class="stat-box">
+            <span class="stat-num sn-1">0</span>
+            <span class="stat-label">Independent oversight bodies nationally</span>
           </div>
-          <h3>Sign the Petition</h3>
-          <p>Join thousands of Australians demanding a Royal Commission to investigate systemic failures and implement these reforms.</p>
-          <a href="petition.html" class="btn btn-primary">Sign Now</a>
-        </div>
-        
-        <div class="card">
-          <div class="card-icon">
-            <i class="fas fa-bullhorn"></i>
+          <div class="stat-box">
+            <span class="stat-num sn-1">94%</span>
+            <span class="stat-label">Of complaints dismissed without investigation</span>
           </div>
-          <h3>Spread the Word</h3>
-          <p>Share our message on social media, talk to friends and family, and help build the movement for change.</p>
-          <a href="social-media-kit.html" class="btn btn-primary">Get the Kit</a>
-        </div>
-        
-        <div class="card">
-          <div class="card-icon">
-            <i class="fas fa-user-edit"></i>
+          <div class="stat-box">
+            <span class="stat-num sn-1">23+</span>
+            <span class="stat-label">Nations with equivalent independent bodies</span>
           </div>
-          <h3>Share Your Story</h3>
-          <p>Personal experiences drive change. Your story matters and can help others understand why reform is essential.</p>
-          <a href="stories.html" class="btn btn-primary">Tell Your Story</a>
+          <div class="stat-box">
+            <span class="stat-num sn-1">$0</span>
+            <span class="stat-label">Compensation ever paid for judicial misconduct in Australia</span>
+          </div>
         </div>
+      </div>
+    </div>
+
+    <!-- SONG RAIL 1 -->
+    <div class="song-rail bg-mid">
+      <div class="song-rail-inner">
+        <div class="song-rail-header">
+          <i class="fas fa-music" style="color:#5B9BD5"></i>
+          <span style="color:#5B9BD5">SONGS OF PILLAR ONE — JUDICIAL INTEGRITY</span>
+        </div>
+        <div class="song-pills">
+          <a href="music.html" class="song-pill sp-1"><i class="fas fa-play"></i> CONFLICT OF INTEREST</a>
+          <a href="music.html" class="song-pill sp-1"><i class="fas fa-play"></i> THE GUILTY TRUTH</a>
+          <a href="music.html" class="song-pill sp-1"><i class="fas fa-play"></i> UNCLEAN HANDS</a>
+          <a href="music.html" class="song-pill sp-1"><i class="fas fa-play"></i> DOMINANCE BY DESIGN</a>
+          <a href="music.html" class="song-pill sp-1"><i class="fas fa-play"></i> BEHIND THE STAMP</a>
+          <a href="music.html" class="song-pill sp-1"><i class="fas fa-play"></i> ROYAL PATTERN</a>
+          <a href="music.html" class="song-pill sp-1"><i class="fas fa-play"></i> SILENCE OF THE STATE</a>
+          <a href="music.html" class="song-pill sp-1"><i class="fas fa-play"></i> THE APPOINTED</a>
+          <a href="music.html" class="song-pill sp-1"><i class="fas fa-play"></i> SWORN TO LIE</a>
+          <a href="music.html" class="song-pill sp-1"><i class="fas fa-play"></i> DOUBLE STANDARD</a>
+          <a href="music.html" class="song-pill sp-1"><i class="fas fa-play"></i> SUPPRESSED</a>
+          <a href="music.html" class="song-pill sp-1"><i class="fas fa-play"></i> MEDIA BLACKOUT</a>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <div class="pillar-divider"></div>
+
+  <!-- ════════════════════════════════════════════ -->
+  <!-- PILLAR 2 — LEGAL AID                         -->
+  <!-- ════════════════════════════════════════════ -->
+  <section id="legal-aid" class="pillar-section bg-mid">
+
+    <div class="pillar-hero pillar-hero-2">
+      <div class="pillar-hero-content">
+        <span class="pillar-number p2">02</span>
+        <div class="pillar-tag tag-2">Pillar Two</div>
+        <h2>EXPANDED<br><span class="p2">LEGAL AID ACCESS</span></h2>
+        <p>Justice is not justice if it only exists for those who can afford it. Every Australian — regardless of income, location, or circumstance — deserves real legal representation.</p>
+      </div>
+    </div>
+
+    <div class="pillar-body">
+      <div class="pillar-block">
+        <h3 class="h3-2">The Problem</h3>
+        <p>Australia's Legal Aid system is chronically underfunded, means-tested into irrelevance, and geographically blind to the realities of rural and remote Australians. Thousands face serious criminal charges, family law battles, and civil disputes entirely alone.</p>
+        <p>Self-represented litigants are at a structural disadvantage in every courtroom — they don't know the rules, they don't know their rights, and the system is not designed to help them learn.</p>
+        <ul>
+          <li class="li-2">Legal Aid funding has declined in real terms for 15 consecutive years</li>
+          <li class="li-2">Means test thresholds haven't kept pace with cost of living since 2005</li>
+          <li class="li-2">Regional and remote areas have acute lawyer shortages</li>
+          <li class="li-2">Families in Family Court routinely face each other unrepresented</li>
+          <li class="li-2">Corporate defendants always have representation. Individuals rarely do.</li>
+        </ul>
+      </div>
+
+      <div class="pillar-block">
+        <h3 class="h3-2">The Reform</h3>
+        <p>A comprehensive rebuild of Australia's legal assistance infrastructure — funded, accessible, and genuinely equal:</p>
+        <ul>
+          <li class="li-2">Double federal funding for Legal Aid commissions within five years</li>
+          <li class="li-2">Raise income thresholds to reflect actual 2025 cost of living</li>
+          <li class="li-2">Expand Community Legal Centre networks — especially regional and remote</li>
+          <li class="li-2">Mandatory duty lawyer services at every Magistrates' Court in Australia</li>
+          <li class="li-2">Online legal assistance portal — plain-language rights, template forms</li>
+          <li class="li-2">Triage services so no person faces court without at least initial advice</li>
+        </ul>
+
+        <div class="stat-grid">
+          <div class="stat-box">
+            <span class="stat-num sn-2">68%</span>
+            <span class="stat-label">Of Australians ineligible for Legal Aid despite being unable to afford a lawyer</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-num sn-2">1 in 3</span>
+            <span class="stat-label">Self-represented in Federal Circuit Court</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-num sn-2">$420/hr</span>
+            <span class="stat-label">Average solicitor rate vs $25,000 Legal Aid annual ceiling</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-num sn-2">83%</span>
+            <span class="stat-label">Of rural Australians unable to access a local lawyer</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SONG RAIL 2 -->
+    <div class="song-rail bg-dark">
+      <div class="song-rail-inner">
+        <div class="song-rail-header">
+          <i class="fas fa-music" style="color:var(--gold)"></i>
+          <span style="color:var(--gold)">SONGS OF PILLAR TWO — LEGAL AID REFORM</span>
+        </div>
+        <div class="song-pills">
+          <a href="music.html" class="song-pill sp-2"><i class="fas fa-play"></i> NO AID, NO JUSTICE</a>
+          <a href="music.html" class="song-pill sp-2"><i class="fas fa-play"></i> FREEDOM ON CREDIT</a>
+          <a href="music.html" class="song-pill sp-2"><i class="fas fa-play"></i> GHOST EMPLOYEE</a>
+          <a href="music.html" class="song-pill sp-2"><i class="fas fa-play"></i> NO BRIEF</a>
+          <a href="music.html" class="song-pill sp-2"><i class="fas fa-play"></i> SELF-REPRESENTED</a>
+          <a href="music.html" class="song-pill sp-2"><i class="fas fa-play"></i> MEANS TEST</a>
+          <a href="music.html" class="song-pill sp-2"><i class="fas fa-play"></i> COSTS ORDER</a>
+          <a href="music.html" class="song-pill sp-2"><i class="fas fa-play"></i> COURTHOUSE BLUES</a>
+          <a href="music.html" class="song-pill sp-2"><i class="fas fa-play"></i> FAMILY COURT BLUES</a>
+          <a href="music.html" class="song-pill sp-2"><i class="fas fa-play"></i> VEXATIOUS</a>
+          <a href="music.html" class="song-pill sp-2"><i class="fas fa-play"></i> FILED AND FORGOTTEN</a>
+          <a href="music.html" class="song-pill sp-2"><i class="fas fa-play"></i> FORCED MEDIATION</a>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <div class="pillar-divider"></div>
+
+  <!-- ════════════════════════════════════════════ -->
+  <!-- PILLAR 3 — EVIDENCE INTEGRITY               -->
+  <!-- ════════════════════════════════════════════ -->
+  <section id="eip" class="pillar-section bg-dark">
+
+    <div class="pillar-hero pillar-hero-3">
+      <div class="pillar-hero-content">
+        <span class="pillar-number p3">03</span>
+        <div class="pillar-tag tag-3">Pillar Three</div>
+        <h2>EVIDENCE INTEGRITY<br><span class="p3">PROTOCOLS</span></h2>
+        <p>Bodycam footage goes missing. Affidavits appear unsigned. Court exhibits disappear. Without ironclad evidence chain-of-custody rules, the truth can be buried before it ever reaches a judge.</p>
+      </div>
+    </div>
+
+    <div class="pillar-body">
+      <div class="pillar-block">
+        <h3 class="h3-3">The Problem</h3>
+        <p>Australia has no national evidence integrity standard. Bodycam footage is routinely "unavailable." Exhibit logs are poorly kept. Digital evidence is handled without verified chain-of-custody. And when evidence is challenged, the burden falls entirely on the individual — not the institution.</p>
+        <p>In case after case, the pattern is the same: inconvenient evidence disappears, is redacted, or is ruled inadmissible on technical grounds engineered to protect the powerful.</p>
+        <ul>
+          <li class="li-3">No national standard for police bodycam retention and production</li>
+          <li class="li-3">Court exhibit logs often incomplete — items "lost" with no accountability</li>
+          <li class="li-3">Digital evidence frequently produced without verified chain of custody</li>
+          <li class="li-3">No penalty framework for institutional evidence tampering</li>
+          <li class="li-3">Redaction of public documents without independent oversight</li>
+        </ul>
+      </div>
+
+      <div class="pillar-block">
+        <h3 class="h3-3">The Reform</h3>
+        <p>A binding national framework for evidence management — from collection to courtroom — with real consequences for non-compliance:</p>
+        <ul>
+          <li class="li-3">Mandatory national bodycam retention policy — minimum 3 years, court-compellable</li>
+          <li class="li-3">Tamper-evident digital chain-of-custody for all court exhibits</li>
+          <li class="li-3">Independent evidence integrity auditor role within the proposed JIC</li>
+          <li class="li-3">Criminal penalties for institutional evidence destruction or suppression</li>
+          <li class="li-3">Right to independent forensic review of disputed evidence</li>
+          <li class="li-3">Public registry of evidence integrity breaches and outcomes</li>
+        </ul>
+
+        <div class="stat-grid">
+          <div class="stat-box">
+            <span class="stat-num sn-3">0</span>
+            <span class="stat-label">National bodycam retention standards</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-num sn-3">1 in 5</span>
+            <span class="stat-label">Appeals cite missing or altered evidence</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-num sn-3">$0</span>
+            <span class="stat-label">Prosecutions for institutional evidence destruction</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-num sn-3">73%</span>
+            <span class="stat-label">Of redaction requests approved without independent review</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SONG RAIL 3 -->
+    <div class="song-rail bg-mid">
+      <div class="song-rail-inner">
+        <div class="song-rail-header">
+          <i class="fas fa-music" style="color:var(--burnt-orange)"></i>
+          <span style="color:var(--burnt-orange)">SONGS OF PILLAR THREE — EVIDENCE INTEGRITY</span>
+        </div>
+        <div class="song-pills">
+          <a href="music.html" class="song-pill sp-3"><i class="fas fa-play"></i> SATCHEL TOOK THE STAND</a>
+          <a href="music.html" class="song-pill sp-3"><i class="fas fa-play"></i> CHAIN OF CUSTODY</a>
+          <a href="music.html" class="song-pill sp-3"><i class="fas fa-play"></i> EXHIBIT A: REBIRTH</a>
+          <a href="music.html" class="song-pill sp-3"><i class="fas fa-play"></i> REDACTED</a>
+          <a href="music.html" class="song-pill sp-3"><i class="fas fa-play"></i> WHITE OUT</a>
+          <a href="music.html" class="song-pill sp-3"><i class="fas fa-play"></i> FORENSIC FRAUD</a>
+          <a href="music.html" class="song-pill sp-3"><i class="fas fa-play"></i> WHAT THEY STOLE</a>
+          <a href="music.html" class="song-pill sp-3"><i class="fas fa-play"></i> PATTERN RECOGNITION</a>
+          <a href="music.html" class="song-pill sp-3"><i class="fas fa-play"></i> THE BAG THAT WALKED</a>
+          <a href="music.html" class="song-pill sp-3"><i class="fas fa-play"></i> THE GHOST IN THE TRAILER</a>
+          <a href="music.html" class="song-pill sp-3"><i class="fas fa-play"></i> UNSIGNED</a>
+          <a href="music.html" class="song-pill sp-3"><i class="fas fa-play"></i> DEFECT NOTICE</a>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- WATCHMEN BANNER -->
+  <section id="watchmen" class="watchmen-banner">
+    <div class="watchmen-banner-content">
+      <h2>WHO WATCHES<br><span>THE WATCHMEN?</span></h2>
+      <p>The three pillars are interconnected. Without judicial accountability, legal aid is meaningless. Without evidence integrity, the truth can always be buried. All three reforms must be built together — or the chain stays broken.</p>
+      <div class="cta-buttons">
+        <a href="take-action.html" class="btn-primary">Sign the Petition</a>
+        <a href="evidence.html" class="btn-secondary">View the Evidence</a>
       </div>
     </div>
   </section>
-  
-  <!-- CTA Section -->
-  <section class="cta-section">
-    <div class="container">
-      <div class="cta-content">
-        <h2>Ready to Stand for Justice?</h2>
-        <p>Together, we can transform Australia's legal system into one that truly serves all citizens.</p>
-        <div class="cta-buttons">
-          <a href="petition.html" class="btn btn-primary btn-large">Sign the Petition</a>
-          <a href="about.html" class="btn btn-outline btn-large">Learn More About Us</a>
-        </div>
-      </div>
+
+  <!-- FINAL CTA -->
+  <section class="pillars-cta">
+    <h2>THREE REFORMS.<br><span>ONE MOVEMENT.</span></h2>
+    <p>These aren't radical ideas. They're minimum standards. Australia already has the ICAC, NACC, and ASIC. We just need the same accountability applied to the courts that are supposed to hold everyone else to account.</p>
+    <div class="cta-buttons">
+      <a href="take-action.html" class="btn-primary">✊ Join the Movement</a>
+      <a href="music.html" class="btn-secondary">🎵 Hear the Music</a>
+      <a href="evidence.html" class="btn-secondary">🔍 See the Evidence</a>
     </div>
   </section>
-  
-  <!-- Footer -->
-  <footer class="site-footer">
-    <div class="container">
-      <div class="footer-grid">
-        <div class="footer-col">
-          <h4>Take Action</h4>
-          <ul>
-            <li><a href="quiz.html">Justice Quiz</a></li>
-            <li><a href="petition.html">Sign the Petition</a></li>
-            <li><a href="stories.html">Share Your Story</a></li>
-            <li><a href="contact.html">Contact Us</a></li>
-          </ul>
-        </div>
-        
-        <div class="footer-col">
-          <h4>Reform Framework</h4>
-          <ul>
-            <li><a href="pillars.html">The 3 Pillars</a></li>
-            <li><a href="rights.html">Know Your Rights</a></li>
-          </ul>
-        </div>
-        
-        <div class="footer-col">
-          <h4>Resources</h4>
-          <ul>
-            <li><a href="resources.html">All Resources</a></li>
-            <li><a href="social-media-kit.html">Social Media Kit</a></li>
-            <li><a href="graphics-guide.html">Graphics Guide</a></li>
-            <li><a href="about.html">About Us</a></li>
-          </ul>
-        </div>
-        
-        <div class="footer-col">
-          <h4>Legal</h4>
-          <ul>
-            <li><a href="mailto:info@fairgojustice.com.au">info@fairgojustice.com.au</a></li>
-            <li><a href="privacy.html">Privacy Policy</a></li>
-            <li><a href="terms.html">Terms of Service</a></li>
-          </ul>
-        </div>
-      </div>
-      
-      <div class="footer-bottom">
-        <p>&copy; 2025 Fair Go Justice Movement. All rights reserved.</p>
-        <p class="footer-tagline"><strong>Justice belongs to the people—not the privileged.</strong></p>
-      </div>
-    </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2025 Fair Go Justice Movement | By the People, For the People | <a href="take-action.html">Take Action</a> | <a href="evidence.html">Evidence Vault</a> | <a href="music.html">Music</a></p>
+    <p style="margin-top:0.5rem; font-size:0.75rem;">This site documents systemic failures in Australia's justice system. All individuals referred to by role or description only. No content constitutes legal advice.</p>
   </footer>
-  
-  <!-- Scripts -->
-  <script src="js/main.js"></script>
+
+  <script>
+    // Dot nav active state
+    const sections = ['overview','jic','legal-aid','eip','watchmen'];
+    const dots = document.querySelectorAll('.dot-nav a');
+    window.addEventListener('scroll', () => {
+      const scrollY = window.scrollY + window.innerHeight/2;
+      sections.forEach((id, i) => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        if (scrollY >= el.offsetTop && scrollY < el.offsetTop + el.offsetHeight) {
+          dots.forEach(d => d.classList.remove('active'));
+          if (dots[i]) dots[i].classList.add('active');
+        }
+      });
+    });
+  </script>
+
 </body>
 </html>
