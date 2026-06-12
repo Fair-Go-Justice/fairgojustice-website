@@ -1,0 +1,783 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FGJ — Lyrics Card</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{
+    --black:#0D1117;
+    --blue:#0E3A5B;
+    --orange:#D66B2D;
+    --white:#F5F5F5;
+    --gold:#D4AF37;
+    --muted:#8892a0;
+    --card-bg:rgba(255,255,255,.048);
+    --line:rgba(255,255,255,.09);
+  }
+  body{
+    background:var(--black);
+    color:var(--white);
+    font-family:'Space Grotesk',sans-serif;
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    padding:40px 20px;
+    overflow-x:hidden;
+  }
+
+  /* ── SELECTOR ── */
+  .selector-wrap{
+    width:100%;
+    max-width:900px;
+    margin-bottom:40px;
+    display:flex;
+    gap:12px;
+    align-items:center;
+    flex-wrap:wrap;
+  }
+  .selector-label{
+    color:var(--gold);
+    font-size:11px;
+    letter-spacing:.22em;
+    text-transform:uppercase;
+    font-weight:700;
+    white-space:nowrap;
+  }
+  select{
+    flex:1;
+    background:rgba(255,255,255,.07);
+    border:1px solid var(--line);
+    border-radius:8px;
+    color:var(--white);
+    font-family:'Space Grotesk',sans-serif;
+    font-size:14px;
+    font-weight:600;
+    padding:12px 16px;
+    cursor:pointer;
+    outline:none;
+    transition:.2s;
+    min-width:200px;
+  }
+  select:focus{border-color:var(--gold)}
+
+  /* ── LYRICS CARD ── */
+  .card-outer{
+    width:100%;
+    max-width:900px;
+    position:relative;
+  }
+
+  .lyrics-card{
+    position:relative;
+    border-radius:28px;
+    overflow:hidden;
+    background:var(--black);
+    border:1px solid rgba(212,175,55,.22);
+    box-shadow:
+      0 0 0 1px rgba(255,255,255,.04),
+      0 40px 120px rgba(0,0,0,.8),
+      0 0 80px rgba(212,175,55,.06) inset;
+  }
+
+  /* cover image */
+  .card-cover{
+    position:absolute;
+    inset:0;
+    z-index:0;
+  }
+  .card-cover img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    filter:brightness(.18) saturate(1.3);
+    transition:filter 1.2s ease;
+  }
+  .lyrics-card:hover .card-cover img{
+    filter:brightness(.22) saturate(1.4);
+  }
+
+  /* dramatic gradient overlay */
+  .card-overlay{
+    position:absolute;
+    inset:0;
+    z-index:1;
+    background:
+      radial-gradient(ellipse at 20% 10%, rgba(14,58,91,.55) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 90%, rgba(214,107,45,.22) 0%, transparent 45%),
+      linear-gradient(170deg, rgba(13,17,23,.3) 0%, rgba(13,17,23,.85) 40%, rgba(13,17,23,.97) 100%);
+  }
+
+  /* gold scan line on hover */
+  .card-scan{
+    position:absolute;
+    inset:0;
+    z-index:2;
+    overflow:hidden;
+    pointer-events:none;
+    border-radius:28px;
+  }
+  .card-scan::after{
+    content:'';
+    position:absolute;
+    top:-100%;
+    left:0;
+    right:0;
+    height:2px;
+    background:linear-gradient(90deg, transparent, rgba(212,175,55,.6), transparent);
+    opacity:0;
+    transition:opacity .3s;
+  }
+  .lyrics-card:hover .card-scan::after{
+    animation:scanline 2.4s linear infinite;
+    opacity:1;
+  }
+  @keyframes scanline{
+    0%{top:-2%} 100%{top:102%}
+  }
+
+  /* content */
+  .card-content{
+    position:relative;
+    z-index:3;
+    padding:48px 52px 52px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:0 48px;
+    min-height:640px;
+  }
+  @media(max-width:680px){
+    .card-content{
+      grid-template-columns:1fr;
+      padding:32px 24px 36px;
+      min-height:auto;
+      gap:28px;
+    }
+  }
+
+  /* LEFT COLUMN */
+  .card-left{
+    display:flex;
+    flex-direction:column;
+    gap:0;
+    border-right:1px solid rgba(255,255,255,.07);
+    padding-right:48px;
+  }
+  @media(max-width:680px){
+    .card-left{border-right:none;padding-right:0;border-bottom:1px solid rgba(255,255,255,.07);padding-bottom:24px}
+  }
+
+  .card-badge{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    background:rgba(212,175,55,.12);
+    border:1px solid rgba(212,175,55,.28);
+    border-radius:999px;
+    padding:6px 14px;
+    color:var(--gold);
+    font-size:10px;
+    letter-spacing:.22em;
+    font-weight:700;
+    text-transform:uppercase;
+    width:fit-content;
+    margin-bottom:20px;
+  }
+  .badge-dot{
+    width:6px;height:6px;
+    border-radius:50%;
+    background:var(--gold);
+    animation:pulse 2s infinite;
+  }
+  @keyframes pulse{50%{opacity:.3}}
+
+  .card-title{
+    font-family:'Bebas Neue',sans-serif;
+    font-size:clamp(42px,7vw,86px);
+    line-height:.88;
+    letter-spacing:.02em;
+    margin-bottom:16px;
+    background:linear-gradient(135deg, #ffffff 0%, #d4c08a 60%, var(--gold) 100%);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    background-clip:text;
+  }
+
+  .card-meta{
+    display:flex;
+    gap:16px;
+    flex-wrap:wrap;
+    margin-bottom:28px;
+  }
+  .meta-pill{
+    font-size:10px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    font-weight:700;
+    padding:5px 12px;
+    border-radius:999px;
+    border:1px solid;
+  }
+  .pill-genre{border-color:rgba(214,107,45,.45);color:var(--orange);background:rgba(214,107,45,.08)}
+  .pill-pillar{border-color:rgba(70,130,200,.45);color:#6db3f2;background:rgba(70,130,200,.08)}
+  .pill-cat{border-color:rgba(255,255,255,.18);color:#b0bbc8;background:rgba(255,255,255,.05)}
+
+  .card-cover-thumb{
+    margin-top:auto;
+    border-radius:14px;
+    overflow:hidden;
+    border:1px solid rgba(212,175,55,.20);
+    box-shadow:0 8px 32px rgba(0,0,0,.5);
+    position:relative;
+  }
+  .card-cover-thumb img{
+    width:100%;
+    display:block;
+    max-height:220px;
+    object-fit:cover;
+  }
+  .cover-overlay{
+    position:absolute;
+    inset:0;
+    background:linear-gradient(to top,rgba(13,17,23,.8) 0%,transparent 60%);
+  }
+  .cover-label{
+    position:absolute;
+    bottom:12px;
+    left:14px;
+    font-size:9px;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    color:var(--gold);
+    font-weight:700;
+  }
+
+  /* RIGHT COLUMN */
+  .card-right{
+    display:flex;
+    flex-direction:column;
+    overflow:hidden;
+  }
+
+  .lyrics-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+  }
+  .lyrics-label{
+    color:var(--muted);
+    font-size:10px;
+    letter-spacing:.22em;
+    text-transform:uppercase;
+    font-weight:700;
+  }
+  .lyrics-count{
+    color:var(--gold);
+    font-size:10px;
+    letter-spacing:.14em;
+    font-weight:700;
+  }
+
+  /* progress bar */
+  .progress-wrap{
+    width:100%;
+    height:2px;
+    background:rgba(255,255,255,.08);
+    border-radius:2px;
+    margin-bottom:24px;
+    overflow:hidden;
+  }
+  .progress-fill{
+    height:100%;
+    background:linear-gradient(90deg,var(--orange),var(--gold));
+    border-radius:2px;
+    transition:width .4s ease;
+    width:0%;
+  }
+
+  /* lyrics text */
+  .lyrics-scroll{
+    flex:1;
+    overflow-y:auto;
+    max-height:440px;
+    padding-right:8px;
+    scrollbar-width:thin;
+    scrollbar-color:rgba(212,175,55,.3) transparent;
+  }
+  .lyrics-scroll::-webkit-scrollbar{width:3px}
+  .lyrics-scroll::-webkit-scrollbar-track{background:transparent}
+  .lyrics-scroll::-webkit-scrollbar-thumb{background:rgba(212,175,55,.3);border-radius:2px}
+
+  .lyric-section{margin-bottom:28px}
+  .section-tag{
+    color:var(--orange);
+    font-size:9px;
+    letter-spacing:.22em;
+    text-transform:uppercase;
+    font-weight:700;
+    margin-bottom:8px;
+    border-left:2px solid var(--orange);
+    padding-left:8px;
+  }
+  .lyric-line{
+    font-size:15px;
+    line-height:1.75;
+    color:rgba(245,245,245,.85);
+    font-weight:400;
+    transition:color .15s, transform .15s;
+  }
+  .lyric-line.active{
+    color:var(--white);
+    font-weight:600;
+    transform:translateX(4px);
+  }
+  .lyric-line.highlight{
+    color:var(--gold);
+    font-weight:600;
+  }
+  .lyric-line:empty{height:10px}
+
+  /* BOTTOM BAR */
+  .card-bottom{
+    position:relative;
+    z-index:3;
+    padding:0 52px 36px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:16px;
+    border-top:1px solid rgba(255,255,255,.06);
+    padding-top:24px;
+  }
+  @media(max-width:680px){.card-bottom{padding:20px 24px 24px}}
+
+  .card-branding{
+    display:flex;
+    align-items:center;
+    gap:12px;
+  }
+  .brand-logo{
+    width:36px;height:36px;
+    border-radius:50%;
+    background:linear-gradient(135deg,var(--orange),var(--blue));
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Bebas Neue',sans-serif;
+    font-size:13px;letter-spacing:.04em;
+  }
+  .brand-text{
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:.08em;
+    color:var(--muted);
+    text-transform:uppercase;
+  }
+  .brand-url{
+    font-size:10px;
+    color:rgba(212,175,55,.6);
+    letter-spacing:.06em;
+  }
+
+  .card-actions{
+    display:flex;
+    gap:10px;
+  }
+  .action-btn{
+    display:inline-flex;
+    align-items:center;
+    gap:7px;
+    padding:10px 18px;
+    border-radius:999px;
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    cursor:pointer;
+    border:1px solid;
+    transition:.2s;
+    text-decoration:none;
+    font-family:'Space Grotesk',sans-serif;
+  }
+  .btn-share{
+    border-color:rgba(214,107,45,.5);
+    color:var(--orange);
+    background:rgba(214,107,45,.1);
+  }
+  .btn-share:hover{background:rgba(214,107,45,.22);transform:translateY(-2px)}
+  .btn-yt{
+    border-color:rgba(255,0,0,.4);
+    color:#ff6060;
+    background:rgba(255,0,0,.08);
+  }
+  .btn-yt:hover{background:rgba(255,0,0,.18);transform:translateY(-2px)}
+
+  /* SHARE TOAST */
+  .toast{
+    position:fixed;
+    bottom:32px;
+    left:50%;
+    transform:translateX(-50%) translateY(80px);
+    background:rgba(212,175,55,.95);
+    color:#0D1117;
+    font-weight:700;
+    font-size:13px;
+    padding:12px 24px;
+    border-radius:999px;
+    transition:transform .3s ease;
+    z-index:999;
+    pointer-events:none;
+  }
+  .toast.show{transform:translateX(-50%) translateY(0)}
+
+  /* STATS ROW */
+  .stats-row{
+    width:100%;
+    max-width:900px;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:12px;
+    margin-top:20px;
+  }
+  @media(max-width:560px){.stats-row{grid-template-columns:repeat(2,1fr)}}
+  .stat-box{
+    background:rgba(255,255,255,.04);
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:16px;
+    text-align:center;
+  }
+  .stat-num{
+    font-family:'Bebas Neue',sans-serif;
+    font-size:28px;
+    color:var(--gold);
+    letter-spacing:.02em;
+    line-height:1;
+  }
+  .stat-lab{
+    font-size:9px;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    color:var(--muted);
+    font-weight:700;
+    margin-top:4px;
+  }
+</style>
+</head>
+<body>
+
+<div class="selector-wrap">
+  <div class="selector-label">🎵 Select Track</div>
+  <select id="trackSelect" onchange="loadTrack(this.value)">
+    <option value="">— Choose a song —</option>
+  </select>
+</div>
+
+<div class="card-outer">
+  <div class="lyrics-card" id="lyricsCard">
+    <!-- COVER BACKGROUND -->
+    <div class="card-cover">
+      <img id="cardBgImg" src="" alt="">
+    </div>
+    <div class="card-overlay"></div>
+    <div class="card-scan"></div>
+
+    <!-- MAIN CONTENT -->
+    <div class="card-content">
+      <!-- LEFT -->
+      <div class="card-left">
+        <div class="card-badge">
+          <div class="badge-dot"></div>
+          <span id="badgeText">Fair Go Justice</span>
+        </div>
+        <h1 class="card-title" id="cardTitle">THE CHAIN<br>IS BROKEN</h1>
+        <div class="card-meta" id="cardMeta"></div>
+        <div class="card-cover-thumb" id="cardThumb">
+          <img id="cardThumbImg" src="" alt="">
+          <div class="cover-overlay"></div>
+          <div class="cover-label" id="coverLabel">Official Cover Art</div>
+        </div>
+      </div>
+
+      <!-- RIGHT -->
+      <div class="card-right">
+        <div class="lyrics-header">
+          <div class="lyrics-label">Lyrics</div>
+          <div class="lyrics-count" id="lyricsCount">Select a track</div>
+        </div>
+        <div class="progress-wrap">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <div class="lyrics-scroll" id="lyricsScroll" onscroll="updateProgress()">
+          <div id="lyricsBody" style="color:var(--muted);font-size:15px;padding-top:40px;text-align:center">
+            Select a track from the dropdown above to load the lyrics.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BOTTOM BAR -->
+    <div class="card-bottom">
+      <div class="card-branding">
+        <div class="brand-logo">FGJ</div>
+        <div>
+          <div class="brand-text">Fair Go Justice</div>
+          <div class="brand-url">fairgojustice.com.au</div>
+        </div>
+      </div>
+      <div class="card-actions">
+        <button class="action-btn btn-share" onclick="copyShareLink()">⬡ Share</button>
+        <a class="action-btn btn-yt" id="ytLink" href="https://www.youtube.com/@fairgojustice" target="_blank">▶ Watch</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="stats-row">
+  <div class="stat-box"><div class="stat-num">99</div><div class="stat-lab">Songs</div></div>
+  <div class="stat-box"><div class="stat-num">3</div><div class="stat-lab">Reform Pillars</div></div>
+  <div class="stat-box"><div class="stat-num">85+</div><div class="stat-lab">Cover Arts</div></div>
+  <div class="stat-box"><div class="stat-num">30</div><div class="stat-lab">On YouTube</div></div>
+</div>
+
+<div class="toast" id="toast">Link copied to clipboard!</div>
+
+<script src="lyrics_data.js"></script>
+<script>
+const CDN = 'https://raw.githubusercontent.com/Fair-Go-Justice/fairgojustice-website/main/thumbnails/';
+
+// coverMap matching music.html
+const coverMap = {
+  '6946':'cover_6946.png',
+  'bankruptcy weapon':'cover_bankruptcy_weapon.png',
+  'before the fall':'cover_before_the_fall.png',
+  'behind the stamp':'cover_behind_the_stamp.png',
+  'blindsided: truth uncut':'cover_blindsided.png',
+  'blindsided truth uncut':'cover_blindsided.png',
+  'brake lines bottom lines':'cover_brake_lines_bottom_lines.png',
+  'built the roads paid the price':'cover_built_the_roads.png',
+  'caveat over home':'cover_caveat_over_home.png',
+  'chain of custody':'cover_chain_of_custody.png',
+  'cold comfort':'cover_cold_comfort.png',
+  'conflict of interest':'cover_conflict_of_interest.png',
+  'corporate shell':'cover_corporate_shell.png',
+  'costs order':'cover_costs_order.png',
+  'courthouse blues':'cover_courthouse_blues.png',
+  'dead letter office':'cover_dead_letter_office.png',
+  'debt trap':'cover_debt_trap.png',
+  'dirty hands':'cover_dirty_hands.png',
+  'double down':'cover_double_down.png',
+  'double standard':'cover_double_standard.png',
+  'elder':'cover_elder.png',
+  'eviction notice':'cover_eviction_notice.png',
+  'family court blues':'cover_family_court_blues.png',
+  'five eyes':'cover_five_eyes.png',
+  'follow the money':'cover_follow_the_money.png',
+  'forced mediation':'cover_forced_mediation.png',
+  'forensic fraud':'cover_forensic_fraud.png',
+  'gagged':'cover_gagged.png',
+  'guardian ad litem':'cover_guardian_ad_litem.png',
+  'inside job':'cover_inside_job.png',
+  'jailhouse testimony':'cover_jailhouse_testimony.png',
+  'jurisdiction':'cover_jurisdiction.png',
+  'litigation funder':'cover_litigation_funder.png',
+  'long road home':'cover_long_road_home.png',
+  'lost in transit':'cover_lost_in_transit.png',
+  'manufactured consent':'cover_manufactured_consent.png',
+  'media blackout':'cover_media_blackout.png',
+  'my blood stained hands':'cover_my_blood_stained_hands.png',
+  'no fixed address':'cover_no_fixed_address.png',
+  'offshore account':'cover_offshore_account.png',
+  'on the record':'cover_on_the_record.png',
+  'one hundred':'cover_one_hundred.png',
+  'paper chase':'cover_paper_chase.png',
+  'paper trail':'cover_paper_trail.png',
+  'predatory lending':'cover_predatory_lending.png',
+  'psych assessment':'cover_psych_assessment.png',
+  'receivers cut':'cover_receivers_cut.png',
+  "receiver's cut":"cover_receivers_cut.png",
+  'redacted':'cover_redacted.png',
+  'rise again':'cover_rise_again.png',
+  'self represented':'cover_self_represented.png',
+  'self-represented':'cover_self_represented.png',
+  'silent victim':'cover_silent_victim.png',
+  'smash and grab':'cover_smash_and_grab.png',
+  'sovereign ground':'cover_sovereign_ground.png',
+  'stand together':'cover_stand_together.png',
+  'statute of limitations':'cover_statute_of_limitations.png',
+  'suicide notes':'cover_suicide_notes.png',
+  'suppressed':'cover_suppressed.png',
+  'sworn to lie':'cover_sworn_to_lie.png',
+  'the architects':'cover_the_architects.png',
+  'the appointed':'cover_the_appointed.png',
+  'the bailiff':'cover_the_bailiff.png',
+  'the expert witness':'cover_the_expert_witness.png',
+  'the final appeal':'cover_the_final_appeal.png',
+  'the long road':'cover_the_long_road.png',
+  'the quiet coup':'cover_the_quiet_coup.png',
+  'the receiver':'cover_the_receiver.png',
+  'the registrar':'cover_the_registrar.png',
+  'the selector':'cover_the_selector.png',
+  'the settlement trap':'cover_the_settlement_trap.png',
+  'the tipstaff':'cover_the_tipstaff.png',
+  'unregistered':'cover_unregistered.png',
+  'vexatious':'cover_vexatious.png',
+  "widow's title":'cover_widows_title.png',
+  'we are not done':'cover_we_are_not_done.png',
+  'whistleblower':'cover_whistleblower.png',
+  'witness protection':'cover_witness_protection.png',
+  'written in blood':'cover_written_in_blood.png',
+};
+
+const ytMap = {
+  'cold comfort':'NeiMDNmLS6E','costs order':'o9Kv1NrQe-Q','forensic fraud':'4kb1kgaFgUs',
+  'guardian ad litem':'IvfSWOPjHr4','media blackout':'fj_hxETi6Vw','offshore account':'cujaRm9wMPk',
+  'paper trail':'_dRFS3HIOWE','rise again':'nwrbaqAYaxY','silent victim':'0wDwcMTqeaA',
+  'conflict of interest':'Fp_j0BumjQs','the appointed':'x3UqqsYzTPg','vexatious':'nro_6EZx1z8',
+  'self-represented':'IpF6rtveFVU','suppressed':'Q05AO-VzQFY','blindsided: truth uncut':'HnnTiCk1CI0',
+  'elder':'WAXn0map22Q','family court blues':'EqBa_TahlZg','bankruptcy weapon':'7skBZ5rVtpI',
+  'we are not done':'_UexLVzLSmI','courthouse blues':'Y7g0bOJt380','forced mediation':'VMGW55n-xFk',
+  'litigation funder':'LTDI8TtNXhM','one hundred':'ob41Im2b3I0','stand together':'hKpWw0CIbpI',
+  'statute of limitations':'VxIxqbASYcA','sworn to lie':'oE2OxaPQTGE','the bailiff':'leI44zViGCY',
+  'the expert witness':'xhJKvNg_mXw','the final appeal':'WDbt_wKsvG8',
+};
+
+const pillarMap = {
+  1:'Pillar 1 — Judicial Integrity',
+  2:'Pillar 2 — Legal Aid Reform',
+  3:'Pillar 3 — Evidence Integrity'
+};
+
+// Populate dropdown from lyrics_data
+const titles = Object.keys(LYRICS_DATA).sort();
+const sel = document.getElementById('trackSelect');
+titles.forEach(t => {
+  const opt = document.createElement('option');
+  opt.value = t;
+  opt.textContent = t.toUpperCase();
+  sel.appendChild(opt);
+});
+
+function getCover(title){
+  const key = title.toLowerCase().replace(/['']/g,"'");
+  return coverMap[key] || null;
+}
+
+function loadTrack(title){
+  if(!title) return;
+  const data = LYRICS_DATA[title];
+  if(!data) return;
+
+  const titleKey = title.toLowerCase();
+  const coverFile = getCover(title);
+  const coverUrl = coverFile ? CDN + coverFile : '';
+
+  // Background
+  const bg = document.getElementById('cardBgImg');
+  if(coverUrl){ bg.src = coverUrl; bg.style.display='block'; }
+  else { bg.style.display='none'; }
+
+  // Thumb
+  const thumb = document.getElementById('cardThumbImg');
+  if(coverUrl){ thumb.src = coverUrl; document.getElementById('cardThumb').style.display='block'; }
+  else { document.getElementById('cardThumb').style.display='none'; }
+
+  // Title
+  const titleWords = title.toUpperCase().split(' ');
+  const mid = Math.ceil(titleWords.length/2);
+  document.getElementById('cardTitle').innerHTML = titleWords.slice(0,mid).join(' ') + '<br>' + titleWords.slice(mid).join(' ');
+
+  // Badge
+  document.getElementById('badgeText').textContent = data.genre || 'Fair Go Justice';
+
+  // Meta pills
+  const meta = document.getElementById('cardMeta');
+  meta.innerHTML = '';
+  if(data.genre){ meta.innerHTML += `<span class="meta-pill pill-genre">${data.genre}</span>`; }
+  if(data.pillar){ meta.innerHTML += `<span class="meta-pill pill-pillar">${pillarMap[data.pillar]||'Pillar '+data.pillar}</span>`; }
+  meta.innerHTML += `<span class="meta-pill pill-cat">fairgojustice.com.au</span>`;
+
+  // YouTube link
+  const ytId = ytMap[titleKey] || ytMap[title.toLowerCase().replace(/[:\-]/g,'').trim()];
+  const ytBtn = document.getElementById('ytLink');
+  ytBtn.href = ytId ? `https://www.youtube.com/watch?v=${ytId}` : 'https://www.youtube.com/@fairgojustice';
+
+  // Lyrics
+  renderLyrics(data.lyrics || data.content || '', title);
+
+  // Count
+  const lines = (data.lyrics || data.content || '').split('\n').filter(Boolean).length;
+  document.getElementById('lyricsCount').textContent = `${lines} lines`;
+}
+
+function renderLyrics(raw, title){
+  const scroll = document.getElementById('lyricsScroll');
+  const body = document.getElementById('lyricsBody');
+  
+  // Parse sections
+  const lines = raw.split('\n');
+  let html = '';
+  let currentSection = null;
+  let sectionLines = [];
+
+  function flushSection(){
+    if(sectionLines.length === 0) return;
+    if(currentSection){
+      html += `<div class="lyric-section">`;
+      html += `<div class="section-tag">${currentSection}</div>`;
+    } else {
+      html += `<div class="lyric-section">`;
+    }
+    sectionLines.forEach((line, i) => {
+      if(!line.trim()){ html += `<div class="lyric-line"></div>`; return; }
+      // Highlight every 4th non-empty line
+      const cls = (i % 8 === 3) ? 'lyric-line highlight' : 'lyric-line';
+      html += `<div class="${cls}">${line}</div>`;
+    });
+    html += `</div>`;
+    sectionLines = [];
+  }
+
+  lines.forEach(line => {
+    const sectionMatch = line.match(/^\[(.*?)\]$/);
+    if(sectionMatch){
+      flushSection();
+      currentSection = sectionMatch[1];
+    } else {
+      sectionLines.push(line);
+    }
+  });
+  flushSection();
+
+  body.innerHTML = html || `<div style="color:var(--muted);padding:20px 0">Lyrics coming soon.</div>`;
+  scroll.scrollTop = 0;
+  document.getElementById('progressFill').style.width = '0%';
+}
+
+function updateProgress(){
+  const el = document.getElementById('lyricsScroll');
+  const pct = el.scrollHeight <= el.clientHeight ? 0
+    : (el.scrollTop / (el.scrollHeight - el.clientHeight)) * 100;
+  document.getElementById('progressFill').style.width = pct + '%';
+}
+
+function copyShareLink(){
+  const title = document.getElementById('trackSelect').value;
+  const url = title
+    ? `https://fairgojustice.com.au/music.html#${encodeURIComponent(title)}`
+    : 'https://fairgojustice.com.au/music.html';
+  navigator.clipboard.writeText(url).catch(()=>{});
+  const t = document.getElementById('toast');
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'), 2400);
+}
+
+// Auto-load first track
+if(titles.length){ sel.value = titles[0]; loadTrack(titles[0]); }
+</script>
+</body>
+</html>
