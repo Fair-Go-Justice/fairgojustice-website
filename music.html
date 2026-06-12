@@ -427,7 +427,45 @@
     @media (max-width: 480px) {
       .playlists-grid { grid-template-columns: 1fr; }
     }
-  </style>
+  
+/* ── LYRICS MODAL ── */
+.lyrics-overlay {
+  position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 9999;
+  display: flex; align-items: center; justify-content: center; padding: 1rem;
+  backdrop-filter: blur(4px);
+}
+.lyrics-modal {
+  background: #0D1117; border: 1px solid #0E3A5B;
+  border-radius: 12px; width: 100%; max-width: 640px;
+  max-height: 85vh; display: flex; flex-direction: column;
+  box-shadow: 0 0 40px rgba(14,58,91,0.6);
+}
+.lyrics-modal-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.2rem 1.5rem; border-bottom: 1px solid #0E3A5B33;
+}
+.lyrics-modal-title {
+  font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem;
+  color: #D4AF37; letter-spacing: 0.1em;
+}
+.lyrics-close-btn {
+  background: none; border: 1px solid #0E3A5B; color: #F5F5F5;
+  width: 32px; height: 32px; border-radius: 6px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.2s;
+}
+.lyrics-close-btn:hover { background: #D66B2D; border-color: #D66B2D; }
+.lyrics-modal-content {
+  padding: 1.5rem; overflow-y: auto; flex: 1;
+  font-family: 'Space Grotesk', sans-serif; font-size: 0.92rem;
+  color: #F5F5F5; line-height: 1.8; white-space: pre-wrap;
+}
+.lyrics-modal-content::-webkit-scrollbar { width: 4px; }
+.lyrics-modal-content::-webkit-scrollbar-thumb { background: #0E3A5B; border-radius: 2px; }
+.lyrics-btn { color: #D4AF37 !important; }
+.lyrics-btn:hover { color: #fff !important; }
+</style>
+  <script src="lyrics_data.js"></script>
 </head>
 <body>
 
@@ -709,33 +747,92 @@ function buildManifestoGrid() {
 // ── COVER ART MAP ──
 const CDN = 'https://raw.githubusercontent.com/Fair-Go-Justice/fairgojustice-website/main/thumbnails/';
 const COVER_MAP = {
+  'bank man came on tuesday': 'cover_bank_man_came_on_tuesday.png',
   'bloodline': 'cover_bloodline.png',
   'cold comfort': 'cover_cold_comfort.png',
   'conflict of interest': 'cover_conflict_of_interest.png',
   'costs order': 'cover_costs_order.png',
+  'courthouse blues': 'cover_courthouse_blues.png',
+  'debt collectors': 'cover_debt_collectors.png',
+  'evidence room': 'cover_evidence_room.png',
   'filed and forgotten': 'cover_filed_and_forgotten.png',
+  'fitzroy files': 'cover_fitzroy_files.png',
+  'five eyes': 'cover_five_eyes.png',
+  'follow the money': 'cover_follow_the_money.png',
+  'forced mediation': 'cover_forced_mediation.png',
   'forensic fraud': 'cover_forensic_fraud.png',
+  'ghost account': 'cover_ghost_account.png',
   'ghost in the system': 'cover_ghost_in_the_system.png',
   'guardian ad litem': 'cover_guardian_ad_litem.png',
+  'hidden hand': 'cover_hidden_hand.png',
   'house built on sand': 'cover_house_built_on_sand.png',
+  'kings cross documents': 'cover_kings_cross_documents.png',
+  'litigation funder': 'cover_litigation_funder.png',
+  'manufactured consent': 'cover_manufactured_consent.png',
   'media blackout': 'cover_media_blackout.png',
   'offshore account': 'cover_offshore_account.png',
+  'one hundred': 'cover_one_hundred.png',
   'paper trail': 'cover_paper_trail.png',
   'redacted': 'cover_redacted.png',
   'rise again': 'cover_rise_again.png',
   'silent victim': 'cover_silent_victim.png',
+  'stand together': 'cover_stand_together.png',
+  'statute of limitations': 'cover_statute_of_limitations.png',
+  'sworn to lie': 'cover_sworn_to_lie.png',
   'the appointed': 'cover_the_appointed.png',
+  'the bailiff': 'cover_the_bailiff.png',
+  'the expert witness': 'cover_the_expert_witness.png',
+  'the final appeal': 'cover_the_final_appeal.png',
   'the last witness': 'cover_the_last_witness.png',
-  'under oath royal truth': 'cover_under_oath.png',
+  'the norway question': 'cover_the_norway_question.png',
+  'the witness': 'cover_the_witness.png',
+  'under oath': 'cover_under_oath.png',
   'whistleblower': 'cover_whistleblower.png',
   'white out': 'cover_white_out.png',
-  'wrecking ball law': 'cover_wrecking_ball_law.png',
+  'wrecking ball law': 'cover_wrecking_ball_law.png'
 };
 function getCoverUrl(title) {
   const key = title.toLowerCase().replace(/[^a-z0-9 ]/g,'').trim();
   return COVER_MAP[key] ? CDN + COVER_MAP[key] : null;
 }
 
+// ── YOUTUBE VIDEO MAP ──
+const YT_MAP = {
+  'vexatious': 'nro_6EZx1z8',
+  'selfrepresented': 'IpF6rtveFVU',
+  'suppressed': 'Q05AO-VzQFY',
+  'the appointed': 'x3UqqsYzTPg',
+  'blindsided truth uncut': 'HnnTiCk1CI0',
+  'elder': 'WAXn0map22Q',
+  'family court blues': 'EqBa_TahlZg',
+  'bankruptcy weapon': '7skBZ5rVtpI',
+  'we are not done': '_UexLVzLSmI',
+  'conflict of interest': 'Fp_j0BumjQs',
+  'cold comfort': 'NeiMDNmLS6E',
+  'costs order': 'o9Kv1NrQe-Q',
+  'double standard': 'FyBXteycll0',
+  'forensic fraud': '4kb1kgaFgUs',
+  'guardian ad litem': 'IvfSWOPjHr4',
+  'media blackout': 'fj_hxETi6Vw',
+  'offshore account': 'cujaRm9wMPk',
+  'paper trail': '_dRFS3HIOWE',
+  'rise again': 'nwrbaqAYaxY',
+  'silent victim': '0wDwcMTqeaA',
+  'courthouse blues': 'Y7g0bOJt380',
+  'forced mediation': 'VMGW55n-xFk',
+  'litigation funder': 'LTDI8TtNXhM',
+  'one hundred': 'ob41Im2b3I0',
+  'stand together': 'hKpWw0CIbpI',
+  'statute of limitations': 'VxIxqbASYcA',
+  'sworn to lie': 'oE2OxaPQTGE',
+  'the bailiff': 'leI44zViGCY',
+  'the expert witness': 'xhJKvNg_mXw',
+  'the final appeal': 'WDbt_wKsvG8'
+};
+function getYtUrl(title) {
+  const key = title.toLowerCase().replace(/[^a-z0-9 ]/g,'').trim();
+  return YT_MAP[key] ? 'https://www.youtube.com/watch?v=' + YT_MAP[key] : 'https://www.youtube.com/@fairgojustice';
+}
 // ── TRACK GRID ──
 let currentFilter = 'all';
 let currentSearch = '';
@@ -772,7 +869,8 @@ function buildTrackGrid(filteredTracks) {
       </div>
       <div class="track-actions">
         ${t.suno ? `<a class="track-link" href="${t.suno}" target="_blank" rel="noopener" onclick="event.stopPropagation()"><i class="fas fa-external-link-alt"></i> SUNO</a>` : ''}
-        <a class="track-link" href="https://www.youtube.com/@fairgojustice" target="_blank" rel="noopener" onclick="event.stopPropagation()"><i class="fab fa-youtube"></i> YT</a>
+        <a class="track-link" href="${getYtUrl(t.title)}" target="_blank" rel="noopener" onclick="event.stopPropagation()"><i class="fab fa-youtube"></i> YT</a>
+        <button class="track-link lyrics-btn" onclick="event.stopPropagation();showLyrics('${t.title}')" style="cursor:pointer;background:none"><i class="fas fa-scroll"></i> LYRICS</button>
         <button class="track-link" onclick="event.stopPropagation();shareTrack('${t.title}')" style="cursor:pointer;background:none"><i class="fas fa-share-alt"></i> SHARE</button>
       </div>
     </div>`;
@@ -903,5 +1001,34 @@ function shareTrack(title) {
 buildManifestoGrid();
 buildTrackGrid(TRACKS);
 </script>
+
+
+// ── LYRICS MODAL JS ──
+function showLyrics(title) {
+  const key = title.toLowerCase().replace(/[^a-z0-9 ]/g,'').trim();
+  const lyrics = (typeof LYRICS_MAP !== 'undefined' && LYRICS_MAP[key])
+    ? LYRICS_MAP[key]
+    : 'Lyrics coming soon for this track.';
+  document.getElementById('lyricsModalTitle').textContent = title.toUpperCase();
+  document.getElementById('lyricsModalContent').textContent = lyrics;
+  const overlay = document.getElementById('lyricsOverlay');
+  overlay.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+}
+function closeLyrics() {
+  document.getElementById('lyricsOverlay').style.display = 'none';
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLyrics(); });
+<!-- ── LYRICS MODAL ── -->
+<div id="lyricsOverlay" class="lyrics-overlay" onclick="closeLyrics()" style="display:none">
+  <div class="lyrics-modal" onclick="event.stopPropagation()">
+    <div class="lyrics-modal-header">
+      <span id="lyricsModalTitle" class="lyrics-modal-title"></span>
+      <button class="lyrics-close-btn" onclick="closeLyrics()"><i class="fas fa-times"></i></button>
+    </div>
+    <div id="lyricsModalContent" class="lyrics-modal-content"></div>
+  </div>
+</div>
 </body>
 </html>
