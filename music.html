@@ -269,9 +269,18 @@
       background: rgba(255,255,255,0.06);
     }
     .track-card-top { display: flex; align-items: flex-start; gap: 0.75rem; }
+    .track-cover {
+      width: 58px; height: 58px; flex-shrink: 0;
+      object-fit: cover; border-radius: 2px;
+      display: block;
+    }
+    .track-cover-placeholder {
+      width: 58px; height: 58px; flex-shrink: 0;
+      border-radius: 2px; display: flex; align-items: center; justify-content: center;
+    }
     .track-num {
-      font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; line-height: 1;
-      color: rgba(255,255,255,0.12); min-width: 2rem; flex-shrink: 0;
+      font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; line-height: 1;
+      color: rgba(255,255,255,0.35);
     }
     .track-info { flex: 1; min-width: 0; }
     .track-title {
@@ -697,6 +706,36 @@ function buildManifestoGrid() {
   }).join('');
 }
 
+// ── COVER ART MAP ──
+const CDN = 'https://raw.githubusercontent.com/Fair-Go-Justice/fairgojustice-website/main/thumbnails/';
+const COVER_MAP = {
+  'bloodline': 'cover_bloodline.png',
+  'cold comfort': 'cover_cold_comfort.png',
+  'conflict of interest': 'cover_conflict_of_interest.png',
+  'costs order': 'cover_costs_order.png',
+  'filed and forgotten': 'cover_filed_and_forgotten.png',
+  'forensic fraud': 'cover_forensic_fraud.png',
+  'ghost in the system': 'cover_ghost_in_the_system.png',
+  'guardian ad litem': 'cover_guardian_ad_litem.png',
+  'house built on sand': 'cover_house_built_on_sand.png',
+  'media blackout': 'cover_media_blackout.png',
+  'offshore account': 'cover_offshore_account.png',
+  'paper trail': 'cover_paper_trail.png',
+  'redacted': 'cover_redacted.png',
+  'rise again': 'cover_rise_again.png',
+  'silent victim': 'cover_silent_victim.png',
+  'the appointed': 'cover_the_appointed.png',
+  'the last witness': 'cover_the_last_witness.png',
+  'under oath royal truth': 'cover_under_oath.png',
+  'whistleblower': 'cover_whistleblower.png',
+  'white out': 'cover_white_out.png',
+  'wrecking ball law': 'cover_wrecking_ball_law.png',
+};
+function getCoverUrl(title) {
+  const key = title.toLowerCase().replace(/[^a-z0-9 ]/g,'').trim();
+  return COVER_MAP[key] ? CDN + COVER_MAP[key] : null;
+}
+
 // ── TRACK GRID ──
 let currentFilter = 'all';
 let currentSearch = '';
@@ -713,10 +752,14 @@ function buildTrackGrid(filteredTracks) {
   grid.innerHTML = filteredTracks.map(t => {
     const color = CAT_COLORS[t.cat] || '#888';
     const isActive = currentTrackIndex >= 0 && TRACKS[currentTrackIndex]?.file === t.file;
+    const coverUrl = getCoverUrl(t.title);
+    const coverHtml = coverUrl
+      ? `<img class="track-cover" src="${coverUrl}" alt="${t.title}" loading="lazy">`
+      : `<div class="track-cover-placeholder" style="background:${color}18;border:1px solid ${color}33"><span class="track-num">${String(t.n).padStart(2,'0')}</span></div>`;
     return `
     <div class="track-card${isActive ? ' active-card' : ''}" id="card-${t.n}" onclick="playTrack(${t.n-1})">
       <div class="track-card-top">
-        <div class="track-num">${String(t.n).padStart(2,'0')}</div>
+        ${coverHtml}
         <div class="track-info">
           <div class="track-title">${t.title}</div>
           <span class="cat-badge" style="background:${color}22;color:${color};border:1px solid ${color}44">${t.short}</span>
