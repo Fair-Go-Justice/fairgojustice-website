@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz Story Slides — Fair Go Justice</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #111; display: flex; flex-direction: column; align-items: center; gap: 40px; padding: 40px 20px; font-family: 'Space Grotesk', sans-serif; }
+
+    h1 { color: #F5F5F5; font-family: 'Bebas Neue', sans-serif; font-size: 2rem; letter-spacing: 3px; text-align: center; margin-bottom: 10px; }
+    .subtitle { color: #888; font-size: 0.9rem; text-align: center; margin-bottom: 30px; }
+
+    /* Each slide is 1080x1920 scaled to 360x640 for preview */
+    .slide {
+      width: 360px;
+      height: 640px;
+      border-radius: 24px;
+      overflow: hidden;
+      position: relative;
+      flex-shrink: 0;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.8);
+    }
+
+    /* SLIDE 1 — Poll */
+    .slide-1 {
+      background: linear-gradient(160deg, #0D1117 0%, #0E3A5B 60%, #0D1117 100%);
+    }
+    .slide-1 .logo { position: absolute; top: 40px; left: 50%; transform: translateX(-50%); font-family: 'Bebas Neue'; font-size: 1.1rem; letter-spacing: 4px; color: #D4AF37; }
+    .slide-1 .badge { position: absolute; top: 70px; left: 50%; transform: translateX(-50%); background: rgba(214,107,45,0.2); border: 1px solid #D66B2D; color: #D66B2D; font-size: 0.7rem; letter-spacing: 2px; padding: 4px 14px; border-radius: 20px; white-space: nowrap; }
+    .slide-1 .main { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 90%; text-align: center; }
+    .slide-1 .question { font-family: 'Bebas Neue'; font-size: 2.6rem; color: #F5F5F5; line-height: 1.1; letter-spacing: 2px; margin-bottom: 30px; }
+    .slide-1 .poll { display: flex; gap: 16px; justify-content: center; }
+    .poll-btn { flex: 1; padding: 18px 0; border-radius: 14px; font-family: 'Bebas Neue'; font-size: 1.6rem; letter-spacing: 3px; cursor: pointer; transition: all 0.2s; }
+    .poll-yes { background: rgba(13,58,91,0.8); border: 2px solid #0E3A5B; color: #F5F5F5; }
+    .poll-no  { background: rgba(214,107,45,0.15); border: 2px solid #D66B2D; color: #D66B2D; }
+    .slide-1 .tap-hint { position: absolute; bottom: 50px; left: 50%; transform: translateX(-50%); color: #888; font-size: 0.75rem; letter-spacing: 2px; }
+
+    /* SLIDE 2–4 — Quiz Questions */
+    .slide-quiz { background: linear-gradient(170deg, #0D1117 0%, #0E3A5B 50%, #0D1117 100%); }
+    .slide-quiz .logo { position: absolute; top: 40px; left: 50%; transform: translateX(-50%); font-family: 'Bebas Neue'; font-size: 1.1rem; letter-spacing: 4px; color: #D4AF37; }
+    .slide-quiz .ep-tag { position: absolute; top: 70px; left: 50%; transform: translateX(-50%); background: rgba(212,175,55,0.15); border: 1px solid #D4AF37; color: #D4AF37; font-size: 0.7rem; letter-spacing: 2px; padding: 4px 14px; border-radius: 20px; white-space: nowrap; }
+    .slide-quiz .qnum { position: absolute; top: 120px; left: 50%; transform: translateX(-50%); color: #D66B2D; font-family: 'Bebas Neue'; font-size: 1rem; letter-spacing: 4px; }
+    .slide-quiz .question { position: absolute; top: 155px; left: 50%; transform: translateX(-50%); width: 88%; text-align: center; font-family: 'Bebas Neue'; font-size: 2rem; color: #F5F5F5; line-height: 1.15; letter-spacing: 2px; }
+    .slide-quiz .options { position: absolute; top: 310px; left: 50%; transform: translateX(-50%); width: 88%; display: flex; flex-direction: column; gap: 14px; }
+    .option-btn { padding: 16px 20px; border-radius: 12px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.12); color: #F5F5F5; font-size: 0.85rem; text-align: left; cursor: pointer; transition: all 0.2s; }
+    .option-letter { color: #D66B2D; font-family: 'Bebas Neue'; font-size: 1.1rem; margin-right: 10px; }
+    .slide-quiz .tap-hint { position: absolute; bottom: 50px; left: 50%; transform: translateX(-50%); color: #888; font-size: 0.75rem; letter-spacing: 2px; }
+
+    /* SLIDE 5 — CTA */
+    .slide-cta { background: linear-gradient(160deg, #0D1117 0%, #0E3A5B 40%, #D66B2D22 100%); }
+    .slide-cta .glow { position: absolute; width: 300px; height: 300px; background: radial-gradient(circle, rgba(214,107,45,0.15) 0%, transparent 70%); top: 30%; left: 50%; transform: translateX(-50%); }
+    .slide-cta .logo { position: absolute; top: 40px; left: 50%; transform: translateX(-50%); font-family: 'Bebas Neue'; font-size: 1.1rem; letter-spacing: 4px; color: #D4AF37; }
+    .slide-cta .main { position: absolute; top: 45%; left: 50%; transform: translate(-50%, -50%); width: 88%; text-align: center; }
+    .slide-cta .headline { font-family: 'Bebas Neue'; font-size: 2.8rem; color: #F5F5F5; line-height: 1.05; letter-spacing: 3px; margin-bottom: 16px; }
+    .slide-cta .sub { color: #ccc; font-size: 0.85rem; line-height: 1.6; margin-bottom: 30px; }
+    .slide-cta .cta-btn { background: #D66B2D; color: #fff; padding: 16px 30px; border-radius: 12px; font-family: 'Bebas Neue'; font-size: 1.4rem; letter-spacing: 3px; display: inline-block; }
+    .slide-cta .url { position: absolute; bottom: 50px; left: 50%; transform: translateX(-50%); color: #D4AF37; font-size: 0.8rem; letter-spacing: 2px; }
+
+    .slide-label { color: #555; font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; margin-top: -20px; }
+
+    .download-note { background: rgba(214,107,45,0.1); border: 1px solid #D66B2D; border-radius: 12px; padding: 20px 30px; max-width: 500px; text-align: center; }
+    .download-note h3 { color: #D66B2D; font-family: 'Bebas Neue'; letter-spacing: 2px; margin-bottom: 8px; }
+    .download-note p { color: #ccc; font-size: 0.85rem; line-height: 1.7; }
+    .download-note code { background: rgba(255,255,255,0.08); padding: 2px 8px; border-radius: 4px; color: #D4AF37; font-size: 0.8rem; }
+  </style>
+</head>
+<body>
+
+<h1>INSTAGRAM STORY QUIZ SLIDES</h1>
+<p class="subtitle">5 slides · Screenshot each one · Post as Story sequence · Link in bio → quiz.html</p>
+
+<!-- SLIDE 1 — POLL -->
+<p class="slide-label">Slide 1 of 5 — Opening Poll</p>
+<div class="slide slide-1">
+  <div class="logo">FAIR GO JUSTICE</div>
+  <div class="badge">QUICK POLL</div>
+  <div class="main">
+    <div class="question">HAS THE LEGAL SYSTEM EVER FAILED YOU OR SOMEONE YOU KNOW?</div>
+    <div class="poll">
+      <div class="poll-btn poll-yes">YES 🙌</div>
+      <div class="poll-btn poll-no">NO</div>
+    </div>
+  </div>
+  <div class="tap-hint">TAP TO ANSWER · SWIPE FOR MORE</div>
+</div>
+
+<!-- SLIDE 2 — QUIZ Q1 -->
+<p class="slide-label">Slide 2 of 5 — Quiz Question 1</p>
+<div class="slide slide-quiz">
+  <div class="logo">FAIR GO JUSTICE</div>
+  <div class="ep-tag">EPISODE 1 QUIZ</div>
+  <div class="qnum">QUESTION 01</div>
+  <div class="question">WHO CURRENTLY OVERSEES COMPLAINTS AGAINST FEDERAL JUDGES IN AUSTRALIA?</div>
+  <div class="options">
+    <div class="option-btn"><span class="option-letter">A</span> An independent judicial commission</div>
+    <div class="option-btn"><span class="option-letter">B</span> The judge's own court</div>
+    <div class="option-btn"><span class="option-letter">C</span> The Attorney-General</div>
+    <div class="option-btn"><span class="option-letter">D</span> Nobody — there is no independent body</div>
+  </div>
+  <div class="tap-hint">TAP AN ANSWER · ANSWER IN NEXT SLIDE</div>
+</div>
+
+<!-- SLIDE 3 — QUIZ Q2 -->
+<p class="slide-label">Slide 3 of 5 — Quiz Question 2 + Answer to Q1</p>
+<div class="slide slide-quiz">
+  <div class="logo">FAIR GO JUSTICE</div>
+  <div class="ep-tag">EPISODE 1 QUIZ</div>
+  <div class="qnum">Q1 ANSWER: D 🔴 — QUESTION 02</div>
+  <div class="question">WHAT IS THE MOST COMMON REASON LEGAL AID IS DENIED IN AUSTRALIA?</div>
+  <div class="options">
+    <div class="option-btn"><span class="option-letter">A</span> The case has no merit</div>
+    <div class="option-btn"><span class="option-letter">B</span> Insufficient funding — the means test is too tight</div>
+    <div class="option-btn"><span class="option-letter">C</span> The applicant already has a lawyer</div>
+    <div class="option-btn"><span class="option-letter">D</span> The case is already before the courts</div>
+  </div>
+  <div class="tap-hint">TAP AN ANSWER · ANSWER IN NEXT SLIDE</div>
+</div>
+
+<!-- SLIDE 4 — FACT CARD -->
+<p class="slide-label">Slide 4 of 5 — Shocking Fact Card</p>
+<div class="slide slide-quiz">
+  <div class="logo">FAIR GO JUSTICE</div>
+  <div class="ep-tag">DID YOU KNOW?</div>
+  <div class="qnum">Q2 ANSWER: B 🔴</div>
+  <div class="question" style="top:170px; font-size:1.7rem;">AUSTRALIA HAS NO INDEPENDENT BODY TO INVESTIGATE COMPLAINTS AGAINST FEDERAL JUDGES.</div>
+  <div class="options" style="top:380px;">
+    <div class="option-btn" style="border-color: rgba(214,107,45,0.4); background: rgba(214,107,45,0.08);">
+      When you file a complaint, it goes back to <strong style="color:#D66B2D">the same court system</strong> you're complaining about.
+    </div>
+    <div class="option-btn" style="border-color: rgba(212,175,55,0.3); background: rgba(212,175,55,0.05);">
+      Fair Go Justice is campaigning for a <strong style="color:#D4AF37">Judicial Integrity Commission</strong> — independent, transparent, accountable.
+    </div>
+  </div>
+  <div class="tap-hint">SWIPE FOR THE FULL EPISODE</div>
+</div>
+
+<!-- SLIDE 5 — CTA -->
+<p class="slide-label">Slide 5 of 5 — Call to Action</p>
+<div class="slide slide-cta">
+  <div class="glow"></div>
+  <div class="logo">FAIR GO JUSTICE</div>
+  <div class="main">
+    <div class="headline">THE CHAIN IS BROKEN.</div>
+    <div class="sub">Episode 1 of The Fair Go Podcast is live.<br>20 minutes. Real evidence. Real voices.<br>And a path to fix it.</div>
+    <div class="cta-btn">🎧 LISTEN NOW</div>
+  </div>
+  <div class="url">fairgojustice.com.au/podcast.html</div>
+</div>
+
+<div class="download-note">
+  <h3>HOW TO USE THESE SLIDES</h3>
+  <p>
+    Screenshot each slide above on mobile (or use browser screenshot on desktop).<br><br>
+    Post as an <strong>Instagram Story sequence</strong> — 5 slides back to back.<br>
+    Add a <code>Link sticker</code> on Slide 5 pointing to <code>fairgojustice.com.au/podcast.html</code><br><br>
+    Also works as <strong>Facebook Stories</strong> and <strong>TikTok Slides</strong>.
+  </p>
+</div>
+
+</body>
+</html>
