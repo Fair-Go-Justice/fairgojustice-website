@@ -7,12 +7,12 @@
   <meta name="description" content="Sign the petition for justice reform. Share the music. Submit your story. Write to your MP. Join the Fair Go Justice movement and demand real change in Australia's legal system.">
     <meta name="robots" content="index, follow">
   <meta name="author" content="Fair Go Justice">
-  <link rel="canonical" href="https://fair-go-justice.github.io/fairgojustice-website/take-action.html">
+  <link rel="canonical" href="https://fairgojustice.com.au/take-action.html">
   <!-- Open Graph -->
   <meta property="og:title" content="Take Action — Fair Go Justice">
   <meta property="og:description" content="Sign the petition. Share the tracks. Submit your story. Write to your MP. Make them hear us.">
   <meta property="og:image" content="https://raw.githubusercontent.com/Fair-Go-Justice/fairgojustice-website/main/thumbnails/hero_chain_broken_master_web.jpg">
-  <meta property="og:url" content="https://fair-go-justice.github.io/fairgojustice-website/take-action.html">
+  <meta property="og:url" content="https://fairgojustice.com.au/take-action.html">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Fair Go Justice">
   <meta property="og:locale" content="en_AU">
@@ -436,7 +436,7 @@
           <span class="share-card-icon">🔗</span>
           <h3>Copy the Link</h3>
           <p>Paste it anywhere — Reddit, forums, email newsletters, local Facebook groups, school communities.</p>
-          <div class="share-copy" id="copyLinkText">https://fair-go-justice.github.io/fairgojustice-website/take-action.html</div>
+          <div class="share-copy" id="copyLinkText">https://fairgojustice.com.au/take-action.html</div>
           <button class="btn-share" style="--platform-color:#D4AF37;" onclick="copyLink()">📋 Copy Link</button>
         </div>
 
@@ -686,10 +686,17 @@
   <div class="copied-toast" id="toast">✅ Copied to clipboard!</div>
 
   <script>
-    // ── Counter animation
+    // ── Backend endpoint
+    const BACKEND = 'https://script.google.com/macros/s/AKfycbw2a731s8RGGDgLXMYRPbhuFoXSbTsK7siTFEVNYUrmYtzWCdwkFgxoDms_ue-z6Gpr/exec';
+
+    // ── Live signature count from Google Sheets
+    let sigCount = 2847;
+
     function animateCount(el, target, duration) {
       const start = parseInt(el.textContent.replace(/,/g,'')) || 0;
-      const step = (target - start) / (duration / 16);
+      const range = target - start;
+      if (range === 0) return;
+      const step = range / (duration / 16);
       let current = start;
       const timer = setInterval(() => {
         current += step;
@@ -701,43 +708,100 @@
       }, 16);
     }
 
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          animateCount(document.getElementById('animCount'), 2847, 2000);
-          observer.disconnect();
-        }
-      });
-    }, { threshold: 0.3 });
-    const counterEl = document.getElementById('animCount');
-    if (counterEl) observer.observe(counterEl);
+    function updateCounterUI(count) {
+      sigCount = count;
+      document.getElementById('animCount').textContent = count.toLocaleString('en-AU');
+      document.getElementById('sigCount').textContent = count.toLocaleString('en-AU');
+      const pct = Math.min(100, Math.round((count / 5000) * 100));
+      document.getElementById('progressFill').style.width = pct + '%';
+      document.querySelector('.progress-label').textContent = pct + '% of goal';
+    }
 
-    // ── Petition sign
-    let sigCount = 2847;
+    // Fetch real count on page load
+    fetch(BACKEND)
+      .then(r => r.json())
+      .then(data => {
+        if (data.count) {
+          const el = document.getElementById('animCount');
+          animateCount(el, data.count, 2000);
+          document.getElementById('sigCount').textContent = data.count.toLocaleString('en-AU');
+          const pct = Math.min(100, Math.round((data.count / 5000) * 100));
+          document.getElementById('progressFill').style.width = pct + '%';
+          document.querySelector('.progress-label').textContent = pct + '% of goal';
+          sigCount = data.count;
+        }
+      })
+      .catch(() => {
+        // Fallback: animate from hardcoded seed
+        animateCount(document.getElementById('animCount'), 2847, 2000);
+      });
+
+    // ── Petition submit → Google Sheets
     function handleSign(e) {
       e.preventDefault();
-      sigCount++;
-      document.getElementById('yourSigNum').textContent = sigCount.toLocaleString('en-AU');
+      const btn = document.querySelector('#petitionForm .btn-submit');
+      btn.textContent = '⏳ Submitting…';
+      btn.disabled = true;
+
+      const payload = {
+        type: 'petition',
+        fname: document.getElementById('fname').value,
+        lname: document.getElementById('lname').value,
+        email: document.getElementById('email').value,
+        state: document.getElementById('state').value,
+        message: document.getElementById('message').value,
+        updates: document.getElementById('updates').checked
+      };
+
+      // Fire-and-forget with no-cors (data saves to sheet even if we can't read response)
+      fetch(BACKEND, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'text/plain' },
+        body: JSON.stringify(payload)
+      }).catch(() => {});
+
+      // Update UI immediately
+      const newCount = sigCount + 1;
+      updateCounterUI(newCount);
+      document.getElementById('yourSigNum').textContent = newCount.toLocaleString('en-AU');
       document.getElementById('petitionForm').style.display = 'none';
       document.getElementById('signedMsg').style.display = 'block';
-      document.getElementById('animCount').textContent = sigCount.toLocaleString('en-AU');
-      document.getElementById('sigCount').textContent = sigCount.toLocaleString('en-AU');
-      const pct = Math.min(100, Math.round((sigCount / 5000) * 100));
-      document.getElementById('progressFill').style.width = pct + '%';
-      showToast('✍️ Signature recorded!');
+      showToast('✍️ Signature recorded — welcome to the movement!');
     }
 
-    // ── Story submit
+    // ── Story submit → Google Sheets
     function handleStory(e) {
       e.preventDefault();
+      const btn = document.querySelector('#storyForm .btn-submit');
+      btn.textContent = '⏳ Submitting…';
+      btn.disabled = true;
+
+      const payload = {
+        type: 'story',
+        name: document.getElementById('sname').value || 'Anonymous',
+        email: document.getElementById('semail').value,
+        state: document.getElementById('sstate').value,
+        category: document.getElementById('scategory').value,
+        story: document.getElementById('sstory').value,
+        consent: document.getElementById('sconsent').value
+      };
+
+      fetch(BACKEND, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'text/plain' },
+        body: JSON.stringify(payload)
+      }).catch(() => {});
+
       document.getElementById('storyForm').style.display = 'none';
       document.getElementById('storyMsg').style.display = 'block';
-      showToast('📨 Story submitted — thank you.');
+      showToast('📨 Story submitted — thank you for speaking up.');
     }
 
-    // ── Share functions
-    const siteUrl = encodeURIComponent('https://fair-go-justice.github.io/fairgojustice-website/take-action.html');
-    const siteTitle = encodeURIComponent("Fair Go Justice — Sign the Petition. Reform Australia's Justice System.");
+    // ── Share functions (all updated to live domain)
+    const LIVE_URL = 'https://fairgojustice.com.au/take-action.html';
+    const siteUrl = encodeURIComponent(LIVE_URL);
 
     function shareFacebook() {
       window.open('https://www.facebook.com/sharer/sharer.php?u=' + siteUrl, '_blank', 'width=600,height=400');
@@ -747,7 +811,7 @@
       window.open('https://twitter.com/intent/tweet?text=' + text + '&url=' + siteUrl, '_blank', 'width=600,height=400');
     }
     function shareWhatsApp() {
-      const text = encodeURIComponent("Have you heard about Fair Go Justice? The justice system needs reform and real Australians are being hurt. Sign the petition: https://fair-go-justice.github.io/fairgojustice-website/take-action.html — then listen to the music. 🇦🇺");
+      const text = encodeURIComponent("Have you heard about Fair Go Justice? The justice system needs reform and real Australians are being hurt. Sign the petition: https://fairgojustice.com.au/take-action.html — then listen to the music. 🇦🇺");
       window.open('https://wa.me/?text=' + text, '_blank');
     }
     function shareLinkedIn() {
@@ -756,7 +820,7 @@
 
     // ── Copy functions
     function copyLink() {
-      navigator.clipboard.writeText('https://fair-go-justice.github.io/fairgojustice-website/take-action.html')
+      navigator.clipboard.writeText(LIVE_URL)
         .then(() => showToast('🔗 Link copied!'));
     }
 
@@ -770,7 +834,7 @@
       const t = document.getElementById('toast');
       t.textContent = msg;
       t.style.display = 'block';
-      setTimeout(() => { t.style.display = 'none'; }, 3000);
+      setTimeout(() => { t.style.display = 'none'; }, 3500);
     }
   </script>
 </body>
