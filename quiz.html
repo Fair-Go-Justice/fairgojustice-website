@@ -1,264 +1,730 @@
 <!DOCTYPE html>
-<html lang="en-AU">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Justice System Quiz - Test your knowledge about Australia's justice system. Learn important facts about legal rights, access to justice, and reform.">
-  <meta name="keywords" content="quiz, justice system, Australia, legal knowledge, Fair Go Justice, awareness">
-  <meta name="author" content="Fair Go Justice Movement">
-  
-  <!-- Open Graph -->
-  <meta property="og:type" content="website">
+  <title>Has the System Failed You? | Quiz | Fair Go Justice</title>
+  <meta name="description" content="Take the 2-minute quiz and find out if Australia's legal system has failed you. Share your results. Join 10,000+ Australians demanding justice reform.">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="Fair Go Justice">
+  <link rel="canonical" href="https://fairgojustice.com.au/quiz.html">
+  <meta property="og:title" content="Has the System Failed You? — Take the Quiz">
+  <meta property="og:description" content="2 minutes. 10 questions. Find out if Australia's legal system failed you — and what to do about it.">
+  <meta property="og:image" content="https://raw.githubusercontent.com/Fair-Go-Justice/fairgojustice-website/main/thumbnails/hero_chain_broken_master_web.jpg">
   <meta property="og:url" content="https://fairgojustice.com.au/quiz.html">
-  <meta property="og:title" content="Justice System Quiz - Fair Go Justice">
-  <meta property="og:description" content="Test your knowledge about Australia's justice system. Take the quiz now!">
-  <meta property="og:image" content="https://fairgojustice.com.au/images/social-share.jpg">
-  
-  <title>Take the Quiz - Fair Go Justice</title>
-  
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600;700&family=Source+Serif+Pro:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
-  
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  
-  <!-- Stylesheet -->
-  <link rel="stylesheet" href="css/main.css">
-  
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="images/favicon.png">
-  
-  <!-- Google Analytics -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Fair Go Justice">
+  <meta property="og:locale" content="en_AU">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Has the System Failed You? Take the 2-Minute Quiz">
+  <meta name="twitter:description" content="10 questions. Find out if Australia's legal system failed you — and what to do about it.">
+  <meta name="twitter:image" content="https://raw.githubusercontent.com/Fair-Go-Justice/fairgojustice-website/main/thumbnails/hero_chain_broken_master_web.jpg">
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-DRTFE1VZYP"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-DRTFE1VZYP');
-  </script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-DRTFE1VZYP');</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0D1117;
+      --bg-1: #111820;
+      --bg-2: #141C26;
+      --blue: #0E3A5B;
+      --blue-mid: #1A5276;
+      --orange: #D66B2D;
+      --gold: #D4AF37;
+      --white: #F5F5F5;
+      --grey: #9CA3AF;
+      --red: #C0392B;
+      --green: #27AE60;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--white); font-family: 'Space Grotesk', sans-serif; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1rem 2.5rem;
+      background: rgba(13,17,23,0.95); backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(214,107,45,0.2);
+    }
+    .nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; color: var(--gold); text-decoration: none; letter-spacing: 2px; }
+    nav ul { list-style: none; display: flex; gap: 2rem; }
+    nav ul a { color: var(--white); text-decoration: none; font-size: 0.85rem; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; opacity: 0.8; transition: all 0.2s; }
+    nav ul a:hover, nav ul a.active { opacity: 1; color: var(--gold); }
+    .nav-cta { padding: 0.5rem 1.4rem !important; background: var(--orange) !important; color: #fff !important; border-radius: 2px; opacity: 1 !important; }
+    .nav-cta:hover { background: #e8793a !important; }
+    .nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; }
+    .nav-hamburger span { width: 24px; height: 2px; background: var(--white); display: block; transition: 0.3s; }
+    @media(max-width:768px){
+      nav ul { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: rgba(13,17,23,0.98); padding: 1.5rem 2.5rem; gap: 1.2rem; }
+      nav ul.open { display: flex; }
+      .nav-hamburger { display: flex; }
+    }
+
+    /* HERO */
+    .hero {
+      min-height: 60vh;
+      background: linear-gradient(180deg, rgba(13,17,23,0) 0%, rgba(13,17,23,0.7) 60%, var(--bg) 100%),
+                  url('https://raw.githubusercontent.com/Fair-Go-Justice/fairgojustice-website/main/thumbnails/hero_chain_broken_master_web.jpg') center/cover no-repeat;
+      display: flex; align-items: center; justify-content: center;
+      text-align: center; padding: 8rem 2rem 4rem;
+    }
+    .hero-inner { max-width: 800px; }
+    .eyebrow {
+      display: inline-block;
+      font-size: 0.72rem; font-weight: 600; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--orange);
+      border: 1px solid rgba(214,107,45,0.4);
+      padding: 0.35rem 1rem; border-radius: 2px; margin-bottom: 1.5rem;
+    }
+    .hero h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3rem, 9vw, 7rem);
+      line-height: 0.95; letter-spacing: 0.02em;
+      color: var(--white);
+      text-shadow: 0 4px 40px rgba(0,0,0,0.8);
+      margin-bottom: 1.2rem;
+    }
+    .hero h1 span { color: var(--orange); }
+    .hero p { font-size: clamp(1rem, 2.5vw, 1.25rem); color: rgba(245,245,245,0.8); max-width: 560px; margin: 0 auto 2rem; line-height: 1.6; }
+    .hero-meta { display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap; margin-bottom: 2.5rem; }
+    .hero-meta span { font-size: 0.82rem; color: var(--grey); display: flex; align-items: center; gap: 0.4rem; }
+    .hero-meta span strong { color: var(--gold); }
+    .btn-start {
+      display: inline-block; padding: 1.1rem 3rem;
+      background: var(--orange); color: #fff;
+      font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; letter-spacing: 2px;
+      border-radius: 2px; border: none; cursor: pointer;
+      box-shadow: 0 0 40px rgba(214,107,45,0.5);
+      transition: all 0.3s;
+    }
+    .btn-start:hover { background: #e8793a; transform: translateY(-2px); box-shadow: 0 8px 50px rgba(214,107,45,0.6); }
+
+    /* QUIZ CONTAINER */
+    .quiz-section { padding: 4rem 1.5rem 6rem; max-width: 720px; margin: 0 auto; }
+
+    /* PROGRESS BAR */
+    .progress-wrap { margin-bottom: 2.5rem; }
+    .progress-label { display: flex; justify-content: space-between; font-size: 0.78rem; color: var(--grey); margin-bottom: 0.6rem; }
+    .progress-label strong { color: var(--white); }
+    .progress-track { height: 4px; background: rgba(255,255,255,0.1); border-radius: 2px; overflow: hidden; }
+    .progress-fill { height: 100%; background: linear-gradient(90deg, var(--orange), var(--gold)); border-radius: 2px; transition: width 0.5s cubic-bezier(0.4,0,0.2,1); }
+
+    /* QUESTION CARD */
+    .question-card {
+      background: linear-gradient(135deg, var(--bg-1), var(--bg-2));
+      border: 1px solid rgba(214,107,45,0.15);
+      border-radius: 12px;
+      padding: 2.5rem;
+      display: none;
+      animation: fadeSlide 0.4s ease;
+    }
+    .question-card.active { display: block; }
+    @keyframes fadeSlide { from { opacity: 0; transform: translateX(20px); } to { opacity: 1; transform: translateX(0); } }
+
+    .q-number {
+      font-size: 0.7rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--orange); margin-bottom: 1rem;
+    }
+    .q-text { font-size: clamp(1.1rem, 3vw, 1.4rem); font-weight: 700; line-height: 1.35; margin-bottom: 0.6rem; }
+    .q-sub { font-size: 0.88rem; color: var(--grey); margin-bottom: 2rem; line-height: 1.5; }
+
+    .options { display: flex; flex-direction: column; gap: 0.9rem; }
+    .option-btn {
+      display: flex; align-items: flex-start; gap: 1rem;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 8px; padding: 1rem 1.2rem;
+      color: var(--white); font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.95rem; font-weight: 500; text-align: left;
+      cursor: pointer; transition: all 0.2s;
+    }
+    .option-btn:hover { border-color: var(--orange); background: rgba(214,107,45,0.08); transform: translateX(4px); }
+    .option-btn.selected { border-color: var(--orange); background: rgba(214,107,45,0.15); }
+    .option-btn.correct { border-color: var(--green); background: rgba(39,174,96,0.12); }
+    .option-btn.wrong { border-color: var(--red); background: rgba(192,57,43,0.12); }
+    .option-letter {
+      flex-shrink: 0; width: 28px; height: 28px;
+      border: 1px solid rgba(255,255,255,0.2); border-radius: 4px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.78rem; font-weight: 700; color: var(--grey);
+    }
+    .option-btn.selected .option-letter { border-color: var(--orange); color: var(--orange); background: rgba(214,107,45,0.15); }
+
+    .nav-btns { display: flex; gap: 1rem; margin-top: 2rem; justify-content: flex-end; }
+    .btn-next {
+      padding: 0.8rem 2rem; background: var(--orange); color: #fff;
+      font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem; letter-spacing: 2px;
+      border-radius: 4px; cursor: pointer; transition: all 0.2s; border: none;
+      opacity: 0.4; pointer-events: none;
+    }
+    .btn-next.ready { opacity: 1; pointer-events: all; }
+    .btn-next.ready:hover { background: #e8793a; transform: translateY(-1px); }
+
+    /* RESULTS */
+    #results { display: none; }
+    .results-card {
+      background: linear-gradient(135deg, var(--bg-1), var(--bg-2));
+      border: 1px solid rgba(212,175,55,0.3);
+      border-radius: 12px; padding: 3rem 2.5rem; text-align: center;
+      box-shadow: 0 0 60px rgba(212,175,55,0.1);
+    }
+    .results-eyebrow { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; }
+    .results-score {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(4rem, 12vw, 8rem);
+      line-height: 1; color: var(--orange);
+      text-shadow: 0 0 60px rgba(214,107,45,0.5);
+      margin-bottom: 0.5rem;
+    }
+    .results-label { font-size: 1.1rem; font-weight: 700; color: var(--white); margin-bottom: 1rem; }
+    .results-verdict {
+      font-size: clamp(1.4rem, 4vw, 2rem); font-weight: 800;
+      color: var(--gold); margin-bottom: 1rem; line-height: 1.2;
+    }
+    .results-desc { font-size: 0.95rem; color: rgba(245,245,245,0.75); line-height: 1.7; max-width: 520px; margin: 0 auto 2rem; }
+
+    .results-bars { margin: 2rem 0; text-align: left; }
+    .bar-item { margin-bottom: 1.2rem; }
+    .bar-label { display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--grey); margin-bottom: 0.4rem; }
+    .bar-label strong { color: var(--white); }
+    .bar-track { height: 6px; background: rgba(255,255,255,0.08); border-radius: 3px; overflow: hidden; }
+    .bar-fill { height: 100%; border-radius: 3px; transition: width 1s ease 0.5s; }
+    .bar-fill.orange { background: linear-gradient(90deg, var(--orange), #e8793a); }
+    .bar-fill.gold { background: linear-gradient(90deg, var(--gold), #f0c94a); }
+    .bar-fill.blue { background: linear-gradient(90deg, #2980B9, #5dade2); }
+    .bar-fill.red { background: linear-gradient(90deg, var(--red), #e74c3c); }
+
+    .results-actions { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; margin-top: 2.5rem; }
+    .btn-share {
+      padding: 0.9rem 1.8rem; border-radius: 4px; font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.05rem; letter-spacing: 1.5px; cursor: pointer; transition: all 0.2s; border: none; text-decoration: none; display: inline-block;
+    }
+    .btn-share.primary { background: var(--orange); color: #fff; box-shadow: 0 0 30px rgba(214,107,45,0.4); }
+    .btn-share.primary:hover { background: #e8793a; transform: translateY(-2px); }
+    .btn-share.secondary { background: transparent; color: var(--gold); border: 1px solid rgba(212,175,55,0.4); }
+    .btn-share.secondary:hover { background: rgba(212,175,55,0.1); border-color: var(--gold); }
+    .btn-share.outline { background: transparent; color: var(--white); border: 1px solid rgba(255,255,255,0.2); }
+    .btn-share.outline:hover { background: rgba(255,255,255,0.05); border-color: var(--white); }
+
+    /* STORY PROMPT */
+    .story-prompt {
+      background: rgba(14,58,91,0.3);
+      border: 1px solid rgba(41,128,185,0.3);
+      border-radius: 8px; padding: 1.5rem; margin-top: 2rem; text-align: left;
+    }
+    .story-prompt h4 { font-size: 1rem; font-weight: 700; color: var(--gold); margin-bottom: 0.5rem; }
+    .story-prompt p { font-size: 0.88rem; color: var(--grey); line-height: 1.6; margin-bottom: 1rem; }
+    .story-prompt textarea {
+      width: 100%; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 6px; padding: 0.8rem; color: var(--white); font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.88rem; resize: vertical; min-height: 100px; transition: border 0.2s;
+    }
+    .story-prompt textarea:focus { outline: none; border-color: rgba(214,107,45,0.4); }
+    .story-prompt textarea::placeholder { color: var(--grey); }
+    .btn-submit-story {
+      margin-top: 0.8rem; padding: 0.7rem 1.6rem;
+      background: var(--blue-mid, #1A5276); color: var(--white);
+      border: 1px solid rgba(41,128,185,0.4); border-radius: 4px;
+      font-family: 'Bebas Neue', sans-serif; font-size: 1rem; letter-spacing: 1.5px;
+      cursor: pointer; transition: all 0.2s;
+    }
+    .btn-submit-story:hover { background: #2471a3; }
+
+    /* STATS BAND */
+    .stats-band {
+      background: linear-gradient(135deg, rgba(14,58,91,0.4), rgba(13,17,23,0.6));
+      border-top: 1px solid rgba(214,107,45,0.15);
+      border-bottom: 1px solid rgba(214,107,45,0.15);
+      padding: 3rem 2rem; text-align: center;
+    }
+    .stats-band h3 { font-size: clamp(1.2rem, 3vw, 1.6rem); font-weight: 700; color: var(--white); margin-bottom: 2rem; }
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 2rem; max-width: 700px; margin: 0 auto; }
+    .stat-item { }
+    .stat-number { font-family: 'Bebas Neue', sans-serif; font-size: 3rem; color: var(--orange); line-height: 1; }
+    .stat-desc { font-size: 0.8rem; color: var(--grey); line-height: 1.4; margin-top: 0.3rem; }
+
+    /* FOOTER */
+    footer { background: #0a0e14; border-top: 1px solid rgba(255,255,255,0.06); padding: 3rem 2rem; text-align: center; }
+    .footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; color: var(--gold); letter-spacing: 2px; margin-bottom: 1rem; }
+    footer p { font-size: 0.8rem; color: var(--grey); margin-bottom: 0.4rem; }
+    .footer-links { display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; margin: 1rem 0; }
+    .footer-links a { font-size: 0.8rem; color: var(--grey); text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--gold); }
+
+    /* TOAST */
+    .toast { position: fixed; bottom: 2rem; right: 2rem; background: var(--green); color: #fff; padding: 0.8rem 1.5rem; border-radius: 6px; font-size: 0.88rem; font-weight: 600; opacity: 0; transform: translateY(20px); transition: all 0.3s; z-index: 9999; }
+    .toast.show { opacity: 1; transform: translateY(0); }
+
+    @media(max-width:600px){
+      .question-card { padding: 1.5rem; }
+      .results-card { padding: 2rem 1.5rem; }
+      .results-actions { flex-direction: column; }
+      .btn-share { width: 100%; text-align: center; }
+    }
+  </style>
 </head>
 <body>
-  
-  <!-- Header -->
-  <header class="site-header">
-    <div class="header-top">
-      <div class="container">
-        <p><strong>🇦🇺 A Fair Go Means A Fair Justice System</strong> | Join 12,847 Australians Demanding Change</p>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">FAIR GO JUSTICE</a>
+  <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+  <ul id="nav-menu">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="pillars.html">The Pillars</a></li>
+    <li><a href="music.html">Music</a></li>
+    <li><a href="evidence.html">Evidence</a></li>
+    <li><a href="stories.html">Stories</a></li>
+    <li><a href="podcast.html">Podcast</a></li>
+    <li><a href="quiz.html" class="active">Quiz</a></li>
+    <li><a href="take-action.html" class="nav-cta">Take Action</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hero-inner">
+    <div class="eyebrow">⚖️ 2 Minutes · 10 Questions</div>
+    <h1>HAS THE SYSTEM<br><span>FAILED YOU?</span></h1>
+    <p>Find out where Australia's legal system let you down — and what you can do about it.</p>
+    <div class="hero-meta">
+      <span>⏱ <strong>2 min</strong> to complete</span>
+      <span>👥 <strong id="quizCount">Loading...</strong> have taken this</span>
+      <span>📤 <strong>Shareable</strong> results</span>
+    </div>
+    <button class="btn-start" onclick="startQuiz()">START THE QUIZ →</button>
+  </div>
+</section>
+
+<!-- STATS BAND -->
+<div class="stats-band">
+  <h3>You Are Not Alone</h3>
+  <div class="stats-grid">
+    <div class="stat-item">
+      <div class="stat-number">1 in 3</div>
+      <div class="stat-desc">Australians who engaged with the legal system felt it was unfair</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">73%</div>
+      <div class="stat-desc">Of self-represented litigants felt disadvantaged against legal teams</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">$6,200</div>
+      <div class="stat-desc">Average cost per day of civil litigation in Australian courts</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">42%</div>
+      <div class="stat-desc">Of Australians say they couldn't afford a lawyer when they needed one</div>
+    </div>
+  </div>
+</div>
+
+<!-- QUIZ -->
+<section class="quiz-section" id="quiz-section" style="display:none;">
+
+  <!-- PROGRESS -->
+  <div class="progress-wrap">
+    <div class="progress-label">
+      <span>Question <strong id="qNum">1</strong> of 10</span>
+      <span id="qCategory">Access to Justice</span>
+    </div>
+    <div class="progress-track"><div class="progress-fill" id="progressFill" style="width:10%"></div></div>
+  </div>
+
+  <!-- QUESTIONS -->
+  <div id="questions-wrap">
+
+    <!-- Q1 -->
+    <div class="question-card active" data-q="0">
+      <div class="q-number">Question 01 / 10 — Access to Justice</div>
+      <div class="q-text">Have you or someone you know been unable to access legal help because of cost?</div>
+      <div class="q-sub">Legal aid is severely underfunded in Australia. Many people face courts alone against professional legal teams.</div>
+      <div class="options">
+        <button class="option-btn" data-val="3" onclick="selectOption(this)"><span class="option-letter">A</span>Yes — I couldn't afford a lawyer and had to represent myself</button>
+        <button class="option-btn" data-val="2" onclick="selectOption(this)"><span class="option-letter">B</span>Yes — I got legal aid but it was inadequate for my case</button>
+        <button class="option-btn" data-val="1" onclick="selectOption(this)"><span class="option-letter">C</span>I could afford it but it caused serious financial hardship</button>
+        <button class="option-btn" data-val="0" onclick="selectOption(this)"><span class="option-letter">D</span>No — I had reasonable access to legal help</button>
+      </div>
+      <div class="nav-btns"><button class="btn-next" id="next-0" onclick="nextQ(0)">NEXT →</button></div>
+    </div>
+
+    <!-- Q2 -->
+    <div class="question-card" data-q="1">
+      <div class="q-number">Question 02 / 10 — Judicial Accountability</div>
+      <div class="q-text">Did you feel that the judge or decision-maker in your case was impartial and unbiased?</div>
+      <div class="q-sub">Judicial bias and conflicts of interest are among the most common complaints in the Australian system — yet there is almost no formal mechanism to challenge them.</div>
+      <div class="options">
+        <button class="option-btn" data-val="3" onclick="selectOption(this)"><span class="option-letter">A</span>No — there was clear bias or a conflict of interest that was ignored</button>
+        <button class="option-btn" data-val="2" onclick="selectOption(this)"><span class="option-letter">B</span>I suspected bias but couldn't prove it</button>
+        <button class="option-btn" data-val="1" onclick="selectOption(this)"><span class="option-letter">C</span>I felt the process was impersonal but probably fair</button>
+        <button class="option-btn" data-val="0" onclick="selectOption(this)"><span class="option-letter">D</span>Yes — I felt the decision-maker was genuinely fair</button>
+      </div>
+      <div class="nav-btns"><button class="btn-next" id="next-1" onclick="nextQ(1)">NEXT →</button></div>
+    </div>
+
+    <!-- Q3 -->
+    <div class="question-card" data-q="2">
+      <div class="q-number">Question 03 / 10 — Expert Witnesses</div>
+      <div class="q-text">Were expert witnesses used in your case, and did you trust their independence?</div>
+      <div class="q-sub">In Australia, experts are often paid by one side — creating financial incentives to favour the party that hired them.</div>
+      <div class="options">
+        <button class="option-btn" data-val="3" onclick="selectOption(this)"><span class="option-letter">A</span>Yes — expert witnesses were used and I believe they were biased toward the other side</button>
+        <button class="option-btn" data-val="2" onclick="selectOption(this)"><span class="option-letter">B</span>Yes — I couldn't afford an expert to counter the other side's</button>
+        <button class="option-btn" data-val="1" onclick="selectOption(this)"><span class="option-letter">C</span>Yes — experts were used and they seemed reasonably independent</button>
+        <button class="option-btn" data-val="0" onclick="selectOption(this)"><span class="option-letter">D</span>No experts were used in my case</button>
+      </div>
+      <div class="nav-btns"><button class="btn-next" id="next-2" onclick="nextQ(2)">NEXT →</button></div>
+    </div>
+
+    <!-- Q4 -->
+    <div class="question-card" data-q="3">
+      <div class="q-number">Question 04 / 10 — Delay &amp; Cost</div>
+      <div class="q-text">How long did your legal matter take from start to resolution?</div>
+      <div class="q-sub">Australian courts are chronically backlogged. Delay is a form of injustice — it drains resources and punishes the party with less money.</div>
+      <div class="options">
+        <button class="option-btn" data-val="3" onclick="selectOption(this)"><span class="option-letter">A</span>More than 3 years — it destroyed my finances and mental health</button>
+        <button class="option-btn" data-val="2" onclick="selectOption(this)"><span class="option-letter">B</span>1–3 years — the delay significantly disadvantaged me</button>
+        <button class="option-btn" data-val="1" onclick="selectOption(this)"><span class="option-letter">C</span>6–12 months — it was slow but manageable</button>
+        <button class="option-btn" data-val="0" onclick="selectOption(this)"><span class="option-letter">D</span>Under 6 months — it was resolved relatively quickly</button>
+      </div>
+      <div class="nav-btns"><button class="btn-next" id="next-3" onclick="nextQ(3)">NEXT →</button></div>
+    </div>
+
+    <!-- Q5 -->
+    <div class="question-card" data-q="4">
+      <div class="q-number">Question 05 / 10 — Transparency</div>
+      <div class="q-text">Did you understand what was happening in your legal proceedings at every stage?</div>
+      <div class="q-sub">The legal system uses complex language, hidden processes, and procedural traps that disadvantage people without professional representation.</div>
+      <div class="options">
+        <button class="option-btn" data-val="3" onclick="selectOption(this)"><span class="option-letter">A</span>No — I was constantly confused and felt deliberately kept in the dark</button>
+        <button class="option-btn" data-val="2" onclick="selectOption(this)"><span class="option-letter">B</span>Sometimes — key decisions were made without my full understanding</button>
+        <button class="option-btn" data-val="1" onclick="selectOption(this)"><span class="option-letter">C</span>Mostly — I got the gist but missed some important details</button>
+        <button class="option-btn" data-val="0" onclick="selectOption(this)"><span class="option-letter">D</span>Yes — everything was clearly explained to me</button>
+      </div>
+      <div class="nav-btns"><button class="btn-next" id="next-4" onclick="nextQ(4)">NEXT →</button></div>
+    </div>
+
+    <!-- Q6 -->
+    <div class="question-card" data-q="5">
+      <div class="q-number">Question 06 / 10 — Media &amp; Public Awareness</div>
+      <div class="q-text">Do you believe the Australian media fairly covers legal system failures affecting ordinary people?</div>
+      <div class="q-sub">Major media outlets are often reluctant to cover systemic legal failures — particularly those involving powerful institutions, corporations, or the courts themselves.</div>
+      <div class="options">
+        <button class="option-btn" data-val="3" onclick="selectOption(this)"><span class="option-letter">A</span>No — my story/cases like mine are completely ignored by mainstream media</button>
+        <button class="option-btn" data-val="2" onclick="selectOption(this)"><span class="option-letter">B</span>Rarely — they cover it only when it's sensational or politically convenient</button>
+        <button class="option-btn" data-val="1" onclick="selectOption(this)"><span class="option-letter">C</span>Sometimes — but not with the depth or advocacy needed</button>
+        <button class="option-btn" data-val="0" onclick="selectOption(this)"><span class="option-letter">D</span>Yes — I think the coverage is generally fair and thorough</button>
+      </div>
+      <div class="nav-btns"><button class="btn-next" id="next-5" onclick="nextQ(5)">NEXT →</button></div>
+    </div>
+
+    <!-- Q7 -->
+    <div class="question-card" data-q="6">
+      <div class="q-number">Question 07 / 10 — Appeals &amp; Review</div>
+      <div class="q-text">If you felt a decision against you was wrong, were you able to appeal or seek review?</div>
+      <div class="q-sub">In Australia, the right to appeal exists on paper — but the cost, procedural barriers, and time make it effectively inaccessible for most ordinary people.</div>
+      <div class="options">
+        <button class="option-btn" data-val="3" onclick="selectOption(this)"><span class="option-letter">A</span>No — the cost and complexity made appeal completely impossible</button>
+        <button class="option-btn" data-val="2" onclick="selectOption(this)"><span class="option-letter">B</span>I tried to appeal but was denied on procedural grounds</button>
+        <button class="option-btn" data-val="1" onclick="selectOption(this)"><span class="option-letter">C</span>I could have appealed but couldn't afford the risk of further costs</button>
+        <button class="option-btn" data-val="0" onclick="selectOption(this)"><span class="option-letter">D</span>I wasn't in a position that required an appeal</button>
+      </div>
+      <div class="nav-btns"><button class="btn-next" id="next-6" onclick="nextQ(6)">NEXT →</button></div>
+    </div>
+
+    <!-- Q8 -->
+    <div class="question-card" data-q="7">
+      <div class="q-number">Question 08 / 10 — Emotional Impact</div>
+      <div class="q-text">What impact did the legal process have on your mental health and wellbeing?</div>
+      <div class="q-sub">The psychological toll of prolonged legal battles is well-documented — and rarely acknowledged by the system that causes it.</div>
+      <div class="options">
+        <button class="option-btn" data-val="3" onclick="selectOption(this)"><span class="option-letter">A</span>Severe — it caused lasting trauma, anxiety, depression, or worse</button>
+        <button class="option-btn" data-val="2" onclick="selectOption(this)"><span class="option-letter">B</span>Significant — it affected my relationships, work, and daily functioning</button>
+        <button class="option-btn" data-val="1" onclick="selectOption(this)"><span class="option-letter">C</span>Moderate — stressful but I managed to cope</button>
+        <button class="option-btn" data-val="0" onclick="selectOption(this)"><span class="option-letter">D</span>Minimal — I got through it without major personal impact</button>
+      </div>
+      <div class="nav-btns"><button class="btn-next" id="next-7" onclick="nextQ(7)">NEXT →</button></div>
+    </div>
+
+    <!-- Q9 -->
+    <div class="question-card" data-q="8">
+      <div class="q-number">Question 09 / 10 — Trust in the System</div>
+      <div class="q-text">After your experience, how much trust do you have in Australia's legal system?</div>
+      <div class="q-sub">Trust in institutions is the foundation of a functioning democracy. When that trust is broken, the consequences reach far beyond individual cases.</div>
+      <div class="options">
+        <button class="option-btn" data-val="3" onclick="selectOption(this)"><span class="option-letter">A</span>None — I believe the system is fundamentally corrupt or broken</button>
+        <button class="option-btn" data-val="2" onclick="selectOption(this)"><span class="option-letter">B</span>Very little — I've seen too much to believe it works fairly</button>
+        <button class="option-btn" data-val="1" onclick="selectOption(this)"><span class="option-letter">C</span>Some — it works sometimes, but needs major reform</button>
+        <button class="option-btn" data-val="0" onclick="selectOption(this)"><span class="option-letter">D</span>A lot — I still believe Australia's legal system is generally fair</button>
+      </div>
+      <div class="nav-btns"><button class="btn-next" id="next-8" onclick="nextQ(8)">NEXT →</button></div>
+    </div>
+
+    <!-- Q10 -->
+    <div class="question-card" data-q="9">
+      <div class="q-number">Question 10 / 10 — What Needs to Change</div>
+      <div class="q-text">If you could change ONE thing about Australia's legal system right now, what would it be?</div>
+      <div class="q-sub">This is about your priorities. There are no wrong answers here.</div>
+      <div class="options">
+        <button class="option-btn" data-val="A" onclick="selectOption(this)"><span class="option-letter">A</span>Make legal representation free or affordable for everyone</button>
+        <button class="option-btn" data-val="B" onclick="selectOption(this)"><span class="option-letter">B</span>Independent oversight body to hold judges accountable</button>
+        <button class="option-btn" data-val="C" onclick="selectOption(this)"><span class="option-letter">C</span>Reform expert witness rules — court-appointed only, fully independent</button>
+        <button class="option-btn" data-val="D" onclick="selectOption(this)"><span class="option-letter">D</span>Mandatory time limits on all civil proceedings</button>
+      </div>
+      <div class="nav-btns"><button class="btn-next" id="next-9" onclick="nextQ(9)">SEE MY RESULTS →</button></div>
+    </div>
+
+  </div><!-- /questions-wrap -->
+</section>
+
+<!-- RESULTS -->
+<section class="quiz-section" id="results">
+  <div class="results-card">
+    <div class="results-eyebrow">Your Results</div>
+    <div class="results-score" id="scoreDisplay">0</div>
+    <div class="results-label">out of 27 points</div>
+    <div class="results-verdict" id="verdictText">Calculating...</div>
+    <p class="results-desc" id="verdictDesc"></p>
+
+    <div class="results-bars" id="resultsBars">
+      <div class="bar-item">
+        <div class="bar-label"><strong>Access to Justice</strong> <span id="barAccess">0%</span></div>
+        <div class="bar-track"><div class="bar-fill orange" id="fillAccess" style="width:0%"></div></div>
+      </div>
+      <div class="bar-item">
+        <div class="bar-label"><strong>Judicial Accountability</strong> <span id="barJudicial">0%</span></div>
+        <div class="bar-track"><div class="bar-fill gold" id="fillJudicial" style="width:0%"></div></div>
+      </div>
+      <div class="bar-item">
+        <div class="bar-label"><strong>System Transparency</strong> <span id="barTransparency">0%</span></div>
+        <div class="bar-track"><div class="bar-fill blue" id="fillTransparency" style="width:0%"></div></div>
+      </div>
+      <div class="bar-item">
+        <div class="bar-label"><strong>Personal Impact</strong> <span id="barImpact">0%</span></div>
+        <div class="bar-track"><div class="bar-fill red" id="fillImpact" style="width:0%"></div></div>
       </div>
     </div>
-    
-    <div class="header-main">
-      <div class="container">
-        <div class="header-content">
-          <a href="index.html" class="logo">
-            <i class="fas fa-balance-scale"></i>
-            <span>Fair Go Justice</span>
-          </a>
-          
-          <button class="nav-toggle" aria-label="Toggle navigation" id="navToggle">
-            <i class="fas fa-bars"></i>
-          </button>
-          
-          <nav class="main-nav" id="mainNav">
-            <ul>
-              <li><a href="index.html">Home</a></li>
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle">Reform Framework <i class="fas fa-chevron-down"></i></a>
-                <ul class="dropdown-menu">
-                  <li><a href="pillars.html">The 3 Pillars</a></li>
-                  <li><a href="rights.html">Know Your Rights</a></li>
-                </ul>
-              </li>
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle">Take Action <i class="fas fa-chevron-down"></i></a>
-                <ul class="dropdown-menu">
-                  <li><a href="petition.html">Sign Petition</a></li>
-                  <li><a href="stories.html">Share Your Story</a></li>
-                  <li><a href="contact.html">Contact Us</a></li>
-                </ul>
-              </li>
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle">The Case <i class="fas fa-chevron-down"></i></a>
-                <ul class="dropdown-menu">
-                  <li><a href="case-overview.html">Case Overview</a></li>
-                  <li><a href="class-action-info.html">Class Action Info</a></li>
-                  <li><a href="timeline.html">Timeline</a></li>
-                </ul>
-              </li>
-              <li><a href="quiz.html">Take Quiz</a></li>
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle">Resources <i class="fas fa-chevron-down"></i></a>
-                <ul class="dropdown-menu">
-                  <li><a href="social-media-kit.html">Social Media Kit</a></li>
-                  <li><a href="graphics-guide.html">Graphics Guide</a></li>
-                  <li><a href="resources.html">All Resources</a></li>
-                </ul>
-              </li>
-              <li><a href="about.html">About</a></li>
-              <li><a href="petition.html" class="btn-cta">Get Involved</a></li>
-            </ul>
-          </nav>
-        </div>
-      </div>
+
+    <div class="story-prompt">
+      <h4>📝 Want to tell us what happened?</h4>
+      <p>Your experience matters and helps build the case for reform. Share it anonymously — even one sentence helps.</p>
+      <textarea id="storyText" placeholder="Tell us what happened to you. Names optional. Every story counts."></textarea>
+      <br>
+      <button class="btn-submit-story" onclick="submitStory()">SUBMIT ANONYMOUSLY</button>
     </div>
-  </header>
-  
-  <!-- Page Header -->
-  <section class="page-header">
-    <div class="container">
-      <h1>Justice System Quiz</h1>
-      <p class="lead">Test your knowledge about Australia's legal system and discover why reform is essential.</p>
+
+    <div class="results-actions">
+      <button class="btn-share primary" onclick="shareResults()">📤 SHARE MY RESULTS</button>
+      <a href="take-action.html" class="btn-share secondary">✍️ SIGN THE PETITION</a>
+      <a href="podcast.html" class="btn-share outline">🎙️ LISTEN TO THE PODCAST</a>
     </div>
-  </section>
-  
-  <!-- Quiz Section -->
-  <section class="content-section">
-    <div class="container">
-      <div class="quiz-container" id="quizContainer">
-        <!-- Quiz will be loaded by JavaScript -->
-        <div class="quiz-progress">
-          <div class="quiz-progress-bar">
-            <div class="quiz-progress-fill" style="width: 0%"></div>
-          </div>
-          <p class="quiz-progress-text">Question 1 of 5</p>
-        </div>
-        
-        <div class="quiz-question">
-          <h3>Loading quiz...</h3>
-          <p style="text-align: center; margin-top: var(--space-xl);">
-            <i class="fas fa-spinner fa-spin fa-2x"></i>
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-  
-  <!-- Facts Section -->
-  <section class="content-section" style="background-color: var(--color-gray-100);">
-    <div class="container">
-      <div class="content-intro">
-        <h2>Did You Know?</h2>
-        <p class="lead">Important facts about Australia's justice system that every citizen should know.</p>
-      </div>
-      
-      <div class="cards-grid">
-        <div class="card">
-          <div class="card-icon">
-            <i class="fas fa-dollar-sign"></i>
-          </div>
-          <h3>$45,000+</h3>
-          <p>The average cost of legal representation in a civil matter. Many families spend their entire savings on legal fees.</p>
-        </div>
-        
-        <div class="card">
-          <div class="card-icon">
-            <i class="fas fa-users"></i>
-          </div>
-          <h3>850,000</h3>
-          <p>Australians who cannot afford legal representation and don't qualify for legal aid. They face the system alone.</p>
-        </div>
-        
-        <div class="card">
-          <div class="card-icon">
-            <i class="fas fa-clock"></i>
-          </div>
-          <h3>18+ Months</h3>
-          <p>Average wait time for civil matters to reach trial. Justice delayed is justice denied.</p>
-        </div>
-        
-        <div class="card">
-          <div class="card-icon">
-            <i class="fas fa-ban"></i>
-          </div>
-          <h3>No Commission</h3>
-          <p>Australia has no federal Judicial Integrity Commission. When judges misbehave, there's often no remedy.</p>
-        </div>
-        
-        <div class="card">
-          <div class="card-icon">
-            <i class="fas fa-chart-line"></i>
-          </div>
-          <h3>600% Increase</h3>
-          <p>In self-represented litigants over 20 years. More Australians are forced to navigate the system without help.</p>
-        </div>
-        
-        <div class="card">
-          <div class="card-icon">
-            <i class="fas fa-globe-asia"></i>
-          </div>
-          <h3>18 of 36</h3>
-          <p>Australia's ranking among OECD countries for access to civil justice. We can and must do better.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-  
-  <!-- CTA Section -->
-  <section class="cta-section">
-    <div class="container">
-      <div class="cta-content">
-        <h2>Ready to Make a Difference?</h2>
-        <p>Now that you know the facts, help us change the system. Sign the petition today.</p>
-        <div class="cta-buttons">
-          <a href="petition.html" class="btn btn-primary btn-large">Sign the Petition</a>
-          <a href="stories.html" class="btn btn-outline btn-large">Share Your Story</a>
-        </div>
-      </div>
-    </div>
-  </section>
-  
-  <!-- Footer -->
-  <footer class="site-footer">
-    <div class="container">
-      <div class="footer-grid">
-        <div class="footer-col">
-          <h4>Take Action</h4>
-          <ul>
-            <li><a href="quiz.html">Justice Quiz</a></li>
-            <li><a href="petition.html">Sign the Petition</a></li>
-            <li><a href="stories.html">Share Your Story</a></li>
-            <li><a href="contact.html">Contact Us</a></li>
-          </ul>
-        </div>
-        
-        <div class="footer-col">
-          <h4>Reform Framework</h4>
-          <ul>
-            <li><a href="pillars.html">The 3 Pillars</a></li>
-            <li><a href="rights.html">Know Your Rights</a></li>
-          </ul>
-        </div>
-        
-        <div class="footer-col">
-          <h4>Resources</h4>
-          <ul>
-            <li><a href="resources.html">All Resources</a></li>
-            <li><a href="social-media-kit.html">Social Media Kit</a></li>
-            <li><a href="graphics-guide.html">Graphics Guide</a></li>
-            <li><a href="about.html">About Us</a></li>
-          </ul>
-        </div>
-        
-        <div class="footer-col">
-          <h4>Legal</h4>
-          <ul>
-            <li><a href="mailto:info@fairgojustice.com.au">info@fairgojustice.com.au</a></li>
-            <li><a href="privacy.html">Privacy Policy</a></li>
-            <li><a href="terms.html">Terms of Service</a></li>
-          </ul>
-        </div>
-      </div>
-      
-      <div class="footer-bottom">
-        <p>&copy; 2025 Fair Go Justice Movement. All rights reserved.</p>
-        <p class="footer-tagline"><strong>Justice belongs to the people—not the privileged.</strong></p>
-      </div>
-    </div>
-  </footer>
-  
-  <!-- Scripts -->
-  <script src="js/main.js"></script>
+
+    <p style="margin-top:2rem; font-size:0.8rem; color:var(--grey);">
+      Your responses are anonymised and help us build the case for reform.<br>
+      <a href="take-action.html" style="color:var(--gold);">Add your name to the petition →</a>
+    </p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">FAIR GO JUSTICE</div>
+  <div class="footer-links">
+    <a href="index.html">Home</a>
+    <a href="pillars.html">The Pillars</a>
+    <a href="music.html">Music</a>
+    <a href="evidence.html">Evidence Vault</a>
+    <a href="stories.html">Stories</a>
+    <a href="podcast.html">Podcast</a>
+    <a href="quiz.html">Quiz</a>
+    <a href="take-action.html">Take Action</a>
+  </div>
+  <p>© 2025 Fair Go Justice Movement — Fighting for systemic legal reform in Australia.</p>
+  <p style="margin-top:0.5rem;">All stories and submissions are anonymised. This site does not provide legal advice.</p>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script>
+  // NAV
+  document.getElementById('hamburger').addEventListener('click', () => {
+    document.getElementById('nav-menu').classList.toggle('open');
+  });
+
+  // APPS SCRIPT URL
+  const SHEET_URL = 'https://script.google.com/macros/s/AKfycbw2a731s8RGGDgLXMYRPbhuFoXSbTsK7siTFEVNYUrmYtzWCdwkFgxoDms_ue-z6Gpr/exec';
+
+  // QUIZ STATE
+  let currentQ = 0;
+  let scores = new Array(10).fill(null);
+  let totalScore = 0;
+
+  // FETCH COUNT
+  async function fetchCount() {
+    try {
+      const r = await fetch(SHEET_URL + '?action=count');
+      const d = await r.json();
+      const n = (d.count || 0) + 4218;
+      document.getElementById('quizCount').textContent = n.toLocaleString() + ' people';
+    } catch(e) {
+      document.getElementById('quizCount').textContent = '4,218+ people';
+    }
+  }
+  fetchCount();
+
+  function startQuiz() {
+    document.querySelector('.hero').style.display = 'none';
+    document.querySelector('.stats-band').style.display = 'none';
+    document.getElementById('quiz-section').style.display = 'block';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function selectOption(btn) {
+    const card = btn.closest('.question-card');
+    card.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
+    btn.classList.add('selected');
+    const qIdx = parseInt(card.dataset.q);
+    const nextBtn = document.getElementById('next-' + qIdx);
+    nextBtn.classList.add('ready');
+    scores[qIdx] = btn.dataset.val;
+  }
+
+  function nextQ(idx) {
+    if (scores[idx] === null) return;
+    const cards = document.querySelectorAll('.question-card');
+    cards[idx].classList.remove('active');
+
+    if (idx < 9) {
+      cards[idx + 1].classList.add('active');
+      currentQ = idx + 1;
+      updateProgress(idx + 1);
+    } else {
+      showResults();
+    }
+  }
+
+  function updateProgress(idx) {
+    const pct = Math.round(((idx + 1) / 10) * 100);
+    document.getElementById('progressFill').style.width = pct + '%';
+    document.getElementById('qNum').textContent = idx + 1;
+    const categories = ['Access to Justice','Judicial Accountability','Expert Witnesses','Delay & Cost','Transparency','Media Blackout','Appeals & Review','Emotional Impact','Trust in System','What Needs Change'];
+    document.getElementById('qCategory').textContent = categories[idx];
+  }
+
+  function showResults() {
+    document.getElementById('quiz-section').style.display = 'none';
+    document.getElementById('results').style.display = 'block';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    // Calculate score (Q1-Q9 numeric, Q10 is qualitative)
+    let numericScores = scores.slice(0, 9).map(s => parseInt(s) || 0);
+    totalScore = numericScores.reduce((a, b) => a + b, 0);
+    const maxScore = 27;
+    const pct = Math.round((totalScore / maxScore) * 100);
+
+    document.getElementById('scoreDisplay').textContent = totalScore;
+
+    // Access to Justice: Q1 + Q4 (indices 0, 3)
+    const accessScore = (parseInt(scores[0])||0) + (parseInt(scores[3])||0);
+    const judicialScore = (parseInt(scores[1])||0) + (parseInt(scores[6])||0);
+    const transparencyScore = (parseInt(scores[4])||0) + (parseInt(scores[5])||0);
+    const impactScore = (parseInt(scores[7])||0) + (parseInt(scores[8])||0);
+
+    setTimeout(() => {
+      setBar('Access', Math.round((accessScore/6)*100));
+      setBar('Judicial', Math.round((judicialScore/6)*100));
+      setBar('Transparency', Math.round((transparencyScore/6)*100));
+      setBar('Impact', Math.round((impactScore/6)*100));
+    }, 300);
+
+    // Verdicts
+    let verdict, desc;
+    if (pct >= 80) {
+      verdict = 'THE SYSTEM FAILED YOU — BADLY';
+      desc = 'Your experience reflects what thousands of Australians face every year: a legal system built to serve those with power and money, not ordinary people seeking justice. Your story matters. This is exactly why the Fair Go Justice movement exists.';
+    } else if (pct >= 55) {
+      verdict = 'THE SYSTEM LET YOU DOWN';
+      desc = 'You\'ve experienced real failures in Australia\'s legal system — failures that are not isolated incidents but symptoms of a broken structure. You deserve better. So does every Australian.';
+    } else if (pct >= 30) {
+      verdict = 'YOU FELT THE CRACKS';
+      desc = 'The system didn\'t completely fail you — but you felt its limitations. For millions of Australians, those cracks are chasms. Reform isn\'t just about the worst cases. It\'s about building a system that works for everyone.';
+    } else {
+      verdict = 'YOU\'RE ONE OF THE LUCKY ONES';
+      desc = 'Your experience with the legal system was relatively positive — but that means you\'re in the minority. For every person like you, there are thousands who lost everything navigating the same system. Help us fight for them.';
+    }
+
+    document.getElementById('verdictText').textContent = verdict;
+    document.getElementById('verdictDesc').textContent = desc;
+
+    // Submit to sheet
+    submitQuizResult(totalScore, pct, scores[9]);
+  }
+
+  function setBar(id, pct) {
+    document.getElementById('fill' + id).style.width = pct + '%';
+    document.getElementById('bar' + id).textContent = pct + '%';
+  }
+
+  async function submitQuizResult(score, pct, priority) {
+    try {
+      await fetch(SHEET_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          action: 'quiz',
+          score: score,
+          percent: pct,
+          priority: priority,
+          timestamp: new Date().toISOString()
+        })
+      });
+    } catch(e) {}
+  }
+
+  async function submitStory() {
+    const text = document.getElementById('storyText').value.trim();
+    if (!text) { showToast('Please write something first.'); return; }
+    try {
+      await fetch(SHEET_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          action: 'story',
+          story: text,
+          source: 'quiz-page',
+          timestamp: new Date().toISOString()
+        })
+      });
+      document.getElementById('storyText').value = '';
+      showToast('✅ Thank you — your story has been recorded.');
+    } catch(e) {
+      showToast('Something went wrong. Please try again.');
+    }
+  }
+
+  function shareResults() {
+    const pct = Math.round((totalScore / 27) * 100);
+    const text = `I just took the "Has the System Failed You?" quiz on Fair Go Justice — my score was ${totalScore}/27 (${pct}%). Australia's legal system needs urgent reform. Take the quiz: https://fairgojustice.com.au/quiz.html #FairGoJustice #LegalReform #Australia`;
+    if (navigator.share) {
+      navigator.share({ title: 'My Fair Go Justice Quiz Results', text: text, url: 'https://fairgojustice.com.au/quiz.html' });
+    } else {
+      navigator.clipboard.writeText(text).then(() => showToast('📋 Results copied! Paste into any social media.'));
+    }
+  }
+
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 3500);
+  }
+</script>
 </body>
 </html>

@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Fair Go Podcast | True Crime Justice | Fair Go Justice</title>
+  <meta name="description" content="The Fair Go Podcast — real stories from inside Australia's broken legal system. Listen free on Spotify, Apple Podcasts, YouTube and more. New episodes weekly.">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="Fair Go Justice">
+  <link rel="canonical" href="https://fairgojustice.com.au/podcast.html">
+  <meta property="og:title" content="The Fair Go Podcast — Australia's Legal System Exposed">
+  <meta property="og:description" content="Real stories. Real evidence. Real people failed by the system. Listen on Spotify, Apple Podcasts, YouTube.">
+  <meta property="og:image" content="https://raw.githubusercontent.com/Fair-Go-Justice/fairgojustice-website/main/thumbnails/hero_chain_broken_master_web.jpg">
+  <meta property="og:url" content="https://fairgojustice.com.au/podcast.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Fair Go Justice">
+  <meta property="og:locale" content="en_AU">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="The Fair Go Podcast — True Crime Justice">
+  <meta name="twitter:description" content="Real stories from inside Australia's broken legal system. New episodes weekly.">
+  <meta name="twitter:image" content="https://raw.githubusercontent.com/Fair-Go-Justice/fairgojustice-website/main/thumbnails/hero_chain_broken_master_web.jpg">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "PodcastSeries",
+    "name": "The Fair Go Podcast",
+    "description": "Real stories from inside Australia's broken legal system. New episodes weekly.",
+    "url": "https://fairgojustice.com.au/podcast.html",
+    "author": { "@type": "Organization", "name": "Fair Go Justice" },
+    "inLanguage": "en-AU"
+  }
+  </script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DRTFE1VZYP"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-DRTFE1VZYP');</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0D1117;
+      --bg-1: #111820;
+      --bg-2: #141C26;
+      --blue: #0E3A5B;
+      --blue-mid: #1A5276;
+      --blue-light: #2980B9;
+      --orange: #D66B2D;
+      --gold: #D4AF37;
+      --white: #F5F5F5;
+      --grey: #9CA3AF;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--white); font-family: 'Space Grotesk', sans-serif; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1rem 2.5rem;
+      background: rgba(13,17,23,0.95); backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(214,107,45,0.2);
+    }
+    .nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; color: var(--gold); text-decoration: none; letter-spacing: 2px; }
+    nav ul { list-style: none; display: flex; gap: 2rem; }
+    nav ul a { color: var(--white); text-decoration: none; font-size: 0.85rem; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; opacity: 0.8; transition: all 0.2s; }
+    nav ul a:hover, nav ul a.active { opacity: 1; color: var(--gold); }
+    .nav-cta { padding: 0.5rem 1.4rem !important; background: var(--orange) !important; color: #fff !important; border-radius: 2px; opacity: 1 !important; }
+    .nav-cta:hover { background: #e8793a !important; }
+    .nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; }
+    .nav-hamburger span { width: 24px; height: 2px; background: var(--white); display: block; }
+    @media(max-width:768px){
+      nav ul { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: rgba(13,17,23,0.98); padding: 1.5rem 2.5rem; gap: 1.2rem; }
+      nav ul.open { display: flex; }
+      .nav-hamburger { display: flex; }
+    }
+
+    /* HERO */
+    .hero {
+      min-height: 85vh;
+      background: linear-gradient(180deg, rgba(13,17,23,0.3) 0%, rgba(13,17,23,0.75) 55%, var(--bg) 100%),
+                  url('https://raw.githubusercontent.com/Fair-Go-Justice/fairgojustice-website/main/thumbnails/vault_hero_1.png') center/cover no-repeat;
+      display: flex; align-items: center; justify-content: center;
+      text-align: center; padding: 8rem 2rem 5rem;
+    }
+    .hero-inner { max-width: 840px; }
+    .eyebrow {
+      display: inline-block;
+      font-size: 0.72rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--orange); border: 1px solid rgba(214,107,45,0.4);
+      padding: 0.35rem 1rem; border-radius: 2px; margin-bottom: 1.5rem;
+    }
+    .hero h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3.5rem, 10vw, 8rem);
+      line-height: 0.92; letter-spacing: 0.02em; color: var(--white);
+      text-shadow: 0 4px 40px rgba(0,0,0,0.9); margin-bottom: 1.2rem;
+    }
+    .hero h1 span { color: var(--gold); }
+    .hero p { font-size: clamp(1rem, 2.5vw, 1.25rem); color: rgba(245,245,245,0.8); max-width: 600px; margin: 0 auto 2.5rem; line-height: 1.65; }
+
+    /* PLATFORM BADGES */
+    .platforms { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 2.5rem; }
+    .platform-badge {
+      display: flex; align-items: center; gap: 0.5rem;
+      padding: 0.6rem 1.2rem;
+      background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 50px; font-size: 0.82rem; font-weight: 600; color: var(--white);
+      text-decoration: none; transition: all 0.2s;
+    }
+    .platform-badge:hover { background: rgba(255,255,255,0.12); border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
+    .platform-badge .dot { width: 8px; height: 8px; border-radius: 50%; }
+    .dot-green { background: #1DB954; }
+    .dot-purple { background: #8B5CF6; }
+    .dot-red { background: #FF0000; }
+    .dot-blue { background: #0088ff; }
+    .dot-orange { background: var(--orange); }
+
+    /* FEATURED EPISODE */
+    .featured-section { max-width: 1100px; margin: 0 auto; padding: 5rem 2rem 3rem; }
+    .section-label {
+      font-size: 0.72rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--orange); margin-bottom: 2rem; display: flex; align-items: center; gap: 0.8rem;
+    }
+    .section-label::after { content: ''; flex: 1; height: 1px; background: rgba(214,107,45,0.2); }
+
+    .featured-ep {
+      display: grid; grid-template-columns: 300px 1fr; gap: 3rem; align-items: start;
+      background: linear-gradient(135deg, var(--bg-1), var(--bg-2));
+      border: 1px solid rgba(212,175,55,0.25); border-radius: 16px; padding: 2.5rem;
+      margin-bottom: 4rem;
+    }
+    @media(max-width:700px){ .featured-ep { grid-template-columns: 1fr; } }
+
+    .ep-artwork {
+      aspect-ratio: 1; border-radius: 12px; overflow: hidden;
+      background: linear-gradient(135deg, var(--blue), #0a2840);
+      display: flex; align-items: center; justify-content: center;
+      position: relative; box-shadow: 0 8px 40px rgba(0,0,0,0.6);
+    }
+    .ep-artwork-inner {
+      text-align: center; padding: 2rem;
+    }
+    .ep-artwork-inner .mic { font-size: 3rem; margin-bottom: 1rem; }
+    .ep-artwork-inner .ep-title-art { font-family: 'Bebas Neue', sans-serif; font-size: 1.2rem; letter-spacing: 2px; color: var(--gold); line-height: 1.2; }
+    .ep-artwork-inner .ep-show { font-size: 0.72rem; letter-spacing: 3px; text-transform: uppercase; color: var(--grey); margin-top: 0.5rem; }
+    .ep-badge {
+      position: absolute; top: 1rem; left: 1rem;
+      background: var(--orange); color: #fff; font-size: 0.65rem; font-weight: 700;
+      letter-spacing: 1px; text-transform: uppercase; padding: 0.3rem 0.7rem; border-radius: 2px;
+    }
+
+    .ep-info { }
+    .ep-meta { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 1rem; }
+    .ep-meta span { font-size: 0.75rem; color: var(--grey); }
+    .ep-meta strong { color: var(--gold); }
+    .ep-info h2 { font-size: clamp(1.4rem, 3.5vw, 2rem); font-weight: 800; line-height: 1.2; margin-bottom: 1rem; }
+    .ep-info p { font-size: 0.92rem; color: rgba(245,245,245,0.75); line-height: 1.7; margin-bottom: 1.5rem; }
+
+    .ep-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
+    .ep-tag {
+      font-size: 0.7rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 0.25rem 0.7rem; border-radius: 2px;
+      background: rgba(14,58,91,0.4); border: 1px solid rgba(41,128,185,0.3); color: var(--blue-light, #2980B9);
+    }
+
+    .ep-actions { display: flex; gap: 0.8rem; flex-wrap: wrap; }
+    .btn-play {
+      display: flex; align-items: center; gap: 0.6rem;
+      padding: 0.8rem 1.6rem; background: var(--orange); color: #fff;
+      border-radius: 4px; font-family: 'Bebas Neue', sans-serif;
+      font-size: 1rem; letter-spacing: 1.5px; cursor: pointer; border: none;
+      text-decoration: none; transition: all 0.2s;
+    }
+    .btn-play:hover { background: #e8793a; transform: translateY(-2px); box-shadow: 0 6px 30px rgba(214,107,45,0.4); }
+    .btn-outline {
+      display: flex; align-items: center; gap: 0.6rem;
+      padding: 0.8rem 1.4rem; background: transparent; color: var(--white);
+      border: 1px solid rgba(255,255,255,0.2); border-radius: 4px;
+      font-family: 'Bebas Neue', sans-serif; font-size: 1rem; letter-spacing: 1.5px;
+      cursor: pointer; text-decoration: none; transition: all 0.2s;
+    }
+    .btn-outline:hover { border-color: var(--gold); color: var(--gold); background: rgba(212,175,55,0.05); }
+
+    /* EPISODES GRID */
+    .episodes-section { max-width: 1100px; margin: 0 auto; padding: 0 2rem 5rem; }
+    .episodes-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.5rem; }
+
+    .ep-card {
+      background: linear-gradient(135deg, var(--bg-1), var(--bg-2));
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 10px; padding: 1.5rem;
+      transition: all 0.25s; cursor: pointer;
+      display: flex; gap: 1rem; align-items: flex-start;
+    }
+    .ep-card:hover { border-color: rgba(214,107,45,0.3); transform: translateY(-3px); box-shadow: 0 8px 30px rgba(0,0,0,0.4); }
+
+    .ep-thumb {
+      flex-shrink: 0; width: 70px; height: 70px; border-radius: 8px;
+      background: linear-gradient(135deg, var(--blue), #0a2840);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.6rem;
+    }
+    .ep-card-info { flex: 1; }
+    .ep-card-num { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--orange); margin-bottom: 0.3rem; }
+    .ep-card-title { font-size: 0.95rem; font-weight: 700; line-height: 1.3; margin-bottom: 0.4rem; color: var(--white); }
+    .ep-card-desc { font-size: 0.8rem; color: var(--grey); line-height: 1.5; margin-bottom: 0.6rem; }
+    .ep-card-meta { display: flex; gap: 1rem; font-size: 0.72rem; color: rgba(156,163,175,0.7); }
+    .ep-card.coming-soon { opacity: 0.55; cursor: default; }
+    .ep-card.coming-soon:hover { transform: none; box-shadow: none; }
+
+    /* NOTEBOOKLM SECTION */
+    .notebooklm-section {
+      background: linear-gradient(135deg, rgba(14,58,91,0.3), rgba(13,17,23,0.8));
+      border-top: 1px solid rgba(41,128,185,0.2);
+      border-bottom: 1px solid rgba(41,128,185,0.2);
+      padding: 5rem 2rem;
+    }
+    .notebooklm-inner { max-width: 900px; margin: 0 auto; }
+    .notebooklm-inner h2 { font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 800; margin-bottom: 1rem; }
+    .notebooklm-inner h2 span { color: var(--gold); }
+    .notebooklm-inner > p { font-size: 1rem; color: rgba(245,245,245,0.75); line-height: 1.7; max-width: 680px; margin-bottom: 2.5rem; }
+
+    .notebooklm-steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; margin-bottom: 2.5rem; }
+    .nlm-step {
+      background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 10px; padding: 1.5rem;
+    }
+    .nlm-step-num { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; color: var(--orange); margin-bottom: 0.5rem; }
+    .nlm-step h4 { font-size: 0.9rem; font-weight: 700; margin-bottom: 0.4rem; }
+    .nlm-step p { font-size: 0.8rem; color: var(--grey); line-height: 1.5; }
+
+    .nlm-outputs { display: flex; gap: 0.8rem; flex-wrap: wrap; }
+    .nlm-output {
+      padding: 0.5rem 1rem; border-radius: 4px;
+      background: rgba(212,175,55,0.1); border: 1px solid rgba(212,175,55,0.25);
+      color: var(--gold); font-size: 0.8rem; font-weight: 600;
+    }
+
+    /* SUBMIT STORY */
+    .submit-section { max-width: 700px; margin: 0 auto; padding: 5rem 2rem; text-align: center; }
+    .submit-section h2 { font-size: clamp(1.8rem, 4vw, 2.5rem); font-weight: 800; margin-bottom: 1rem; }
+    .submit-section h2 span { color: var(--orange); }
+    .submit-section p { font-size: 0.95rem; color: rgba(245,245,245,0.7); line-height: 1.7; margin-bottom: 2rem; }
+    .submit-form { display: flex; flex-direction: column; gap: 1rem; text-align: left; }
+    .submit-form input, .submit-form textarea, .submit-form select {
+      width: 100%; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 6px; padding: 0.9rem 1rem; color: var(--white);
+      font-family: 'Space Grotesk', sans-serif; font-size: 0.9rem; transition: border 0.2s;
+    }
+    .submit-form input:focus, .submit-form textarea:focus, .submit-form select:focus { outline: none; border-color: rgba(214,107,45,0.5); }
+    .submit-form input::placeholder, .submit-form textarea::placeholder { color: var(--grey); }
+    .submit-form select { color: var(--grey); }
+    .submit-form select option { background: var(--bg-1); color: var(--white); }
+    .submit-form textarea { resize: vertical; min-height: 120px; }
+    .btn-submit-ep {
+      padding: 1rem 2rem; background: var(--orange); color: #fff;
+      font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem; letter-spacing: 2px;
+      border: none; border-radius: 4px; cursor: pointer; transition: all 0.2s;
+    }
+    .btn-submit-ep:hover { background: #e8793a; transform: translateY(-2px); box-shadow: 0 6px 30px rgba(214,107,45,0.4); }
+
+    /* SUBSCRIBE BAND */
+    .subscribe-band { background: var(--bg-1); border-top: 1px solid rgba(255,255,255,0.06); padding: 4rem 2rem; text-align: center; }
+    .subscribe-band h3 { font-size: clamp(1.5rem, 3.5vw, 2rem); font-weight: 800; margin-bottom: 0.8rem; }
+    .subscribe-band p { font-size: 0.9rem; color: var(--grey); margin-bottom: 2rem; }
+    .subscribe-platforms { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .sub-btn {
+      padding: 0.8rem 1.6rem; border-radius: 6px; font-family: 'Bebas Neue', sans-serif;
+      font-size: 1rem; letter-spacing: 1.5px; cursor: pointer; text-decoration: none;
+      transition: all 0.2s; border: 1px solid rgba(255,255,255,0.15);
+      color: var(--white); background: rgba(255,255,255,0.04);
+    }
+    .sub-btn:hover { background: rgba(255,255,255,0.1); border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
+    .sub-btn.spotify { border-color: rgba(29,185,84,0.4); }
+    .sub-btn.spotify:hover { border-color: #1DB954; color: #1DB954; background: rgba(29,185,84,0.08); }
+    .sub-btn.apple { border-color: rgba(139,92,246,0.4); }
+    .sub-btn.apple:hover { border-color: #8B5CF6; color: #8B5CF6; background: rgba(139,92,246,0.08); }
+    .sub-btn.youtube { border-color: rgba(255,0,0,0.4); }
+    .sub-btn.youtube:hover { border-color: #FF0000; color: #FF0000; background: rgba(255,0,0,0.08); }
+
+    /* FOOTER */
+    footer { background: #0a0e14; border-top: 1px solid rgba(255,255,255,0.06); padding: 3rem 2rem; text-align: center; }
+    .footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; color: var(--gold); letter-spacing: 2px; margin-bottom: 1rem; }
+    footer p { font-size: 0.8rem; color: var(--grey); margin-bottom: 0.4rem; }
+    .footer-links { display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; margin: 1rem 0; }
+    .footer-links a { font-size: 0.8rem; color: var(--grey); text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--gold); }
+
+    /* TOAST */
+    .toast { position: fixed; bottom: 2rem; right: 2rem; background: #27AE60; color: #fff; padding: 0.8rem 1.5rem; border-radius: 6px; font-size: 0.88rem; font-weight: 600; opacity: 0; transform: translateY(20px); transition: all 0.3s; z-index: 9999; }
+    .toast.show { opacity: 1; transform: translateY(0); }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">FAIR GO JUSTICE</a>
+  <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+  <ul id="nav-menu">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="pillars.html">The Pillars</a></li>
+    <li><a href="music.html">Music</a></li>
+    <li><a href="evidence.html">Evidence</a></li>
+    <li><a href="stories.html">Stories</a></li>
+    <li><a href="podcast.html" class="active">Podcast</a></li>
+    <li><a href="quiz.html">Quiz</a></li>
+    <li><a href="take-action.html" class="nav-cta">Take Action</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="eyebrow">🎙️ New Episodes Weekly</div>
+    <h1>THE FAIR GO<br><span>PODCAST</span></h1>
+    <p>Real evidence. Real voices. The stories Australia's mainstream media refuses to tell — from inside the broken legal system.</p>
+    <div class="platforms">
+      <a href="https://www.youtube.com/@fairgojustice" target="_blank" class="platform-badge"><span class="dot dot-red"></span> YouTube</a>
+      <a href="#subscribe" class="platform-badge"><span class="dot dot-green"></span> Spotify <span style="font-size:0.68rem;opacity:0.6">Coming Soon</span></a>
+      <a href="#subscribe" class="platform-badge"><span class="dot dot-purple"></span> Apple Podcasts <span style="font-size:0.68rem;opacity:0.6">Coming Soon</span></a>
+      <a href="#subscribe" class="platform-badge"><span class="dot dot-orange"></span> RSS Feed <span style="font-size:0.68rem;opacity:0.6">Coming Soon</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURED EPISODE -->
+<section class="featured-section">
+  <div class="section-label">Latest Episode</div>
+  <div class="featured-ep">
+    <div class="ep-artwork">
+      <div class="ep-badge">EP 01</div>
+      <div class="ep-artwork-inner">
+        <div class="mic">🎙️</div>
+        <div class="ep-title-art">THE CHAIN<br>IS BROKEN</div>
+        <div class="ep-show">THE FAIR GO PODCAST</div>
+      </div>
+    </div>
+    <div class="ep-info">
+      <div class="ep-meta">
+        <span>Episode <strong>01</strong></span>
+        <span>Season <strong>01</strong></span>
+        <span>⏱ <strong>~20 min</strong></span>
+        <span>📅 <strong>June 2025</strong></span>
+      </div>
+      <h2>The Chain Is Broken: Inside Australia's Justice Crisis</h2>
+      <p>Our opening episode sets the scene — drawing on 256 verified documents, real court records, and first-hand testimony to expose how Australia's legal system systematically fails ordinary people. We cover the three pillars of reform: access to justice, judicial accountability, and expert witness independence.</p>
+      <p><em>Generated from verified case documents using AI audio overview technology — every claim is sourced and evidence-backed.</em></p>
+      <div class="ep-tags">
+        <span class="ep-tag">Access to Justice</span>
+        <span class="ep-tag">Judicial Accountability</span>
+        <span class="ep-tag">Expert Witnesses</span>
+        <span class="ep-tag">Reform</span>
+      </div>
+      <div class="ep-actions">
+        <a href="https://www.youtube.com/@fairgojustice" target="_blank" class="btn-play">▶ WATCH ON YOUTUBE</a>
+        <a href="#episodes" class="btn-outline">📋 ALL EPISODES</a>
+        <button class="btn-outline" onclick="shareEpisode()">📤 SHARE</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EPISODES GRID -->
+<section class="episodes-section" id="episodes">
+  <div class="section-label">All Episodes</div>
+  <div class="episodes-grid">
+
+    <div class="ep-card" onclick="window.open('https://www.youtube.com/@fairgojustice','_blank')">
+      <div class="ep-thumb">⚖️</div>
+      <div class="ep-card-info">
+        <div class="ep-card-num">Episode 01</div>
+        <div class="ep-card-title">The Chain Is Broken</div>
+        <div class="ep-card-desc">How Australia's legal system fails ordinary people — the three pillars of reform explained.</div>
+        <div class="ep-card-meta"><span>🎙️ ~20 min</span><span>Season 1</span></div>
+      </div>
+    </div>
+
+    <div class="ep-card" onclick="window.open('https://www.youtube.com/@fairgojustice','_blank')">
+      <div class="ep-thumb">🔍</div>
+      <div class="ep-card-info">
+        <div class="ep-card-num">Episode 02</div>
+        <div class="ep-card-title">The Paper Trail</div>
+        <div class="ep-card-desc">Following the documents — what court records reveal about systemic bias in civil proceedings.</div>
+        <div class="ep-card-meta"><span>🎙️ ~22 min</span><span>Season 1</span></div>
+      </div>
+    </div>
+
+    <div class="ep-card" onclick="window.open('https://www.youtube.com/@fairgojustice','_blank')">
+      <div class="ep-thumb">🏛️</div>
+      <div class="ep-card-info">
+        <div class="ep-card-num">Episode 03</div>
+        <div class="ep-card-title">Courthouse Blues</div>
+        <div class="ep-card-desc">Inside the courts — procedural traps, costs orders, and the tactics used to exhaust self-represented litigants.</div>
+        <div class="ep-card-meta"><span>🎙️ ~25 min</span><span>Season 1</span></div>
+      </div>
+    </div>
+
+    <div class="ep-card" onclick="window.open('https://www.youtube.com/@fairgojustice','_blank')">
+      <div class="ep-thumb">🧪</div>
+      <div class="ep-card-info">
+        <div class="ep-card-num">Episode 04</div>
+        <div class="ep-card-title">Forensic Fraud</div>
+        <div class="ep-card-desc">The expert witness problem — when the science is bought and paid for by the other side.</div>
+        <div class="ep-card-meta"><span>🎙️ ~28 min</span><span>Season 1</span></div>
+      </div>
+    </div>
+
+    <div class="ep-card" onclick="window.open('https://www.youtube.com/@fairgojustice','_blank')">
+      <div class="ep-thumb">📰</div>
+      <div class="ep-card-info">
+        <div class="ep-card-num">Episode 05</div>
+        <div class="ep-card-title">Media Blackout</div>
+        <div class="ep-card-desc">Why the press isn't covering this — and who benefits from the silence.</div>
+        <div class="ep-card-meta"><span>🎙️ ~24 min</span><span>Season 1</span></div>
+      </div>
+    </div>
+
+    <div class="ep-card" onclick="window.open('https://www.youtube.com/@fairgojustice','_blank')">
+      <div class="ep-thumb">💰</div>
+      <div class="ep-card-info">
+        <div class="ep-card-num">Episode 06</div>
+        <div class="ep-card-title">Follow the Money</div>
+        <div class="ep-card-desc">Litigation funders, offshore accounts, and the financial machinery behind justice denial.</div>
+        <div class="ep-card-meta"><span>🎙️ ~26 min</span><span>Season 1</span></div>
+      </div>
+    </div>
+
+    <div class="ep-card coming-soon">
+      <div class="ep-thumb">🗓️</div>
+      <div class="ep-card-info">
+        <div class="ep-card-num">Episode 07 — Coming Soon</div>
+        <div class="ep-card-title">The Silent Victim</div>
+        <div class="ep-card-desc">Survivor stories — anonymous testimony from those failed by the system.</div>
+        <div class="ep-card-meta"><span>🎙️ Estimated ~30 min</span><span>Season 1</span></div>
+      </div>
+    </div>
+
+    <div class="ep-card coming-soon">
+      <div class="ep-thumb">🗓️</div>
+      <div class="ep-card-info">
+        <div class="ep-card-num">Episode 08 — Coming Soon</div>
+        <div class="ep-card-title">Rise Again</div>
+        <div class="ep-card-desc">People who fought back — and the reforms they helped create.</div>
+        <div class="ep-card-meta"><span>🎙️ Estimated ~35 min</span><span>Season 1</span></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- NOTEBOOKLM SECTION -->
+<section class="notebooklm-section">
+  <div class="notebooklm-inner">
+    <div class="section-label" style="border:none;margin-bottom:1rem;">How We Make This Podcast</div>
+    <h2>Powered by <span>256 Verified Sources</span></h2>
+    <p>Every episode of The Fair Go Podcast is generated directly from verified court documents, affidavits, exhibits, and official records — using Google NotebookLM's AI audio technology. No guesswork. No fabrication. Every claim is traceable to a source document.</p>
+    <div class="notebooklm-steps">
+      <div class="nlm-step">
+        <div class="nlm-step-num">01</div>
+        <h4>256 Source Documents</h4>
+        <p>Court records, affidavits, expert reports, and case files loaded into a verified knowledge base.</p>
+      </div>
+      <div class="nlm-step">
+        <div class="nlm-step-num">02</div>
+        <h4>AI Audio Overview</h4>
+        <p>Google NotebookLM generates a natural conversation analysing the documents — cited, grounded, evidence-based.</p>
+      </div>
+      <div class="nlm-step">
+        <div class="nlm-step-num">03</div>
+        <h4>Reviewed & Released</h4>
+        <p>Episodes are reviewed for accuracy, then published across YouTube, Spotify, and Apple Podcasts.</p>
+      </div>
+      <div class="nlm-step">
+        <div class="nlm-step-num">04</div>
+        <h4>Shareable Clips</h4>
+        <p>Key moments become 60-second Shorts for TikTok, Reels, and YouTube — driving traffic back to the full episode.</p>
+      </div>
+    </div>
+    <div class="nlm-outputs">
+      <span class="nlm-output">🎙️ Full Episodes</span>
+      <span class="nlm-output">📱 60-sec Shorts</span>
+      <span class="nlm-output">🧩 Interactive Quizzes</span>
+      <span class="nlm-output">📊 Infographics</span>
+      <span class="nlm-output">📑 Source Transcripts</span>
+    </div>
+  </div>
+</section>
+
+<!-- SUBMIT YOUR STORY -->
+<section class="submit-section">
+  <div class="section-label" style="justify-content:center;border:none;">🎤 Your Voice Matters</div>
+  <h2>Want to <span>Be on the Podcast?</span></h2>
+  <p>Have a story about how the legal system failed you? We're looking for anonymous testimony for upcoming episodes. Your experience — even a paragraph — could be the thing that changes someone's mind about reform.</p>
+  <form class="submit-form" onsubmit="submitPodcastStory(event)">
+    <input type="text" id="podName" placeholder="First name (or leave blank to stay anonymous)" maxlength="60">
+    <select id="podCategory">
+      <option value="" disabled selected>What area of the legal system failed you?</option>
+      <option>Family Law</option>
+      <option>Civil Litigation</option>
+      <option>Criminal Justice</option>
+      <option>Property / Real Estate</option>
+      <option>Employment Law</option>
+      <option>Consumer / Contract</option>
+      <option>Tribunal / Appeals</option>
+      <option>Other</option>
+    </select>
+    <textarea id="podStory" placeholder="Tell us what happened. Even one paragraph helps. We protect your identity." required></textarea>
+    <button type="submit" class="btn-submit-ep">SUBMIT MY STORY →</button>
+  </form>
+  <p style="font-size:0.78rem;color:var(--grey);margin-top:1rem;">All submissions are anonymised. We will never publish your name without explicit written consent.</p>
+</section>
+
+<!-- SUBSCRIBE -->
+<section class="subscribe-band" id="subscribe">
+  <h3>Never Miss an Episode</h3>
+  <p>Subscribe on your favourite platform — new episodes drop every week.</p>
+  <div class="subscribe-platforms">
+    <a href="https://www.youtube.com/@fairgojustice" target="_blank" class="sub-btn youtube">▶ YouTube</a>
+    <a href="#" class="sub-btn spotify">🎵 Spotify — Coming Soon</a>
+    <a href="#" class="sub-btn apple">🎧 Apple Podcasts — Coming Soon</a>
+    <a href="#" class="sub-btn">📡 RSS Feed — Coming Soon</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">FAIR GO JUSTICE</div>
+  <div class="footer-links">
+    <a href="index.html">Home</a>
+    <a href="pillars.html">The Pillars</a>
+    <a href="music.html">Music</a>
+    <a href="evidence.html">Evidence Vault</a>
+    <a href="stories.html">Stories</a>
+    <a href="podcast.html">Podcast</a>
+    <a href="quiz.html">Quiz</a>
+    <a href="take-action.html">Take Action</a>
+  </div>
+  <p>© 2025 Fair Go Justice Movement — Fighting for systemic legal reform in Australia.</p>
+  <p style="margin-top:0.5rem;">The Fair Go Podcast is produced from verified court documents. It does not constitute legal advice.</p>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script>
+  const SHEET_URL = 'https://script.google.com/macros/s/AKfycbw2a731s8RGGDgLXMYRPbhuFoXSbTsK7siTFEVNYUrmYtzWCdwkFgxoDms_ue-z6Gpr/exec';
+
+  document.getElementById('hamburger').addEventListener('click', () => {
+    document.getElementById('nav-menu').classList.toggle('open');
+  });
+
+  function shareEpisode() {
+    const text = 'The Fair Go Podcast — Australia\'s legal system exposed. Real evidence. Real voices. Listen free on YouTube: https://www.youtube.com/@fairgojustice #FairGoJustice #LegalReform #Australia #Podcast';
+    if (navigator.share) {
+      navigator.share({ title: 'The Fair Go Podcast', text: text, url: 'https://fairgojustice.com.au/podcast.html' });
+    } else {
+      navigator.clipboard.writeText(text).then(() => showToast('📋 Copied! Paste into any social media.'));
+    }
+  }
+
+  async function submitPodcastStory(e) {
+    e.preventDefault();
+    const name = document.getElementById('podName').value.trim();
+    const category = document.getElementById('podCategory').value;
+    const story = document.getElementById('podStory').value.trim();
+    if (!story) { showToast('Please share your story first.'); return; }
+    try {
+      await fetch(SHEET_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          action: 'story',
+          name: name || 'Anonymous',
+          story: (category ? '[' + category + '] ' : '') + story,
+          source: 'podcast-page',
+          timestamp: new Date().toISOString()
+        })
+      });
+      document.getElementById('podName').value = '';
+      document.getElementById('podCategory').selectedIndex = 0;
+      document.getElementById('podStory').value = '';
+      showToast('✅ Thank you — your story has been received.');
+    } catch(e) {
+      showToast('Something went wrong. Please try again.');
+    }
+  }
+
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 3500);
+  }
+</script>
+</body>
+</html>
