@@ -291,12 +291,183 @@
   #search-input:focus { border-color: var(--purple); }
   #search-input::placeholder { color: rgba(255,255,255,.25); }
 
+  /* ─── CLUSTER PANEL ─── */
+  #cluster-panel {
+    position: fixed; inset: 0; z-index: 400;
+    display: flex; align-items: center; justify-content: center;
+    background: rgba(0,0,0,.75);
+    backdrop-filter: blur(10px);
+    opacity: 0; pointer-events: none;
+    transition: opacity .3s;
+  }
+  #cluster-panel.visible { opacity: 1; pointer-events: all; }
+  .cp-panel {
+    background: linear-gradient(135deg, rgba(13,17,23,.98) 0%, rgba(14,58,91,.5) 100%);
+    border: 1px solid rgba(255,255,255,.1);
+    border-radius: 10px;
+    width: min(680px, 96vw);
+    max-height: 88vh;
+    overflow: hidden;
+    display: flex; flex-direction: column;
+    box-shadow: 0 0 80px rgba(0,0,0,.9);
+    animation: cardIn .35s cubic-bezier(.22,1,.36,1);
+  }
+  .cp-header {
+    padding: 28px 28px 20px;
+    border-bottom: 1px solid rgba(255,255,255,.07);
+    position: relative;
+    flex-shrink: 0;
+  }
+  .cp-cluster-id {
+    font-size: 9px; letter-spacing: .3em; color: rgba(255,255,255,.3);
+    margin-bottom: 6px;
+  }
+  .cp-title {
+    font-family: 'Bebas Neue', Arial, sans-serif;
+    font-size: clamp(24px,4vw,38px);
+    letter-spacing: .12em;
+    margin-bottom: 8px;
+  }
+  .cp-pillar {
+    font-size: 10px; letter-spacing: .2em; color: rgba(255,255,255,.35);
+  }
+  .cp-close {
+    position: absolute; top: 18px; right: 18px;
+    width: 32px; height: 32px;
+    background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12);
+    border-radius: 50%; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; color: rgba(255,255,255,.5);
+    transition: all .2s;
+  }
+  .cp-close:hover { background: rgba(255,0,0,.25); color: #fff; }
+  .cp-songs {
+    overflow-y: auto; padding: 20px 28px;
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  @media(max-width:540px){ .cp-songs { grid-template-columns: 1fr; } }
+  .cp-song-row {
+    display: flex; align-items: center; gap: 10px;
+    padding: 10px 12px; border-radius: 5px;
+    background: rgba(255,255,255,.03);
+    border: 1px solid rgba(255,255,255,.06);
+    cursor: pointer; transition: all .2s;
+    position: relative;
+  }
+  .cp-song-row:hover { background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.18); }
+  .cp-song-num { font-size: 8px; letter-spacing: .2em; color: rgba(255,255,255,.2); min-width: 22px; }
+  .cp-song-name { font-size: 11px; letter-spacing: .1em; color: rgba(255,255,255,.75); flex: 1; line-height: 1.3; }
+  .cp-song-sig { font-size: 8px; color: #D4AF37; }
+  .cp-song-yt {
+    font-size: 8px; letter-spacing: .15em; padding: 3px 8px;
+    border: 1px solid currentColor; border-radius: 2px;
+    text-decoration: none; transition: all .15s;
+    flex-shrink: 0;
+  }
+  .cp-song-yt:hover { opacity: .7; }
+  .cp-footer {
+    padding: 16px 28px;
+    border-top: 1px solid rgba(255,255,255,.07);
+    display: flex; gap: 10px; flex-shrink: 0;
+  }
+  .cp-footer-btn {
+    font-size: 9px; letter-spacing: .2em; padding: 9px 18px;
+    border-radius: 3px; border: 1px solid; cursor: pointer;
+    transition: all .2s; text-decoration: none; background: transparent;
+    font-family: inherit;
+  }
+
+  /* ─── SIGNATURE WORLD OVERLAY ─── */
+  #world-overlay {
+    position: fixed; inset: 0; z-index: 500;
+    opacity: 0; pointer-events: none;
+    transition: opacity .4s;
+    overflow: hidden;
+  }
+  #world-overlay.visible { opacity: 1; pointer-events: all; }
+  #world-canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .wo-content {
+    position: relative; z-index: 10;
+    height: 100%; display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    padding: 40px 24px;
+    text-align: center;
+  }
+  .wo-eyebrow {
+    font-size: 9px; letter-spacing: .4em; color: rgba(255,255,255,.4);
+    margin-bottom: 12px; text-transform: uppercase;
+  }
+  .wo-title {
+    font-family: 'Bebas Neue', Arial, sans-serif;
+    font-size: clamp(36px, 7vw, 80px);
+    letter-spacing: .15em; line-height: 1;
+    margin-bottom: 20px;
+  }
+  .wo-world-name {
+    font-size: clamp(12px,2vw,18px); letter-spacing: .3em;
+    opacity: .6; margin-bottom: 32px;
+    text-transform: uppercase;
+  }
+  .wo-desc {
+    max-width: 580px;
+    font-size: clamp(12px,1.5vw,15px); line-height: 1.8;
+    color: rgba(255,255,255,.65);
+    border-left: 3px solid currentColor;
+    padding-left: 20px; text-align: left;
+    margin-bottom: 40px;
+  }
+  .wo-actions { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; }
+  .wo-btn {
+    font-size: 10px; letter-spacing: .25em; padding: 12px 24px;
+    border: 1px solid; border-radius: 3px; cursor: pointer;
+    transition: all .2s; text-decoration: none; background: transparent;
+    font-family: inherit; color: inherit;
+  }
+  .wo-btn:hover { filter: brightness(1.4); }
+  #wo-close {
+    position: fixed; top: 20px; right: 20px; z-index: 20;
+    width: 36px; height: 36px;
+    background: rgba(0,0,0,.6); border: 1px solid rgba(255,255,255,.2);
+    border-radius: 50%; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 15px; color: rgba(255,255,255,.7);
+    transition: all .2s;
+  }
+  #wo-close:hover { background: rgba(255,0,0,.3); color: #fff; }
+
+  /* ─── GATEWAY LABEL ─── */
+  .gw-label {
+    position: fixed; z-index: 120;
+    pointer-events: none;
+    opacity: 0; transition: opacity .2s;
+    transform: translate(-50%, -140%);
+  }
+  .gw-label.visible { opacity: 1; }
+  .gw-label .gwl-inner {
+    background: rgba(0,0,0,.85);
+    border: 1px solid rgba(255,255,255,.2);
+    border-radius: 4px; padding: 8px 16px;
+    text-align: center; white-space: nowrap;
+    box-shadow: 0 4px 20px rgba(0,0,0,.7);
+  }
+  .gw-label .gwl-title {
+    font-family: 'Bebas Neue', Arial, sans-serif;
+    font-size: 13px; letter-spacing: .2em;
+  }
+  .gw-label .gwl-sub {
+    font-size: 7px; letter-spacing: .3em;
+    color: rgba(255,255,255,.4); margin-top: 2px;
+  }
+
   /* ─── MOBILE ─── */
   @media(max-width:600px){
     #legend { display: none; }
     #stats-bar { gap: 16px; font-size: 9px; }
     .sc-panel { width: 98vw; }
     .sc-body { padding: 16px; }
+    .cp-header { padding: 20px; }
+    .cp-songs { padding: 12px 20px; }
   }
 </style>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -381,6 +552,41 @@
   </div>
 </div>
 
+<!-- CLUSTER PANEL -->
+<div id="cluster-panel">
+  <div class="cp-panel">
+    <div class="cp-header">
+      <div class="cp-cluster-id" id="cp-cluster-id">CLUSTER</div>
+      <div class="cp-title" id="cp-title">CLUSTER NAME</div>
+      <div class="cp-pillar" id="cp-pillar"></div>
+      <div class="cp-close" id="cp-close">✕</div>
+    </div>
+    <div class="cp-songs" id="cp-songs"></div>
+    <div class="cp-footer" id="cp-footer"></div>
+  </div>
+</div>
+
+<!-- SIGNATURE WORLD OVERLAY -->
+<div id="world-overlay">
+  <canvas id="world-canvas"></canvas>
+  <div id="wo-close">✕</div>
+  <div class="wo-content">
+    <div class="wo-eyebrow" id="wo-eyebrow">EVIDENCE VAULT · ROOM 05 · SIGNATURE WORLD</div>
+    <div class="wo-title" id="wo-title">SILENT VICTIM</div>
+    <div class="wo-world-name" id="wo-world-name">THE COURTROOM WORLD</div>
+    <div class="wo-desc" id="wo-desc"></div>
+    <div class="wo-actions" id="wo-actions"></div>
+  </div>
+</div>
+
+<!-- GATEWAY LABEL -->
+<div class="gw-label" id="gw-label">
+  <div class="gwl-inner">
+    <div class="gwl-title" id="gwl-title">ENTER CLUSTER</div>
+    <div class="gwl-sub">CLICK TO OPEN GATEWAY</div>
+  </div>
+</div>
+
 <!-- THREE.JS -->
 <canvas id="three-canvas"></canvas>
 
@@ -434,6 +640,116 @@ const COVER_MAP = {
   'caveat over home': 'cover_caveat_over_home.png',
   'debt trap': 'cover_debt_trap.png',
   'house built on sand': 'cover_house_built_on_sand.png',
+};
+
+// ═══════════════════════════════════════════════════
+// YOUTUBE ID MAP — 38 verified uploads
+// ═══════════════════════════════════════════════════
+const YT_MAP = {
+  'VEXATIOUS':               'nro_6EZx1z8',
+  'SELF-REPRESENTED':        'IpF6rtveFVU',
+  'SUPPRESSED':              'Q05AO-VzQFY',
+  'THE APPOINTED':           'x3UqqsYzTPg',
+  'BLINDSIDED: TRUTH UNCUT': 'HnnTiCk1CI0',
+  'ELDER':                   'WAXn0map22Q',
+  'FAMILY COURT BLUES':      'EqBa_TahlZg',
+  'BANKRUPTCY WEAPON':       '7skBZ5rVtpI',
+  'WE ARE NOT DONE':         '_UexLVzLSmI',
+  'CONFLICT OF INTEREST':    'Fp_j0BumjQs',
+  'COLD COMFORT':            'NeiMDNmLS6E',
+  'COSTS ORDER':             'o9Kv1NrQe-Q',
+  'DOUBLE STANDARD':         'ZlffuokZce8',
+  'FORENSIC FRAUD':          '4kb1kgaFgUs',
+  'GUARDIAN AD LITEM':       'IvfSWOPjHr4',
+  'MEDIA BLACKOUT':          'fj_hxETi6Vw',
+  'OFFSHORE ACCOUNT':        'cujaRm9wMPk',
+  'PAPER TRAIL':             '_dRFS3HIOWE',
+  'RISE AGAIN':              'nwrbaqAYaxY',
+  'SILENT VICTIM':           '0wDwcMTqeaA',
+  'COURTHOUSE BLUES':        'Y7g0bOJt380',
+  'FORCED MEDIATION':        'VMGW55n-xFk',
+  'LITIGATION FUNDER':       'LTDI8TtNXhM',
+  'ONE HUNDRED':             'ob41Im2b3I0',
+  'STAND TOGETHER':          'hKpWw0CIbpI',
+  'STATUTE OF LIMITATIONS':  'VxIxqbASYcA',
+  'SWORN TO LIE':            'oE2OxaPQTGE',
+  'THE BAILIFF':             'leI44zViGCY',
+  'THE EXPERT WITNESS':      'xhJKvNg_mXw',
+  'THE FINAL APPEAL':        'WDbt_wKsvG8',
+  'THE LONG ROAD':           'aJls0jy3qhQ',
+  'THE RECEIVER':            'pCu7zJE4k7k',
+  'THE REGISTRAR':           'UWY-Zvoar_U',
+  'THE SELECTOR':            'DBmXZgJhTO8',
+  'THE SETTLEMENT TRAP':     'rtLwEzw3rgk',
+  'THE TIPSTAFF':            'gH8F0yS_9y4',
+  'UNREGISTERED':            '3Rd4kQ2KFSM',
+  "WIDOW'S TITLE":           'cUHeLoUFqjg',
+};
+
+// ═══════════════════════════════════════════════════
+// SIGNATURE WORLD DEFINITIONS
+// ═══════════════════════════════════════════════════
+const SIGNATURE_WORLDS = {
+  'SILENT VICTIM': {
+    worldName: 'THE COURTROOM WORLD',
+    bgColors: ['#1A0000','#2D0000','#0D0000'],
+    accentColor: '#FF3B3B',
+    particles: { color: '#FF3B3B', count: 180, speed: 0.4, size: 2, fall: true },
+    overlayText: 'SEALED',
+    eyebrow: 'SUPPRESSION & SILENCE · SIGNATURE WORLD',
+    link: 'song-experience.html',
+    linkLabel: '🎵 ENTER SONG EXPERIENCE',
+    ytKey: 'SILENT VICTIM',
+    desc: 'The song that started the movement. In courtrooms across Australia, victims are told to be quiet — to accept, to move on. Silence is not consent. It is a documented condition of systemic pressure. Every sealed file is a story that was taken. Every suppressed voice is evidence.',
+  },
+  'FOLLOW THE MONEY': {
+    worldName: 'THE FINANCIAL NETWORK',
+    bgColors: ['#001A08','#002D10','#000D04'],
+    accentColor: '#00FF88',
+    particles: { color: '#00FF88', count: 220, speed: 2.5, size: 1.5, fall: false, matrix: true },
+    overlayText: '$$$',
+    eyebrow: 'FOLLOW THE MONEY · SIGNATURE WORLD',
+    link: 'song-experience.html?song=follow-the-money',
+    linkLabel: '🔍 ENTER INVESTIGATION',
+    ytKey: null,
+    desc: 'The investigative journalist\'s anthem. Every document leads to a transaction. Every transaction leads to a motive. Follow the money until the system reveals itself. Offshore accounts. Corporate shells. Financial instruments engineered for extraction. Follow the trail.',
+  },
+  'THE ARCHITECTS': {
+    worldName: 'THE BLUEPRINT INSTITUTION',
+    bgColors: ['#000A1A','#001529','#000510'],
+    accentColor: '#00BFFF',
+    particles: { color: '#00BFFF', count: 120, speed: 0.6, size: 1.5, fall: false, grid: true },
+    overlayText: 'BLUEPRINT',
+    eyebrow: 'JUDICIAL ACCOUNTABILITY · SIGNATURE WORLD',
+    link: 'song-experience.html',
+    linkLabel: '🏛 ENTER THE INSTITUTION',
+    ytKey: null,
+    desc: 'Every unjust outcome was designed. The architects of systemic failure didn\'t stumble into power — they built the structures that hold power in place. This world explores the blueprints: the procedural architecture, the appointment mechanisms, the institutional design that protects itself.',
+  },
+  'SOVEREIGN GROUND': {
+    worldName: 'THE FUTURE AUSTRALIA',
+    bgColors: ['#0D0520','#1A0A40','#050210'],
+    accentColor: '#D4AF37',
+    particles: { color: '#D4AF37', count: 200, speed: -0.8, size: 2.5, fall: true, rise: true },
+    overlayText: 'SOVEREIGN',
+    eyebrow: 'SOVEREIGN FUTURE · SIGNATURE WORLD',
+    link: 'take-action.html',
+    linkLabel: '🌏 BUILD THE FUTURE',
+    ytKey: null,
+    desc: 'This is the ground we stand on. Not the ground we were given — the ground we claim. A justice system rebuilt on transparent foundations. A sovereign Australia where institutional accountability is not a request but a requirement. The future is not a destination. It is a decision.',
+  },
+  'STAND TOGETHER': {
+    worldName: 'THE MOVEMENT WORLD',
+    bgColors: ['#0A0520','#150A35','#050218'],
+    accentColor: '#8B5CF6',
+    particles: { color: '#8B5CF6', count: 160, speed: 1, size: 2, fall: false, ring: true },
+    overlayText: 'TOGETHER',
+    eyebrow: 'SOVEREIGN FUTURE · MOVEMENT ANTHEM',
+    link: 'take-action.html',
+    linkLabel: '✊ JOIN THE MOVEMENT',
+    ytKey: 'STAND TOGETHER',
+    desc: 'Individual stories becoming collective power. The transition from isolated complaint to coordinated reform. Every person who stood up alone is part of something larger now. Stand together — because the system banks on us being divided.',
+  },
 };
 
 const CLUSTER_CONFIG = {
@@ -728,6 +1044,38 @@ CLUSTER_NAMES.forEach(cname => {
   scene.add(cLight);
 });
 
+// ── CLUSTER GATEWAYS ──────────────────────────────────
+const gatewayMeshes = []; // { mesh, ring2, clusterName }
+
+CLUSTER_NAMES.forEach(cname => {
+  const cfg = CLUSTER_CONFIG[cname];
+  const [cx, cy, cz] = cfg.center;
+
+  // Outer portal ring
+  const ringGeo = new THREE.TorusGeometry(3.8, 0.18, 12, 64);
+  const ringMat = new THREE.MeshPhongMaterial({
+    color: cfg.hex, emissive: cfg.hex, emissiveIntensity: 0.7,
+    transparent: true, opacity: 0.85
+  });
+  const ring = new THREE.Mesh(ringGeo, ringMat);
+  ring.position.set(cx, cy, cz);
+  ring.userData = { type: 'gateway', clusterName: cname };
+  scene.add(ring);
+
+  // Inner rotating ring
+  const ring2Geo = new THREE.TorusGeometry(2.8, 0.08, 8, 48);
+  const ring2Mat = new THREE.MeshPhongMaterial({
+    color: cfg.hex, emissive: cfg.hex, emissiveIntensity: 1.0,
+    transparent: true, opacity: 0.5
+  });
+  const ring2 = new THREE.Mesh(ring2Geo, ring2Mat);
+  ring2.position.set(cx, cy, cz);
+  ring2.rotation.x = Math.PI / 4;
+  scene.add(ring2);
+
+  gatewayMeshes.push({ mesh: ring, ring2, clusterName: cname, cx, cy, cz });
+});
+
 // ── SONG STARS ────────────────────────────────────────
 const songStars = []; // { mesh, data, clusterName, angle, orbitRadius, orbitSpeed, baseY }
 const raycaster = new THREE.Raycaster();
@@ -847,10 +1195,15 @@ canvas.addEventListener('mousemove', e => {
     lastMouse = { x: e.clientX, y: e.clientY };
   }
 
-  // Hover detection
+  // Hover detection — songs first, then gateways
   raycaster.setFromCamera(mouseNDC, camera);
   const meshes = songStars.map(s => s.mesh);
   const hits = raycaster.intersectObjects(meshes);
+  const gwMeshes = gatewayMeshes.map(g => g.mesh);
+  const gwHits = raycaster.intersectObjects(gwMeshes);
+  const gwLabel = document.getElementById('gw-label');
+  const gwTitle = document.getElementById('gwl-title');
+
   if (hits.length) {
     const hit = hits[0];
     const star = songStars.find(s => s.mesh === hit.object);
@@ -866,10 +1219,24 @@ canvas.addEventListener('mousemove', e => {
     hoverLabel.style.left = e.clientX + 'px';
     hoverLabel.style.top  = e.clientY + 'px';
     hoverLabel.classList.add('visible');
+    gwLabel.classList.remove('visible');
+    canvas.style.cursor = 'pointer';
+  } else if (gwHits.length) {
+    const gw = gatewayMeshes.find(g => g.mesh === gwHits[0].object);
+    if (gw) {
+      gwTitle.textContent = 'ENTER ' + gw.clusterName;
+      gwTitle.style.color = CLUSTER_CONFIG[gw.clusterName].color;
+    }
+    gwLabel.style.left = e.clientX + 'px';
+    gwLabel.style.top  = e.clientY + 'px';
+    gwLabel.classList.add('visible');
+    hoverLabel.classList.remove('visible');
+    if (hoveredStar) { hoveredStar.mesh.material.emissiveIntensity = hoveredStar.isSignature ? 0.9 : 0.5; hoveredStar = null; }
     canvas.style.cursor = 'pointer';
   } else {
     if (hoveredStar) { hoveredStar.mesh.material.emissiveIntensity = hoveredStar.isSignature ? 0.9 : 0.5; hoveredStar = null; }
     hoverLabel.classList.remove('visible');
+    gwLabel.classList.remove('visible');
     canvas.style.cursor = 'default';
   }
 });
@@ -887,10 +1254,17 @@ canvas.addEventListener('wheel', e => {
 
 canvas.addEventListener('click', e => {
   raycaster.setFromCamera(mouseNDC, camera);
+  // Check song stars first
   const hits = raycaster.intersectObjects(songStars.map(s => s.mesh));
   if (hits.length) {
     const star = songStars.find(s => s.mesh === hits[0].object);
-    if (star) { openCard(star); playClick(); }
+    if (star) { openCard(star); playClick(); return; }
+  }
+  // Check gateways
+  const gwHits = raycaster.intersectObjects(gatewayMeshes.map(g => g.mesh));
+  if (gwHits.length) {
+    const gw = gatewayMeshes.find(g => g.mesh === gwHits[0].object);
+    if (gw) { openClusterPanel(gw.clusterName); playClick(); }
   }
 });
 
@@ -913,6 +1287,8 @@ canvas.addEventListener('touchend', e => {
     const x = ((e.changedTouches[0].clientX - rect.left) / rect.width) * 2 - 1;
     const y = -((e.changedTouches[0].clientY - rect.top) / rect.height) * 2 + 1;
     raycaster.setFromCamera(new THREE.Vector2(x, y), camera);
+    const gwHitsT = raycaster.intersectObjects(gatewayMeshes.map(g => g.mesh));
+    if (gwHitsT.length) { const gw = gatewayMeshes.find(g => g.mesh === gwHitsT[0].object); if(gw){ openClusterPanel(gw.clusterName); playClick(); return; } }
     const hits = raycaster.intersectObjects(songStars.map(s => s.mesh));
     if (hits.length) { const star = songStars.find(s => s.mesh === hits[0].object); if (star) { openCard(star); playClick(); } }
   }
@@ -997,13 +1373,30 @@ function openCard(star) {
   m.innerHTML = '♬ FULL CATALOGUE';
   acts.appendChild(m);
 
-  // YouTube (for songs that have it)
-  if (s.id) {
+  // YouTube — direct video link if we have an ID
+  const ytId = YT_MAP[s.title];
+  if (ytId) {
     const yt = document.createElement('a');
-    yt.href = `https://www.youtube.com/@fairgojustice`; yt.target = '_blank';
+    yt.href = `https://www.youtube.com/watch?v=${ytId}`; yt.target = '_blank';
     yt.className = 'sc-btn sc-btn-danger';
-    yt.innerHTML = '▶ YOUTUBE';
+    yt.style.borderColor = '#FF0000'; yt.style.color = '#FF0000';
+    yt.innerHTML = '▶ WATCH ON YOUTUBE';
     acts.appendChild(yt);
+  }
+
+  // Signature World button
+  const worldDef = SIGNATURE_WORLDS[s.title];
+  if (worldDef) {
+    const wb = document.createElement('button');
+    wb.className = 'sc-btn';
+    wb.style.cssText = `border-color:${cfg.color};color:${cfg.color};background:${cfg.color}22;font-weight:600;`;
+    wb.innerHTML = `★ ENTER ${worldDef.worldName}`;
+    wb.addEventListener('click', (e) => {
+      e.preventDefault();
+      closeCard();
+      openWorld(s.title, worldDef, cfg.color, s.desc);
+    });
+    acts.appendChild(wb);
   }
 
   // Vault
@@ -1023,7 +1416,7 @@ function openCard(star) {
   if (star.isSignature) {
     const sig = document.createElement('div');
     sig.style.cssText = 'font-size:9px;letter-spacing:.2em;color:#D4AF37;margin-top:8px;width:100%;';
-    sig.textContent = '★ SIGNATURE WORLD — IMMERSIVE EXPERIENCE AVAILABLE';
+    sig.textContent = '★ SIGNATURE WORLD ACTIVE — CLICK ENTER WORLD ABOVE';
     acts.appendChild(sig);
   }
 
@@ -1035,6 +1428,219 @@ function closeCard() {
   document.getElementById('song-card').classList.remove('visible');
   activeCard = null;
 }
+
+// ═══════════════════════════════════════════════════
+// CLUSTER PANEL
+// ═══════════════════════════════════════════════════
+function openClusterPanel(clusterName) {
+  const cfg = CLUSTER_CONFIG[clusterName];
+  const panel = document.getElementById('cluster-panel');
+  const color = cfg.color;
+
+  document.getElementById('cp-cluster-id').textContent = 'EVIDENCE VAULT · ROOM 05 · CLUSTER GATEWAY';
+  document.getElementById('cp-title').textContent = clusterName;
+  document.getElementById('cp-title').style.color = color;
+  document.getElementById('cp-pillar').textContent = cfg.pillar;
+
+  // Song list
+  const songsEl = document.getElementById('cp-songs');
+  songsEl.innerHTML = '';
+  let globalIdx = 0;
+  CLUSTER_NAMES.forEach(cn => { if(cn === clusterName) return; globalIdx += CLUSTER_CONFIG[cn].songs.length; });
+  // Actually just use cluster-local index
+  cfg.songs.forEach((s, i) => {
+    const row = document.createElement('div');
+    row.className = 'cp-song-row';
+    const isSig = s.signature || SIGNATURE_TITLES.has(s.title);
+    const ytId = YT_MAP[s.title];
+    row.innerHTML = `
+      <div class="cp-song-num">${String(i+1).padStart(2,'0')}</div>
+      <div class="cp-song-name" style="color:${isSig?color:'rgba(255,255,255,.75)'}">
+        ${isSig ? '★ ' : ''}${s.title}
+      </div>
+      ${ytId ? `<a class="cp-song-yt" style="color:${color}" href="https://www.youtube.com/watch?v=${ytId}" target="_blank">▶</a>` : ''}
+    `;
+    row.addEventListener('click', (e) => {
+      if (e.target.tagName === 'A') return;
+      // Find and open star card
+      const star = songStars.find(st => st.song.title === s.title && st.clusterName === clusterName);
+      if (star) { closeClusterPanel(); openCard(star); playClick(); }
+    });
+    songsEl.appendChild(row);
+  });
+
+  // Footer
+  const footer = document.getElementById('cp-footer');
+  footer.innerHTML = `
+    <a href="music.html" class="cp-footer-btn" style="border-color:${color};color:${color};">♬ FULL CATALOGUE</a>
+    <button class="cp-footer-btn" style="border-color:rgba(255,255,255,.2);color:rgba(255,255,255,.5);" onclick="closeClusterPanel()">← BACK TO GALAXY</button>
+  `;
+
+  panel.classList.add('visible');
+}
+
+function closeClusterPanel() {
+  document.getElementById('cluster-panel').classList.remove('visible');
+}
+
+document.getElementById('cp-close').addEventListener('click', closeClusterPanel);
+document.getElementById('cluster-panel').addEventListener('click', e => {
+  if (e.target === document.getElementById('cluster-panel')) closeClusterPanel();
+});
+
+// ═══════════════════════════════════════════════════
+// SIGNATURE WORLD OVERLAY
+// ═══════════════════════════════════════════════════
+let worldAnimId = null;
+
+function openWorld(songTitle, worldDef, accentColor, songDesc) {
+  const overlay = document.getElementById('world-overlay');
+  const wcanvas = document.getElementById('world-canvas');
+  const ctx = wcanvas.getContext('2d');
+
+  // Set content
+  document.getElementById('wo-eyebrow').textContent = worldDef.eyebrow;
+  document.getElementById('wo-title').textContent = songTitle;
+  document.getElementById('wo-title').style.color = worldDef.accentColor;
+  document.getElementById('wo-world-name').textContent = worldDef.worldName;
+  document.getElementById('wo-world-name').style.color = worldDef.accentColor;
+  document.getElementById('wo-desc').textContent = worldDef.desc;
+  document.getElementById('wo-desc').style.borderColor = worldDef.accentColor;
+
+  // Actions
+  const acts = document.getElementById('wo-actions');
+  acts.innerHTML = '';
+  const mainBtn = document.createElement('a');
+  mainBtn.href = worldDef.link; mainBtn.className = 'wo-btn';
+  mainBtn.style.borderColor = worldDef.accentColor; mainBtn.style.color = worldDef.accentColor;
+  mainBtn.innerHTML = worldDef.linkLabel;
+  acts.appendChild(mainBtn);
+
+  if (worldDef.ytKey && YT_MAP[worldDef.ytKey]) {
+    const ytBtn = document.createElement('a');
+    ytBtn.href = `https://www.youtube.com/watch?v=${YT_MAP[worldDef.ytKey]}`; ytBtn.target = '_blank';
+    ytBtn.className = 'wo-btn';
+    ytBtn.style.borderColor = '#FF0000'; ytBtn.style.color = '#FF0000';
+    ytBtn.innerHTML = '▶ WATCH ON YOUTUBE';
+    acts.appendChild(ytBtn);
+  }
+
+  const backBtn = document.createElement('button');
+  backBtn.className = 'wo-btn'; backBtn.style.borderColor = 'rgba(255,255,255,.2)';
+  backBtn.style.color = 'rgba(255,255,255,.5)'; backBtn.innerHTML = '← BACK TO NEXUS';
+  backBtn.addEventListener('click', closeWorld);
+  acts.appendChild(backBtn);
+
+  // Resize canvas
+  function resizeWorldCanvas() {
+    wcanvas.width = window.innerWidth;
+    wcanvas.height = window.innerHeight;
+  }
+  resizeWorldCanvas();
+
+  // Particles system
+  const pw = worldDef.particles;
+  const worldParticles = [];
+  const hexToRgb = hex => {
+    const r = parseInt(hex.slice(1,3),16);
+    const g = parseInt(hex.slice(3,5),16);
+    const b = parseInt(hex.slice(5,7),16);
+    return {r,g,b};
+  };
+  const pRgb = hexToRgb(pw.color);
+
+  for (let i = 0; i < pw.count; i++) {
+    worldParticles.push({
+      x: Math.random() * window.innerWidth,
+      y: pw.fall || pw.rise ? (pw.rise ? Math.random() * window.innerHeight : -10) : Math.random() * window.innerHeight,
+      vx: pw.matrix ? 0 : (Math.random() - .5) * (pw.ring ? pw.speed : 0.4),
+      vy: pw.fall ? pw.speed * (0.5 + Math.random()) : (pw.rise ? -pw.speed * (0.3 + Math.random()*0.7) : (Math.random()-.5)*0.5),
+      size: pw.size * (0.5 + Math.random() * 1.2),
+      alpha: 0.3 + Math.random() * 0.7,
+      matrixChar: pw.matrix ? Math.floor(Math.random()*10) : null,
+      matrixY: pw.matrix ? 0 : null,
+      matrixSpeed: pw.matrix ? pw.speed * (0.5 + Math.random() * 1.5) : 0,
+      angle: pw.ring ? Math.random() * Math.PI * 2 : 0,
+      ringR: pw.ring ? 80 + Math.random() * 200 : 0,
+    });
+  }
+
+  // Gradient backgrounds
+  const bgs = worldDef.bgColors;
+
+  function drawWorldFrame(t) {
+    const W = wcanvas.width, H = wcanvas.height;
+    ctx.clearRect(0, 0, W, H);
+
+    // Background gradient
+    const grad = ctx.createRadialGradient(W/2, H/2, 0, W/2, H/2, Math.max(W,H)*0.8);
+    grad.addColorStop(0, bgs[1] || bgs[0]);
+    grad.addColorStop(0.5, bgs[0]);
+    grad.addColorStop(1, bgs[2] || '#000000');
+    ctx.fillStyle = grad;
+    ctx.fillRect(0, 0, W, H);
+
+    // Draw particles
+    worldParticles.forEach(p => {
+      ctx.save();
+      if (pw.matrix && p.matrixChar !== null) {
+        ctx.font = `${10 + p.size}px monospace`;
+        ctx.fillStyle = `rgba(${pRgb.r},${pRgb.g},${pRgb.b},${p.alpha * 0.8})`;
+        ctx.fillText(p.matrixChar, p.x, p.matrixY);
+        p.matrixY += p.matrixSpeed;
+        if (p.matrixY > H) { p.matrixY = 0; p.x = Math.random() * W; p.matrixChar = Math.floor(Math.random()*10); }
+      } else if (pw.ring) {
+        p.angle += pw.speed * 0.01;
+        p.x = W/2 + Math.cos(p.angle) * p.ringR;
+        p.y = H/2 + Math.sin(p.angle) * p.ringR * 0.4;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI*2);
+        ctx.fillStyle = `rgba(${pRgb.r},${pRgb.g},${pRgb.b},${p.alpha})`;
+        ctx.fill();
+      } else {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI*2);
+        ctx.fillStyle = `rgba(${pRgb.r},${pRgb.g},${pRgb.b},${p.alpha})`;
+        ctx.fill();
+        p.x += p.vx;
+        p.y += p.vy;
+        if (pw.fall && p.y > H + 20) { p.y = -10; p.x = Math.random() * W; }
+        if (pw.rise && p.y < -20)    { p.y = H + 10; p.x = Math.random() * W; }
+        if (p.x < 0 || p.x > W) p.vx *= -1;
+        if (!pw.fall && !pw.rise && (p.y < 0 || p.y > H)) p.vy *= -1;
+      }
+      ctx.restore();
+    });
+
+    // Big background text watermark
+    ctx.save();
+    ctx.globalAlpha = 0.04 + 0.02 * Math.sin(t * 0.5);
+    ctx.font = `bold ${Math.min(W * 0.18, 140)}px 'Bebas Neue', Arial`;
+    ctx.fillStyle = worldDef.accentColor;
+    ctx.textAlign = 'center';
+    ctx.fillText(worldDef.overlayText, W/2, H/2 + 60);
+    ctx.restore();
+
+    // Vignette
+    const vig = ctx.createRadialGradient(W/2, H/2, H*0.25, W/2, H/2, H*0.85);
+    vig.addColorStop(0, 'rgba(0,0,0,0)');
+    vig.addColorStop(1, 'rgba(0,0,0,0.75)');
+    ctx.fillStyle = vig;
+    ctx.fillRect(0, 0, W, H);
+
+    worldAnimId = requestAnimationFrame(t2 => drawWorldFrame(t2 * 0.001));
+  }
+
+  overlay.classList.add('visible');
+  worldAnimId = requestAnimationFrame(t => drawWorldFrame(t * 0.001));
+}
+
+function closeWorld() {
+  document.getElementById('world-overlay').classList.remove('visible');
+  if (worldAnimId) { cancelAnimationFrame(worldAnimId); worldAnimId = null; }
+}
+
+document.getElementById('wo-close').addEventListener('click', closeWorld);
 
 // ── SEARCH ────────────────────────────────────────────
 document.getElementById('search-input').addEventListener('input', e => {
@@ -1094,6 +1700,16 @@ function animate() {
     core.rotation.y += 0.003 + i * 0.001;
     core.rotation.x += 0.001;
     core.material.opacity = 0.15 + 0.1 * Math.sin(t * 0.8 + i);
+  });
+
+  // Gateway rings animate
+  gatewayMeshes.forEach((gw, i) => {
+    gw.mesh.rotation.y += 0.004 + i * 0.0008;
+    gw.mesh.rotation.z += 0.002;
+    gw.mesh.material.emissiveIntensity = 0.5 + 0.3 * Math.sin(t * 1.5 + i * 1.1);
+    gw.ring2.rotation.x += 0.006 + i * 0.001;
+    gw.ring2.rotation.y -= 0.003;
+    gw.ring2.material.opacity = 0.3 + 0.2 * Math.sin(t * 2 + i * 0.7);
   });
 
   renderer.render(scene, camera);
