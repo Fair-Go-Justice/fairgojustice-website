@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Timeline Chamber — Room 02 | Fair Go Justice Evidence Vault</title>
+<meta name="robots" content="noindex">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;}
+  :root{
+    --gold:#D4AF37;--red:#FF3B3B;--blue:#0099FF;--cyan:#00FFFF;
+    --dark:#0D1117;--glass:rgba(13,17,23,0.88);
+    --verified:#00FF88;--partial:#D4AF37;--review:#00BFFF;--disputed:#FF3B3B;
+  }
+  body{background:#000;color:#F5F5F5;font-family:'Space Grotesk',sans-serif;overflow:hidden;height:100vh;}
+  @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+
+  /* ── BOOT SEQUENCE ───────────────────────────────────────────── */
+  #boot{
+    position:fixed;inset:0;background:#000;z-index:9999;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;
+  }
+  #boot.hidden{opacity:0;pointer-events:none;transition:opacity 1.2s ease;}
+  .boot-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(28px,5vw,52px);
+    color:var(--gold);letter-spacing:8px;text-align:center;}
+  .boot-sub{font-size:11px;color:#555;letter-spacing:4px;text-transform:uppercase;}
+  .boot-log{width:min(480px,90vw);font-size:10px;color:#00FFAA;letter-spacing:2px;
+    font-family:'Courier New',monospace;margin-top:12px;min-height:120px;}
+  .boot-log p{opacity:0;animation:fadeIn 0.4s forwards;}
+  .boot-log p.ok{color:#00FF88;}
+  .boot-log p.warn{color:#D4AF37;}
+  .boot-log p.err{color:#FF3B3B;}
+  @keyframes fadeIn{to{opacity:1;}}
+  .boot-bar-wrap{width:min(480px,90vw);height:2px;background:#111;margin-top:8px;}
+  .boot-bar{height:100%;width:0;background:linear-gradient(90deg,var(--gold),#FFD700);
+    transition:width 0.15s ease;}
+  .boot-corner{position:absolute;width:24px;height:24px;border-color:var(--gold);border-style:solid;opacity:0.6;}
+  .bc-tl{top:24px;left:24px;border-width:2px 0 0 2px;}
+  .bc-tr{top:24px;right:24px;border-width:2px 2px 0 0;}
+  .bc-bl{bottom:24px;left:24px;border-width:0 0 2px 2px;}
+  .bc-br{bottom:24px;right:24px;border-width:0 2px 2px 0;}
+
+  /* ── CANVAS ──────────────────────────────────────────────────── */
+  #scene{position:fixed;inset:0;opacity:0;transition:opacity 1.4s ease;}
+  #scene.visible{opacity:1;}
+
+  /* ── UI OVERLAY ──────────────────────────────────────────────── */
+  #ui{position:fixed;inset:0;pointer-events:none;z-index:100;}
+
+  /* room badge */
+  .room-badge{
+    position:absolute;top:20px;left:50%;transform:translateX(-50%);
+    font-family:'Bebas Neue',sans-serif;font-size:11px;letter-spacing:6px;
+    color:var(--gold);background:rgba(0,0,0,0.6);
+    padding:6px 20px;border:1px solid rgba(212,175,55,0.3);
+    backdrop-filter:blur(8px);pointer-events:none;
+  }
+
+  /* back button */
+  #back-btn{
+    position:absolute;top:16px;left:20px;
+    pointer-events:all;cursor:pointer;
+    font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:600;
+    letter-spacing:3px;text-transform:uppercase;
+    color:#888;background:rgba(0,0,0,0.5);
+    border:1px solid rgba(255,255,255,0.1);
+    padding:8px 16px;backdrop-filter:blur(8px);
+    transition:all 0.3s;text-decoration:none;display:flex;align-items:center;gap:8px;
+  }
+  #back-btn:hover{color:var(--gold);border-color:rgba(212,175,55,0.4);}
+
+  /* tagline */
+  .chamber-tagline{
+    position:absolute;bottom:80px;left:50%;transform:translateX(-50%);
+    font-size:11px;color:rgba(212,175,55,0.5);letter-spacing:4px;
+    text-transform:uppercase;white-space:nowrap;pointer-events:none;
+    text-align:center;
+  }
+
+  /* scroll hint */
+  #scroll-hint{
+    position:absolute;bottom:48px;left:50%;transform:translateX(-50%);
+    font-size:10px;color:#444;letter-spacing:3px;text-transform:uppercase;
+    pointer-events:none;animation:pulse-hint 2.5s ease-in-out infinite;
+  }
+  @keyframes pulse-hint{0%,100%{opacity:0.3;}50%{opacity:0.8;}}
+
+  /* event count HUD */
+  #hud{
+    position:absolute;bottom:20px;left:20px;right:20px;
+    display:flex;justify-content:center;align-items:center;gap:24px;
+    pointer-events:none;flex-wrap:wrap;
+  }
+  .hud-pill{
+    display:flex;align-items:center;gap:8px;
+    font-size:10px;letter-spacing:2px;color:#666;padding:5px 12px;
+    background:rgba(0,0,0,0.4);border:1px solid rgba(255,255,255,0.07);
+    backdrop-filter:blur(6px);border-radius:2px;
+  }
+  .hud-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
+  .hud-dot.gold{background:var(--gold);}
+  .hud-dot.red{background:var(--red);}
+  .hud-dot.blue{background:var(--blue);}
+  .hud-count{font-family:'Bebas Neue',sans-serif;font-size:15px;color:#aaa;margin-right:2px;}
+
+  /* navigation arrows */
+  #nav-prev,#nav-next{
+    position:absolute;top:50%;transform:translateY(-50%);
+    pointer-events:all;cursor:pointer;
+    width:44px;height:44px;display:flex;align-items:center;justify-content:center;
+    background:rgba(0,0,0,0.55);border:1px solid rgba(255,255,255,0.1);
+    backdrop-filter:blur(8px);transition:all 0.3s;font-size:18px;color:#666;
+  }
+  #nav-prev{left:20px;}
+  #nav-next{right:20px;}
+  #nav-prev:hover,#nav-next:hover{color:var(--gold);border-color:rgba(212,175,55,0.4);}
+  #nav-prev.dim,#nav-next.dim{opacity:0.2;pointer-events:none;}
+
+  /* ── EVENT CARD ──────────────────────────────────────────────── */
+  #event-card{
+    position:fixed;inset:0;z-index:200;
+    display:flex;align-items:center;justify-content:center;
+    background:rgba(0,0,0,0.85);backdrop-filter:blur(16px);
+    opacity:0;pointer-events:none;transition:opacity 0.4s ease;
+  }
+  #event-card.active{opacity:1;pointer-events:all;}
+  .ec-box{
+    width:min(600px,92vw);max-height:88vh;overflow-y:auto;
+    background:linear-gradient(160deg,rgba(13,17,23,0.98),rgba(5,8,14,0.99));
+    border:1px solid rgba(255,255,255,0.08);
+    position:relative;padding:40px 36px 32px;
+    animation:slideUpCard 0.4s cubic-bezier(0.16,1,0.3,1) both;
+  }
+  @keyframes slideUpCard{from{transform:translateY(40px);opacity:0;}to{transform:translateY(0);opacity:1;}}
+  .ec-corner{position:absolute;width:18px;height:18px;border-color:var(--event-color,var(--gold));border-style:solid;opacity:0.7;}
+  .ec-tl{top:12px;left:12px;border-width:2px 0 0 2px;}
+  .ec-br{bottom:12px;right:12px;border-width:0 2px 2px 0;}
+  .ec-room{font-size:10px;letter-spacing:5px;color:#555;text-transform:uppercase;margin-bottom:6px;}
+  .ec-year{
+    font-family:'Bebas Neue',sans-serif;font-size:clamp(48px,10vw,80px);
+    color:var(--event-color,var(--gold));line-height:1;margin-bottom:4px;
+    text-shadow:0 0 40px var(--event-color,var(--gold));
+  }
+  .ec-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(18px,4vw,26px);
+    letter-spacing:3px;color:#F5F5F5;margin-bottom:16px;}
+  .ec-status-row{display:flex;align-items:center;gap:10px;margin-bottom:20px;}
+  .ec-status{
+    font-size:9px;letter-spacing:3px;font-weight:700;padding:4px 12px;
+    border:1px solid;border-radius:1px;
+  }
+  .ec-status.verified{color:var(--verified);border-color:var(--verified);background:rgba(0,255,136,0.08);}
+  .ec-status.partial{color:var(--partial);border-color:var(--partial);background:rgba(212,175,55,0.08);}
+  .ec-status.review{color:var(--review);border-color:var(--review);background:rgba(0,191,255,0.08);}
+  .ec-status.disputed{color:var(--disputed);border-color:var(--disputed);background:rgba(255,59,59,0.08);}
+  .ec-type-badge{font-size:9px;letter-spacing:2px;color:#555;padding:4px 10px;
+    border:1px solid rgba(255,255,255,0.1);}
+  .ec-divider{width:100%;height:1px;background:rgba(255,255,255,0.07);margin-bottom:20px;}
+  .ec-summary{font-size:14px;line-height:1.7;color:#B0B8C8;margin-bottom:20px;}
+  .ec-exhibit{
+    background:rgba(255,255,255,0.03);border-left:2px solid var(--event-color,var(--gold));
+    padding:12px 16px;margin-bottom:16px;
+  }
+  .ec-exhibit-label{font-size:9px;letter-spacing:4px;color:#555;margin-bottom:5px;}
+  .ec-exhibit-text{font-size:12px;color:#888;line-height:1.6;}
+  .ec-narration{
+    font-size:11px;color:#6A7A8A;font-style:italic;line-height:1.6;
+    margin-bottom:20px;border-top:1px solid rgba(255,255,255,0.05);padding-top:16px;
+  }
+  .ec-close{
+    display:inline-flex;align-items:center;gap:8px;cursor:pointer;
+    font-size:11px;letter-spacing:3px;font-weight:600;text-transform:uppercase;
+    color:#666;border:1px solid rgba(255,255,255,0.1);padding:10px 20px;
+    transition:all 0.3s;background:transparent;margin-top:4px;
+  }
+  .ec-close:hover{color:var(--gold);border-color:rgba(212,175,55,0.4);}
+
+  /* ── RESPONSIVE ──────────────────────────────────────────────── */
+  @media(max-width:600px){
+    .ec-box{padding:28px 20px 24px;}
+    #nav-prev,#nav-next{display:none;}
+    .hud-pill{font-size:9px;gap:5px;padding:4px 8px;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ── BOOT ──────────────────────────────────────────────────────── -->
+<div id="boot">
+  <div class="boot-corner bc-tl"></div>
+  <div class="boot-corner bc-tr"></div>
+  <div class="boot-corner bc-bl"></div>
+  <div class="boot-corner bc-br"></div>
+  <div class="boot-title">TIMELINE CHAMBER</div>
+  <div class="boot-sub">Room 02 · Evidence Vault · Chronological Archive</div>
+  <div class="boot-log" id="boot-log"></div>
+  <div class="boot-bar-wrap"><div class="boot-bar" id="boot-bar"></div></div>
+</div>
+
+<!-- ── CANVAS ─────────────────────────────────────────────────────── -->
+<canvas id="scene"></canvas>
+
+<!-- ── UI ────────────────────────────────────────────────────────── -->
+<div id="ui">
+  <a href="vault.html" id="back-btn">← VAULT</a>
+  <div class="room-badge">ROOM 02 · TIMELINE CHAMBER · CHRONOLOGICAL EVIDENCE ARCHIVE</div>
+
+  <div id="nav-prev">‹</div>
+  <div id="nav-next">›</div>
+
+  <div class="chamber-tagline">Every event leaves a trace. Every gap tells a story.</div>
+  <div id="scroll-hint">↑ ↓ &nbsp; NAVIGATE TIMELINE &nbsp; CLICK EVENT TO EXAMINE</div>
+
+  <div id="hud">
+    <div class="hud-pill"><div class="hud-dot gold"></div><span class="hud-count" id="hud-verified">0</span>VERIFIED EVENTS</div>
+    <div class="hud-pill"><div class="hud-dot red"></div><span class="hud-count" id="hud-anomaly">0</span>ANOMALIES</div>
+    <div class="hud-pill"><div class="hud-dot blue"></div><span class="hud-count" id="hud-pending">0</span>PENDING REVIEW</div>
+  </div>
+</div>
+
+<!-- ── EVENT CARD ─────────────────────────────────────────────────── -->
+<div id="event-card">
+  <div class="ec-box" id="ec-box">
+    <div class="ec-corner ec-tl"></div>
+    <div class="ec-corner ec-br"></div>
+    <div class="ec-room" id="ec-room">ROOM 02 · TIMELINE CHAMBER</div>
+    <div class="ec-year" id="ec-year">2019</div>
+    <div class="ec-title" id="ec-title">Event Title</div>
+    <div class="ec-status-row">
+      <div class="ec-status" id="ec-status">VERIFIED</div>
+      <div class="ec-type-badge" id="ec-type">DOCUMENTED EVENT</div>
+    </div>
+    <div class="ec-divider"></div>
+    <div class="ec-summary" id="ec-summary">Summary text.</div>
+    <div class="ec-exhibit">
+      <div class="ec-exhibit-label">EXHIBIT REFERENCE</div>
+      <div class="ec-exhibit-text" id="ec-exhibit">Verified evidence reference pending upload. Replace this placeholder with a confirmed exhibit reference before public release.</div>
+    </div>
+    <div class="ec-narration" id="ec-narration">Narration placeholder.</div>
+    <button class="ec-close" id="ec-close">✕ &nbsp; CLOSE &nbsp; [ESC]</button>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+/* ══════════════════════════════════════════════════════════════════
+   TIMELINE DATA — placeholder chronology (systemic/role-based)
+   Replace with verified exhibit references before public release.
+══════════════════════════════════════════════════════════════════ */
+const EVENTS = [
+  {
+    id: 'e01', year: '2019', quarter: 'Q1',
+    title: 'Initial Engagement Documented',
+    type: 'DOCUMENTED EVENT', status: 'partial',
+    color: '#D4AF37', isAnomaly: false,
+    summary: 'Records indicate the commencement of a systemic engagement. Documentation from this period forms the baseline reference point for subsequent chronological analysis. All exhibits referenced herein are subject to verification protocols.',
+    exhibit: 'Exhibit Reference Pending — Replace with confirmed source document before public release.',
+    narration: '"Every investigation begins with a first documented contact. This is that point. What follows is the evidentiary trail." — Systemic analysis note.',
+  },
+  {
+    id: 'e02', year: '2019', quarter: 'Q3',
+    title: 'Procedural Anomaly Identified',
+    type: 'ANOMALY MARKER', status: 'review',
+    color: '#FF3B3B', isAnomaly: true,
+    summary: 'Procedural records from this period contain documented inconsistencies requiring further examination. The nature of the anomaly relates to process integrity and disclosure obligations. No findings of fact are asserted — this notation flags a pattern requiring verification.',
+    exhibit: 'Exhibit Reference Pending — Replace with verified procedural record before public release.',
+    narration: '"Gaps in procedure are not always mistakes. Sometimes they are patterns. This gap was the first marker in a longer sequence." — Systemic analysis note.',
+  },
+  {
+    id: 'e03', year: '2020', quarter: 'Q1',
+    title: 'Documentation Escalation Phase',
+    type: 'REFERENCE PENDING', status: 'partial',
+    color: '#D4AF37', isAnomaly: false,
+    summary: 'A period of documented escalation in which additional records were generated and formal communications exchanged. The volume and nature of correspondence during this phase is relevant to chronological analysis of the systemic pattern under review.',
+    exhibit: 'Exhibit Reference Pending — Replace with confirmed correspondence records before public release.',
+    narration: '"The paper trail thickens here. Volume of documentation is itself a data point." — Systemic analysis note.',
+  },
+  {
+    id: 'e04', year: '2020', quarter: 'Q4',
+    title: 'Chain of Custody Event Recorded',
+    type: 'EVIDENCE INTEGRITY', status: 'review',
+    color: '#FF3B3B', isAnomaly: true,
+    summary: 'Records from this period reflect a documented chain of custody event. The integrity of evidentiary handling during this phase is a subject of ongoing systemic review. All characterisations are provisional pending exhibit verification.',
+    exhibit: 'Exhibit Reference Pending — Replace with verified chain of custody records before public release.',
+    narration: '"Custody is not just a process — it is a promise. When that promise breaks, the record shows it." — Systemic analysis note.',
+  },
+  {
+    id: 'e05', year: '2021', quarter: 'Q2',
+    title: 'Formal Disclosure Period',
+    type: 'DISCLOSURE EVENT', status: 'verified',
+    color: '#00FF88', isAnomaly: false,
+    summary: 'This period corresponds to documented formal disclosure processes. Records confirm the existence of disclosure obligations and their partial fulfilment. The extent and completeness of disclosure during this phase is a key point of chronological analysis.',
+    exhibit: 'Exhibit Reference Pending — Replace with verified disclosure records before public release.',
+    narration: '"Disclosure is not optional in a system governed by law. The record of what was and was not disclosed speaks for itself." — Systemic analysis note.',
+  },
+  {
+    id: 'e06', year: '2021', quarter: 'Q4',
+    title: 'Systemic Pattern Documented',
+    type: 'PATTERN ANALYSIS', status: 'partial',
+    color: '#D4AF37', isAnomaly: false,
+    summary: 'Analysis of records from this period reveals a documented systemic pattern consistent with the anomalies identified in earlier phases. This notation reflects an aggregation of documented concerns rather than a single isolated event. No findings of fact are asserted.',
+    exhibit: 'Exhibit Reference Pending — Replace with verified analytical records before public release.',
+    narration: '"A single anomaly is a data point. A pattern is an argument. This is where the pattern becomes undeniable." — Systemic analysis note.',
+  },
+  {
+    id: 'e07', year: '2022', quarter: 'Q1',
+    title: 'Reform Engagement Initiated',
+    type: 'REFORM MILESTONE', status: 'verified',
+    color: '#00FF88', isAnomaly: false,
+    summary: 'Records from this period document the formal initiation of systemic reform engagement. This represents a transition point in the chronological record, from identification of documented concerns to active engagement with reform processes and accountability mechanisms.',
+    exhibit: 'Exhibit Reference Pending — Replace with verified reform correspondence before public release.',
+    narration: '"The decision to seek accountability through legitimate channels is itself a documented act of courage." — Systemic analysis note.',
+  },
+  {
+    id: 'e08', year: '2022', quarter: 'Q3',
+    title: 'Procedural Contradiction Recorded',
+    type: 'ANOMALY MARKER', status: 'disputed',
+    color: '#FF3B3B', isAnomaly: true,
+    summary: 'A documented contradiction between formal process records and procedural outcomes was identified during this period. The contradiction relates to stated obligations versus documented actions. This notation does not constitute a finding of fact. All characterisations are provisional.',
+    exhibit: 'Exhibit Reference Pending — Replace with verified contradiction evidence before public release.',
+    narration: '"What was said and what was done are two different records. When they contradict, one of them is wrong." — Systemic analysis note.',
+  },
+  {
+    id: 'e09', year: '2023', quarter: 'Q2',
+    title: 'Evidence Archive Compiled',
+    type: 'VERIFIED MILESTONE', status: 'verified',
+    color: '#00FF88', isAnomaly: false,
+    summary: 'This period documents the systematic compilation of an evidence archive drawing on records from the preceding four years. The archive represents the evidentiary foundation of ongoing systemic analysis. All exhibits are subject to ongoing verification protocols.',
+    exhibit: 'Exhibit Reference Pending — Replace with verified archive catalogue before public release.',
+    narration: '"The archive is the argument. Everything that could not be hidden was preserved here." — Systemic analysis note.',
+  },
+  {
+    id: 'e10', year: '2024', quarter: 'Q1',
+    title: 'Public Platform Established',
+    type: 'REFORM MILESTONE', status: 'verified',
+    color: '#0099FF', isAnomaly: false,
+    summary: 'The establishment of a public-facing platform to communicate documented systemic concerns to a broader audience. This milestone represents the transition from private documentation to public accountability advocacy through legitimate lawful expression.',
+    exhibit: 'Public platform records — fairgojustice.com.au — established as a matter of public record.',
+    narration: '"When internal channels have been exhausted, the public record becomes the accountability mechanism." — Platform founding note.',
+  },
+  {
+    id: 'e11', year: '2025', quarter: 'Q2',
+    title: 'Evidence Vault Architecture Developed',
+    type: 'PLATFORM MILESTONE', status: 'verified',
+    color: '#0099FF', isAnomaly: false,
+    summary: 'Development of an interactive evidence vault architecture to provide structured public access to documented systemic concerns. The vault system supports transparency, source verification, and public education about systemic accountability failures.',
+    exhibit: 'Platform development records — Evidence Vault Phase 1 & 2 — documented in project records.',
+    narration: '"The vault is not just a website. It is a structured argument. Every room is a chapter." — Development note.',
+  },
+  {
+    id: 'e12', year: '2026', quarter: 'Q2',
+    title: 'Ongoing — Active Accountability Record',
+    type: 'LIVE RECORD', status: 'review',
+    color: '#D4AF37', isAnomaly: false,
+    summary: 'The chronological record remains active. Documentation continues to accumulate. Reform engagement is ongoing. This timeline will be updated as verified exhibit references are confirmed and approved for public release through the standard verification protocol.',
+    exhibit: 'This record is live. Verified exhibit references will be added as they are confirmed through the verification protocol. Replace this placeholder with approved exhibit references only.',
+    narration: '"The timeline does not end here. It is still being written. Every day that passes without accountability is itself a data point." — Active record note.',
+  },
+];
+
+/* ══ count HUD ══ */
+const vCount = EVENTS.filter(e=>e.status==='verified').length;
+const aCount = EVENTS.filter(e=>e.isAnomaly).length;
+const pCount = EVENTS.filter(e=>e.status==='partial'||e.status==='review').length;
+document.getElementById('hud-verified').textContent = vCount;
+document.getElementById('hud-anomaly').textContent = aCount;
+document.getElementById('hud-pending').textContent = pCount;
+
+/* ══════════════════════════════════════════════════════════════════
+   BOOT SEQUENCE
+══════════════════════════════════════════════════════════════════ */
+const bootLog = document.getElementById('boot-log');
+const bootBar = document.getElementById('boot-bar');
+const BOOT_LINES = [
+  { t:200,  cls:'ok',   tx:'> TIMELINE CHAMBER ONLINE' },
+  { t:600,  cls:'ok',   tx:'> CHRONOLOGICAL ARCHIVE LOADED' },
+  { t:1000, cls:'warn', tx:'> ' + EVENTS.length + ' EVENTS INDEXED' },
+  { t:1300, cls:'ok',   tx:'> VERIFIED EVENTS: ' + vCount },
+  { t:1600, cls:'err',  tx:'> ANOMALY MARKERS: ' + aCount + ' DETECTED' },
+  { t:1900, cls:'warn', tx:'> PENDING REVIEW: ' + pCount + ' EVENTS' },
+  { t:2200, cls:'ok',   tx:'> HOLOGRAPHIC RAIL INITIALISING...' },
+  { t:2600, cls:'ok',   tx:'> TEMPORAL NAVIGATION ARMED' },
+  { t:2900, cls:'ok',   tx:'> CHAMBER ACCESS GRANTED' },
+];
+let maxT = 0;
+BOOT_LINES.forEach(l=>{
+  maxT = Math.max(maxT, l.t);
+  setTimeout(()=>{
+    const p = document.createElement('p');
+    p.className = l.cls; p.textContent = l.tx;
+    bootLog.appendChild(p);
+    const prog = (l.t / 3200) * 100;
+    bootBar.style.width = prog + '%';
+  }, l.t);
+});
+setTimeout(()=>{
+  bootBar.style.width = '100%';
+  setTimeout(()=>{
+    document.getElementById('boot').classList.add('hidden');
+    document.getElementById('scene').classList.add('visible');
+    initAudio();
+  }, 600);
+}, 3200);
+
+/* ══════════════════════════════════════════════════════════════════
+   AUDIO ENGINE
+══════════════════════════════════════════════════════════════════ */
+let audioCtx, masterGain, ambientStarted = false;
+function initAudio(){
+  try{
+    audioCtx = new(window.AudioContext||window.webkitAudioContext)();
+    masterGain = audioCtx.createGain();
+    masterGain.gain.setValueAtTime(0, audioCtx.currentTime);
+    masterGain.connect(audioCtx.destination);
+    startAmbient();
+  }catch(e){}
+}
+function startAmbient(){
+  if(!audioCtx||ambientStarted) return;
+  ambientStarted = true;
+  // Clock-tick resonance — deep tonal hum
+  [41, 82, 164].forEach((freq,i)=>{
+    const osc = audioCtx.createOscillator();
+    const g = audioCtx.createGain();
+    osc.type = 'sine';
+    osc.frequency.value = freq;
+    g.gain.value = [0.045, 0.025, 0.012][i];
+    osc.connect(g); g.connect(masterGain);
+    osc.start();
+  });
+  masterGain.gain.linearRampToValueAtTime(1, audioCtx.currentTime + 3);
+}
+function playTone(type){
+  if(!audioCtx) return;
+  const o = audioCtx.createOscillator();
+  const g = audioCtx.createGain();
+  const f = type==='verified'?440: type==='anomaly'?220: type==='review'?330: 280;
+  const wave = type==='anomaly'?'sawtooth':'sine';
+  o.type = wave; o.frequency.value = f;
+  g.gain.setValueAtTime(0.18, audioCtx.currentTime);
+  g.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + (type==='anomaly'?0.8:0.5));
+  o.connect(g); g.connect(masterGain);
+  o.start(); o.stop(audioCtx.currentTime + 0.8);
+}
+// clock tick
+function playTick(){
+  if(!audioCtx) return;
+  const buf = audioCtx.createBuffer(1,audioCtx.sampleRate*0.03,audioCtx.sampleRate);
+  const d = buf.getChannelData(0);
+  for(let i=0;i<d.length;i++) d[i]=(Math.random()*2-1)*Math.exp(-i/200);
+  const s = audioCtx.createBufferSource();
+  s.buffer = buf;
+  const g = audioCtx.createGain(); g.gain.value=0.04;
+  s.connect(g); g.connect(masterGain); s.start();
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   THREE.JS SCENE
+══════════════════════════════════════════════════════════════════ */
+const canvas = document.getElementById('scene');
+const renderer = new THREE.WebGLRenderer({canvas, antialias:true, alpha:true});
+renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
+renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.shadowMap.enabled = true;
+
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x000508);
+scene.fog = new THREE.FogExp2(0x000508, 0.022);
+
+const camera = new THREE.PerspectiveCamera(62, window.innerWidth/window.innerHeight, 0.1, 300);
+camera.position.set(0, 1.8, 0);
+
+/* ── AMBIENT LIGHT ── */
+scene.add(new THREE.AmbientLight(0x0A0F1A, 1));
+const dirLight = new THREE.DirectionalLight(0x112244, 0.6);
+dirLight.position.set(0, 20, -10);
+scene.add(dirLight);
+
+/* ── FLOOR — black glass grid ── */
+(()=>{
+  const geo = new THREE.PlaneGeometry(120, 800, 60, 400);
+  const mat = new THREE.MeshStandardMaterial({
+    color:0x010308, metalness:0.9, roughness:0.1,
+    transparent:true, opacity:0.85,
+  });
+  const mesh = new THREE.Mesh(geo, mat);
+  mesh.rotation.x = -Math.PI/2;
+  mesh.position.y = -0.5;
+  scene.add(mesh);
+
+  // grid lines
+  const gridHelper = new THREE.GridHelper(800, 400, 0x0D2030, 0x091520);
+  gridHelper.position.y = -0.48;
+  scene.add(gridHelper);
+})();
+
+/* ── CEILING GRID ── */
+(()=>{
+  const gridHelper = new THREE.GridHelper(800, 200, 0x0A1820, 0x060E15);
+  gridHelper.position.y = 8;
+  gridHelper.rotation.x = Math.PI;
+  scene.add(gridHelper);
+})();
+
+/* ── MAIN TIMELINE RAIL ── */
+const RAIL_Z_START = -10;
+const RAIL_Z_END   = -10 - (EVENTS.length - 1) * 14;
+const railGeo = new THREE.CylinderGeometry(0.04, 0.04, Math.abs(RAIL_Z_END - RAIL_Z_START), 8);
+const railMat = new THREE.MeshStandardMaterial({color:0x1A2530, emissive:0x0D1520, metalness:0.9, roughness:0.2});
+const rail = new THREE.Mesh(railGeo, railMat);
+rail.rotation.x = Math.PI/2;
+rail.position.set(0, 1.0, (RAIL_Z_START + RAIL_Z_END)/2);
+scene.add(rail);
+
+// Rail glow line (line along rail)
+(()=>{
+  const pts = [new THREE.Vector3(0,1.0,RAIL_Z_START), new THREE.Vector3(0,1.0,RAIL_Z_END)];
+  const geo = new THREE.BufferGeometry().setFromPoints(pts);
+  const mat = new THREE.LineBasicMaterial({color:0x1A3A5A, transparent:true, opacity:0.4});
+  scene.add(new THREE.Line(geo, mat));
+})();
+
+/* ── TUNNEL WALLS ── */
+(()=>{
+  const wallGeo = new THREE.PlaneGeometry(1, 800);
+  const wallMat = new THREE.MeshStandardMaterial({color:0x030810, transparent:true, opacity:0.5});
+  const wL = new THREE.Mesh(wallGeo, wallMat);
+  wL.position.set(-9, 3.5, -200); scene.add(wL);
+  const wR = new THREE.Mesh(wallGeo, wallMat.clone());
+  wR.position.set(9, 3.5, -200); wR.rotation.y = Math.PI; scene.add(wR);
+})();
+
+/* ── PARTICLE DUST ── */
+(()=>{
+  const count = 1200;
+  const pos = new Float32Array(count*3);
+  for(let i=0;i<count;i++){
+    pos[i*3]   = (Math.random()-0.5)*18;
+    pos[i*3+1] = Math.random()*9;
+    pos[i*3+2] = RAIL_Z_START - Math.random()*Math.abs(RAIL_Z_END - RAIL_Z_START) - 5;
+  }
+  const geo = new THREE.BufferGeometry();
+  geo.setAttribute('position', new THREE.BufferAttribute(pos,3));
+  const mat = new THREE.PointsMaterial({color:0x1A3050, size:0.06, transparent:true, opacity:0.5});
+  scene.add(new THREE.Points(geo, mat));
+})();
+
+/* ══ BUILD EVENT NODES ══ */
+const eventMeshes = [];
+const labelCanvases = [];
+
+function hexToThree(hex){
+  return new THREE.Color(parseInt(hex.replace('#',''), 16));
+}
+function makeTexture(text, subText, color){
+  const c = document.createElement('canvas');
+  c.width=512; c.height=256;
+  const ctx = c.getContext('2d');
+  ctx.clearRect(0,0,512,256);
+  ctx.fillStyle = 'rgba(5,10,20,0.0)';
+  ctx.fillRect(0,0,512,256);
+  // year
+  ctx.font = 'bold 96px Bebas Neue, Arial';
+  ctx.fillStyle = color;
+  ctx.shadowColor = color;
+  ctx.shadowBlur = 30;
+  ctx.fillText(text, 20, 100);
+  ctx.shadowBlur = 0;
+  // subtitle
+  ctx.font = '500 22px Space Grotesk, Arial';
+  ctx.fillStyle = '#889';
+  ctx.fillText(subText, 22, 136);
+  return new THREE.CanvasTexture(c);
+}
+
+EVENTS.forEach((ev, i)=>{
+  const z = RAIL_Z_START - i * 14;
+  const colorHex = ev.color;
+  const colorThree = hexToThree(colorHex);
+
+  // Gate ring
+  const ringGeo = new THREE.TorusGeometry(1.8, 0.04, 16, 64);
+  const ringMat = new THREE.MeshStandardMaterial({
+    color: colorThree,
+    emissive: colorThree,
+    emissiveIntensity: ev.isAnomaly ? 1.4 : 0.6,
+    transparent: true, opacity: 0.85,
+  });
+  const ring = new THREE.Mesh(ringGeo, ringMat);
+  ring.position.set(0, 1.0, z);
+  ring.userData = { eventIndex: i, baseEmissive: ev.isAnomaly ? 1.4 : 0.6 };
+  scene.add(ring);
+  eventMeshes.push(ring);
+
+  // Node sphere
+  const nodeGeo = new THREE.SphereGeometry(0.22, 16, 16);
+  const nodeMat = new THREE.MeshStandardMaterial({
+    color: colorThree, emissive: colorThree, emissiveIntensity: 1.2,
+    transparent: true, opacity: 0.9,
+  });
+  const node = new THREE.Mesh(nodeGeo, nodeMat);
+  node.position.set(0, 1.0, z);
+  scene.add(node);
+
+  // Point light per event
+  const pLight = new THREE.PointLight(colorThree, ev.isAnomaly ? 1.6 : 0.9, 8);
+  pLight.position.set(0, 1.0, z);
+  scene.add(pLight);
+
+  // Broken ring for anomalies — cross bars
+  if(ev.isAnomaly){
+    const barGeo = new THREE.BoxGeometry(3.4, 0.05, 0.05);
+    const barMat = new THREE.MeshStandardMaterial({
+      color:0xFF3B3B, emissive:0xFF3B3B, emissiveIntensity:0.8,
+      transparent:true, opacity:0.6,
+    });
+    const bar1 = new THREE.Mesh(barGeo, barMat);
+    bar1.position.set(0,1.0,z); bar1.rotation.z = Math.PI/4;
+    scene.add(bar1);
+    const bar2 = new THREE.Mesh(barGeo, barMat.clone());
+    bar2.position.set(0,1.0,z); bar2.rotation.z = -Math.PI/4;
+    scene.add(bar2);
+    // Spark particles
+    const sparkCount = 80;
+    const sPos = new Float32Array(sparkCount*3);
+    for(let s=0;s<sparkCount;s++){
+      const angle = Math.random()*Math.PI*2;
+      const rad = 1.2 + Math.random()*1.8;
+      sPos[s*3]   = Math.cos(angle)*rad;
+      sPos[s*3+1] = 1.0 + (Math.random()-0.5)*1.5;
+      sPos[s*3+2] = z + (Math.random()-0.5)*0.4;
+    }
+    const sGeo = new THREE.BufferGeometry();
+    sGeo.setAttribute('position', new THREE.BufferAttribute(sPos,3));
+    const sMat = new THREE.PointsMaterial({color:0xFF3B3B, size:0.06, transparent:true, opacity:0.7});
+    scene.add(new THREE.Points(sGeo, sMat));
+  }
+
+  // Year label sprite
+  const tex = makeTexture(ev.year, ev.quarter + ' · ' + ev.title.substring(0,28).toUpperCase(), colorHex);
+  const spriteMat = new THREE.SpriteMaterial({map:tex, transparent:true});
+  const sprite = new THREE.Sprite(spriteMat);
+  sprite.scale.set(6, 3, 1);
+  sprite.position.set(0, 4.2, z);
+  scene.add(sprite);
+  labelCanvases.push(sprite);
+
+  // Status indicator line below ring
+  const stColor = ev.status==='verified'?0x00FF88: ev.status==='disputed'?0xFF3B3B: ev.status==='review'?0x0099FF: 0xD4AF37;
+  const siGeo = new THREE.CylinderGeometry(0.025,0.025,0.9,6);
+  const siMat = new THREE.MeshStandardMaterial({color:stColor, emissive:stColor, emissiveIntensity:1.5});
+  const si = new THREE.Mesh(siGeo, siMat);
+  si.position.set(0,-0.4+1.0,z);
+  scene.add(si);
+});
+
+/* ── CONNECTION THREADS between events ── */
+for(let i=0;i<EVENTS.length-1;i++){
+  const z1 = RAIL_Z_START - i * 14;
+  const z2 = RAIL_Z_START - (i+1) * 14;
+  const pts = [new THREE.Vector3(0,1.0,z1), new THREE.Vector3(0,1.0,z2)];
+  const geo = new THREE.BufferGeometry().setFromPoints(pts);
+  const colorA = hexToThree(EVENTS[i].color);
+  const colorB = hexToThree(EVENTS[i+1].color);
+  const avgColor = colorA.clone().lerp(colorB, 0.5);
+  const mat = new THREE.LineBasicMaterial({color:avgColor, transparent:true, opacity:0.25});
+  scene.add(new THREE.Line(geo, mat));
+}
+
+/* ══ CAMERA RAIL ══ */
+const TARGET_Z_POSITIONS = EVENTS.map((_,i)=> RAIL_Z_START - i*14 + 6);
+let currentEventIdx = 0;
+let targetCamZ = TARGET_Z_POSITIONS[0];
+let camZ = targetCamZ;
+const camDrift = {x:0,y:0};
+
+function goToEvent(idx){
+  if(idx<0||idx>=EVENTS.length) return;
+  currentEventIdx = idx;
+  targetCamZ = TARGET_Z_POSITIONS[idx];
+  playTick();
+  updateNavButtons();
+}
+function updateNavButtons(){
+  document.getElementById('nav-prev').classList.toggle('dim', currentEventIdx===0);
+  document.getElementById('nav-next').classList.toggle('dim', currentEventIdx===EVENTS.length-1);
+}
+updateNavButtons();
+
+document.getElementById('nav-prev').addEventListener('click',()=>goToEvent(currentEventIdx-1));
+document.getElementById('nav-next').addEventListener('click',()=>goToEvent(currentEventIdx+1));
+
+window.addEventListener('keydown',e=>{
+  if(document.getElementById('event-card').classList.contains('active')) return;
+  if(e.key==='ArrowDown'||e.key==='ArrowRight') goToEvent(currentEventIdx+1);
+  if(e.key==='ArrowUp'||e.key==='ArrowLeft')  goToEvent(currentEventIdx-1);
+});
+window.addEventListener('wheel',e=>{
+  if(document.getElementById('event-card').classList.contains('active')) return;
+  if(e.deltaY>0) goToEvent(currentEventIdx+1);
+  else goToEvent(currentEventIdx-1);
+},{passive:true});
+
+// touch swipe
+let touchStartY=0;
+window.addEventListener('touchstart',e=>touchStartY=e.touches[0].clientY,{passive:true});
+window.addEventListener('touchend',e=>{
+  const dy = touchStartY - e.changedTouches[0].clientY;
+  if(Math.abs(dy)>40){ dy>0? goToEvent(currentEventIdx+1): goToEvent(currentEventIdx-1); }
+},{passive:true});
+
+/* ══ RAYCASTER — click events ══ */
+const raycaster = new THREE.Raycaster();
+const mouse = new THREE.Vector2();
+let hoveredRing = null;
+
+canvas.addEventListener('mousemove',e=>{
+  mouse.x = (e.clientX/window.innerWidth)*2-1;
+  mouse.y = -(e.clientY/window.innerHeight)*2+1;
+  camDrift.x = mouse.x * 0.3;
+  camDrift.y = mouse.y * 0.15;
+});
+
+canvas.addEventListener('click', e=>{
+  if(document.getElementById('event-card').classList.contains('active')) return;
+  mouse.x = (e.clientX/window.innerWidth)*2-1;
+  mouse.y = -(e.clientY/window.innerHeight)*2+1;
+  raycaster.setFromCamera(mouse, camera);
+  const hits = raycaster.intersectObjects(eventMeshes);
+  if(hits.length>0){
+    const idx = hits[0].object.userData.eventIndex;
+    openEventCard(idx);
+  }
+});
+
+/* ══ EVENT CARD ══ */
+const STATUS_LABELS = { verified:'VERIFIED', partial:'PARTIALLY VERIFIED', review:'UNDER REVIEW', disputed:'DISPUTED' };
+function openEventCard(idx){
+  const ev = EVENTS[idx];
+  const card = document.getElementById('event-card');
+  const box  = document.getElementById('ec-box');
+
+  // set color variable
+  box.style.setProperty('--event-color', ev.color);
+  box.style.borderColor = ev.color + '33';
+  box.querySelectorAll('.ec-corner').forEach(c=> c.style.borderColor = ev.color);
+
+  document.getElementById('ec-year').textContent    = ev.year;
+  document.getElementById('ec-year').style.color    = ev.color;
+  document.getElementById('ec-year').style.textShadow = `0 0 40px ${ev.color}`;
+  document.getElementById('ec-title').textContent   = ev.title.toUpperCase();
+  document.getElementById('ec-summary').textContent = ev.summary;
+  document.getElementById('ec-exhibit').textContent = ev.exhibit;
+  document.getElementById('ec-narration').textContent = ev.narration;
+
+  const st = document.getElementById('ec-status');
+  st.textContent = STATUS_LABELS[ev.status] || 'UNDER REVIEW';
+  st.className = 'ec-status ' + ev.status;
+
+  document.getElementById('ec-type').textContent = ev.type;
+  document.getElementById('ec-room').textContent = `ROOM 02 · TIMELINE CHAMBER · EVENT ${String(idx+1).padStart(2,'0')} OF ${EVENTS.length}`;
+
+  card.classList.add('active');
+  playTone(ev.status==='verified'?'verified': ev.isAnomaly?'anomaly':'review');
+}
+function closeEventCard(){
+  document.getElementById('event-card').classList.remove('active');
+}
+document.getElementById('ec-close').addEventListener('click', closeEventCard);
+document.getElementById('event-card').addEventListener('click', e=>{
+  if(e.target===document.getElementById('event-card')) closeEventCard();
+});
+window.addEventListener('keydown',e=>{ if(e.key==='Escape') closeEventCard(); });
+
+/* ══ ANIMATE ══ */
+let t = 0;
+function animate(){
+  requestAnimationFrame(animate);
+  t += 0.016;
+
+  // smooth camera Z
+  camZ += (targetCamZ - camZ) * 0.06;
+  camera.position.z = camZ;
+  camera.position.x += (camDrift.x * 0.5 - camera.position.x) * 0.04;
+  camera.position.y += (1.8 + camDrift.y * 0.3 - camera.position.y) * 0.04;
+  camera.lookAt(camera.position.x * 0.1, 1.0, camZ - 10);
+
+  // Raycaster hover
+  raycaster.setFromCamera(mouse, camera);
+  const hits = raycaster.intersectObjects(eventMeshes);
+  const newHover = hits.length>0 ? hits[0].object : null;
+  if(newHover !== hoveredRing){
+    if(hoveredRing) hoveredRing.material.emissiveIntensity = hoveredRing.userData.baseEmissive;
+    if(newHover){ newHover.material.emissiveIntensity = 2.5; canvas.style.cursor='pointer'; }
+    else canvas.style.cursor='default';
+    hoveredRing = newHover;
+  }
+
+  // Pulse rings
+  eventMeshes.forEach((ring,i)=>{
+    const ev = EVENTS[i];
+    if(ring === hoveredRing) return;
+    const isClose = i===currentEventIdx;
+    if(ev.isAnomaly){
+      ring.material.emissiveIntensity = ev.userData?.baseEmissive || 1.4;
+      ring.material.emissiveIntensity = 1.0 + Math.sin(t*8 + i)*0.8;
+      ring.rotation.z += 0.008;
+    } else {
+      ring.material.emissiveIntensity = (isClose ? 0.9 : 0.5) + Math.sin(t*1.5+i*0.7)*0.25;
+    }
+    ring.scale.setScalar(isClose ? 1.0 + Math.sin(t*2)*0.03 : 1.0);
+  });
+
+  renderer.render(scene, camera);
+}
+animate();
+
+/* ══ RESIZE ══ */
+window.addEventListener('resize',()=>{
+  camera.aspect = window.innerWidth/window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+});
+</script>
+</body>
+</html>
