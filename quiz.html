@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Has the System Failed You? | Quiz | Fair Go Justice</title>
-  <meta name="description" content="Take the 2-minute quiz and find out if Australia's legal system has failed you. Share your results. Join 10,000+ Australians demanding justice reform.">
+  <title>Quiz | Fair Go Justice — Has the System Failed You? + System Knowledge</title>
+  <meta name="description" content="Two quizzes in one: find out if the system failed you, or test your knowledge of how institutional misconduct really works. Join Australians demanding justice reform.">
   <meta name="robots" content="index, follow">
   <meta name="author" content="Fair Go Justice">
   <link rel="canonical" href="https://fairgojustice.com.au/quiz.html">
@@ -264,6 +264,104 @@
       .results-actions { flex-direction: column; }
       .btn-share { width: 100%; text-align: center; }
     }
+
+    /* ── MODE SELECTOR ── */
+    .mode-selector {
+      padding: 3rem 1.5rem 2rem;
+      max-width: 720px; margin: 0 auto; text-align: center;
+    }
+    .mode-selector h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(1.8rem, 5vw, 2.8rem);
+      letter-spacing: 0.04em; color: var(--white); margin-bottom: 0.6rem;
+    }
+    .mode-selector p { font-size: 0.95rem; color: var(--grey); margin-bottom: 2rem; line-height: 1.6; }
+    .mode-cards {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem;
+    }
+    @media(max-width:600px){ .mode-cards { grid-template-columns: 1fr; } }
+    .mode-card {
+      background: linear-gradient(135deg, var(--bg-1), var(--bg-2));
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 10px; padding: 2rem 1.5rem;
+      cursor: pointer; transition: all 0.25s; text-align: left;
+    }
+    .mode-card:hover { border-color: var(--orange); transform: translateY(-3px); box-shadow: 0 12px 40px rgba(214,107,45,0.2); }
+    .mode-card.sk:hover { border-color: var(--gold); box-shadow: 0 12px 40px rgba(212,175,55,0.2); }
+    .mode-icon { font-size: 2rem; margin-bottom: 0.8rem; }
+    .mode-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; letter-spacing: 1px; color: var(--white); margin-bottom: 0.4rem; }
+    .mode-card.sk .mode-title { color: var(--gold); }
+    .mode-badge {
+      display: inline-block; font-size: 0.65rem; font-weight: 600;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      padding: 0.25rem 0.7rem; border-radius: 2px; margin-bottom: 0.8rem;
+    }
+    .mode-badge.exp { background: rgba(214,107,45,0.2); color: var(--orange); border: 1px solid rgba(214,107,45,0.3); }
+    .mode-badge.know { background: rgba(212,175,55,0.15); color: var(--gold); border: 1px solid rgba(212,175,55,0.3); }
+    .mode-desc { font-size: 0.85rem; color: var(--grey); line-height: 1.6; margin-bottom: 1.2rem; }
+    .mode-meta { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .mode-meta span { font-size: 0.75rem; color: rgba(245,245,245,0.5); }
+    .mode-meta strong { color: var(--white); }
+    .btn-mode {
+      display: block; width: 100%; margin-top: 1.2rem;
+      padding: 0.75rem; text-align: center;
+      font-family: 'Bebas Neue', sans-serif; font-size: 1rem; letter-spacing: 1.5px;
+      border-radius: 4px; cursor: pointer; transition: all 0.2s; border: none;
+    }
+    .btn-mode.exp { background: var(--orange); color: #fff; }
+    .btn-mode.exp:hover { background: #e8793a; }
+    .btn-mode.know { background: transparent; color: var(--gold); border: 1px solid rgba(212,175,55,0.5); }
+    .btn-mode.know:hover { background: rgba(212,175,55,0.1); }
+
+    /* ── SK QUIZ ── */
+    #sk-quiz-section { padding: 4rem 1.5rem 6rem; max-width: 720px; margin: 0 auto; display: none; }
+    .sk-header { text-align: center; margin-bottom: 2.5rem; }
+    .sk-header .eyebrow { color: var(--gold); border-color: rgba(212,175,55,0.3); }
+    .sk-header h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(1.6rem, 4vw, 2.4rem); letter-spacing: 0.04em; margin-bottom: 0.5rem; }
+    .sk-header p { font-size: 0.88rem; color: var(--grey); line-height: 1.6; }
+
+    .sk-pillar-tag {
+      display: inline-block; font-size: 0.65rem; font-weight: 600;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      padding: 0.2rem 0.6rem; border-radius: 2px; margin-bottom: 1rem;
+    }
+    .pillar-accountability { background: rgba(214,107,45,0.15); color: var(--orange); border: 1px solid rgba(214,107,45,0.25); }
+    .pillar-transparency { background: rgba(41,128,185,0.15); color: #5dade2; border: 1px solid rgba(41,128,185,0.25); }
+    .pillar-evidence { background: rgba(212,175,55,0.12); color: var(--gold); border: 1px solid rgba(212,175,55,0.25); }
+    .pillar-reform { background: rgba(39,174,96,0.12); color: #27ae60; border: 1px solid rgba(39,174,96,0.25); }
+
+    .option-btn.sk-correct { border-color: var(--green) !important; background: rgba(39,174,96,0.15) !important; }
+    .option-btn.sk-wrong { border-color: var(--red) !important; background: rgba(192,57,43,0.12) !important; }
+    .option-btn.sk-correct .option-letter { border-color: var(--green); color: var(--green); }
+    .option-btn.sk-wrong .option-letter { border-color: var(--red); color: var(--red); }
+    .sk-feedback {
+      margin-top: 1rem; padding: 0.9rem 1.1rem;
+      border-radius: 6px; font-size: 0.88rem; line-height: 1.6;
+      display: none;
+    }
+    .sk-feedback.correct { background: rgba(39,174,96,0.1); border: 1px solid rgba(39,174,96,0.3); color: #7dcea0; }
+    .sk-feedback.wrong { background: rgba(192,57,43,0.1); border: 1px solid rgba(192,57,43,0.3); color: #f1948a; }
+
+    /* ── SK RESULTS ── */
+    #sk-results { display: none; padding: 4rem 1.5rem 6rem; max-width: 720px; margin: 0 auto; }
+    .sk-results-card {
+      background: linear-gradient(135deg, var(--bg-1), var(--bg-2));
+      border: 1px solid rgba(212,175,55,0.3); border-radius: 12px;
+      padding: 3rem 2.5rem; text-align: center;
+      box-shadow: 0 0 60px rgba(212,175,55,0.08);
+    }
+    .sk-score-wrap { margin: 1rem 0 2rem; }
+    .sk-score-big {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(5rem, 14vw, 9rem);
+      line-height: 1; color: var(--gold);
+      text-shadow: 0 0 60px rgba(212,175,55,0.4);
+    }
+    .sk-score-denom { font-size: 1.2rem; color: var(--grey); }
+    .sk-grade { font-family: 'Bebas Neue', sans-serif; font-size: clamp(1.4rem, 4vw, 2rem); color: var(--white); letter-spacing: 0.05em; margin-bottom: 0.5rem; }
+    .sk-grade-desc { font-size: 0.92rem; color: rgba(245,245,245,0.7); line-height: 1.7; max-width: 500px; margin: 0 auto 2rem; }
+    .sk-pillar-scores { text-align: left; margin: 1.5rem 0; }
+    .sk-pillar-scores h4 { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--grey); margin-bottom: 1rem; }
   </style>
 </head>
 <body>
@@ -300,6 +398,38 @@
     <button class="btn-start" onclick="startQuiz()">START THE QUIZ →</button>
   </div>
 </section>
+
+<!-- MODE SELECTOR -->
+<div class="mode-selector" id="mode-selector">
+  <h2>CHOOSE YOUR QUIZ</h2>
+  <p>Two ways to engage with the evidence. One tests your personal experience. The other tests your knowledge of how the system really operates.</p>
+  <div class="mode-cards">
+    <div class="mode-card" onclick="startQuiz()">
+      <div class="mode-icon">⚖️</div>
+      <div class="mode-badge exp">Personal</div>
+      <div class="mode-title">Has the System Failed You?</div>
+      <p class="mode-desc">10 questions about your own experience with Australia's legal system. Scored by impact. Shareable results.</p>
+      <div class="mode-meta">
+        <span>⏱ <strong>2 min</strong></span>
+        <span>📊 <strong>Scored</strong></span>
+        <span>📤 <strong>Shareable</strong></span>
+      </div>
+      <button class="btn-mode exp">START PERSONAL QUIZ →</button>
+    </div>
+    <div class="mode-card sk" onclick="startSKQuiz()">
+      <div class="mode-icon">🧠</div>
+      <div class="mode-badge know">Knowledge</div>
+      <div class="mode-title">System Knowledge Quiz</div>
+      <p class="mode-desc">15 hard questions on institutional misconduct, evidence law, and systemic failure — drawn from 256 verified source documents.</p>
+      <div class="mode-meta">
+        <span>⏱ <strong>5 min</strong></span>
+        <span>📚 <strong>15 questions</strong></span>
+        <span>✅ <strong>Right / Wrong</strong></span>
+      </div>
+      <button class="btn-mode know">START KNOWLEDGE QUIZ →</button>
+    </div>
+  </div>
+</div>
 
 <!-- STATS BAND -->
 <div class="stats-band">
@@ -531,6 +661,297 @@
   </div>
 </section>
 
+<!-- ══════════════════════════════════════════
+     SYSTEM KNOWLEDGE QUIZ
+══════════════════════════════════════════ -->
+<section id="sk-quiz-section">
+  <div class="sk-header">
+    <div class="eyebrow">🧠 256 Verified Sources</div>
+    <h2>SYSTEM KNOWLEDGE QUIZ</h2>
+    <p>How well do you understand institutional misconduct? These questions are drawn from documented case analysis.<br>No real names. All systemic.</p>
+  </div>
+
+  <div class="progress-wrap">
+    <div class="progress-label">
+      <span>Question <strong id="skQNum">1</strong> of 15</span>
+      <span id="skQPillar">Evidence Integrity</span>
+    </div>
+    <div class="progress-track"><div class="progress-fill" id="skProgressFill" style="width:6.67%"></div></div>
+  </div>
+
+  <div id="sk-questions-wrap">
+
+    <!-- SK Q1 -->
+    <div class="question-card active" data-skq="0">
+      <div class="sk-pillar-tag pillar-accountability">Accountability</div>
+      <div class="q-number">Question 01 / 15 — Multi-Agency Coordination</div>
+      <div class="q-text">A statistical analysis of coordinated communications across multiple independent agencies on a documented date identified a specific probability of independent occurrence. What is this documented probability?</div>
+      <div class="options">
+        <button class="option-btn" data-correct="false" onclick="skSelect(this,0)"><span class="option-letter">A</span>0.02%</button>
+        <button class="option-btn" data-correct="true"  onclick="skSelect(this,0)"><span class="option-letter">B</span>0.00001%</button>
+        <button class="option-btn" data-correct="false" onclick="skSelect(this,0)"><span class="option-letter">C</span>0.0005%</button>
+        <button class="option-btn" data-correct="false" onclick="skSelect(this,0)"><span class="option-letter">D</span>0.000002%</button>
+      </div>
+      <div class="sk-feedback" id="skFb0"></div>
+      <div class="nav-btns"><button class="btn-next" id="sknext-0" onclick="skNextQ(0)">NEXT →</button></div>
+    </div>
+
+    <!-- SK Q2 -->
+    <div class="question-card" data-skq="1">
+      <div class="sk-pillar-tag pillar-transparency">Transparency</div>
+      <div class="q-number">Question 02 / 15 — Law Enforcement Procedure</div>
+      <div class="q-text">What was the documented compliance rate of the law enforcement agency regarding its own internal drug exhibit procedures?</div>
+      <div class="options">
+        <button class="option-btn" data-correct="false" onclick="skSelect(this,1)"><span class="option-letter">A</span>10%</button>
+        <button class="option-btn" data-correct="true"  onclick="skSelect(this,1)"><span class="option-letter">B</span>0%</button>
+        <button class="option-btn" data-correct="false" onclick="skSelect(this,1)"><span class="option-letter">C</span>5.6%</button>
+        <button class="option-btn" data-correct="false" onclick="skSelect(this,1)"><span class="option-letter">D</span>25%</button>
+      </div>
+      <div class="sk-feedback" id="skFb1"></div>
+      <div class="nav-btns"><button class="btn-next" id="sknext-1" onclick="skNextQ(1)">NEXT →</button></div>
+    </div>
+
+    <!-- SK Q3 -->
+    <div class="question-card" data-skq="2">
+      <div class="sk-pillar-tag pillar-evidence">Evidence Integrity</div>
+      <div class="q-number">Question 03 / 15 — Expert Evidence / Invoice Analysis</div>
+      <div class="q-text">An expert analysis of a primary infrastructure repair invoice identified a technical impossibility. Which specification contradiction was documented?</div>
+      <div class="options">
+        <button class="option-btn" data-correct="true"  onclick="skSelect(this,2)"><span class="option-letter">A</span>The mismatch between the volume of material invoiced and the documented area of coverage</button>
+        <button class="option-btn" data-correct="false" onclick="skSelect(this,2)"><span class="option-letter">B</span>The use of two incompatible asphalt grades on the same repair documentation</button>
+        <button class="option-btn" data-correct="false" onclick="skSelect(this,2)"><span class="option-letter">C</span>The application of cold-mix asphalt in a high-speed road environment</button>
+        <button class="option-btn" data-correct="false" onclick="skSelect(this,2)"><span class="option-letter">D</span>The scheduling of structural resurfacing during peak traffic hours</button>
+      </div>
+      <div class="sk-feedback" id="skFb2"></div>
+      <div class="nav-btns"><button class="btn-next" id="sknext-2" onclick="skNextQ(2)">NEXT →</button></div>
+    </div>
+
+    <!-- SK Q4 -->
+    <div class="question-card" data-skq="3">
+      <div class="sk-pillar-tag pillar-accountability">Accountability</div>
+      <div class="q-number">Question 04 / 15 — Financial Misconduct</div>
+      <div class="q-text">Which sequence of events characterises the documented 'double recovery' tactic?</div>
+      <div class="options">
+        <button class="option-btn" data-correct="false" onclick="skSelect(this,3)"><span class="option-letter">A</span>The assignment of a judgment debt to a third-party funder before the liability period expired</button>
+        <button class="option-btn" data-correct="false" onclick="skSelect(this,3)"><span class="option-letter">B</span>Receiving a government grant for infrastructure repair while charging a private party for the same work</button>
+        <button class="option-btn" data-correct="false" onclick="skSelect(this,3)"><span class="option-letter">C</span>Claiming workers' compensation benefits while receiving a private disability settlement</button>
+        <button class="option-btn" data-correct="true"  onclick="skSelect(this,3)"><span class="option-letter">D</span>Simultaneous receipt of an insurance total-loss payout and a civil judgment for the same asset</button>
+      </div>
+      <div class="sk-feedback" id="skFb3"></div>
+      <div class="nav-btns"><button class="btn-next" id="sknext-3" onclick="skNextQ(3)">NEXT →</button></div>
+    </div>
+
+    <!-- SK Q5 -->
+    <div class="question-card" data-skq="4">
+      <div class="sk-pillar-tag pillar-evidence">Evidence Integrity</div>
+      <div class="q-number">Question 05 / 15 — Document Fabrication</div>
+      <div class="q-text">Which specific document fabrication led to the establishment of vicarious liability against the respondent in the tribunal proceedings?</div>
+      <div class="options">
+        <button class="option-btn" data-correct="false" onclick="skSelect(this,4)"><span class="option-letter">A</span>The forging of a medical clearance certificate</button>
+        <button class="option-btn" data-correct="false" onclick="skSelect(this,4)"><span class="option-letter">B</span>The manufacturing of a drug and alcohol policy acknowledgement form</button>
+        <button class="option-btn" data-correct="false" onclick="skSelect(this,4)"><span class="option-letter">C</span>The alteration of a heavy vehicle pre-trip inspection log</button>
+        <button class="option-btn" data-correct="true"  onclick="skSelect(this,4)"><span class="option-letter">D</span>The backdating of an employment contract after the incident</button>
+      </div>
+      <div class="sk-feedback" id="skFb4"></div>
+      <div class="nav-btns"><button class="btn-next" id="sknext-4" onclick="skNextQ(4)">NEXT →</button></div>
+    </div>
+
+    <!-- SK Q6 -->
+    <div class="question-card" data-skq="5">
+      <div class="sk-pillar-tag pillar-transparency">Transparency</div>
+      <div class="q-number">Question 06 / 15 — Evidence Suppression</div>
+      <div class="q-text">What percentage of body-worn video footage was suppressed by the law enforcement agency, according to the institutional failure analysis?</div>
+      <div class="options">
+        <button class="option-btn" data-correct="true"  onclick="skSelect(this,5)"><span class="option-letter">A</span>100%</button>
+        <button class="option-btn" data-correct="false" onclick="skSelect(this,5)"><span class="option-letter">B</span>94.4%</button>
+        <button class="option-btn" data-correct="false" onclick="skSelect(this,5)"><span class="option-letter">C</span>75.2%</button>
+        <button class="option-btn" data-correct="false" onclick="skSelect(this,5)"><span class="option-letter">D</span>50%</button>
+      </div>
+      <div class="sk-feedback" id="skFb5"></div>
+      <div class="nav-btns"><button class="btn-next" id="sknext-5" onclick="skNextQ(5)">NEXT →</button></div>
+    </div>
+
+    <!-- SK Q7 -->
+    <div class="question-card" data-skq="6">
+      <div class="sk-pillar-tag pillar-accountability">Accountability</div>
+      <div class="q-number">Question 07 / 15 — Model Litigant Obligations</div>
+      <div class="q-text">In a civil litigation conduct review, a government agency's legal representative was scrutinised for breach of Model Litigant Guidelines. Which specific obligation was allegedly ignored?</div>
+      <div class="options">
+        <button class="option-btn" data-correct="false" onclick="skSelect(this,6)"><span class="option-letter">A</span>The mandate to settle all claims within 90 days regardless of merit</button>
+        <button class="option-btn" data-correct="false" onclick="skSelect(this,6)"><span class="option-letter">B</span>The obligation to provide pro-bono support to unrepresented defendants</button>
+        <button class="option-btn" data-correct="false" onclick="skSelect(this,6)"><span class="option-letter">C</span>The prohibition against using external counsel for property damage recoveries</button>
+        <button class="option-btn" data-correct="true"  onclick="skSelect(this,6)"><span class="option-letter">D</span>The requirement to correct known errors in affidavits and evidence once identified</button>
+      </div>
+      <div class="sk-feedback" id="skFb6"></div>
+      <div class="nav-btns"><button class="btn-next" id="sknext-6" onclick="skNextQ(6)">NEXT →</button></div>
+    </div>
+
+    <!-- SK Q8 -->
+    <div class="question-card" data-skq="7">
+      <div class="sk-pillar-tag pillar-accountability">Accountability</div>
+      <div class="q-number">Question 08 / 15 — Interest / Financial Misconduct</div>
+      <div class="q-text">What mathematical anomaly is documented regarding the interest charges applied to the civil judgment debt?</div>
+      <div class="options">
+        <button class="option-btn" data-correct="false" onclick="skSelect(this,7)"><span class="option-letter">A</span>Interest was calculated from a date preceding the actual incident</button>
+        <button class="option-btn" data-correct="true"  onclick="skSelect(this,7)"><span class="option-letter">B</span>Compounding interest was applied daily instead of annually</button>
+        <button class="option-btn" data-correct="false" onclick="skSelect(this,7)"><span class="option-letter">C</span>The interest rate exceeded the statutory maximum</button>
+        <button class="option-btn" data-correct="false" onclick="skSelect(this,7)"><span class="option-letter">D</span>Interest was calculated on the gross claim rather than the settled amount</button>
+      </div>
+      <div class="sk-feedback" id="skFb7"></div>
+      <div class="nav-btns"><button class="btn-next" id="sknext-7" onclick="skNextQ(7)">NEXT →</button></div>
+    </div>
+
+    <!-- SK Q9 -->
+    <div class="question-card" data-skq="8">
+      <div class="sk-pillar-tag pillar-evidence">Evidence Integrity</div>
+      <div class="q-number">Question 09 / 15 — Vehicle Identity Fraud</div>
+      <div class="q-text">A vehicle declared a statutory total loss was allegedly reintroduced into operation. What was the specific nature of the digit alteration noted in the vehicle identification number?</div>
+      <div class="options">
+        <button class="option-btn" data-correct="true"  onclick="skSelect(this,8)"><span class="option-letter">A</span>The final digits were changed to bypass the Written-Off Vehicle Register</button>
+        <button class="option-btn" data-correct="false" onclick="skSelect(this,8)"><span class="option-letter">B</span>The manufacturer's plant code was replaced with a generic identifier</button>
+        <button class="option-btn" data-correct="false" onclick="skSelect(this,8)"><span class="option-letter">C</span>The model year code was shifted forward by two years</button>
+        <button class="option-btn" data-correct="false" onclick="skSelect(this,8)"><span class="option-letter">D</span>The checksum digit was recalculated to match a different chassis</button>
+      </div>
+      <div class="sk-feedback" id="skFb8"></div>
+      <div class="nav-btns"><button class="btn-next" id="sknext-8" onclick="skNextQ(8)">NEXT →</button></div>
+    </div>
+
+    <!-- SK Q10 -->
+    <div class="question-card" data-skq="9">
+      <div class="sk-pillar-tag pillar-transparency">Transparency</div>
+      <div class="q-number">Question 10 / 15 — Evidence Credibility</div>
+      <div class="q-text">What was the primary accountability gap in the tribunal's acceptance of the government agency's infrastructure damage assessments?</div>
+      <div class="options">
+        <button class="option-btn" data-correct="true"  onclick="skSelect(this,9)"><span class="option-letter">A</span>Publicly available imagery from two different dates showed no visible repair work had been performed</button>
+        <button class="option-btn" data-correct="false" onclick="skSelect(this,9)"><span class="option-letter">B</span>The lack of competitive tendering for the emergency repairs</button>
+        <button class="option-btn" data-correct="false" onclick="skSelect(this,9)"><span class="option-letter">C</span>The failure to obtain a signed statement from the lead project engineer</button>
+        <button class="option-btn" data-correct="false" onclick="skSelect(this,9)"><span class="option-letter">D</span>The use of an unlicensed assessor to quantify the loss</button>
+      </div>
+      <div class="sk-feedback" id="skFb9"></div>
+      <div class="nav-btns"><button class="btn-next" id="sknext-9" onclick="skNextQ(9)">NEXT →</button></div>
+    </div>
+
+    <!-- SK Q11 -->
+    <div class="question-card" data-skq="10">
+      <div class="sk-pillar-tag pillar-accountability">Accountability</div>
+      <div class="q-number">Question 11 / 15 — Coordinated Misconduct</div>
+      <div class="q-text">Under integrity legislation, what form of conduct is specifically cited when independent agencies produce identical narratives within 90 minutes of an incident?</div>
+      <div class="options">
+        <button class="option-btn" data-correct="false" onclick="skSelect(this,10)"><span class="option-letter">A</span>Standard media relations and public information protocols</button>
+        <button class="option-btn" data-correct="false" onclick="skSelect(this,10)"><span class="option-letter">B</span>Independent corroboration of investigative findings</button>
+        <button class="option-btn" data-correct="false" onclick="skSelect(this,10)"><span class="option-letter">C</span>Administrative oversight and procedural delay</button>
+        <button class="option-btn" data-correct="true"  onclick="skSelect(this,10)"><span class="option-letter">D</span>Coordinated conduct involving public officials</button>
+      </div>
+      <div class="sk-feedback" id="skFb10"></div>
+      <div class="nav-btns"><button class="btn-next" id="sknext-10" onclick="skNextQ(10)">NEXT →</button></div>
+    </div>
+
+    <!-- SK Q12 -->
+    <div class="question-card" data-skq="11">
+      <div class="sk-pillar-tag pillar-accountability">Accountability</div>
+      <div class="q-number">Question 12 / 15 — Coercive Enforcement</div>
+      <div class="q-text">A government agency used formal enforcement mechanisms in a manner described as coercive. Why was this considered procedural misconduct?</div>
+      <div class="options">
+        <button class="option-btn" data-correct="false" onclick="skSelect(this,11)"><span class="option-letter">A</span>The notices were served outside standard business hours</button>
+        <button class="option-btn" data-correct="false" onclick="skSelect(this,11)"><span class="option-letter">B</span>The legal representatives failed to disclose their fee structure</button>
+        <button class="option-btn" data-correct="true"  onclick="skSelect(this,11)"><span class="option-letter">C</span>Enforcement actions were escalated while documented fraud indicators and evidence disputes remained unresolved</button>
+        <button class="option-btn" data-correct="false" onclick="skSelect(this,11)"><span class="option-letter">D</span>The enforcement officer failed to provide a cooling-off period</button>
+      </div>
+      <div class="sk-feedback" id="skFb11"></div>
+      <div class="nav-btns"><button class="btn-next" id="sknext-11" onclick="skNextQ(11)">NEXT →</button></div>
+    </div>
+
+    <!-- SK Q13 -->
+    <div class="question-card" data-skq="12">
+      <div class="sk-pillar-tag pillar-reform">Reform</div>
+      <div class="q-number">Question 13 / 15 — Referral Pathways</div>
+      <div class="q-text">Which federal integrity body is suggested for referral in relation to cross-jurisdictional financial transactions in this case analysis?</div>
+      <div class="options">
+        <button class="option-btn" data-correct="false" onclick="skSelect(this,12)"><span class="option-letter">A</span>The Commonwealth Ombudsman</button>
+        <button class="option-btn" data-correct="true"  onclick="skSelect(this,12)"><span class="option-letter">B</span>NACC — National Anti-Corruption Commission</button>
+        <button class="option-btn" data-correct="false" onclick="skSelect(this,12)"><span class="option-letter">C</span>ASIC — Australian Securities and Investments Commission</button>
+        <button class="option-btn" data-correct="false" onclick="skSelect(this,12)"><span class="option-letter">D</span>AFCA — Australian Financial Complaints Authority</button>
+      </div>
+      <div class="sk-feedback" id="skFb12"></div>
+      <div class="nav-btns"><button class="btn-next" id="sknext-12" onclick="skNextQ(12)">NEXT →</button></div>
+    </div>
+
+    <!-- SK Q14 -->
+    <div class="question-card" data-skq="13">
+      <div class="sk-pillar-tag pillar-transparency">Transparency</div>
+      <div class="q-number">Question 14 / 15 — Insurance Investigation Conduct</div>
+      <div class="q-text">What role did the third-party insurance investigator play in the alleged narrative alignment, according to the findings?</div>
+      <div class="options">
+        <button class="option-btn" data-correct="false" onclick="skSelect(this,13)"><span class="option-letter">A</span>Identifying a mechanical failure that the agency subsequently suppressed</button>
+        <button class="option-btn" data-correct="false" onclick="skSelect(this,13)"><span class="option-letter">B</span>Providing an accurate pre-transaction assessment of the infrastructure repairs</button>
+        <button class="option-btn" data-correct="true"  onclick="skSelect(this,13)"><span class="option-letter">C</span>Commissioning reports after the payout to create an appearance of pre-transaction due diligence</button>
+        <button class="option-btn" data-correct="false" onclick="skSelect(this,13)"><span class="option-letter">D</span>Refusing to share data with law enforcement to protect client confidentiality</button>
+      </div>
+      <div class="sk-feedback" id="skFb13"></div>
+      <div class="nav-btns"><button class="btn-next" id="sknext-13" onclick="skNextQ(13)">NEXT →</button></div>
+    </div>
+
+    <!-- SK Q15 -->
+    <div class="question-card" data-skq="14">
+      <div class="sk-pillar-tag pillar-accountability">Accountability</div>
+      <div class="q-number">Question 15 / 15 — Unjust Enrichment</div>
+      <div class="q-text">In the financial exploitation analysis, the term 'unjust enrichment' is applied to which situation?</div>
+      <div class="options">
+        <button class="option-btn" data-correct="true"  onclick="skSelect(this,14)"><span class="option-letter">A</span>The employer retaining a vehicle asset after receiving a total-loss insurance payout</button>
+        <button class="option-btn" data-correct="false" onclick="skSelect(this,14)"><span class="option-letter">B</span>The government agency charging a margin on top of contractor invoices</button>
+        <button class="option-btn" data-correct="false" onclick="skSelect(this,14)"><span class="option-letter">C</span>The respondent receiving Legal Aid while possessing undisclosed financial assets</button>
+        <button class="option-btn" data-correct="false" onclick="skSelect(this,14)"><span class="option-letter">D</span>Legal representatives charging interest on their own fees during the dispute</button>
+      </div>
+      <div class="sk-feedback" id="skFb14"></div>
+      <div class="nav-btns"><button class="btn-next" id="sknext-14" onclick="skNextQ(14)">SEE MY SCORE →</button></div>
+    </div>
+
+  </div><!-- /sk-questions-wrap -->
+</section>
+
+<!-- SK RESULTS -->
+<section id="sk-results">
+  <div class="sk-results-card">
+    <div class="results-eyebrow">System Knowledge Quiz — Results</div>
+    <div class="sk-score-wrap">
+      <div class="sk-score-big" id="skScoreDisplay">0</div>
+      <div class="sk-score-denom">out of 15 correct</div>
+    </div>
+    <div class="sk-grade" id="skGradeText">Calculating…</div>
+    <p class="sk-grade-desc" id="skGradeDesc"></p>
+
+    <div class="sk-pillar-scores">
+      <h4>Score by Pillar</h4>
+      <div class="bar-item">
+        <div class="bar-label"><strong>Accountability</strong> <span id="skBarAcc">0%</span></div>
+        <div class="bar-track"><div class="bar-fill orange" id="skFillAcc" style="width:0%"></div></div>
+      </div>
+      <div class="bar-item">
+        <div class="bar-label"><strong>Transparency</strong> <span id="skBarTrans">0%</span></div>
+        <div class="bar-track"><div class="bar-fill blue" id="skFillTrans" style="width:0%"></div></div>
+      </div>
+      <div class="bar-item">
+        <div class="bar-label"><strong>Evidence Integrity</strong> <span id="skBarEvid">0%</span></div>
+        <div class="bar-track"><div class="bar-fill gold" id="skFillEvid" style="width:0%"></div></div>
+      </div>
+      <div class="bar-item">
+        <div class="bar-label"><strong>Reform</strong> <span id="skBarRef">0%</span></div>
+        <div class="bar-track"><div class="bar-fill" id="skFillRef" style="width:0%; background:linear-gradient(90deg,#27ae60,#7dcea0)"></div></div>
+      </div>
+    </div>
+
+    <div class="results-actions">
+      <button class="btn-share primary" onclick="skShareResults()">📤 SHARE MY SCORE</button>
+      <button class="btn-share secondary" onclick="retakeSKQuiz()">🔄 RETAKE KNOWLEDGE QUIZ</button>
+      <a href="take-action.html" class="btn-share outline">✍️ SIGN THE PETITION</a>
+    </div>
+    <p style="margin-top:2rem; font-size:0.8rem; color:var(--grey);">
+      Questions drawn from 256 verified source documents — sanitised to systemic language.<br>
+      <a href="evidence.html" style="color:var(--gold);">Explore the Evidence Vault →</a>
+    </p>
+  </div>
+</section>
+
 <!-- FOOTER -->
 <footer>
   <div class="footer-logo">FAIR GO JUSTICE</div>
@@ -580,6 +1001,7 @@
   function startQuiz() {
     document.querySelector('.hero').style.display = 'none';
     document.querySelector('.stats-band').style.display = 'none';
+    document.getElementById('mode-selector').style.display = 'none';
     document.getElementById('quiz-section').style.display = 'block';
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
@@ -724,6 +1146,182 @@
     t.textContent = msg;
     t.classList.add('show');
     setTimeout(() => t.classList.remove('show'), 3500);
+  }
+
+  // ══════════════════════════════════════════
+  // SYSTEM KNOWLEDGE QUIZ
+  // ══════════════════════════════════════════
+  let skCurrentQ = 0;
+  let skResults = new Array(15).fill(null); // true = correct, false = wrong
+
+  // Pillar mapping: which questions belong to which pillar (0-indexed)
+  // Accountability: 0,3,6,7,10,11,14 = Q1,4,7,8,11,12,15
+  // Transparency:   1,5,9,13         = Q2,6,10,14
+  // Evidence:       2,4,8            = Q3,5,9
+  // Reform:         12               = Q13
+  const skPillarMap = {
+    accountability: [0,3,6,7,10,11,14],
+    transparency:   [1,5,9,13],
+    evidence:       [2,4,8],
+    reform:         [12]
+  };
+
+  const skFeedback = [
+    { correct: "✅ Correct. The probability of 0.00001% — roughly 1 in 10 million — indicates the communications were statistically impossible to have occurred independently.", wrong: "❌ The documented probability is 0.00001% — making independent occurrence statistically implausible." },
+    { correct: "✅ Correct. Zero percent compliance with its own internal procedures — a complete institutional failure, documented in the analysis.", wrong: "❌ The compliance rate was 0% — the agency followed none of its own drug exhibit procedures." },
+    { correct: "✅ Correct. The volume of material invoiced was physically impossible to apply to the documented repair area — a clear technical impossibility.", wrong: "❌ The key contradiction was the mismatch between invoiced material volume and the documented coverage area." },
+    { correct: "✅ Correct. Receiving both an insurance total-loss payout and a civil judgment for the same asset is the textbook definition of double recovery.", wrong: "❌ Double recovery occurred through simultaneous receipt of an insurance payout and a civil judgment for the same asset." },
+    { correct: "✅ Correct. A backdated employment contract — created after the incident — manufactured the appearance of an employment relationship that underpinned the vicarious liability claim.", wrong: "❌ Vicarious liability was established via a backdated employment contract created after the incident." },
+    { correct: "✅ Correct. 100% of body-worn video footage was suppressed — not a single frame was disclosed from officers present at the scene.", wrong: "❌ The documented suppression rate was 100% — no body-worn video was ever disclosed." },
+    { correct: "✅ Correct. The Model Litigant obligation requires the Crown to correct known errors in evidence — an obligation that was demonstrably ignored.", wrong: "❌ The breached obligation was the requirement to correct known errors in affidavits and evidence once identified." },
+    { correct: "✅ Correct. Daily compounding interest — rather than the standard annual calculation — produces exponentially inflated debt, which is what was documented.", wrong: "❌ The anomaly was compounding interest applied daily instead of annually — dramatically inflating the debt." },
+    { correct: "✅ Correct. Changing the final digits allowed the vehicle to bypass the Written-Off Vehicle Register — effectively laundering a written-off asset back into use.", wrong: "❌ The final digits were altered to bypass the Written-Off Vehicle Register." },
+    { correct: "✅ Correct. Publicly available satellite/aerial imagery for two dates showed no repair work had occurred — directly contradicting the invoiced claims.", wrong: "❌ Publicly available imagery for two dates showed no visible repair work — undermining the damage assessments." },
+    { correct: "✅ Correct. Under integrity legislation, independent agencies producing identical narratives within 90 minutes constitutes coordinated conduct involving public officials.", wrong: "❌ This conduct is classified as coordinated conduct involving public officials under integrity legislation." },
+    { correct: "✅ Correct. Escalating enforcement while known fraud indicators and evidence disputes are unresolved is procedural misconduct — using the enforcement mechanism as a weapon.", wrong: "❌ The misconduct was escalating enforcement while fraud indicators and evidence disputes remained unresolved." },
+    { correct: "✅ Correct. The NACC — National Anti-Corruption Commission — is the appropriate federal body for cross-jurisdictional corruption referrals of this nature.", wrong: "❌ The NACC (National Anti-Corruption Commission) is the appropriate body for this type of referral." },
+    { correct: "✅ Correct. Commissioning reports after a payout — then presenting them as if they were pre-transaction due diligence — is manufactured evidence of process compliance.", wrong: "❌ Reports were commissioned after the payout to create a false appearance of pre-transaction due diligence." },
+    { correct: "✅ Correct. Retaining a vehicle asset after receiving a full insurance total-loss payout for it is unjust enrichment — the asset should have been surrendered.", wrong: "❌ Unjust enrichment occurred when the employer retained a vehicle asset after receiving a total-loss insurance payout for it." }
+  ];
+
+  const skPillarLabels = ['Question 01','Question 02','Question 03','Question 04','Question 05','Question 06','Question 07','Question 08','Question 09','Question 10','Question 11','Question 12','Question 13','Question 14','Question 15'];
+  const skPillarNames  = ['Accountability','Transparency','Evidence Integrity','Accountability','Evidence Integrity','Transparency','Accountability','Accountability','Evidence Integrity','Transparency','Accountability','Accountability','Reform','Transparency','Accountability'];
+  const skProgressLabels = ['Multi-Agency Coordination','Law Enforcement Procedure','Expert Evidence / Invoice Analysis','Financial Misconduct','Document Fabrication','Evidence Suppression','Model Litigant Obligations','Interest / Financial Misconduct','Vehicle Identity Fraud','Evidence Credibility','Coordinated Misconduct','Coercive Enforcement','Referral Pathways','Insurance Investigation Conduct','Unjust Enrichment'];
+
+  function startSKQuiz() {
+    document.getElementById('mode-selector').style.display = 'none';
+    document.querySelector('.stats-band').style.display = 'none';
+    document.getElementById('sk-quiz-section').style.display = 'block';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function skSelect(btn, qIdx) {
+    const card = btn.closest('.question-card');
+    // Prevent re-selection after answer locked
+    if (card.dataset.answered) return;
+    card.dataset.answered = 'true';
+
+    const isCorrect = btn.dataset.correct === 'true';
+    skResults[qIdx] = isCorrect;
+
+    // Style all buttons
+    card.querySelectorAll('.option-btn').forEach(b => {
+      b.style.pointerEvents = 'none';
+      if (b.dataset.correct === 'true') b.classList.add('sk-correct');
+    });
+    if (!isCorrect) btn.classList.add('sk-wrong');
+
+    // Show feedback
+    const fb = document.getElementById('skFb' + qIdx);
+    fb.style.display = 'block';
+    fb.className = 'sk-feedback ' + (isCorrect ? 'correct' : 'wrong');
+    fb.textContent = isCorrect ? skFeedback[qIdx].correct : skFeedback[qIdx].wrong;
+
+    // Enable next
+    const nextBtn = document.getElementById('sknext-' + qIdx);
+    nextBtn.classList.add('ready');
+  }
+
+  function skNextQ(idx) {
+    if (skResults[idx] === null) return;
+    const cards = document.querySelectorAll('#sk-questions-wrap .question-card');
+    cards[idx].classList.remove('active');
+
+    if (idx < 14) {
+      cards[idx + 1].classList.add('active');
+      skCurrentQ = idx + 1;
+      skUpdateProgress(idx + 1);
+    } else {
+      skShowResults();
+    }
+  }
+
+  function skUpdateProgress(idx) {
+    const pct = Math.round(((idx + 1) / 15) * 100);
+    document.getElementById('skProgressFill').style.width = pct + '%';
+    document.getElementById('skQNum').textContent = idx + 1;
+    document.getElementById('skQPillar').textContent = skProgressLabels[idx];
+  }
+
+  function skShowResults() {
+    document.getElementById('sk-quiz-section').style.display = 'none';
+    document.getElementById('sk-results').style.display = 'block';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    const total = skResults.filter(r => r === true).length;
+    document.getElementById('skScoreDisplay').textContent = total;
+
+    // Pillar scores
+    function pillarScore(indices) {
+      const correct = indices.filter(i => skResults[i] === true).length;
+      return Math.round((correct / indices.length) * 100);
+    }
+    const accPct   = pillarScore(skPillarMap.accountability);
+    const transPct = pillarScore(skPillarMap.transparency);
+    const evidPct  = pillarScore(skPillarMap.evidence);
+    const refPct   = pillarScore(skPillarMap.reform);
+
+    setTimeout(() => {
+      document.getElementById('skFillAcc').style.width   = accPct + '%';   document.getElementById('skBarAcc').textContent   = accPct + '%';
+      document.getElementById('skFillTrans').style.width = transPct + '%'; document.getElementById('skBarTrans').textContent = transPct + '%';
+      document.getElementById('skFillEvid').style.width  = evidPct + '%';  document.getElementById('skBarEvid').textContent  = evidPct + '%';
+      document.getElementById('skFillRef').style.width   = refPct + '%';   document.getElementById('skBarRef').textContent   = refPct + '%';
+    }, 300);
+
+    // Grade
+    let grade, desc;
+    if (total >= 13) {
+      grade = 'EXPERT ANALYST — YOU SEE THROUGH THE FOG';
+      desc  = 'You understand how institutional misconduct operates at the highest level. Your knowledge of coordinated conduct, evidence suppression, and financial exploitation is sharp. The system relies on people not knowing what you know.';
+    } else if (total >= 10) {
+      grade = 'INFORMED ADVOCATE — ABOVE THE NOISE';
+      desc  = 'You have a strong grasp of how systemic failure works. A few areas to sharpen — but you\'re already ahead of most. Share this quiz and help others see what you see.';
+    } else if (total >= 7) {
+      grade = 'AWARE BUT LEARNING';
+      desc  = 'You understand the basics but the deeper mechanisms of institutional misconduct are still coming into focus. The Evidence Vault is your next stop — 256 sources, all verified.';
+    } else {
+      grade = 'THE SYSTEM COUNTS ON YOUR CONFUSION';
+      desc  = 'Don\'t be discouraged — this is precisely why the system works. Complexity is a shield. Start with the Three Pillars, then come back and take this quiz again.';
+    }
+    document.getElementById('skGradeText').textContent = grade;
+    document.getElementById('skGradeDesc').textContent = desc;
+  }
+
+  function skShareResults() {
+    const total = skResults.filter(r => r === true).length;
+    const pct = Math.round((total / 15) * 100);
+    const text = `I scored ${total}/15 on the Fair Go Justice System Knowledge Quiz — drawing from 256 verified source documents. How much do YOU know about institutional misconduct in Australia? Take it: https://fairgojustice.com.au/quiz.html #FairGoJustice #LegalReform #SystemKnowledge`;
+    if (navigator.share) {
+      navigator.share({ title: 'My System Knowledge Quiz Score', text: text, url: 'https://fairgojustice.com.au/quiz.html' });
+    } else {
+      navigator.clipboard.writeText(text).then(() => showToast('📋 Score copied! Paste into any social media.'));
+    }
+  }
+
+  function retakeSKQuiz() {
+    skCurrentQ = 0;
+    skResults = new Array(15).fill(null);
+    document.getElementById('sk-results').style.display = 'none';
+    // Reset all cards
+    const cards = document.querySelectorAll('#sk-questions-wrap .question-card');
+    cards.forEach((c, i) => {
+      c.classList.remove('active');
+      delete c.dataset.answered;
+      c.querySelectorAll('.option-btn').forEach(b => {
+        b.classList.remove('sk-correct','sk-wrong','selected');
+        b.style.pointerEvents = '';
+      });
+      const fb = document.getElementById('skFb' + i);
+      if (fb) { fb.style.display = 'none'; fb.textContent = ''; }
+      const nb = document.getElementById('sknext-' + i);
+      if (nb) nb.classList.remove('ready');
+    });
+    cards[0].classList.add('active');
+    document.getElementById('skProgressFill').style.width = '6.67%';
+    document.getElementById('skQNum').textContent = '1';
+    document.getElementById('skQPillar').textContent = skProgressLabels[0];
+    document.getElementById('sk-quiz-section').style.display = 'block';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 </script>
 </body>
