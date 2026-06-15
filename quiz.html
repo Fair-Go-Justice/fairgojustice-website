@@ -288,9 +288,23 @@
     }
     .mode-card:hover { border-color: var(--orange); transform: translateY(-3px); box-shadow: 0 12px 40px rgba(214,107,45,0.2); }
     .mode-card.sk:hover { border-color: var(--gold); box-shadow: 0 12px 40px rgba(212,175,55,0.2); }
+    .mode-card.cd:hover { border-color: #4CAF50; box-shadow: 0 12px 40px rgba(76,175,80,0.2); }
     .mode-icon { font-size: 2rem; margin-bottom: 0.8rem; }
     .mode-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; letter-spacing: 1px; color: var(--white); margin-bottom: 0.4rem; }
     .mode-card.sk .mode-title { color: var(--gold); }
+    .mode-card.cd .mode-title { color: #4CAF50; }
+    .mode-badge.case { background: rgba(76,175,80,0.15); color: #4CAF50; border: 1px solid rgba(76,175,80,0.3); }
+    .btn-mode.case { background: transparent; border: 2px solid #4CAF50; color: #4CAF50; padding: 0.75rem 1.5rem; border-radius: 4px; font-family: 'Bebas Neue', sans-serif; letter-spacing: 1px; cursor: pointer; font-size: 1rem; transition: all 0.2s; }
+    .btn-mode.case:hover { background: #4CAF50; color: #000; }
+    .cd-option { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 0.9rem 1.2rem; margin: 0.5rem 0; cursor: pointer; font-family: 'Space Grotesk',sans-serif; font-size: 0.95rem; color: var(--white); text-align: left; width: 100%; transition: all 0.2s; display: flex; align-items: center; gap: 0.75rem; }
+    .cd-option:hover:not([disabled]) { border-color: #4CAF50; background: rgba(76,175,80,0.1); }
+    .cd-option.correct { border-color: #4CAF50 !important; background: rgba(76,175,80,0.2) !important; color: #4CAF50; }
+    .cd-option.wrong { border-color: #f44336 !important; background: rgba(244,67,54,0.15) !important; color: #f44336; }
+    .cd-option .opt-letter { font-family: 'Bebas Neue',sans-serif; font-size: 1.1rem; min-width: 1.5rem; }
+    .cd-explanation { background: rgba(76,175,80,0.1); border-left: 3px solid #4CAF50; border-radius: 6px; padding: 1rem; margin-top: 1rem; font-size: 0.9rem; color: rgba(245,245,245,0.85); line-height: 1.6; display: none; }
+    .cd-next-btn { display: none; margin-top: 1.2rem; background: #4CAF50; color: #000; border: none; padding: 0.75rem 2rem; border-radius: 4px; font-family: 'Bebas Neue',sans-serif; font-size: 1.1rem; letter-spacing: 1px; cursor: pointer; }
+    .cd-progress-bar { height: 4px; background: rgba(255,255,255,0.1); border-radius: 2px; margin-bottom: 1.5rem; }
+    .cd-progress-fill { height: 100%; background: #4CAF50; border-radius: 2px; transition: width 0.4s ease; }
     .mode-badge {
       display: inline-block; font-size: 0.65rem; font-weight: 600;
       letter-spacing: 0.15em; text-transform: uppercase;
@@ -402,7 +416,7 @@
 <!-- MODE SELECTOR -->
 <div class="mode-selector" id="mode-selector">
   <h2>CHOOSE YOUR QUIZ</h2>
-  <p>Two ways to engage with the evidence. One tests your personal experience. The other tests your knowledge of how the system really operates.</p>
+  <p>Three ways to engage with the evidence. Test your experience, test your knowledge, or drill into the case details drawn from 256 verified source documents.</p>
   <div class="mode-cards">
     <div class="mode-card" onclick="startQuiz()">
       <div class="mode-icon">⚖️</div>
@@ -427,6 +441,18 @@
         <span>✅ <strong>Right / Wrong</strong></span>
       </div>
       <button class="btn-mode know">START KNOWLEDGE QUIZ →</button>
+    </div>
+    <div class="mode-card cd" onclick="startCDQuiz()">
+      <div class="mode-icon">🔍</div>
+      <div class="mode-badge case">Case Details</div>
+      <div class="mode-title">Case Details Quiz</div>
+      <p class="mode-desc">10 questions drawn directly from verified court documents, police records, and forensic reports. How closely have you read the evidence?</p>
+      <div class="mode-meta">
+        <span>⏱ <strong>3 min</strong></span>
+        <span>📁 <strong>10 questions</strong></span>
+        <span>✅ <strong>Right / Wrong</strong></span>
+      </div>
+      <button class="btn-mode case">START CASE DETAILS QUIZ →</button>
     </div>
   </div>
 </div>
@@ -952,6 +978,36 @@
   </div>
 </section>
 
+<!-- ═══════════════════════════════════════════════════════
+     CASE DETAILS QUIZ SECTION
+═══════════════════════════════════════════════════════ -->
+<section id="cd-quiz-section" style="display:none; padding: 2rem 1rem; max-width: 780px; margin: 0 auto;">
+  <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:1.5rem;">
+    <div>
+      <div style="font-family:'Bebas Neue',sans-serif; font-size:1.8rem; color:#4CAF50; letter-spacing:2px;">CASE DETAILS QUIZ</div>
+      <div style="font-size:0.85rem; color:rgba(245,245,245,0.5); margin-top:0.2rem;">Drawn from verified court documents · 256 sources</div>
+    </div>
+    <div id="cd-counter" style="font-family:'Bebas Neue',sans-serif; font-size:1.4rem; color:rgba(245,245,245,0.4);">1 / 10</div>
+  </div>
+  <div class="cd-progress-bar"><div class="cd-progress-fill" id="cd-progress" style="width:10%;"></div></div>
+  <div id="cd-question-wrap"></div>
+</section>
+
+<!-- CASE DETAILS RESULTS SECTION -->
+<section id="cd-results-section" style="display:none; padding: 3rem 1rem; max-width: 780px; margin: 0 auto; text-align:center;">
+  <div style="font-family:'Bebas Neue',sans-serif; font-size:1rem; letter-spacing:3px; color:#4CAF50; margin-bottom:0.5rem;">CASE DETAILS QUIZ — RESULTS</div>
+  <div id="cd-score-display" style="font-family:'Bebas Neue',sans-serif; font-size:5rem; color:#4CAF50; line-height:1;"></div>
+  <div style="font-size:1rem; color:rgba(245,245,245,0.5); margin-bottom:0.5rem;">out of 10</div>
+  <div id="cd-grade" style="font-family:'Bebas Neue',sans-serif; font-size:1.6rem; letter-spacing:2px; color:var(--white); margin:1rem 0;"></div>
+  <div id="cd-grade-desc" style="font-size:1rem; color:rgba(245,245,245,0.7); max-width:540px; margin:0 auto 2rem;"></div>
+  <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; margin-bottom:2rem;">
+    <button onclick="cdRetake()" style="font-family:'Bebas Neue',sans-serif; letter-spacing:1px; font-size:1rem; padding:0.8rem 2rem; border:2px solid #4CAF50; background:transparent; color:#4CAF50; border-radius:4px; cursor:pointer;">RETAKE QUIZ</button>
+    <button onclick="cdShare()" style="font-family:'Bebas Neue',sans-serif; letter-spacing:1px; font-size:1rem; padding:0.8rem 2rem; border:none; background:#4CAF50; color:#000; border-radius:4px; cursor:pointer;">📤 SHARE SCORE</button>
+    <a href="evidence.html" style="font-family:'Bebas Neue',sans-serif; letter-spacing:1px; font-size:1rem; padding:0.8rem 2rem; border:2px solid var(--gold); background:transparent; color:var(--gold); border-radius:4px; text-decoration:none;">🔍 EXPLORE THE VAULT</a>
+  </div>
+  <p style="font-size:0.8rem; color:rgba(245,245,245,0.35);">All questions sourced from 256 verified documents — sanitised to systemic language.</p>
+</section>
+
 <!-- FOOTER -->
 <footer>
   <div class="footer-logo">FAIR GO JUSTICE</div>
@@ -1138,6 +1194,168 @@
       navigator.share({ title: 'My Fair Go Justice Quiz Results', text: text, url: 'https://fairgojustice.com.au/quiz.html' });
     } else {
       navigator.clipboard.writeText(text).then(() => showToast('📋 Results copied! Paste into any social media.'));
+    }
+  }
+
+  // ═══════════════════════════════════════════════════════
+  // CASE DETAILS QUIZ DATA & LOGIC
+  // ═══════════════════════════════════════════════════════
+  const caseDetailsQuestions = [
+    {
+      q: "On what date and at what approximate time did the truck incident involving the claimant occur?",
+      opts: ["24 July 2019 at 12:50 am", "18 July 2019 at 11:50 pm", "19 July 2019 at 12:50 pm", "19 July 2019 at 12:50 am"],
+      correct: 3,
+      explanation: "Multiple court documents and police fact sheets confirm the incident took place in the early morning of 19 July 2019."
+    },
+    {
+      q: "According to the Consent Judgment, what sum was the claimant ordered to pay to the government agency?",
+      opts: ["$200,000", "$131,625.79", "$110,000", "$85,354.55"],
+      correct: 2,
+      explanation: "Paragraph 4 of the Terms of Judgment specifically sets the sum for the First Defendant at $110,000 inclusive of costs."
+    },
+    {
+      q: "What substances were identified in the blood analysis of the driver following the collision at the tunnel entrance?",
+      opts: ["Cannabis and Alcohol", "Opiates and Benzodiazepines", "Alcohol and Cocaine", "Amphetamine and Methylamphetamine"],
+      correct: 3,
+      explanation: "The police fact sheet explicitly lists the presence of Amphetamine and Methylamphetamine in the accused's blood sample."
+    },
+    {
+      q: "In the 2021 Local Court proceedings, which of the following facts was NOT agreed upon by the parties?",
+      opts: ["The identity of the driver at the time of the incident", "The ownership of the truck with registration Vehicle Reg-A", "Whether the vehicle was damaged beyond economic repair", "That the driver owed a duty of care to the owner"],
+      correct: 2,
+      explanation: "The 'Agreed Facts' correspondence shows the defence explicitly stated 'Not agreed' regarding the economic repair status of the vehicle."
+    },
+    {
+      q: "What odometer reading was recorded for the Mack truck (Vehicle Reg-A) during the major engine repair in February 2019?",
+      opts: ["527,394 Kms", "377,438 Kms", "481,183 Kms", "548,892 Kms"],
+      correct: 2,
+      explanation: "The invoice from a named service provider dated 16 February 2019 specifically lists the odometer at 481,183 Kms."
+    },
+    {
+      q: "Under the Consent Judgment, how many days were the Defendants given to pay the Judgment Sum to the government agency?",
+      opts: ["30 days", "28 days", "14 days", "7 days"],
+      correct: 1,
+      explanation: "The terms of judgment state that the sums in paragraphs 1 and 4 are to be paid within 28 days."
+    },
+    {
+      q: "Which legal firm represented the First Defendant/Cross-Defendant throughout the proceedings?",
+      opts: ["A named plaintiff firm", "The claimant's legal representative", "Marbury Chambers", "The opposing legal firm"],
+      correct: 3,
+      explanation: "The filing details and signatures on the Defence and Consent Judgment confirm the opposing legal firm as the solicitor on record."
+    },
+    {
+      q: "According to the Case Evidence Integration framework, what is the calculated statistical probability of the observed coordination between public authorities occurring by coincidence?",
+      opts: ["0.00005%", "10 in 100", "94.4%", "0.000002%"],
+      correct: 3,
+      explanation: "The Statistical Evidence section of the framework explicitly calculates the probability of coordination as 0.000002% — or 1 in 50 million."
+    },
+    {
+      q: "In his personal statement, what does the claimant claim regarding his pre-employment drug screening with the employer?",
+      opts: ["He passed a mandatory drug test two days before starting", "He provided a prior medical clearance from a different employer", "No medical or drug testing was required prior to starting", "Testing was delayed until after his first week of shifts"],
+      correct: 2,
+      explanation: "The claimant states he was employed over the phone without meeting management and that no pre-medical or drug testing was required."
+    },
+    {
+      q: "What asphalt specification was highlighted as a technical inconsistency in the Invoice Documentation Analysis?",
+      opts: ["AC10HD / A15E", "Tunnel Wall Panel Spec", "POL 268 Compliance", "VIN Vehicle Reg-A (2013)"],
+      correct: 0,
+      explanation: "The framework notes that an aggregate size of 10mm (AC10) and 15mm (A15E) are mutually exclusive, indicating a documentation irregularity."
+    }
+  ];
+
+  let cdCurrent = 0, cdScore = 0, cdAnswered = false;
+
+  function startCDQuiz() {
+    document.querySelector('.hero').style.display = 'none';
+    document.querySelector('.stats-band').style.display = 'none';
+    document.getElementById('mode-selector').style.display = 'none';
+    cdCurrent = 0; cdScore = 0; cdAnswered = false;
+    document.getElementById('cd-quiz-section').style.display = 'block';
+    renderCDQuestion();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function renderCDQuestion() {
+    const q = caseDetailsQuestions[cdCurrent];
+    const total = caseDetailsQuestions.length;
+    document.getElementById('cd-counter').textContent = `${cdCurrent + 1} / ${total}`;
+    document.getElementById('cd-progress').style.width = `${((cdCurrent + 1) / total) * 100}%`;
+    cdAnswered = false;
+
+    const optLetters = ['A','B','C','D'];
+    const optsHtml = q.opts.map((o, i) => `
+      <button class="cd-option" onclick="cdSelect(this, ${i})">
+        <span class="opt-letter">${optLetters[i]}</span>
+        <span>${o}</span>
+      </button>`).join('');
+
+    document.getElementById('cd-question-wrap').innerHTML = `
+      <div class="question-card" style="margin-bottom:0;">
+        <div style="font-size:0.8rem; color:rgba(245,245,245,0.4); letter-spacing:2px; text-transform:uppercase; margin-bottom:0.75rem;">Question ${cdCurrent + 1}</div>
+        <div style="font-size:1.15rem; font-weight:600; color:var(--white); margin-bottom:1.5rem; line-height:1.5;">${q.q}</div>
+        <div id="cd-opts">${optsHtml}</div>
+        <div class="cd-explanation" id="cd-expl">${q.explanation}</div>
+        <button class="cd-next-btn" id="cd-next" onclick="cdNext()">${cdCurrent + 1 < total ? 'NEXT QUESTION →' : 'SEE RESULTS'}</button>
+      </div>`;
+  }
+
+  function cdSelect(btn, idx) {
+    if (cdAnswered) return;
+    cdAnswered = true;
+    const q = caseDetailsQuestions[cdCurrent];
+    const opts = document.querySelectorAll('.cd-option');
+    opts.forEach(o => o.disabled = true);
+    if (idx === q.correct) {
+      btn.classList.add('correct');
+      cdScore++;
+    } else {
+      btn.classList.add('wrong');
+      opts[q.correct].classList.add('correct');
+    }
+    document.getElementById('cd-expl').style.display = 'block';
+    document.getElementById('cd-next').style.display = 'inline-block';
+  }
+
+  function cdNext() {
+    cdCurrent++;
+    if (cdCurrent < caseDetailsQuestions.length) {
+      renderCDQuestion();
+    } else {
+      showCDResults();
+    }
+  }
+
+  function showCDResults() {
+    document.getElementById('cd-quiz-section').style.display = 'none';
+    document.getElementById('cd-results-section').style.display = 'block';
+    document.getElementById('cd-score-display').textContent = cdScore;
+    const grades = [
+      { min: 9, grade: 'FORENSIC ANALYST', desc: 'You have read the evidence. Every page. You know exactly what happened and why the system failed.' },
+      { min: 7, grade: 'EVIDENCE LITERATE', desc: 'Solid grasp of the documented facts. You see the pattern. Now share what you know.' },
+      { min: 4, grade: 'DEVELOPING AWARENESS', desc: 'You\'re engaging with the details. Explore the Evidence Vault to fill the gaps.' },
+      { min: 0, grade: 'JUST GETTING STARTED', desc: 'The documents are all there. Start with the Evidence Vault — the truth is in the details.' }
+    ];
+    const g = grades.find(x => cdScore >= x.min);
+    document.getElementById('cd-grade').textContent = g.grade;
+    document.getElementById('cd-grade-desc').textContent = g.desc;
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function cdRetake() {
+    document.getElementById('cd-results-section').style.display = 'none';
+    cdCurrent = 0; cdScore = 0;
+    document.getElementById('cd-quiz-section').style.display = 'block';
+    renderCDQuestion();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function cdShare() {
+    const text = `I scored ${cdScore}/10 on the Fair Go Justice Case Details Quiz — tested directly from 256 verified court documents. Can you beat it? https://fairgojustice.com.au/quiz.html #FairGoJustice #LegalReform #EvidenceMatters`;
+    if (navigator.share) {
+      navigator.share({ title: 'My Case Details Quiz Score', text, url: 'https://fairgojustice.com.au/quiz.html' });
+    } else {
+      navigator.clipboard.writeText(text);
+      showToast('Score copied — paste it anywhere!');
     }
   }
 
