@@ -1,0 +1,1127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Room 06 · Witness Theatre — FGJ Evidence Vault</title>
+<style>
+  *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+  :root {
+    --black:   #0D1117;
+    --blue:    #0E3A5B;
+    --orange:  #D66B2D;
+    --white:   #F5F5F5;
+    --gold:    #D4AF37;
+    --cyan:    #00E5FF;
+    --amber:   #FFB300;
+    --red:     #EF5350;
+    --green:   #00C853;
+    --purple:  #7C4DFF;
+  }
+  html, body {
+    width:100%; height:100%;
+    background:var(--black);
+    overflow:hidden;
+    font-family:'Space Grotesk', sans-serif;
+    color:var(--white);
+  }
+  #three-canvas { position:fixed; inset:0; z-index:0; }
+
+  /* ── HUD NAV ── */
+  #hud-top {
+    position:fixed; top:0; left:0; right:0; z-index:20;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:14px 24px;
+    background:linear-gradient(to bottom, rgba(13,17,23,0.95), transparent);
+    border-bottom:1px solid rgba(0,229,255,0.08);
+  }
+  #hud-top .room-id {
+    font-family:'Bebas Neue', sans-serif;
+    font-size:11px; letter-spacing:3px; color:var(--cyan); opacity:0.6;
+  }
+  #hud-top .room-title {
+    font-family:'Bebas Neue', sans-serif;
+    font-size:22px; letter-spacing:4px; color:var(--white);
+  }
+  #hud-top .nav-links { display:flex; gap:12px; }
+  #hud-top .nav-links a {
+    font-size:10px; letter-spacing:2px; text-transform:uppercase;
+    color:rgba(245,245,245,0.5); text-decoration:none;
+    padding:6px 12px; border:1px solid rgba(245,245,245,0.1); border-radius:3px;
+    transition:all 0.2s;
+  }
+  #hud-top .nav-links a:hover { color:var(--cyan); border-color:var(--cyan); }
+
+  /* ── CENTRE LABEL ── */
+  #centre-label {
+    position:fixed; top:50%; left:50%; transform:translate(-50%,-50%);
+    z-index:10; pointer-events:none; text-align:center;
+    opacity:1; transition:opacity 0.5s;
+  }
+  #centre-label.hidden { opacity:0; }
+  #centre-label h2 {
+    font-family:'Bebas Neue',sans-serif; font-size:32px;
+    letter-spacing:6px; color:var(--cyan); text-shadow:0 0 30px rgba(0,229,255,0.5);
+  }
+  #centre-label p {
+    font-size:11px; letter-spacing:3px; color:rgba(245,245,245,0.4); margin-top:6px;
+  }
+
+  /* ── WITNESS NODES SIDEBAR ── */
+  #witness-sidebar {
+    position:fixed; left:0; top:50%; transform:translateY(-50%);
+    z-index:20; width:200px;
+    background:rgba(13,17,23,0.92);
+    border-right:1px solid rgba(0,229,255,0.15);
+    border-radius:0 8px 8px 0;
+    padding:16px 12px;
+  }
+  #witness-sidebar h3 {
+    font-family:'Bebas Neue',sans-serif; font-size:12px;
+    letter-spacing:3px; color:var(--cyan); margin-bottom:12px;
+    padding-bottom:8px; border-bottom:1px solid rgba(0,229,255,0.2);
+  }
+  .witness-node {
+    display:flex; align-items:center; gap:10px;
+    padding:8px 10px; border-radius:5px; cursor:pointer;
+    margin-bottom:4px; transition:all 0.2s;
+    border:1px solid transparent;
+  }
+  .witness-node:hover { background:rgba(0,229,255,0.05); border-color:rgba(0,229,255,0.2); }
+  .witness-node.active { background:rgba(0,229,255,0.1); border-color:var(--cyan); }
+  .witness-node .w-dot {
+    width:8px; height:8px; border-radius:50%; flex-shrink:0;
+  }
+  .witness-node .w-info { flex:1; min-width:0; }
+  .witness-node .w-label {
+    font-size:10px; font-weight:600; letter-spacing:1px;
+    text-transform:uppercase; color:var(--white); white-space:nowrap;
+    overflow:hidden; text-overflow:ellipsis;
+  }
+  .witness-node .w-type {
+    font-size:9px; letter-spacing:1px; color:rgba(245,245,245,0.4);
+    margin-top:1px;
+  }
+  .witness-node .w-badge {
+    font-size:8px; font-weight:700; letter-spacing:1px;
+    padding:2px 5px; border-radius:2px; text-transform:uppercase; flex-shrink:0;
+  }
+  .badge-verified   { background:rgba(212,175,55,0.2); color:var(--gold); border:1px solid rgba(212,175,55,0.4); }
+  .badge-partial    { background:rgba(255,179,0,0.15); color:var(--amber); border:1px solid rgba(255,179,0,0.35); }
+  .badge-review     { background:rgba(0,229,255,0.1); color:var(--cyan); border:1px solid rgba(0,229,255,0.3); }
+  .badge-disputed   { background:rgba(239,83,80,0.15); color:var(--red); border:1px solid rgba(239,83,80,0.3); }
+
+  /* ── TRANSCRIPT PANEL ── */
+  #transcript-panel {
+    position:fixed; right:-540px; top:0; bottom:0; width:520px; z-index:30;
+    background:rgba(10,14,20,0.97);
+    border-left:1px solid rgba(0,229,255,0.2);
+    display:flex; flex-direction:column;
+    transition:right 0.45s cubic-bezier(0.25,0.46,0.45,0.94);
+    overflow:hidden;
+  }
+  #transcript-panel.open { right:0; }
+
+  #tp-header {
+    padding:20px 24px 16px;
+    border-bottom:1px solid rgba(0,229,255,0.15);
+    background:rgba(0,229,255,0.03);
+  }
+  #tp-header .tp-id {
+    font-size:10px; letter-spacing:3px; color:var(--cyan); opacity:0.6;
+  }
+  #tp-header .tp-label {
+    font-family:'Bebas Neue',sans-serif; font-size:20px; letter-spacing:3px;
+    color:var(--white); margin:4px 0;
+  }
+  #tp-header .tp-meta {
+    font-size:10px; color:rgba(245,245,245,0.4); letter-spacing:1px;
+  }
+  #tp-status-row {
+    display:flex; align-items:center; gap:8px; margin-top:10px;
+  }
+  #tp-status-badge {
+    font-size:9px; font-weight:700; letter-spacing:2px; text-transform:uppercase;
+    padding:4px 10px; border-radius:3px;
+  }
+  #tp-type-tag {
+    font-size:9px; letter-spacing:2px; text-transform:uppercase;
+    color:rgba(245,245,245,0.4); padding:4px 8px;
+    border:1px solid rgba(245,245,245,0.15); border-radius:3px;
+  }
+  #tp-close {
+    margin-left:auto; background:none; border:1px solid rgba(245,245,245,0.2);
+    color:rgba(245,245,245,0.5); cursor:pointer; padding:6px 12px;
+    border-radius:3px; font-size:10px; letter-spacing:1px; transition:all 0.2s;
+  }
+  #tp-close:hover { color:var(--white); border-color:var(--white); }
+
+  /* waveform */
+  #waveform-bar {
+    padding:14px 24px 10px;
+    border-bottom:1px solid rgba(0,229,255,0.1);
+  }
+  #waveform-bar .wf-label {
+    font-size:9px; letter-spacing:2px; color:rgba(245,245,245,0.35); margin-bottom:6px;
+  }
+  #waveform-canvas {
+    width:100%; height:48px; border-radius:4px;
+    background:rgba(0,229,255,0.04); border:1px solid rgba(0,229,255,0.1);
+  }
+
+  /* statement timeline */
+  #statement-timeline {
+    padding:14px 24px 10px;
+    border-bottom:1px solid rgba(0,229,255,0.1);
+  }
+  #statement-timeline .st-label {
+    font-size:9px; letter-spacing:2px; color:rgba(245,245,245,0.35); margin-bottom:8px;
+  }
+  .st-entry {
+    display:flex; align-items:flex-start; gap:10px; margin-bottom:8px;
+  }
+  .st-marker {
+    width:8px; height:8px; border-radius:50%; flex-shrink:0; margin-top:3px;
+  }
+  .st-text { font-size:10px; color:rgba(245,245,245,0.5); line-height:1.5; }
+  .st-time { font-size:9px; color:rgba(245,245,245,0.25); margin-top:1px; }
+
+  /* transcript body */
+  #tp-body {
+    flex:1; overflow-y:auto; padding:20px 24px;
+    scrollbar-width:thin; scrollbar-color:rgba(0,229,255,0.2) transparent;
+  }
+  #tp-body::-webkit-scrollbar { width:4px; }
+  #tp-body::-webkit-scrollbar-thumb { background:rgba(0,229,255,0.2); border-radius:2px; }
+  .transcript-block {
+    background:rgba(0,229,255,0.03); border:1px solid rgba(0,229,255,0.1);
+    border-radius:6px; padding:16px; margin-bottom:14px;
+    border-left:3px solid var(--cyan);
+  }
+  .transcript-block .tb-heading {
+    font-size:9px; letter-spacing:2px; text-transform:uppercase;
+    color:var(--cyan); margin-bottom:8px;
+  }
+  .transcript-block .tb-text {
+    font-size:12px; line-height:1.7; color:rgba(245,245,245,0.7);
+  }
+  .transcript-block.gold  { border-left-color:var(--gold); }
+  .transcript-block.gold .tb-heading { color:var(--gold); }
+  .transcript-block.amber { border-left-color:var(--amber); }
+  .transcript-block.amber .tb-heading { color:var(--amber); }
+  .transcript-block.red   { border-left-color:var(--red); }
+  .transcript-block.red .tb-heading { color:var(--red); }
+
+  /* related evidence */
+  #related-evidence {
+    padding:14px 24px 10px;
+    border-top:1px solid rgba(0,229,255,0.1);
+  }
+  #related-evidence .re-label {
+    font-size:9px; letter-spacing:2px; color:rgba(245,245,245,0.35); margin-bottom:8px;
+  }
+  .re-tags { display:flex; flex-wrap:wrap; gap:6px; }
+  .re-tag {
+    font-size:9px; letter-spacing:1px; text-transform:uppercase;
+    padding:4px 10px; border-radius:20px; cursor:pointer;
+    border:1px solid rgba(0,229,255,0.25); color:var(--cyan);
+    background:rgba(0,229,255,0.06); transition:all 0.2s;
+  }
+  .re-tag:hover { background:rgba(0,229,255,0.15); }
+
+  /* routing */
+  #tp-routing {
+    padding:16px 24px 20px;
+    border-top:1px solid rgba(0,229,255,0.15);
+    background:rgba(0,229,255,0.02);
+  }
+  #tp-routing .rt-label {
+    font-size:9px; letter-spacing:2px; color:rgba(245,245,245,0.35); margin-bottom:10px;
+  }
+  .rt-buttons { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+  .rt-btn {
+    padding:8px 10px; border-radius:4px; cursor:pointer; text-align:center;
+    font-size:9px; letter-spacing:2px; text-transform:uppercase; font-weight:700;
+    border:1px solid; transition:all 0.2s; text-decoration:none; display:block;
+  }
+  .rt-btn.teal   { color:#00BCD4; border-color:rgba(0,188,212,0.4); background:rgba(0,188,212,0.08); }
+  .rt-btn.green  { color:#00C853; border-color:rgba(0,200,83,0.4);  background:rgba(0,200,83,0.08); }
+  .rt-btn.gold   { color:var(--gold); border-color:rgba(212,175,55,0.4); background:rgba(212,175,55,0.08); }
+  .rt-btn.purple { color:#AB47BC; border-color:rgba(171,71,188,0.4); background:rgba(171,71,188,0.08); }
+  .rt-btn:hover  { filter:brightness(1.3); transform:translateY(-1px); }
+
+  /* ── HOVER TOOLTIP ── */
+  #hover-tip {
+    position:fixed; z-index:25; pointer-events:none;
+    background:rgba(10,14,20,0.95); border:1px solid rgba(0,229,255,0.3);
+    padding:6px 12px; border-radius:4px;
+    font-size:10px; letter-spacing:1px; color:var(--cyan);
+    opacity:0; transition:opacity 0.2s;
+    white-space:nowrap;
+  }
+  #hover-tip.show { opacity:1; }
+
+  /* ── PLACEHOLDER NOTICE ── */
+  #placeholder-notice {
+    position:fixed; bottom:16px; left:50%; transform:translateX(-50%);
+    z-index:20; font-size:9px; letter-spacing:2px; text-transform:uppercase;
+    color:rgba(245,245,245,0.25); pointer-events:none;
+    background:rgba(13,17,23,0.8); padding:6px 16px; border-radius:20px;
+    border:1px solid rgba(245,245,245,0.08);
+  }
+
+  /* ── LOADING ── */
+  #loader {
+    position:fixed; inset:0; z-index:100; background:var(--black);
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    transition:opacity 0.8s;
+  }
+  #loader.fade { opacity:0; pointer-events:none; }
+  #loader .l-room {
+    font-family:'Bebas Neue',sans-serif; font-size:11px;
+    letter-spacing:5px; color:var(--cyan); opacity:0.6; margin-bottom:8px;
+  }
+  #loader .l-title {
+    font-family:'Bebas Neue',sans-serif; font-size:36px;
+    letter-spacing:8px; color:var(--white); margin-bottom:30px;
+  }
+  #loader .l-bar-wrap {
+    width:260px; height:2px; background:rgba(245,245,245,0.1); border-radius:2px;
+  }
+  #loader .l-bar {
+    height:100%; width:0%; background:var(--cyan);
+    border-radius:2px; transition:width 0.05s linear;
+    box-shadow:0 0 10px var(--cyan);
+  }
+  #loader .l-status {
+    font-size:10px; letter-spacing:2px; color:rgba(245,245,245,0.3);
+    margin-top:12px; min-height:14px;
+  }
+
+  @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@400;600;700&display=swap');
+</style>
+</head>
+<body>
+
+<!-- LOADER -->
+<div id="loader">
+  <div class="l-room">ROOM 06</div>
+  <div class="l-title">WITNESS THEATRE</div>
+  <div class="l-bar-wrap"><div class="l-bar" id="load-bar"></div></div>
+  <div class="l-status" id="load-status">Initialising testimony chamber…</div>
+</div>
+
+<!-- HUD -->
+<div id="hud-top">
+  <div>
+    <div class="room-id">ROOM 06 · FGJ EVIDENCE VAULT</div>
+    <div class="room-title">WITNESS THEATRE</div>
+  </div>
+  <div class="nav-links">
+    <a href="vault.html">⬡ VAULT</a>
+    <a href="evidence-intake.html">⬡ INTAKE</a>
+    <a href="timeline-chamber.html">⬡ TIMELINE</a>
+    <a href="chain-of-custody-reactor.html">⬡ REACTOR</a>
+    <a href="music-nexus.html">⬡ NEXUS</a>
+    <a href="index.html">⬡ HOME</a>
+  </div>
+</div>
+
+<!-- THREE CANVAS -->
+<canvas id="three-canvas"></canvas>
+
+<!-- CENTRE LABEL -->
+<div id="centre-label">
+  <h2>SELECT A WITNESS NODE</h2>
+  <p>CLICK A SEAT TO OPEN TESTIMONY · ESC TO CLOSE</p>
+</div>
+
+<!-- WITNESS SIDEBAR -->
+<div id="witness-sidebar">
+  <h3>⬡ WITNESSES</h3>
+  <div id="witness-list"></div>
+</div>
+
+<!-- HOVER TIP -->
+<div id="hover-tip"></div>
+
+<!-- TRANSCRIPT PANEL -->
+<div id="transcript-panel">
+  <div id="tp-header">
+    <div class="tp-id" id="tp-id-label">WIT-000</div>
+    <div class="tp-label" id="tp-title-label">WITNESS LABEL</div>
+    <div class="tp-meta" id="tp-meta-label">TYPE · DATE · SOURCE</div>
+    <div id="tp-status-row">
+      <div id="tp-status-badge" class="w-badge badge-review">UNDER REVIEW</div>
+      <div id="tp-type-tag">TYPE</div>
+      <button id="tp-close" onclick="closePanel()">✕ CLOSE</button>
+    </div>
+  </div>
+
+  <div id="waveform-bar">
+    <div class="wf-label">⬡ AUDIO WAVEFORM — VOICE PATTERN ANALYSIS</div>
+    <canvas id="waveform-canvas"></canvas>
+  </div>
+
+  <div id="statement-timeline">
+    <div class="st-label">⬡ STATEMENT TIMELINE</div>
+    <div id="st-entries"></div>
+  </div>
+
+  <div id="tp-body"></div>
+
+  <div id="related-evidence">
+    <div class="re-label">⬡ RELATED EVIDENCE NODES</div>
+    <div class="re-tags" id="re-tags"></div>
+  </div>
+
+  <div id="tp-routing">
+    <div class="rt-label">⬡ ROUTE THIS TESTIMONY</div>
+    <div class="rt-buttons">
+      <a href="timeline-chamber.html" class="rt-btn teal">⧗ TIMELINE</a>
+      <a href="chain-of-custody-reactor.html" class="rt-btn green">⬡ REACTOR</a>
+      <a href="evidence-intake.html" class="rt-btn gold">⊕ FORENSICS</a>
+      <a href="#" class="rt-btn purple" onclick="return false;">◎ ARCHIVE</a>
+    </div>
+  </div>
+</div>
+
+<!-- PLACEHOLDER NOTICE -->
+<div id="placeholder-notice">⚠ ALL WITNESS RECORDS ARE PLACEHOLDERS ONLY — NO REAL TESTIMONY REPRODUCED</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+// ═══════════════════════════════════════════════════════════════════════
+//  WITNESS DATA — placeholder / anonymised only
+// ═══════════════════════════════════════════════════════════════════════
+const WITNESSES = [
+  {
+    id: 'WIT-001',
+    label: 'WITNESS ALPHA',
+    type: 'Witness Statement',
+    typeShort: 'STATEMENT',
+    date: 'Reference Pending',
+    source: 'Public submission — court registry',
+    status: 'verified',
+    colour: '#D4AF37',
+    clusterAngle: 0,
+    summary: 'Documented account describing procedural irregularities observed during a formal hearing process. Statement references publicly available court records.',
+    timeline: [
+      { time: 'Phase 1', text: 'Initial contact with formal process.', dot:'#D4AF37' },
+      { time: 'Phase 2', text: 'Formal statement lodged with registry.', dot:'#D4AF37' },
+      { time: 'Phase 3', text: 'Statement cross-referenced against public records.', dot:'#00E5FF' },
+    ],
+    transcript: [
+      { heading:'Opening Statement', text:'[PLACEHOLDER] A documented pattern of procedural irregularity was observed across multiple formal hearings. This account draws solely on publicly available registry records and documented correspondence.', style:'gold' },
+      { heading:'Key Observation — Systemic Pattern', text:'[PLACEHOLDER] The observed irregularity was not isolated. Public records indicate a recurring pattern across proceedings involving similar institutional actors over an extended period.', style:'default' },
+      { heading:'Verification Note', text:'[PLACEHOLDER] This statement is classified as VERIFIED against public registry sources. No personal identifying information is included. All assertions are drawn from documented public material.', style:'gold' },
+    ],
+    relatedEvidence: ['CHAIN OF CUSTODY LOG', 'REGISTRY PUBLIC RECORD', 'PROCEDURAL TIMELINE', 'EXHIBIT FGJ-DOC-001'],
+  },
+  {
+    id: 'WIT-002',
+    label: 'WITNESS BRAVO',
+    type: 'Court Transcript',
+    typeShort: 'TRANSCRIPT',
+    date: 'Reference Pending',
+    source: 'Publicly available court transcript',
+    status: 'partial',
+    colour: '#FFB300',
+    clusterAngle: 60,
+    summary: 'Excerpts from a publicly available court transcript documenting procedural exchanges. Partial verification — not all supporting documents confirmed.',
+    timeline: [
+      { time: 'Filing', text: 'Transcript obtained from public registry.', dot:'#FFB300' },
+      { time: 'Review', text: 'Partial cross-reference completed.', dot:'#00E5FF' },
+      { time: 'Pending', text: 'Supporting exhibits still under review.', dot:'#7C4DFF' },
+    ],
+    transcript: [
+      { heading:'Transcript Excerpt — Systemic Exchange', text:'[PLACEHOLDER] Publicly recorded procedural exchange in which an institutional actor acknowledged awareness of documented concerns without initiating formal review. Source: public registry.', style:'amber' },
+      { heading:'Context Note', text:'[PLACEHOLDER] This excerpt is drawn from a public transcript only. Surrounding context and full transcript remain under review. No findings of fact are implied.', style:'default' },
+      { heading:'Partial Verification Status', text:'[PLACEHOLDER] One supporting document has been confirmed against the public registry. Two additional referenced documents are pending verification. Status: PARTIALLY VERIFIED.', style:'amber' },
+    ],
+    relatedEvidence: ['PUBLIC TRANSCRIPT FILE', 'COURT REGISTRY RECORD', 'PROCEDURAL EXCHANGE LOG'],
+  },
+  {
+    id: 'WIT-003',
+    label: 'EXPERT DELTA',
+    type: 'Expert Opinion',
+    typeShort: 'EXPERT',
+    date: 'Reference Pending',
+    source: 'Publicly available expert analysis',
+    status: 'verified',
+    colour: '#00E5FF',
+    clusterAngle: 120,
+    summary: 'Expert analysis addressing systemic patterns observed across documented cases. Based entirely on publicly available material and published research.',
+    timeline: [
+      { time: 'Submission', text: 'Expert opinion lodged with formal body.', dot:'#00E5FF' },
+      { time: 'Publication', text: 'Summary published as public record.', dot:'#D4AF37' },
+      { time: 'Indexed', text: 'Indexed into evidence vault as VERIFIED.', dot:'#00C853' },
+    ],
+    transcript: [
+      { heading:'Expert Analysis — Systemic Observations', text:'[PLACEHOLDER] Published expert opinion identifies a documented pattern of systemic underperformance across relevant institutional processes. The analysis draws on publicly available data sets and peer-reviewed research.', style:'default' },
+      { heading:'Reform Recommendations', text:'[PLACEHOLDER] The expert opinion references three areas of recommended systemic reform: transparency mechanisms, independent oversight, and evidence integrity standards. No individual actors are named.', style:'gold' },
+      { heading:'Verification', text:'[PLACEHOLDER] This expert opinion is VERIFIED against the original public submission on record. Reference available on request via public registry.', style:'gold' },
+    ],
+    relatedEvidence: ['PUBLISHED EXPERT SUBMISSION', 'SYSTEMIC PATTERN ANALYSIS', 'REFORM PILLAR — EVIDENCE INTEGRITY', 'REFORM PILLAR — OVERSIGHT'],
+  },
+  {
+    id: 'WIT-004',
+    label: 'WITNESS ECHO',
+    type: 'Audio Interview',
+    typeShort: 'AUDIO',
+    date: 'Reference Pending',
+    source: 'Redacted public submission',
+    status: 'review',
+    colour: '#7C4DFF',
+    clusterAngle: 180,
+    summary: 'Anonymised audio interview. Identity of interviewee protected. Transcript is a summary of documented themes only — no direct quotes reproduced.',
+    timeline: [
+      { time: 'Recorded', text: 'Interview conducted under protected conditions.', dot:'#7C4DFF' },
+      { time: 'Redacted', text: 'Identity and identifying details removed.', dot:'#FFB300' },
+      { time: 'Under Review', text: 'Awaiting independent verification.', dot:'#00E5FF' },
+    ],
+    transcript: [
+      { heading:'Thematic Summary — Documented Concerns', text:'[PLACEHOLDER] Interview subject documented a pattern of alleged institutional unresponsiveness when formal concerns were raised. This is a thematic summary only. No direct quotes are reproduced. Identity protected.', style:'default' },
+      { heading:'Key Theme — Access to Process', text:'[PLACEHOLDER] A recurring theme in this testimony relates to documented difficulty accessing formal processes. This pattern is corroborated by publicly available submissions to relevant oversight bodies.', style:'default' },
+      { heading:'Verification Pending Note', text:'[PLACEHOLDER] This testimony is classified UNDER REVIEW. Independent verification of supporting documentary record is ongoing. No findings of fact are drawn from this testimony at this time.', style:'amber' },
+    ],
+    relatedEvidence: ['REDACTED SUBMISSION FILE', 'OVERSIGHT BODY RECORD', 'ACCESS TO PROCESS LOG'],
+  },
+  {
+    id: 'WIT-005',
+    label: 'WITNESS FOXTROT',
+    type: 'Public Submission',
+    typeShort: 'SUBMISSION',
+    date: 'Reference Pending',
+    source: 'Formal public inquiry submission',
+    status: 'verified',
+    colour: '#00C853',
+    clusterAngle: 240,
+    summary: 'Formal submission to a public inquiry documenting systemic concerns. Fully verified against published inquiry record.',
+    timeline: [
+      { time: 'Lodged', text: 'Submission lodged with public inquiry body.', dot:'#00C853' },
+      { time: 'Published', text: 'Published in inquiry public record.', dot:'#D4AF37' },
+      { time: 'Verified', text: 'Cross-referenced and confirmed. Status: VERIFIED.', dot:'#00C853' },
+    ],
+    transcript: [
+      { heading:'Submission Summary — Systemic Accountability', text:'[PLACEHOLDER] Formal public inquiry submission documenting a pattern of accountability gaps across relevant institutional processes. Submission is on the public record and available through the relevant inquiry registry.', style:'gold' },
+      { heading:'Documented Concern — Oversight Mechanisms', text:'[PLACEHOLDER] The submission identifies specific documented failures in oversight mechanisms, drawing on publicly available records spanning multiple review periods.', style:'default' },
+      { heading:'Reform Recommendations', text:'[PLACEHOLDER] Three systemic reforms are recommended in this submission: independent evidence review, mandatory transparency reporting, and accessible formal complaint processes. VERIFIED via public inquiry record.', style:'gold' },
+    ],
+    relatedEvidence: ['PUBLIC INQUIRY RECORD', 'OVERSIGHT GAP ANALYSIS', 'TRANSPARENCY REPORT', 'REFORM PILLAR — LEGAL AID'],
+  },
+  {
+    id: 'WIT-006',
+    label: 'WITNESS GOLF',
+    type: 'Bodycam Dialogue',
+    typeShort: 'BODYCAM',
+    date: 'Reference Pending',
+    source: 'Redacted public record — partial release',
+    status: 'disputed',
+    colour: '#EF5350',
+    clusterAngle: 300,
+    summary: 'Partial transcript from a publicly released bodycam record. Disputed — not all segments have been independently verified. Significant portions remain redacted.',
+    timeline: [
+      { time: 'Captured', text: 'Record created during documented institutional encounter.', dot:'#EF5350' },
+      { time: 'Partial Release', text: 'Partial release under public access provisions.', dot:'#FFB300' },
+      { time: 'Disputed', text: 'Independent verification contested by institutional party.', dot:'#EF5350' },
+    ],
+    transcript: [
+      { heading:'Partial Transcript — Public Segments Only', text:'[PLACEHOLDER] The following is a summary of publicly released segments only. Significant portions of this record remain redacted and have not been verified independently. No findings of fact are drawn from this record.', style:'red' },
+      { heading:'Documented Exchange — Systemic Concern', text:'[PLACEHOLDER] A documented exchange in the public release segments raises concerns about procedural compliance. The relevant institutional party disputes the characterisation of this exchange.', style:'red' },
+      { heading:'Disputed Status Note', text:'[PLACEHOLDER] This record is classified DISPUTED. Independent verification is incomplete. The disputed characterisation is noted and both positions are recorded. No conclusion is drawn pending full verification.', style:'red' },
+    ],
+    relatedEvidence: ['PARTIAL BODYCAM RELEASE', 'INSTITUTIONAL RESPONSE RECORD', 'DISPUTED EVIDENCE FILE'],
+  },
+];
+
+const STATUS_CONFIG = {
+  verified: { label:'VERIFIED',   badge:'badge-verified', dot:'#D4AF37' },
+  partial:  { label:'PARTIAL',    badge:'badge-partial',  dot:'#FFB300' },
+  review:   { label:'UNDER REVIEW',badge:'badge-review',  dot:'#00E5FF' },
+  disputed: { label:'DISPUTED',   badge:'badge-disputed', dot:'#EF5350' },
+};
+
+// ═══════════════════════════════════════════════════════════════════════
+//  LOADER
+// ═══════════════════════════════════════════════════════════════════════
+const loadBar = document.getElementById('load-bar');
+const loadStatus = document.getElementById('load-status');
+const LOAD_STEPS = [
+  [10,'Calibrating testimony chamber…'],
+  [25,'Deploying witness silhouettes…'],
+  [45,'Mounting transcript panels…'],
+  [60,'Initialising waveform systems…'],
+  [78,'Activating verification matrix…'],
+  [92,'Routing to connected rooms…'],
+  [100,'Witness Theatre ready.'],
+];
+let loadIdx = 0;
+function advanceLoader() {
+  if (loadIdx >= LOAD_STEPS.length) return;
+  const [pct, msg] = LOAD_STEPS[loadIdx++];
+  loadBar.style.width = pct + '%';
+  loadStatus.textContent = msg;
+  if (pct < 100) setTimeout(advanceLoader, 280);
+  else setTimeout(() => { document.getElementById('loader').classList.add('fade'); }, 600);
+}
+setTimeout(advanceLoader, 300);
+
+// ═══════════════════════════════════════════════════════════════════════
+//  THREE.JS SCENE
+// ═══════════════════════════════════════════════════════════════════════
+const canvas = document.getElementById('three-canvas');
+const renderer = new THREE.WebGLRenderer({ canvas, antialias:true, alpha:false });
+renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
+renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.shadowMap.enabled = true;
+
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x0D1117);
+scene.fog = new THREE.FogExp2(0x0D1117, 0.018);
+
+const camera = new THREE.PerspectiveCamera(60, window.innerWidth/window.innerHeight, 0.1, 300);
+camera.position.set(0, 8, 22);
+camera.lookAt(0, 2, 0);
+
+// Lights
+const ambientLight = new THREE.AmbientLight(0x0D1117, 0.3);
+scene.add(ambientLight);
+
+const cyanKey = new THREE.PointLight(0x00E5FF, 1.5, 60);
+cyanKey.position.set(-12, 18, 8);
+scene.add(cyanKey);
+
+const goldFill = new THREE.PointLight(0xD4AF37, 0.6, 50);
+goldFill.position.set(12, 10, -5);
+scene.add(goldFill);
+
+const centreSpot = new THREE.SpotLight(0x00E5FF, 2.5, 40, Math.PI/6, 0.4);
+centreSpot.position.set(0, 25, 0);
+centreSpot.target.position.set(0, 0, 0);
+scene.add(centreSpot);
+scene.add(centreSpot.target);
+
+// ── AMPHITHEATRE FLOOR ──────────────────────────────────────────────
+const floorGeo = new THREE.CircleGeometry(28, 64);
+const floorMat = new THREE.MeshStandardMaterial({
+  color:0x0A0E14, roughness:0.9, metalness:0.3
+});
+const floor = new THREE.Mesh(floorGeo, floorMat);
+floor.rotation.x = -Math.PI/2;
+floor.position.y = -0.5;
+scene.add(floor);
+
+// Floor grid rings
+for (let r = 4; r <= 26; r += 4) {
+  const ringGeo = new THREE.RingGeometry(r - 0.04, r + 0.04, 80);
+  const ringMat = new THREE.MeshBasicMaterial({
+    color: r <= 12 ? 0x00E5FF : 0x0E3A5B,
+    side:THREE.DoubleSide, transparent:true,
+    opacity: r <= 12 ? 0.18 : 0.08
+  });
+  const ring = new THREE.Mesh(ringGeo, ringMat);
+  ring.rotation.x = -Math.PI/2;
+  ring.position.y = -0.49;
+  scene.add(ring);
+}
+
+// Tiered seating tiers (rear arcs)
+for (let t = 0; t < 4; t++) {
+  const tierGeo = new THREE.TorusGeometry(14 + t*2.5, 0.15, 8, 80, Math.PI);
+  const tierMat = new THREE.MeshStandardMaterial({
+    color:0x0E3A5B, roughness:0.6, metalness:0.5, transparent:true, opacity:0.4
+  });
+  const tier = new THREE.Mesh(tierGeo, tierMat);
+  tier.rotation.x = -Math.PI/2;
+  tier.rotation.z = Math.PI/2;
+  tier.position.y = t * 1.2;
+  tier.position.z = -2;
+  scene.add(tier);
+}
+
+// ── CENTRE STAGE PLATFORM ───────────────────────────────────────────
+const platformGeo = new THREE.CylinderGeometry(5, 5.5, 0.3, 40);
+const platformMat = new THREE.MeshStandardMaterial({
+  color:0x0E3A5B, roughness:0.3, metalness:0.8,
+  emissive:0x001A30, emissiveIntensity:0.5
+});
+const platform = new THREE.Mesh(platformGeo, platformMat);
+platform.position.y = -0.35;
+scene.add(platform);
+
+// Platform ring
+const pRingGeo = new THREE.TorusGeometry(5.2, 0.06, 8, 60);
+const pRingMat = new THREE.MeshStandardMaterial({
+  color:0x00E5FF, emissive:0x00E5FF, emissiveIntensity:2,
+  transparent:true, opacity:0.8
+});
+const platformRing = new THREE.Mesh(pRingGeo, pRingMat);
+platformRing.rotation.x = -Math.PI/2;
+platformRing.position.y = -0.18;
+scene.add(platformRing);
+
+// ── HOLOGRAPHIC WITNESS SILHOUETTE ──────────────────────────────────
+const silhouetteGroup = new THREE.Group();
+
+// Body — semi-transparent abstract human form
+const bodyGeo = new THREE.CapsuleGeometry(0.7, 2.2, 12, 20);
+const bodyMat = new THREE.MeshStandardMaterial({
+  color:0x00E5FF, emissive:0x003344, emissiveIntensity:1,
+  transparent:true, opacity:0.18, wireframe:false
+});
+const bodyMesh = new THREE.Mesh(bodyGeo, bodyMat);
+bodyMesh.position.y = 2.5;
+silhouetteGroup.add(bodyMesh);
+
+// Wireframe overlay
+const bodyWireMat = new THREE.MeshBasicMaterial({
+  color:0x00E5FF, wireframe:true, transparent:true, opacity:0.35
+});
+const bodyWire = new THREE.Mesh(bodyGeo, bodyWireMat);
+bodyWire.position.y = 2.5;
+silhouetteGroup.add(bodyWire);
+
+// Head
+const headGeo = new THREE.SphereGeometry(0.55, 20, 20);
+const headMat = new THREE.MeshStandardMaterial({
+  color:0x00E5FF, emissive:0x003344, emissiveIntensity:1.2,
+  transparent:true, opacity:0.25
+});
+const headMesh = new THREE.Mesh(headGeo, headMat);
+headMesh.position.y = 4.4;
+silhouetteGroup.add(headMesh);
+
+const headWireMat = new THREE.MeshBasicMaterial({
+  color:0x00E5FF, wireframe:true, transparent:true, opacity:0.4
+});
+const headWire = new THREE.Mesh(headGeo, headWireMat);
+headWire.position.y = 4.4;
+silhouetteGroup.add(headWire);
+
+// Vertical scan beam through silhouette
+const beamGeo = new THREE.CylinderGeometry(0.04, 0.04, 8, 12);
+const beamMat = new THREE.MeshBasicMaterial({
+  color:0x00E5FF, transparent:true, opacity:0.6
+});
+const beam = new THREE.Mesh(beamGeo, beamMat);
+beam.position.y = 2.5;
+silhouetteGroup.add(beam);
+
+scene.add(silhouetteGroup);
+
+// ── TRANSCRIPT PANELS around silhouette ─────────────────────────────
+const panelGroup = new THREE.Group();
+const panelAngles = [Math.PI*0.3, -Math.PI*0.3, Math.PI*0.7, -Math.PI*0.7];
+panelAngles.forEach((angle, i) => {
+  const pGeo = new THREE.PlaneGeometry(3.2, 2);
+  const pMat = new THREE.MeshStandardMaterial({
+    color:0x001122, emissive:0x001A30, emissiveIntensity:0.8,
+    transparent:true, opacity:0.7, side:THREE.DoubleSide
+  });
+  const panel = new THREE.Mesh(pGeo, pMat);
+  const r = 6;
+  panel.position.set(Math.sin(angle)*r, 2.2 + (i%2)*0.8, Math.cos(angle)*r - 1);
+  panel.lookAt(0, 2, 0);
+
+  // Panel border
+  const borderGeo = new THREE.EdgesGeometry(pGeo);
+  const borderMat = new THREE.LineBasicMaterial({
+    color:0x00E5FF, transparent:true, opacity:0.4
+  });
+  const border = new THREE.LineSegments(borderGeo, borderMat);
+  panel.add(border);
+  panelGroup.add(panel);
+});
+scene.add(panelGroup);
+
+// ── WITNESS SEAT NODES ───────────────────────────────────────────────
+const seatGroup = new THREE.Group();
+const seatMeshes = [];
+const SEAT_RADIUS = 10;
+
+WITNESSES.forEach((w, i) => {
+  const angle = (w.clusterAngle * Math.PI) / 180;
+  const x = Math.sin(angle) * SEAT_RADIUS;
+  const z = Math.cos(angle) * SEAT_RADIUS - 2;
+
+  // Seat platform
+  const seatBaseGeo = new THREE.CylinderGeometry(0.8, 1.0, 0.2, 20);
+  const seatBaseMat = new THREE.MeshStandardMaterial({
+    color: new THREE.Color(w.colour),
+    emissive: new THREE.Color(w.colour),
+    emissiveIntensity: 0.4, roughness:0.3, metalness:0.7,
+    transparent:true, opacity:0.8
+  });
+  const seatBase = new THREE.Mesh(seatBaseGeo, seatBaseMat);
+  seatBase.position.set(x, -0.35, z);
+  seatGroup.add(seatBase);
+
+  // Vertical pole
+  const poleGeo = new THREE.CylinderGeometry(0.04, 0.04, 2.5, 8);
+  const poleMat = new THREE.MeshStandardMaterial({
+    color: new THREE.Color(w.colour),
+    emissive: new THREE.Color(w.colour),
+    emissiveIntensity: 1.5, transparent:true, opacity:0.7
+  });
+  const pole = new THREE.Mesh(poleGeo, poleMat);
+  pole.position.set(x, 0.9, z);
+  seatGroup.add(pole);
+
+  // Floating orb
+  const orbGeo = new THREE.SphereGeometry(0.5, 20, 20);
+  const orbMat = new THREE.MeshStandardMaterial({
+    color: new THREE.Color(w.colour),
+    emissive: new THREE.Color(w.colour),
+    emissiveIntensity: 2, transparent:true, opacity:0.85,
+    roughness:0.1, metalness:0.9
+  });
+  const orb = new THREE.Mesh(orbGeo, orbMat);
+  orb.position.set(x, 2.4, z);
+  orb.userData = { witnessIdx: i, baseY: 2.4, label: w.label, type: w.type };
+  seatGroup.add(orb);
+  seatMeshes.push(orb);
+
+  // Wireframe ring around orb
+  const wRingGeo = new THREE.TorusGeometry(0.7, 0.03, 8, 30);
+  const wRingMat = new THREE.MeshBasicMaterial({
+    color: new THREE.Color(w.colour), transparent:true, opacity:0.5
+  });
+  const wRing = new THREE.Mesh(wRingGeo, wRingMat);
+  wRing.position.set(x, 2.4, z);
+  wRing.rotation.x = Math.PI/2;
+  wRing.userData = { floatRing: true };
+  seatGroup.add(wRing);
+
+  // Connection line from orb to platform centre
+  const linePoints = [
+    new THREE.Vector3(x, 2.4, z),
+    new THREE.Vector3(0, 1, 0)
+  ];
+  const lineGeo = new THREE.BufferGeometry().setFromPoints(linePoints);
+  const lineMat = new THREE.LineBasicMaterial({
+    color: new THREE.Color(w.colour), transparent:true, opacity:0.2
+  });
+  const line = new THREE.Line(lineGeo, lineMat);
+  seatGroup.add(line);
+});
+scene.add(seatGroup);
+
+// ── BACKGROUND PARTICLES ─────────────────────────────────────────────
+const particleCount = 800;
+const pPositions = new Float32Array(particleCount * 3);
+for (let i = 0; i < particleCount; i++) {
+  pPositions[i*3]   = (Math.random()-0.5)*100;
+  pPositions[i*3+1] = Math.random()*40 - 5;
+  pPositions[i*3+2] = (Math.random()-0.5)*100;
+}
+const pGeo = new THREE.BufferGeometry();
+pGeo.setAttribute('position', new THREE.BufferAttribute(pPositions, 3));
+const pMat = new THREE.PointsMaterial({ color:0x00E5FF, size:0.08, transparent:true, opacity:0.35 });
+scene.add(new THREE.Points(pGeo, pMat));
+
+// ── CEILING LIGHT STRIPS ─────────────────────────────────────────────
+for (let c = 0; c < 8; c++) {
+  const a = (c / 8) * Math.PI * 2;
+  const stripGeo = new THREE.CylinderGeometry(0.04, 0.04, 0.8, 8);
+  const stripMat = new THREE.MeshBasicMaterial({ color:0x00E5FF, transparent:true, opacity:0.7 });
+  const strip = new THREE.Mesh(stripGeo, stripMat);
+  strip.position.set(Math.sin(a)*13, 14, Math.cos(a)*13 - 2);
+  scene.add(strip);
+
+  const beamLineGeo = new THREE.CylinderGeometry(0.02, 0.12, 12, 8);
+  const beamLineMat = new THREE.MeshBasicMaterial({ color:0x00E5FF, transparent:true, opacity:0.06 });
+  const beamLine = new THREE.Mesh(beamLineGeo, beamLineMat);
+  beamLine.position.set(Math.sin(a)*13, 8, Math.cos(a)*13 - 2);
+  scene.add(beamLine);
+}
+
+// ═══════════════════════════════════════════════════════════════════════
+//  SIDEBAR
+// ═══════════════════════════════════════════════════════════════════════
+const witnessList = document.getElementById('witness-list');
+WITNESSES.forEach((w, i) => {
+  const sc = STATUS_CONFIG[w.status];
+  const node = document.createElement('div');
+  node.className = 'witness-node';
+  node.id = `wnode-${i}`;
+  node.innerHTML = `
+    <div class="w-dot" style="background:${w.colour};box-shadow:0 0 5px ${w.colour}"></div>
+    <div class="w-info">
+      <div class="w-label">${w.label}</div>
+      <div class="w-type">${w.typeShort}</div>
+    </div>
+    <div class="w-badge ${sc.badge}">${sc.label}</div>
+  `;
+  node.addEventListener('click', () => openWitness(i));
+  witnessList.appendChild(node);
+});
+
+// ═══════════════════════════════════════════════════════════════════════
+//  WAVEFORM CANVAS
+// ═══════════════════════════════════════════════════════════════════════
+const wfCanvas = document.getElementById('waveform-canvas');
+const wfCtx = wfCanvas.getContext('2d');
+let wfPhase = 0;
+let wfActive = false;
+let wfColour = '#00E5FF';
+
+function drawWaveform() {
+  wfCanvas.width = wfCanvas.offsetWidth;
+  wfCanvas.height = wfCanvas.offsetHeight;
+  const w = wfCanvas.width, h = wfCanvas.height;
+  wfCtx.clearRect(0, 0, w, h);
+
+  const amp = wfActive ? h * 0.36 : h * 0.06;
+  wfCtx.strokeStyle = wfColour;
+  wfCtx.lineWidth = 1.5;
+  wfCtx.shadowColor = wfColour;
+  wfCtx.shadowBlur = wfActive ? 8 : 3;
+  wfCtx.beginPath();
+  for (let x = 0; x < w; x++) {
+    const t = (x / w) * Math.PI * 12 + wfPhase;
+    const noise = wfActive ? Math.sin(t * 0.7 + wfPhase * 0.5) * 0.3 : 0;
+    const y = h/2 + Math.sin(t) * amp * (1 + noise);
+    x === 0 ? wfCtx.moveTo(x, y) : wfCtx.lineTo(x, y);
+  }
+  wfCtx.stroke();
+  if (wfActive) wfPhase += 0.07;
+}
+
+// ═══════════════════════════════════════════════════════════════════════
+//  OPEN / CLOSE PANEL
+// ═══════════════════════════════════════════════════════════════════════
+let currentWitness = null;
+
+function openWitness(idx) {
+  const w = WITNESSES[idx];
+  currentWitness = idx;
+  const sc = STATUS_CONFIG[w.status];
+
+  // Update sidebar active
+  document.querySelectorAll('.witness-node').forEach(n => n.classList.remove('active'));
+  document.getElementById(`wnode-${idx}`)?.classList.add('active');
+
+  // Header
+  document.getElementById('tp-id-label').textContent = w.id;
+  document.getElementById('tp-title-label').textContent = w.label;
+  document.getElementById('tp-meta-label').textContent = `${w.type} · ${w.date} · ${w.source}`;
+  const badge = document.getElementById('tp-status-badge');
+  badge.textContent = sc.label;
+  badge.className = `w-badge ${sc.badge}`;
+  document.getElementById('tp-type-tag').textContent = w.typeShort;
+
+  // Waveform
+  wfActive = true;
+  wfColour = w.colour;
+
+  // Statement timeline
+  const stEl = document.getElementById('st-entries');
+  stEl.innerHTML = '';
+  w.timeline.forEach(t => {
+    const entry = document.createElement('div');
+    entry.className = 'st-entry';
+    entry.innerHTML = `
+      <div class="st-marker" style="background:${t.dot};box-shadow:0 0 5px ${t.dot}"></div>
+      <div>
+        <div class="st-text">${t.text}</div>
+        <div class="st-time">${t.time}</div>
+      </div>
+    `;
+    stEl.appendChild(entry);
+  });
+
+  // Transcript blocks
+  const body = document.getElementById('tp-body');
+  body.innerHTML = `<p style="font-size:11px;color:rgba(245,245,245,0.45);margin-bottom:16px;line-height:1.6;">${w.summary}</p>`;
+  w.transcript.forEach(tb => {
+    const block = document.createElement('div');
+    block.className = `transcript-block ${tb.style}`;
+    block.innerHTML = `<div class="tb-heading">${tb.heading}</div><div class="tb-text">${tb.text}</div>`;
+    body.appendChild(block);
+  });
+
+  // Related evidence
+  const re = document.getElementById('re-tags');
+  re.innerHTML = '';
+  w.relatedEvidence.forEach(e => {
+    const tag = document.createElement('div');
+    tag.className = 're-tag';
+    tag.textContent = e;
+    re.appendChild(tag);
+  });
+
+  // Open panel
+  document.getElementById('transcript-panel').classList.add('open');
+  document.getElementById('centre-label').classList.add('hidden');
+
+  // Focus camera gently toward that witness orb
+  const a = (w.clusterAngle * Math.PI) / 180;
+  cameraTarget.set(Math.sin(a)*4, 4, Math.cos(a)*4 - 1);
+
+  // Activate silhouette colour
+  beamMat.color.set(w.colour);
+  beamMat.opacity = 0.8;
+  bodyWireMat.color.set(w.colour);
+  headWireMat.color.set(w.colour);
+  platformRing.material.color.set(w.colour);
+  platformRing.material.emissive.set(w.colour);
+}
+
+function closePanel() {
+  document.getElementById('transcript-panel').classList.remove('open');
+  document.getElementById('centre-label').classList.remove('hidden');
+  document.querySelectorAll('.witness-node').forEach(n => n.classList.remove('active'));
+  wfActive = false;
+  currentWitness = null;
+  cameraTarget.set(0, 2, 0);
+  beamMat.color.set(0x00E5FF);
+  bodyWireMat.color.set(0x00E5FF);
+  headWireMat.color.set(0x00E5FF);
+  platformRing.material.color.set(0x00E5FF);
+  platformRing.material.emissive.set(0x00E5FF);
+}
+
+document.addEventListener('keydown', e => { if(e.key==='Escape') closePanel(); });
+
+// ═══════════════════════════════════════════════════════════════════════
+//  RAYCASTING / HOVER
+// ═══════════════════════════════════════════════════════════════════════
+const raycaster = new THREE.Raycaster();
+const mouseNDC = new THREE.Vector2();
+const tip = document.getElementById('hover-tip');
+let mouseXPx = 0, mouseYPx = 0;
+
+canvas.addEventListener('mousemove', e => {
+  mouseXPx = e.clientX; mouseYPx = e.clientY;
+  mouseNDC.x = (e.clientX / window.innerWidth)*2 - 1;
+  mouseNDC.y = -(e.clientY / window.innerHeight)*2 + 1;
+
+  raycaster.setFromCamera(mouseNDC, camera);
+  const hits = raycaster.intersectObjects(seatMeshes);
+  if (hits.length > 0) {
+    const obj = hits[0].object;
+    tip.textContent = `${obj.userData.label} · ${obj.userData.type}`;
+    tip.style.left = (mouseXPx + 14) + 'px';
+    tip.style.top  = (mouseYPx - 10) + 'px';
+    tip.classList.add('show');
+    canvas.style.cursor = 'pointer';
+  } else {
+    tip.classList.remove('show');
+    canvas.style.cursor = 'default';
+  }
+});
+
+canvas.addEventListener('click', e => {
+  mouseNDC.x = (e.clientX / window.innerWidth)*2 - 1;
+  mouseNDC.y = -(e.clientY / window.innerHeight)*2 + 1;
+  raycaster.setFromCamera(mouseNDC, camera);
+  const hits = raycaster.intersectObjects(seatMeshes);
+  if (hits.length > 0) openWitness(hits[0].object.userData.witnessIdx);
+});
+
+// ═══════════════════════════════════════════════════════════════════════
+//  AUDIO — ambient drone
+// ═══════════════════════════════════════════════════════════════════════
+let audioCtx = null;
+function initAudio() {
+  if (audioCtx) return;
+  audioCtx = new (window.AudioContext||window.webkitAudioContext)();
+  const freqs = [40, 80, 160];
+  freqs.forEach(freq => {
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+    osc.type = 'sine';
+    osc.frequency.value = freq;
+    gain.gain.value = 0;
+    osc.connect(gain);
+    gain.connect(audioCtx.destination);
+    osc.start();
+    gain.gain.linearRampToValueAtTime(0.012, audioCtx.currentTime + 2);
+  });
+}
+document.addEventListener('click', initAudio, { once:true });
+
+// ═══════════════════════════════════════════════════════════════════════
+//  CAMERA DRIFT
+// ═══════════════════════════════════════════════════════════════════════
+const cameraTarget = new THREE.Vector3(0, 2, 0);
+let camAngle = 0;
+
+// ═══════════════════════════════════════════════════════════════════════
+//  ANIMATE
+// ═══════════════════════════════════════════════════════════════════════
+const clock = new THREE.Clock();
+
+function animate() {
+  requestAnimationFrame(animate);
+  const t = clock.getElapsedTime();
+
+  // Camera drift around the scene
+  if (!currentWitness) {
+    camAngle += 0.0008;
+    const r = 22;
+    camera.position.x += (Math.sin(camAngle)*r - camera.position.x) * 0.012;
+    camera.position.z += (Math.cos(camAngle)*r - camera.position.z) * 0.012;
+    camera.position.y += (9 + Math.sin(t*0.15)*1.5 - camera.position.y) * 0.01;
+  }
+  camera.lookAt(cameraTarget);
+
+  // Silhouette scan beam pulse
+  const beamPulse = 0.5 + 0.5*Math.sin(t*2.5);
+  beamMat.opacity = 0.3 + beamPulse * 0.5;
+  beam.scale.y = 1 + beamPulse * 0.08;
+
+  // Head/body shimmer
+  bodyMat.opacity = 0.12 + beamPulse * 0.1;
+  headMat.opacity = 0.18 + beamPulse * 0.15;
+
+  // Silhouette slow rotation
+  silhouetteGroup.rotation.y = Math.sin(t * 0.2) * 0.06;
+
+  // Platform ring pulse
+  platformRing.material.emissiveIntensity = 1.5 + Math.sin(t*1.5)*0.8;
+
+  // Witness orbs float + glow
+  seatMeshes.forEach((orb, i) => {
+    orb.position.y = orb.userData.baseY + Math.sin(t*1.2 + i*0.9)*0.2;
+    orb.material.emissiveIntensity = 1.5 + Math.sin(t*2 + i*0.7)*0.8;
+    // Find sibling ring
+    const ring = seatGroup.children.find(c =>
+      c.userData.floatRing &&
+      Math.abs(c.position.x - orb.position.x) < 0.1 &&
+      Math.abs(c.position.z - orb.position.z) < 0.1
+    );
+    if (ring) {
+      ring.position.y = orb.position.y;
+      ring.rotation.y = t * 1.2 + i;
+      ring.rotation.z = t * 0.4;
+    }
+    if (currentWitness === i) {
+      orb.scale.setScalar(1.25 + Math.sin(t*3)*0.06);
+    } else {
+      orb.scale.setScalar(1);
+    }
+  });
+
+  // Transcript panels drift
+  panelGroup.children.forEach((p, i) => {
+    p.position.y += (2.2 + (i%2)*0.8 + Math.sin(t*0.5 + i)*0.15 - p.position.y) * 0.05;
+    p.lookAt(camera.position.x*0.1, 2, camera.position.z*0.1);
+  });
+
+  // Waveform
+  drawWaveform();
+
+  renderer.render(scene, camera);
+}
+animate();
+
+window.addEventListener('resize', () => {
+  camera.aspect = window.innerWidth/window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+});
+</script>
+</body>
+</html>
