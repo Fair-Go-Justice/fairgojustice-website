@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chain of Custody Reactor — Evidence Vault | Fair Go Justice</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --black:  #000000;
+  --deep:   #020408;
+  --blue:   #0E3A5B;
+  --cyan:   #00BFFF;
+  --gold:   #D4AF37;
+  --orange: #D66B2D;
+  --red:    #FF3B3B;
+  --white:  #F5F5F5;
+  --glass:  rgba(2,4,8,0.82);
+}
+
+html, body {
+  background: var(--black);
+  color: var(--white);
+  font-family: 'Space Grotesk', monospace;
+  overflow: hidden;
+  height: 100vh; width: 100vw;
+  user-select: none;
+}
+
+/* ============================================================
+   ENTRY SEQUENCE
+   ============================================================ */
+#entry {
+  position: fixed; inset: 0; z-index: 900;
+  background: #000;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  transition: opacity 1.5s ease;
+}
+#entry.fade-out { opacity: 0; pointer-events: none; }
+
+.e-scan {
+  position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+  animation: eScan 2.8s ease-in-out forwards 0.5s;
+  opacity: 0;
+}
+@keyframes eScan { 0%{opacity:1;top:0%} 100%{opacity:0;top:100%} }
+
+.e-corner { position:absolute; width:44px; height:44px; opacity:0; animation:eFadeIn 0.6s ease forwards 0.4s; }
+.e-corner.tl{top:20px;left:20px;border-top:1.5px solid var(--cyan);border-left:1.5px solid var(--cyan);}
+.e-corner.tr{top:20px;right:20px;border-top:1.5px solid var(--cyan);border-right:1.5px solid var(--cyan);}
+.e-corner.bl{bottom:20px;left:20px;border-bottom:1.5px solid var(--cyan);border-left:1.5px solid var(--cyan);}
+.e-corner.br{bottom:20px;right:20px;border-bottom:1.5px solid var(--cyan);border-right:1.5px solid var(--cyan);}
+@keyframes eFadeIn { to { opacity:1; } }
+
+.e-room {
+  font-family: 'Space Grotesk', monospace;
+  font-size: clamp(0.55rem, 1.5vw, 0.75rem);
+  letter-spacing: 0.45em; color: var(--cyan);
+  opacity: 0; animation: eFadeIn 0.8s ease forwards 0.3s;
+  margin-bottom: 18px;
+}
+.e-title {
+  font-family: 'Bebas Neue', Impact, sans-serif;
+  font-size: clamp(2.2rem, 8vw, 6rem);
+  letter-spacing: 0.18em; color: var(--white);
+  text-shadow: 0 0 40px var(--red), 0 0 80px rgba(255,59,59,0.3);
+  opacity: 0; animation: eTitle 1s ease forwards 0.7s;
+}
+@keyframes eTitle { from{opacity:0;transform:scale(0.94) translateY(12px);filter:blur(10px)} to{opacity:1;transform:none;filter:none} }
+
+.e-sub {
+  font-size: clamp(0.5rem, 1.6vw, 0.72rem);
+  letter-spacing: 0.38em; color: var(--red);
+  opacity: 0; animation: eFadeIn 0.8s ease forwards 1.2s;
+  margin-top: 10px;
+}
+
+#e-log {
+  margin-top: 36px; text-align: left;
+  font-size: clamp(0.55rem, 1.4vw, 0.68rem);
+  letter-spacing: 0.12em; color: #557; line-height: 1.9;
+  opacity: 0; animation: eFadeIn 0.6s ease forwards 1.6s;
+  min-height: 90px;
+}
+#e-log .line { color: #4af; }
+#e-log .ok   { color: var(--gold); }
+#e-log .warn { color: var(--red); }
+
+#e-bar-wrap {
+  margin-top: 28px; width: min(400px, 80vw);
+  opacity: 0; animation: eFadeIn 0.6s ease forwards 2s;
+}
+#e-bar-track {
+  height: 2px; background: #111;
+  position: relative; overflow: hidden;
+}
+#e-bar-fill {
+  height: 100%; width: 0%; background: var(--red);
+  box-shadow: 0 0 10px var(--red);
+  transition: width 0.1s linear;
+}
+#e-bar-label {
+  text-align: right; font-size: 0.6rem;
+  letter-spacing: 0.3em; color: #556; margin-top: 6px;
+}
+
+/* ============================================================
+   HUD — TOP
+   ============================================================ */
+#hud-top {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 20px;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.9), transparent);
+  pointer-events: none;
+}
+#back-btn {
+  pointer-events: all;
+  font-family: 'Space Grotesk', monospace;
+  font-size: clamp(0.55rem, 1.5vw, 0.7rem);
+  letter-spacing: 0.28em; color: var(--cyan);
+  background: rgba(0,191,255,0.07); border: 1px solid rgba(0,191,255,0.25);
+  padding: 7px 14px; cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+}
+#back-btn:hover { background: rgba(0,191,255,0.15); border-color: var(--cyan); }
+
+#room-badge {
+  font-family: 'Bebas Neue', Impact, sans-serif;
+  font-size: clamp(0.85rem, 2.5vw, 1.2rem);
+  letter-spacing: 0.25em; color: var(--white);
+  text-align: center;
+}
+#room-badge span { color: var(--red); }
+
+#integrity-status {
+  font-size: clamp(0.5rem, 1.3vw, 0.62rem);
+  letter-spacing: 0.3em; color: var(--red);
+  animation: statusPulse 2s ease-in-out infinite;
+}
+@keyframes statusPulse { 0%,100%{opacity:0.7} 50%{opacity:1} }
+
+/* ============================================================
+   HUD — BOTTOM
+   ============================================================ */
+#hud-bottom {
+  position: fixed; bottom: 0; left: 0; right: 0; z-index: 100;
+  padding: 0 16px 16px;
+  background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 100%);
+}
+#ring-indicators {
+  display: flex; justify-content: center; align-items: flex-end;
+  gap: clamp(6px, 2vw, 18px);
+  margin-bottom: 8px;
+}
+.ring-ind {
+  display: flex; flex-direction: column; align-items: center;
+  cursor: pointer; transition: transform 0.2s;
+}
+.ring-ind:hover { transform: translateY(-3px); }
+.ring-ind .ri-num {
+  font-size: 0.58rem; letter-spacing: 0.2em;
+  color: #445; margin-bottom: 4px;
+}
+.ring-ind .ri-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  box-shadow: 0 0 6px currentColor;
+  animation: dotPulse 2s ease-in-out infinite;
+}
+.ring-ind.gold .ri-dot { color: var(--gold); background: var(--gold); }
+.ring-ind.caution .ri-dot { color: var(--orange); background: var(--orange); }
+.ring-ind.broken .ri-dot { color: var(--red); background: var(--red); animation: dotFlicker 0.4s ease-in-out infinite; }
+.ring-ind .ri-label {
+  font-size: 0.5rem; letter-spacing: 0.2em; margin-top: 4px;
+  color: #556;
+}
+.ring-ind.active .ri-num { color: var(--white); }
+.ring-ind.active .ri-label { color: var(--white); }
+@keyframes dotPulse { 0%,100%{opacity:0.7} 50%{opacity:1} }
+@keyframes dotFlicker { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+#hint-text {
+  text-align: center; font-size: clamp(0.5rem, 1.4vw, 0.62rem);
+  letter-spacing: 0.3em; color: #334;
+  animation: hintPulse 3s ease-in-out infinite;
+}
+@keyframes hintPulse { 0%,100%{opacity:0.5} 50%{opacity:1} }
+
+/* ============================================================
+   CANVAS + RING LABELS
+   ============================================================ */
+#reactor-canvas {
+  position: fixed; inset: 0;
+  width: 100vw; height: 100vh;
+  display: block;
+}
+#ring-labels {
+  position: fixed; inset: 0; pointer-events: none; z-index: 50;
+}
+.rlabel {
+  position: absolute; transform: translateX(-50%);
+  text-align: center; pointer-events: none;
+  transition: opacity 0.3s;
+}
+.rlabel-num {
+  font-family: 'Bebas Neue', Impact, sans-serif;
+  font-size: clamp(0.7rem, 2vw, 0.95rem);
+  letter-spacing: 0.25em; opacity: 0.4;
+}
+.rlabel-name {
+  font-family: 'Bebas Neue', Impact, sans-serif;
+  font-size: clamp(1rem, 3vw, 1.4rem);
+  letter-spacing: 0.2em;
+  text-shadow: 0 0 12px currentColor;
+}
+.rlabel-status {
+  font-size: clamp(0.45rem, 1.2vw, 0.58rem);
+  letter-spacing: 0.25em; margin-top: 2px;
+  opacity: 0.8;
+}
+.rlabel.hovered .rlabel-name { opacity: 1; }
+
+/* ============================================================
+   EVIDENCE CARD OVERLAY
+   ============================================================ */
+#card-overlay {
+  position: fixed; inset: 0; z-index: 500;
+  background: rgba(0,0,0,0.75);
+  backdrop-filter: blur(4px);
+  display: flex; align-items: center; justify-content: center;
+  padding: 20px;
+  transition: opacity 0.4s ease;
+}
+#card-overlay.hidden { opacity: 0; pointer-events: none; }
+
+#evidence-card {
+  position: relative;
+  background: rgba(2,4,8,0.96);
+  border: 1px solid rgba(255,255,255,0.08);
+  max-width: 680px; width: 100%;
+  max-height: 90vh; overflow-y: auto;
+  padding: 36px 32px 28px;
+  transform: translateY(30px);
+  transition: transform 0.4s ease;
+  box-shadow: 0 0 60px rgba(0,0,0,0.8), 0 0 0 1px rgba(255,255,255,0.04);
+}
+#card-overlay:not(.hidden) #evidence-card { transform: translateY(0); }
+
+#card-close {
+  position: absolute; top: 16px; right: 16px;
+  background: none; border: 1px solid #333; color: #666;
+  width: 30px; height: 30px; cursor: pointer; font-size: 0.9rem;
+  transition: color 0.2s, border-color 0.2s;
+}
+#card-close:hover { color: var(--white); border-color: #666; }
+
+#card-stage-num {
+  font-family: 'Space Grotesk', monospace;
+  font-size: 0.65rem; letter-spacing: 0.45em;
+  color: #445; margin-bottom: 10px;
+}
+
+#card-status-badge {
+  display: inline-block;
+  font-size: 0.6rem; letter-spacing: 0.35em;
+  padding: 4px 12px; border: 1px solid;
+  margin-bottom: 18px;
+  animation: badgePulse 2s ease-in-out infinite;
+}
+@keyframes badgePulse { 0%,100%{opacity:0.85} 50%{opacity:1} }
+.badge-gold { color: var(--gold); border-color: var(--gold); background: rgba(212,175,55,0.08); }
+.badge-caution { color: var(--orange); border-color: var(--orange); background: rgba(214,107,45,0.08); }
+.badge-broken {
+  color: var(--red); border-color: var(--red); background: rgba(255,59,59,0.1);
+  animation: breachFlicker 1.2s ease-in-out infinite;
+}
+@keyframes breachFlicker { 0%,100%{opacity:1;box-shadow:0 0 8px rgba(255,59,59,0.4)} 50%{opacity:0.7;box-shadow:none} }
+
+#card-title {
+  font-family: 'Bebas Neue', Impact, sans-serif;
+  font-size: clamp(1.8rem, 5vw, 2.8rem);
+  letter-spacing: 0.08em; line-height: 1; color: var(--white);
+  margin-bottom: 6px;
+}
+#card-subtitle {
+  font-size: clamp(0.7rem, 1.8vw, 0.85rem);
+  letter-spacing: 0.2em; color: #677;
+  margin-bottom: 22px;
+}
+#card-divider {
+  height: 1px; background: linear-gradient(90deg, transparent, #333, transparent);
+  margin: 0 0 20px;
+}
+#card-body {
+  font-size: clamp(0.82rem, 2vw, 0.95rem);
+  line-height: 1.75; color: #ccc;
+  margin-bottom: 22px;
+}
+#card-legal-wrap {
+  background: rgba(255,255,255,0.03);
+  border-left: 3px solid;
+  padding: 14px 16px;
+  margin-bottom: 16px;
+}
+#card-legal-label {
+  font-size: 0.58rem; letter-spacing: 0.35em;
+  margin-bottom: 7px;
+}
+#card-legal {
+  font-family: 'Space Grotesk', monospace;
+  font-size: clamp(0.72rem, 1.8vw, 0.82rem);
+  line-height: 1.65; color: #aab;
+}
+#card-exhibit {
+  font-size: 0.62rem; letter-spacing: 0.22em;
+  color: #445; padding: 8px 0;
+  border-top: 1px solid #111;
+  margin-top: 8px; margin-bottom: 20px;
+}
+#card-exhibit em { color: #667; font-style: italic; }
+
+.card-btn {
+  display: inline-block; font-family: 'Space Grotesk', monospace;
+  font-size: 0.65rem; letter-spacing: 0.3em;
+  padding: 10px 20px; cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+  margin-right: 10px; margin-top: 4px;
+  text-decoration: none;
+}
+.btn-close-card {
+  background: rgba(255,255,255,0.04); border: 1px solid #333; color: #aaa;
+}
+.btn-close-card:hover { background: rgba(255,255,255,0.1); border-color: #666; }
+.btn-vault {
+  background: rgba(0,191,255,0.08); border: 1px solid rgba(0,191,255,0.3); color: var(--cyan);
+}
+.btn-vault:hover { background: rgba(0,191,255,0.18); border-color: var(--cyan); }
+
+/* Scrollbar */
+#evidence-card::-webkit-scrollbar { width: 4px; }
+#evidence-card::-webkit-scrollbar-track { background: #0a0a0a; }
+#evidence-card::-webkit-scrollbar-thumb { background: #333; }
+</style>
+</head>
+
+<body>
+
+<!-- ============================================================
+     ENTRY SEQUENCE
+     ============================================================ -->
+<div id="entry">
+  <div class="e-corner tl"></div>
+  <div class="e-corner tr"></div>
+  <div class="e-corner bl"></div>
+  <div class="e-corner br"></div>
+  <div class="e-scan"></div>
+  <div class="e-room">EVIDENCE VAULT — ROOM 03</div>
+  <div class="e-title">CHAIN OF CUSTODY<br>REACTOR</div>
+  <div class="e-sub">EVIDENCE INTEGRITY ANALYSIS SYSTEM</div>
+  <div id="e-log"></div>
+  <div id="e-bar-wrap">
+    <div id="e-bar-track"><div id="e-bar-fill"></div></div>
+    <div id="e-bar-label">LOADING INTEGRITY ENGINE…</div>
+  </div>
+</div>
+
+<!-- ============================================================
+     HUD TOP
+     ============================================================ -->
+<div id="hud-top">
+  <button id="back-btn" onclick="window.location.href='vault.html'">← EVIDENCE VAULT</button>
+  <div id="room-badge">ROOM 03 — <span>CHAIN OF CUSTODY REACTOR</span></div>
+  <div id="integrity-status">⚡ 2 BREAKS DETECTED</div>
+</div>
+
+<!-- ============================================================
+     CANVAS
+     ============================================================ -->
+<canvas id="reactor-canvas"></canvas>
+
+<!-- Ring labels (CSS positioned over canvas) -->
+<div id="ring-labels"></div>
+
+<!-- ============================================================
+     HUD BOTTOM
+     ============================================================ -->
+<div id="hud-bottom">
+  <div id="ring-indicators"></div>
+  <div id="hint-text">CLICK ANY RING TO EXAMINE STAGE</div>
+</div>
+
+<!-- ============================================================
+     EVIDENCE CARD
+     ============================================================ -->
+<div id="card-overlay" class="hidden">
+  <div id="evidence-card">
+    <button id="card-close" onclick="closeCard()">✕</button>
+    <div id="card-stage-num"></div>
+    <div id="card-status-badge"></div>
+    <div id="card-title"></div>
+    <div id="card-subtitle"></div>
+    <div id="card-divider"></div>
+    <div id="card-body"></div>
+    <div id="card-legal-wrap">
+      <div id="card-legal-label">FORENSIC / LEGAL NOTE</div>
+      <div id="card-legal"></div>
+    </div>
+    <div id="card-exhibit"></div>
+    <div>
+      <button class="card-btn btn-close-card" onclick="closeCard()">↩ RETURN TO REACTOR</button>
+      <button class="card-btn btn-vault" onclick="window.location.href='vault.html'">⟶ VAULT HUB</button>
+    </div>
+  </div>
+</div>
+
+<!-- Three.js -->
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
+
+<script>
+/* ============================================================
+   STAGE DATA
+   ============================================================ */
+const STAGES = [
+  {
+    id:'collect', num:'01', label:'COLLECT', status:'gold',
+    statusLabel:'CHAIN INTACT', color:0xD4AF37, css:'#D4AF37',
+    subtitle:'Evidence Collection Protocol',
+    body:'The collection stage establishes the origin and condition of all evidence at point of seizure. Individual documentation, in-situ photography, and unique exhibit identifiers create the integrity foundation every subsequent stage depends on. Without this foundation, nothing that follows is legally sound.',
+    legal:'Each item must be individually documented, photographed in situ, and assigned a unique exhibit identifier before being moved from its original location. This is the non-negotiable foundation of admissible evidence.',
+    exhibit:'Verified evidence reference pending upload.'
+  },
+  {
+    id:'seal', num:'02', label:'SEAL', status:'gold',
+    statusLabel:'CHAIN INTACT', color:0xD4AF37, css:'#D4AF37',
+    subtitle:'Evidence Packaging & Sealing',
+    body:'Tamper-evident sealing creates a permanent physical and documentary record of any unauthorised access attempt. Every seal must log the custodian name, date, time, and authorising authority — and that log must travel with the evidence.',
+    legal:'Broken or re-sealed packaging without a co-signed, dated authorisation record constitutes a chain of custody breach. This is not a technicality — it is the evidentiary foundation of any integrity claim.',
+    exhibit:'Verified evidence reference pending upload.'
+  },
+  {
+    id:'store', num:'03', label:'STORE', status:'caution',
+    statusLabel:'INTEGRITY CAUTION', color:0xD66B2D, css:'#D66B2D',
+    subtitle:'Evidence Storage Integrity',
+    body:'Storage facilities must maintain controlled access logs, environmental monitoring, and continuous audit trails. Systemic concerns regarding the completeness of access records in institutional storage settings have been documented and raised as reform priorities.',
+    legal:'Access to stored evidence by any party not listed on the chain log raises legitimate questions of contamination, tampering, or substitution — each constituting grounds for challenge to the integrity of any finding.',
+    exhibit:'Replace this placeholder with a verified exhibit reference before public release.'
+  },
+  {
+    id:'transfer', num:'04', label:'TRANSFER', status:'broken',
+    statusLabel:'⚡ INTEGRITY BREACH', color:0xFF3B3B, css:'#FF3B3B',
+    subtitle:'Chain of Transfer — Documented Break',
+    body:'Every transfer of evidence between custodians requires a signed handover with timestamps, witness details, and a unique transfer reference number. A single missing, incomplete, or unsigned record legally fractures the chain — and everything beyond becomes questionable.',
+    legal:'Documented systemic patterns indicate that transfer documentation gaps occur in institutional settings. This is not an isolated incident — it is a structural failure requiring independent oversight reform.',
+    exhibit:'Replace this placeholder with a verified exhibit reference before public release.'
+  },
+  {
+    id:'examine', num:'05', label:'EXAMINE', status:'caution',
+    statusLabel:'INTEGRITY CAUTION', color:0xD66B2D, css:'#D66B2D',
+    subtitle:'Forensic Examination Protocol',
+    body:'Independent examination must occur under documented conditions. The examiner\'s qualifications, methodology, access logs, and chain-of-custody acknowledgement all form part of the evidentiary record. Examination without independent oversight creates verification gaps that cannot be retroactively corrected.',
+    legal:'Where examination methodology cannot be independently verified or cross-examined, the reliability of any findings derived from that examination is open to legitimate challenge — and should be.',
+    exhibit:'Replace this placeholder with a verified exhibit reference before public release.'
+  },
+  {
+    id:'disclose', num:'06', label:'DISCLOSE', status:'broken',
+    statusLabel:'⚡ INTEGRITY BREACH', color:0xFF3B3B, css:'#FF3B3B',
+    subtitle:'Disclosure Failure — Documented Break',
+    body:'Full and timely disclosure of all relevant evidence is a fundamental legal obligation — not a courtesy. Selective, delayed, or suppressed disclosure is a due-process breach at the chain-of-custody level. It does not merely affect the proceeding — it corrupts the evidentiary foundation itself.',
+    legal:'Documented systemic patterns of non-disclosure and selective evidence management have been identified and raised as reform priorities. An independent oversight body with compulsion powers is the required institutional response.',
+    exhibit:'Replace this placeholder with a verified exhibit reference before public release.'
+  },
+  {
+    id:'present', num:'07', label:'PRESENT', status:'caution',
+    statusLabel:'INTEGRITY CAUTION', color:0xD66B2D, css:'#D66B2D',
+    subtitle:'Evidence Presentation Integrity',
+    body:'The final stage inherits every integrity question from all preceding stages. A chain broken at Stage 4 or 6 does not repair itself at Stage 7. Each unresolved break compounds. Any proceeding that relies on a compromised chain is itself compromised — and that reality must be confronted openly.',
+    legal:'Reform Priority: An independent Evidence Integrity Commission would provide systematic oversight from collection through to presentation — closing the accountability gap that currently allows chain failures to go unchallenged.',
+    exhibit:'Verified evidence reference pending upload.'
+  },
+];
+
+/* ============================================================
+   BUILD HUD INDICATORS
+   ============================================================ */
+const indCont = document.getElementById('ring-indicators');
+STAGES.forEach((s, i) => {
+  const d = document.createElement('div');
+  d.className = `ring-ind ${s.status}`;
+  d.id = `ri-${i}`;
+  d.innerHTML = `<div class="ri-num">0${i+1}</div>
+    <div class="ri-dot"></div>
+    <div class="ri-label">${s.label}</div>`;
+  d.onclick = () => showCard(i);
+  indCont.appendChild(d);
+});
+
+/* ============================================================
+   THREE.JS SCENE
+   ============================================================ */
+let scene, camera, renderer, clock;
+let rings = [], ringMeshes = [], ringLights = [];
+let sparks = []; // broken-ring spark systems
+let particles, floorMesh;
+let beamSegments = [];
+let raycaster, mouse2D;
+let hoveredIdx = null;
+let cameraTarget = { x:0, y:3 };
+let cardOpen = false;
+let labelEls = [];
+
+const CVS = document.getElementById('reactor-canvas');
+
+function initScene() {
+  clock = new THREE.Clock();
+
+  scene = new THREE.Scene();
+  scene.background = new THREE.Color(0x000000);
+  scene.fog = new THREE.FogExp2(0x000000, 0.022);
+
+  camera = new THREE.PerspectiveCamera(54, innerWidth/innerHeight, 0.1, 400);
+  camera.position.set(0, 3, 20);
+  camera.lookAt(0, 0, 0);
+
+  renderer = new THREE.WebGLRenderer({ canvas: CVS, antialias: true });
+  renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+  renderer.setSize(innerWidth, innerHeight);
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure = 1.1;
+
+  // Lights
+  scene.add(new THREE.AmbientLight(0x080810, 4));
+  const bl = new THREE.PointLight(0x1E6EA7, 3, 120);
+  bl.position.set(0, 20, 10); scene.add(bl);
+
+  raycaster = new THREE.Raycaster();
+  mouse2D = new THREE.Vector2();
+
+  buildFloor();
+  buildParticles();
+  buildRings();
+  buildBeams();
+  buildLabels();
+
+  window.addEventListener('mousemove', onMouseMove);
+  window.addEventListener('click', onCanvasClick);
+  window.addEventListener('touchend', onTouchEnd, { passive:true });
+  window.addEventListener('resize', onResize);
+
+  animate();
+}
+
+/* ---- FLOOR ---- */
+function buildFloor() {
+  const g = new THREE.PlaneGeometry(120, 80, 40, 28);
+  const m = new THREE.MeshStandardMaterial({
+    color: 0x000508, roughness: 0.12, metalness: 0.85,
+    transparent: true, opacity: 0.9
+  });
+  floorMesh = new THREE.Mesh(g, m);
+  floorMesh.rotation.x = -Math.PI / 2;
+  floorMesh.position.y = -5;
+  scene.add(floorMesh);
+
+  // Grid lines
+  const gridGeo = new THREE.BufferGeometry();
+  const pts = [];
+  const W=60, D=40, stX=6, stZ=4;
+  for(let x=-W; x<=W; x+=stX){ pts.push(x,-4.98,-D, x,-4.98,D); }
+  for(let z=-D; z<=D; z+=stZ){ pts.push(-W,-4.98,z, W,-4.98,z); }
+  gridGeo.setAttribute('position', new THREE.Float32BufferAttribute(pts, 3));
+  const gridMat = new THREE.LineBasicMaterial({ color:0x0a1520, transparent:true, opacity:0.4 });
+  scene.add(new THREE.LineSegments(gridGeo, gridMat));
+}
+
+/* ---- PARTICLES ---- */
+function buildParticles() {
+  const N = 900;
+  const pos = new Float32Array(N*3);
+  for(let i=0; i<N; i++){
+    pos[i*3]   = (Math.random()-0.5)*80;
+    pos[i*3+1] = (Math.random()-0.5)*30 + 2;
+    pos[i*3+2] = (Math.random()-0.5)*40;
+  }
+  const g = new THREE.BufferGeometry();
+  g.setAttribute('position', new THREE.BufferAttribute(pos,3));
+  const m = new THREE.PointsMaterial({ color:0x1a2a3a, size:0.06, transparent:true, opacity:0.7 });
+  particles = new THREE.Points(g,m);
+  scene.add(particles);
+}
+
+/* ---- RINGS ---- */
+function buildRings() {
+  const xPos = [-15,-10,-5,0,5,10,15];
+  const yOff  = [0.3, 0.8, 0, -0.5, 0, 0.8, 0.3];
+
+  STAGES.forEach((s, i) => {
+    const col = s.color;
+
+    // Outer glow ring (fake bloom)
+    const glowG = new THREE.TorusGeometry(2.35, 0.32, 16, 80);
+    const glowM = new THREE.MeshBasicMaterial({ color: col, transparent:true, opacity:0.12 });
+    const glowMesh = new THREE.Mesh(glowG, glowM);
+    glowMesh.position.set(xPos[i], yOff[i], 0);
+    glowMesh.rotation.x = Math.PI * 0.08;
+    scene.add(glowMesh);
+
+    // Main ring
+    const rg = new THREE.TorusGeometry(2.0, 0.18, 32, 100);
+    const rm = new THREE.MeshStandardMaterial({
+      color: col,
+      emissive: col,
+      emissiveIntensity: s.status === 'broken' ? 1.6 : s.status === 'caution' ? 0.9 : 0.7,
+      roughness: 0.2, metalness: 0.8
+    });
+    const mesh = new THREE.Mesh(rg, rm);
+    mesh.position.set(xPos[i], yOff[i], 0);
+    mesh.rotation.x = Math.PI * 0.08;
+    mesh.userData.stageIdx = i;
+    scene.add(mesh);
+    ringMeshes.push(mesh);
+    rings.push({ mesh, glowMesh, mat: rm, glowMat: glowM, stage: s, xPos: xPos[i], yOff: yOff[i] });
+
+    // Point light per ring
+    const light = new THREE.PointLight(col, s.status === 'broken' ? 2.0 : 1.2, 14);
+    light.position.set(xPos[i], yOff[i], 1.5);
+    scene.add(light);
+    ringLights.push(light);
+
+    // Broken ring: fracture geometry + sparks
+    if(s.status === 'broken') {
+      buildBrokenEffect(i, xPos[i], yOff[i], col);
+    }
+  });
+}
+
+/* ---- BROKEN RING EFFECTS ---- */
+function buildBrokenEffect(idx, x, y, col) {
+  // Fracture line burst from ring
+  const fGeo = new THREE.BufferGeometry();
+  const fPts = [];
+  for(let f=0; f<12; f++){
+    const ang = (f/12)*Math.PI*2;
+    const r = 2.0;
+    const x0 = Math.cos(ang)*r;
+    const y0 = Math.sin(ang)*r;
+    const jitter = 0.4 + Math.random()*0.3;
+    fPts.push(x0,y0,0, x0*(1+jitter),y0*(1+jitter),Math.random()*0.3-0.15);
+  }
+  fGeo.setAttribute('position', new THREE.Float32BufferAttribute(fPts,3));
+  const fMat = new THREE.LineBasicMaterial({ color:col, transparent:true, opacity:0.7 });
+  const fracture = new THREE.LineSegments(fGeo, fMat);
+  fracture.position.set(x, y, 0);
+  fracture.rotation.x = Math.PI * 0.08;
+  scene.add(fracture);
+
+  // Spark particles
+  const N = 60;
+  const sPos = new Float32Array(N*3);
+  const sVel = new Float32Array(N*3);
+  for(let p=0; p<N; p++){
+    const ang = Math.random()*Math.PI*2;
+    const r = 2.0 + Math.random()*0.5;
+    sPos[p*3]   = Math.cos(ang)*r;
+    sPos[p*3+1] = Math.sin(ang)*r;
+    sPos[p*3+2] = (Math.random()-0.5)*0.3;
+    sVel[p*3]   = (Math.random()-0.5)*0.04;
+    sVel[p*3+1] = (Math.random()-0.5)*0.04;
+    sVel[p*3+2] = (Math.random()-0.5)*0.02;
+  }
+  const sg = new THREE.BufferGeometry();
+  sg.setAttribute('position', new THREE.BufferAttribute(sPos,3));
+  const sm = new THREE.PointsMaterial({ color:col, size:0.06, transparent:true, opacity:0.9 });
+  const sp = new THREE.Points(sg, sm);
+  sp.position.set(x, y, 0);
+  sp.rotation.x = Math.PI * 0.08;
+  scene.add(sp);
+  sparks.push({ points:sp, geo:sg, vel:sVel, mat:sm });
+}
+
+/* ---- BEAMS BETWEEN RINGS ---- */
+function buildBeams() {
+  // Pairs: draw beam except where both sides of broken ring
+  const pairs = [
+    [0,1,'gold'],[1,2,'gold'],[2,3,'orange'],
+    [4,5,'orange'],[5,6,'orange'],[6,6,'none']
+  ];
+  const xPos = [-15,-10,-5,0,5,10,15];
+  const yOff  = [0.3, 0.8, 0, -0.5, 0, 0.8, 0.3];
+
+  pairs.forEach(([a,b,type])=>{
+    if(type==='none') return;
+    const col = type==='gold' ? 0xD4AF37 : 0xD66B2D;
+    const pts = [
+      new THREE.Vector3(xPos[a], yOff[a], 0),
+      new THREE.Vector3(xPos[b], yOff[b], 0)
+    ];
+    const g = new THREE.BufferGeometry().setFromPoints(pts);
+    const m = new THREE.LineBasicMaterial({ color:col, transparent:true, opacity:0.25 });
+    scene.add(new THREE.Line(g, m));
+  });
+
+  // Break gaps (TRANSFER=3, DISCLOSE=5): zigzag arcs
+  [3,5].forEach(brk => {
+    const a = brk-1, b = brk;
+    const pts = [];
+    for(let t=0; t<=8; t++){
+      const frac = t/8;
+      const x = xPos[a] + (xPos[b]-xPos[a])*frac;
+      const y = yOff[a] + (yOff[b]-yOff[a])*frac + Math.sin(frac*Math.PI*3)*0.4;
+      pts.push(new THREE.Vector3(x,y,0));
+    }
+    const g = new THREE.BufferGeometry().setFromPoints(pts);
+    const m = new THREE.LineBasicMaterial({ color:0xFF3B3B, transparent:true, opacity:0.5 });
+    scene.add(new THREE.Line(g,m));
+  });
+}
+
+/* ---- CSS LABELS ---- */
+function buildLabels() {
+  const cont = document.getElementById('ring-labels');
+  rings.forEach((r,i) => {
+    const el = document.createElement('div');
+    el.className = 'rlabel';
+    el.id = `rl-${i}`;
+    el.style.color = r.stage.css;
+    el.innerHTML = `
+      <div class="rlabel-num">${r.stage.num}</div>
+      <div class="rlabel-name" style="color:${r.stage.css}">${r.stage.label}</div>
+      <div class="rlabel-status">${r.stage.statusLabel}</div>`;
+    cont.appendChild(el);
+    labelEls.push(el);
+  });
+}
+
+/* ============================================================
+   ANIMATION LOOP
+   ============================================================ */
+function animate() {
+  requestAnimationFrame(animate);
+  const t = clock.getElapsedTime();
+
+  // Camera drift
+  if(!cardOpen) {
+    camera.position.x += (Math.sin(t*0.18)*1.5 - camera.position.x)*0.02;
+    camera.position.y += (3 + Math.sin(t*0.13)*0.7 - camera.position.y)*0.02;
+    camera.lookAt(0, 0, 0);
+  }
+
+  // Animate rings
+  rings.forEach((r, i) => {
+    const s = r.stage;
+    if(s.status === 'broken') {
+      // Flicker intensity
+      const flicker = 1.3 + Math.sin(t*12 + i)*0.5 + Math.random()*0.4;
+      r.mat.emissiveIntensity = flicker;
+      ringLights[i].intensity = 1.5 + Math.sin(t*9)*0.8;
+      r.mesh.rotation.z += 0.008;
+    } else if(s.status === 'caution') {
+      r.mat.emissiveIntensity = 0.8 + Math.sin(t*1.8 + i)*0.25;
+      ringLights[i].intensity = 0.9 + Math.sin(t*1.5)*0.3;
+      r.mesh.rotation.z += 0.003;
+    } else {
+      r.mat.emissiveIntensity = 0.6 + Math.sin(t*1.2 + i)*0.15;
+      ringLights[i].intensity = 0.8 + Math.sin(t*1.0)*0.2;
+      r.mesh.rotation.z += 0.002;
+    }
+    r.glowMesh.rotation.z = r.mesh.rotation.z;
+    r.glowMat.opacity = 0.08 + r.mat.emissiveIntensity * 0.04;
+
+    // Hover scale
+    const targetS = hoveredIdx === i ? 1.12 : 1.0;
+    r.mesh.scale.lerp(new THREE.Vector3(targetS, targetS, targetS), 0.1);
+    r.glowMesh.scale.copy(r.mesh.scale);
+  });
+
+  // Animate sparks
+  sparks.forEach(sp => {
+    const pos = sp.geo.attributes.position;
+    const N = pos.count;
+    for(let p=0; p<N; p++){
+      pos.setX(p, pos.getX(p) + sp.vel[p*3]);
+      pos.setY(p, pos.getY(p) + sp.vel[p*3+1]);
+      pos.setZ(p, pos.getZ(p) + sp.vel[p*3+2]);
+      // Reset spark if it's drifted too far
+      const dist = Math.sqrt(pos.getX(p)**2+pos.getY(p)**2);
+      if(dist > 3.5) {
+        const ang = Math.random()*Math.PI*2;
+        const r = 1.9 + Math.random()*0.3;
+        pos.setX(p, Math.cos(ang)*r);
+        pos.setY(p, Math.sin(ang)*r);
+        pos.setZ(p, (Math.random()-0.5)*0.2);
+      }
+    }
+    pos.needsUpdate = true;
+    sp.mat.opacity = 0.6 + Math.random()*0.4;
+  });
+
+  // Drift particles
+  particles.rotation.y += 0.00015;
+
+  // Update CSS labels
+  updateLabels();
+
+  // Raycaster hover (from last known mouse)
+  updateHover();
+
+  renderer.render(scene, camera);
+}
+
+/* ---- LABEL PROJECTION ---- */
+function updateLabels() {
+  labelEls.forEach((el,i) => {
+    const r = rings[i];
+    const pos = r.mesh.position.clone().add(new THREE.Vector3(0, 3.2, 0));
+    const v = pos.clone().project(camera);
+    const sx = (v.x*0.5+0.5)*innerWidth;
+    const sy = (-v.y*0.5+0.5)*innerHeight;
+    el.style.left = sx+'px';
+    el.style.top  = sy+'px';
+    el.style.opacity = hoveredIdx===i ? '1' : '0.55';
+    el.classList.toggle('hovered', hoveredIdx===i);
+  });
+}
+
+/* ============================================================
+   INTERACTION
+   ============================================================ */
+let lastMouse = { x:0, y:0 };
+
+function onMouseMove(e) {
+  lastMouse = e;
+  if(cardOpen) return;
+  mouse2D.x = (e.clientX/innerWidth)*2-1;
+  mouse2D.y = -(e.clientY/innerHeight)*2+1;
+}
+
+function updateHover() {
+  if(cardOpen) return;
+  raycaster.setFromCamera(mouse2D, camera);
+  const hits = raycaster.intersectObjects(ringMeshes);
+  const newHov = hits.length ? hits[0].object.userData.stageIdx : null;
+  if(newHov !== hoveredIdx) {
+    hoveredIdx = newHov;
+    document.body.style.cursor = hoveredIdx !== null ? 'pointer' : 'default';
+    // Highlight bottom indicator
+    document.querySelectorAll('.ring-ind').forEach((el,i)=>el.classList.toggle('active', i===hoveredIdx));
+  }
+}
+
+function onCanvasClick(e) {
+  if(cardOpen) return;
+  if(e.target.closest('#hud-top,#hud-bottom,#card-overlay')) return;
+  mouse2D.x = (e.clientX/innerWidth)*2-1;
+  mouse2D.y = -(e.clientY/innerHeight)*2+1;
+  raycaster.setFromCamera(mouse2D, camera);
+  const hits = raycaster.intersectObjects(ringMeshes);
+  if(hits.length) showCard(hits[0].object.userData.stageIdx);
+}
+
+function onTouchEnd(e) {
+  if(cardOpen) return;
+  const t = e.changedTouches[0];
+  mouse2D.x = (t.clientX/innerWidth)*2-1;
+  mouse2D.y = -(t.clientY/innerHeight)*2+1;
+  raycaster.setFromCamera(mouse2D, camera);
+  const hits = raycaster.intersectObjects(ringMeshes);
+  if(hits.length) showCard(hits[0].object.userData.stageIdx);
+}
+
+function onResize() {
+  camera.aspect = innerWidth/innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(innerWidth, innerHeight);
+}
+
+/* ============================================================
+   EVIDENCE CARD
+   ============================================================ */
+function showCard(idx) {
+  const s = STAGES[idx];
+  cardOpen = true;
+
+  document.getElementById('card-stage-num').textContent = `STAGE ${s.num} OF 07 — CHAIN OF CUSTODY REACTOR`;
+
+  const badge = document.getElementById('card-status-badge');
+  badge.textContent = s.statusLabel;
+  badge.className = 'badge-' + s.status;
+
+  document.getElementById('card-title').textContent = s.label;
+  document.getElementById('card-subtitle').textContent = s.subtitle;
+  document.getElementById('card-body').textContent = s.body;
+  document.getElementById('card-legal').textContent = s.legal;
+
+  // Colour the legal wrap border to match status
+  const lw = document.getElementById('card-legal-wrap');
+  const ll = document.getElementById('card-legal-label');
+  lw.style.borderLeftColor = s.css;
+  ll.style.color = s.css;
+
+  // Exhibit reference
+  const isPlaceholder = s.exhibit.startsWith('Replace') || s.exhibit.startsWith('Verified evidence reference pending');
+  document.getElementById('card-exhibit').innerHTML = `
+    <em>EXHIBIT STATUS: ${s.exhibit}</em>`;
+
+  // Border colour on card
+  document.getElementById('evidence-card').style.borderColor = s.css + '44';
+
+  // Highlight indicator
+  document.querySelectorAll('.ring-ind').forEach((el,i)=>el.classList.toggle('active',i===idx));
+
+  // Play audio tone
+  playTone(s.status);
+
+  document.getElementById('card-overlay').classList.remove('hidden');
+}
+
+function closeCard() {
+  cardOpen = false;
+  document.getElementById('card-overlay').classList.add('hidden');
+  document.querySelectorAll('.ring-ind').forEach(el=>el.classList.remove('active'));
+}
+
+/* ============================================================
+   WEB AUDIO ENGINE
+   ============================================================ */
+let audioCtx = null;
+let bassNode = null, bassGain = null;
+
+function initAudio() {
+  try {
+    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+    // Bass hum
+    bassNode = audioCtx.createOscillator();
+    bassNode.type = 'sine';
+    bassNode.frequency.value = 52;
+    bassGain = audioCtx.createGain();
+    bassGain.gain.value = 0;
+    bassNode.connect(bassGain);
+    bassGain.connect(audioCtx.destination);
+    bassNode.start();
+
+    // Fade in hum
+    bassGain.gain.linearRampToValueAtTime(0.04, audioCtx.currentTime + 2);
+  } catch(e) { /* audio not available */ }
+}
+
+function playTone(status) {
+  if(!audioCtx) return;
+  const now = audioCtx.currentTime;
+  const osc = audioCtx.createOscillator();
+  const g = audioCtx.createGain();
+  osc.connect(g); g.connect(audioCtx.destination);
+  if(status === 'broken') {
+    osc.type = 'sawtooth';
+    osc.frequency.setValueAtTime(180, now);
+    osc.frequency.linearRampToValueAtTime(90, now+0.3);
+    g.gain.setValueAtTime(0.12, now);
+    g.gain.linearRampToValueAtTime(0, now+0.4);
+  } else if(status === 'caution') {
+    osc.type = 'triangle';
+    osc.frequency.value = 330;
+    g.gain.setValueAtTime(0.08, now);
+    g.gain.linearRampToValueAtTime(0, now+0.3);
+  } else {
+    osc.type = 'sine';
+    osc.frequency.value = 528;
+    g.gain.setValueAtTime(0.08, now);
+    g.gain.linearRampToValueAtTime(0, now+0.4);
+  }
+  osc.start(now); osc.stop(now+0.5);
+}
+
+/* ============================================================
+   ENTRY SEQUENCE
+   ============================================================ */
+const LOG_LINES = [
+  { text:'LOADING CHAIN OF CUSTODY MODULE…', cls:'line', delay:1800 },
+  { text:'SCANNING 7 CUSTODY STAGES…', cls:'line', delay:2200 },
+  { text:'STAGE 01 COLLECT — VERIFIED ✓', cls:'ok', delay:2600 },
+  { text:'STAGE 02 SEAL — VERIFIED ✓', cls:'ok', delay:2900 },
+  { text:'STAGE 03 STORE — CAUTION ⚠', cls:'warn', delay:3200 },
+  { text:'STAGE 04 TRANSFER — INTEGRITY BREACH ✗', cls:'warn', delay:3450 },
+  { text:'STAGE 05 EXAMINE — CAUTION ⚠', cls:'warn', delay:3650 },
+  { text:'STAGE 06 DISCLOSE — INTEGRITY BREACH ✗', cls:'warn', delay:3850 },
+  { text:'STAGE 07 PRESENT — CAUTION ⚠', cls:'warn', delay:4050 },
+  { text:'ANALYSIS COMPLETE — 2 BREAKS DETECTED', cls:'warn', delay:4300 },
+];
+
+function runEntry() {
+  const logEl = document.getElementById('e-log');
+  const fill  = document.getElementById('e-bar-fill');
+  const lbl   = document.getElementById('e-bar-label');
+
+  // Progress bar
+  let pct = 0;
+  const barInt = setInterval(() => {
+    pct = Math.min(100, pct + 1.8);
+    fill.style.width = pct+'%';
+    if(pct >= 100) clearInterval(barInt);
+  }, 55);
+
+  // Log lines
+  LOG_LINES.forEach(({ text, cls, delay }) => {
+    setTimeout(() => {
+      const span = document.createElement('div');
+      span.className = cls; span.textContent = '> ' + text;
+      logEl.appendChild(span);
+    }, delay);
+  });
+
+  // Scene start
+  setTimeout(() => {
+    lbl.textContent = 'REACTOR ONLINE — ENTERING CHAMBER';
+    initScene();
+    initAudio();
+  }, 4600);
+
+  // Fade out entry
+  setTimeout(() => {
+    document.getElementById('entry').classList.add('fade-out');
+  }, 5200);
+
+  // Remove entry from DOM
+  setTimeout(() => {
+    const e = document.getElementById('entry');
+    if(e) e.remove();
+  }, 7000);
+}
+
+// Keyboard close card
+document.addEventListener('keydown', e => {
+  if(e.key === 'Escape' && cardOpen) closeCard();
+});
+
+// Start
+runEntry();
+</script>
+</body>
+</html>
