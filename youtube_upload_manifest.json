@@ -109,60 +109,298 @@
     "videoId": "NeiMDNmLS6E",
     "title": "COLD COMFORT",
     "pillar": 2,
-    "uploadedAt": "2026-06-11T04:31:45Z"
+    "uploadedAt": "2026-06-11T04:31:45Z",
+    "playlists": [
+      "complete_collection",
+      "hip_hop"
+    ]
   },
   "costs_order": {
     "videoId": "o9Kv1NrQe-Q",
     "title": "COSTS ORDER",
     "pillar": 1,
-    "uploadedAt": "2026-06-11T04:33:27Z"
+    "uploadedAt": "2026-06-11T04:33:27Z",
+    "playlists": [
+      "complete_collection",
+      "hip_hop",
+      "pillar_2_legal_aid"
+    ]
   },
   "double_standard": {
-    "videoId": "FyBXteycll0",
+    "videoId": "ZlffuokZce8",
     "title": "DOUBLE STANDARD",
     "pillar": null,
-    "uploadedAt": "2026-06-11T04:33:49Z"
+    "uploadedAt": "2026-06-11T04:33:49Z",
+    "playlists": [
+      "complete_collection",
+      "hip_hop",
+      "pillar_1_judicial"
+    ]
   },
   "forensic_fraud": {
     "videoId": "4kb1kgaFgUs",
     "title": "FORENSIC FRAUD",
     "pillar": 3,
-    "uploadedAt": "2026-06-11T04:33:51Z"
+    "uploadedAt": "2026-06-11T04:33:51Z",
+    "playlists": [
+      "complete_collection",
+      "hip_hop",
+      "pillar_3_evidence"
+    ]
   },
   "guardian_ad_litem": {
     "videoId": "IvfSWOPjHr4",
     "title": "GUARDIAN AD LITEM",
     "pillar": 1,
-    "uploadedAt": "2026-06-11T04:33:57Z"
+    "uploadedAt": "2026-06-11T04:33:57Z",
+    "playlists": [
+      "complete_collection",
+      "hip_hop",
+      "pillar_1_judicial"
+    ]
   },
   "media_blackout": {
     "videoId": "fj_hxETi6Vw",
     "title": "MEDIA BLACKOUT",
     "pillar": 1,
-    "uploadedAt": "2026-06-11T04:34:00Z"
+    "uploadedAt": "2026-06-11T04:34:00Z",
+    "playlists": [
+      "complete_collection",
+      "hip_hop"
+    ]
   },
   "offshore_account": {
     "videoId": "cujaRm9wMPk",
     "title": "OFFSHORE ACCOUNT",
     "pillar": 1,
-    "uploadedAt": "2026-06-11T04:34:44Z"
+    "uploadedAt": "2026-06-11T04:34:44Z",
+    "playlists": [
+      "complete_collection",
+      "hip_hop"
+    ]
   },
   "paper_trail": {
     "videoId": "_dRFS3HIOWE",
     "title": "PAPER TRAIL",
     "pillar": 1,
-    "uploadedAt": "2026-06-11T04:34:46Z"
+    "uploadedAt": "2026-06-11T04:34:46Z",
+    "playlists": [
+      "complete_collection",
+      "hip_hop",
+      "pillar_3_evidence"
+    ]
   },
   "rise_again": {
     "videoId": "nwrbaqAYaxY",
     "title": "RISE AGAIN",
     "pillar": 1,
-    "uploadedAt": "2026-06-11T04:35:19Z"
+    "uploadedAt": "2026-06-11T04:35:19Z",
+    "playlists": [
+      "complete_collection",
+      "hip_hop"
+    ]
   },
   "silent_victim": {
     "videoId": "0wDwcMTqeaA",
     "title": "SILENT VICTIM",
     "pillar": 1,
-    "uploadedAt": "2026-06-11T04:35:21Z"
+    "uploadedAt": "2026-06-11T04:35:21Z",
+    "playlists": [
+      "complete_collection",
+      "hip_hop"
+    ]
+  },
+  "courthouse_blues": {
+    "videoId": "Y7g0bOJt380",
+    "title": "COURTHOUSE BLUES",
+    "uploadedAt": "2026-06-12T07:28:00Z",
+    "playlists": [
+      "complete_collection",
+      "hip_hop"
+    ]
+  },
+  "forced_mediation": {
+    "videoId": "VMGW55n-xFk",
+    "title": "FORCED MEDIATION",
+    "uploadedAt": "2026-06-12T07:28:00Z",
+    "playlists": [
+      "complete_collection",
+      "hip_hop",
+      "pillar_2_legal_aid"
+    ]
+  },
+  "litigation_funder": {
+    "videoId": "LTDI8TtNXhM",
+    "title": "LITIGATION FUNDER",
+    "uploadedAt": "2026-06-12T07:28:00Z",
+    "playlists": [
+      "complete_collection",
+      "hip_hop"
+    ]
+  },
+  "one_hundred": {
+    "videoId": "ob41Im2b3I0",
+    "title": "ONE HUNDRED",
+    "uploadedAt": "2026-06-12T07:28:00Z",
+    "playlists": [
+      "complete_collection",
+      "hip_hop"
+    ]
+  },
+  "stand_together": {
+    "videoId": "hKpWw0CIbpI",
+    "title": "STAND TOGETHER",
+    "uploadedAt": "2026-06-12T07:28:00Z",
+    "playlists": [
+      "complete_collection",
+      "hip_hop"
+    ]
+  },
+  "statute_of_limitations": {
+    "videoId": "VxIxqbASYcA",
+    "title": "STATUTE OF LIMITATIONS",
+    "uploadedAt": "2026-06-12T07:28:00Z",
+    "playlists": [
+      "complete_collection",
+      "hip_hop",
+      "pillar_2_legal_aid"
+    ]
+  },
+  "sworn_to_lie": {
+    "videoId": "oE2OxaPQTGE",
+    "title": "SWORN TO LIE",
+    "uploadedAt": "2026-06-12T07:28:00Z",
+    "playlists": [
+      "complete_collection",
+      "hip_hop",
+      "pillar_1_judicial"
+    ]
+  },
+  "the_bailiff": {
+    "videoId": "leI44zViGCY",
+    "title": "THE BAILIFF",
+    "uploadedAt": "2026-06-12T07:28:00Z",
+    "playlists": [
+      "complete_collection",
+      "hip_hop"
+    ]
+  },
+  "the_expert_witness": {
+    "videoId": "xhJKvNg_mXw",
+    "title": "THE EXPERT WITNESS",
+    "uploadedAt": "2026-06-12T07:28:00Z",
+    "playlists": [
+      "complete_collection",
+      "hip_hop",
+      "pillar_3_evidence"
+    ]
+  },
+  "the_final_appeal": {
+    "videoId": "WDbt_wKsvG8",
+    "title": "THE FINAL APPEAL",
+    "uploadedAt": "2026-06-12T07:28:00Z",
+    "playlists": [
+      "complete_collection",
+      "hip_hop"
+    ]
+  },
+  "the_long_road": {
+    "videoId": "aJls0jy3qhQ",
+    "title": "THE LONG ROAD",
+    "pillar": null,
+    "playlists": [
+      "complete_collection",
+      "hip_hop"
+    ],
+    "uploadedAt": "2026-06-12T13:13:23Z"
+  },
+  "the_receiver": {
+    "videoId": "pCu7zJE4k7k",
+    "title": "THE RECEIVER",
+    "pillar": 2,
+    "playlists": [
+      "complete_collection",
+      "hip_hop",
+      "pillar_2_legal_aid"
+    ],
+    "uploadedAt": "2026-06-12T13:13:26Z"
+  },
+  "the_registrar": {
+    "videoId": "UWY-Zvoar_U",
+    "title": "THE REGISTRAR",
+    "pillar": 1,
+    "playlists": [
+      "complete_collection",
+      "hip_hop",
+      "pillar_1_judicial"
+    ],
+    "uploadedAt": "2026-06-12T13:13:28Z"
+  },
+  "the_selector": {
+    "videoId": "DBmXZgJhTO8",
+    "title": "THE SELECTOR",
+    "pillar": 1,
+    "playlists": [
+      "complete_collection",
+      "hip_hop",
+      "pillar_1_judicial"
+    ],
+    "uploadedAt": "2026-06-12T13:13:30Z"
+  },
+  "the_settlement_trap": {
+    "videoId": "rtLwEzw3rgk",
+    "title": "THE SETTLEMENT TRAP",
+    "pillar": 2,
+    "playlists": [
+      "complete_collection",
+      "hip_hop",
+      "pillar_2_legal_aid"
+    ],
+    "uploadedAt": "2026-06-12T13:13:58Z"
+  },
+  "the_tipstaff": {
+    "videoId": "gH8F0yS_9y4",
+    "title": "THE TIPSTAFF",
+    "pillar": 1,
+    "playlists": [
+      "complete_collection",
+      "hip_hop",
+      "pillar_1_judicial"
+    ],
+    "uploadedAt": "2026-06-12T13:14:00Z"
+  },
+  "unregistered": {
+    "videoId": "3Rd4kQ2KFSM",
+    "title": "UNREGISTERED",
+    "pillar": 3,
+    "playlists": [
+      "complete_collection",
+      "hip_hop",
+      "pillar_3_evidence"
+    ],
+    "uploadedAt": "2026-06-12T13:14:03Z"
+  },
+  "widow_s_title": {
+    "videoId": "cUHeLoUFqjg",
+    "title": "WIDOW'S TITLE",
+    "pillar": null,
+    "playlists": [
+      "complete_collection",
+      "hip_hop"
+    ],
+    "uploadedAt": "2026-06-12T13:14:05Z"
+  },
+  "podcast_ep01": {
+    "title": "Episode 1: The Chain Is Broken | Fair Go Justice Podcast",
+    "videoId": "jbJnnBsAe9I",
+    "thumbnail": "thumbnails/ep01_thumb_1280x720.jpg",
+    "thumbnailUploaded": false,
+    "playlists": [
+      "PLF04BQKL-tlNUvu1X7ke8DFUU4DzQZQHQ",
+      "PLF04BQKL-tlNt_Hw-hQ9vyYy7gW0AVB1G"
+    ],
+    "type": "podcast",
+    "duration": "37:55",
+    "uploadDate": "2026-06-15"
   }
 }
