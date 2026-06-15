@@ -528,6 +528,104 @@ html, body {
   .hud-center-title { display: none; }
   .hud-hint { display: none; }
 }
+
+/* ── TIER BADGES ── */
+.nlabel-tier {
+  font-size: 0.42rem;
+  letter-spacing: 0.18em;
+  margin-top: 3px;
+  opacity: 0.65;
+}
+
+/* ── HOVER PREVIEW CARD ── */
+#hover-preview {
+  position: fixed;
+  pointer-events: none;
+  z-index: 200;
+  background: rgba(2,4,8,0.94);
+  border: 1px solid rgba(0,191,255,0.22);
+  border-radius: 4px;
+  padding: 14px 18px;
+  min-width: 210px;
+  max-width: 260px;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.18s ease, transform 0.18s ease;
+  backdrop-filter: blur(14px);
+  box-shadow: 0 0 20px rgba(0,191,255,0.08);
+}
+#hover-preview.hp-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.hp-room-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 0.52rem;
+  letter-spacing: 0.2em;
+  color: rgba(255,255,255,0.35);
+  margin-bottom: 3px;
+}
+.hp-label {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.05rem;
+  letter-spacing: 0.06em;
+  margin-bottom: 10px;
+}
+.hp-lines {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 10px;
+}
+.hp-lines li {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.68rem;
+  color: rgba(245,245,245,0.65);
+  padding: 2px 0;
+}
+.hp-lines li::before {
+  content: '⟶  ';
+  color: #00BFFF;
+  font-size: 0.6rem;
+}
+.hp-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid rgba(255,255,255,0.07);
+  padding-top: 8px;
+}
+.hp-time {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.6rem;
+  color: rgba(255,255,255,0.38);
+}
+.hp-ver-badge {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 0.54rem;
+  letter-spacing: 0.14em;
+  padding: 2px 7px;
+  border-radius: 2px;
+}
+.hp-ver-badge.ver-verified  { background: rgba(0,255,136,0.12); color: #00FF88; border: 1px solid rgba(0,255,136,0.28); }
+.hp-ver-badge.ver-partial   { background: rgba(212,175,55,0.12); color: #D4AF37; border: 1px solid rgba(212,175,55,0.28); }
+.hp-ver-badge.ver-review    { background: rgba(0,191,255,0.12); color: #00BFFF; border: 1px solid rgba(0,191,255,0.28); }
+.hp-ver-badge.ver-disputed  { background: rgba(255,59,59,0.12); color: #FF3B3B; border: 1px solid rgba(255,59,59,0.28); }
+
+/* ── PANEL VERIFICATION BADGE ── */
+.panel-ver-badge {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 0.52rem;
+  letter-spacing: 0.14em;
+  padding: 2px 8px;
+  border-radius: 2px;
+  margin-left: 8px;
+  vertical-align: middle;
+}
+.panel-ver-badge.ver-verified  { background: rgba(0,255,136,0.12); color: #00FF88; border: 1px solid rgba(0,255,136,0.28); }
+.panel-ver-badge.ver-partial   { background: rgba(212,175,55,0.12); color: #D4AF37; border: 1px solid rgba(212,175,55,0.28); }
+.panel-ver-badge.ver-review    { background: rgba(0,191,255,0.12); color: #00BFFF; border: 1px solid rgba(0,191,255,0.28); }
+.panel-ver-badge.ver-disputed  { background: rgba(255,59,59,0.12); color: #FF3B3B; border: 1px solid rgba(255,59,59,0.28); }
+
 </style>
 </head>
 <body>
@@ -570,6 +668,17 @@ html, body {
 
 <!-- NODE LABELS -->
 <div id="node-labels"></div>
+<!-- HOVER PREVIEW CARD -->
+<div id="hover-preview">
+  <div class="hp-room-num" id="hp-room-num"></div>
+  <div class="hp-label" id="hp-label"></div>
+  <ul class="hp-lines" id="hp-lines"></ul>
+  <div class="hp-footer">
+    <span class="hp-time" id="hp-time"></span>
+    <span class="hp-ver-badge" id="hp-ver-badge"></span>
+  </div>
+</div>
+
 
 <!-- HUD OVERLAY -->
 <div id="hud">
@@ -614,10 +723,13 @@ html, body {
 const ROOMS = [
   {
     id: 'intake', label: 'EVIDENCE INTAKE', room: 'ROOM 01',
+    tier: 1,
     titleLine1: 'Evidence', titleLine2: 'Intake',
     color: 0x00BFFF, glowColor: '#00BFFF',
     orbitRadius: 22, orbitSpeed: 0.003, orbitOffset: 0,
-    orbitTilt: 0.15, size: 1.9,
+    orbitTilt: 0.15, size: 2.8,
+    verStatus: 'verified', estTime: '12 MIN',
+    hoverLines: ['256+ Evidence Sources', 'Level 1 Classification', '100% Verified'],
     description: 'The primary evidence repository. Documents, photographs, metadata, and primary source material — each verified, catalogued, and cross-referenced. This is where the evidence trail begins.',
     stats: [
       { label: 'Sources', value: '256+', cls: 'v-gold' },
@@ -629,10 +741,13 @@ const ROOMS = [
   },
   {
     id: 'timeline', label: 'TIMELINE CHAMBER', room: 'ROOM 02',
+    tier: 3,
     titleLine1: 'Timeline', titleLine2: 'Chamber',
     color: 0xD4AF37, glowColor: '#D4AF37',
     orbitRadius: 18, orbitSpeed: 0.0025, orbitOffset: Math.PI * 0.7,
-    orbitTilt: -0.2, size: 1.7,
+    orbitTilt: -0.2, size: 1.3,
+    verStatus: 'partial', estTime: '8 MIN',
+    hoverLines: ['47+ Documented Events', '12 Contradictions', '2019–Present'],
     description: 'Walk the chronological evidence trail. Events materialise in sequence. Contradictions fracture red. Corroborating evidence illuminates gold. The timeline becomes a physical place you move through.',
     stats: [
       { label: 'Start', value: '2019', cls: '' },
@@ -644,10 +759,13 @@ const ROOMS = [
   },
   {
     id: 'custody', label: 'CHAIN OF CUSTODY', room: 'ROOM 03',
+    tier: 3,
     titleLine1: 'Chain of', titleLine2: 'Custody',
     color: 0xFF3B3B, glowColor: '#FF3B3B',
     orbitRadius: 29, orbitSpeed: 0.002, orbitOffset: Math.PI * 1.4,
-    orbitTilt: 0.3, size: 2.1,
+    orbitTilt: 0.3, size: 1.3,
+    verStatus: 'review', estTime: '5 MIN',
+    hoverLines: ['7 Integrity Stages', '2 Breaches Detected', 'Active Review'],
     description: 'Seven custody stages rendered as energy rings. Verified stages glow gold. Instability burns orange. Breaks fracture red. The Custody Reactor responds visually to the integrity of the evidence chain.',
     stats: [
       { label: 'Stages', value: '7', cls: '' },
@@ -659,10 +777,13 @@ const ROOMS = [
   },
   {
     id: 'pillars', label: 'REFORM CATHEDRAL', room: 'ROOM 04',
+    tier: 2,
     titleLine1: 'Reform', titleLine2: 'Cathedral',
     color: 0xD66B2D, glowColor: '#D66B2D',
     orbitRadius: 25, orbitSpeed: 0.0035, orbitOffset: Math.PI * 0.3,
-    orbitTilt: -0.1, size: 1.8,
+    orbitTilt: -0.1, size: 1.9,
+    verStatus: 'verified', estTime: '7 MIN',
+    hoverLines: ['3 Reform Pillars', '15+ Active Proposals', '12+ Submissions'],
     description: 'Three towering reform pillars rise from the evidence. As documented concerns accumulate, the pillars grow brighter — mapping the path from systemic failure to structural reform.',
     stats: [
       { label: 'Pillars', value: '3', cls: 'v-gold' },
@@ -674,10 +795,13 @@ const ROOMS = [
   },
   {
     id: 'music', label: 'MUSIC NEXUS', room: 'ROOM 05',
+    tier: 2,
     titleLine1: 'Music', titleLine2: 'Nexus',
     color: 0xA040FF, glowColor: '#A040FF',
     orbitRadius: 16, orbitSpeed: 0.004, orbitOffset: Math.PI * 1.1,
-    orbitTilt: 0.25, size: 1.6,
+    orbitTilt: 0.25, size: 1.9,
+    verStatus: 'verified', estTime: '15 MIN',
+    hoverLines: ['157+ Original Tracks', '6 Genres', 'Live & Streaming'],
     description: 'Where evidence becomes sound. 157+ original tracks — each song an explorable world. Country. Hip hop. Ambient. Every track court-safe. Every track authentic. Walk into a song; the world changes around you.',
     stats: [
       { label: 'Tracks', value: '157+', cls: 'v-gold' },
@@ -689,10 +813,13 @@ const ROOMS = [
   },
   {
     id: 'network', label: 'AUSTRALIA NETWORK', room: 'ROOM 06',
+    tier: 2,
     titleLine1: 'Australia', titleLine2: 'Network',
     color: 0x00FF88, glowColor: '#00FF88',
     orbitRadius: 33, orbitSpeed: 0.0018, orbitOffset: Math.PI * 0.9,
-    orbitTilt: -0.25, size: 2.0,
+    orbitTilt: -0.25, size: 1.9,
+    verStatus: 'verified', estTime: '10 MIN',
+    hoverLines: ['8+ Cities', 'National Reach', 'Active Petitions'],
     description: 'Australia as a living accountability network. Cities glow. Each node contains stories, petitions, reform submissions, and evidence themes. The movement becomes geographically, unmistakably real.',
     stats: [
       { label: 'Stories', value: 'GROWING', cls: 'v-gold' },
@@ -704,10 +831,13 @@ const ROOMS = [
   },
   {
     id: 'podcast', label: 'DOCUMENTARY ARCHIVE', room: 'ROOM 07',
+    tier: 1,
     titleLine1: 'Documentary', titleLine2: 'Archive',
     color: 0xFF8C00, glowColor: '#FF8C00',
     orbitRadius: 20, orbitSpeed: 0.0028, orbitOffset: Math.PI * 1.7,
-    orbitTilt: 0.08, size: 1.7,
+    orbitTilt: 0.08, size: 2.8,
+    verStatus: 'verified', estTime: '67 MIN',
+    hoverLines: ['2 Episodes Live', '67 Min Total Runtime', '8 Episode Series'],
     description: 'The Evidence Engine — audio documentary series. Episodes live. AI-narrated. Court-safe. Every episode transforms raw evidence into a narrative that moves people from passive observer to active participant.',
     stats: [
       { label: 'Episodes Live', value: '2', cls: 'v-gold' },
@@ -719,10 +849,13 @@ const ROOMS = [
   },
   {
     id: 'stories', label: 'WITNESS THEATRE', room: 'ROOM 08',
+    tier: 2,
     titleLine1: 'Witness', titleLine2: 'Theatre',
     color: 0xFF6B9D, glowColor: '#FF6B9D',
     orbitRadius: 27, orbitSpeed: 0.0022, orbitOffset: Math.PI * 0.5,
-    orbitTilt: -0.18, size: 1.6,
+    orbitTilt: -0.18, size: 1.9,
+    verStatus: 'partial', estTime: '6 MIN',
+    hoverLines: ['Open Submissions', '12+ Documented Themes', '100% Anonymous'],
     description: 'Community testimony — the lived experience of systemic failure. Anonymous. Verified. Powerful. Every submission strengthens the evidentiary record and builds the case for structural reform.',
     stats: [
       { label: 'Stories', value: 'OPEN', cls: 'v-gold' },
@@ -734,10 +867,13 @@ const ROOMS = [
   },
   {
     id: 'quiz', label: 'FORENSICS LAB', room: 'ROOM 09',
+    tier: 1,
     titleLine1: 'Forensics', titleLine2: 'Lab',
     color: 0xCCFF00, glowColor: '#CCFF00',
     orbitRadius: 14, orbitSpeed: 0.005, orbitOffset: Math.PI * 1.9,
-    orbitTilt: 0.35, size: 1.5,
+    orbitTilt: 0.35, size: 2.8,
+    verStatus: 'verified', estTime: '20 MIN',
+    hoverLines: ['45+ Questions', '4 Assessment Modes', 'Live Now'],
     description: 'Test your knowledge of systemic patterns and legal structures. Four assessment modes. Hard quiz. Case review. System knowledge. Build awareness — identify failure points before they trap you.',
     stats: [
       { label: 'Questions', value: '45+', cls: 'v-gold' },
@@ -960,27 +1096,58 @@ function buildCore() {
   scene.add(centralRing2);
 }
 
+const TIER_SIZES = { 1: 2.8, 2: 1.9, 3: 1.3 };
+const TIER_LABELS = { 1: 'PRIMARY HUB', 2: 'SECONDARY', 3: 'EXHIBIT NODE' };
+const VER_LABELS  = { verified:'VERIFIED', partial:'PART. VERIFIED', review:'UNDER REVIEW', disputed:'DISPUTED' };
+const VER_CLASSES = { verified:'ver-verified', partial:'ver-partial', review:'ver-review', disputed:'ver-disputed' };
+
 function buildNode(room, idx) {
-  const geo = new THREE.SphereGeometry(room.size, 24, 24);
+  const sz = TIER_SIZES[room.tier] || room.size;
+  const geo = new THREE.SphereGeometry(sz, 28, 28);
   const mat = new THREE.MeshPhongMaterial({
     color: room.color, emissive: room.color, emissiveIntensity: 0.28,
     shininess: 90, transparent: true, opacity: 0.9,
   });
   const mesh = new THREE.Mesh(geo, mat);
 
-  // Inner glow
-  const ig = new THREE.SphereGeometry(room.size * 0.55, 14, 14);
+  // Inner glow sphere
+  const ig = new THREE.SphereGeometry(sz * 0.55, 14, 14);
   const im = new THREE.MeshBasicMaterial({ color: room.color, transparent: true, opacity: 0.22 });
   mesh.add(new THREE.Mesh(ig, im));
 
-  // Node point light
-  const light = new THREE.PointLight(room.color, 0, 18);
+  // Tier 1: dual outer rings (primary hub indicator)
+  if (room.tier === 1) {
+    const rg1 = new THREE.TorusGeometry(sz * 2.0, 0.09, 12, 80);
+    const rm1 = new THREE.MeshBasicMaterial({ color: room.color, transparent: true, opacity: 0.30 });
+    const ring1 = new THREE.Mesh(rg1, rm1);
+    ring1.rotation.x = Math.PI / 2;
+    mesh.add(ring1);
+
+    const rg2 = new THREE.TorusGeometry(sz * 2.6, 0.05, 12, 80);
+    const rm2 = new THREE.MeshBasicMaterial({ color: room.color, transparent: true, opacity: 0.14 });
+    const ring2 = new THREE.Mesh(rg2, rm2);
+    ring2.rotation.x = Math.PI / 3;
+    mesh.add(ring2);
+  }
+
+  // Tier 2: single subtle ring (secondary hub)
+  if (room.tier === 2) {
+    const rg = new THREE.TorusGeometry(sz * 1.7, 0.05, 12, 64);
+    const rm = new THREE.MeshBasicMaterial({ color: room.color, transparent: true, opacity: 0.16 });
+    const ring = new THREE.Mesh(rg, rm);
+    ring.rotation.x = Math.PI / 3.5;
+    mesh.add(ring);
+  }
+
+  // Node point light (stronger for Tier 1)
+  const lightRange = room.tier === 1 ? 32 : room.tier === 2 ? 22 : 14;
+  const light = new THREE.PointLight(room.color, 0, lightRange);
   mesh.add(light);
 
   scene.add(mesh);
 
   nodeObjs.push({
-    mesh, room, mat, light,
+    mesh, room, mat, light, sz,
     angle: room.orbitOffset,
     isHovered: false,
   });
@@ -1007,9 +1174,13 @@ function buildConnections() {
 function buildLabels() {
   const container = document.getElementById('node-labels');
   nodeObjs.forEach(node => {
+    const tierName = TIER_LABELS[node.room.tier] || '';
     const el = document.createElement('div');
     el.className = 'nlabel';
-    el.innerHTML = `<div class="nlabel-inner" style="border-color:${node.room.glowColor}40;color:${node.room.glowColor}">${node.room.label}</div>`;
+    el.innerHTML = `<div class="nlabel-inner" style="border-color:${node.room.glowColor}40;color:${node.room.glowColor}">
+      ${node.room.label}
+      <div class="nlabel-tier" style="color:${node.room.glowColor}">${tierName}</div>
+    </div>`;
     container.appendChild(el);
     labelEls.push(el);
   });
@@ -1052,14 +1223,22 @@ function animate() {
     }
   });
 
-  // Update connection lines
-  connLines.forEach(({ a, b, line }) => {
+  // Update connection lines — dynamic opacity + hover trace
+  connLines.forEach(({ a, b, line, mat: lmat }) => {
     const pA = nodeObjs[a].mesh.position;
     const pB = nodeObjs[b].mesh.position;
     const pos = line.geometry.attributes.position;
     pos.setXYZ(0, pA.x, pA.y, pA.z);
     pos.setXYZ(1, pB.x, pB.y, pB.z);
     pos.needsUpdate = true;
+    const isAdj = hoveredIdx === a || hoveredIdx === b;
+    const targetOp = isAdj ? 0.82 : 0.09 + Math.sin(t * 0.6 + a) * 0.03;
+    lmat.opacity += (targetOp - lmat.opacity) * 0.10;
+    if (isAdj) {
+      lmat.color.set(nodeObjs[hoveredIdx].room.color);
+    } else {
+      lmat.color.set(0x1E6EA7);
+    }
   });
 
   // Project node labels to screen
@@ -1070,12 +1249,32 @@ function animate() {
     const el = labelEls[i];
     if (v.z < 1) {
       el.style.left = x + 'px';
-      el.style.top = (y + node.room.size * 22 + 14) + 'px';
+      el.style.top = (y + (TIER_SIZES[node.room.tier] || node.room.size) * 22 + 14) + 'px';
       el.style.opacity = node.isHovered ? '1' : '0.55';
+      el.style.transform = node.isHovered ? 'translateX(-50%) scale(1.08)' : 'translateX(-50%)';
     } else {
       el.style.opacity = '0';
     }
   });
+
+  // Position hover preview card above hovered node
+  const hpEl = document.getElementById('hover-preview');
+  if (hoveredIdx !== null && hpEl) {
+    const hn = nodeObjs[hoveredIdx];
+    const hv = hn.mesh.position.clone().project(camera);
+    if (hv.z < 1) {
+      const hx = (hv.x * 0.5 + 0.5) * window.innerWidth;
+      const hy = (-hv.y * 0.5 + 0.5) * window.innerHeight;
+      const cardW = 240;
+      const left = Math.max(8, Math.min(hx - cardW / 2, window.innerWidth - cardW - 8));
+      const top  = Math.max(8, hy - 185 - (TIER_SIZES[hn.room.tier] || hn.room.size) * 16);
+      hpEl.style.left = left + 'px';
+      hpEl.style.top  = top + 'px';
+      hpEl.classList.add('hp-visible');
+    }
+  } else if (hpEl) {
+    hpEl.classList.remove('hp-visible');
+  }
 
   controls.update();
   renderer.render(scene, camera);
@@ -1095,6 +1294,22 @@ function getHoveredFromMouse() {
   return idx >= 0 ? idx : null;
 }
 
+function updateHoverPreview(room) {
+  const numEl  = document.getElementById('hp-room-num');
+  const lblEl  = document.getElementById('hp-label');
+  const linesEl= document.getElementById('hp-lines');
+  const timeEl = document.getElementById('hp-time');
+  const verEl  = document.getElementById('hp-ver-badge');
+  if (!numEl) return;
+  numEl.textContent = room.room;
+  lblEl.textContent = room.label;
+  lblEl.style.color  = room.glowColor;
+  linesEl.innerHTML  = (room.hoverLines || []).map(l => `<li>${l}</li>`).join('');
+  timeEl.textContent = '⏱  EST. ' + (room.estTime || '—');
+  verEl.textContent  = VER_LABELS[room.verStatus] || '—';
+  verEl.className    = 'hp-ver-badge ' + (VER_CLASSES[room.verStatus] || '');
+}
+
 function onMouseMove(e) {
   mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
   mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
@@ -1111,6 +1326,7 @@ function onMouseMove(e) {
     nodeObjs[idx].mat.emissiveIntensity = 0.75;
     nodeObjs[idx].light.intensity = 2.5;
     document.body.style.cursor = 'pointer';
+    if (idx !== hoveredIdx) updateHoverPreview(nodeObjs[idx].room);
     hoveredIdx = idx;
   } else {
     document.body.style.cursor = 'default';
@@ -1149,7 +1365,7 @@ function openPanel(room) {
   ).join('');
 
   document.getElementById('panel-content').innerHTML = `
-    <div class="panel-room-number"><span class="pulse-dot"></span>${room.room} — CLASSIFIED ARCHIVE</div>
+    <div class="panel-room-number"><span class="pulse-dot"></span>${room.room} — CLASSIFIED ARCHIVE<span class="panel-ver-badge ${VER_CLASSES[room.verStatus] || ''}">${VER_LABELS[room.verStatus] || '—'}</span></div>
     <div class="panel-title">${room.titleLine1}<br><span class="accent">${room.titleLine2}</span></div>
     <div class="panel-divider"></div>
     <p class="panel-desc">${room.description}</p>
