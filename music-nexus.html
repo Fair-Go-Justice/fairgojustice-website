@@ -1,0 +1,1111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MUSIC NEXUS — Fair Go Justice</title>
+<meta name="description" content="The Music Nexus — 99 reform songs as a living starfield galaxy. Each song is a world. Each world is a door into the movement.">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --black: #0D1117;
+    --blue: #0E3A5B;
+    --orange: #D66B2D;
+    --white: #F5F5F5;
+    --gold: #D4AF37;
+    --cyan: #00BFFF;
+    --red: #FF3B3B;
+    --green: #00FF88;
+    --purple: #8B5CF6;
+    --pink: #FF6EC7;
+  }
+  body {
+    background: #000;
+    color: var(--white);
+    font-family: 'Space Grotesk', 'Segoe UI', sans-serif;
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+  }
+
+  /* ─── BOOT ─── */
+  #boot-screen {
+    position: fixed; inset: 0; z-index: 9999;
+    background: #000;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 12px;
+  }
+  #boot-logo {
+    font-family: 'Bebas Neue', 'Arial Narrow', Arial, sans-serif;
+    font-size: clamp(28px, 5vw, 52px);
+    letter-spacing: .15em;
+    color: var(--purple);
+    text-shadow: 0 0 40px var(--purple), 0 0 80px rgba(139,92,246,.4);
+    animation: logoPulse 1.5s ease-in-out infinite alternate;
+  }
+  @keyframes logoPulse { from{opacity:.7;} to{opacity:1;} }
+  #boot-sub {
+    font-size: 11px; letter-spacing: .3em;
+    color: rgba(255,255,255,.4); text-transform: uppercase;
+  }
+  #boot-log {
+    margin-top: 20px; width: 340px;
+    font-family: monospace; font-size: 11px;
+    color: rgba(255,255,255,.6); line-height: 1.8;
+    text-align: left;
+  }
+  .boot-line { opacity: 0; }
+  .boot-line.visible { animation: fadeIn .3s ease forwards; }
+  @keyframes fadeIn { to { opacity: 1; } }
+  #boot-bar-wrap {
+    width: 340px; height: 3px;
+    background: rgba(139,92,246,.2); border-radius: 2px;
+    margin-top: 10px; overflow: hidden;
+  }
+  #boot-bar {
+    height: 100%; width: 0%;
+    background: linear-gradient(90deg, var(--purple), var(--cyan));
+    border-radius: 2px;
+    transition: width .06s linear;
+  }
+  #boot-screen.hidden {
+    animation: bootOut .8s ease forwards;
+  }
+  @keyframes bootOut {
+    to { opacity: 0; pointer-events: none; }
+  }
+
+  /* ─── CANVAS ─── */
+  #three-canvas { position: fixed; inset: 0; display: block; }
+
+  /* ─── HUD ─── */
+  #hud-top {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 16px 24px;
+    background: linear-gradient(180deg, rgba(0,0,0,.85) 0%, transparent 100%);
+    pointer-events: none;
+  }
+  #hud-top .room-id {
+    font-size: 10px; letter-spacing: .3em; color: rgba(255,255,255,.35);
+  }
+  #hud-top .room-title {
+    font-family: 'Bebas Neue', Arial, sans-serif;
+    font-size: clamp(16px,2.5vw,24px);
+    letter-spacing: .2em;
+    color: var(--purple);
+    text-shadow: 0 0 20px var(--purple);
+  }
+  #back-btn {
+    position: fixed; top: 14px; right: 20px; z-index: 200;
+    font-size: 10px; letter-spacing: .2em;
+    color: rgba(255,255,255,.5);
+    background: rgba(255,255,255,.06);
+    border: 1px solid rgba(255,255,255,.12);
+    padding: 7px 14px; border-radius: 3px;
+    cursor: pointer; transition: all .2s;
+    text-decoration: none;
+  }
+  #back-btn:hover { color: #fff; border-color: var(--purple); background: rgba(139,92,246,.15); }
+
+  /* ─── CLUSTER LEGEND ─── */
+  #legend {
+    position: fixed; bottom: 80px; left: 20px; z-index: 100;
+    display: flex; flex-direction: column; gap: 6px;
+    pointer-events: none;
+  }
+  .legend-item {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 9px; letter-spacing: .18em; color: rgba(255,255,255,.55);
+  }
+  .legend-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* ─── STATS ─── */
+  #stats-bar {
+    position: fixed; bottom: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: center;
+    gap: 40px; padding: 14px 24px;
+    background: linear-gradient(0deg, rgba(0,0,0,.9) 0%, transparent 100%);
+    font-size: 10px; letter-spacing: .2em; color: rgba(255,255,255,.4);
+    pointer-events: none;
+  }
+  .stat-item strong { color: var(--purple); margin-right: 4px; }
+
+  /* ─── HOVER LABEL ─── */
+  #hover-label {
+    position: fixed; z-index: 150;
+    pointer-events: none;
+    opacity: 0; transition: opacity .15s;
+    transform: translate(-50%, -120%);
+  }
+  #hover-label.visible { opacity: 1; }
+  #hover-label .hl-inner {
+    background: rgba(0,0,0,.88);
+    border: 1px solid rgba(255,255,255,.15);
+    border-radius: 4px;
+    padding: 8px 12px;
+    text-align: center;
+    white-space: nowrap;
+    box-shadow: 0 4px 20px rgba(0,0,0,.6);
+  }
+  #hover-label .hl-title {
+    font-family: 'Bebas Neue', Arial, sans-serif;
+    font-size: 13px; letter-spacing: .15em;
+  }
+  #hover-label .hl-cluster {
+    font-size: 8px; letter-spacing: .2em;
+    color: rgba(255,255,255,.4); margin-top: 2px;
+  }
+
+  /* ─── SONG CARD ─── */
+  #song-card {
+    position: fixed; inset: 0; z-index: 300;
+    display: flex; align-items: center; justify-content: center;
+    background: rgba(0,0,0,.7);
+    backdrop-filter: blur(8px);
+    opacity: 0; pointer-events: none;
+    transition: opacity .3s;
+  }
+  #song-card.visible { opacity: 1; pointer-events: all; }
+  .sc-panel {
+    background: linear-gradient(135deg, rgba(13,17,23,.97) 0%, rgba(14,58,91,.6) 100%);
+    border: 1px solid rgba(255,255,255,.12);
+    border-radius: 8px;
+    width: min(540px, 94vw);
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 0 60px rgba(0,0,0,.8), 0 0 120px rgba(139,92,246,.15);
+    animation: cardIn .35s cubic-bezier(.22,1,.36,1);
+  }
+  @keyframes cardIn {
+    from { transform: scale(.88) translateY(30px); opacity: 0; }
+    to   { transform: scale(1) translateY(0); opacity: 1; }
+  }
+  .sc-cover-wrap {
+    width: 100%; aspect-ratio: 16/9;
+    overflow: hidden; border-radius: 8px 8px 0 0;
+    position: relative;
+  }
+  .sc-cover-wrap img {
+    width: 100%; height: 100%; object-fit: cover;
+    display: block;
+  }
+  .sc-cover-placeholder {
+    width: 100%; height: 100%;
+    display: flex; align-items: center; justify-content: center;
+    background: linear-gradient(135deg, rgba(139,92,246,.3), rgba(0,191,255,.2));
+    font-size: 28px; letter-spacing: .1em; color: rgba(255,255,255,.3);
+    font-family: 'Bebas Neue', Arial, sans-serif;
+  }
+  .sc-cluster-badge {
+    position: absolute; top: 12px; right: 12px;
+    font-size: 8px; letter-spacing: .2em;
+    padding: 4px 10px; border-radius: 20px;
+    border: 1px solid currentColor;
+    font-weight: 600;
+  }
+  .sc-body { padding: 24px; }
+  .sc-num { font-size: 9px; letter-spacing: .3em; color: rgba(255,255,255,.3); margin-bottom: 6px; }
+  .sc-title {
+    font-family: 'Bebas Neue', Arial, sans-serif;
+    font-size: clamp(22px, 4vw, 34px);
+    letter-spacing: .12em;
+    line-height: 1.1;
+    margin-bottom: 16px;
+  }
+  .sc-desc {
+    font-size: 13px; line-height: 1.7;
+    color: rgba(255,255,255,.65);
+    border-left: 2px solid var(--purple);
+    padding-left: 14px;
+    margin-bottom: 20px;
+  }
+  .sc-pillar {
+    font-size: 9px; letter-spacing: .25em;
+    color: rgba(255,255,255,.35);
+    background: rgba(255,255,255,.05);
+    border: 1px solid rgba(255,255,255,.08);
+    display: inline-block;
+    padding: 5px 12px; border-radius: 20px;
+    margin-bottom: 20px;
+  }
+  .sc-actions {
+    display: flex; flex-wrap: wrap; gap: 10px;
+  }
+  .sc-btn {
+    font-size: 10px; letter-spacing: .2em;
+    padding: 10px 18px; border-radius: 3px;
+    border: 1px solid; cursor: pointer;
+    transition: all .2s; text-decoration: none;
+    display: inline-flex; align-items: center; gap: 6px;
+    font-family: inherit;
+    background: transparent;
+  }
+  .sc-btn-primary {
+    border-color: var(--purple); color: var(--purple);
+  }
+  .sc-btn-primary:hover {
+    background: var(--purple); color: #000;
+  }
+  .sc-btn-secondary {
+    border-color: rgba(255,255,255,.2); color: rgba(255,255,255,.5);
+  }
+  .sc-btn-secondary:hover {
+    border-color: rgba(255,255,255,.5); color: #fff;
+  }
+  .sc-btn-danger {
+    border-color: var(--red); color: var(--red);
+  }
+  .sc-btn-danger:hover { background: var(--red); color: #fff; }
+  .sc-close {
+    position: absolute; top: 14px; left: 14px;
+    width: 30px; height: 30px;
+    background: rgba(0,0,0,.6);
+    border: 1px solid rgba(255,255,255,.15);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; font-size: 14px; color: rgba(255,255,255,.6);
+    transition: all .2s; z-index: 10;
+  }
+  .sc-close:hover { background: rgba(255,0,0,.3); color: #fff; }
+
+  /* ─── SEARCH ─── */
+  #search-bar {
+    position: fixed; top: 60px; left: 50%; transform: translateX(-50%);
+    z-index: 100;
+    width: min(320px, 90vw);
+  }
+  #search-input {
+    width: 100%; padding: 8px 14px;
+    background: rgba(0,0,0,.6);
+    border: 1px solid rgba(139,92,246,.3);
+    border-radius: 3px;
+    color: #fff; font-size: 11px; letter-spacing: .15em;
+    font-family: inherit;
+    outline: none; transition: border-color .2s;
+  }
+  #search-input:focus { border-color: var(--purple); }
+  #search-input::placeholder { color: rgba(255,255,255,.25); }
+
+  /* ─── MOBILE ─── */
+  @media(max-width:600px){
+    #legend { display: none; }
+    #stats-bar { gap: 16px; font-size: 9px; }
+    .sc-panel { width: 98vw; }
+    .sc-body { padding: 16px; }
+  }
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- BOOT -->
+<div id="boot-screen">
+  <div id="boot-logo">MUSIC NEXUS</div>
+  <div id="boot-sub">Fair Go Justice — Evidence Vault — Room 05</div>
+  <div id="boot-log">
+    <div class="boot-line" id="bl0">▸ NEXUS CORE INITIALISING...</div>
+    <div class="boot-line" id="bl1">▸ SONG GALAXY MAP LOADING: 99 TRACKS</div>
+    <div class="boot-line" id="bl2">▸ CLUSTER ANALYSIS: 6 REFORM THEMES DETECTED</div>
+    <div class="boot-line" id="bl3">▸ JUDICIAL ACCOUNTABILITY NODE: <span style="color:#D4AF37">39 SONGS</span></div>
+    <div class="boot-line" id="bl4">▸ EVIDENCE INTEGRITY NODE: <span style="color:#00BFFF">16 SONGS</span></div>
+    <div class="boot-line" id="bl5">▸ SUPPRESSION & SILENCE NODE: <span style="color:#FF3B3B">13 SONGS</span></div>
+    <div class="boot-line" id="bl6">▸ FOLLOW THE MONEY NODE: <span style="color:#00FF88">5 SONGS</span></div>
+    <div class="boot-line" id="bl7">▸ LEGAL AID & ACCESS NODE: <span style="color:#D66B2D">14 SONGS</span></div>
+    <div class="boot-line" id="bl8">▸ SOVEREIGN FUTURE NODE: <span style="color:#8B5CF6">12 SONGS</span></div>
+    <div class="boot-line" id="bl9">▸ <span style="color:#00FF88">NEXUS ACTIVE — ENTER THE GALAXY</span></div>
+  </div>
+  <div id="boot-bar-wrap"><div id="boot-bar"></div></div>
+</div>
+
+<!-- HUD -->
+<div id="hud-top">
+  <div>
+    <div class="room-id">EVIDENCE VAULT · ROOM 05</div>
+    <div class="room-title">⬡ MUSIC NEXUS</div>
+  </div>
+</div>
+<a id="back-btn" href="vault.html">← BACK TO VAULT</a>
+
+<!-- SEARCH -->
+<div id="search-bar">
+  <input id="search-input" type="text" placeholder="SEARCH SONGS..." autocomplete="off">
+</div>
+
+<!-- LEGEND -->
+<div id="legend">
+  <div class="legend-item"><div class="legend-dot" style="background:#D4AF37"></div>JUDICIAL ACCOUNTABILITY</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#00BFFF"></div>EVIDENCE INTEGRITY</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#D66B2D"></div>LEGAL AID & ACCESS</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#FF3B3B"></div>SUPPRESSION & SILENCE</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#00FF88"></div>FOLLOW THE MONEY</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#8B5CF6"></div>SOVEREIGN FUTURE</div>
+</div>
+
+<!-- STATS -->
+<div id="stats-bar">
+  <div class="stat-item"><strong>99</strong> REFORM SONGS</div>
+  <div class="stat-item"><strong>6</strong> THEME CLUSTERS</div>
+  <div class="stat-item"><strong>5</strong> SIGNATURE WORLDS</div>
+  <div class="stat-item"><strong>∞</strong> ENTRY DOORS</div>
+</div>
+
+<!-- HOVER LABEL -->
+<div id="hover-label">
+  <div class="hl-inner">
+    <div class="hl-title" id="hl-title">SONG TITLE</div>
+    <div class="hl-cluster" id="hl-cluster">CLUSTER</div>
+  </div>
+</div>
+
+<!-- SONG CARD -->
+<div id="song-card">
+  <div class="sc-panel" style="position:relative;">
+    <div class="sc-close" id="sc-close">✕</div>
+    <div class="sc-cover-wrap" id="sc-cover-wrap">
+      <div class="sc-cover-placeholder" id="sc-cover-placeholder">♪</div>
+      <div class="sc-cluster-badge" id="sc-badge"></div>
+    </div>
+    <div class="sc-body">
+      <div class="sc-num" id="sc-num"></div>
+      <div class="sc-title" id="sc-title"></div>
+      <div class="sc-desc" id="sc-desc"></div>
+      <div class="sc-pillar" id="sc-pillar"></div>
+      <div class="sc-actions" id="sc-actions"></div>
+    </div>
+  </div>
+</div>
+
+<!-- THREE.JS -->
+<canvas id="three-canvas"></canvas>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+// ═══════════════════════════════════════════════════
+// DATA — 99 SONGS IN 6 CLUSTERS
+// ═══════════════════════════════════════════════════
+const CDN = 'https://raw.githubusercontent.com/Fair-Go-Justice/fairgojustice-website/main/thumbnails/';
+
+const COVER_MAP = {
+  'chain of custody': 'cover_chain_of_custody.png',
+  'silent victim': 'cover_silent_victim.png',
+  'follow the money': 'cover_follow_the_money.png',
+  'forensic fraud': 'cover_forensic_fraud.png',
+  'ghost in the system': 'cover_ghost_in_the_system.png',
+  'paper trail': 'cover_paper_trail.png',
+  'the appointed': 'cover_the_appointed.png',
+  'the bailiff': 'cover_the_bailiff.png',
+  'the expert witness': 'cover_the_expert_witness.png',
+  'the final appeal': 'cover_the_final_appeal.png',
+  'the last witness': 'cover_the_last_witness.png',
+  'whistleblower': 'cover_whistleblower.png',
+  'offshore account': 'cover_offshore_account.png',
+  'corporate shell': 'cover_corporate_shell.png',
+  'media blackout': 'cover_media_blackout.png',
+  'suppressed': 'bXtX_suppressed_thumb.jpg',
+  'double standard': 'bXtX_double_standard_thumb.jpg',
+  'vexatious': 'bXtX_vexatious_thumb.jpg',
+  'stand together': 'cover_stand_together.png',
+  'rise again': 'cover_rise_again.png',
+  'bloodline': 'cover_bloodline.png',
+  'costs order': 'cover_costs_order.png',
+  'courthouse blues': 'cover_courthouse_blues.png',
+  'cold comfort': 'cover_cold_comfort.png',
+  'filed and forgotten': 'cover_filed_and_forgotten.png',
+  'statute of limitations': 'cover_statute_of_limitations.png',
+  'sworn to lie': 'cover_sworn_to_lie.png',
+  'wrecking ball law': 'cover_wrecking_ball_law.png',
+  'guardian ad litem': 'cover_guardian_ad_litem.png',
+  'we are not done': 'bXtX_we_are_not_done_thumb.jpg',
+  'bankruptcy weapon': 'bXtX_bankruptcy_weapon_thumb.jpg',
+  'family court blues': 'bXtX_family_court_blues_thumb.jpg',
+  'elder': 'bXtX_elder_thumb.jpg',
+  'one hundred': 'bXtX_one_hundred_thumb.jpg',
+  'litigation funder': 'bXtX_litigation_funder_thumb.jpg',
+  'forced mediation': 'bXtX_forced_mediation_thumb.jpg',
+  'conflict of interest': 'bXtX_conflict_of_interest_thumb.jpg',
+  'under oath': 'cover_under_oath.png',
+  'before the fall': 'cover_before_the_fall.png',
+  'caveat over home': 'cover_caveat_over_home.png',
+  'debt trap': 'cover_debt_trap.png',
+  'house built on sand': 'cover_house_built_on_sand.png',
+};
+
+const CLUSTER_CONFIG = {
+  'JUDICIAL ACCOUNTABILITY': {
+    color: '#D4AF37', hex: 0xD4AF37, labelColor: '#D4AF37',
+    pillar: 'Pillar 1 — Judicial Independence & Accountability',
+    center: [-18, 0, 0],
+    songs: [
+      { title: 'THE APPOINTED', id: 'e3c61a84-4e58-4e68-b479-b74b6e7fac41', signature: true,
+        desc: 'A forensic examination of how judicial appointments can become instruments of systemic control rather than independent arbitration.',
+        theme: 'Judicial appointment mechanisms · Independence failures' },
+      { title: 'SWORN TO LIE', id: '', desc: 'When the oath of office becomes a veil over institutional dishonesty. A documented pattern of false declarations under systemic pressure.', theme: 'Perjury · False declarations' },
+      { title: 'THE REGISTRAR', id: '', desc: 'The gatekeepers of justice — how administrative decisions shape case outcomes before a judge ever sees a file.', theme: 'Administrative gatekeeping · Court registry power' },
+      { title: 'THE BAILIFF', id: '', desc: 'Authority in the corridor. The procedural enforcement machinery that operates below judicial scrutiny.', theme: 'Procedural enforcement · Court administration' },
+      { title: 'THE TIPSTAFF', id: '', desc: 'The invisible hand in court proceedings — whose interests are served by the rituals of formal justice?', theme: 'Court ceremony · Power rituals' },
+      { title: 'THE SELECTOR', id: '', desc: 'Who decides who decides? The selection of decision-makers is itself a mechanism of systemic control.', theme: 'Panel selection · Decision-maker bias' },
+      { title: 'CONFLICT OF INTEREST', id: '', desc: 'When the umpire has a stake in the game. Documented conflicts that were never disclosed.', theme: 'Undisclosed conflicts · Professional ethics' },
+      { title: 'DOUBLE STANDARD', id: '', desc: 'One rule for institutions. Another for individuals. The asymmetry at the heart of unequal justice.', theme: 'Institutional privilege · Unequal treatment' },
+      { title: 'THE EXPERT WITNESS', id: '', desc: 'Expertise as a weapon — when professional opinion serves the party that pays rather than the truth that matters.', theme: 'Expert bias · Paid testimony' },
+      { title: 'VEXATIOUS', id: '', desc: 'Labelled vexatious for refusing to be silent. The weaponisation of procedure against legitimate claims.', theme: 'Vexatious declarations · Silencing mechanisms' },
+      { title: 'UNDER OATH (ROYAL TRUTH)', id: '', desc: 'The moment the institution is placed under oath. What the Royal Commission heard — and what it did not.', theme: 'Royal commissions · Institutional testimony' },
+      { title: 'THE FAIR GO THAT NEVER CAME', id: '', desc: 'Australia\'s founding promise measured against documented systemic failure. The gap between myth and reality.', theme: 'Australian values · Systemic betrayal' },
+      { title: 'THE GUILTY TRUTH (Pillar 1 Cut)', id: '', desc: 'Evidence of institutional guilt framed within the first pillar of reform. What accountability looks like when it actually arrives.', theme: 'Accountability · Institutional guilt' },
+      { title: 'DOMINANCE BY DESIGN (Pillar 1 Cut)', id: '', desc: 'The architecture of judicial dominance — not accidental, not incidental, but designed.', theme: 'Systemic design · Power architecture' },
+      { title: 'THEY CALLED IT LAWFUL', id: '', desc: 'A process can be lawful and still be unjust. Documentation of lawful conduct that produced unlawful outcomes.', theme: 'Procedural compliance · Substantive injustice' },
+      { title: 'THE RECEIVER', id: '', desc: 'Appointed to protect — deployed to extract. How receivership became a tool of systemic asset removal.', theme: 'Receivership · Asset stripping' },
+      { title: 'GUARDIAN AD LITEM', id: '', desc: 'Appointed to serve the vulnerable. A documented pattern of guardians who served the institution instead.', theme: 'Child protection · Guardian accountability' },
+      { title: 'THE LAST WITNESS', id: '', desc: 'The final testimony that the system tried to silence. Evidence that survived every attempt at suppression.', theme: 'Witness protection · Testimony suppression' },
+      { title: 'THE AFFIDAVIT THEY BURIED', id: '', desc: 'A sworn statement that disappeared inside the system. Its existence — and its burial — documented here.', theme: 'Document suppression · Affidavit integrity' },
+      { title: 'MEANS TEST', id: '', desc: 'Access to justice measured by a bank balance. The means test as gatekeeping, not fairness.', theme: 'Legal aid · Financial barriers' },
+      { title: 'THE GAUNTLET', id: '', desc: 'The procedural obstacle course designed to exhaust rather than adjudicate. Running the gauntlet of the justice system.', theme: 'Procedural exhaustion · Access barriers' },
+      { title: 'PAPER SKIN', id: '', desc: 'Rights that exist only on paper. The fragility of legal protections when institutions refuse to enforce them.', theme: 'Paper rights · Enforcement failures' },
+      { title: 'WRECKING BALL LAW', id: '', desc: 'Legislation wielded as a demolition tool. When the law destroys more than it protects.', theme: 'Legislative weaponisation · Destructive process' },
+      { title: 'THE SETTLEMENT TRAP', id: '', desc: 'Forced into settlement under financial and procedural pressure. The trap that silences legitimate claims.', theme: 'Coercive settlement · Access to hearing' },
+      { title: 'STATUTE OF LIMITATIONS', id: '', desc: 'The clock that serves institutions over individuals. How time limits are used to extinguish valid claims.', theme: 'Limitation periods · Delayed justice' },
+      { title: 'THE COST OF ASKING', id: '', desc: 'Asking for justice costs money. The financial barrier that determines who gets heard.', theme: 'Court costs · Financial deterrence' },
+      { title: 'SELF-REPRESENTED', id: '', desc: 'Navigating a system designed by lawyers, for lawyers, without a lawyer. The self-represented litigant as the system\'s excluded outsider.', theme: 'Self-representation · Systemic exclusion' },
+      { title: 'FAMILY COURT BLUES', id: '', desc: 'The human cost of family court proceedings. Evidence of a system that breaks families it was designed to protect.', theme: 'Family law · Child welfare' },
+      { title: 'COSTS ORDER', id: '', desc: 'Punished for losing. The costs order as a weapon that makes justice a financial risk no one can afford.', theme: 'Costs sanctions · Deterrence' },
+      { title: 'ELDER', id: '', desc: 'The most vulnerable in the system — elderly litigants who cannot outlast the delays the system manufactures.', theme: 'Elder justice · Vulnerable litigants' },
+      { title: 'MARCH TO THE GATE', id: '', desc: 'The long march toward institutional reform. Every step documented, every obstacle recorded.', theme: 'Reform movement · Collective action' },
+      { title: 'WE ARE NOT DONE', id: '', desc: 'The movement continues. Every partial victory is a foundation for the next stage of accountability.', theme: 'Reform persistence · Movement continuity' },
+      { title: 'NO BRIEF', id: '', desc: 'Unrepresented and unheard. The systemic disadvantage of those who enter the justice system without professional support.', theme: 'Legal representation · Access to advocacy' },
+      { title: 'COURTHOUSE BLUES', id: '', desc: 'The emotional and financial toll of courthouse reality. Twelve-hour waits, adjournments, and the erosion of hope.', theme: 'Procedural delay · Human cost' },
+      { title: 'THE REGISTRAR', id: '', desc: 'The administrative layer of justice that operates without accountability. The registrar who controls access.', theme: 'Court administration · Administrative power' },
+      { title: 'SIGNED WITHOUT ASKING', id: '', desc: 'Documents executed without informed consent. A pattern of signatures obtained under conditions of duress.', theme: 'Informed consent · Duress documentation' },
+      { title: 'THEY SANK THE TRUTH', id: '', desc: 'Evidence that was deliberately submerged within the institutional process. Documented suppression of material facts.', theme: 'Evidence suppression · Deliberate concealment' },
+      { title: 'HANSARD HEARTS', id: '', desc: 'What parliament said and what parliament did. The gap between recorded words and institutional action.', theme: 'Parliamentary accountability · Legislative record' },
+      { title: 'THE NAME THEY OWN', id: '', desc: 'Identity weaponised within the system. How naming and labelling become tools of institutional control.', theme: 'Identity · Institutional labelling' },
+    ]
+  },
+  'EVIDENCE INTEGRITY': {
+    color: '#00BFFF', hex: 0x00BFFF, labelColor: '#00BFFF',
+    pillar: 'Pillar 2 — Evidence Integrity & Chain of Custody',
+    center: [18, 0, -10],
+    songs: [
+      { title: 'CHAIN OF CUSTODY', id: 'cc3f04f7-3c9d-482e-8a5b-3b9cc7ba6f41', signature: true,
+        desc: 'The seven-stage integrity framework — and what happens when each stage is compromised. This song opens the door to the Reactor.',
+        theme: 'Chain of custody · Evidence integrity', link: 'chain-of-custody-reactor.html', linkLabel: '⚡ ENTER REACTOR' },
+      { title: 'FORENSIC FRAUD', id: '', desc: 'Documented patterns of forensic manipulation — when the evidence itself becomes evidence of wrongdoing.', theme: 'Forensic manipulation · Expert misconduct' },
+      { title: 'PAPER TRAIL', id: '', desc: 'Follow the documents. Every transfer, every stamp, every signature — the paper trail that tells the real story.', theme: 'Document tracing · Administrative records' },
+      { title: 'GHOST IN THE SYSTEM', id: '', desc: 'Files that exist but cannot be located. Records that vanish. The ghost documents that should be central to every hearing.', theme: 'Missing records · System gaps' },
+      { title: 'EXHIBIT A', id: '', desc: 'The first piece of evidence — and the first piece to be challenged. What Exhibit A reveals about the integrity of what follows.', theme: 'Primary evidence · Evidentiary foundations' },
+      { title: 'DEFECT NOTICE (Evidence Cut)', id: '', desc: 'The formal notice of evidentiary defect. Issued, ignored, and eventually buried within the case management system.', theme: 'Defect notices · Procedural suppression' },
+      { title: 'SATCHEL TOOK THE STAND (Evidence Cut)', id: '', desc: 'The drug bag reference that survived every attempt to sanitise the record. Physical evidence in an evidentiary chain.', theme: 'Physical evidence · Chain verification' },
+      { title: 'THE GHOST IN THE TRAILER (Evidence Cut)', id: '', desc: 'Evidence located, documented, then disappeared from the official record. The ghost that should never have been invisible.', theme: 'Evidence disappearance · Record integrity' },
+      { title: 'COLD COMFORT', id: '', desc: 'The consolation of an incomplete system. Evidence gathered but never presented. The cold comfort of partial truth.', theme: 'Incomplete disclosure · Evidence withholding' },
+      { title: 'THE LONG ROAD', id: '', desc: 'The extended evidentiary journey from collection to presentation. Every stage where integrity can be compromised.', theme: 'Multi-stage integrity · Cumulative failure' },
+      { title: 'SIGNED. SEALED. PURSUED. (Second Bite Cut)', id: '', desc: 'Signed once, sealed once, then pursued again. The second-bite doctrine and its impact on evidentiary integrity.', theme: 'Res judicata · Second proceedings' },
+      { title: 'WRECKING BALL LAW', id: '', desc: 'Evidence destroyed by legislative process. When the law itself becomes the instrument of evidentiary obliteration.', theme: 'Legislative evidence destruction · Retroactive impact' },
+      { title: 'NO BRIEF', id: '', desc: 'Evidence presented without briefing, without context, without professional advocacy — and misread as a result.', theme: 'Unrepresented evidence · Contextual failure' },
+      { title: 'THE SETTLEMENT TRAP', id: '', desc: 'Evidence suppressed as a condition of settlement. The confidentiality clause that buries what should be public.', theme: 'Confidentiality · Evidence suppression' },
+      { title: 'UNREGISTERED', id: '', desc: 'Documents that exist but are not registered. The unregistered evidence that falls outside the official evidentiary record.', theme: 'Document registration · Evidentiary gaps' },
+      { title: 'FAKE ME', id: '', desc: 'A forensic examination of fabricated documentation — when evidence is created rather than collected.', theme: 'Document fabrication · Evidence fraud' },
+    ]
+  },
+  'LEGAL AID & ACCESS': {
+    color: '#D66B2D', hex: 0xD66B2D, labelColor: '#D66B2D',
+    pillar: 'Pillar 3 — Equal Access to Justice',
+    center: [0, 0, 22],
+    songs: [
+      { title: 'NO AID, NO JUSTICE', id: '', desc: 'When legal aid is denied, justice is denied. A documented system where financial capacity determines legal outcome.', theme: 'Legal aid · Financial access barriers' },
+      { title: 'SELF-REPRESENTED', id: '', desc: 'The solo navigator in a system built for professionals. Evidence that self-representation systematically disadvantages legitimate claims.', theme: 'Self-representation · Systemic exclusion' },
+      { title: 'COSTS ORDER', id: '', desc: 'The punitive cost order — a mechanism that deters access to justice and silences those who cannot afford to lose.', theme: 'Costs deterrence · Access barriers' },
+      { title: 'LITIGATION FUNDER', id: '', desc: 'When litigation funding becomes the only access path. The commercialisation of justice and its impact on outcomes.', theme: 'Litigation funding · Commercial justice' },
+      { title: 'THE SETTLEMENT TRAP', id: '', desc: 'The financial pressure that forces settlement before a hearing. When institutional resources determine outcomes.', theme: 'Coercive settlement · Power imbalance' },
+      { title: 'FORCED MEDIATION', id: '', desc: 'Mediation without genuine consent. The mandatory process that resolves institution-favourably at the cost of legitimate claims.', theme: 'Mediation coercion · Mandatory processes' },
+      { title: 'BANKRUPTCY WEAPON', id: '', desc: 'Bankruptcy proceedings deployed as a tactical weapon against individuals. Documented patterns of weaponised insolvency.', theme: 'Bankruptcy tactics · Financial weapons' },
+      { title: 'THE COST OF ASKING', id: '', desc: 'Every application costs money. Every adjournment costs money. The price of simply asking the system for justice.', theme: 'Application costs · Financial burden' },
+      { title: 'STATUTE OF LIMITATIONS', id: '', desc: 'The limitation clock that serves institutional interests. How time limits extinguish legitimate claims before they can be heard.', theme: 'Limitation periods · Access barriers' },
+      { title: 'FAMILY COURT BLUES', id: '', desc: 'The collision between family vulnerability and institutional process. Children and parents caught in a system designed for resolution but producing conflict.', theme: 'Family access · Child protection costs' },
+      { title: 'MEANS TEST', id: '', desc: 'Legal aid gated by a financial threshold. The means test as a gatekeeping mechanism rather than a fairness tool.', theme: 'Means testing · Aid eligibility' },
+      { title: 'ONE HUNDRED', id: '', desc: 'One hundred cases. One hundred people who couldn\'t afford to continue. A documented pattern of financially induced withdrawal.', theme: 'Case abandonment · Financial attrition' },
+      { title: 'FREEDOM ON CREDIT (Pillar 2 Cut)', id: '', desc: 'Justice purchased on credit — and the debt that follows those who sought it. The financial aftermath of systemic engagement.', theme: 'Justice debt · Financial aftermath' },
+      { title: 'LUCKY COUNTRY? NOT FOR ME (Reform Cut)', id: '', desc: 'The "lucky country" narrative examined against the lived experience of those for whom luck was institutionally withheld.', theme: 'Australian myth · Access inequality' },
+    ]
+  },
+  'SUPPRESSION & SILENCE': {
+    color: '#FF3B3B', hex: 0xFF3B3B, labelColor: '#FF3B3B',
+    pillar: 'Cross-Pillar — Suppression, Silence & Survivors',
+    center: [-10, 0, 18],
+    songs: [
+      { title: 'SILENT VICTIM', id: 'b2a1f6e8-9c3d-4a7b-8e2f-1d5c9b0a4e83', signature: true,
+        desc: 'The song that started the movement. For every person told to be quiet, to accept, to move on. Silence is not consent — it is a documented condition of systemic pressure.',
+        theme: 'Victim suppression · Institutional silencing', link: 'song-experience.html', linkLabel: '🎵 ENTER SONG WORLD' },
+      { title: 'SUPPRESSED', id: '', desc: 'Evidence suppressed. Voices suppressed. The institutional machinery of enforced silence documented and named.', theme: 'Evidence suppression · Voice removal' },
+      { title: 'FILED AND FORGOTTEN', id: '', desc: 'The complaint was filed. Then it disappeared. A documented pattern of institutional complaint burial.', theme: 'Complaint management · Institutional burial' },
+      { title: 'MEDIA BLACKOUT', id: '', desc: 'When the story cannot be told. Suppression orders, confidentiality agreements, and the media silence that follows.', theme: 'Media suppression · Publication restrictions' },
+      { title: 'WHISTLEBLOWER', id: '', desc: 'Protected in theory. Punished in practice. The documented experience of those who spoke up inside institutions.', theme: 'Whistleblower protection · Institutional retaliation' },
+      { title: 'THEY SANK THE TRUTH', id: '', desc: 'Truth submerged within institutional process. The deliberate concealment of material facts within the official record.', theme: 'Truth suppression · Deliberate concealment' },
+      { title: 'FAKE ME', id: '', desc: 'A forensic examination of fabricated documentation and its role in institutional suppression.', theme: 'Document fabrication · Identity suppression' },
+      { title: 'BLOODLINE', id: '', desc: 'The intergenerational impact of institutional injustice. How systemic failure passes from generation to generation.', theme: 'Intergenerational impact · Family trauma' },
+      { title: 'FROM LITTLE LIES', id: '', desc: 'Small falsehoods compound into systemic failure. The documented accumulation of institutional dishonesty.', theme: 'Cumulative deception · Systemic dishonesty' },
+      { title: 'ELDER', id: '', desc: 'The silencing of elderly victims — whose age becomes a procedural weapon. They run out the clock.', theme: 'Elder silencing · Time-based suppression' },
+      { title: 'WIDOW\'S TITLE', id: '', desc: 'Title disputes that leave surviving family members without legal standing. Documented vulnerability at the intersection of property and grief.', theme: 'Property rights · Surviving spouses' },
+      { title: 'MODERN SLAVE (Movement Cut)', id: '', desc: 'Systemic entrapment that mirrors historical coercion. Documented patterns of financial and procedural enslavement.', theme: 'Financial coercion · Systemic entrapment' },
+      { title: 'THE NAME THEY OWN', id: '', desc: 'When your identity is weaponised by the institution that was supposed to protect it. Named, labelled, and defined by those with power.', theme: 'Identity control · Institutional labelling' },
+    ]
+  },
+  'FOLLOW THE MONEY': {
+    color: '#00FF88', hex: 0x00FF88, labelColor: '#00FF88',
+    pillar: 'Cross-Pillar — Financial Corruption & Systemic Extraction',
+    center: [12, 0, -18],
+    songs: [
+      { title: 'FOLLOW THE MONEY', id: '', signature: true,
+        desc: 'The investigative journalist\'s anthem. Every document leads to a transaction. Every transaction leads to a motive. Follow the money until the system reveals itself.',
+        theme: 'Financial investigation · Corruption tracing', link: 'song-experience.html?song=follow-the-money', linkLabel: '🎵 ENTER SONG WORLD' },
+      { title: 'OFFSHORE ACCOUNT', id: '', desc: 'Value extracted and parked offshore. Documented patterns of asset movement that circumvent domestic accountability.', theme: 'Offshore extraction · Asset movement' },
+      { title: 'CORPORATE SHELL', id: '', desc: 'The shell company as a systemic tool. Documented use of corporate structures to separate liability from accountability.', theme: 'Shell companies · Liability separation' },
+      { title: 'DEBT TRAP', id: '', desc: 'Debt engineered as a control mechanism. The documented architecture of financial entrapment.', theme: 'Debt engineering · Financial control' },
+      { title: 'STOLEN VALUE, OFFSHORE CHAINS', id: '', desc: 'Value removed, chains maintained. The documented movement of extracted assets through offshore structures.', theme: 'Asset extraction · Offshore chains' },
+      { title: 'DEBT RECYCLING BLUES (Financial Fraud Cut)', id: '', desc: 'Debt recycled through financial instruments to obscure its origins. A documented pattern of financial obfuscation.', theme: 'Debt recycling · Financial fraud' },
+      { title: 'INSIDE JOB', id: '', desc: 'The corruption that operates from within. Documented patterns of internal institutional collaboration in financial extraction.', theme: 'Internal corruption · Institutional collusion' },
+      { title: 'CAVEAT OVER HOME (Legal/Property Cut)', id: '', desc: 'The caveat as a weapon against home ownership. Documented use of property encumbrance to extract and control.', theme: 'Property law · Caveat weaponisation' },
+      { title: 'EVERYTHING TO HIDE (Track 12 Cut)', id: '', desc: 'An institution with nothing to say and everything to conceal. The silence that confirms the worst suspicions.', theme: 'Institutional concealment · Silence as evidence' },
+      { title: 'MANUFACTURED CONSENT', id: '', desc: 'Agreement manufactured under conditions that preclude genuine consent. A documented pattern of procedural coercion.', theme: 'Manufactured consent · Coercive agreement' },
+      { title: 'FIVE EYES', id: '', desc: 'Surveillance and financial intelligence in the service of institutional power rather than public accountability.', theme: 'Intelligence systems · Surveillance power' },
+    ]
+  },
+  'SOVEREIGN FUTURE': {
+    color: '#8B5CF6', hex: 0x8B5CF6, labelColor: '#8B5CF6',
+    pillar: 'Movement Pillar — Reform, Rebuilding & Sovereign Future',
+    center: [-4, 0, -20],
+    songs: [
+      { title: 'STAND TOGETHER', id: '', signature: true,
+        desc: 'The movement anthem. Individual stories becoming collective power. The transition from isolated complaint to coordinated reform.',
+        theme: 'Collective action · Reform movement', link: 'take-action.html', linkLabel: '✊ TAKE ACTION' },
+      { title: 'WE ARE NOT DONE', id: '', desc: 'Every partial victory is a foundation. The movement continues until structural reform is achieved and verified.', theme: 'Movement persistence · Long-term reform' },
+      { title: 'RISE AGAIN', id: '', desc: 'Documenting recovery from systemic failure. Every person who was broken by the system and chose to rebuild.', theme: 'Recovery · Resilience documentation' },
+      { title: 'SOVEREIGN SONS (Movement Cut)', id: '', desc: 'The next generation inheriting both the injustice and the movement. Sovereignty as a future-facing commitment.', theme: 'Intergenerational justice · Future sovereignty' },
+      { title: 'WE RAISED THE FLAG (Movement Anthem)', id: '', desc: 'The flag that marks the movement\'s territory. Raised for every person the system refused to hear.', theme: 'Movement identity · Collective symbol' },
+      { title: 'LUCKY COUNTRY? NOT FOR ME (Reform Cut)', id: '', desc: 'Reclaiming the national narrative. Australia can be the lucky country — if the institutions are rebuilt to serve everyone.', theme: 'National reform · Inclusive future' },
+      { title: 'BUILT THE ROADS, PAID THE PRICE (Working Class Cut)', id: '', desc: 'The working class that built the infrastructure and paid the price of institutional indifference.', theme: 'Working class justice · Infrastructure equity' },
+      { title: 'HOUSE BUILT ON SAND (Systemic Failure Cut)', id: '', desc: 'A justice system built on foundations that cannot hold. The systemic failure that requires structural — not cosmetic — reform.', theme: 'Systemic foundations · Structural reform' },
+      { title: 'BEFORE THE FALL', id: '', desc: 'The moment before institutional collapse. Evidence that the system was warned — and chose not to act.', theme: 'Pre-reform · Warning signs ignored' },
+      { title: 'HANSARD HEARTS', id: '', desc: 'Parliament\'s recorded commitments measured against institutional reality. The accountability that comes from Hansard.', theme: 'Parliamentary record · Legislative accountability' },
+      { title: 'SOVEREIGN GROUND', id: '', desc: 'Standing on ground that belongs to the future. The reform platform as sovereign territory — not subject to institutional intimidation.', theme: 'Sovereign platform · Reform ground' },
+      { title: 'THE QUIET COUP', id: '', desc: 'The coup that happened without a shot. Documented institutional capture that changed the landscape of Australian justice.', theme: 'Institutional capture · Systemic coup' },
+    ]
+  }
+};
+
+// Signature worlds for enhanced treatment
+const SIGNATURE_TITLES = new Set(['CHAIN OF CUSTODY','SILENT VICTIM','FOLLOW THE MONEY','STAND TOGETHER','THE APPOINTED']);
+
+// Cluster ordering + indices
+const CLUSTER_NAMES = Object.keys(CLUSTER_CONFIG);
+
+// ═══════════════════════════════════════════════════
+// BOOT SEQUENCE
+// ═══════════════════════════════════════════════════
+const BOOT_LINES = 10;
+let bootIdx = 0;
+function bootTick() {
+  if (bootIdx < BOOT_LINES) {
+    const el = document.getElementById('bl' + bootIdx);
+    if (el) el.classList.add('visible');
+    bootIdx++;
+    const bar = document.getElementById('boot-bar');
+    if (bar) bar.style.width = (bootIdx / BOOT_LINES * 100) + '%';
+    setTimeout(bootTick, 280);
+  } else {
+    setTimeout(() => {
+      document.getElementById('boot-screen').classList.add('hidden');
+      setTimeout(initAudio, 1200);
+    }, 600);
+  }
+}
+bootTick();
+
+// ═══════════════════════════════════════════════════
+// AUDIO ENGINE
+// ═══════════════════════════════════════════════════
+let audioCtx = null;
+let droneGain = null;
+
+function initAudio() {
+  try {
+    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    // Ambient drone — 55Hz + 110Hz
+    [55, 110, 220].forEach((freq, i) => {
+      const osc = audioCtx.createOscillator();
+      const g = audioCtx.createGain();
+      osc.type = i === 0 ? 'sine' : 'triangle';
+      osc.frequency.value = freq;
+      g.gain.setValueAtTime(0, audioCtx.currentTime);
+      g.gain.linearRampToValueAtTime(i === 0 ? 0.04 : 0.015, audioCtx.currentTime + 3);
+      osc.connect(g); g.connect(audioCtx.destination);
+      osc.start();
+    });
+  } catch(e) {}
+}
+
+function playTone(freq, type = 'sine', vol = 0.12, dur = 0.4) {
+  if (!audioCtx) return;
+  const osc = audioCtx.createOscillator();
+  const g = audioCtx.createGain();
+  osc.type = type; osc.frequency.value = freq;
+  g.gain.setValueAtTime(vol, audioCtx.currentTime);
+  g.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + dur);
+  osc.connect(g); g.connect(audioCtx.destination);
+  osc.start(); osc.stop(audioCtx.currentTime + dur);
+}
+
+function playHover() { playTone(660, 'sine', 0.05, 0.2); }
+function playClick() { playTone(330, 'triangle', 0.1, 0.5); }
+
+// ═══════════════════════════════════════════════════
+// THREE.JS GALAXY
+// ═══════════════════════════════════════════════════
+const canvas = document.getElementById('three-canvas');
+const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: false });
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+renderer.setSize(innerWidth, innerHeight);
+renderer.setClearColor(0x000000, 1);
+
+const scene = new THREE.Scene();
+scene.fog = new THREE.FogExp2(0x000005, 0.018);
+
+const camera = new THREE.PerspectiveCamera(60, innerWidth / innerHeight, 0.1, 300);
+camera.position.set(0, 12, 35);
+camera.lookAt(0, 0, 0);
+
+// Lighting
+const ambient = new THREE.AmbientLight(0x111133, 0.8);
+scene.add(ambient);
+[
+  { color: 0x8B5CF6, pos: [0, 20, 0], intensity: 0.6 },
+  { color: 0x00BFFF, pos: [20, 10, -10], intensity: 0.4 },
+  { color: 0xFF3B3B, pos: [-15, 5, 15], intensity: 0.35 },
+  { color: 0xD4AF37, pos: [-20, 8, -5], intensity: 0.3 },
+].forEach(({ color, pos, intensity }) => {
+  const light = new THREE.PointLight(color, intensity, 80);
+  light.position.set(...pos);
+  scene.add(light);
+});
+
+// ── STARFIELD BACKGROUND ──────────────────────────────
+const starGeo = new THREE.BufferGeometry();
+const STAR_COUNT = 3000;
+const starPos = new Float32Array(STAR_COUNT * 3);
+for (let i = 0; i < STAR_COUNT; i++) {
+  starPos[i*3]   = (Math.random() - .5) * 400;
+  starPos[i*3+1] = (Math.random() - .5) * 400;
+  starPos[i*3+2] = (Math.random() - .5) * 400;
+}
+starGeo.setAttribute('position', new THREE.BufferAttribute(starPos, 3));
+const starMat = new THREE.PointsMaterial({ color: 0xaabbff, size: 0.08, transparent: true, opacity: 0.5 });
+scene.add(new THREE.Points(starGeo, starMat));
+
+// ── CLUSTER CORES ─────────────────────────────────────
+const clusterCoreGroup = new THREE.Group();
+scene.add(clusterCoreGroup);
+
+CLUSTER_NAMES.forEach(cname => {
+  const cfg = CLUSTER_CONFIG[cname];
+  const [cx, cy, cz] = cfg.center;
+
+  // Pulsing core sphere
+  const coreGeo = new THREE.SphereGeometry(2.2, 32, 32);
+  const coreMat = new THREE.MeshPhongMaterial({
+    color: cfg.hex, emissive: cfg.hex, emissiveIntensity: 0.4,
+    transparent: true, opacity: 0.25, wireframe: true
+  });
+  const coreMesh = new THREE.Mesh(coreGeo, coreMat);
+  coreMesh.position.set(cx, cy, cz);
+  clusterCoreGroup.add(coreMesh);
+
+  // Point light per cluster
+  const cLight = new THREE.PointLight(cfg.hex, 0.5, 40);
+  cLight.position.set(cx, cy, cz);
+  scene.add(cLight);
+});
+
+// ── SONG STARS ────────────────────────────────────────
+const songStars = []; // { mesh, data, clusterName, angle, orbitRadius, orbitSpeed, baseY }
+const raycaster = new THREE.Raycaster();
+raycaster.params.Points.threshold = 0.8;
+
+let songIndex = 0;
+CLUSTER_NAMES.forEach(cname => {
+  const cfg = CLUSTER_CONFIG[cname];
+  const [cx, cy, cz] = cfg.center;
+  const songs = cfg.songs;
+
+  songs.forEach((song, i) => {
+    const isSignature = song.signature || SIGNATURE_TITLES.has(song.title);
+    const size = isSignature ? 0.55 : 0.22 + Math.random() * 0.18;
+    const geo = new THREE.SphereGeometry(size, isSignature ? 16 : 8, isSignature ? 16 : 8);
+    const mat = new THREE.MeshPhongMaterial({
+      color: cfg.hex,
+      emissive: cfg.hex,
+      emissiveIntensity: isSignature ? 0.9 : 0.5,
+      transparent: true,
+      opacity: isSignature ? 1.0 : 0.85
+    });
+    const mesh = new THREE.Mesh(geo, mat);
+
+    // Orbit params
+    const angle = (i / songs.length) * Math.PI * 2 + Math.random() * 0.3;
+    const orbitRadius = 5 + (i % 4) * 2.2 + Math.random() * 1.5;
+    const orbitSpeed = 0.0006 + Math.random() * 0.0004;
+    const baseY = (Math.random() - .5) * 4;
+
+    mesh.position.set(
+      cx + Math.cos(angle) * orbitRadius,
+      cy + baseY,
+      cz + Math.sin(angle) * orbitRadius
+    );
+
+    // Signature glow ring
+    if (isSignature) {
+      const ringGeo = new THREE.TorusGeometry(size * 2.2, 0.06, 8, 40);
+      const ringMat = new THREE.MeshBasicMaterial({ color: cfg.hex, transparent: true, opacity: 0.4 });
+      const ring = new THREE.Mesh(ringGeo, ringMat);
+      ring.rotation.x = Math.PI / 2;
+      mesh.add(ring);
+    }
+
+    scene.add(mesh);
+    songStars.push({
+      mesh, song, clusterName: cname, cfg,
+      angle, orbitRadius, orbitSpeed, baseY,
+      cx, cy, cz,
+      isSignature,
+      index: ++songIndex
+    });
+  });
+});
+
+// ── NEBULA PARTICLES (cluster atmosphere) ─────────────
+CLUSTER_NAMES.forEach(cname => {
+  const cfg = CLUSTER_CONFIG[cname];
+  const [cx, cy, cz] = cfg.center;
+  const count = 200;
+  const geo = new THREE.BufferGeometry();
+  const pos = new Float32Array(count * 3);
+  for (let i = 0; i < count; i++) {
+    const r = 4 + Math.random() * 10;
+    const theta = Math.random() * Math.PI * 2;
+    const phi = (Math.random() - .5) * Math.PI;
+    pos[i*3]   = cx + r * Math.cos(theta) * Math.cos(phi);
+    pos[i*3+1] = cy + r * Math.sin(phi) * 2;
+    pos[i*3+2] = cz + r * Math.sin(theta) * Math.cos(phi);
+  }
+  geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+  const mat = new THREE.PointsMaterial({ color: cfg.hex, size: 0.12, transparent: true, opacity: 0.18 });
+  scene.add(new THREE.Points(geo, mat));
+});
+
+// ── INTER-CLUSTER CONNECTION LINES ────────────────────
+const lineMat = new THREE.LineBasicMaterial({ color: 0x223344, transparent: true, opacity: 0.12 });
+const centers = CLUSTER_NAMES.map(c => CLUSTER_CONFIG[c].center);
+for (let i = 0; i < centers.length; i++) {
+  for (let j = i+1; j < centers.length; j++) {
+    const pts = [
+      new THREE.Vector3(...centers[i]),
+      new THREE.Vector3(...centers[j])
+    ];
+    const geo = new THREE.BufferGeometry().setFromPoints(pts);
+    scene.add(new THREE.Line(geo, lineMat));
+  }
+}
+
+// ═══════════════════════════════════════════════════
+// INTERACTION
+// ═══════════════════════════════════════════════════
+let hoveredStar = null;
+let cameraAngle = 0;
+let cameraPhi = 0.35;
+let cameraRadius = 35;
+let isDragging = false, lastMouse = { x: 0, y: 0 };
+let mouseNDC = new THREE.Vector2();
+let activeCard = null;
+
+const hoverLabel = document.getElementById('hover-label');
+const hlTitle = document.getElementById('hl-title');
+const hlCluster = document.getElementById('hl-cluster');
+
+canvas.addEventListener('mousemove', e => {
+  mouseNDC.x = (e.clientX / innerWidth) * 2 - 1;
+  mouseNDC.y = -(e.clientY / innerHeight) * 2 + 1;
+
+  // Drag
+  if (isDragging) {
+    const dx = e.clientX - lastMouse.x;
+    const dy = e.clientY - lastMouse.y;
+    cameraAngle -= dx * 0.004;
+    cameraPhi   -= dy * 0.003;
+    cameraPhi = Math.max(0.1, Math.min(1.2, cameraPhi));
+    lastMouse = { x: e.clientX, y: e.clientY };
+  }
+
+  // Hover detection
+  raycaster.setFromCamera(mouseNDC, camera);
+  const meshes = songStars.map(s => s.mesh);
+  const hits = raycaster.intersectObjects(meshes);
+  if (hits.length) {
+    const hit = hits[0];
+    const star = songStars.find(s => s.mesh === hit.object);
+    if (star && star !== hoveredStar) {
+      if (hoveredStar) hoveredStar.mesh.material.emissiveIntensity = hoveredStar.isSignature ? 0.9 : 0.5;
+      hoveredStar = star;
+      hoveredStar.mesh.material.emissiveIntensity = 2.0;
+      playHover();
+      hlTitle.textContent = star.song.title;
+      hlTitle.style.color = star.cfg.color;
+      hlCluster.textContent = star.clusterName;
+    }
+    hoverLabel.style.left = e.clientX + 'px';
+    hoverLabel.style.top  = e.clientY + 'px';
+    hoverLabel.classList.add('visible');
+    canvas.style.cursor = 'pointer';
+  } else {
+    if (hoveredStar) { hoveredStar.mesh.material.emissiveIntensity = hoveredStar.isSignature ? 0.9 : 0.5; hoveredStar = null; }
+    hoverLabel.classList.remove('visible');
+    canvas.style.cursor = 'default';
+  }
+});
+
+canvas.addEventListener('mousedown', e => {
+  isDragging = true; lastMouse = { x: e.clientX, y: e.clientY };
+});
+canvas.addEventListener('mouseup', () => { isDragging = false; });
+canvas.addEventListener('mouseleave', () => { isDragging = false; });
+
+canvas.addEventListener('wheel', e => {
+  cameraRadius += e.deltaY * 0.04;
+  cameraRadius = Math.max(10, Math.min(80, cameraRadius));
+}, { passive: true });
+
+canvas.addEventListener('click', e => {
+  raycaster.setFromCamera(mouseNDC, camera);
+  const hits = raycaster.intersectObjects(songStars.map(s => s.mesh));
+  if (hits.length) {
+    const star = songStars.find(s => s.mesh === hits[0].object);
+    if (star) { openCard(star); playClick(); }
+  }
+});
+
+// Touch
+let touchStart = null;
+canvas.addEventListener('touchstart', e => { touchStart = e.touches[0]; isDragging = true; lastMouse = { x: e.touches[0].clientX, y: e.touches[0].clientY }; }, { passive: true });
+canvas.addEventListener('touchmove', e => {
+  const t = e.touches[0];
+  if (isDragging) {
+    const dx = t.clientX - lastMouse.x, dy = t.clientY - lastMouse.y;
+    cameraAngle -= dx * 0.005; cameraPhi -= dy * 0.004;
+    cameraPhi = Math.max(0.1, Math.min(1.2, cameraPhi));
+    lastMouse = { x: t.clientX, y: t.clientY };
+  }
+}, { passive: true });
+canvas.addEventListener('touchend', e => {
+  isDragging = false;
+  if (touchStart && Math.abs(e.changedTouches[0].clientX - touchStart.clientX) < 5) {
+    const rect = canvas.getBoundingClientRect();
+    const x = ((e.changedTouches[0].clientX - rect.left) / rect.width) * 2 - 1;
+    const y = -((e.changedTouches[0].clientY - rect.top) / rect.height) * 2 + 1;
+    raycaster.setFromCamera(new THREE.Vector2(x, y), camera);
+    const hits = raycaster.intersectObjects(songStars.map(s => s.mesh));
+    if (hits.length) { const star = songStars.find(s => s.mesh === hits[0].object); if (star) { openCard(star); playClick(); } }
+  }
+}, { passive: true });
+
+// Keyboard
+window.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeCard();
+  if (e.key === 'ArrowLeft')  cameraAngle -= 0.05;
+  if (e.key === 'ArrowRight') cameraAngle += 0.05;
+  if (e.key === 'ArrowUp')    cameraPhi -= 0.03;
+  if (e.key === 'ArrowDown')  cameraPhi += 0.03;
+});
+
+// Card close
+document.getElementById('sc-close').addEventListener('click', closeCard);
+document.getElementById('song-card').addEventListener('click', e => { if (e.target === document.getElementById('song-card')) closeCard(); });
+
+// ═══════════════════════════════════════════════════
+// SONG CARD
+// ═══════════════════════════════════════════════════
+function openCard(star) {
+  const s = star.song;
+  const cfg = star.cfg;
+  const cover = COVER_MAP[s.title.toLowerCase()];
+
+  // Cover
+  const wrap = document.getElementById('sc-cover-wrap');
+  const placeholder = document.getElementById('sc-cover-placeholder');
+  const existingImg = wrap.querySelector('img');
+  if (existingImg) existingImg.remove();
+
+  if (cover) {
+    const img = document.createElement('img');
+    img.src = CDN + cover;
+    img.alt = s.title;
+    img.onerror = () => { img.remove(); placeholder.style.display = 'flex'; };
+    placeholder.style.display = 'none';
+    wrap.insertBefore(img, wrap.firstChild);
+  } else {
+    placeholder.style.display = 'flex';
+    placeholder.style.background = `linear-gradient(135deg, ${cfg.color}44, rgba(0,0,0,.6))`;
+    placeholder.textContent = '♪';
+  }
+
+  // Badge
+  const badge = document.getElementById('sc-badge');
+  badge.textContent = star.clusterName;
+  badge.style.color = cfg.color;
+  badge.style.borderColor = cfg.color;
+  badge.style.background = cfg.color + '22';
+
+  // Body
+  document.getElementById('sc-num').textContent = `TRACK ${String(star.index).padStart(2,'0')} OF 99`;
+  document.getElementById('sc-title').textContent = s.title;
+  document.getElementById('sc-title').style.color = '#fff';
+  document.getElementById('sc-desc').textContent = s.desc || 'Reform narrative in music form. Systemic storytelling through sound.';
+  document.getElementById('sc-pillar').textContent = '⬡ ' + (cfg.pillar || 'FGJ REFORM MOVEMENT');
+
+  // Actions
+  const acts = document.getElementById('sc-actions');
+  acts.innerHTML = '';
+
+  // Experience button
+  if (s.link) {
+    const a = document.createElement('a');
+    a.href = s.link; a.className = 'sc-btn sc-btn-primary';
+    a.style.borderColor = cfg.color; a.style.color = cfg.color;
+    a.innerHTML = s.linkLabel || '🎵 ENTER SONG WORLD';
+    acts.appendChild(a);
+  } else {
+    const a = document.createElement('a');
+    a.href = `song-experience.html`; a.className = 'sc-btn sc-btn-primary';
+    a.style.borderColor = cfg.color; a.style.color = cfg.color;
+    a.innerHTML = '🎵 SONG EXPERIENCE';
+    acts.appendChild(a);
+  }
+
+  // Music page
+  const m = document.createElement('a');
+  m.href = 'music.html'; m.className = 'sc-btn sc-btn-secondary';
+  m.innerHTML = '♬ FULL CATALOGUE';
+  acts.appendChild(m);
+
+  // YouTube (for songs that have it)
+  if (s.id) {
+    const yt = document.createElement('a');
+    yt.href = `https://www.youtube.com/@fairgojustice`; yt.target = '_blank';
+    yt.className = 'sc-btn sc-btn-danger';
+    yt.innerHTML = '▶ YOUTUBE';
+    acts.appendChild(yt);
+  }
+
+  // Vault
+  const v = document.createElement('a');
+  v.href = 'vault.html'; v.className = 'sc-btn sc-btn-secondary';
+  v.innerHTML = '⬡ VAULT';
+  acts.appendChild(v);
+
+  // Theme tag
+  if (s.theme) {
+    const tag = document.createElement('div');
+    tag.style.cssText = `font-size:9px;letter-spacing:.2em;color:${cfg.color}99;margin-top:16px;width:100%;`;
+    tag.textContent = '🏷 ' + s.theme;
+    acts.appendChild(tag);
+  }
+
+  if (star.isSignature) {
+    const sig = document.createElement('div');
+    sig.style.cssText = 'font-size:9px;letter-spacing:.2em;color:#D4AF37;margin-top:8px;width:100%;';
+    sig.textContent = '★ SIGNATURE WORLD — IMMERSIVE EXPERIENCE AVAILABLE';
+    acts.appendChild(sig);
+  }
+
+  document.getElementById('song-card').classList.add('visible');
+  activeCard = star;
+}
+
+function closeCard() {
+  document.getElementById('song-card').classList.remove('visible');
+  activeCard = null;
+}
+
+// ── SEARCH ────────────────────────────────────────────
+document.getElementById('search-input').addEventListener('input', e => {
+  const q = e.target.value.toLowerCase().trim();
+  songStars.forEach(star => {
+    if (!q) {
+      star.mesh.material.opacity = star.isSignature ? 1 : 0.85;
+      star.mesh.visible = true;
+    } else {
+      const match = star.song.title.toLowerCase().includes(q) ||
+                    star.clusterName.toLowerCase().includes(q) ||
+                    (star.song.theme || '').toLowerCase().includes(q);
+      star.mesh.visible = match;
+      star.mesh.material.opacity = match ? 1 : 0;
+    }
+  });
+});
+
+// ═══════════════════════════════════════════════════
+// ANIMATION LOOP
+// ═══════════════════════════════════════════════════
+const clock = new THREE.Clock();
+
+function animate() {
+  requestAnimationFrame(animate);
+  const t = clock.getElapsedTime();
+
+  // Slow auto-rotate camera
+  if (!isDragging && !activeCard) cameraAngle += 0.0008;
+
+  // Camera orbit
+  const cx = cameraRadius * Math.cos(cameraAngle) * Math.sin(cameraPhi);
+  const cy = cameraRadius * Math.cos(cameraPhi);
+  const cz = cameraRadius * Math.sin(cameraAngle) * Math.sin(cameraPhi);
+  camera.position.set(cx, cy, cz);
+  camera.lookAt(0, 0, 0);
+
+  // Song star orbits
+  songStars.forEach(star => {
+    star.angle += star.orbitSpeed;
+    star.mesh.position.set(
+      star.cx + Math.cos(star.angle) * star.orbitRadius,
+      star.cy + star.baseY + Math.sin(t * 0.3 + star.angle) * 0.3,
+      star.cz + Math.sin(star.angle) * star.orbitRadius
+    );
+
+    // Signature pulse
+    if (star.isSignature) {
+      const pulse = 0.8 + 0.2 * Math.sin(t * 2.5 + star.index);
+      star.mesh.material.emissiveIntensity = pulse;
+      star.mesh.scale.setScalar(0.9 + 0.1 * Math.sin(t * 2 + star.index));
+    }
+  });
+
+  // Cluster cores pulse
+  clusterCoreGroup.children.forEach((core, i) => {
+    core.rotation.y += 0.003 + i * 0.001;
+    core.rotation.x += 0.001;
+    core.material.opacity = 0.15 + 0.1 * Math.sin(t * 0.8 + i);
+  });
+
+  renderer.render(scene, camera);
+}
+animate();
+
+// Resize
+window.addEventListener('resize', () => {
+  camera.aspect = innerWidth / innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(innerWidth, innerHeight);
+});
+</script>
+</body>
+</html>
