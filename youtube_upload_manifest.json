@@ -402,5 +402,16 @@
     "type": "podcast",
     "duration": "37:55",
     "uploadDate": "2026-06-15"
+  },
+  "episode_02_how_money_buys_the_truth": {
+    "videoId": "GsuTMIk2kas",
+    "title": "EP02: How Money Buys the Truth | THE EVIDENCE ENGINE",
+    "type": "podcast",
+    "playlists": [
+      "podcast"
+    ],
+    "uploadedAt": "2026-06-15T13:15:31Z",
+    "thumbnailStatus": "pending_rate_limit",
+    "duration": "29:30"
   }
 }
