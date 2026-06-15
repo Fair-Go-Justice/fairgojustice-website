@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Living Song Experience — Fair Go Justice</title>
+<meta name="description" content="An immersive cinematic music experience — where evidence meets song.">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --black:#0D1117;
+  --blue:#0E3A5B;
+  --orange:#D66B2D;
+  --white:#F5F5F5;
+  --gold:#D4AF37;
+  --red:#C0392B;
+  --glow-blue:rgba(14,58,91,0.6);
+  --glow-gold:rgba(212,175,55,0.4);
+}
+html,body{width:100%;height:100%;overflow:hidden;background:var(--black);color:var(--white);font-family:'Space Grotesk',sans-serif}
+
+/* ── CANVAS BACKGROUND ── */
+#bgCanvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0}
+
+/* ── COVER BACKGROUND ── */
+#coverBg{
+  position:fixed;top:0;left:0;width:100%;height:100%;z-index:1;
+  background-size:cover;background-position:center;
+  animation:kenBurns 30s ease-in-out infinite alternate;
+  filter:blur(6px) brightness(0.25);
+  transition:background-image 1s ease;
+}
+@keyframes kenBurns{
+  0%{transform:scale(1) translate(0,0)}
+  33%{transform:scale(1.08) translate(-1%,-1%)}
+  66%{transform:scale(1.05) translate(1%,0.5%)}
+  100%{transform:scale(1.1) translate(-0.5%,1%)}
+}
+
+/* ── DARK OVERLAY GRADIENT ── */
+#overlay{
+  position:fixed;top:0;left:0;width:100%;height:100%;z-index:2;
+  background:linear-gradient(135deg,rgba(13,17,23,0.85) 0%,rgba(14,58,91,0.3) 50%,rgba(13,17,23,0.9) 100%);
+}
+
+/* ── ENTRY FADE ── */
+#entryScreen{
+  position:fixed;top:0;left:0;width:100%;height:100%;z-index:100;
+  background:#000;display:flex;align-items:center;justify-content:center;
+  flex-direction:column;gap:1.5rem;
+  transition:opacity 1.2s ease;
+}
+#entryScreen.fade-out{opacity:0;pointer-events:none}
+.entry-logo{font-family:'Bebas Neue',sans-serif;font-size:3.5rem;color:var(--gold);letter-spacing:6px;text-align:center}
+.entry-sub{color:rgba(245,245,245,0.5);font-size:0.85rem;letter-spacing:4px;text-transform:uppercase;text-align:center}
+.entry-bar{width:200px;height:2px;background:rgba(255,255,255,0.1);border-radius:2px;overflow:hidden}
+.entry-fill{height:100%;background:linear-gradient(90deg,var(--blue),var(--gold));width:0;animation:loadFill 2s ease forwards}
+@keyframes loadFill{to{width:100%}}
+
+/* ── TOP NAV ── */
+#topNav{
+  position:fixed;top:0;left:0;right:0;z-index:20;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1rem 1.5rem;
+  background:linear-gradient(180deg,rgba(13,17,23,0.95) 0%,transparent 100%);
+  border-bottom:1px solid rgba(212,175,55,0.1);
+}
+.nav-back{display:flex;align-items:center;gap:0.5rem;color:rgba(245,245,245,0.6);text-decoration:none;font-size:0.8rem;letter-spacing:2px;text-transform:uppercase;transition:color 0.2s}
+.nav-back:hover{color:var(--gold)}
+.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;color:var(--gold);letter-spacing:4px}
+.nav-actions{display:flex;gap:0.75rem}
+.nav-btn{padding:0.4rem 0.9rem;border-radius:4px;font-size:0.7rem;letter-spacing:2px;text-transform:uppercase;text-decoration:none;cursor:pointer;border:1px solid;transition:all 0.2s;font-family:'Space Grotesk',sans-serif}
+.nav-btn-outline{color:var(--orange);border-color:rgba(214,107,45,0.4);background:transparent}
+.nav-btn-outline:hover{background:var(--orange);color:#fff;border-color:var(--orange)}
+.nav-btn-gold{color:var(--gold);border-color:rgba(212,175,55,0.4);background:transparent}
+.nav-btn-gold:hover{background:var(--gold);color:#000;border-color:var(--gold)}
+
+/* ── MAIN LAYOUT ── */
+#mainLayout{
+  position:fixed;top:0;left:0;width:100%;height:100%;z-index:10;
+  display:grid;grid-template-columns:1fr 380px;grid-template-rows:auto 1fr auto;
+  padding-top:70px;padding-bottom:70px;
+  opacity:0;transition:opacity 0.8s ease 2.5s;
+}
+#mainLayout.visible{opacity:1}
+
+/* ── LEFT PANEL ── */
+#leftPanel{
+  display:flex;flex-direction:column;
+  padding:1.5rem 2rem;
+  overflow:hidden;
+}
+.song-meta{margin-bottom:1.5rem}
+.genre-badge{
+  display:inline-block;padding:0.25rem 0.75rem;border-radius:20px;
+  font-size:0.65rem;letter-spacing:3px;text-transform:uppercase;font-weight:600;
+  background:rgba(14,58,91,0.6);border:1px solid rgba(14,58,91,0.9);color:var(--gold);
+  margin-bottom:0.75rem;
+}
+.song-title-main{
+  font-family:'Bebas Neue',sans-serif;font-size:clamp(2.2rem,5vw,4rem);
+  color:var(--white);letter-spacing:4px;line-height:1;margin-bottom:0.5rem;
+  text-shadow:0 0 40px rgba(212,175,55,0.3);
+}
+.song-tagline{color:rgba(245,245,245,0.45);font-size:0.8rem;letter-spacing:2px;text-transform:uppercase}
+
+/* ── COVER ART ── */
+.cover-container{
+  display:flex;gap:1.5rem;align-items:flex-start;margin-bottom:1.5rem;
+}
+.cover-art{
+  width:160px;height:160px;flex-shrink:0;border-radius:8px;overflow:hidden;
+  border:1px solid rgba(212,175,55,0.2);
+  box-shadow:0 0 30px rgba(212,175,55,0.15),0 0 60px rgba(14,58,91,0.3);
+  cursor:pointer;position:relative;
+}
+.cover-art img{width:100%;height:100%;object-fit:cover;display:block}
+.cover-play-overlay{
+  position:absolute;inset:0;background:rgba(0,0,0,0.5);
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;transition:opacity 0.3s;
+}
+.cover-art:hover .cover-play-overlay{opacity:1}
+.cover-play-overlay i{font-size:2.5rem;color:var(--gold)}
+.cover-info{flex:1}
+.cover-info p{color:rgba(245,245,245,0.5);font-size:0.78rem;line-height:1.7;margin-bottom:0.75rem}
+.yt-embed-btn{
+  display:inline-flex;align-items:center;gap:0.5rem;
+  padding:0.5rem 1rem;border-radius:6px;
+  background:linear-gradient(135deg,#c00,#900);
+  color:#fff;font-size:0.75rem;letter-spacing:1px;cursor:pointer;border:none;
+  font-family:'Space Grotesk',sans-serif;font-weight:600;text-transform:uppercase;
+  transition:all 0.2s;
+}
+.yt-embed-btn:hover{transform:translateY(-1px);box-shadow:0 4px 20px rgba(192,0,0,0.4)}
+
+/* ── YOUTUBE EMBED ── */
+#ytEmbed{
+  display:none;border-radius:8px;overflow:hidden;
+  border:1px solid rgba(212,175,55,0.2);
+  box-shadow:0 0 30px rgba(212,175,55,0.15);
+  margin-bottom:1.5rem;
+  aspect-ratio:16/9;width:100%;
+}
+#ytEmbed.visible{display:block}
+#ytEmbed iframe{width:100%;height:100%;border:none}
+
+/* ── LYRICS PANEL ── */
+.lyrics-label{
+  font-size:0.65rem;letter-spacing:4px;text-transform:uppercase;color:var(--gold);
+  margin-bottom:0.75rem;display:flex;align-items:center;gap:0.5rem;
+}
+.lyrics-label::after{content:'';flex:1;height:1px;background:rgba(212,175,55,0.2)}
+#lyricsPanel{
+  flex:1;overflow-y:auto;padding-right:0.5rem;
+  scrollbar-width:thin;scrollbar-color:rgba(212,175,55,0.3) transparent;
+}
+#lyricsPanel::-webkit-scrollbar{width:4px}
+#lyricsPanel::-webkit-scrollbar-track{background:transparent}
+#lyricsPanel::-webkit-scrollbar-thumb{background:rgba(212,175,55,0.3);border-radius:2px}
+.lyric-section-header{
+  color:var(--gold);font-size:0.7rem;letter-spacing:3px;text-transform:uppercase;
+  padding:1rem 0 0.4rem;opacity:0.7;font-weight:600;
+}
+.lyric-line{
+  color:rgba(245,245,245,0.75);font-size:0.92rem;line-height:1.9;
+  padding:0.1rem 0;cursor:pointer;border-radius:4px;transition:all 0.2s;
+  padding-left:0.5rem;border-left:2px solid transparent;
+}
+.lyric-line:hover{color:var(--white);border-left-color:var(--orange);padding-left:0.75rem;background:rgba(214,107,45,0.05)}
+.lyric-line.active{color:var(--gold);border-left-color:var(--gold);padding-left:0.75rem;background:rgba(212,175,55,0.07)}
+.lyric-empty{height:0.5rem}
+
+/* ── RIGHT PANEL ── */
+#rightPanel{
+  display:flex;flex-direction:column;gap:1rem;
+  padding:1.5rem 1.5rem 1.5rem 0;
+  overflow-y:auto;
+  scrollbar-width:none;
+}
+#rightPanel::-webkit-scrollbar{display:none}
+
+/* Evidence Connections */
+.panel-card{
+  background:rgba(14,22,34,0.7);border:1px solid rgba(212,175,55,0.12);
+  border-radius:12px;padding:1.25rem;backdrop-filter:blur(12px);
+}
+.panel-card-title{
+  font-size:0.62rem;letter-spacing:4px;text-transform:uppercase;color:var(--gold);
+  margin-bottom:1rem;display:flex;align-items:center;gap:0.5rem;
+}
+.panel-card-title i{font-size:0.7rem}
+.evidence-node{
+  display:flex;align-items:center;gap:0.75rem;padding:0.7rem 0.75rem;
+  border-radius:8px;background:rgba(14,58,91,0.2);border:1px solid rgba(14,58,91,0.3);
+  margin-bottom:0.6rem;cursor:pointer;transition:all 0.25s;text-decoration:none;
+}
+.evidence-node:hover{background:rgba(14,58,91,0.5);border-color:var(--gold);transform:translateX(3px)}
+.evidence-node:last-child{margin-bottom:0}
+.evidence-node-icon{
+  width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-size:0.9rem;flex-shrink:0;
+}
+.evidence-node-text{flex:1}
+.evidence-node-room{font-size:0.72rem;color:var(--white);font-weight:600;letter-spacing:1px}
+.evidence-node-desc{font-size:0.65rem;color:rgba(245,245,245,0.45);margin-top:0.15rem}
+.evidence-node-arrow{color:rgba(212,175,55,0.4);font-size:0.7rem}
+
+/* Reform Pathway */
+.reform-pill{
+  display:flex;align-items:center;gap:0.75rem;padding:0.7rem 0.75rem;
+  border-radius:8px;background:rgba(214,107,45,0.08);border:1px solid rgba(214,107,45,0.2);
+  margin-bottom:0.6rem;text-decoration:none;transition:all 0.25s;
+}
+.reform-pill:hover{background:rgba(214,107,45,0.15);border-color:var(--orange);transform:translateX(3px)}
+.reform-pill:last-child{margin-bottom:0}
+.reform-pill-num{
+  width:28px;height:28px;border-radius:50%;background:var(--orange);color:#fff;
+  font-size:0.7rem;font-weight:700;display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+}
+.reform-pill-text{font-size:0.72rem;color:rgba(245,245,245,0.8);font-weight:500}
+
+/* Progress Bar */
+.lyrics-progress{
+  width:100%;height:3px;background:rgba(255,255,255,0.08);border-radius:2px;
+  margin-bottom:1rem;overflow:hidden;
+}
+.lyrics-progress-fill{
+  height:100%;background:linear-gradient(90deg,var(--blue),var(--gold));
+  width:0;transition:width 0.3s ease;border-radius:2px;
+}
+
+/* Stats row */
+.stats-row{
+  display:grid;grid-template-columns:1fr 1fr;gap:0.5rem;
+}
+.stat-chip{
+  background:rgba(14,58,91,0.3);border:1px solid rgba(14,58,91,0.4);
+  border-radius:8px;padding:0.6rem;text-align:center;
+}
+.stat-chip-val{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;color:var(--gold);letter-spacing:2px}
+.stat-chip-label{font-size:0.58rem;color:rgba(245,245,245,0.4);letter-spacing:2px;text-transform:uppercase}
+
+/* ── BOTTOM BAR ── */
+#bottomBar{
+  position:fixed;bottom:0;left:0;right:0;z-index:20;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0.85rem 1.5rem;
+  background:linear-gradient(0deg,rgba(13,17,23,0.98) 0%,transparent 100%);
+  border-top:1px solid rgba(212,175,55,0.08);
+  gap:1rem;
+}
+.bottom-share{display:flex;align-items:center;gap:0.5rem}
+.share-label{font-size:0.65rem;letter-spacing:2px;text-transform:uppercase;color:rgba(245,245,245,0.35)}
+.share-btn{
+  width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-size:0.8rem;cursor:pointer;border:1px solid;transition:all 0.2s;text-decoration:none;
+}
+.share-btn-sky{color:#0085ff;border-color:rgba(0,133,255,0.3);background:rgba(0,133,255,0.08)}
+.share-btn-sky:hover{background:#0085ff;color:#fff;border-color:#0085ff}
+.share-btn-li{color:#0a66c2;border-color:rgba(10,102,194,0.3);background:rgba(10,102,194,0.08)}
+.share-btn-li:hover{background:#0a66c2;color:#fff;border-color:#0a66c2}
+.bottom-ctas{display:flex;gap:0.5rem}
+.cta-btn{
+  padding:0.45rem 1rem;border-radius:6px;font-size:0.68rem;letter-spacing:1.5px;
+  text-transform:uppercase;text-decoration:none;cursor:pointer;border:1px solid;
+  transition:all 0.2s;font-family:'Space Grotesk',sans-serif;font-weight:600;white-space:nowrap;
+}
+.cta-story{color:var(--orange);border-color:rgba(214,107,45,0.4);background:rgba(214,107,45,0.06)}
+.cta-story:hover{background:var(--orange);color:#fff;border-color:var(--orange)}
+.cta-petition{color:var(--gold);border-color:rgba(212,175,55,0.4);background:rgba(212,175,55,0.06)}
+.cta-petition:hover{background:var(--gold);color:#000;border-color:var(--gold)}
+.cta-vault{color:var(--white);border-color:rgba(245,245,245,0.2);background:rgba(245,245,245,0.04)}
+.cta-vault:hover{background:rgba(245,245,245,0.1);border-color:rgba(245,245,245,0.5)}
+.bottom-track-nav{display:flex;gap:0.5rem}
+.track-nav-btn{
+  padding:0.45rem 0.9rem;border-radius:6px;font-size:0.68rem;letter-spacing:1px;
+  text-transform:uppercase;cursor:pointer;border:1px solid rgba(245,245,245,0.15);
+  background:rgba(245,245,245,0.05);color:rgba(245,245,245,0.5);
+  transition:all 0.2s;font-family:'Space Grotesk',sans-serif;text-decoration:none;
+}
+.track-nav-btn:hover{border-color:rgba(245,245,245,0.4);color:var(--white);background:rgba(245,245,245,0.1)}
+
+/* ── NO TRACK FOUND ── */
+#noTrack{
+  position:fixed;inset:0;z-index:50;
+  display:none;flex-direction:column;align-items:center;justify-content:center;gap:1.5rem;
+  background:var(--black);text-align:center;padding:2rem;
+}
+#noTrack h2{font-family:'Bebas Neue',sans-serif;font-size:3rem;color:var(--gold);letter-spacing:6px}
+#noTrack p{color:rgba(245,245,245,0.5);max-width:400px;line-height:1.7}
+#noTrack a{padding:0.6rem 1.5rem;background:var(--orange);color:#fff;border-radius:6px;text-decoration:none;font-weight:600;font-size:0.85rem;letter-spacing:2px;text-transform:uppercase}
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  #mainLayout{grid-template-columns:1fr;padding-bottom:80px}
+  #rightPanel{display:none}
+  .cover-container{flex-direction:column}
+  .cover-art{width:100%;height:220px}
+}
+@media(max-width:600px){
+  .song-title-main{font-size:2rem}
+  #leftPanel{padding:1rem}
+  .bottom-ctas .cta-story,.bottom-ctas .cta-petition{display:none}
+}
+
+/* Scanline effect */
+#mainLayout::before{
+  content:'';position:fixed;top:0;left:0;width:100%;height:100%;z-index:9;
+  background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.015) 2px,rgba(0,0,0,0.015) 4px);
+  pointer-events:none;
+}
+</style>
+</head>
+<body>
+
+<!-- Entry Loading Screen -->
+<div id="entryScreen">
+  <div class="entry-logo">FAIR GO JUSTICE</div>
+  <div class="entry-sub">LIVING SONG EXPERIENCE</div>
+  <div class="entry-bar"><div class="entry-fill"></div></div>
+  <div style="color:rgba(245,245,245,0.25);font-size:0.7rem;letter-spacing:3px;text-transform:uppercase">Loading cinematic experience...</div>
+</div>
+
+<!-- Background canvas (particles) -->
+<canvas id="bgCanvas"></canvas>
+
+<!-- Cover background -->
+<div id="coverBg"></div>
+<div id="overlay"></div>
+
+<!-- Top Navigation -->
+<nav id="topNav">
+  <a href="music.html" class="nav-back"><i class="fas fa-arrow-left"></i> Music</a>
+  <div class="nav-logo">FGJ</div>
+  <div class="nav-actions">
+    <a href="vault.html" class="nav-btn nav-btn-gold"><i class="fas fa-vault" style="margin-right:0.3rem"></i>Vault</a>
+    <a href="take-action.html" class="nav-btn nav-btn-outline">Take Action</a>
+  </div>
+</nav>
+
+<!-- No track found -->
+<div id="noTrack">
+  <h2>TRACK NOT FOUND</h2>
+  <p>The song you're looking for doesn't have an experience yet — but the entire catalogue is waiting for you.</p>
+  <a href="music.html">← Browse All Songs</a>
+</div>
+
+<!-- Main Layout -->
+<div id="mainLayout">
+  <!-- LEFT: Song info + lyrics -->
+  <div id="leftPanel">
+    <div class="song-meta">
+      <div id="genreBadge" class="genre-badge">Loading...</div>
+      <h1 id="songTitle" class="song-title-main">LOADING</h1>
+      <div id="songTagline" class="song-tagline">Evidence through music</div>
+    </div>
+
+    <!-- Cover + controls -->
+    <div class="cover-container">
+      <div class="cover-art" id="coverArtEl" onclick="toggleYT()">
+        <img id="coverImg" src="" alt="">
+        <div class="cover-play-overlay">
+          <i class="fas fa-play"></i>
+        </div>
+      </div>
+      <div class="cover-info">
+        <p id="songDescription">This song examines systemic patterns within the Australian justice system through narrative and music.</p>
+        <button class="yt-embed-btn" id="ytBtn" onclick="toggleYT()" style="display:none">
+          <i class="fab fa-youtube"></i> Watch Video
+        </button>
+      </div>
+    </div>
+
+    <!-- YouTube embed (hidden by default) -->
+    <div id="ytEmbed"><iframe id="ytFrame" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe></div>
+
+    <!-- Lyrics progress -->
+    <div class="lyrics-progress"><div class="lyrics-progress-fill" id="lyricsProgress"></div></div>
+
+    <div class="lyrics-label"><i class="fas fa-music"></i> Lyrics</div>
+
+    <!-- Lyrics display -->
+    <div id="lyricsPanel"></div>
+  </div>
+
+  <!-- RIGHT: Evidence + Reform -->
+  <div id="rightPanel">
+    <!-- Stats -->
+    <div class="panel-card">
+      <div class="stats-row">
+        <div class="stat-chip"><div class="stat-chip-val" id="statTrackNum">—</div><div class="stat-chip-label">Track</div></div>
+        <div class="stat-chip"><div class="stat-chip-val" id="statGenre">—</div><div class="stat-chip-label">Genre</div></div>
+      </div>
+    </div>
+
+    <!-- Evidence Connections -->
+    <div class="panel-card">
+      <div class="panel-card-title"><i class="fas fa-network-wired"></i> Evidence Connections</div>
+      <div id="evidenceNodes"></div>
+    </div>
+
+    <!-- Reform Pathway -->
+    <div class="panel-card">
+      <div class="panel-card-title"><i class="fas fa-landmark"></i> Reform Pathway</div>
+      <div id="reformNodes"></div>
+    </div>
+
+    <!-- More Songs -->
+    <div class="panel-card" id="moreSongsCard">
+      <div class="panel-card-title"><i class="fas fa-compact-disc"></i> More Songs</div>
+      <div id="moreSongs"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Bottom Bar -->
+<div id="bottomBar">
+  <div class="bottom-share">
+    <span class="share-label">Share</span>
+    <a href="#" class="share-btn share-btn-sky" id="bskyShare" title="Share on Bluesky"><i class="fas fa-cloud"></i></a>
+    <a href="#" class="share-btn share-btn-li" id="liShare" title="Share on LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+  </div>
+  <div class="bottom-ctas">
+    <a href="stories.html" class="cta-btn cta-story">Submit Story</a>
+    <a href="take-action.html" class="cta-btn cta-petition">Sign Petition</a>
+    <a href="vault.html" class="cta-btn cta-vault"><i class="fas fa-vault"></i> Vault</a>
+  </div>
+  <div class="bottom-track-nav">
+    <a href="#" id="prevTrack" class="track-nav-btn"><i class="fas fa-chevron-left"></i> Prev</a>
+    <a href="#" id="nextTrack" class="track-nav-btn">Next <i class="fas fa-chevron-right"></i></a>
+  </div>
+</div>
+
+<!-- Data -->
+<script src="lyrics_data.js"></script>
+<script>
+// ── YT MAP ──
+const YT_MAP = {
+  'vexatious':'nro_6EZx1z8','selfrepresented':'IpF6rtveFVU','suppressed':'Q05AO-VzQFY',
+  'the appointed':'x3UqqsYzTPg','blindsided truth uncut':'HnnTiCk1CI0','elder':'WAXn0map22Q',
+  'family court blues':'EqBa_TahlZg','bankruptcy weapon':'7skBZ5rVtpI','we are not done':'_UexLVzLSmI',
+  'conflict of interest':'Fp_j0BumjQs','cold comfort':'NeiMDNmLS6E','costs order':'o9Kv1NrQe-Q',
+  'double standard':'ZlffuokZce8','forensic fraud':'4kb1kgaFgUs','guardian ad litem':'IvfSWOPjHr4',
+  'media blackout':'fj_hxETi6Vw','offshore account':'cujaRm9wMPk','paper trail':'_dRFS3HIOWE',
+  'rise again':'nwrbaqAYaxY','silent victim':'0wDwcMTqeaA','courthouse blues':'Y7g0bOJt380',
+  'forced mediation':'VMGW55n-xFk','litigation funder':'LTDI8TtNXhM','one hundred':'ob41Im2b3I0',
+  'stand together':'hKpWw0CIbpI','statute of limitations':'VxIxqbASYcA','sworn to lie':'oE2OxaPQTGE',
+  'the bailiff':'leI44zViGCY','the expert witness':'xhJKvNg_mXw','the final appeal':'WDbt_wKsvG8',
+  'the long road':'aJls0jy3qhQ','the receiver':'pCu7zJE4k7k','the registrar':'UWY-Zvoar_U',
+  'the selector':'DBmXZgJhTO8','the settlement trap':'rtLwEzw3rgk','the tipstaff':'gH8F0yS_9y4',
+  'unregistered':'3Rd4kQ2KFSM','widows title':'cUHeLoUFqjg'
+};
+
+// ── COVER MAP ──
+const CDN = 'https://raw.githubusercontent.com/Fair-Go-Justice/fairgojustice-website/main/thumbnails/';
+const COVER_MAP = {
+  'bank man came on tuesday':'cover_bank_man_came_on_tuesday.png','bloodline':'cover_bloodline.png',
+  'cold comfort':'cover_cold_comfort.png','conflict of interest':'bXtX_conflict_of_interest_thumb.jpg',
+  'costs order':'cover_costs_order.png','courthouse blues':'cover_courthouse_blues.png',
+  'debt collectors':'cover_debt_collectors.png','evidence room':'cover_evidence_room.png',
+  'filed and forgotten':'cover_filed_and_forgotten.png','fitzroy files':'cover_fitzroy_files.png',
+  'five eyes':'cover_five_eyes.png','follow the money':'cover_follow_the_money.png',
+  'forced mediation':'bXtX_forced_mediation_thumb.jpg','double standard':'bXtX_double_standard_thumb.jpg',
+  'elder':'bXtX_elder_thumb.jpg','family court blues':'bXtX_family_court_blues_thumb.jpg',
+  'suppressed':'bXtX_suppressed_thumb.jpg','vexatious':'bXtX_vexatious_thumb.jpg',
+  'we are not done':'bXtX_we_are_not_done_thumb.jpg','forensic fraud':'cover_forensic_fraud.png',
+  'ghost account':'cover_ghost_account.png','ghost in the system':'cover_ghost_in_the_system.png',
+  'guardian ad litem':'cover_guardian_ad_litem.png','hidden hand':'cover_hidden_hand.png',
+  'litigation funder':'cover_litigation_funder.png','media blackout':'cover_media_blackout.png',
+  'offshore account':'cover_offshore_account.png','paper trail':'cover_paper_trail.png',
+  'rise again':'cover_rise_again.png','silent victim':'cover_silent_victim.png',
+  'stand together':'cover_stand_together.png','statute of limitations':'cover_statute_of_limitations.png',
+  'sworn to lie':'cover_sworn_to_lie.png','the appointed':'cover_the_appointed.png',
+  'the bailiff':'cover_the_bailiff.png','the expert witness':'cover_the_expert_witness.png',
+  'the final appeal':'cover_the_final_appeal.png','the long road':'cover_the_long_road.png',
+  'the receiver':'cover_the_receiver.png','the registrar':'cover_the_registrar.png',
+  'the selector':'cover_the_selector.png','the settlement trap':'cover_the_settlement_trap.png',
+  'the tipstaff':'cover_the_tipstaff.png','unregistered':'cover_unregistered.png',
+  'widows title':'cover_widows_title.png','bankruptcy weapon':'cover_bankruptcy_weapon.png',
+  'blindsided truth uncut':'cover_blindsided.png','selfrepresented':'cover_self_represented.png',
+  'one hundred':'cover_one_hundred.png'
+};
+
+// ── EVIDENCE CONNECTIONS (keyword-based) ──
+const EVIDENCE_THEMES = {
+  court:    [{room:'Timeline Chamber',icon:'⏱',color:'#D4AF37',link:'vault.html',desc:'Walk through when events occurred'},{room:'Chain of Custody',icon:'🔗',color:'#C0392B',link:'exhibit-chain-of-custody.html',desc:'How evidence was handled'},{room:'Witness Theatre',icon:'👁',color:'#E91E8C',link:'stories.html',desc:'Community voices & statements'}],
+  fraud:    [{room:'Forensics Lab',icon:'🔬',color:'#AAFF00',link:'quiz.html',desc:'Examine documented anomalies'},{room:'Evidence Intake',icon:'📂',color:'#00CFFF',link:'evidence.html',desc:'Source records & exhibits'},{room:'Chain of Custody',icon:'🔗',color:'#C0392B',link:'exhibit-chain-of-custody.html',desc:'Document handling trail'}],
+  family:   [{room:'Witness Theatre',icon:'👁',color:'#E91E8C',link:'stories.html',desc:'Family court experiences'},{room:'Reform Cathedral',icon:'🏛',color:'#D66B2D',link:'pillars.html',desc:'Proposed legislative change'},{room:'Australia Network',icon:'🌏',color:'#27AE60',link:'take-action.html',desc:'Join others across the country'}],
+  financial:[{room:'Chain of Custody',icon:'🔗',color:'#C0392B',link:'exhibit-chain-of-custody.html',desc:'Asset & fund traceability'},{room:'Forensics Lab',icon:'🔬',color:'#AAFF00',link:'quiz.html',desc:'Financial pattern analysis'},{room:'Evidence Intake',icon:'📂',color:'#00CFFF',link:'evidence.html',desc:'Financial records vault'}],
+  reform:   [{room:'Reform Cathedral',icon:'🏛',color:'#D66B2D',link:'pillars.html',desc:'The three reform pillars'},{room:'Australia Network',icon:'🌏',color:'#27AE60',link:'take-action.html',desc:'Sign petition & take action'},{room:'Documentary Archive',icon:'🎙',color:'#F39C12',link:'podcast.html',desc:'Listen to the Evidence Engine'}],
+  default:  [{room:'Evidence Intake',icon:'📂',color:'#00CFFF',link:'evidence.html',desc:'Primary source records'},{room:'Timeline Chamber',icon:'⏱',color:'#D4AF37',link:'vault.html',desc:'When key events occurred'},{room:'Reform Cathedral',icon:'🏛',color:'#D66B2D',link:'pillars.html',desc:'Pathway to systemic change'}]
+};
+
+const REFORM_PILLARS = [
+  {num:1,label:'Judicial Integrity Commission',desc:'Independent oversight of judicial conduct'},
+  {num:2,label:'Legal Aid Reform',desc:'Equal access to justice for all Australians'},
+  {num:3,label:'Evidence Standards Act',desc:'Mandatory evidence handling protocols'}
+];
+
+// ── GENRE DESCRIPTIONS ──
+const GENRE_TAGS = {
+  'country':'Australian Country','hiphop':'Aussie Hip Hop','blues':'Australian Blues',
+  'folk':'Australian Folk','rock':'Aussie Rock','rap':'Aussie Rap'
+};
+
+// ── SONG DESCRIPTIONS ──
+const SONG_DESCS = {
+  'silent victim':'A haunting ballad about suppression orders, sealed files, and the silencing of truth within the legal system.',
+  'forensic fraud':'A forensic deep-dive into documented irregularities — the evidence that speaks louder than testimony.',
+  'family court blues':'When the system designed to protect families becomes the weapon used against them.',
+  'we are not done':'A powerful anthem of resistance — when the appeal is denied, the movement grows louder.',
+  'costs order':'A punitive costs order shouldn\'t silence the pursuit of justice — but for too many, it does.',
+  'double standard':'One rule for the institution, another for the individual. The double standard laid bare.',
+  'suppressed':'Evidence suppressed, documents sealed, truth buried. This is what systemic suppression looks like.',
+  'vexatious':'Labelled vexatious — the ultimate silencing tactic used against those who dare to question authority.',
+  'paper trail':'Follow every signature, every date stamp, every anomaly. The paper trail never lies.',
+  'the long road':'Justice doesn\'t arrive quickly. Sometimes it takes years to see what was always there.',
+};
+
+// ── PARTICLES ──
+const canvas = document.getElementById('bgCanvas');
+const ctx = canvas.getContext('2d');
+let particles = [];
+function resizeCanvas(){canvas.width=window.innerWidth;canvas.height=window.innerHeight}
+function initParticles(){
+  particles=[];
+  for(let i=0;i<80;i++){
+    particles.push({
+      x:Math.random()*canvas.width,y:Math.random()*canvas.height,
+      r:Math.random()*1.5+0.3,
+      vx:(Math.random()-0.5)*0.15,vy:-Math.random()*0.3-0.05,
+      alpha:Math.random()*0.4+0.05,
+      color:Math.random()>0.7?'212,175,55':'14,58,91'
+    });
+  }
+}
+function animParticles(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  particles.forEach(p=>{
+    ctx.beginPath();
+    ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+    ctx.fillStyle=`rgba(${p.color},${p.alpha})`;
+    ctx.fill();
+    p.x+=p.vx;p.y+=p.vy;
+    if(p.y<-5)p.y=canvas.height+5;
+    if(p.x<-5)p.x=canvas.width+5;
+    if(p.x>canvas.width+5)p.x=-5;
+  });
+  requestAnimationFrame(animParticles);
+}
+resizeCanvas();initParticles();animParticles();
+window.addEventListener('resize',()=>{resizeCanvas();initParticles()});
+
+// ── PARSE LYRICS ──
+function parseLyricsRaw(raw){
+  if(!raw)return{title:'',style:'',lines:[]};
+  const titleMatch=raw.match(/TITLE:\s*(.+)/i);
+  const styleMatch=raw.match(/STYLE:\s*(.+)/i);
+  const lyricsStart=raw.indexOf('LYRICS:');
+  const lyricsRaw=lyricsStart>=0?raw.slice(lyricsStart+7):raw;
+  const rawLines=lyricsRaw.split('\n');
+  const lines=[];
+  rawLines.forEach(l=>{
+    const t=l.trim();
+    if(!t)return;
+    if(/^\[.+\]$/.test(t)){lines.push({type:'section',text:t.replace(/[\[\]]/g,'')})}
+    else{lines.push({type:'lyric',text:t})}
+  });
+  return{
+    title:titleMatch?titleMatch[1].trim():'',
+    style:styleMatch?styleMatch[1].trim():'',
+    lines
+  };
+}
+
+// ── DETERMINE EVIDENCE THEME ──
+function getEvidenceTheme(key,style){
+  const k=key.toLowerCase();const s=(style||'').toLowerCase();
+  if(/family|guardian|child|custody/.test(k)||/family/.test(s))return 'family';
+  if(/fraud|forensic|sworn|lie|fake|fabricat/.test(k))return 'fraud';
+  if(/bank|financial|offshore|debt|bankrupt|funder|receiver/.test(k))return 'financial';
+  if(/reform|pillar|stand|together|petition|change/.test(k))return 'reform';
+  if(/court|judge|suppressed|vexatious|costs|appeal|bailiff|registrar|tipstaff/.test(k))return 'court';
+  return 'default';
+}
+
+// ── NORMALISE KEY ──
+function norm(s){return s.toLowerCase().replace(/[^a-z0-9 ]/g,'').trim()}
+
+// ── GET ALL TRACK KEYS ──
+function getAllTracks(){
+  if(typeof LYRICS_MAP==='undefined')return[];
+  return Object.keys(LYRICS_MAP).sort();
+}
+
+// ── MAIN INIT ──
+let currentTrackKey='';
+let lyricsLines=[];
+let activeLineIdx=0;
+
+function loadTrack(key){
+  const k=key?norm(key):'';
+  // Try to find in LYRICS_MAP
+  const lyricsRaw=typeof LYRICS_MAP!=='undefined'?LYRICS_MAP[k]:null;
+  const parsed=lyricsRaw?parseLyricsRaw(lyricsRaw):null;
+
+  if(!parsed&&typeof LYRICS_MAP!=='undefined'){
+    // fuzzy match
+    const allKeys=Object.keys(LYRICS_MAP);
+    const fuzzy=allKeys.find(ak=>ak.includes(k)||k.includes(ak));
+    if(fuzzy){return loadTrack(fuzzy)}
+    document.getElementById('noTrack').style.display='flex';
+    return;
+  }
+
+  currentTrackKey=k;
+  lyricsLines=parsed?parsed.lines:[];
+
+  const displayTitle=parsed&&parsed.title?parsed.title:k.toUpperCase();
+  const style=parsed?parsed.style:'';
+
+  // Detect genre from style
+  let genreLabel='FGJ Original';
+  if(/country|dusty|williams|pedal steel|fingerpick/.test(style.toLowerCase()))genreLabel='Australian Country';
+  else if(/hip.?hop|rap|flow|australian accent/.test(style.toLowerCase()))genreLabel='Aussie Hip Hop';
+  else if(/blues/.test(style.toLowerCase()))genreLabel='Australian Blues';
+  else if(/folk/.test(style.toLowerCase()))genreLabel='Australian Folk';
+  else if(/rock/.test(style.toLowerCase()))genreLabel='Aussie Rock';
+
+  document.getElementById('genreBadge').textContent=genreLabel;
+  document.getElementById('songTitle').textContent=displayTitle;
+  document.getElementById('songTagline').textContent=style?style.split(',').slice(0,3).join(' · '):'Evidence through music';
+  document.getElementById('statGenre').textContent=genreLabel.split(' ').pop();
+
+  // Track number
+  const allTracks=getAllTracks();
+  const idx=allTracks.indexOf(k);
+  document.getElementById('statTrackNum').textContent=idx>=0?`#${idx+1}`:'—';
+
+  // Cover image
+  const coverFile=COVER_MAP[k]||COVER_MAP[displayTitle.toLowerCase()]||null;
+  const coverUrl=coverFile?CDN+coverFile:CDN+'cover_silent_victim.png';
+  document.getElementById('coverImg').src=coverUrl;
+  document.getElementById('coverBg').style.backgroundImage=`url('${coverUrl}')`;
+
+  // Description
+  document.getElementById('songDescription').textContent=SONG_DESCS[k]||`A Fair Go Justice original — exploring systemic patterns through the lens of music and evidence.`;
+
+  // YouTube
+  const ytKey=Object.keys(YT_MAP).find(yk=>norm(yk)===k||norm(yk).includes(k)||k.includes(norm(yk)))||k;
+  const ytId=YT_MAP[ytKey]||YT_MAP[k];
+  if(ytId){
+    document.getElementById('ytBtn').style.display='inline-flex';
+    document.getElementById('ytFrame').src=`https://www.youtube.com/embed/${ytId}?rel=0&modestbranding=1`;
+  }
+
+  // Evidence nodes
+  const theme=getEvidenceTheme(k,style);
+  const nodes=EVIDENCE_THEMES[theme]||EVIDENCE_THEMES.default;
+  document.getElementById('evidenceNodes').innerHTML=nodes.map(n=>`
+    <a href="${n.link}" class="evidence-node">
+      <div class="evidence-node-icon" style="background:rgba(0,0,0,0.3);border:1px solid ${n.color};color:${n.color}">${n.icon}</div>
+      <div class="evidence-node-text">
+        <div class="evidence-node-room">${n.room}</div>
+        <div class="evidence-node-desc">${n.desc}</div>
+      </div>
+      <i class="fas fa-chevron-right evidence-node-arrow"></i>
+    </a>
+  `).join('');
+
+  // Reform pillars
+  document.getElementById('reformNodes').innerHTML=REFORM_PILLARS.map(r=>`
+    <a href="pillars.html#pillar${r.num}" class="reform-pill">
+      <div class="reform-pill-num">${r.num}</div>
+      <div class="reform-pill-text">${r.label}</div>
+    </a>
+  `).join('');
+
+  // More songs
+  const more=getAllTracks().filter(t=>t!==k).sort(()=>Math.random()-0.5).slice(0,4);
+  document.getElementById('moreSongs').innerHTML=more.map(t=>
+    `<a href="song-experience.html?track=${encodeURIComponent(t)}" class="evidence-node" style="margin-bottom:0.5rem">
+      <div class="evidence-node-icon" style="background:rgba(212,175,55,0.1);border:1px solid rgba(212,175,55,0.2);color:var(--gold);font-size:0.7rem">▶</div>
+      <div class="evidence-node-text"><div class="evidence-node-room">${t.toUpperCase()}</div></div>
+      <i class="fas fa-chevron-right evidence-node-arrow"></i>
+    </a>`
+  ).join('');
+
+  // Prev/next
+  if(idx>0){
+    const prev=allTracks[idx-1];
+    document.getElementById('prevTrack').href=`song-experience.html?track=${encodeURIComponent(prev)}`;
+  }
+  if(idx<allTracks.length-1){
+    const next=allTracks[idx+1];
+    document.getElementById('nextTrack').href=`song-experience.html?track=${encodeURIComponent(next)}`;
+  }
+
+  // Render lyrics
+  renderLyrics();
+
+  // Share URLs
+  const shareText=encodeURIComponent(`🎵 "${displayTitle}" — a Fair Go Justice original. Evidence through music. https://fairgojustice.com.au/song-experience.html?track=${encodeURIComponent(k)}`);
+  document.getElementById('bskyShare').href=`https://bsky.app/intent/compose?text=${shareText}`;
+  document.getElementById('liShare').href=`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent('https://fairgojustice.com.au/song-experience.html?track='+k)}`;
+}
+
+function renderLyrics(){
+  const panel=document.getElementById('lyricsPanel');
+  panel.innerHTML='';
+  lyricsLines.forEach((line,i)=>{
+    if(line.type==='section'){
+      const el=document.createElement('div');
+      el.className='lyric-section-header';
+      el.textContent=line.text;
+      panel.appendChild(el);
+    } else {
+      const el=document.createElement('div');
+      el.className='lyric-line';
+      el.textContent=line.text;
+      el.dataset.idx=i;
+      el.addEventListener('click',()=>setActiveLine(i));
+      panel.appendChild(el);
+    }
+  });
+  updateLyricsProgress();
+}
+
+function setActiveLine(idx){
+  document.querySelectorAll('.lyric-line').forEach(el=>el.classList.remove('active'));
+  const el=document.querySelector(`.lyric-line[data-idx="${idx}"]`);
+  if(el){
+    el.classList.add('active');
+    el.scrollIntoView({behavior:'smooth',block:'center'});
+    activeLineIdx=idx;
+    updateLyricsProgress();
+  }
+}
+
+function updateLyricsProgress(){
+  const lyricLines=lyricsLines.filter(l=>l.type==='lyric');
+  const pct=lyricLines.length?Math.round((activeLineIdx/lyricsLines.length)*100):0;
+  document.getElementById('lyricsProgress').style.width=pct+'%';
+}
+
+// YouTube toggle
+let ytVisible=false;
+function toggleYT(){
+  const el=document.getElementById('ytEmbed');
+  ytVisible=!ytVisible;
+  el.classList.toggle('visible',ytVisible);
+  document.getElementById('ytBtn').innerHTML=ytVisible
+    ?'<i class="fab fa-youtube"></i> Hide Video'
+    :'<i class="fab fa-youtube"></i> Watch Video';
+  if(ytVisible)el.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+
+// ── ENTRY SEQUENCE ──
+setTimeout(()=>{
+  document.getElementById('entryScreen').classList.add('fade-out');
+  document.getElementById('mainLayout').classList.add('visible');
+  setTimeout(()=>document.getElementById('entryScreen').remove(),1400);
+},2200);
+
+// ── PARSE URL & LOAD ──
+const params=new URLSearchParams(window.location.search);
+const trackParam=params.get('track')||params.get('song')||'silent victim';
+loadTrack(trackParam);
+
+// Keyboard navigation
+document.addEventListener('keydown',e=>{
+  const lines=document.querySelectorAll('.lyric-line');
+  if(!lines.length)return;
+  if(e.key==='ArrowDown'){
+    const next=Math.min(activeLineIdx+1,lyricsLines.length-1);
+    setActiveLine(next);
+  } else if(e.key==='ArrowUp'){
+    const prev=Math.max(activeLineIdx-1,0);
+    setActiveLine(prev);
+  }
+});
+</script>
+</body>
+</html>

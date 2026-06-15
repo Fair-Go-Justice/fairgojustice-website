@@ -314,7 +314,9 @@
       100%{ box-shadow: 0 0 0 0 rgba(214,107,45,0); }
     }
 
-    .track-actions { display: flex; gap: 0.5rem; align-items: center; margin-top: 0.25rem; }
+    .track-actions { display: flex; gap: 0.5rem; align-items: center; margin-top: 0.25rem; flex-wrap: wrap; }
+    .exp-btn { color: var(--gold) !important; border-color: rgba(212,175,55,0.4) !important; background: rgba(212,175,55,0.06) !important; font-weight: 700 !important; }
+    .exp-btn:hover { background: var(--gold) !important; color: #000 !important; border-color: var(--gold) !important; }
     .track-link {
       display: inline-flex; align-items: center; gap: 0.3rem;
       font-size: 0.7rem; color: var(--muted); text-decoration: none;
@@ -936,6 +938,7 @@ function buildTrackGrid(filteredTracks) {
         <a class="track-link" href="${getYtUrl(t.title)}" target="_blank" rel="noopener" onclick="event.stopPropagation()"><i class="fab fa-youtube"></i> YT</a>
         <button class="track-link lyrics-btn" onclick="event.stopPropagation();showLyrics('${t.title}')" style="cursor:pointer;background:none"><i class="fas fa-scroll"></i> LYRICS</button>
         <button class="track-link" onclick="event.stopPropagation();shareTrack('${t.title}')" style="cursor:pointer;background:none"><i class="fas fa-share-alt"></i> SHARE</button>
+        <a class="track-link exp-btn" href="song-experience.html?track=${encodeURIComponent(t.title.toLowerCase())}" onclick="event.stopPropagation()"><i class="fas fa-film"></i> EXPERIENCE</a>
       </div>
     </div>`;
   }).join('');
@@ -1074,6 +1077,7 @@ function showLyrics(title) {
     ? LYRICS_MAP[key]
     : 'Lyrics coming soon for this track.';
   document.getElementById('lyricsModalTitle').textContent = title.toUpperCase();
+  document.getElementById('lyricsExpBtn').href = 'song-experience.html?track=' + encodeURIComponent(title.toLowerCase());
   document.getElementById('lyricsModalContent').textContent = lyrics;
   const overlay = document.getElementById('lyricsOverlay');
   overlay.style.display = 'flex';
@@ -1089,7 +1093,10 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLyrics(
   <div class="lyrics-modal" onclick="event.stopPropagation()">
     <div class="lyrics-modal-header">
       <span id="lyricsModalTitle" class="lyrics-modal-title"></span>
-      <button class="lyrics-close-btn" onclick="closeLyrics()"><i class="fas fa-times"></i></button>
+      <div style="display:flex;gap:0.5rem;align-items:center">
+        <a id="lyricsExpBtn" href="#" style="padding:0.3rem 0.75rem;border-radius:4px;background:rgba(212,175,55,0.1);border:1px solid rgba(212,175,55,0.3);color:#D4AF37;font-size:0.65rem;letter-spacing:2px;text-transform:uppercase;text-decoration:none;font-family:'Space Grotesk',sans-serif;font-weight:700"><i class="fas fa-film"></i> EXPERIENCE</a>
+        <button class="lyrics-close-btn" onclick="closeLyrics()"><i class="fas fa-times"></i></button>
+      </div>
     </div>
     <div id="lyricsModalContent" class="lyrics-modal-content"></div>
   </div>
