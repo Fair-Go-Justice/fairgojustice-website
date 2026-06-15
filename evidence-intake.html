@@ -1,0 +1,1479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Evidence Intake — Room 01 | Fair Go Justice Vault</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+:root {
+  --black:  #000000;
+  --deep:   #020408;
+  --blue:   #0E3A5B;
+  --cyan:   #00BFFF;
+  --gold:   #D4AF37;
+  --orange: #D66B2D;
+  --red:    #FF3B3B;
+  --green:  #00FF88;
+  --amber:  #FFB830;
+  --white:  #F5F5F5;
+  --glass:  rgba(2,4,8,0.85);
+}
+
+html, body {
+  background: var(--black);
+  color: var(--white);
+  font-family: 'Space Grotesk', monospace;
+  overflow: hidden;
+  height: 100vh; width: 100vw;
+  user-select: none;
+}
+
+/* ═══════════════════════════════════════
+   ENTRY SEQUENCE
+═══════════════════════════════════════ */
+#entry {
+  position: fixed; inset: 0; z-index: 900;
+  background: #000;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  transition: opacity 1.5s ease;
+}
+#entry.fade-out { opacity: 0; pointer-events: none; }
+
+.e-scan {
+  position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--orange), transparent);
+  animation: eScan 3s ease-in-out forwards 0.5s;
+  opacity: 0;
+}
+@keyframes eScan { 0%{opacity:1;top:0%} 100%{opacity:0;top:100%} }
+
+.e-corner { position:absolute; width:44px; height:44px; opacity:0; animation:eFadeIn 0.6s ease forwards 0.4s; }
+.e-corner.tl{top:20px;left:20px;border-top:1.5px solid var(--orange);border-left:1.5px solid var(--orange);}
+.e-corner.tr{top:20px;right:20px;border-top:1.5px solid var(--orange);border-right:1.5px solid var(--orange);}
+.e-corner.bl{bottom:20px;left:20px;border-bottom:1.5px solid var(--orange);border-left:1.5px solid var(--orange);}
+.e-corner.br{bottom:20px;right:20px;border-bottom:1.5px solid var(--orange);border-right:1.5px solid var(--orange);}
+@keyframes eFadeIn { to { opacity:1; } }
+
+.e-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(2.2rem, 6vw, 4.5rem);
+  letter-spacing: 0.15em;
+  color: var(--orange);
+  text-shadow: 0 0 40px rgba(214,107,45,0.8);
+  opacity: 0; animation: eFadeIn 1s ease forwards 1s;
+  text-align: center;
+}
+.e-sub {
+  font-size: 0.75rem; letter-spacing: 0.35em;
+  color: var(--cyan); margin-top: 10px;
+  opacity: 0; animation: eFadeIn 0.8s ease forwards 1.6s;
+  text-transform: uppercase;
+}
+.e-status {
+  position: absolute; bottom: 40px;
+  font-size: 0.65rem; letter-spacing: 0.3em;
+  color: rgba(0,191,255,0.7);
+  opacity: 0; animation: eFadeIn 0.8s ease forwards 2s;
+}
+.e-bar {
+  width: 280px; height: 2px;
+  background: rgba(214,107,45,0.15);
+  margin-top: 24px; overflow: hidden;
+  opacity: 0; animation: eFadeIn 0.5s ease forwards 1.8s;
+}
+.e-bar-fill {
+  height: 100%; width: 0%;
+  background: linear-gradient(90deg, var(--orange), var(--gold));
+  animation: eBarFill 1.8s ease forwards 2s;
+}
+@keyframes eBarFill { to { width: 100%; } }
+
+#enter-btn {
+  margin-top: 32px;
+  padding: 12px 44px; border: 1px solid var(--orange);
+  background: transparent; color: var(--orange);
+  font-family: 'Space Grotesk', monospace;
+  font-size: 0.75rem; letter-spacing: 0.3em;
+  cursor: pointer; text-transform: uppercase;
+  opacity: 0; animation: eFadeIn 0.8s ease forwards 3.6s;
+  transition: all 0.25s;
+}
+#enter-btn:hover { background: rgba(214,107,45,0.12); box-shadow: 0 0 20px rgba(214,107,45,0.3); }
+
+/* ═══════════════════════════════════════
+   3D CANVAS
+═══════════════════════════════════════ */
+#three-canvas {
+  position: fixed; inset: 0;
+  width: 100vw; height: 100vh;
+}
+
+/* ═══════════════════════════════════════
+   HUD HEADER
+═══════════════════════════════════════ */
+#hud-header {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  height: 56px;
+  background: linear-gradient(180deg, rgba(0,0,0,0.95) 0%, transparent 100%);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 24px;
+  border-bottom: 1px solid rgba(214,107,45,0.15);
+}
+.hud-room {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.1rem; letter-spacing: 0.2em; color: var(--orange);
+}
+.hud-breadcrumb {
+  font-size: 0.6rem; letter-spacing: 0.25em; color: rgba(245,245,245,0.35);
+  text-transform: uppercase;
+}
+.hud-status {
+  font-size: 0.6rem; letter-spacing: 0.2em;
+  color: var(--green); display: flex; align-items: center; gap: 8px;
+}
+.hud-status-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--green); animation: pulse 1.5s infinite;
+}
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+/* ═══════════════════════════════════════
+   LEFT PANEL — EVIDENCE TYPE SELECTOR
+═══════════════════════════════════════ */
+#type-panel {
+  position: fixed; left: 16px; top: 70px; bottom: 16px;
+  width: 180px; z-index: 100;
+  background: var(--glass);
+  border: 1px solid rgba(214,107,45,0.25);
+  border-radius: 8px;
+  padding: 16px 12px;
+  display: flex; flex-direction: column; gap: 6px;
+  backdrop-filter: blur(12px);
+  overflow-y: auto;
+}
+#type-panel h3 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 0.85rem; letter-spacing: 0.2em;
+  color: var(--orange); margin-bottom: 8px;
+  border-bottom: 1px solid rgba(214,107,45,0.2);
+  padding-bottom: 8px;
+}
+.type-btn {
+  display: flex; align-items: center; gap: 10px;
+  padding: 9px 10px; border-radius: 5px;
+  border: 1px solid rgba(255,255,255,0.06);
+  background: rgba(255,255,255,0.03);
+  cursor: pointer; transition: all 0.2s;
+  font-size: 0.7rem; letter-spacing: 0.08em;
+  color: rgba(245,245,245,0.7);
+}
+.type-btn:hover, .type-btn.active {
+  border-color: var(--orange);
+  background: rgba(214,107,45,0.12);
+  color: var(--white);
+}
+.type-btn .t-icon { font-size: 1rem; }
+.type-count {
+  margin-left: auto; font-size: 0.6rem;
+  color: var(--gold); letter-spacing: 0.1em;
+}
+
+/* ═══════════════════════════════════════
+   INTAKE FORM PANEL
+═══════════════════════════════════════ */
+#intake-panel {
+  position: fixed; right: -520px; top: 70px; bottom: 16px;
+  width: 480px; z-index: 200;
+  background: var(--glass);
+  border: 1px solid rgba(214,107,45,0.3);
+  border-right: none;
+  border-radius: 8px 0 0 8px;
+  backdrop-filter: blur(16px);
+  transition: right 0.4s cubic-bezier(0.4,0,0.2,1);
+  display: flex; flex-direction: column;
+  overflow: hidden;
+}
+#intake-panel.open { right: 0; }
+
+.panel-header {
+  padding: 18px 20px 14px;
+  border-bottom: 1px solid rgba(214,107,45,0.2);
+  display: flex; align-items: center; justify-content: space-between;
+  flex-shrink: 0;
+}
+.panel-header h2 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.2rem; letter-spacing: 0.2em; color: var(--orange);
+}
+.panel-header .exhibit-id {
+  font-size: 0.65rem; letter-spacing: 0.25em;
+  color: var(--gold); margin-top: 2px;
+}
+#panel-close {
+  background: none; border: 1px solid rgba(255,255,255,0.1);
+  color: var(--white); cursor: pointer; border-radius: 4px;
+  width: 28px; height: 28px; font-size: 0.85rem;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.2s;
+}
+#panel-close:hover { border-color: var(--red); color: var(--red); }
+
+.panel-body { flex: 1; overflow-y: auto; padding: 16px 20px; display: flex; flex-direction: column; gap: 14px; }
+.panel-body::-webkit-scrollbar { width: 4px; }
+.panel-body::-webkit-scrollbar-thumb { background: rgba(214,107,45,0.3); border-radius: 2px; }
+
+.form-section { display: flex; flex-direction: column; gap: 6px; }
+.form-label {
+  font-size: 0.6rem; letter-spacing: 0.25em;
+  color: var(--cyan); text-transform: uppercase;
+}
+.form-input, .form-select, .form-textarea {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 4px; padding: 9px 12px;
+  color: var(--white); font-family: 'Space Grotesk', monospace;
+  font-size: 0.75rem; transition: border-color 0.2s;
+  width: 100%;
+}
+.form-input:focus, .form-select:focus, .form-textarea:focus {
+  outline: none; border-color: var(--orange);
+  background: rgba(214,107,45,0.06);
+}
+.form-select { cursor: pointer; }
+.form-select option { background: #0D1117; }
+.form-textarea { resize: vertical; min-height: 70px; }
+
+/* Verification status buttons */
+.verify-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 6px;
+}
+.verify-btn {
+  padding: 8px 10px; border-radius: 4px; cursor: pointer;
+  font-size: 0.6rem; letter-spacing: 0.15em; text-align: center;
+  border: 1px solid; transition: all 0.2s; background: transparent;
+  font-family: 'Space Grotesk', monospace; text-transform: uppercase;
+}
+.verify-btn[data-v="verified"]   { border-color: #00FF88; color: #00FF88; }
+.verify-btn[data-v="partial"]    { border-color: #FFB830; color: #FFB830; }
+.verify-btn[data-v="review"]     { border-color: #00BFFF; color: #00BFFF; }
+.verify-btn[data-v="disputed"]   { border-color: #FF3B3B; color: #FF3B3B; }
+.verify-btn.selected { color: #000; }
+.verify-btn[data-v="verified"].selected  { background: #00FF88; }
+.verify-btn[data-v="partial"].selected   { background: #FFB830; }
+.verify-btn[data-v="review"].selected    { background: #00BFFF; }
+.verify-btn[data-v="disputed"].selected  { background: #FF3B3B; }
+
+/* Routing portals */
+.route-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 6px;
+}
+.route-btn {
+  padding: 9px 8px; border-radius: 4px; cursor: pointer;
+  font-size: 0.6rem; letter-spacing: 0.12em; text-align: center;
+  border: 1px solid rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.03);
+  color: rgba(245,245,245,0.6);
+  transition: all 0.2s; font-family: 'Space Grotesk', monospace;
+  text-transform: uppercase;
+}
+.route-btn:hover, .route-btn.selected {
+  border-color: var(--cyan); color: var(--cyan);
+  background: rgba(0,191,255,0.08);
+}
+.route-icon { font-size: 1.1rem; display: block; margin-bottom: 4px; }
+
+.panel-footer {
+  padding: 14px 20px;
+  border-top: 1px solid rgba(214,107,45,0.2);
+  display: flex; gap: 10px; flex-shrink: 0;
+}
+#process-btn {
+  flex: 1; padding: 12px;
+  background: linear-gradient(135deg, var(--orange), #b85a25);
+  border: none; border-radius: 5px;
+  color: #000; font-family: 'Bebas Neue', sans-serif;
+  font-size: 1rem; letter-spacing: 0.2em; cursor: pointer;
+  transition: all 0.25s;
+}
+#process-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 20px rgba(214,107,45,0.4); }
+#clear-btn {
+  padding: 12px 18px; background: transparent;
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 5px; color: rgba(245,245,245,0.5);
+  font-size: 0.7rem; letter-spacing: 0.15em; cursor: pointer;
+  transition: all 0.2s; font-family: 'Space Grotesk', monospace;
+  text-transform: uppercase;
+}
+#clear-btn:hover { border-color: var(--red); color: var(--red); }
+
+/* ═══════════════════════════════════════
+   EVIDENCE LOG — BOTTOM PANEL
+═══════════════════════════════════════ */
+#evidence-log {
+  position: fixed; bottom: 0; left: 196px; right: 0;
+  height: 0px; z-index: 100;
+  background: rgba(0,0,0,0.95);
+  border-top: 1px solid rgba(214,107,45,0.2);
+  transition: height 0.35s ease;
+  overflow: hidden;
+}
+#evidence-log.expanded { height: 200px; }
+
+#log-toggle {
+  position: fixed; bottom: 16px; left: 50%; transform: translateX(-50%);
+  z-index: 110; padding: 8px 22px;
+  background: rgba(0,0,0,0.85); border: 1px solid rgba(214,107,45,0.3);
+  color: var(--orange); font-family: 'Bebas Neue', sans-serif;
+  font-size: 0.8rem; letter-spacing: 0.2em; cursor: pointer;
+  border-radius: 20px; transition: all 0.2s;
+  display: flex; align-items: center; gap: 8px;
+  backdrop-filter: blur(8px);
+}
+#log-toggle:hover { border-color: var(--orange); background: rgba(214,107,45,0.1); }
+#log-count {
+  background: var(--orange); color: #000;
+  border-radius: 10px; padding: 1px 7px;
+  font-size: 0.65rem; font-family: 'Space Grotesk', monospace;
+  font-weight: 700;
+}
+
+.log-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 20px 6px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.log-header h3 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 0.9rem; letter-spacing: 0.2em; color: var(--orange);
+}
+#log-close {
+  background: none; border: none; color: rgba(245,245,245,0.4);
+  font-size: 1rem; cursor: pointer;
+}
+#log-table-wrap { overflow-y: auto; height: calc(200px - 46px); padding: 0 10px 10px; }
+#log-table {
+  width: 100%; border-collapse: collapse;
+  font-size: 0.62rem; letter-spacing: 0.06em;
+}
+#log-table th {
+  text-align: left; padding: 6px 8px;
+  color: var(--cyan); font-weight: 400;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  position: sticky; top: 0; background: rgba(0,0,0,0.95);
+}
+#log-table td {
+  padding: 7px 8px;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  color: rgba(245,245,245,0.75);
+}
+#log-table tr.new-entry td { animation: logFlash 1s ease; }
+@keyframes logFlash { 0%,100%{background:transparent} 30%{background:rgba(214,107,45,0.15)} }
+
+.v-badge {
+  display: inline-block; padding: 2px 7px; border-radius: 3px;
+  font-size: 0.55rem; letter-spacing: 0.1em; font-weight: 600;
+}
+.v-badge.verified  { background: rgba(0,255,136,0.15); color: #00FF88; border: 1px solid rgba(0,255,136,0.3); }
+.v-badge.partial   { background: rgba(255,184,48,0.15); color: #FFB830; border: 1px solid rgba(255,184,48,0.3); }
+.v-badge.review    { background: rgba(0,191,255,0.15); color: #00BFFF; border: 1px solid rgba(0,191,255,0.3); }
+.v-badge.disputed  { background: rgba(255,59,59,0.15); color: #FF3B3B; border: 1px solid rgba(255,59,59,0.3); }
+
+.route-tag {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-size: 0.55rem; color: rgba(0,191,255,0.8);
+}
+
+/* ═══════════════════════════════════════
+   SCANNER OVERLAY
+═══════════════════════════════════════ */
+#scanner-overlay {
+  position: fixed; inset: 0; z-index: 50; pointer-events: none;
+}
+.scan-beam {
+  position: absolute; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent 10%, rgba(214,107,45,0.6) 40%, rgba(255,200,0,0.8) 50%, rgba(214,107,45,0.6) 60%, transparent 90%);
+  box-shadow: 0 0 12px rgba(214,107,45,0.5);
+  animation: scanBeam 4s ease-in-out infinite;
+  opacity: 0;
+}
+@keyframes scanBeam {
+  0%   { top: 10%; opacity: 0; }
+  10%  { opacity: 1; }
+  80%  { opacity: 0.6; }
+  100% { top: 90%; opacity: 0; }
+}
+
+/* ═══════════════════════════════════════
+   CENTRAL SCANNER LABEL
+═══════════════════════════════════════ */
+#scanner-label {
+  position: fixed; left: 50%; top: 50%; transform: translate(-50%, -50%);
+  z-index: 80; pointer-events: none;
+  text-align: center; opacity: 0;
+  transition: opacity 0.5s;
+}
+#scanner-label.visible { opacity: 1; }
+.scanner-ring-label {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 0.75rem; letter-spacing: 0.4em; color: var(--orange);
+  text-shadow: 0 0 20px rgba(214,107,45,0.6);
+}
+.scanner-sub-label {
+  font-size: 0.55rem; letter-spacing: 0.3em; color: rgba(0,191,255,0.6);
+  margin-top: 4px;
+}
+
+/* ═══════════════════════════════════════
+   HOVER LABEL
+═══════════════════════════════════════ */
+#hover-label {
+  position: fixed; z-index: 99; pointer-events: none;
+  background: rgba(0,0,0,0.9); border: 1px solid rgba(214,107,45,0.4);
+  padding: 6px 12px; border-radius: 4px;
+  font-size: 0.65rem; letter-spacing: 0.12em;
+  color: var(--white); display: none;
+  backdrop-filter: blur(8px);
+  max-width: 200px;
+}
+.hl-type { font-size: 0.55rem; color: var(--orange); letter-spacing: 0.2em; }
+
+/* ═══════════════════════════════════════
+   TOAST NOTIFICATION
+═══════════════════════════════════════ */
+#toast {
+  position: fixed; top: 70px; left: 50%; transform: translateX(-50%);
+  z-index: 500;
+  background: rgba(0,20,0,0.95); border: 1px solid var(--green);
+  padding: 10px 24px; border-radius: 4px;
+  font-size: 0.7rem; letter-spacing: 0.15em; color: var(--green);
+  display: none; backdrop-filter: blur(8px);
+}
+#toast.error { border-color: var(--red); color: var(--red); background: rgba(20,0,0,0.95); }
+#toast.show { display: block; animation: toastIn 0.3s ease; }
+@keyframes toastIn { from{opacity:0;transform:translate(-50%,-10px)} to{opacity:1;transform:translate(-50%,0)} }
+
+/* ═══════════════════════════════════════
+   PORTAL FLASH (routing animation)
+═══════════════════════════════════════ */
+#portal-flash {
+  position: fixed; inset: 0; z-index: 600; pointer-events: none;
+  background: radial-gradient(ellipse at center, rgba(0,191,255,0.6), transparent 70%);
+  opacity: 0; transition: opacity 0.3s;
+}
+#portal-flash.flash { animation: portalFlash 1.2s ease; }
+@keyframes portalFlash {
+  0%   { opacity: 0; }
+  20%  { opacity: 1; }
+  60%  { opacity: 0.5; }
+  100% { opacity: 0; }
+}
+
+/* ═══════════════════════════════════════
+   VAULT NAV
+═══════════════════════════════════════ */
+#vault-nav {
+  position: fixed; top: 70px; left: 200px; z-index: 100;
+  display: flex; gap: 8px; align-items: center;
+}
+.nav-link {
+  font-size: 0.6rem; letter-spacing: 0.2em; color: rgba(245,245,245,0.4);
+  text-decoration: none; text-transform: uppercase;
+  padding: 5px 10px; border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 3px; transition: all 0.2s;
+}
+.nav-link:hover { color: var(--orange); border-color: rgba(214,107,45,0.3); }
+
+/* ═══════════════════════════════════════
+   PLACEHOLDER NOTICE
+═══════════════════════════════════════ */
+#placeholder-notice {
+  position: fixed; bottom: 60px; left: 50%; transform: translateX(-50%);
+  z-index: 90; pointer-events: none;
+  font-size: 0.55rem; letter-spacing: 0.2em;
+  color: rgba(255,184,48,0.5);
+  background: rgba(0,0,0,0.7);
+  padding: 4px 14px; border-radius: 3px;
+  border: 1px solid rgba(255,184,48,0.15);
+  text-transform: uppercase; white-space: nowrap;
+}
+
+/* ═══════════════════════════════════════
+   SCROLLBAR
+═══════════════════════════════════════ */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-thumb { background: rgba(214,107,45,0.3); border-radius: 2px; }
+
+/* MOBILE */
+@media(max-width:700px){
+  #type-panel { width: 120px; }
+  #intake-panel { width: min(380px, 96vw); }
+  #vault-nav { display: none; }
+  #evidence-log { left: 136px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════ ENTRY SEQUENCE ═══════ -->
+<div id="entry">
+  <div class="e-scan"></div>
+  <div class="e-corner tl"></div><div class="e-corner tr"></div>
+  <div class="e-corner bl"></div><div class="e-corner br"></div>
+  <div class="e-title">EVIDENCE INTAKE</div>
+  <div class="e-sub">Room 01 · The Intake Chamber</div>
+  <div class="e-bar"><div class="e-bar-fill"></div></div>
+  <div class="e-status">INITIALISING INTAKE CHAMBER · LOADING EVIDENCE PODS</div>
+  <button id="enter-btn" onclick="enterChamber()">ENTER INTAKE CHAMBER</button>
+</div>
+
+<!-- ═══════ HUD HEADER ═══════ -->
+<div id="hud-header" style="opacity:0;transition:opacity 1s">
+  <div>
+    <div class="hud-room">ROOM 01 · EVIDENCE INTAKE</div>
+    <div class="hud-breadcrumb">FAIR GO JUSTICE · EVIDENCE VAULT</div>
+  </div>
+  <div class="hud-status">
+    <div class="hud-status-dot"></div>
+    INTAKE CHAMBER ACTIVE
+  </div>
+</div>
+
+<!-- ═══════ VAULT NAV ═══════ -->
+<div id="vault-nav" style="opacity:0;transition:opacity 1s">
+  <a class="nav-link" href="vault.html">⬡ VAULT HUB</a>
+  <a class="nav-link" href="timeline-chamber.html">TIMELINE</a>
+  <a class="nav-link" href="chain-of-custody-reactor.html">REACTOR</a>
+  <a class="nav-link" href="music-nexus.html">NEXUS</a>
+</div>
+
+<!-- ═══════ THREE.JS CANVAS ═══════ -->
+<canvas id="three-canvas"></canvas>
+
+<!-- ═══════ SCANNER BEAM OVERLAY ═══════ -->
+<div id="scanner-overlay">
+  <div class="scan-beam"></div>
+</div>
+
+<!-- ═══════ SCANNER LABEL ═══════ -->
+<div id="scanner-label">
+  <div class="scanner-ring-label">INTAKE SCANNER ACTIVE</div>
+  <div class="scanner-sub-label">CLICK A EVIDENCE POD TO BEGIN INTAKE</div>
+</div>
+
+<!-- ═══════ HOVER LABEL ═══════ -->
+<div id="hover-label">
+  <div class="hl-type" id="hl-type"></div>
+  <div id="hl-name"></div>
+  <div style="font-size:0.5rem;color:rgba(245,245,245,0.4);margin-top:3px">CLICK TO OPEN INTAKE FORM</div>
+</div>
+
+<!-- ═══════ LEFT — EVIDENCE TYPE SELECTOR ═══════ -->
+<div id="type-panel" style="opacity:0;transition:opacity 1s">
+  <h3>Evidence Types</h3>
+  <div class="type-btn active" data-type="all" onclick="filterType('all')">
+    <span class="t-icon">⬡</span> All Types
+    <span class="type-count" id="cnt-all">8</span>
+  </div>
+  <div class="type-btn" data-type="document" onclick="filterType('document')">
+    <span class="t-icon">📄</span> Document
+    <span class="type-count" id="cnt-document">0</span>
+  </div>
+  <div class="type-btn" data-type="image" onclick="filterType('image')">
+    <span class="t-icon">🖼</span> Image
+    <span class="type-count" id="cnt-image">0</span>
+  </div>
+  <div class="type-btn" data-type="audio" onclick="filterType('audio')">
+    <span class="t-icon">🎵</span> Audio
+    <span class="type-count" id="cnt-audio">0</span>
+  </div>
+  <div class="type-btn" data-type="video" onclick="filterType('video')">
+    <span class="t-icon">🎬</span> Video
+    <span class="type-count" id="cnt-video">0</span>
+  </div>
+  <div class="type-btn" data-type="email" onclick="filterType('email')">
+    <span class="t-icon">📧</span> Email
+    <span class="type-count" id="cnt-email">0</span>
+  </div>
+  <div class="type-btn" data-type="court" onclick="filterType('court')">
+    <span class="t-icon">⚖</span> Court Record
+    <span class="type-count" id="cnt-court">0</span>
+  </div>
+  <div class="type-btn" data-type="witness" onclick="filterType('witness')">
+    <span class="t-icon">👤</span> Witness Statement
+    <span class="type-count" id="cnt-witness">0</span>
+  </div>
+  <div class="type-btn" data-type="financial" onclick="filterType('financial')">
+    <span class="t-icon">💰</span> Financial Record
+    <span class="type-count" id="cnt-financial">0</span>
+  </div>
+
+  <div style="margin-top:auto;padding-top:12px;border-top:1px solid rgba(255,255,255,0.06)">
+    <div style="font-size:0.55rem;letter-spacing:0.2em;color:rgba(245,245,245,0.3);text-transform:uppercase;margin-bottom:8px">Processed</div>
+    <div id="processed-count" style="font-family:'Bebas Neue',sans-serif;font-size:1.6rem;color:var(--gold);letter-spacing:0.1em">0</div>
+    <div style="font-size:0.55rem;letter-spacing:0.15em;color:rgba(245,245,245,0.3);text-transform:uppercase">exhibits logged</div>
+  </div>
+</div>
+
+<!-- ═══════ RIGHT — INTAKE FORM ═══════ -->
+<div id="intake-panel">
+  <div class="panel-header">
+    <div>
+      <h2>EVIDENCE INTAKE</h2>
+      <div class="exhibit-id" id="display-exhibit-id">EXHIBIT ID: —</div>
+    </div>
+    <button id="panel-close" onclick="closePanel()">✕</button>
+  </div>
+  <div class="panel-body">
+
+    <!-- Exhibit ID (auto) -->
+    <div class="form-section">
+      <label class="form-label">Exhibit ID (Auto-Assigned)</label>
+      <input class="form-input" id="field-exhibit-id" readonly style="opacity:0.6;cursor:default">
+    </div>
+
+    <!-- Evidence Type -->
+    <div class="form-section">
+      <label class="form-label">Evidence Type</label>
+      <select class="form-select" id="field-type">
+        <option value="">— Select Type —</option>
+        <option value="document">📄 Document</option>
+        <option value="image">🖼 Image</option>
+        <option value="audio">🎵 Audio Recording</option>
+        <option value="video">🎬 Video / CCTV</option>
+        <option value="email">📧 Email / Correspondence</option>
+        <option value="court">⚖ Court Record</option>
+        <option value="witness">👤 Witness Statement</option>
+        <option value="financial">💰 Financial Record</option>
+      </select>
+    </div>
+
+    <!-- Exhibit Label -->
+    <div class="form-section">
+      <label class="form-label">Exhibit Label / Title</label>
+      <input class="form-input" id="field-label" type="text" placeholder="Brief descriptive title…">
+    </div>
+
+    <!-- Source -->
+    <div class="form-section">
+      <label class="form-label">Source / Origin</label>
+      <input class="form-input" id="field-source" type="text" placeholder="e.g. Public records, court filing, correspondence…">
+    </div>
+
+    <!-- Date / Time -->
+    <div class="form-section">
+      <label class="form-label">Document Date / Time</label>
+      <input class="form-input" id="field-date" type="date">
+    </div>
+
+    <!-- Description -->
+    <div class="form-section">
+      <label class="form-label">Description / Notes</label>
+      <textarea class="form-textarea" id="field-desc" placeholder="Describe the exhibit content and relevance (no personal names)…"></textarea>
+    </div>
+
+    <!-- Verification Status -->
+    <div class="form-section">
+      <label class="form-label">Verification Status</label>
+      <div class="verify-grid" id="verify-grid">
+        <button class="verify-btn" data-v="verified"  onclick="selectVerify(this)">✓ Verified</button>
+        <button class="verify-btn" data-v="partial"   onclick="selectVerify(this)">◐ Partially Verified</button>
+        <button class="verify-btn" data-v="review"    onclick="selectVerify(this)">◉ Under Review</button>
+        <button class="verify-btn" data-v="disputed"  onclick="selectVerify(this)">✗ Disputed</button>
+      </div>
+    </div>
+
+    <!-- Route To -->
+    <div class="form-section">
+      <label class="form-label">Route To Vault Room</label>
+      <div class="route-grid" id="route-grid">
+        <button class="route-btn" data-r="timeline" onclick="selectRoute(this)">
+          <span class="route-icon">🕰</span>Timeline Chamber
+        </button>
+        <button class="route-btn" data-r="reactor" onclick="selectRoute(this)">
+          <span class="route-icon">⚡</span>Chain Reactor
+        </button>
+        <button class="route-btn" data-r="forensics" onclick="selectRoute(this)">
+          <span class="route-icon">🔬</span>Forensics Lab
+        </button>
+        <button class="route-btn" data-r="witness" onclick="selectRoute(this)">
+          <span class="route-icon">🎭</span>Witness Theatre
+        </button>
+        <button class="route-btn" data-r="documentary" onclick="selectRoute(this)">
+          <span class="route-icon">🎬</span>Documentary Archive
+        </button>
+        <button class="route-btn" data-r="music" onclick="selectRoute(this)">
+          <span class="route-icon">🎵</span>Music Nexus
+        </button>
+      </div>
+    </div>
+
+    <!-- Placeholder notice -->
+    <div style="padding:8px 10px;background:rgba(255,184,48,0.06);border:1px solid rgba(255,184,48,0.15);border-radius:4px;font-size:0.6rem;line-height:1.6;color:rgba(255,184,48,0.7);letter-spacing:0.05em">
+      ⚠ This intake form uses placeholder data only. All fields are illustrative pending verified records. No exhibit data leaves this browser session.
+    </div>
+  </div>
+
+  <div class="panel-footer">
+    <button id="process-btn" onclick="processEvidence()">⚡ PROCESS EVIDENCE</button>
+    <button id="clear-btn" onclick="clearForm()">CLEAR</button>
+  </div>
+</div>
+
+<!-- ═══════ EVIDENCE LOG ═══════ -->
+<div id="evidence-log">
+  <div class="log-header">
+    <h3>EVIDENCE LOG — SESSION INTAKE</h3>
+    <button id="log-close" onclick="toggleLog()">✕</button>
+  </div>
+  <div id="log-table-wrap">
+    <table id="log-table">
+      <thead>
+        <tr>
+          <th>Exhibit ID</th>
+          <th>Label</th>
+          <th>Type</th>
+          <th>Date</th>
+          <th>Status</th>
+          <th>Route</th>
+          <th>Processed</th>
+        </tr>
+      </thead>
+      <tbody id="log-body"></tbody>
+    </table>
+  </div>
+</div>
+
+<button id="log-toggle" onclick="toggleLog()">
+  EVIDENCE LOG <span id="log-count">0</span>
+</button>
+
+<!-- ═══════ PORTAL FLASH ═══════ -->
+<div id="portal-flash"></div>
+
+<!-- ═══════ TOAST ═══════ -->
+<div id="toast"></div>
+
+<!-- ═══════ PLACEHOLDER NOTICE ═══════ -->
+<div id="placeholder-notice">PLACEHOLDER MODE · ALL DATA ILLUSTRATIVE · NO VERIFIED CASE FACTS</div>
+
+<!-- ═══════ THREE.JS ═══════ -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+<script>
+// ══════════════════════════════════════════════════
+// EVIDENCE POD DEFINITIONS
+// ══════════════════════════════════════════════════
+const EVIDENCE_TYPES = [
+  { id: 'document',  label: 'Document',         icon: '📄', color: 0xD4AF37, emissive: 0x8B7100 },
+  { id: 'image',     label: 'Image',             icon: '🖼',  color: 0x00BFFF, emissive: 0x006688 },
+  { id: 'audio',     label: 'Audio',             icon: '🎵', color: 0xD66B2D, emissive: 0x7A3010 },
+  { id: 'video',     label: 'Video',             icon: '🎬', color: 0xAA44FF, emissive: 0x5500AA },
+  { id: 'email',     label: 'Email',             icon: '📧', color: 0x00FF88, emissive: 0x008844 },
+  { id: 'court',     label: 'Court Record',      icon: '⚖',  color: 0xFF3B3B, emissive: 0x880000 },
+  { id: 'witness',   label: 'Witness Statement', icon: '👤', color: 0xFFB830, emissive: 0x886000 },
+  { id: 'financial', label: 'Financial Record',  icon: '💰', color: 0x44FFCC, emissive: 0x008866 }
+];
+
+const ROUTE_LABELS = {
+  timeline:    'Timeline Chamber',
+  reactor:     'Chain Reactor',
+  forensics:   'Forensics Lab',
+  witness:     'Witness Theatre',
+  documentary: 'Documentary Archive',
+  music:       'Music Nexus'
+};
+
+const ROUTE_URLS = {
+  timeline:    'timeline-chamber.html',
+  reactor:     'chain-of-custody-reactor.html',
+  forensics:   'quiz.html',
+  witness:     'stories.html',
+  documentary: 'podcast.html',
+  music:       'music-nexus.html'
+};
+
+// ══════════════════════════════════════════════════
+// GLOBAL STATE
+// ══════════════════════════════════════════════════
+let scene, camera, renderer, clock;
+let pods = [];
+let raycaster, mouse;
+let audioCtx = null;
+let currentPod = null;
+let selectedVerify = null;
+let selectedRoute = null;
+let evidenceLog = [];
+let typeCounts = {};
+let processedCount = 0;
+let exhibitSeq = 1000;
+let logOpen = false;
+let hasEntered = false;
+
+EVIDENCE_TYPES.forEach(t => { typeCounts[t.id] = 0; });
+
+// ══════════════════════════════════════════════════
+// AUDIO
+// ══════════════════════════════════════════════════
+function initAudio() {
+  if (audioCtx) return;
+  audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+}
+function playTone(freq, type='sine', dur=0.18, vol=0.08) {
+  if (!audioCtx) return;
+  const o = audioCtx.createOscillator();
+  const g = audioCtx.createGain();
+  o.connect(g); g.connect(audioCtx.destination);
+  o.type = type; o.frequency.value = freq;
+  g.gain.setValueAtTime(vol, audioCtx.currentTime);
+  g.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + dur);
+  o.start(); o.stop(audioCtx.currentTime + dur);
+}
+function playHover()   { playTone(660,'sine',0.12,0.04); }
+function playClick()   { playTone(440,'triangle',0.25,0.1); }
+function playSuccess() { [550,660,880].forEach((f,i)=>setTimeout(()=>playTone(f,'sine',0.2,0.08),i*80)); }
+function playError()   { playTone(180,'sawtooth',0.3,0.08); }
+function playAmbient() {
+  if (!audioCtx) return;
+  [55,82.5,110].forEach(freq => {
+    const o = audioCtx.createOscillator();
+    const g = audioCtx.createGain();
+    o.connect(g); g.connect(audioCtx.destination);
+    o.type = 'sine'; o.frequency.value = freq;
+    g.gain.setValueAtTime(0,audioCtx.currentTime);
+    g.gain.linearRampToValueAtTime(0.02,audioCtx.currentTime+3);
+    o.start();
+  });
+}
+
+// ══════════════════════════════════════════════════
+// ENTRY
+// ══════════════════════════════════════════════════
+function enterChamber() {
+  initAudio(); playAmbient();
+  const entry = document.getElementById('entry');
+  entry.classList.add('fade-out');
+  setTimeout(() => {
+    entry.style.display = 'none';
+    document.getElementById('hud-header').style.opacity = '1';
+    document.getElementById('type-panel').style.opacity = '1';
+    document.getElementById('vault-nav').style.opacity = '1';
+    document.getElementById('scanner-label').classList.add('visible');
+    hasEntered = true;
+  }, 1500);
+}
+
+// ══════════════════════════════════════════════════
+// THREE.JS SCENE
+// ══════════════════════════════════════════════════
+function initScene() {
+  scene = new THREE.Scene();
+  scene.fog = new THREE.FogExp2(0x000000, 0.018);
+
+  camera = new THREE.PerspectiveCamera(65, innerWidth/innerHeight, 0.1, 500);
+  camera.position.set(0, 2, 28);
+
+  renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('three-canvas'), antialias: true, alpha: true });
+  renderer.setSize(innerWidth, innerHeight);
+  renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+
+  clock = new THREE.Clock();
+  raycaster = new THREE.Raycaster();
+  mouse = new THREE.Vector2();
+
+  buildRoom();
+  buildCentralScanner();
+  buildPods();
+  buildParticles();
+  buildConveyorRail();
+  buildRoutingPortals();
+
+  animate();
+}
+
+// ── ROOM ──────────────────────────────────────────
+function buildRoom() {
+  // Floor grid
+  const grid = new THREE.GridHelper(120, 40, 0x0E3A5B, 0x020810);
+  grid.position.y = -8;
+  scene.add(grid);
+
+  // Ambient light
+  const ambient = new THREE.AmbientLight(0x020408, 3);
+  scene.add(ambient);
+
+  // Orange key light
+  const keyLight = new THREE.PointLight(0xD66B2D, 4, 80);
+  keyLight.position.set(0, 15, 0);
+  scene.add(keyLight);
+
+  // Cyan fill
+  const fillLight = new THREE.PointLight(0x00BFFF, 2, 60);
+  fillLight.position.set(-20, 5, -10);
+  scene.add(fillLight);
+
+  // Gold accent
+  const goldLight = new THREE.PointLight(0xD4AF37, 1.5, 50);
+  goldLight.position.set(20, 5, -10);
+  scene.add(goldLight);
+
+  // Ceiling strips
+  for (let i = -3; i <= 3; i++) {
+    const geo = new THREE.BoxGeometry(40, 0.05, 0.1);
+    const mat = new THREE.MeshBasicMaterial({ color: 0x0E3A5B, transparent: true, opacity: 0.4 });
+    const strip = new THREE.Mesh(geo, mat);
+    strip.position.set(0, 18, i * 6);
+    scene.add(strip);
+  }
+
+  // Wall panels (back)
+  for (let i = -2; i <= 2; i++) {
+    const geo = new THREE.PlaneGeometry(8, 14);
+    const mat = new THREE.MeshBasicMaterial({
+      color: 0x0E3A5B, transparent: true, opacity: 0.08, side: THREE.DoubleSide
+    });
+    const wall = new THREE.Mesh(geo, mat);
+    wall.position.set(i * 10, 3, -30);
+    scene.add(wall);
+  }
+}
+
+// ── CENTRAL SCANNER ───────────────────────────────
+let scannerGroup;
+function buildCentralScanner() {
+  scannerGroup = new THREE.Group();
+
+  // Platform base
+  const baseGeo = new THREE.CylinderGeometry(5, 5.5, 0.3, 32);
+  const baseMat = new THREE.MeshPhongMaterial({ color: 0x0E3A5B, emissive: 0x020810, transparent: true, opacity: 0.7 });
+  const base = new THREE.Mesh(baseGeo, baseMat);
+  base.position.y = -7.7;
+  scannerGroup.add(base);
+
+  // Scanner ring 1
+  const ring1Geo = new THREE.TorusGeometry(4.5, 0.06, 8, 64);
+  const ring1Mat = new THREE.MeshBasicMaterial({ color: 0xD66B2D });
+  const ring1 = new THREE.Mesh(ring1Geo, ring1Mat);
+  ring1.rotation.x = Math.PI / 2;
+  ring1.position.y = -7.5;
+  scannerGroup.add(ring1);
+
+  // Scanner ring 2
+  const ring2Geo = new THREE.TorusGeometry(3.8, 0.04, 8, 64);
+  const ring2Mat = new THREE.MeshBasicMaterial({ color: 0x00BFFF });
+  const ring2 = new THREE.Mesh(ring2Geo, ring2Mat);
+  ring2.rotation.x = Math.PI / 2;
+  ring2.position.y = 0;
+  scannerGroup.add(ring2);
+  scannerGroup._ring2 = ring2;
+
+  // Vertical beam
+  const beamGeo = new THREE.CylinderGeometry(0.05, 0.05, 20, 8);
+  const beamMat = new THREE.MeshBasicMaterial({ color: 0xD66B2D, transparent: true, opacity: 0.3 });
+  const beam = new THREE.Mesh(beamGeo, beamMat);
+  beam.position.y = 2;
+  scannerGroup.add(beam);
+  scannerGroup._beam = beam;
+
+  // Scanner plate
+  const plateGeo = new THREE.CylinderGeometry(4.4, 4.4, 0.05, 32);
+  const plateMat = new THREE.MeshBasicMaterial({ color: 0x00BFFF, transparent: true, opacity: 0.05 });
+  const plate = new THREE.Mesh(plateGeo, plateMat);
+  plate.position.y = -7.55;
+  scannerGroup.add(plate);
+  scannerGroup._plate = plate;
+
+  scene.add(scannerGroup);
+}
+
+// ── EVIDENCE PODS ─────────────────────────────────
+const podGroup = new THREE.Group();
+function buildPods() {
+  EVIDENCE_TYPES.forEach((type, i) => {
+    const angle = (i / EVIDENCE_TYPES.length) * Math.PI * 2;
+    const radius = 11;
+
+    const geo = new THREE.IcosahedronGeometry(0.9, 0);
+    const mat = new THREE.MeshPhongMaterial({
+      color: type.color,
+      emissive: type.emissive,
+      emissiveIntensity: 0.4,
+      transparent: true,
+      opacity: 0.85,
+      wireframe: false
+    });
+    const mesh = new THREE.Mesh(geo, mat);
+
+    // Wire shell
+    const wGeo = new THREE.IcosahedronGeometry(1.05, 0);
+    const wMat = new THREE.MeshBasicMaterial({ color: type.color, wireframe: true, transparent: true, opacity: 0.2 });
+    const wire = new THREE.Mesh(wGeo, wMat);
+    mesh.add(wire);
+
+    // Glow sphere
+    const glowGeo = new THREE.SphereGeometry(1.4, 16, 16);
+    const glowMat = new THREE.MeshBasicMaterial({ color: type.color, transparent: true, opacity: 0.06 });
+    const glow = new THREE.Mesh(glowGeo, glowMat);
+    mesh.add(glow);
+
+    mesh.position.set(
+      Math.cos(angle) * radius,
+      1 + Math.sin(angle * 2.1) * 2,
+      Math.sin(angle) * radius
+    );
+
+    mesh.userData = {
+      typeId: type.id,
+      typeLabel: type.label,
+      color: type.color,
+      angle: angle,
+      radius: radius,
+      orbitSpeed: 0.12 + i * 0.015,
+      orbitOffset: i * 0.8,
+      baseY: 1 + Math.sin(angle * 2.1) * 2,
+      wire, glow
+    };
+
+    podGroup.add(mesh);
+    pods.push(mesh);
+  });
+  scene.add(podGroup);
+}
+
+// ── PARTICLES ─────────────────────────────────────
+function buildParticles() {
+  const count = 1200;
+  const geo = new THREE.BufferGeometry();
+  const pos = new Float32Array(count * 3);
+  for (let i = 0; i < count; i++) {
+    pos[i*3]   = (Math.random()-0.5)*80;
+    pos[i*3+1] = Math.random()*40 - 5;
+    pos[i*3+2] = (Math.random()-0.5)*80;
+  }
+  geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+  const mat = new THREE.PointsMaterial({ color: 0x0E3A5B, size: 0.15, transparent: true, opacity: 0.6 });
+  scene.add(new THREE.Points(geo, mat));
+}
+
+// ── CONVEYOR RAIL ─────────────────────────────────
+const conveyorGroup = new THREE.Group();
+let conveyorItems = [];
+function buildConveyorRail() {
+  // Rail tube — horizontal at back
+  const railGeo = new THREE.CylinderGeometry(0.06, 0.06, 50, 8);
+  const railMat = new THREE.MeshBasicMaterial({ color: 0x0E3A5B, transparent: true, opacity: 0.5 });
+  const rail = new THREE.Mesh(railGeo, railMat);
+  rail.rotation.z = Math.PI / 2;
+  rail.position.set(0, -2, -18);
+  conveyorGroup.add(rail);
+
+  // Glow strip along rail
+  const stripGeo = new THREE.CylinderGeometry(0.02, 0.02, 50, 8);
+  const stripMat = new THREE.MeshBasicMaterial({ color: 0xD66B2D, transparent: true, opacity: 0.4 });
+  const strip = new THREE.Mesh(stripGeo, stripMat);
+  strip.rotation.z = Math.PI / 2;
+  strip.position.set(0, -1.95, -18);
+  conveyorGroup.add(strip);
+
+  // Moving items on conveyor
+  const itemColors = [0xD66B2D, 0x00BFFF, 0xD4AF37, 0xFF3B3B, 0x00FF88];
+  for (let i = 0; i < 7; i++) {
+    const geo = new THREE.BoxGeometry(1.2, 0.8, 0.3);
+    const mat = new THREE.MeshPhongMaterial({
+      color: itemColors[i%5], emissive: itemColors[i%5],
+      emissiveIntensity: 0.2, transparent: true, opacity: 0.7
+    });
+    const item = new THREE.Mesh(geo, mat);
+    item.position.set(-25 + i * 7, -1.7, -18);
+    item.userData.conveyorOffset = i / 7;
+    conveyorGroup.add(item);
+    conveyorItems.push(item);
+  }
+
+  scene.add(conveyorGroup);
+}
+
+// ── ROUTING PORTALS ───────────────────────────────
+const PORTAL_DEFS = [
+  { label: 'TIMELINE',    color: 0x00BFFF, pos: [-22, -2, -15], url: 'timeline-chamber.html' },
+  { label: 'REACTOR',     color: 0x00FF88, pos: [-11, -2, -20], url: 'chain-of-custody-reactor.html' },
+  { label: 'FORENSICS',   color: 0xD4AF37, pos: [  0, -2, -24], url: 'quiz.html' },
+  { label: 'WITNESS',     color: 0xFFB830, pos: [ 11, -2, -20], url: 'stories.html' },
+  { label: 'DOCUMENTARY', color: 0xAA44FF, pos: [ 22, -2, -15], url: 'podcast.html' }
+];
+let portalMeshes = [];
+function buildRoutingPortals() {
+  PORTAL_DEFS.forEach(def => {
+    const g = new THREE.Group();
+
+    const arcGeo = new THREE.TorusGeometry(2.2, 0.12, 8, 32, Math.PI);
+    const arcMat = new THREE.MeshBasicMaterial({ color: def.color });
+    const arc = new THREE.Mesh(arcGeo, arcMat);
+    arc.rotation.z = Math.PI;
+    g.add(arc);
+
+    // Portal fill
+    const fillGeo = new THREE.CircleGeometry(2.1, 32);
+    const fillMat = new THREE.MeshBasicMaterial({ color: def.color, transparent: true, opacity: 0.04, side: THREE.DoubleSide });
+    const fill = new THREE.Mesh(fillGeo, fillMat);
+    g.add(fill);
+
+    // Pillars
+    [-2.2, 2.2].forEach(x => {
+      const pilGeo = new THREE.CylinderGeometry(0.08, 0.08, 5, 8);
+      const pilMat = new THREE.MeshBasicMaterial({ color: def.color, transparent: true, opacity: 0.5 });
+      const pil = new THREE.Mesh(pilGeo, pilMat);
+      pil.position.set(x, -2.5, 0);
+      g.add(pil);
+    });
+
+    g.position.set(...def.pos);
+    g.userData = { label: def.label, url: def.url, color: def.color, fill, arc };
+    scene.add(g);
+    portalMeshes.push(g);
+  });
+}
+
+// ══════════════════════════════════════════════════
+// ANIMATE
+// ══════════════════════════════════════════════════
+let hoveredPod = null;
+function animate() {
+  requestAnimationFrame(animate);
+  const t = clock.getElapsedTime();
+
+  // Pod orbits
+  pods.forEach((pod, i) => {
+    const d = pod.userData;
+    const a = d.orbitOffset + t * d.orbitSpeed * 0.3;
+    pod.position.x = Math.cos(a) * d.radius;
+    pod.position.z = Math.sin(a) * d.radius;
+    pod.position.y = d.baseY + Math.sin(t * 0.5 + i) * 0.8;
+    pod.rotation.x += 0.008;
+    pod.rotation.y += 0.012;
+    pod.userData.wire.rotation.y -= 0.015;
+
+    // Pulsing glow
+    pod.userData.glow.material.opacity = 0.04 + 0.04 * Math.sin(t * 1.5 + i * 0.7);
+    pod.material.emissiveIntensity = pod === hoveredPod
+      ? 0.8 + 0.3 * Math.sin(t * 4)
+      : 0.4 + 0.1 * Math.sin(t * 1.2 + i);
+  });
+
+  // Scanner ring
+  if (scannerGroup) {
+    scannerGroup._ring2.rotation.z += 0.015;
+    scannerGroup._beam.material.opacity = 0.2 + 0.15 * Math.sin(t * 2);
+    scannerGroup._plate.material.opacity = 0.03 + 0.03 * Math.sin(t * 1.5);
+  }
+
+  // Conveyor items slide
+  conveyorItems.forEach((item, i) => {
+    item.position.x = -25 + ((t * 3 + i * 7) % 56);
+    item.rotation.y += 0.01;
+  });
+
+  // Portal pulsing
+  portalMeshes.forEach((g, i) => {
+    g.userData.fill.material.opacity = 0.03 + 0.03 * Math.sin(t * 1.3 + i * 0.9);
+    g.userData.arc.material.opacity  = 0.5 + 0.3 * Math.sin(t * 1.5 + i * 0.7);
+    g.rotation.y = Math.sin(t * 0.2 + i) * 0.08;
+  });
+
+  // Slow camera drift
+  camera.position.x = Math.sin(t * 0.05) * 1.5;
+  camera.position.y = 2 + Math.sin(t * 0.08) * 0.5;
+  camera.lookAt(0, 0, 0);
+
+  renderer.render(scene, camera);
+}
+
+// ══════════════════════════════════════════════════
+// RAYCASTING / INTERACTION
+// ══════════════════════════════════════════════════
+const hoverLabel = document.getElementById('hover-label');
+const hlType = document.getElementById('hl-type');
+const hlName = document.getElementById('hl-name');
+let lastHover = null;
+
+window.addEventListener('mousemove', e => {
+  if (!hasEntered) return;
+  mouse.x = (e.clientX / innerWidth) * 2 - 1;
+  mouse.y = -(e.clientY / innerHeight) * 2 + 1;
+
+  raycaster.setFromCamera(mouse, camera);
+  const hits = raycaster.intersectObjects(pods);
+
+  if (hits.length) {
+    const pod = hits[0].object;
+    if (pod !== lastHover) {
+      playHover();
+      lastHover = pod;
+      hoveredPod = pod;
+    }
+    const d = pod.userData;
+    hoverLabel.style.display = 'block';
+    hoverLabel.style.left = (e.clientX + 16) + 'px';
+    hoverLabel.style.top  = (e.clientY - 10) + 'px';
+    hlType.textContent = d.typeId.toUpperCase();
+    hlName.textContent = d.typeLabel;
+    document.body.style.cursor = 'pointer';
+  } else {
+    hoverLabel.style.display = 'none';
+    hoveredPod = null; lastHover = null;
+    document.body.style.cursor = 'default';
+  }
+});
+
+window.addEventListener('click', e => {
+  if (!hasEntered) return;
+  initAudio();
+  mouse.x = (e.clientX / innerWidth) * 2 - 1;
+  mouse.y = -(e.clientY / innerHeight) * 2 + 1;
+  raycaster.setFromCamera(mouse, camera);
+  const hits = raycaster.intersectObjects(pods);
+  if (hits.length) {
+    playClick();
+    openIntakePanel(hits[0].object);
+  }
+});
+
+window.addEventListener('touchend', e => {
+  if (!hasEntered) return;
+  initAudio();
+  const t = e.changedTouches[0];
+  mouse.x = (t.clientX / innerWidth) * 2 - 1;
+  mouse.y = -(t.clientY / innerHeight) * 2 + 1;
+  raycaster.setFromCamera(mouse, camera);
+  const hits = raycaster.intersectObjects(pods);
+  if (hits.length) { playClick(); openIntakePanel(hits[0].object); }
+});
+
+window.addEventListener('resize', () => {
+  camera.aspect = innerWidth / innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(innerWidth, innerHeight);
+});
+
+window.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closePanel();
+});
+
+// ══════════════════════════════════════════════════
+// INTAKE PANEL
+// ══════════════════════════════════════════════════
+function openIntakePanel(podMesh) {
+  currentPod = podMesh;
+  const type = podMesh.userData.typeId;
+  const typeLabel = podMesh.userData.typeLabel;
+  const exhibitId = generateExhibitId(type);
+
+  document.getElementById('field-exhibit-id').value = exhibitId;
+  document.getElementById('display-exhibit-id').textContent = `EXHIBIT ID: ${exhibitId}`;
+
+  // Pre-select type
+  const sel = document.getElementById('field-type');
+  sel.value = type;
+
+  // Highlight matching type button
+  document.querySelectorAll('.type-btn').forEach(b => b.classList.remove('active'));
+  const btn = document.querySelector(`.type-btn[data-type="${type}"]`);
+  if (btn) btn.classList.add('active');
+
+  document.getElementById('intake-panel').classList.add('open');
+  document.getElementById('scanner-label').classList.remove('visible');
+}
+
+function closePanel() {
+  document.getElementById('intake-panel').classList.remove('open');
+  document.getElementById('scanner-label').classList.add('visible');
+  clearForm();
+  currentPod = null;
+}
+
+function clearForm() {
+  ['field-label','field-source','field-date','field-desc'].forEach(id => {
+    document.getElementById(id).value = '';
+  });
+  document.getElementById('field-type').value = '';
+  selectedVerify = null;
+  selectedRoute = null;
+  document.querySelectorAll('.verify-btn').forEach(b => b.classList.remove('selected'));
+  document.querySelectorAll('.route-btn').forEach(b => b.classList.remove('selected'));
+  document.getElementById('display-exhibit-id').textContent = 'EXHIBIT ID: —';
+}
+
+function generateExhibitId(type) {
+  const prefix = {
+    document:'DOC', image:'IMG', audio:'AUD', video:'VID',
+    email:'EML', court:'CRT', witness:'WIT', financial:'FIN'
+  };
+  const p = prefix[type] || 'EXH';
+  exhibitSeq++;
+  return `FGJ-${p}-${exhibitSeq}`;
+}
+
+function selectVerify(btn) {
+  document.querySelectorAll('.verify-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  selectedVerify = btn.dataset.v;
+}
+
+function selectRoute(btn) {
+  document.querySelectorAll('.route-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  selectedRoute = btn.dataset.r;
+}
+
+// ══════════════════════════════════════════════════
+// PROCESS EVIDENCE
+// ══════════════════════════════════════════════════
+function processEvidence() {
+  const exhibitId = document.getElementById('field-exhibit-id').value;
+  const label = document.getElementById('field-label').value.trim();
+  const type = document.getElementById('field-type').value;
+  const source = document.getElementById('field-source').value.trim();
+  const date = document.getElementById('field-date').value;
+  const desc = document.getElementById('field-desc').value.trim();
+
+  if (!exhibitId) { showToast('No exhibit ID assigned.', true); playError(); return; }
+  if (!label)     { showToast('Please enter an exhibit label.', true); playError(); return; }
+  if (!type)      { showToast('Please select evidence type.', true); playError(); return; }
+  if (!selectedVerify) { showToast('Please set verification status.', true); playError(); return; }
+  if (!selectedRoute)  { showToast('Please select a routing destination.', true); playError(); return; }
+
+  // Add to log
+  const entry = {
+    exhibitId, label, type, source,
+    date: date || 'Date Pending',
+    verify: selectedVerify,
+    route: selectedRoute,
+    processed: new Date().toLocaleTimeString()
+  };
+  evidenceLog.unshift(entry);
+  processedCount++;
+
+  // Update type count
+  typeCounts[type] = (typeCounts[type] || 0) + 1;
+  updateTypeCounts();
+
+  // Update processed counter
+  document.getElementById('processed-count').textContent = processedCount;
+  document.getElementById('log-count').textContent = processedCount;
+
+  // Portal flash
+  triggerPortalFlash();
+  playSuccess();
+
+  // Add to log table
+  addLogRow(entry);
+
+  // Show toast
+  showToast(`✓ ${exhibitId} → ${ROUTE_LABELS[selectedRoute]}`);
+
+  // Auto-open log
+  if (!logOpen) setTimeout(toggleLog, 400);
+
+  closePanel();
+}
+
+function updateTypeCounts() {
+  let total = 0;
+  EVIDENCE_TYPES.forEach(t => {
+    const cnt = typeCounts[t.id] || 0;
+    total += cnt;
+    const el = document.getElementById(`cnt-${t.id}`);
+    if (el) el.textContent = cnt;
+  });
+  const allEl = document.getElementById('cnt-all');
+  if (allEl) allEl.textContent = total;
+}
+
+function addLogRow(entry) {
+  const tbody = document.getElementById('log-body');
+  const tr = document.createElement('tr');
+  tr.classList.add('new-entry');
+
+  const vBadge = `<span class="v-badge ${entry.verify}">${entry.verify}</span>`;
+  const routeTag = `<span class="route-tag">→ ${ROUTE_LABELS[entry.route]}</span>`;
+
+  tr.innerHTML = `
+    <td style="color:var(--gold);font-family:'Bebas Neue',sans-serif;letter-spacing:0.1em">${entry.exhibitId}</td>
+    <td>${entry.label}</td>
+    <td style="text-transform:capitalize">${entry.type}</td>
+    <td>${entry.date}</td>
+    <td>${vBadge}</td>
+    <td>${routeTag}</td>
+    <td style="color:rgba(245,245,245,0.4)">${entry.processed}</td>
+  `;
+  tbody.insertBefore(tr, tbody.firstChild);
+}
+
+// ══════════════════════════════════════════════════
+// FILTER BY TYPE
+// ══════════════════════════════════════════════════
+function filterType(type) {
+  document.querySelectorAll('.type-btn').forEach(b => b.classList.remove('active'));
+  document.querySelector(`.type-btn[data-type="${type}"]`).classList.add('active');
+
+  pods.forEach(pod => {
+    const match = type === 'all' || pod.userData.typeId === type;
+    pod.material.opacity = match ? 0.85 : 0.08;
+    pod.userData.glow.material.opacity = match ? 0.06 : 0;
+  });
+}
+
+// ══════════════════════════════════════════════════
+// LOG TOGGLE
+// ══════════════════════════════════════════════════
+function toggleLog() {
+  logOpen = !logOpen;
+  const log = document.getElementById('evidence-log');
+  const btn = document.getElementById('log-toggle');
+  if (logOpen) {
+    log.classList.add('expanded');
+    btn.style.bottom = '210px';
+  } else {
+    log.classList.remove('expanded');
+    btn.style.bottom = '16px';
+  }
+}
+
+// ══════════════════════════════════════════════════
+// PORTAL FLASH
+// ══════════════════════════════════════════════════
+function triggerPortalFlash() {
+  const pf = document.getElementById('portal-flash');
+  pf.classList.remove('flash');
+  void pf.offsetWidth;
+  pf.classList.add('flash');
+}
+
+// ══════════════════════════════════════════════════
+// TOAST
+// ══════════════════════════════════════════════════
+let toastTimer;
+function showToast(msg, isError=false) {
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.className = 'show' + (isError ? ' error' : '');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => { el.className = ''; }, 3000);
+}
+
+// ══════════════════════════════════════════════════
+// BOOT
+// ══════════════════════════════════════════════════
+initScene();
+</script>
+</body>
+</html>
