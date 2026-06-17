@@ -413,5 +413,107 @@
     "uploadedAt": "2026-06-15T13:15:31Z",
     "thumbnailStatus": "pending_rate_limit",
     "duration": "29:30"
+  },
+  "bloodline": {
+    "videoId": "VJmG9Rjbj1g",
+    "title": "BLOODLINE",
+    "playlists": [
+      "complete_collection",
+      "hip_hop"
+    ],
+    "uploadedAt": "2026-06-17T09:05:46Z",
+    "thumbnail": "thumbnails/batch19/thumb_bloodline.jpg"
+  },
+  "whistleblower": {
+    "videoId": "A-9jsSIJWpw",
+    "title": "WHISTLEBLOWER",
+    "playlists": [
+      "complete_collection",
+      "hip_hop"
+    ],
+    "uploadedAt": "2026-06-17T09:05:55Z",
+    "thumbnail": "thumbnails/batch19/thumb_whistleblower.jpg"
+  },
+  "wrecking_ball_law": {
+    "videoId": "q1P_2WYtpwk",
+    "title": "WRECKING BALL LAW",
+    "playlists": [
+      "complete_collection",
+      "hard_rock"
+    ],
+    "uploadedAt": "2026-06-17T09:06:09Z",
+    "thumbnail": "thumbnails/batch19/thumb_wrecking_ball_law.jpg"
+  },
+  "ghost_in_the_system": {
+    "videoId": "rlmUjIZ7HzU",
+    "title": "GHOST IN THE SYSTEM",
+    "playlists": [
+      "complete_collection",
+      "hip_hop"
+    ],
+    "uploadedAt": "2026-06-17T09:06:11Z",
+    "thumbnail": "thumbnails/batch19/thumb_ghost_in_system.jpg"
+  },
+  "filed_and_forgotten": {
+    "videoId": "D6XRTlLCkHw",
+    "title": "FILED AND FORGOTTEN",
+    "playlists": [
+      "complete_collection",
+      "hip_hop"
+    ],
+    "uploadedAt": "2026-06-17T09:06:29Z",
+    "thumbnail": "thumbnails/batch19/thumb_filed_forgotten.jpg"
+  },
+  "the_last_witness": {
+    "videoId": "XKdTm5N3QNE",
+    "title": "THE LAST WITNESS",
+    "playlists": [
+      "complete_collection",
+      "hip_hop"
+    ],
+    "uploadedAt": "2026-06-17T09:06:29Z",
+    "thumbnail": "thumbnails/batch19/thumb_the_last_witness.jpg"
+  },
+  "under_oath": {
+    "videoId": "4bN75F17EB4",
+    "title": "UNDER OATH",
+    "playlists": [
+      "complete_collection",
+      "hip_hop"
+    ],
+    "uploadedAt": "2026-06-17T09:06:44Z",
+    "thumbnail": "thumbnails/batch19/thumb_under_oath.jpg"
+  },
+  "corporate_shell": {
+    "videoId": "YH6yVuVnTYw",
+    "title": "CORPORATE SHELL",
+    "playlists": [
+      "complete_collection",
+      "hip_hop"
+    ],
+    "uploadedAt": "2026-06-17T09:06:47Z",
+    "thumbnail": "thumbnails/batch19/thumb_corporate_shell.jpg"
+  },
+  "behind_the_stamp": {
+    "videoId": "52HIK2M-aa0",
+    "title": "BEHIND THE STAMP",
+    "pillar": 1,
+    "playlists": [
+      "complete_collection",
+      "hip_hop",
+      "pillar_1_judicial"
+    ],
+    "uploadedAt": "2026-06-17T09:07:04Z",
+    "thumbnail": "thumbnails/batch19/thumb_behind_the_stamp.jpg"
+  },
+  "redacted": {
+    "videoId": "2Svz86DU9bk",
+    "title": "REDACTED",
+    "playlists": [
+      "complete_collection",
+      "hip_hop"
+    ],
+    "uploadedAt": "2026-06-17T09:07:02Z",
+    "thumbnail": "thumbnails/batch19/thumb_redacted.jpg"
   }
 }
