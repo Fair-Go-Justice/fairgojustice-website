@@ -1,0 +1,4 @@
+# Redirect all traffic to www subdomain with HTTPS
+# This ensures fairgojustice.com.au redirects to https://www.fairgojustice.com.au
+https://fairgojustice.com.au/*    https://www.fairgojustice.com.au/:splat    301!
+http://fairgojustice.com.au/*     https://www.fairgojustice.com.au/:splat    301!
