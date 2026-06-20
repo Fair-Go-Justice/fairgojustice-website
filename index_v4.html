@@ -1,0 +1,973 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Australian Justice Reform Movement | Fair Go Justice</title>
+    <meta name="description" content="Fair Go Justice — exposing Australian family court failures, child protection abuses, and legal system breakdowns through music, evidence, and community stories. Join the movement.">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="Fair Go Justice">
+  <link rel="canonical" href="https://fairgojustice.com.au/">
+  <!-- Open Graph -->
+  <meta property="og:title" content="THE CHAIN IS BROKEN | Fair Go Justice">
+  <meta property="og:description" content="THE CHAIN IS BROKEN. Exposing systemic failures in Australian courts. 99 original tracks. Real stories. Evidence that demands accountability.">
+  <meta property="og:image" content="https://raw.githubusercontent.com/Fair-Go-Justice/fairgojustice-website/main/thumbnails/fgj_master_poster_web.jpg">
+  <meta property="og:url" content="https://fairgojustice.com.au/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Fair Go Justice">
+  <meta property="og:locale" content="en_AU">
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Fair Go Justice — The Chain Is Broken">
+  <meta name="twitter:description" content="99 original tracks. Real stories from Australians failed by the system. Join the movement for justice reform.">
+  <meta name="twitter:image" content="https://raw.githubusercontent.com/Fair-Go-Justice/fairgojustice-website/main/thumbnails/fgj_master_poster_web.jpg">
+  <!-- Structured Data -->
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DRTFE1VZYP"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-DRTFE1VZYP');</script>
+  <link rel="stylesheet" href="main_v3.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0D1117;
+      --navy: #0E3A5B;
+      --orange: #D66B2D;
+      --gold: #D4AF37;
+      --white: #F5F5F5;
+      --red: #C0392B;
+      --text-muted: #8B9DB0;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--white); font-family: 'Space Grotesk', sans-serif; overflow-x: hidden; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      background: rgba(13,17,23,0.0); backdrop-filter: blur(0);
+      border-bottom: 1px solid transparent;
+      padding: 0 2.5rem; height: 75px;
+      display: flex; align-items: center; justify-content: space-between;
+      transition: all 0.4s ease;
+    }
+    nav.scrolled {
+      background: rgba(13,17,23,0.97); backdrop-filter: blur(20px);
+      border-bottom-color: rgba(214,107,45,0.2);
+    }
+    .nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.7rem; color: var(--orange); letter-spacing: 3px; text-decoration: none; }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; align-items: center; }
+    .nav-links a { color: var(--white); text-decoration: none; font-size: 0.8rem; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase; opacity: 0.85; transition: opacity 0.2s, color 0.2s; }
+    .nav-links a:hover { opacity: 1; color: var(--orange); }
+    .nav-cta { padding: 0.5rem 1.4rem; background: var(--orange); color: #fff !important; border-radius: 1px; opacity: 1 !important; }
+    .nav-cta:hover { background: #e8793a !important; color: #fff !important; }
+    .nav-mobile-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+    .nav-mobile-toggle span { width: 24px; height: 2px; background: var(--white); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      background:
+        linear-gradient(to bottom, rgba(13,17,23,0.35) 0%, rgba(13,17,23,0.55) 50%, rgba(13,17,23,0.95) 90%, var(--bg) 100%),
+        url('https://raw.githubusercontent.com/Fair-Go-Justice/fairgojustice-website/main/thumbnails/hero_australia_united_web.jpg') center/cover no-repeat fixed;
+      display: flex; align-items: center;
+      position: relative; overflow: hidden;
+    }
+    .hero-content {
+      max-width: 1100px; margin: 0 auto; padding: 0 2.5rem;
+      padding-top: 100px;
+      position: relative; z-index: 2;
+    }
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 0.7rem;
+      font-size: 0.72rem; letter-spacing: 4px; text-transform: uppercase;
+      color: var(--orange); margin-bottom: 1.8rem;
+      border: 1px solid rgba(214,107,45,0.3); padding: 0.4rem 1rem; border-radius: 1px;
+    }
+    .hero-eyebrow::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--orange); animation: pulse-dot 2s infinite; }
+    @keyframes pulse-dot { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(1.3)} }
+    .hero h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(5rem, 14vw, 11rem);
+      line-height: 0.88; letter-spacing: 2px;
+      margin-bottom: 2rem;
+    }
+    .hero h1 .line-1 { display: block; color: var(--white); }
+    .hero h1 .line-2 { display: block; color: var(--orange); text-shadow: 0 0 60px rgba(214,107,45,0.5); }
+    .hero h1 .line-3 { display: block; color: var(--white); font-size: 0.55em; letter-spacing: 6px; margin-top: 0.3em; }
+    .hero-sub {
+      font-size: clamp(1rem, 2vw, 1.2rem); color: rgba(245,245,245,0.75);
+      max-width: 580px; line-height: 1.8; margin-bottom: 3rem;
+      font-weight: 300;
+    }
+    .hero-buttons { display: flex; gap: 1.2rem; flex-wrap: wrap; }
+    .btn-primary {
+      padding: 1.1rem 2.8rem; background: var(--orange); color: #fff;
+      font-family: 'Bebas Neue', sans-serif; font-size: 1.2rem; letter-spacing: 3px;
+      text-decoration: none; border-radius: 1px; border: none; cursor: pointer;
+      transition: all 0.25s; display: inline-block;
+    }
+    .btn-primary:hover { background: #e8793a; transform: translateY(-2px); box-shadow: 0 8px 30px rgba(214,107,45,0.4); }
+    .btn-secondary {
+      padding: 1.1rem 2.8rem; background: transparent; color: var(--white);
+      font-family: 'Bebas Neue', sans-serif; font-size: 1.2rem; letter-spacing: 3px;
+      text-decoration: none; border-radius: 1px; border: 1px solid rgba(245,245,245,0.4); cursor: pointer;
+      transition: all 0.25s; display: inline-block;
+    }
+    .btn-secondary:hover { border-color: var(--white); transform: translateY(-2px); }
+    .hero-scroll {
+      position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+      font-size: 0.7rem; letter-spacing: 3px; text-transform: uppercase; color: rgba(245,245,245,0.4);
+      animation: bounce 2.5s infinite;
+    }
+    .hero-scroll::after { content: '▼'; font-size: 0.8rem; }
+    @keyframes bounce { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(8px)} }
+
+    /* ── TICKER ── */
+    .ticker {
+      background: var(--orange); padding: 0.6rem 0; overflow: hidden;
+      border-top: 2px solid rgba(255,255,255,0.1);
+      border-bottom: 2px solid rgba(255,255,255,0.1);
+    }
+    .ticker-track {
+      display: flex; gap: 4rem; white-space: nowrap;
+      animation: ticker-scroll 35s linear infinite;
+    }
+    .ticker-track:hover { animation-play-state: paused; }
+    .ticker-item { font-size: 0.78rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #fff; }
+    .ticker-sep { color: rgba(255,255,255,0.5); }
+    @keyframes ticker-scroll { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+
+    /* ── MUSIC FOR JUSTICE ── */
+    .music-section { padding: 6rem 2.5rem; background: linear-gradient(180deg, var(--bg) 0%, #0a0e14 50%, var(--bg) 100%); }
+    .section-header { text-align: center; margin-bottom: 4rem; }
+    .section-eyebrow { font-size: 0.72rem; letter-spacing: 4px; text-transform: uppercase; color: var(--orange); margin-bottom: 1rem; display: block; }
+    .section-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(3rem, 7vw, 5.5rem); letter-spacing: 3px; margin-bottom: 1rem; }
+    .section-title span { color: var(--orange); }
+    .section-sub { color: var(--text-muted); font-size: 0.95rem; max-width: 600px; margin: 0 auto; line-height: 1.7; }
+
+    .music-featured { max-width: 1300px; margin: 0 auto; }
+    .music-hero-card {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+      background: rgba(255,255,255,0.02); border: 1px solid rgba(214,107,45,0.15);
+      margin-bottom: 2px; overflow: hidden;
+    }
+    .music-hero-img { position: relative; overflow: hidden; aspect-ratio: 1; }
+    .music-hero-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s; }
+    .music-hero-card:hover .music-hero-img img { transform: scale(1.04); }
+    .music-hero-info {
+      padding: 3.5rem; display: flex; flex-direction: column; justify-content: center;
+      background: linear-gradient(135deg, rgba(14,58,91,0.3), rgba(13,17,23,0.9));
+    }
+    .music-hero-label { font-size: 0.7rem; letter-spacing: 4px; text-transform: uppercase; color: var(--orange); margin-bottom: 1rem; }
+    .music-hero-info h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.5rem, 5vw, 4.5rem); letter-spacing: 3px; line-height: 0.9; margin-bottom: 1.5rem; }
+    .music-hero-info p { color: var(--text-muted); font-size: 0.9rem; line-height: 1.7; margin-bottom: 2rem; }
+    .music-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 2rem; }
+    .music-tag { padding: 0.25rem 0.8rem; font-size: 0.68rem; letter-spacing: 1.5px; text-transform: uppercase; border: 1px solid rgba(214,107,45,0.35); color: var(--orange); border-radius: 1px; }
+    .music-hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .play-btn { display: inline-flex; align-items: center; gap: 0.6rem; padding: 0.85rem 2rem; background: var(--orange); color: #fff; text-decoration: none; font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem; letter-spacing: 2px; border-radius: 1px; transition: all 0.2s; }
+    .play-btn:hover { background: #e8793a; transform: translateY(-2px); }
+    .play-btn-secondary { background: transparent; border: 1px solid rgba(245,245,245,0.3); color: var(--white); }
+    .play-btn-secondary:hover { border-color: var(--white); background: rgba(255,255,255,0.05); }
+
+    .music-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 2px; margin-top: 2px; }
+    .music-card {
+      position: relative; overflow: hidden; cursor: pointer;
+      background: rgba(255,255,255,0.02);
+    }
+    .music-card-img { position: relative; aspect-ratio: 1; overflow: hidden; }
+    .music-card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s, filter 0.5s; filter: brightness(0.8); }
+    .music-card:hover .music-card-img img { transform: scale(1.08); filter: brightness(0.5); }
+    .music-play-overlay {
+      position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+      opacity: 0; transition: opacity 0.3s;
+    }
+    .music-card:hover .music-play-overlay { opacity: 1; }
+    .music-play-btn { width: 60px; height: 60px; border-radius: 50%; background: var(--orange); display: flex; align-items: center; justify-content: center; font-size: 1.4rem; box-shadow: 0 0 30px rgba(214,107,45,0.6); transition: transform 0.2s; }
+    .music-play-btn:hover { transform: scale(1.1); }
+    .music-card-info { padding: 1.2rem 1.4rem; border-top: 1px solid rgba(255,255,255,0.05); }
+    .music-card-info h4 { font-family: 'Bebas Neue', sans-serif; font-size: 1.3rem; letter-spacing: 2px; margin-bottom: 0.3rem; }
+    .music-card-info p { font-size: 0.78rem; color: var(--text-muted); }
+    .music-card-info .genre { font-size: 0.65rem; letter-spacing: 2px; text-transform: uppercase; color: var(--orange); margin-top: 0.4rem; }
+
+    /* ── STATS ── */
+    .stats-bar { background: linear-gradient(135deg, rgba(14,58,91,0.5), rgba(13,17,23,0.9)); border-top: 1px solid rgba(212,175,55,0.2); border-bottom: 1px solid rgba(212,175,55,0.2); padding: 4rem 2.5rem; }
+    .stats-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; text-align: center; }
+    .stat-item { padding: 1.5rem; }
+    .stat-num { font-family: 'Bebas Neue', sans-serif; font-size: clamp(3rem, 6vw, 5rem); color: var(--gold); letter-spacing: 2px; line-height: 1; }
+    .stat-label { font-size: 0.78rem; letter-spacing: 2px; text-transform: uppercase; color: var(--text-muted); margin-top: 0.5rem; }
+
+    /* ── THREE PILLARS ── */
+    .pillars-section { padding: 6rem 2.5rem; }
+    .pillars-grid { max-width: 1300px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+    .pillar-card {
+      position: relative; overflow: hidden; cursor: pointer;
+      background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05);
+      padding: 3.5rem 2.5rem; transition: all 0.4s;
+      display: flex; flex-direction: column;
+    }
+    .pillar-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: var(--orange); transform: scaleX(0); transform-origin: left;
+      transition: transform 0.4s;
+    }
+    .pillar-card:hover::before { transform: scaleX(1); }
+    .pillar-card:hover { background: rgba(214,107,45,0.04); border-color: rgba(214,107,45,0.2); transform: translateY(-4px); }
+    .pillar-watermark { font-family: 'Bebas Neue', sans-serif; font-size: 8rem; color: rgba(255,255,255,0.03); position: absolute; right: -10px; bottom: -20px; line-height: 1; pointer-events: none; }
+    .pillar-icon { font-size: 2.5rem; margin-bottom: 1.5rem; }
+    .pillar-card h3 { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; letter-spacing: 2px; margin-bottom: 1rem; line-height: 1; }
+    .pillar-card p { color: var(--text-muted); font-size: 0.88rem; line-height: 1.7; flex: 1; }
+    .pillar-link { margin-top: 2rem; font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; color: var(--orange); text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem; transition: gap 0.2s; }
+    .pillar-link:hover { gap: 0.8rem; }
+
+    /* ── TRAILER / VIDEO ── */
+    .trailer-section { padding: 6rem 2.5rem; background: linear-gradient(180deg, var(--bg), #070B0F 50%, var(--bg)); }
+    .trailer-inner { max-width: 1300px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1.2fr; gap: 4rem; align-items: center; }
+    .trailer-text .section-eyebrow { text-align: left; }
+    .trailer-text h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.5rem, 5vw, 4.5rem); letter-spacing: 3px; line-height: 0.95; margin-bottom: 1.5rem; }
+    .trailer-text h2 span { color: var(--orange); }
+    .trailer-text p { color: var(--text-muted); font-size: 0.9rem; line-height: 1.8; margin-bottom: 2rem; }
+    .trailer-bullets { list-style: none; margin-bottom: 2rem; }
+    .trailer-bullets li { padding: 0.5rem 0; font-size: 0.88rem; color: rgba(245,245,245,0.7); display: flex; align-items: center; gap: 0.8rem; }
+    .trailer-bullets li::before { content: '▸'; color: var(--orange); }
+    .trailer-embed { position: relative; }
+    .trailer-embed::before { content: ''; position: absolute; inset: -2px; background: linear-gradient(135deg, var(--orange), var(--gold), transparent); border-radius: 2px; z-index: -1; opacity: 0.6; }
+    .trailer-embed iframe { width: 100%; aspect-ratio: 16/9; border: none; display: block; border-radius: 1px; }
+
+    /* ── EVIDENCE VAULT PREVIEW ── */
+    .vault-preview { padding: 6rem 2.5rem; }
+    .vault-preview-inner { max-width: 1300px; margin: 0 auto; }
+    .vault-tiles { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 2px; margin-top: 3rem; }
+    .vault-tile {
+      position: relative; overflow: hidden; cursor: pointer;
+      aspect-ratio: 16/9; background: var(--navy);
+    }
+    .vault-tile img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s, filter 0.6s; filter: brightness(0.6) saturate(1.1); }
+    .vault-tile:hover img { transform: scale(1.07); filter: brightness(0.4) saturate(1.4); }
+    .vault-tile-overlay {
+      position: absolute; inset: 0; padding: 1.5rem;
+      background: linear-gradient(to top, rgba(13,17,23,0.95) 0%, transparent 60%);
+      display: flex; flex-direction: column; justify-content: flex-end;
+    }
+    .vault-tile-tag { font-size: 0.62rem; letter-spacing: 3px; text-transform: uppercase; color: var(--orange); margin-bottom: 0.4rem; }
+    .vault-tile h4 { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; letter-spacing: 2px; }
+    .vault-tile-arrow { position: absolute; top: 1.2rem; right: 1.2rem; font-size: 1.2rem; opacity: 0; transition: opacity 0.3s, transform 0.3s; }
+    .vault-tile:hover .vault-tile-arrow { opacity: 1; transform: translate(3px, -3px); }
+    .vault-cta { text-align: center; margin-top: 3rem; }
+
+    /* ── WALL OF STORIES ── */
+    .stories-section { padding: 6rem 2.5rem; background: linear-gradient(180deg, var(--bg), #080b10 50%, var(--bg)); }
+    .stories-grid { max-width: 1300px; margin: 0 auto; display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 2px; }
+    .story-card {
+      background: rgba(255,255,255,0.025); border: 1px solid rgba(255,255,255,0.06);
+      padding: 2.5rem; cursor: pointer; transition: all 0.3s; position: relative; overflow: hidden;
+    }
+    .story-card::after { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: var(--orange); transform: scaleY(0); transform-origin: bottom; transition: transform 0.4s; }
+    .story-card:hover::after { transform: scaleY(1); }
+    .story-card:hover { background: rgba(214,107,45,0.04); border-color: rgba(214,107,45,0.15); }
+    .story-card.featured { grid-row: span 2; display: flex; flex-direction: column; justify-content: space-between; }
+    .story-state { display: inline-block; padding: 0.25rem 0.7rem; background: rgba(14,58,91,0.5); font-size: 0.65rem; letter-spacing: 2px; text-transform: uppercase; color: #5dade2; margin-bottom: 1rem; border-radius: 1px; }
+    .story-type { font-size: 0.65rem; letter-spacing: 2px; text-transform: uppercase; color: var(--orange); margin-bottom: 0.8rem; }
+    .story-card h3 { font-size: 1.15rem; font-weight: 600; margin-bottom: 0.8rem; line-height: 1.4; }
+    .story-card p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.7; }
+    .story-read { margin-top: 1.5rem; font-size: 0.72rem; letter-spacing: 2px; text-transform: uppercase; color: var(--orange); text-decoration: none; display: inline-flex; align-items: center; gap: 0.4rem; }
+
+    /* ── MAP ── */
+    .map-section { padding: 6rem 2.5rem; }
+    .map-inner { max-width: 1100px; margin: 0 auto; }
+    .australia-map {
+      display: grid;
+      grid-template-areas:
+        ". . WA . . NT . . QLD ."
+        ". . WA . . NT . . QLD ."
+        ". . WA . SA . NSW . QLD ."
+        ". . WA . SA . NSW . ACT ."
+        ". . WA . SA . VIC . VIC ."
+        ". . . . . . TAS . . .";
+      gap: 4px; margin: 3rem 0;
+    }
+    .map-state {
+      background: rgba(14,58,91,0.3); border: 1px solid rgba(14,58,91,0.5);
+      border-radius: 2px; padding: 1.5rem 1rem; cursor: pointer; text-align: center;
+      transition: all 0.3s;
+    }
+    .map-state:hover, .map-state.active { background: rgba(214,107,45,0.2); border-color: var(--orange); }
+    .map-state-name { font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; letter-spacing: 2px; }
+    .map-state-count { font-size: 0.7rem; color: var(--text-muted); margin-top: 0.2rem; }
+    .map-simple-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin: 3rem 0; max-width: 700px; margin-left: auto; margin-right: auto; }
+
+    /* ── PETITION ── */
+    .petition-section {
+      padding: 7rem 2.5rem;
+      background: linear-gradient(rgba(13,17,23,0.85), rgba(13,17,23,0.95)),
+                  url('https://raw.githubusercontent.com/Fair-Go-Justice/fairgojustice-website/main/thumbnails/fgj_master_poster_web.jpg') center/cover no-repeat fixed;
+      text-align: center;
+    }
+    .petition-inner { max-width: 700px; margin: 0 auto; }
+    .petition-section h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(3rem, 7vw, 5.5rem); letter-spacing: 3px; margin-bottom: 1rem; }
+    .petition-section h2 span { color: var(--orange); }
+    .petition-section p { color: var(--text-muted); font-size: 1rem; line-height: 1.8; margin-bottom: 2.5rem; }
+    .petition-bar-wrap { background: rgba(255,255,255,0.08); height: 6px; border-radius: 3px; margin-bottom: 0.8rem; overflow: hidden; }
+    .petition-bar { height: 100%; background: linear-gradient(90deg, var(--orange), var(--gold)); width: 0; border-radius: 3px; transition: width 2s ease; }
+    .petition-progress-text { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 2.5rem; }
+    .petition-progress-text strong { color: var(--orange); }
+    .petition-input-row { display: flex; gap: 0; max-width: 500px; margin: 0 auto 1.5rem; }
+    .petition-input { flex: 1; padding: 1rem 1.5rem; background: rgba(255,255,255,0.06); border: 1px solid rgba(214,107,45,0.3); border-right: none; color: var(--white); font-family: 'Space Grotesk', sans-serif; font-size: 0.9rem; border-radius: 1px 0 0 1px; }
+    .petition-input:focus { outline: none; border-color: var(--orange); }
+    .petition-input::placeholder { color: var(--text-muted); }
+    .petition-submit { padding: 1rem 2rem; background: var(--orange); color: #fff; border: none; font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem; letter-spacing: 2px; cursor: pointer; border-radius: 0 1px 1px 0; transition: background 0.2s; }
+    .petition-submit:hover { background: #e8793a; }
+    .petition-privacy { font-size: 0.75rem; color: var(--text-muted); }
+
+    /* ── SHARE HUB ── */
+    .share-section { padding: 5rem 2.5rem; background: #080B10; }
+    .share-grid { max-width: 1100px; margin: 3rem auto 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 1rem; }
+    .share-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); padding: 1.8rem 1.2rem; text-align: center; cursor: pointer; transition: all 0.3s; border-radius: 2px; text-decoration: none; color: var(--white); }
+    .share-card:hover { background: rgba(214,107,45,0.08); border-color: rgba(214,107,45,0.3); transform: translateY(-3px); }
+    .share-platform { font-size: 2rem; margin-bottom: 0.8rem; }
+    .share-card h4 { font-size: 0.82rem; font-weight: 600; margin-bottom: 0.3rem; }
+    .share-card p { font-size: 0.72rem; color: var(--text-muted); }
+
+    /* ── FOOTER ── */
+    footer { background: #060910; border-top: 1px solid rgba(214,107,45,0.12); padding: 5rem 2.5rem 2rem; }
+    .footer-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; }
+    .footer-brand p { color: var(--text-muted); font-size: 0.85rem; line-height: 1.7; margin: 1rem 0 1.5rem; max-width: 280px; }
+    .footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; color: var(--orange); letter-spacing: 3px; text-decoration: none; display: block; }
+    .footer-socials { display: flex; gap: 0.8rem; }
+    .footer-social { width: 36px; height: 36px; border: 1px solid rgba(255,255,255,0.15); border-radius: 1px; display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 0.9rem; color: var(--text-muted); transition: all 0.2s; }
+    .footer-social:hover { border-color: var(--orange); color: var(--orange); }
+    .footer-col h4 { font-size: 0.72rem; letter-spacing: 3px; text-transform: uppercase; color: var(--orange); margin-bottom: 1.5rem; }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 0.8rem; }
+    .footer-col a { color: var(--text-muted); text-decoration: none; font-size: 0.85rem; transition: color 0.2s; }
+    .footer-col a:hover { color: var(--white); }
+    .footer-bottom { max-width: 1200px; margin: 3rem auto 0; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.06); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+    .footer-bottom p { font-size: 0.78rem; color: var(--text-muted); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1024px) {
+      .pillars-grid { grid-template-columns: 1fr; }
+      .trailer-inner { grid-template-columns: 1fr; }
+      .stories-grid { grid-template-columns: 1fr; }
+      .story-card.featured { grid-row: span 1; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .music-hero-card { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .stats-grid { grid-template-columns: 1fr 1fr; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .share-grid { grid-template-columns: repeat(3,1fr); }
+    }
+    @media (max-width: 480px) {
+      .share-grid { grid-template-columns: repeat(2,1fr); }
+      .stats-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+  <link rel="alternate" hreflang="en-AU" href="https://fairgojustice.com.au/" />
+  <link rel="alternate" hreflang="x-default" href="https://fairgojustice.com.au/" />
+  <link rel="manifest" href="/manifest.json">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "name": "Fair Go Justice",
+      "url": "https://fairgojustice.com.au",
+      "logo": "https://fairgojustice.com.au/thumbnails/fgj_master_poster_web.jpg",
+      "description": "Australian justice reform movement exposing family court failures, child protection abuses, and legal accountability breakdowns.",
+      "sameAs": [
+        "https://www.youtube.com/@fairgojustice",
+        "https://www.tiktok.com/@fairgojustice",
+        "https://bsky.app/profile/fairgojustice.bsky.social",
+        "https://www.instagram.com/fairgojustice",
+        "https://www.facebook.com/fairgojustice"
+      ]
+    }
+  ]
+}
+</script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Fair Go Justice",
+  "url": "https://fairgojustice.com.au/",
+  "description": "Australian justice reform movement \u2014 99 protest songs, documented evidence, and community stories exposing systemic failures.",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": {
+      "@type": "EntryPoint",
+      "urlTemplate": "https://fairgojustice.com.au/music.html?q={search_term_string}"
+    },
+    "query-input": "required name=search_term_string"
+  }
+}
+</script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="mainNav">
+  <a href="#" class="nav-logo">FAIR GO JUSTICE</a>
+  <ul class="nav-links">
+    <li><a href="#home">Home</a></li>
+    <li><a href="evidence.html">The Evidence</a></li>
+    <li><a href="pillars.html">The Reforms</a></li>
+    <li><a href="stories.html">Stories</a></li>
+    <li><a href="music.html">Music</a></li>
+    <li><a href="podcast.html">Podcast</a></li>
+    <li><a href="quiz.html">Quiz</a></li>
+
+    <li><a href="take-action.html" class="nav-cta">Take Action</a></li>
+  </ul>
+</nav>
+
+<!-- ══════════════════════════════════════
+     HERO
+══════════════════════════════════════ -->
+<section class="hero" id="home">
+  <div class="hero-content">
+    <div class="hero-eyebrow">Australia's Justice Reform Movement</div>
+    <h1>
+      <span class="line-1">THE CHAIN</span>
+      <span class="line-2">IS BROKEN</span>
+      <span class="line-3">Restore Trust · Restore Accountability</span>
+    </h1>
+    <p class="hero-sub">Australia deserves transparent courts, verified evidence, independent oversight, and equal access to justice for every citizen — not just those who can afford it.</p>
+    <div class="hero-buttons">
+      <a href="take-action.html" class="btn-primary">Join the Movement</a>
+      <a href="#trailer" class="btn-secondary">▶ Watch the Trailer</a>
+    </div>
+  </div>
+  <div class="hero-scroll">Scroll</div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-track">
+    <span class="ticker-item">850,000+ AUSTRALIANS REPRESENTED</span>
+    <span class="ticker-sep">◆</span>
+    <span class="ticker-item">3 NATIONAL REFORMS PROPOSED</span>
+    <span class="ticker-sep">◆</span>
+    <span class="ticker-item">JUDICIAL INTEGRITY COMMISSION</span>
+    <span class="ticker-sep">◆</span>
+    <span class="ticker-item">EVIDENCE INTEGRITY PROTOCOLS</span>
+    <span class="ticker-sep">◆</span>
+    <span class="ticker-item">LEGAL AID REFORM NOW</span>
+    <span class="ticker-sep">◆</span>
+    <span class="ticker-item">100+ COMMUNITY STORIES</span>
+    <span class="ticker-sep">◆</span>
+    <span class="ticker-item">THE CHAIN IS BROKEN</span>
+    <span class="ticker-sep">◆</span>
+    <span class="ticker-item">850,000+ AUSTRALIANS REPRESENTED</span>
+    <span class="ticker-sep">◆</span>
+    <span class="ticker-item">3 NATIONAL REFORMS PROPOSED</span>
+    <span class="ticker-sep">◆</span>
+    <span class="ticker-item">JUDICIAL INTEGRITY COMMISSION</span>
+    <span class="ticker-sep">◆</span>
+    <span class="ticker-item">EVIDENCE INTEGRITY PROTOCOLS</span>
+    <span class="ticker-sep">◆</span>
+    <span class="ticker-item">LEGAL AID REFORM NOW</span>
+    <span class="ticker-sep">◆</span>
+    <span class="ticker-item">100+ COMMUNITY STORIES</span>
+    <span class="ticker-sep">◆</span>
+    <span class="ticker-item">THE CHAIN IS BROKEN</span>
+    <span class="ticker-sep">◆</span>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     MUSIC FOR JUSTICE
+══════════════════════════════════════ -->
+<section class="music-section" id="music">
+  <div class="section-header">
+    <span class="section-eyebrow">🎵 The Movement Has a Soundtrack</span>
+    <h2 class="section-title">MUSIC FOR <span>JUSTICE</span></h2>
+    <p class="section-sub">Original music that turns evidence into emotion and reform into culture. Something no other advocacy movement has.</p>
+  </div>
+
+  <div class="music-featured">
+    <!-- Featured: The Appointed -->
+    <div class="music-hero-card">
+      <div class="music-hero-img">
+        <img src="https://raw.githubusercontent.com/Fair-Go-Justice/fairgojustice-website/main/thumbnails/the_appointed_v1_thumb.jpg" alt="The Appointed">
+      </div>
+      <div class="music-hero-info">
+        <div class="music-hero-label">🔴 Featured Track</div>
+        <h2>THE APPOINTED</h2>
+        <p>When those appointed to deliver justice become the architects of its denial — who holds them to account? A cinematic indictment of judicial accountability failure.</p>
+        <div class="music-tags">
+          <span class="music-tag">Judicial Integrity</span>
+          <span class="music-tag">Reform Anthem</span>
+          <span class="music-tag">Documentary</span>
+        </div>
+        <div class="music-hero-btns">
+          <a href="https://www.youtube.com/watch?v=x3UqqsYzTPg" target="_blank" class="play-btn">▶ Play on YouTube</a>
+          <a href="music.html" class="play-btn play-btn-secondary">Full Catalogue →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Track grid -->
+    <div class="music-grid">
+      <div class="music-card">
+        <div class="music-card-img">
+          <img src="https://raw.githubusercontent.com/Fair-Go-Justice/fairgojustice-website/main/thumbnails/album_legal_aid_reform.png" alt="Legal Aid Reform">
+          <div class="music-play-overlay">
+            <a href="music.html" class="music-play-btn">▶</a>
+          </div>
+        </div>
+        <div class="music-card-info">
+          <h4>LEGAL AID REFORM</h4>
+          <p>Equal scales, equal rights</p>
+          <div class="genre">Reform · Protest</div>
+        </div>
+      </div>
+      <div class="music-card">
+        <div class="music-card-img">
+          <img src="https://raw.githubusercontent.com/Fair-Go-Justice/fairgojustice-website/main/thumbnails/album_evidence_integrity.png" alt="Evidence Integrity Protocols">
+          <div class="music-play-overlay">
+            <a href="music.html" class="music-play-btn">▶</a>
+          </div>
+        </div>
+        <div class="music-card-info">
+          <h4>EVIDENCE INTEGRITY</h4>
+          <p>Protect the truth, protect the chain</p>
+          <div class="genre">Documentary · Dark</div>
+        </div>
+      </div>
+      <div class="music-card">
+        <div class="music-card-img">
+          <img src="https://raw.githubusercontent.com/Fair-Go-Justice/fairgojustice-website/main/thumbnails/album_conflict_of_interest.png" alt="Conflict of Interest">
+          <div class="music-play-overlay">
+            <a href="music.html" class="music-play-btn">▶</a>
+          </div>
+        </div>
+        <div class="music-card-info">
+          <h4>CONFLICT OF INTEREST</h4>
+          <p>When the judge has skin in the game</p>
+          <div class="genre">Investigative · Cinematic</div>
+        </div>
+      </div>
+      <div class="music-card">
+        <div class="music-card-img" style="background: linear-gradient(135deg, #1a0533, #3d0b6e); display:flex; align-items:center; justify-content:center; font-size:3rem;">🎤</div>
+        <div class="music-card-info">
+          <h4>VEXATIOUS</h4>
+          <p>Weaponised law, weaponised courts</p>
+          <div class="genre">Hip-Hop · Spoken Word</div>
+        </div>
+      </div>
+      <div class="music-card">
+        <div class="music-card-img" style="background: linear-gradient(135deg, #0a2a0a, #1a5c1a); display:flex; align-items:center; justify-content:center; font-size:3rem;">🌿</div>
+        <div class="music-card-info">
+          <h4>WE ARE NOT DONE</h4>
+          <p>The movement continues</p>
+          <div class="genre">Anthem · Hope</div>
+        </div>
+      </div>
+      <div class="music-card">
+        <div class="music-card-img" style="background: linear-gradient(135deg, #1a1a0a, #5c5c00); display:flex; align-items:center; justify-content:center; font-size:3rem;">📜</div>
+        <div class="music-card-info">
+          <h4>SIGNED. DENIED. BETRAYED.</h4>
+          <p>The paper trail of injustice</p>
+          <div class="genre">Folk · Documentary</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     STATS
+══════════════════════════════════════ -->
+<div class="stats-bar" id="stats">
+  <div class="stats-grid">
+    <div class="stat-item">
+      <div class="stat-num" data-target="850000" data-suffix="+">0</div>
+      <div class="stat-label">Australians Represented</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num" data-target="12847" data-suffix="+">0</div>
+      <div class="stat-label">Movement Supporters</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num" data-target="3" data-suffix="">0</div>
+      <div class="stat-label">National Reforms Proposed</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num" data-target="100" data-suffix="+">0</div>
+      <div class="stat-label">Community Stories</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     THREE PILLARS
+══════════════════════════════════════ -->
+<section class="pillars-section" id="reforms">
+  <div class="section-header">
+    <span class="section-eyebrow">The Three Reforms</span>
+    <h2 class="section-title">THE <span>PILLARS</span> OF CHANGE</h2>
+    <p class="section-sub">Three evidence-based national reforms that would transform justice outcomes for every Australian.</p>
+  </div>
+  <div class="pillars-grid">
+    <div class="pillar-card" onclick="location.href='pillars.html#jic'">
+      <div class="pillar-watermark">01</div>
+      <div class="pillar-icon">🛡</div>
+      <h3>JUDICIAL INTEGRITY COMMISSION</h3>
+      <p>An independent body with real powers to investigate judicial conduct, conflict of interest, and systemic bias — with full transparency and public reporting.</p>
+      <a href="pillars.html#jic" class="pillar-link">Read the Proposal →</a>
+    </div>
+    <div class="pillar-card" onclick="location.href='pillars.html#eip'">
+      <div class="pillar-watermark">02</div>
+      <div class="pillar-icon">📹</div>
+      <h3>EVIDENCE INTEGRITY PROTOCOLS</h3>
+      <p>Mandated tamper-evident bodycam recording, real-time chain of custody tracking, and independent audit of all evidence from collection to verdict.</p>
+      <a href="pillars.html#eip" class="pillar-link">Read the Proposal →</a>
+    </div>
+    <div class="pillar-card" onclick="location.href='pillars.html#lar'">
+      <div class="pillar-watermark">03</div>
+      <div class="pillar-icon">⚖</div>
+      <h3>LEGAL AID REFORM</h3>
+      <p>Equal access to quality legal representation regardless of income. Self-represented litigants should not face corporations with unlimited legal budgets in silence.</p>
+      <a href="pillars.html#lar" class="pillar-link">Read the Proposal →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     TRAILER
+══════════════════════════════════════ -->
+<section class="trailer-section" id="trailer">
+  <div class="trailer-inner">
+    <div class="trailer-text">
+      <span class="section-eyebrow">Watch the Evidence</span>
+      <h2>THE MOVEMENT<br>HAS A <span>STORY</span></h2>
+      <p>Music, evidence, and stories collide in a movement that refuses to be silenced. Watch the documentary that started it all.</p>
+      <ul class="trailer-bullets">
+        <li>Missing bodycam evidence</li>
+        <li>Chain of custody failures</li>
+        <li>Legal aid denied</li>
+        <li>Judicial accountability gaps</li>
+        <li>Community voices from every state</li>
+      </ul>
+      <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+        <a href="evidence.html" class="btn-primary">Enter the Evidence Vault</a>
+        <a href="https://www.youtube.com/@fairgojustice" target="_blank" class="btn-secondary">YouTube Channel →</a>
+      </div>
+    </div>
+    <div class="trailer-embed">
+      <iframe src="https://www.youtube.com/embed/x3UqqsYzTPg?rel=0&modestbranding=1" allowfullscreen title="The Appointed — Fair Go Justice"></iframe>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     EVIDENCE VAULT PREVIEW
+══════════════════════════════════════ -->
+<section class="vault-preview" id="evidence">
+  <div class="vault-preview-inner">
+    <div class="section-header">
+      <span class="section-eyebrow">Forensic Evidence Library</span>
+      <h2 class="section-title">THE EVIDENCE <span>VAULT</span></h2>
+      <p class="section-sub">Click any exhibit to enter the full investigation. This is not a document dump — it is a living forensic archive.</p>
+    </div>
+    <div class="vault-tiles">
+      <div class="vault-tile" onclick="location.href='evidence.html#chain-of-custody'">
+        <img src="https://raw.githubusercontent.com/Fair-Go-Justice/fairgojustice-website/main/thumbnails/vault_chain_of_custody_wide_web.jpg" alt="Chain of Custody">
+        <div class="vault-tile-overlay">
+          <div class="vault-tile-tag">🔗 Evidence Integrity</div>
+          <h4>CHAIN OF CUSTODY</h4>
+        </div>
+        <div class="vault-tile-arrow">↗</div>
+      </div>
+      <div class="vault-tile" onclick="location.href='evidence.html#missing-bodycam'">
+        <img src="https://raw.githubusercontent.com/Fair-Go-Justice/fairgojustice-website/main/thumbnails/vault_missing_bodycam_v2_web.jpg" alt="Missing Bodycam">
+        <div class="vault-tile-overlay">
+          <div class="vault-tile-tag">📹 Missing Evidence</div>
+          <h4>MISSING BODYCAM</h4>
+        </div>
+        <div class="vault-tile-arrow">↗</div>
+      </div>
+      <div class="vault-tile" onclick="location.href='evidence.html#oversight'">
+        <img src="https://raw.githubusercontent.com/Fair-Go-Justice/fairgojustice-website/main/thumbnails/vault_who_watches_watchmen_web.jpg" alt="Judicial Oversight">
+        <div class="vault-tile-overlay">
+          <div class="vault-tile-tag">⚖ Judicial Oversight</div>
+          <h4>WHO WATCHES THE WATCHMEN?</h4>
+        </div>
+        <div class="vault-tile-arrow">↗</div>
+      </div>
+      <div class="vault-tile" onclick="location.href='evidence.html#forensic'">
+        <img src="https://raw.githubusercontent.com/Fair-Go-Justice/fairgojustice-website/main/thumbnails/vault_forensic_truth_v2_web.jpg" alt="Forensic Truth">
+        <div class="vault-tile-overlay">
+          <div class="vault-tile-tag">🔬 Forensic Analysis</div>
+          <h4>THE EVIDENCE NEVER LIES</h4>
+        </div>
+        <div class="vault-tile-arrow">↗</div>
+      </div>
+      <div class="vault-tile" onclick="location.href='evidence.html#jic'">
+        <img src="https://raw.githubusercontent.com/Fair-Go-Justice/fairgojustice-website/main/thumbnails/vault_jic_web.jpg" alt="Judicial Integrity Commission">
+        <div class="vault-tile-overlay">
+          <div class="vault-tile-tag">🛡 Reform</div>
+          <h4>JUDICIAL INTEGRITY COMMISSION</h4>
+        </div>
+        <div class="vault-tile-arrow">↗</div>
+      </div>
+      <div class="vault-tile" onclick="location.href='evidence.html#legal-aid'">
+        <img src="https://raw.githubusercontent.com/Fair-Go-Justice/fairgojustice-website/main/thumbnails/fgj_master_poster_web.jpg" alt="Legal Aid">
+        <div class="vault-tile-overlay">
+          <div class="vault-tile-tag">⚖ Access to Justice</div>
+          <h4>LEGAL AID OR LEGAL RAID?</h4>
+        </div>
+        <div class="vault-tile-arrow">↗</div>
+      </div>
+    </div>
+    <div class="vault-cta">
+      <a href="evidence.html" class="btn-primary">Enter the Full Evidence Vault →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     WALL OF STORIES
+══════════════════════════════════════ -->
+<section class="stories-section" id="stories">
+  <div class="section-header">
+    <span class="section-eyebrow">Community Voices</span>
+    <h2 class="section-title">WALL OF <span>STORIES</span></h2>
+    <p class="section-sub">Real Australians. Real experiences. Anonymous where requested. Because stories are what move people to act.</p>
+  </div>
+  <div class="stories-grid" style="max-width:1300px;margin:0 auto;">
+    <div class="story-card featured">
+      <div>
+        <span class="story-state">NSW</span>
+        <div class="story-type">Legal Aid Denial</div>
+        <h3>"I spent three years in court without a lawyer. The other side had a team of four."</h3>
+        <p>A self-represented litigant from regional New South Wales describes navigating a complex civil matter against a well-resourced institution. Legal aid was denied twice. The cost — financial, emotional, and physical — was devastating. But she didn't stop.</p>
+      </div>
+      <a href="stories.html" class="story-read">Read Full Story →</a>
+    </div>
+    <div class="story-card">
+      <span class="story-state">QLD</span>
+      <div class="story-type">Missing Evidence</div>
+      <h3>"The bodycam was there. The footage wasn't."</h3>
+      <p>A Queensland resident describes how critical footage from a documented incident was never produced — despite the officer's camera being present and active throughout.</p>
+      <a href="stories.html" class="story-read">Read →</a>
+    </div>
+    <div class="story-card">
+      <span class="story-state">VIC</span>
+      <div class="story-type">Judicial Conduct</div>
+      <h3>"The complaint took 14 months to be dismissed without reasons."</h3>
+      <p>When a formal complaint about judicial conduct received a one-paragraph dismissal after over a year, this Victorian resident knew the system was not designed to hold itself accountable.</p>
+      <a href="stories.html" class="story-read">Read →</a>
+    </div>
+    <div class="story-card">
+      <span class="story-state">WA</span>
+      <div class="story-type">Chain of Custody</div>
+      <h3>"Evidence that changed hands three times with no documentation."</h3>
+      <p>A Western Australian family traces how critical physical evidence moved through the system without a single entry in the custody log — and what that meant for their case.</p>
+      <a href="stories.html" class="story-read">Read →</a>
+    </div>
+    <div class="story-card">
+      <span class="story-state">SA</span>
+      <div class="story-type">Access to Justice</div>
+      <h3>"I was told to represent myself. I didn't even know what a brief was."</h3>
+      <p>A South Australian pensioner recounts the moment a court clerk handed them a procedural guide and wished them luck — moments before a scheduled hearing against a legal team.</p>
+      <a href="stories.html" class="story-read">Read →</a>
+    </div>
+  </div>
+  <div style="text-align:center;margin-top:3rem;">
+    <a href="stories.html" class="btn-primary" style="margin-right:1rem;">Read All Stories</a>
+    <a href="stories.html#submit" class="btn-secondary">Share Your Story</a>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     PETITION
+══════════════════════════════════════ -->
+<section class="petition-section" id="petition">
+  <div class="petition-inner">
+    <h2>JOIN THE <span>MOVEMENT</span></h2>
+    <p>Over 12,800 Australians have already added their name to the national reform petition. Every signature matters. Every voice counts.</p>
+    <div class="petition-bar-wrap">
+      <div class="petition-bar" id="petitionBar" style="width:0%"></div>
+    </div>
+    <div class="petition-progress-text"><strong>12,847</strong> of 50,000 signatures — <strong>25.7%</strong> to next milestone</div>
+    <div class="petition-input-row">
+      <input type="email" class="petition-input" placeholder="your@email.com — join 12,847 Australians">
+      <button class="petition-submit">SIGN NOW</button>
+    </div>
+    <p class="petition-privacy">🔒 Your email is never sold or shared. Unsubscribe anytime.</p>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     SOCIAL SHARE HUB
+══════════════════════════════════════ -->
+<section class="share-section" id="share">
+  <div class="section-header">
+    <span class="section-eyebrow">Spread the Word</span>
+    <h2 class="section-title">SOCIAL <span>SHARE HUB</span></h2>
+    <p class="section-sub">Ready-made campaign graphics. Download, post, tag. Help the movement grow.</p>
+  </div>
+  <div class="share-grid">
+    <a href="#" class="share-card">
+      <div class="share-platform">📘</div>
+      <h4>Facebook</h4>
+      <p>Share post + graphic</p>
+    </a>
+    <a href="#" class="share-card">
+      <div class="share-platform">🎵</div>
+      <h4>TikTok</h4>
+      <p>Video clip + caption</p>
+    </a>
+    <a href="#" class="share-card">
+      <div class="share-platform">📸</div>
+      <h4>Instagram</h4>
+      <p>Story + post tiles</p>
+    </a>
+    <a href="https://www.youtube.com/@fairgojustice" target="_blank" class="share-card">
+      <div class="share-platform">▶</div>
+      <h4>YouTube</h4>
+      <p>Subscribe + share</p>
+    </a>
+    <a href="#" class="share-card">
+      <div class="share-platform">🐦</div>
+      <h4>X / Twitter</h4>
+      <p>Tweet thread</p>
+    </a>
+    <a href="#" class="share-card">
+      <div class="share-platform">📩</div>
+      <h4>Email</h4>
+      <p>Forward to friends</p>
+    </a>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     EMAIL CAPTURE — JOIN THE MOVEMENT
+══════════════════════════════════════ -->
+<section style="background:linear-gradient(135deg,#0a1628 0%,#0E3A5B 100%);padding:5rem 2.5rem;text-align:center;border-top:1px solid rgba(214,107,45,0.2);border-bottom:1px solid rgba(214,107,45,0.2);">
+  <div style="max-width:620px;margin:0 auto;">
+    <span style="font-size:0.72rem;letter-spacing:4px;text-transform:uppercase;color:#D66B2D;font-family:'Space Grotesk',sans-serif;">Stay in the Fight</span>
+    <h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(2.5rem,6vw,4rem);letter-spacing:3px;color:#F5F5F5;margin:0.8rem 0 1rem;">GET THE <span style="color:#D66B2D;">UPDATES</span></h2>
+    <p style="color:rgba(245,245,245,0.65);font-family:'Space Grotesk',sans-serif;font-size:0.95rem;line-height:1.8;margin-bottom:2rem;">New tracks. Evidence drops. Petition milestones. Court dates. Straight to your inbox — no spam, just the movement.</p>
+    <form action="https://formsubmit.co/fairgojustice@gmail.com" method="POST" style="display:flex;gap:0;max-width:480px;margin:0 auto 1rem;" onsubmit="this.querySelector('.join-btn').textContent='SENDING…'">
+      <input type="hidden" name="_subject" value="New FGJ Subscriber">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_next" value="https://www.fairgojustice.com.au/?subscribed=1">
+      <input type="email" name="email" required placeholder="your@email.com" style="flex:1;padding:1rem 1.5rem;background:rgba(255,255,255,0.06);border:1px solid rgba(214,107,45,0.35);border-right:none;color:#F5F5F5;font-family:'Space Grotesk',sans-serif;font-size:0.9rem;border-radius:2px 0 0 2px;outline:none;">
+      <button type="submit" class="join-btn" style="padding:1rem 1.8rem;background:#D66B2D;color:#fff;border:none;font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:2px;cursor:pointer;border-radius:0 2px 2px 0;transition:background 0.2s;" onmouseover="this.style.background='#e8793a'" onmouseout="this.style.background='#D66B2D'">JOIN NOW</button>
+    </form>
+    <p style="font-size:0.72rem;color:rgba(245,245,245,0.35);font-family:'Space Grotesk',sans-serif;">🔒 Your email is never sold or shared. Unsubscribe anytime.</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="#" class="footer-logo">FAIR GO JUSTICE</a>
+      <p>A national movement for judicial integrity, evidence transparency, and equal access to justice for every Australian.</p>
+      <div class="footer-socials">
+        <a href="https://www.youtube.com/@fairgojustice" class="footer-social" target="_blank">▶</a>
+        <a href="#" class="footer-social">📘</a>
+        <a href="#" class="footer-social">🐦</a>
+        <a href="#" class="footer-social">📸</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>The Movement</h4>
+      <ul>
+        <li><a href="#">About FGJ</a></li>
+        <li><a href="pillars.html">The Three Reforms</a></li>
+        <li><a href="evidence.html">Evidence Vault</a></li>
+        <li><a href="stories.html">Wall of Stories</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Media</h4>
+      <ul>
+        <li><a href="music.html">Music for Justice</a></li>
+        <li><a href="https://www.youtube.com/@fairgojustice" target="_blank">YouTube Channel</a></li>
+        <li><a href="#">Press Kit</a></li>
+        <li><a href="#">Media Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Take Action</h4>
+      <ul>
+        <li><a href="take-action.html">Sign the Petition</a></li>
+        <li><a href="stories.html#submit">Share Your Story</a></li>
+        <li><a href="evidence.html#submit">Submit Evidence</a></li>
+        <li><a href="#">Volunteer</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 Fair Go Justice Movement. All rights reserved.</p>
+    <p><a href="#">Privacy Policy</a> · <a href="#">Terms of Use</a> · <a href="#">Accessibility</a></p>
+  </div>
+</footer>
+
+<script>
+// Nav scroll
+const nav = document.getElementById('mainNav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 60);
+});
+
+// Animated counters
+const counters = document.querySelectorAll('[data-target]');
+const countObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    const el = entry.target;
+    const target = parseInt(el.dataset.target);
+    const suffix = el.dataset.suffix || '';
+    const duration = 2000;
+    const step = target / (duration / 16);
+    let current = 0;
+    const timer = setInterval(() => {
+      current = Math.min(current + step, target);
+      if (target >= 10000) {
+        el.textContent = Math.floor(current).toLocaleString() + suffix;
+      } else {
+        el.textContent = Math.floor(current) + suffix;
+      }
+      if (current >= target) clearInterval(timer);
+    }, 16);
+    countObserver.unobserve(el);
+  });
+}, { threshold: 0.5 });
+counters.forEach(c => countObserver.observe(c));
+
+// Petition bar
+const barObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      document.getElementById('petitionBar').style.width = '25.7%';
+      barObserver.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.3 });
+const petBar = document.getElementById('petitionBar');
+if (petBar) barObserver.observe(petBar);
+
+// Scroll-triggered reveal
+const revealObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.style.opacity = 1; e.target.style.transform = 'translateY(0)'; }
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.vault-tile, .story-card, .pillar-card, .music-card').forEach((el, i) => {
+  el.style.opacity = 0; el.style.transform = 'translateY(25px)';
+  el.style.transition = `opacity 0.6s ease ${i * 0.07}s, transform 0.6s ease ${i * 0.07}s`;
+  revealObs.observe(el);
+});
+</script>
+</body>
+</html>

@@ -1,7 +1,7 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://fair-go-justice.github.io/fairgojustice-website/sitemap.xml
+Sitemap: https://fairgojustice.com.au/sitemap.xml
 
 # Block old/dev variants
 Disallow: /index_v2.html
@@ -11,3 +11,17 @@ Disallow: /main_v3.css
 Disallow: /evidence_v2.html
 Disallow: /pillars_v2.html
 Disallow: /pillars_v3.html
+Disallow: /index_fixed.html
+Disallow: /index_new.html
+Disallow: /enhanced_index.html
+Disallow: /enhanced_lyrics.html
+Disallow: /enhanced_music.html
+Disallow: /enhanced_pillars.html
+Disallow: /enhanced_stories.html
+Disallow: /*_reverted.html
+Disallow: /*_step4.html
+Disallow: /*_fixed.html
+Disallow: /site_index.html
+Disallow: /site_music.html
+Disallow: /site_pillars.html
+Disallow: /site_stories.html

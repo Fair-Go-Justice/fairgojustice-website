@@ -1,0 +1,13 @@
+{
+  "name": "Fair Go Justice",
+  "short_name": "Fair Go",
+  "description": "Australian justice reform movement — music, evidence, community stories.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0D1117",
+  "theme_color": "#0E3A5B",
+  "icons": [
+    { "src": "/thumbnails/fgj_icon_192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/thumbnails/fgj_icon_512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}
