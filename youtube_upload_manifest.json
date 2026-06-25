@@ -10,15 +10,16 @@
     "uploadedAt": "2026-06-10T17:45:25Z"
   },
   "self_represented": {
-    "videoId": "IpF6rtveFVU",
-    "title": "SELF-REPRESENTED",
-    "pillar": 2,
+    "video_id": "fWooeWqgWZ0",
+    "title": "SELF REPRESENTED",
+    "pillar": "Pillar 2",
     "playlists": [
-      "complete_collection",
-      "hip_hop",
-      "pillar_2_legal_aid"
+      "Complete Collection",
+      "Pillar 2",
+      "Hip-Hop"
     ],
-    "uploadedAt": "2026-06-10T17:45:41Z"
+    "uploaded": "2026-06-25",
+    "batch": 23
   },
   "suppressed": {
     "videoId": "Q05AO-VzQFY",
@@ -515,5 +516,403 @@
     ],
     "uploadedAt": "2026-06-17T09:07:02Z",
     "thumbnail": "thumbnails/batch19/thumb_redacted.jpg"
+  },
+  "chain_of_custody": {
+    "videoId": "g9F7WkJxwls",
+    "title": "CHAIN OF CUSTODY",
+    "pillar": 3,
+    "playlists": [
+      "pillar_3_evidence",
+      "complete_collection"
+    ],
+    "uploadedAt": "2026-06-20T01:01:55.950412Z"
+  },
+  "exhibit_a": {
+    "videoId": "fLYiM5Bofms",
+    "title": "EXHIBIT A",
+    "pillar": 3,
+    "playlists": [
+      "pillar_3_evidence",
+      "complete_collection"
+    ],
+    "uploadedAt": "2026-06-24T12:27:04.461656Z"
+  },
+  "6946": {
+    "videoId": "96Rwfwma_iU",
+    "title": "6946",
+    "pillar": null,
+    "playlists": [
+      "complete_collection"
+    ],
+    "uploadedAt": "2026-06-24T19:24:05Z"
+  },
+  "white_out": {
+    "videoId": "uu99cVOMPpw",
+    "title": "WHITE OUT",
+    "pillar": 3,
+    "playlists": [
+      "complete_collection",
+      "evidence_integrity"
+    ],
+    "uploadedAt": "2026-06-24T19:24:05Z"
+  },
+  "house_built_on_sand": {
+    "videoId": "XzXvdn68DqA",
+    "title": "HOUSE BUILT ON SAND",
+    "pillar": null,
+    "playlists": [
+      "complete_collection",
+      "protest_folk"
+    ],
+    "uploadedAt": "2026-06-24T19:24:05Z"
+  },
+  "means_test": {
+    "videoId": "H6yoegxOXn0",
+    "title": "MEANS TEST",
+    "pillar": 2,
+    "playlists": [
+      "complete_collection",
+      "legal_aid_reform"
+    ],
+    "uploadedAt": "2026-06-24T19:24:05Z"
+  },
+  "from_little_lies": {
+    "videoId": "-ka9QHPpn5I",
+    "title": "FROM LITTLE LIES",
+    "pillar": null,
+    "playlists": [
+      "complete_collection",
+      "protest_folk"
+    ],
+    "uploadedAt": "2026-06-24T19:24:05Z"
+  },
+  "they_called_it_lawful": {
+    "videoId": "C4mW6ihfx-A",
+    "title": "THEY CALLED IT LAWFUL",
+    "pillar": 1,
+    "playlists": [
+      "country",
+      "pillar_1_judicial",
+      "complete_collection"
+    ],
+    "uploadedAt": "2026-06-25T01:03:23.805746Z",
+    "cdnUrl": "https://raw.githubusercontent.com/Fair-Go-Justice/fairgojustice-website/main/videos/fgj_they_called_it_lawful.mp4"
+  },
+  "brake_lines": {
+    "videoId": "-ukgjXx2D54",
+    "title": "BRAKE LINES & BOTTOM LINES (Insurance Cut)",
+    "pillar": 3,
+    "playlists": [
+      "hip_hop",
+      "pillar_3_evidence",
+      "complete_collection"
+    ],
+    "uploadedAt": "2026-06-25T03:47:22Z"
+  },
+  "built_the_roads": {
+    "videoId": "KbusE3JtzWU",
+    "title": "BUILT THE ROADS, PAID THE PRICE",
+    "pillar": null,
+    "playlists": [
+      "hip_hop",
+      "complete_collection"
+    ],
+    "uploadedAt": "2026-06-25T03:47:23Z"
+  },
+  "caveat_over_home": {
+    "videoId": "cXCPFKOb0Bo",
+    "title": "CAVEAT OVER HOME",
+    "pillar": 2,
+    "playlists": [
+      "hip_hop",
+      "pillar_2_legal_aid",
+      "complete_collection"
+    ],
+    "uploadedAt": "2026-06-25T03:47:23Z"
+  },
+  "march_to_the_gate": {
+    "videoId": "Q439qLadoA8",
+    "title": "MARCH TO THE GATE",
+    "pillar": null,
+    "playlists": [
+      "hip_hop",
+      "complete_collection"
+    ],
+    "uploadedAt": "2026-06-25T03:47:23Z"
+  },
+  "hansard_hearts": {
+    "videoId": "J9m5_6cDFpM",
+    "title": "HANSARD HEARTS",
+    "pillar": null,
+    "playlists": [
+      "hip_hop",
+      "complete_collection"
+    ],
+    "uploadedAt": "2026-06-25T03:47:23Z"
+  },
+  "dominance_by_design": {
+    "videoId": "FNO0YjCrluo",
+    "title": "DOMINANCE BY DESIGN",
+    "pillar": 1,
+    "playlists": [
+      "hip_hop",
+      "pillar_1_judicial",
+      "complete_collection"
+    ],
+    "uploadedAt": "2026-06-25T03:47:52Z"
+  },
+  "debt_recycling_blues": {
+    "videoId": "oYPyU2gisw0",
+    "title": "DEBT RECYCLING BLUES",
+    "pillar": null,
+    "playlists": [
+      "hip_hop",
+      "complete_collection"
+    ],
+    "uploadedAt": "2026-06-25T03:47:52Z"
+  },
+  "lucky_country_not_for_me": {
+    "videoId": "p51PiHDanys",
+    "title": "LUCKY COUNTRY? NOT FOR ME",
+    "pillar": null,
+    "playlists": [
+      "hip_hop",
+      "complete_collection"
+    ],
+    "uploadedAt": "2026-06-25T03:47:52Z"
+  },
+  "fingerprint_the_frame_job": {
+    "videoId": "Yex05EtvyEg",
+    "title": "FINGERPRINT THE FRAME JOB",
+    "pillar": 3,
+    "playlists": [
+      "hip_hop",
+      "pillar_3_evidence",
+      "complete_collection"
+    ],
+    "uploadedAt": "2026-06-25T03:47:55Z"
+  },
+  "freedom_on_credit": {
+    "videoId": "RuI1f-z7Ghc",
+    "title": "FREEDOM ON CREDIT",
+    "pillar": 2,
+    "playlists": [
+      "hip_hop",
+      "pillar_2_legal_aid",
+      "complete_collection"
+    ],
+    "uploadedAt": "2026-06-25T03:47:52Z"
+  },
+  "defect_notice": {
+    "videoId": "GV_VD-9TiBY",
+    "title": "DEFECT NOTICE (Evidence Cut)",
+    "pillar": 3,
+    "playlists": [
+      "hip_hop",
+      "pillar_3_evidence",
+      "complete_collection"
+    ],
+    "uploadedAt": "2026-06-25T05:42:03Z"
+  },
+  "everything_to_hide": {
+    "videoId": "ZUNnX_BpYGk",
+    "title": "EVERYTHING TO HIDE (Track 12 Cut)",
+    "pillar": null,
+    "playlists": [
+      "hip_hop",
+      "complete_collection"
+    ],
+    "uploadedAt": "2026-06-25T05:41:57Z"
+  },
+  "exhibit_a_rebirth": {
+    "videoId": "_-dpbFe_jFs",
+    "title": "EXHIBIT A: REBIRTH (Evidence Cut)",
+    "pillar": 3,
+    "playlists": [
+      "hip_hop",
+      "pillar_3_evidence",
+      "complete_collection"
+    ],
+    "uploadedAt": "2026-06-25T05:42:05Z"
+  },
+  "fake_me": {
+    "videoId": "3NYu6-v-Bbg",
+    "title": "FAKE ME",
+    "pillar": null,
+    "playlists": [
+      "hip_hop",
+      "complete_collection"
+    ],
+    "uploadedAt": "2026-06-25T05:41:59Z"
+  },
+  "ghost_employee": {
+    "videoId": "pbqPjNbUZ3o",
+    "title": "GHOST EMPLOYEE (Pillar 2 Cut)",
+    "pillar": 2,
+    "playlists": [
+      "hip_hop",
+      "pillar_2_legal_aid",
+      "complete_collection"
+    ],
+    "uploadedAt": "2026-06-25T05:42:01Z"
+  },
+  "modern_slave": {
+    "videoId": "3WRSJ1H6bl0",
+    "title": "MODERN SLAVE (Movement Cut)",
+    "pillar": null,
+    "playlists": [
+      "hip_hop",
+      "complete_collection"
+    ],
+    "uploadedAt": "2026-06-25T05:42:15Z"
+  },
+  "no_aid_no_justice": {
+    "videoId": "J2Fgrsbvi84",
+    "title": "NO AID, NO JUSTICE",
+    "pillar": 2,
+    "playlists": [
+      "hip_hop",
+      "pillar_2_legal_aid",
+      "complete_collection"
+    ],
+    "uploadedAt": "2026-06-25T05:42:33Z"
+  },
+  "no_brief": {
+    "videoId": "IZBbwWsDwZ8",
+    "title": "NO BRIEF",
+    "pillar": 2,
+    "playlists": [
+      "hip_hop",
+      "pillar_2_legal_aid",
+      "complete_collection"
+    ],
+    "uploadedAt": "2026-06-25T05:42:15Z"
+  },
+  "paper_skin": {
+    "videoId": "zx4pNgtdLbY",
+    "title": "PAPER SKIN",
+    "pillar": null,
+    "playlists": [
+      "hip_hop",
+      "complete_collection"
+    ],
+    "uploadedAt": "2026-06-25T05:42:15Z"
+  },
+  "pattern_recognition": {
+    "videoId": "_GWZsMeDvrs",
+    "title": "PATTERN RECOGNITION (AI Evidence Cut)",
+    "pillar": 3,
+    "playlists": [
+      "hip_hop",
+      "pillar_3_evidence",
+      "complete_collection"
+    ],
+    "uploadedAt": "2026-06-25T05:42:41Z"
+  },
+  "royal_pattern": {
+    "video_id": "cuJiU9mGVwk",
+    "title": "ROYAL PATTERN (Judicial Integrity Cut)",
+    "pillar": "Pillar 1",
+    "playlists": [
+      "Complete Collection",
+      "Pillar 1",
+      "Hip-Hop"
+    ],
+    "uploaded": "2026-06-25",
+    "batch": 23
+  },
+  "satchel_took_the_stand": {
+    "video_id": "4M829fGkPiU",
+    "title": "SATCHEL TOOK THE STAND (Evidence Cut)",
+    "pillar": "Pillar 3",
+    "playlists": [
+      "Complete Collection",
+      "Pillar 3",
+      "Hip-Hop"
+    ],
+    "uploaded": "2026-06-25",
+    "batch": 23
+  },
+  "signed_sealed_pursued": {
+    "video_id": "tQDjV5RoeC0",
+    "title": "SIGNED. SEALED. PURSUED. (Second Bite Cut)",
+    "pillar": "Pillar 1+2",
+    "playlists": [
+      "Complete Collection",
+      "Pillar 1",
+      "Pillar 2",
+      "Hip-Hop"
+    ],
+    "uploaded": "2026-06-25",
+    "batch": 23
+  },
+  "signed_without_asking": {
+    "video_id": "DUnpevTWh9s",
+    "title": "SIGNED WITHOUT ASKING",
+    "pillar": null,
+    "playlists": [
+      "Complete Collection",
+      "Hip-Hop"
+    ],
+    "uploaded": "2026-06-25",
+    "batch": 23
+  },
+  "silence_of_the_state": {
+    "video_id": "eDK2NlN2fJs",
+    "title": "SILENCE OF THE STATE (Judicial Cut)",
+    "pillar": "Pillar 1",
+    "playlists": [
+      "Complete Collection",
+      "Pillar 1",
+      "Hip-Hop"
+    ],
+    "uploaded": "2026-06-25",
+    "batch": 23
+  },
+  "sovereign_sons": {
+    "video_id": "CPGNCm18eVM",
+    "title": "SOVEREIGN SONS (Movement Cut)",
+    "pillar": null,
+    "playlists": [
+      "Complete Collection",
+      "Country"
+    ],
+    "uploaded": "2026-06-25",
+    "batch": 23
+  },
+  "stolen_value_offshore_chains": {
+    "video_id": "hcbJh-WcTB8",
+    "title": "STOLEN VALUE, OFFSHORE CHAINS",
+    "pillar": null,
+    "playlists": [
+      "Complete Collection",
+      "Hip-Hop"
+    ],
+    "uploaded": "2026-06-25",
+    "batch": 23
+  },
+  "they_blamed_the_bag": {
+    "video_id": "ZQbC9gCYaIo",
+    "title": "THEY BLAMED THE BAG (Three Pillars Cut)",
+    "pillar": "Pillar 1+2+3",
+    "playlists": [
+      "Complete Collection",
+      "Pillar 3",
+      "Hip-Hop"
+    ],
+    "uploaded": "2026-06-25",
+    "batch": 23
+  },
+  "they_sank_the_truth": {
+    "video_id": "LDPYhAEC2Yo",
+    "title": "THEY SANK THE TRUTH",
+    "pillar": "Pillar 3",
+    "playlists": [
+      "Complete Collection",
+      "Pillar 3",
+      "Hip-Hop"
+    ],
+    "uploaded": "2026-06-25",
+    "batch": 23
   }
 }
