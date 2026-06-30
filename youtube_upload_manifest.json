@@ -567,24 +567,24 @@
     "uploadedAt": "2026-06-24T19:24:05Z"
   },
   "means_test": {
-    "videoId": "H6yoegxOXn0",
+    "videoId": "Aj6RfHqQUoU",
     "title": "MEANS TEST",
     "pillar": 2,
     "playlists": [
-      "complete_collection",
-      "legal_aid_reform"
+      "pillar_2_legal_aid",
+      "complete_collection"
     ],
-    "uploadedAt": "2026-06-24T19:24:05Z"
+    "uploadedAt": "2026-06-29T01:02:59.755061Z"
   },
   "from_little_lies": {
-    "videoId": "-ka9QHPpn5I",
+    "videoId": "tsrboauRPcc",
     "title": "FROM LITTLE LIES",
-    "pillar": null,
+    "pillar": 1,
     "playlists": [
-      "complete_collection",
-      "protest_folk"
+      "country",
+      "complete_collection"
     ],
-    "uploadedAt": "2026-06-24T19:24:05Z"
+    "uploadedAt": "2026-06-26T01:03:09Z"
   },
   "they_called_it_lawful": {
     "videoId": "C4mW6ihfx-A",
@@ -631,24 +631,25 @@
     "uploadedAt": "2026-06-25T03:47:23Z"
   },
   "march_to_the_gate": {
-    "videoId": "Q439qLadoA8",
+    "videoId": "mDV_NLj1kxE",
     "title": "MARCH TO THE GATE",
     "pillar": null,
     "playlists": [
       "hip_hop",
       "complete_collection"
     ],
-    "uploadedAt": "2026-06-25T03:47:23Z"
+    "uploadedAt": "2026-06-28T01:02:49.518320Z"
   },
   "hansard_hearts": {
-    "videoId": "J9m5_6cDFpM",
+    "videoId": "e2CR1Ra5QOY",
     "title": "HANSARD HEARTS",
-    "pillar": null,
+    "pillar": 2,
     "playlists": [
-      "hip_hop",
+      "country",
       "complete_collection"
     ],
-    "uploadedAt": "2026-06-25T03:47:23Z"
+    "uploadedAt": "2026-06-27T01:03:05.350422Z",
+    "thumbnail": "bXtX_hansard_hearts_thumb.jpg"
   },
   "dominance_by_design": {
     "videoId": "FNO0YjCrluo",
@@ -767,36 +768,35 @@
     "uploadedAt": "2026-06-25T05:42:15Z"
   },
   "no_aid_no_justice": {
-    "videoId": "J2Fgrsbvi84",
-    "title": "NO AID, NO JUSTICE",
+    "videoId": "_V66_Cl0uFQ",
+    "title": "NO AID NO JUSTICE",
     "pillar": 2,
     "playlists": [
-      "hip_hop",
       "pillar_2_legal_aid",
       "complete_collection"
     ],
-    "uploadedAt": "2026-06-25T05:42:33Z"
+    "uploadedAt": "2026-06-30T16:00:49Z"
   },
   "no_brief": {
-    "videoId": "IZBbwWsDwZ8",
+    "videoId": "6QHXeughH_E",
     "title": "NO BRIEF",
     "pillar": 2,
     "playlists": [
-      "hip_hop",
       "pillar_2_legal_aid",
-      "complete_collection"
+      "complete_collection",
+      "aussie_country"
     ],
-    "uploadedAt": "2026-06-25T05:42:15Z"
+    "uploadedAt": "2026-07-01T21:15:00Z"
   },
   "paper_skin": {
-    "videoId": "zx4pNgtdLbY",
+    "videoId": "3Sv_z_a2ftw",
     "title": "PAPER SKIN",
-    "pillar": null,
+    "pillar": 3,
     "playlists": [
-      "hip_hop",
+      "pillar_3_evidence",
       "complete_collection"
     ],
-    "uploadedAt": "2026-06-25T05:42:15Z"
+    "uploadedAt": "2026-07-01T21:15:00Z"
   },
   "pattern_recognition": {
     "videoId": "_GWZsMeDvrs",
@@ -847,15 +847,15 @@
     "batch": 23
   },
   "signed_without_asking": {
-    "video_id": "DUnpevTWh9s",
+    "videoId": "XCtyfS7okJU",
     "title": "SIGNED WITHOUT ASKING",
-    "pillar": null,
+    "pillar": 1,
     "playlists": [
-      "Complete Collection",
-      "Hip-Hop"
+      "pillar_1_judicial",
+      "complete_collection",
+      "aussie_country"
     ],
-    "uploaded": "2026-06-25",
-    "batch": 23
+    "uploadedAt": "2026-07-01T21:15:00Z"
   },
   "silence_of_the_state": {
     "video_id": "eDK2NlN2fJs",
@@ -904,28 +904,25 @@
     "batch": 23
   },
   "they_sank_the_truth": {
-    "video_id": "LDPYhAEC2Yo",
+    "videoId": "rgL_k8rYRQ8",
     "title": "THEY SANK THE TRUTH",
-    "pillar": "Pillar 3",
+    "pillar": 3,
     "playlists": [
-      "Complete Collection",
-      "Pillar 3",
-      "Hip-Hop"
+      "pillar_3_evidence",
+      "complete_collection",
+      "hip_hop"
     ],
-    "uploaded": "2026-06-25",
-    "batch": 23
+    "uploadedAt": "2026-07-01T21:15:00Z"
   },
   "the_affidavit_they_buried": {
-    "video_id": "S3VOgAz4qKI",
+    "videoId": "bZnc5JdqcjI",
     "title": "THE AFFIDAVIT THEY BURIED",
-    "pillar": "Pillar 3",
+    "pillar": 3,
     "playlists": [
-      "Complete Collection",
-      "Pillar 3",
-      "Hip-Hop"
+      "pillar_3_evidence",
+      "complete_collection"
     ],
-    "uploaded": "2026-06-25",
-    "batch": 24
+    "uploadedAt": "2026-07-01T21:15:00Z"
   },
   "the_bag_that_walked_evidence_cut": {
     "video_id": "cjKk5lRLM6k",
@@ -952,16 +949,14 @@
     "batch": 24
   },
   "the_cost_of_asking": {
-    "video_id": "xMkAGXQIwiM",
+    "videoId": "0Smw2_0geIA",
     "title": "THE COST OF ASKING",
-    "pillar": "Pillar 2",
+    "pillar": 2,
     "playlists": [
-      "Complete Collection",
-      "Pillar 2",
-      "Hip-Hop"
+      "pillar_2_legal_aid",
+      "complete_collection"
     ],
-    "uploaded": "2026-06-25",
-    "batch": 24
+    "uploadedAt": "2026-07-01T21:15:00Z"
   },
   "the_crown_dont_speak_silence_cut": {
     "video_id": "IhxhNgCJBe4",
@@ -976,26 +971,26 @@
     "batch": 24
   },
   "the_fair_go_that_never_came": {
-    "video_id": "PqOrM65e17U",
+    "videoId": "LCxr-wLrXOg",
     "title": "THE FAIR GO THAT NEVER CAME",
-    "pillar": null,
+    "pillar": 2,
     "playlists": [
-      "Complete Collection",
-      "Hip-Hop"
+      "pillar_2_legal_aid",
+      "complete_collection",
+      "aussie_country"
     ],
-    "uploaded": "2026-06-25",
-    "batch": 24
+    "uploadedAt": "2026-07-01T21:15:00Z"
   },
   "the_gauntlet": {
-    "video_id": "YxQgup2gMPE",
+    "videoId": "a9WctSjaDU8",
     "title": "THE GAUNTLET",
-    "pillar": null,
+    "pillar": 1,
     "playlists": [
-      "Complete Collection",
-      "Hip-Hop"
+      "pillar_1_judicial",
+      "complete_collection",
+      "hip_hop"
     ],
-    "uploaded": "2026-06-25",
-    "batch": 24
+    "uploadedAt": "2026-07-01T21:15:00Z"
   },
   "the_ghost_in_the_trailer_evidence_cut": {
     "video_id": "4-AUotkw7-w",
@@ -1022,15 +1017,14 @@
     "batch": 24
   },
   "the_name_they_own": {
-    "video_id": "HNXdR0Od07s",
+    "videoId": "lYI6sXVSAEI",
     "title": "THE NAME THEY OWN",
-    "pillar": null,
+    "pillar": 1,
     "playlists": [
-      "Complete Collection",
-      "Hip-Hop"
+      "pillar_1_judicial",
+      "complete_collection"
     ],
-    "uploaded": "2026-06-25",
-    "batch": 24
+    "uploadedAt": "2026-07-01T21:15:00Z"
   },
   "unclean_hands_pillar_1_cut": {
     "video_id": "WYfV_iiUqyM",
@@ -1078,5 +1072,30 @@
     ],
     "uploaded": "2026-06-25",
     "batch": 24
+  },
+  "silence_of_the_state_judicial_cut": {
+    "videoId": "zHU_Cs9uLpI",
+    "title": "SILENCE OF THE STATE",
+    "pillar": 1,
+    "playlists": [
+      "pillar_1_judicial",
+      "complete_collection",
+      "hip_hop"
+    ],
+    "uploadedAt": "2026-07-01T21:15:00Z"
+  },
+  "the_bank_man_came_on_tuesday": {
+    "videoId": "ei_XSUMA7vI",
+    "title": "THE BANK MAN CAME ON TUESDAY",
+    "pillar": null,
+    "genre": "Aussie Country",
+    "playlists": [
+      "complete_collection",
+      "aussie_country"
+    ],
+    "thumbnail": "https://github.com/Fair-Go-Justice/fairgojustice-website/raw/main/thumbnails/the-bank-man-came-on-tuesday.png",
+    "thumbnailApplied": true,
+    "uploadedAt": "2026-06-30T22:19:34Z",
+    "batch": "batch30"
   }
 }
