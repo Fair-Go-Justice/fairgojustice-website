@@ -1097,5 +1097,15 @@
     "thumbnailApplied": true,
     "uploadedAt": "2026-06-30T22:19:34Z",
     "batch": "batch30"
+  },
+  "widows_title": {
+    "videoId": "y8j2NcdcSeg",
+    "title": "WIDOW'S TITLE",
+    "pillar": 1,
+    "playlists": [
+      "country",
+      "complete_collection"
+    ],
+    "uploadedAt": "2026-07-01T01:02:18.033923Z"
   }
 }
