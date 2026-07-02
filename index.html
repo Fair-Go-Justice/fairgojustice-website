@@ -389,6 +389,43 @@
       .share-grid { grid-template-columns: repeat(2,1fr); }
       .stats-grid { grid-template-columns: 1fr 1fr; }
     }
+
+    /* ── THEMED PLAYLISTS ── */
+    .playlists-section { padding: 6rem 2.5rem; background: linear-gradient(180deg, #0a0e14 0%, var(--bg) 100%); }
+    .playlists-grid {
+      max-width: 1300px; margin: 0 auto;
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px;
+    }
+    .playlist-card {
+      background: rgba(255,255,255,0.025); border: 1px solid rgba(255,255,255,0.06);
+      padding: 2.8rem 2.2rem; text-decoration: none; color: var(--white);
+      display: flex; flex-direction: column; transition: all 0.35s;
+      position: relative; overflow: hidden; cursor: pointer;
+    }
+    .playlist-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: var(--orange); transform: scaleX(0); transform-origin: left;
+      transition: transform 0.35s;
+    }
+    .playlist-card:hover::before { transform: scaleX(1); }
+    .playlist-card:hover { background: rgba(214,107,45,0.05); border-color: rgba(214,107,45,0.25); transform: translateY(-4px); }
+    .playlist-card--hero { grid-column: span 2; background: linear-gradient(135deg, rgba(14,58,91,0.35), rgba(13,17,23,0.9)); border-color: rgba(212,175,55,0.2); }
+    .playlist-card--hero::before { background: var(--gold); }
+    .playlist-card--cta { background: rgba(14,58,91,0.15); border-color: rgba(14,58,91,0.4); align-items: center; text-align: center; }
+    .playlist-card__icon { font-size: 2.6rem; margin-bottom: 1rem; }
+    .playlist-card--hero .playlist-card__icon { font-size: 3.2rem; }
+    .playlist-card__badge { display: inline-block; padding: 0.25rem 0.8rem; margin-bottom: 0.8rem; font-size: 0.65rem; letter-spacing: 3px; text-transform: uppercase; background: rgba(212,175,55,0.15); border: 1px solid rgba(212,175,55,0.4); color: var(--gold); border-radius: 1px; }
+    .playlist-card__title { font-family: 'Bebas Neue', sans-serif; font-size: 1.9rem; letter-spacing: 2px; line-height: 1; margin-bottom: 1rem; }
+    .playlist-card--hero .playlist-card__title { font-size: 2.6rem; }
+    .playlist-card__desc { font-size: 0.86rem; color: var(--text-muted); line-height: 1.7; flex: 1; margin-bottom: 1.5rem; }
+    .playlist-card__meta { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 1rem; }
+    .playlist-card--cta .playlist-card__meta { justify-content: center; gap: 1rem; }
+    .playlist-card__count { font-size: 0.72rem; letter-spacing: 2px; text-transform: uppercase; color: var(--text-muted); }
+    .playlist-card__cta { font-size: 0.72rem; letter-spacing: 2px; text-transform: uppercase; color: var(--orange); }
+    .playlist-card:hover .playlist-card__cta { color: var(--white); }
+    @media (max-width: 1024px) { .playlists-grid { grid-template-columns: 1fr 1fr; } .playlist-card--hero { grid-column: span 2; } }
+    @media (max-width: 640px) { .playlists-grid { grid-template-columns: 1fr; } .playlist-card--hero { grid-column: span 1; } }
+
   </style>
 </head>
 <body>
@@ -567,6 +604,56 @@
 <!-- ══════════════════════════════════════
      STATS
 ══════════════════════════════════════ -->
+<!-- ══════════════════════════════════════
+     BROWSE BY THEME — YouTube Playlists
+══════════════════════════════════════ -->
+<section class="playlists-section" id="playlists">
+  <div class="section-header">
+    <span class="section-eyebrow">🎵 Explore the Catalogue</span>
+    <h2 class="section-title">BROWSE BY <span>THEME</span></h2>
+    <p class="section-sub">144 original tracks organised by the stories they tell. Find your entry point into the movement.</p>
+  </div>
+  <div class="playlists-grid">
+    <a href="https://www.youtube.com/playlist?list=PLOfghv39Dl9M" target="_blank" rel="noopener" class="playlist-card playlist-card--hero">
+      <div class="playlist-card__icon">🎯</div>
+      <div class="playlist-card__badge">START HERE</div>
+      <h3 class="playlist-card__title">NEW TO THE MOVEMENT?</h3>
+      <p class="playlist-card__desc">5 essential tracks that tell the whole story in under 20 minutes. The chain is broken — this is where you find out how.</p>
+      <div class="playlist-card__meta"><span class="playlist-card__count">5 tracks</span><span class="playlist-card__cta">Listen on YouTube →</span></div>
+    </a>
+    <a href="music.html" class="playlist-card playlist-card--cta">
+      <div class="playlist-card__icon" style="font-size:3.5rem;">🎵</div>
+      <h3 class="playlist-card__title">FULL CATALOGUE</h3>
+      <p class="playlist-card__desc">Browse all 144 original tracks — searchable by genre, pillar, and theme.</p>
+      <div class="playlist-card__meta"><span class="playlist-card__count">144 tracks</span><span class="playlist-card__cta">Browse All →</span></div>
+    </a>
+    <a href="https://www.youtube.com/playlist?list=PLTnLnDK0QWKQ" target="_blank" rel="noopener" class="playlist-card">
+      <div class="playlist-card__icon">🔊</div>
+      <h3 class="playlist-card__title">WHISTLEBLOWERS</h3>
+      <p class="playlist-card__desc">Songs for those who risk everything to speak truth to power. They came forward. We made music for what they couldn't say in court.</p>
+      <div class="playlist-card__meta"><span class="playlist-card__count">35 tracks</span><span class="playlist-card__cta">Listen →</span></div>
+    </a>
+    <a href="https://www.youtube.com/playlist?list=PLXaZIWuUL00g" target="_blank" rel="noopener" class="playlist-card">
+      <div class="playlist-card__icon">📺</div>
+      <h3 class="playlist-card__title">MEDIA &amp; BLACKOUT</h3>
+      <p class="playlist-card__desc">When the press goes silent. When stories are killed before they run. These tracks cover what never made the evening news.</p>
+      <div class="playlist-card__meta"><span class="playlist-card__count">17 tracks</span><span class="playlist-card__cta">Listen →</span></div>
+    </a>
+    <a href="https://www.youtube.com/playlist?list=PLUCLJvEeYTrg" target="_blank" rel="noopener" class="playlist-card">
+      <div class="playlist-card__icon">⚖️</div>
+      <h3 class="playlist-card__title">COURTS &amp; JUDGES</h3>
+      <p class="playlist-card__desc">Inside the chambers of power. Judicial integrity, conflict of interest, and the cost of a system designed to be unaccountable.</p>
+      <div class="playlist-card__meta"><span class="playlist-card__count">42 tracks</span><span class="playlist-card__cta">Listen →</span></div>
+    </a>
+    <a href="https://www.youtube.com/playlist?list=PLCk8GFybMV_Q" target="_blank" rel="noopener" class="playlist-card">
+      <div class="playlist-card__icon">🌏</div>
+      <h3 class="playlist-card__title">LUCKY COUNTRY MYTH</h3>
+      <p class="playlist-card__desc">The fair go that never came. Working class stories, housing fights, and the Australia we were promised vs. the one we got.</p>
+      <div class="playlist-card__meta"><span class="playlist-card__count">29 tracks</span><span class="playlist-card__cta">Listen →</span></div>
+    </a>
+  </div>
+</section>
+
 <div class="stats-bar" id="stats">
   <div class="stats-grid">
     <div class="stat-item">
