@@ -937,16 +937,16 @@
     "batch": 24
   },
   "the_case_they_cant_redact_movement_cut": {
-    "video_id": "E2twULt82DQ",
-    "title": "THE CASE THEY CAN'T REDACT (Movement Cut)",
-    "pillar": "Pillar 3",
+    "videoId": "IQdobQHJ90s",
+    "title": "THE CASE THEY CAN'T REDACT",
+    "pillar": 1,
     "playlists": [
-      "Complete Collection",
-      "Pillar 3",
-      "Hip-Hop"
+      "hip_hop",
+      "whistleblowers",
+      "complete_collection"
     ],
-    "uploaded": "2026-06-25",
-    "batch": 24
+    "uploadedAt": "2026-07-02T19:39:39Z",
+    "batch": "batch30"
   },
   "the_cost_of_asking": {
     "videoId": "0Smw2_0geIA",
@@ -959,16 +959,16 @@
     "uploadedAt": "2026-07-01T21:15:00Z"
   },
   "the_crown_dont_speak_silence_cut": {
-    "video_id": "IhxhNgCJBe4",
-    "title": "THE CROWN DON'T SPEAK (Silence Cut)",
-    "pillar": "Pillar 1",
+    "videoId": "eWmiI8ZX92s",
+    "title": "THE CROWN DON'T SPEAK",
+    "pillar": 1,
     "playlists": [
-      "Complete Collection",
-      "Pillar 1",
-      "Hip-Hop"
+      "pillar_1_judicial",
+      "courts_judges",
+      "complete_collection"
     ],
-    "uploaded": "2026-06-25",
-    "batch": 24
+    "uploadedAt": "2026-07-02T19:39:39Z",
+    "batch": "batch30"
   },
   "the_fair_go_that_never_came": {
     "videoId": "LCxr-wLrXOg",
@@ -1107,5 +1107,198 @@
       "complete_collection"
     ],
     "uploadedAt": "2026-07-01T01:02:18.033923Z"
+  },
+  "under_oath_royal_truth": {
+    "videoId": "k-_nmQx9nLY",
+    "title": "UNDER OATH (ROYAL TRUTH)",
+    "pillar": 1,
+    "playlists": [
+      "pillar_1_judicial",
+      "courts_judges",
+      "complete_collection"
+    ],
+    "uploadedAt": "2026-07-02T19:39:39Z",
+    "batch": "batch30"
+  },
+  "behind_the_stamp_pillar_1_cut": {
+    "videoId": "nPJlaab5FU4",
+    "title": "BEHIND THE STAMP (PILLAR 1 CUT)",
+    "pillar": 1,
+    "playlists": [
+      "pillar_1_judicial",
+      "courts_judges",
+      "complete_collection"
+    ],
+    "uploadedAt": "2026-07-02T19:39:39Z",
+    "batch": "batch30"
+  },
+  "caveat_over_home_legalproperty_cut": {
+    "videoId": "6E6_vy4yCqE",
+    "title": "CAVEAT OVER HOME",
+    "pillar": 1,
+    "playlists": [
+      "country",
+      "lucky_country_myth",
+      "complete_collection"
+    ],
+    "uploadedAt": "2026-07-02T19:39:39Z",
+    "batch": "batch30"
+  },
+  "chain_of_custody_pillar_3_cut": {
+    "videoId": "jFMJiaCFx-E",
+    "title": "CHAIN OF CUSTODY (PILLAR 3 CUT)",
+    "pillar": 3,
+    "playlists": [
+      "pillar_3_evidence",
+      "courts_judges",
+      "complete_collection"
+    ],
+    "uploadedAt": "2026-07-02T19:39:39Z",
+    "batch": "batch30"
+  },
+  "house_built_on_sand_systemic_failure_cut": {
+    "videoId": "tbsjD6Ji0qg",
+    "title": "HOUSE BUILT ON SAND",
+    "pillar": 1,
+    "playlists": [
+      "country",
+      "lucky_country_myth",
+      "complete_collection"
+    ],
+    "uploadedAt": "2026-07-02T19:39:39Z",
+    "batch": "batch30"
+  },
+  "redacted_evidence_cut": {
+    "videoId": "6bG6EKLR_Gk",
+    "title": "REDACTED (EVIDENCE CUT)",
+    "pillar": 3,
+    "playlists": [
+      "pillar_3_evidence",
+      "courts_judges",
+      "complete_collection"
+    ],
+    "uploadedAt": "2026-07-02T19:39:39Z",
+    "batch": "batch30"
+  },
+  "gaslight_the_court": {
+    "videoId": "dVm2z99ACwE",
+    "title": "GASLIGHT THE COURT",
+    "genre": "Hip-Hop",
+    "pillar": 1,
+    "playlists": [
+      "Complete Collection",
+      "Hip-Hop & Drill",
+      "Pillar 1 Judicial Integrity"
+    ],
+    "uploadedAt": "2026-07-05",
+    "batch": 31
+  },
+  "gaslight_the_court_v2": {
+    "videoId": "vCNXaX4PWxE",
+    "title": "GASLIGHT THE COURT (v2 Uncut \u2014 The Breakdown)",
+    "genre": "Hip-Hop",
+    "pillar": 1,
+    "playlists": [
+      "Complete Collection",
+      "Hip-Hop & Drill",
+      "Pillar 1 Judicial Integrity"
+    ],
+    "uploadedAt": "2026-07-05",
+    "batch": 31
+  },
+  "accountability_now": {
+    "videoId": "AJYAL8T2QRc",
+    "title": "ACCOUNTABILITY NOW",
+    "genre": "Hip-Hop",
+    "pillar": 1,
+    "playlists": [
+      "Complete Collection",
+      "Hip-Hop & Drill",
+      "Pillar 1 Judicial Integrity"
+    ],
+    "uploadedAt": "2026-07-05",
+    "batch": 31
+  },
+  "ai_in_law": {
+    "videoId": "qjJOOb3hfEc",
+    "title": "AI IN LAW",
+    "genre": "Hip-Hop",
+    "pillar": 3,
+    "playlists": [
+      "Complete Collection",
+      "Hip-Hop & Drill",
+      "Pillar 3 Evidence Integrity"
+    ],
+    "uploadedAt": "2026-07-05",
+    "batch": 31
+  },
+  "designed_to_fail": {
+    "videoId": "NdmF4vaBuRI",
+    "title": "DESIGNED TO FAIL",
+    "genre": "Aussie Country",
+    "pillar": 2,
+    "playlists": [
+      "Complete Collection",
+      "Aussie Country & Bush Ballads",
+      "Pillar 2 Legal Aid Reform"
+    ],
+    "uploadedAt": "2026-07-05",
+    "batch": 31
+  },
+  "three_years_waiting": {
+    "videoId": "Gr9ro3OgWwk",
+    "title": "THREE YEARS WAITING",
+    "genre": "Aussie Country",
+    "pillar": 2,
+    "playlists": [
+      "Complete Collection",
+      "Aussie Country & Bush Ballads",
+      "Pillar 2 Legal Aid Reform"
+    ],
+    "uploadedAt": "2026-07-05",
+    "batch": 31
+  },
+  "the_invisible_link": {
+    "videoId": "9CwVYdBKTV0",
+    "title": "THE INVISIBLE LINK",
+    "status": "DELETED",
+    "note": "Video deleted - needs re-upload",
+    "playlist": "Courts & Judges"
+  },
+  "algorithmic_lies": {
+    "videoId": "svJ7cEuAv9c",
+    "title": "ALGORITHMIC LIES",
+    "status": "public",
+    "playlist": "Courts & Judges"
+  },
+  "humanitys_price": {
+    "videoId": "Vm9PQ7gRL18",
+    "title": "HUMANITY'S PRICE",
+    "status": "public",
+    "playlist": "Lucky Country Myth"
+  },
+  "courts_and_justice": {
+    "videoId": "Ghar1lVYhQA",
+    "title": "COURTS AND JUSTICE",
+    "status": "public",
+    "playlist": "Courts & Judges"
+  },
+  "the_new_playbook": {
+    "videoId": "wMZREFWgB4s",
+    "title": "THE NEW PLAYBOOK",
+    "status": "public",
+    "playlist": "Courts & Judges"
+  },
+  "the_ai_precedent": {
+    "videoId": "NqGvxyQPlsw",
+    "title": "THE AI PRECEDENT",
+    "status": "public",
+    "playlist": "Courts & Judges"
+  },
+  "invisible_catastrophic": {
+    "videoId": "rBlV82sgZ-k",
+    "title": "INVISIBLE CATASTROPHIC",
+    "status": "public",
+    "playlist": "Courts & Judges"
   }
 }
