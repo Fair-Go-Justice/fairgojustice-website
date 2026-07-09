@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Advanced DJ Composer & AI Lyric Remixer</title>
+  <!-- Google Fonts: Inter for UI, Orbitron for tech metrics -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+  <div class="glow-container">
+    <div class="bg-glow bg-glow-primary"></div>
+    <div class="bg-glow bg-glow-secondary"></div>
+  </div>
+
+  <div class="app-container" id="app-viewport">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="header-logo">
+        <svg viewBox="0 0 24 24" class="logo-icon">
+          <path d="M12 2L2 22h20L12 2zm0 3.99L18.49 19H5.51L12 5.99zm-1 8h2v2h-2v-2zm0-4h2v3h-2V9.99z" />
+        </svg>
+        <div class="logo-text">
+          <h1>ADVANCED DJ COMPOSER</h1>
+          <span class="subtitle">LIVE SAMPLER &amp; AI LYRIC REMIXER ENGINE</span>
+        </div>
+      </div>
+      <div class="header-status">
+        <div class="status-indicator">
+          <span id="system-status-dot" class="status-dot pulsing"></span>
+          <span id="system-status-label" class="status-label">SYSTEM ONLINE</span>
+        </div>
+        <div class="status-metric">
+          <span class="metric-name">BPM</span>
+          <span id="header-bpm-display" class="metric-value">180</span>
+        </div>
+        <div class="status-metric">
+          <span class="metric-name">SEQ TRACKS</span>
+          <span class="metric-value">4 ACTIVE</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Workspace Grid -->
+    <main class="app-grid">
+      
+      <!-- LEFT COLUMN: CONSTRUCT & AI REMIX -->
+      <section class="panel panel-inputs">
+        <div class="panel-header">
+          <h2>1. CHOOSE VIBE &amp; GENRE</h2>
+          <span class="panel-tag">PRESETS</span>
+        </div>
+
+
+        <!-- SoundCloud Style Matcher -->
+        <div class="sc-matcher-card">
+          <div class="sc-matcher-header">
+            <h3>🔗 SOUNDCLOUD STYLE MATCHER</h3>
+            <span class="panel-tag sc-tag-ready" id="sc-status-tag">READY</span>
+          </div>
+          <div class="sc-input-row">
+            <input type="url" id="sc-url-input" class="input-text sc-url-field"
+              placeholder="https://soundcloud.com/artist/track-name">
+            <button id="btn-sc-match" class="btn btn-sc-match">⚡ MATCH</button>
+          </div>
+          <div id="sc-result-area" class="sc-result-area" style="display:none;">
+            <div class="sc-result-inner">
+              <div class="sc-result-track" id="sc-result-track"></div>
+              <div class="sc-result-meta" id="sc-result-meta"></div>
+              <button id="btn-sc-apply" class="btn btn-mini btn-sc-apply">✔ APPLY PRESET</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Presets Grid -->
+        <div class="control-group">
+          <div class="genre-label-row">
+            <label class="group-label">GENRE SELECTOR</label>
+            
+            <div class="pattern-selector-container">
+              <label for="param-pattern" class="select-label-mini">PATTERN:</label>
+              <select id="param-pattern" class="input-select-mini-flat">
+                <option value="patternA" selected>Pattern A (Main)</option>
+                <option value="patternB">Pattern B (Fill)</option>
+                <option value="patternC">Pattern C (Sync)</option>
+              </select>
+            </div>
+          </div>
+          
+          <div class="preset-chips">
+            <button class="preset-chip active" data-preset="doc-industrial">
+              <span class="chip-title">Doc Industrial</span>
+              <span class="chip-desc">178 BPM • Hardcore</span>
+            </button>
+            <button class="preset-chip" data-preset="uptempo-weapon">
+              <span class="chip-title">Uptempo Outcome</span>
+              <span class="chip-desc">182 BPM • Rawstyle</span>
+            </button>
+            <button class="preset-chip" data-preset="schranz-techno">
+              <span class="chip-title">Schranz Warehouse</span>
+              <span class="chip-desc">160 BPM • Hard Techno</span>
+            </button>
+            <button class="preset-chip" data-preset="warehouse-bounce">
+              <span class="chip-title">Warehouse Bounce</span>
+              <span class="chip-desc">156 BPM • Dark Club</span>
+            </button>
+            <button class="preset-chip" data-preset="hakken-korps">
+              <span class="chip-title">Hakken Korps</span>
+              <span class="chip-desc">175 BPM • Makina Core</span>
+            </button>
+            <button class="preset-chip" data-preset="northern-bounce">
+              <span class="chip-title">Northern Bounce</span>
+              <span class="chip-desc">150 BPM • UK Rave</span>
+            </button>
+            <button class="preset-chip" data-preset="donk-queen-rave">
+              <span class="chip-title">Donk Queen Rave</span>
+              <span class="chip-desc">153 BPM • Multi-Genre</span>
+            </button>
+            <button class="preset-chip" data-preset="acidcore-ebm">
+              <span class="chip-title">Acidcore EBM</span>
+              <span class="chip-desc">145 BPM • Acid Synths</span>
+            </button>
+            <button class="preset-chip" data-preset="pub-rock">
+              <span class="chip-title">Aussie Pub Rock</span>
+              <span class="chip-desc">136 BPM • Guitar Anthem</span>
+            </button>
+            <button class="preset-chip" data-preset="aussie-hiphop">
+              <span class="chip-title">Westside Hip Hop</span>
+              <span class="chip-desc">90 BPM • Boom-Bap</span>
+            </button>
+            <button class="preset-chip" data-preset="breakcore-dnb">
+              <span class="chip-title">Breakcore / DnB</span>
+              <span class="chip-desc">172 BPM • Chopped Breaks</span>
+            </button>
+            <button class="preset-chip" data-preset="synthwave">
+              <span class="chip-title">Cyber Synthwave</span>
+              <span class="chip-desc">115 BPM • Neon Retro</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Sliders -->
+        <div class="control-grid">
+          <div class="slider-control">
+            <div class="slider-header">
+              <span class="slider-label">TEMPO (BPM)</span>
+              <span id="bpm-val" class="slider-value">178</span>
+            </div>
+            <input type="range" id="param-bpm" min="60" max="220" value="178" class="input-range">
+          </div>
+
+          <div class="slider-control">
+            <div class="slider-header">
+              <span class="slider-label">KICK DISTORTION</span>
+              <span id="dist-val" class="slider-value">85%</span>
+            </div>
+            <input type="range" id="param-dist" min="0" max="100" value="85" class="input-range">
+          </div>
+
+          <div class="slider-control">
+            <div class="slider-header">
+              <span class="slider-label">SUB BASS RUMBLE</span>
+              <span id="sub-val" class="slider-value">90%</span>
+            </div>
+            <input type="range" id="param-sub" min="0" max="100" value="90" class="input-range">
+          </div>
+
+          <div class="slider-control">
+            <div class="slider-header">
+              <span class="slider-label">METALLIC CLANGS</span>
+              <span id="clang-val" class="slider-value">75%</span>
+            </div>
+            <input type="range" id="param-clang" min="0" max="100" value="75" class="input-range">
+          </div>
+        </div>
+
+        <!-- Vocals & Scratches -->
+        <div class="control-row">
+          <div class="select-control">
+            <label for="param-vocals" class="select-label">VOCAL TIMBRE &amp; DELIVERY</label>
+            <select id="param-vocals" class="input-select">
+              <option value="robotic-monotone" selected>Robotic Monotone Demonic Chant</option>
+              <option value="shouted-gang">Low Male Shouted Gang Vocals</option>
+              <option value="aussie-grit">Aussie Accent Gritty Spoken-Barked</option>
+              <option value="pub-grit">Talk-Sung Pub Rock Grit</option>
+              <option value="female-hardtechno">Robotic Female Vocal Stabs</option>
+              <option value="mc-hype">UK MC Hype Calls &amp; Crowd Shouts</option>
+              <option value="synthwave-vocoder">Vocoder Retro Vocal Hooks</option>
+              <option value="none">No Vocals (Pure Instrumental)</option>
+            </select>
+          </div>
+
+          <div class="select-control">
+            <label for="param-scratches" class="select-label">TURNTABLE SCRATCH PATTERNS</label>
+            <select id="param-scratches" class="input-select">
+              <option value="battle-transform" selected>Turntable Battle Cuts &amp; Flare Stutters</option>
+              <option value="low-impact">Short Transition Scratches Only</option>
+              <option value="heavy-quantized">Aggressive Quantized Hype Scratches</option>
+              <option value="none">No Scratches (Pure Drums/Synth)</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- AI Lyric Remixer Panel -->
+        <div class="remixer-card">
+          <div class="remixer-header">
+            <h3>🪄 AI LYRIC REMIXER (FREE LLM PORTAL)</h3>
+            <span class="panel-tag status-offline" id="llm-status">LOCAL FALLBACK</span>
+          </div>
+
+          <div class="api-settings-grid">
+            <div class="select-control">
+              <label for="api-type" class="select-label">AI INTERFACE</label>
+              <select id="api-type" class="input-select-mini">
+                <option value="fallback" selected>Fallback (Local Code Re-writer)</option>
+                <option value="gemini">Gemini API (Free Dev Key)</option>
+                <option value="ollama">Local Ollama (Offline LLM)</option>
+              </select>
+            </div>
+            
+            <div class="input-control" id="gemini-key-wrapper" style="display: none;">
+              <label for="gemini-key" class="select-label">GEMINI DEVELOPER KEY</label>
+              <input type="password" id="gemini-key" class="input-text-mini" placeholder="AIzaSy...">
+            </div>
+
+            <div class="input-control" id="ollama-model-wrapper" style="display: none;">
+              <label for="ollama-model" class="select-label">OLLAMA MODEL NAME</label>
+              <input type="text" id="ollama-model" class="input-text-mini" value="gemma" placeholder="e.g. gemma, llama3">
+            </div>
+          </div>
+
+          <div class="song-loader-row">
+            <span class="tool-label">LOAD CLASSIC SONG:</span>
+            <div class="mini-chips">
+              <button class="mini-chip-btn" data-song="elvis">Elvis - Hound Dog</button>
+              <button class="mini-chip-btn" data-song="beachboys">Beach Boys - Surfin' USA</button>
+              <button class="mini-chip-btn" data-song="johnnycash">Johnny Cash - Ring of Fire</button>
+              <button class="mini-chip-btn" data-song="sinatra">Sinatra - My Way</button>
+            </div>
+          </div>
+
+          <button id="btn-ai-revamp" class="btn btn-revamp-pulse">
+            🪄 REVAMP LYRICAL REMASTER
+          </button>
+        </div>
+
+        <!-- Custom Inputs -->
+        <div class="control-group">
+          <label for="input-slogan" class="group-label">FOCUS SLOGAN (FOR TURNTABLE STUTTERS)</label>
+          <input type="text" id="input-slogan" class="input-text" value="Check the Chain" placeholder="e.g. Audit the Power, Null and Void...">
+        </div>
+
+        <div class="control-group">
+          <label for="input-story" class="group-label">LYRICS / CONTEXT (STORY BULLET POINTS)</label>
+          <textarea id="input-story" class="input-textarea" placeholder="Paste classic lyrics or enter your custom story bullet points..."></textarea>
+        </div>
+      </section>
+
+      <!-- RIGHT COLUMN: SEQUENCER, SAMPLER & OUTPUTS -->
+      <section class="panel panel-outputs">
+        
+        <!-- Live Step Sequencer & Sampler Card -->
+        <div class="synth-card" id="seq-card-panel">
+          <div class="synth-header">
+            <div class="synth-title">
+              <svg viewBox="0 0 24 24" class="synth-icon">
+                <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z" />
+              </svg>
+              <h3>16-STEP SEQUENCER &amp; SAMPLER</h3>
+            </div>
+            <div class="synth-controls">
+              <button id="btn-seq-toggle" class="btn btn-synth-play">
+                <span class="play-icon">▶</span> START SEQUENCER
+              </button>
+              <button id="btn-seq-clear" class="btn btn-synth-clear">
+                🗑 CLEAR
+              </button>
+            </div>
+          </div>
+
+          <!-- Sequencer Grid Layout -->
+          <div class="sequencer-matrix">
+            <!-- Track 1: Kick -->
+            <div class="seq-track-row" data-track="kick">
+              <div class="track-header">
+                <span class="track-title font-tech">KICK</span>
+                <span class="track-sub">909 DIST</span>
+              </div>
+              <div class="step-buttons">
+                <!-- 16 steps generated dynamically -->
+              </div>
+            </div>
+
+            <!-- Track 2: Sub Bass -->
+            <div class="seq-track-row" data-track="sub">
+              <div class="track-header">
+                <span class="track-title font-tech">SUB</span>
+                <span class="track-sub">RUMBLE</span>
+              </div>
+              <div class="step-buttons"></div>
+            </div>
+
+            <!-- Track 3: Metallic Clang -->
+            <div class="seq-track-row" data-track="clang">
+              <div class="track-header">
+                <span class="track-title font-tech">CLANG</span>
+                <span class="track-sub">METAL</span>
+              </div>
+              <div class="step-buttons"></div>
+            </div>
+
+            <!-- Track 4: Record Sample -->
+            <div class="seq-track-row" data-track="sample">
+              <div class="track-header">
+                <span class="track-title font-tech">MIC</span>
+                <span class="track-sub">RECORD</span>
+              </div>
+              <div class="step-buttons"></div>
+            </div>
+          </div>
+
+          <!-- Mic Sampler Control Area -->
+          <div class="sampler-controls-row">
+            <div class="mic-status-container">
+              <span id="mic-pulsar" class="recording-indicator"></span>
+              <span id="sampler-status" class="font-tech text-muted">MIC UNLOCKED</span>
+            </div>
+            
+            <div class="sampler-sliders">
+              <div class="mini-slider-control">
+                <span class="mini-slider-label">PLAY RATE:</span>
+                <span id="speed-val" class="mini-slider-value">1.0x</span>
+                <input type="range" id="param-sample-speed" min="0.5" max="2.0" step="0.1" value="1.0" class="input-range-mini">
+              </div>
+              <!-- Save/Lock speed button -->
+              <button id="btn-lock-speed" class="btn btn-mini" title="Lock current speed">LOCK SPEED</button>
+            </div>
+
+            <div class="sampler-buttons">
+              <button id="btn-record-mic" class="btn btn-sampl-rec">🔴 REC</button>
+              <button id="btn-stop-rec" class="btn btn-sampl-stop" disabled>⏹ STOP</button>
+              <button id="btn-play-sample" class="btn btn-sampl-play" disabled>▶ TEST</button>
+            </div>
+          </div>
+
+          <!-- Live One-Shot FX Pads -->
+          <div class="fx-pads-group">
+            <span class="group-label">LIVE ONE-SHOT FX PADS</span>
+            <div class="fx-pads-grid">
+              <button class="btn btn-fx-pad" data-fx="siren">🚨 SIREN</button>
+              <button class="btn btn-fx-pad" data-fx="acid">⚡ ACID STAB</button>
+              <button class="btn btn-fx-pad" data-fx="snare">🥁 GATED SNARE</button>
+              <button class="btn btn-fx-pad" id="btn-scratch-trigger">🎚 SCRATCH CUT</button>
+            </div>
+          </div>
+
+          <!-- Visualizer Canvas -->
+          <div class="visualizer-container">
+            <canvas id="canvas-visualizer"></canvas>
+            <div class="visualizer-overlay">
+              <span id="visualizer-status">MONITOR OFFLINE</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Compiled Style Prompt -->
+        <div class="output-card">
+          <div class="output-card-header">
+            <h3>2. COMPILED STYLE PROMPT (SUNO/UDIO STYLE BOX)</h3>
+            <button class="btn-copy" data-target="output-style" title="Copy to clipboard">
+              <span class="copy-icon">📋</span> COPY PROMPT
+            </button>
+          </div>
+          <div class="output-wrapper">
+            <textarea id="output-style" class="output-area" readonly></textarea>
+          </div>
+          <span class="char-counter"><span id="style-char-count">0</span> / 1200 characters</span>
+        </div>
+
+        <!-- Lyrics Box -->
+        <div class="output-card">
+          <div class="output-card-header">
+            <h3>3. STRUCTURED LYRIC SHEET (SUNO/UDIO LYRICS BOX)</h3>
+            <button class="btn-copy" data-target="output-lyrics" title="Copy to clipboard">
+              <span class="copy-icon">📋</span> COPY LYRICS
+            </button>
+          </div>
+          <div class="output-wrapper">
+            <textarea id="output-lyrics" class="output-area lyrics-output" readonly></textarea>
+          </div>
+        </div>
+
+        <div class="output-card">
+          <div class="output-card-header">
+            <h3>4. SUNO EXPORT PACK</h3>
+            <button class="btn-copy" data-target="output-suno-pack" title="Copy full Suno pack">
+              <span class="copy-icon">📋</span> COPY PACK
+            </button>
+          </div>
+          <div class="suno-mini-grid">
+            <div class="suno-field">
+              <div class="suno-field-header">
+                <span class="tool-label">TITLE</span>
+                <button class="btn-copy btn-copy-mini" data-target="output-suno-title" title="Copy title">COPY</button>
+              </div>
+              <textarea id="output-suno-title" class="output-area output-area-mini" readonly></textarea>
+            </div>
+            <div class="suno-field">
+              <div class="suno-field-header">
+                <span class="tool-label">NEGATIVE CUES</span>
+                <button class="btn-copy btn-copy-mini" data-target="output-suno-negative" title="Copy negatives">COPY</button>
+              </div>
+              <textarea id="output-suno-negative" class="output-area output-area-mini" readonly></textarea>
+            </div>
+          </div>
+          <div class="suno-field">
+            <div class="suno-field-header">
+              <span class="tool-label">GENERATION NOTES</span>
+              <button class="btn-copy btn-copy-mini" data-target="output-suno-notes" title="Copy notes">COPY</button>
+            </div>
+            <textarea id="output-suno-notes" class="output-area output-area-mid" readonly></textarea>
+          </div>
+          <div class="suno-field">
+            <div class="suno-field-header">
+              <span class="tool-label">FULL SUNO PACK</span>
+            </div>
+            <textarea id="output-suno-pack" class="output-area lyrics-output output-area-pack" readonly></textarea>
+          </div>
+        </div>
+
+        <!-- Preset Manager -->
+        <div class="bottom-tools">
+          <div class="storage-panel">
+            <span class="tool-label font-tech">SAVE CUSTOM STATE:</span>
+            <input type="text" id="custom-preset-name" class="input-text-mini" placeholder="Preset Name">
+            <button id="btn-save-preset" class="btn btn-mini">SAVE</button>
+            <div id="saved-presets-list" class="mini-chips"></div>
+          </div>
+        </div>
+      </section>
+
+        <!-- ── JUSTICE LYRIC ENGINE ─────────────────────────────────────────── -->
+        <section class="justice-section">
+          <div class="justice-card">
+            <div class="justice-header">
+              <span class="justice-badge">⚖️ AI JUSTICE AUDIT</span>
+              <h2 class="justice-title">JUSTICE LYRIC ENGINE</h2>
+              <p class="justice-subtitle">AI should verify power — not replace justice.</p>
+            </div>
+
+            <div class="justice-controls">
+              <!-- Theme -->
+              <div class="justice-field">
+                <label class="justice-label" for="justice-theme">THEME</label>
+                <select id="justice-theme" class="justice-select">
+                  <option value="ai-auditor">AI as Independent Auditor</option>
+                  <option value="wrong-classification">Wrong Classification → Wrong Outcome</option>
+                  <option value="access-to-justice">Access to Justice</option>
+                  <option value="evidence-integrity">Evidence Integrity</option>
+                  <option value="public-confidence">Public Confidence</option>
+                </select>
+                <div id="justice-theme-slogan" class="justice-slogan"></div>
+              </div>
+
+              <!-- Audience -->
+              <div class="justice-field">
+                <label class="justice-label" for="justice-audience">AUDIENCE</label>
+                <select id="justice-audience" class="justice-select">
+                  <option value="workers">Workers</option>
+                  <option value="small-business">Small Business</option>
+                  <option value="srls">Self-Represented Litigants</option>
+                  <option value="tech-community">Tech Community</option>
+                  <option value="public-integrity">Public Integrity</option>
+                </select>
+              </div>
+
+              <!-- Genre -->
+              <div class="justice-field">
+                <label class="justice-label" for="justice-genre">GENRE</label>
+                <select id="justice-genre" class="justice-select">
+                  <option value="hard-techno">Hard Techno / Industrial</option>
+                  <option value="aussie-hip-hop">Aussie Hip Hop</option>
+                  <option value="aussie-country">Australian Country</option>
+                  <option value="rawstyle">Rawstyle / Harder Styles</option>
+                  <option value="spoken-word">Spoken Word / Protest</option>
+                </select>
+              </div>
+            </div>
+
+            <button id="btn-justice-generate" class="btn justice-btn">
+              ⚖️ GENERATE JUSTICE LYRIC
+            </button>
+
+            <div class="justice-output-wrap">
+              <div class="justice-output-header">
+                <span class="justice-out-label">GENERATED LYRIC</span>
+                <button id="btn-justice-copy" class="btn btn-mini justice-copy-btn">📋 COPY</button>
+              </div>
+              <textarea id="justice-lyric-output" class="justice-output" readonly placeholder="Your justice lyric will appear here…"></textarea>
+            </div>
+
+            <div class="justice-hooks-wrap">
+              <div class="justice-out-label">HOOK BANK</div>
+              <div id="justice-hook-bank" class="justice-hooks"></div>
+            </div>
+          </div>
+        </section>
+
+    </main>
+
+    <!-- Footer Guide -->
+    <footer class="app-footer">
+      <div class="footer-guide-grid">
+        <div class="guide-item">
+          <h4>💡 AI LYRIC REMIX PORTAL</h4>
+          <p>Connect your Gemini API Key or run a local Ollama server (`OLLAMA_ORIGINS="*" ollama serve`). Load a classic song and hit **REVAMP**. The LLM will re-author the lyrics into the selected style lane, including the new warehouse bounce, northern bounce, and donk queen rave modes.</p>
+        </div>
+        <div class="guide-item">
+          <h4>🎤 MIC SAMPLER SEQUENCING</h4>
+          <p>Allow browser mic permissions, click **RECORD** and scream, chant, or make sounds. You can then trigger your custom sample using the fourth track (<strong>MIC RECORD</strong>) on the 16-step sequencer timeline.</p>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
