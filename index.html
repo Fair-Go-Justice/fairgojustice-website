@@ -426,6 +426,132 @@
     @media (max-width: 1024px) { .playlists-grid { grid-template-columns: 1fr 1fr; } .playlist-card--hero { grid-column: span 2; } }
     @media (max-width: 640px) { .playlists-grid { grid-template-columns: 1fr; } .playlist-card--hero { grid-column: span 1; } }
 
+  
+    /* ── AUDIT JUSTICE CAMPAIGN CARD ── */
+    .audit-justice-banner {
+      padding: 0 2.5rem 5rem;
+      max-width: 1300px;
+      margin: 0 auto -2rem;
+    }
+    .audit-card {
+      position: relative;
+      background: linear-gradient(135deg, rgba(13,17,23,0.97) 0%, rgba(14,58,91,0.25) 100%);
+      border: 2px solid #D4AF37;
+      border-radius: 4px;
+      padding: 3.5rem 4rem;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 2rem;
+      align-items: center;
+      overflow: hidden;
+    }
+    .audit-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #D4AF37, #D66B2D, #D4AF37);
+    }
+    .audit-card-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: #D4AF37;
+      color: #0D1117;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 0.85rem;
+      letter-spacing: 0.15em;
+      padding: 0.3rem 1rem;
+      border-radius: 2px;
+      margin-bottom: 1rem;
+    }
+    .audit-card-badge::before {
+      content: '●';
+      font-size: 0.6rem;
+      animation: pulse-dot 1.5s ease-in-out infinite;
+    }
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+    .audit-card-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      color: #F5F5F5;
+      line-height: 1;
+      margin-bottom: 1rem;
+    }
+    .audit-card-title span { color: #D4AF37; }
+    .audit-card-title em { color: #D66B2D; font-style: normal; }
+    .audit-card-stats {
+      display: flex;
+      gap: 2.5rem;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .audit-stat {
+      text-align: center;
+    }
+    .audit-stat-num {
+      display: block;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2rem;
+      color: #D66B2D;
+      line-height: 1;
+    }
+    .audit-stat-label {
+      display: block;
+      font-size: 0.7rem;
+      color: rgba(245,245,245,0.55);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-top: 0.2rem;
+      max-width: 100px;
+    }
+    .audit-card-body {
+      font-size: 1rem;
+      color: rgba(245,245,245,0.75);
+      line-height: 1.6;
+      max-width: 620px;
+      margin-bottom: 1.5rem;
+    }
+    .audit-card-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: #D4AF37;
+      color: #0D1117;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.1rem;
+      letter-spacing: 0.1em;
+      padding: 0.9rem 2.2rem;
+      border-radius: 3px;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .audit-card-cta:hover {
+      background: #F5D47A;
+      transform: translateY(-2px);
+    }
+    .audit-card-icon {
+      font-size: clamp(5rem, 8vw, 9rem);
+      opacity: 0.12;
+      line-height: 1;
+      user-select: none;
+      position: absolute;
+      right: 2rem;
+      bottom: -1rem;
+    }
+    @media (max-width: 768px) {
+      .audit-card {
+        grid-template-columns: 1fr;
+        padding: 2.5rem 2rem;
+      }
+      .audit-card-stats { gap: 1.5rem; }
+      .audit-card-icon { display: none; }
+      .audit-banner { padding: 0 1.5rem 3rem; }
+    }
+
   </style>
 </head>
 <body>
@@ -709,6 +835,46 @@
     </div>
   </div>
 </section>
+
+
+<!-- ── AUDIT JUSTICE CAMPAIGN CARD ── -->
+<div class="audit-justice-banner">
+  <div class="audit-card">
+    <div class="audit-card-content">
+      <div class="audit-card-badge">NEW EVIDENCE</div>
+      <h2 class="audit-card-title">AI SHOULD <span>AUDIT</span> JUSTICE —<br>NOT <em>REPLACE</em> IT</h2>
+      <div class="audit-card-stats">
+        <div class="audit-stat">
+          <span class="audit-stat-num">26%</span>
+          <span class="audit-stat-label">Australia OECD judicial integrity score</span>
+        </div>
+        <div class="audit-stat">
+          <span class="audit-stat-num">73+</span>
+          <span class="audit-stat-label">Cases of AI fake citations in AU courts</span>
+        </div>
+        <div class="audit-stat">
+          <span class="audit-stat-num">12.8%</span>
+          <span class="audit-stat-label">Family Court cases now self-represented</span>
+        </div>
+        <div class="audit-stat">
+          <span class="audit-stat-num">$55B</span>
+          <span class="audit-stat-label">Worker misclassification losses per year</span>
+        </div>
+      </div>
+      <p class="audit-card-body">
+        Australian courts are already failing ordinary people — and AI is making it worse. 
+        Fabricated legal citations. Algorithmic welfare decisions. No mandatory audit framework. 
+        These aren't future risks. They're happening right now.
+      </p>
+      <a href="audit-justice.html" class="audit-card-cta">
+        SEE THE FULL EVIDENCE →
+      </a>
+    </div>
+    <span class="audit-card-icon">⚖</span>
+  </div>
+</div>
+
+
 
 <!-- ══════════════════════════════════════
      TRAILER
