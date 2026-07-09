@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Audit Justice — AI Should Verify Power, Not Replace Justice | Fair Go Justice</title>
+  <meta name="description" content="Australia's legal system makes preventable mistakes. AI should detect them. Eight current, source-backed issues demanding accountability — from fake AI citations in courts to automated welfare decisions.">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="Fair Go Justice">
+  <link rel="canonical" href="https://fairgojustice.com.au/audit-justice.html">
+  <meta property="og:title" content="Audit Justice — AI Should Verify Power, Not Replace Justice">
+  <meta property="og:description" content="Wrong classification. Wrong outcome. Eight current Australian justice failures — and why AI auditing, not AI automation, is the answer.">
+  <meta property="og:image" content="https://raw.githubusercontent.com/Fair-Go-Justice/fairgojustice-website/main/thumbnails/fgj_master_poster_web.jpg">
+  <meta property="og:url" content="https://fairgojustice.com.au/audit-justice.html">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="en_AU">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Audit Justice | Fair Go Justice">
+  <meta name="twitter:description" content="Eight Australian justice failures. One demand: if systems can ruin lives, they must be auditable.">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DRTFE1VZYP"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-DRTFE1VZYP');</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0D1117;
+      --navy: #0E3A5B;
+      --orange: #D66B2D;
+      --gold: #D4AF37;
+      --white: #F5F5F5;
+      --red: #C0392B;
+      --green: #27AE60;
+      --text-muted: #8B9DB0;
+      --card-bg: #111820;
+      --card-border: rgba(214,107,45,0.15);
+    }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--white); font-family: 'Space Grotesk', sans-serif; overflow-x: hidden; line-height: 1.7; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      background: rgba(13,17,23,0.97); backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(214,107,45,0.2);
+      padding: 0 2.5rem; height: 68px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; color: var(--orange); letter-spacing: 3px; text-decoration: none; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
+    .nav-links a { color: var(--white); text-decoration: none; font-size: 0.78rem; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase; opacity: 0.8; transition: all 0.2s; }
+    .nav-links a:hover, .nav-links a.active { opacity: 1; color: var(--orange); }
+    .nav-cta { padding: 0.45rem 1.3rem; background: var(--orange); color: #fff !important; border-radius: 1px; opacity: 1 !important; }
+    @media(max-width:768px){ .nav-links { display: none; } }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 92vh;
+      background:
+        linear-gradient(160deg, rgba(13,17,23,0.55) 0%, rgba(14,58,91,0.45) 40%, rgba(13,17,23,0.92) 80%, var(--bg) 100%),
+        repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(214,107,45,0.03) 2px, rgba(214,107,45,0.03) 4px);
+      display: flex; align-items: center;
+      padding-top: 68px;
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse 70% 50% at 70% 40%, rgba(14,58,91,0.3) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-content { max-width: 1100px; margin: 0 auto; padding: 5rem 2.5rem 4rem; position: relative; z-index: 2; }
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 0.7rem;
+      font-size: 0.72rem; letter-spacing: 4px; text-transform: uppercase; color: var(--orange);
+      border: 1px solid rgba(214,107,45,0.3); padding: 0.4rem 1rem; border-radius: 1px; margin-bottom: 2rem;
+    }
+    .hero-eyebrow::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--orange); animation: pdot 2s infinite; }
+    @keyframes pdot { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(1.3)} }
+    .hero h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(4.5rem, 12vw, 10rem);
+      line-height: 0.88; letter-spacing: 2px; margin-bottom: 1.5rem;
+    }
+    .hero h1 .l1 { display: block; color: var(--white); }
+    .hero h1 .l2 { display: block; color: var(--orange); text-shadow: 0 0 60px rgba(214,107,45,0.4); }
+    .hero h1 .l3 { display: block; color: var(--white); font-size: 0.52em; letter-spacing: 6px; margin-top: 0.4em; opacity: 0.9; }
+    .hero-sub { font-size: clamp(1rem,2vw,1.2rem); color: rgba(245,245,245,0.72); max-width: 640px; line-height: 1.9; margin-bottom: 2.8rem; font-weight: 300; }
+    .hero-sub strong { color: var(--orange); font-weight: 600; }
+    .hero-buttons { display: flex; gap: 1.2rem; flex-wrap: wrap; margin-bottom: 3.5rem; }
+    .btn-primary { padding: 1.05rem 2.6rem; background: var(--orange); color: #fff; font-family: 'Bebas Neue', sans-serif; font-size: 1.15rem; letter-spacing: 3px; text-decoration: none; border-radius: 1px; transition: all 0.25s; display: inline-block; }
+    .btn-primary:hover { background: #e8793a; transform: translateY(-2px); box-shadow: 0 8px 30px rgba(214,107,45,0.4); }
+    .btn-secondary { padding: 1.05rem 2.6rem; background: transparent; color: var(--white); font-family: 'Bebas Neue', sans-serif; font-size: 1.15rem; letter-spacing: 3px; text-decoration: none; border: 1px solid rgba(245,245,245,0.35); border-radius: 1px; transition: all 0.25s; display: inline-block; }
+    .btn-secondary:hover { border-color: var(--white); transform: translateY(-2px); }
+
+    /* ── STAT BAR ── */
+    .stat-bar { background: var(--navy); border-top: 1px solid rgba(212,175,55,0.2); border-bottom: 1px solid rgba(212,175,55,0.2); padding: 1.4rem 2.5rem; }
+    .stat-bar-inner { max-width: 1100px; margin: 0 auto; display: flex; gap: 2rem; flex-wrap: wrap; justify-content: space-between; align-items: center; }
+    .stat-item { text-align: center; flex: 1; min-width: 140px; }
+    .stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 2.4rem; color: var(--gold); letter-spacing: 2px; display: block; line-height: 1; }
+    .stat-label { font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; color: var(--text-muted); margin-top: 0.3rem; }
+    .stat-source { font-size: 0.6rem; color: rgba(245,245,245,0.35); display: block; margin-top: 0.2rem; }
+    .stat-divider { width: 1px; height: 50px; background: rgba(245,245,245,0.1); }
+    @media(max-width:600px){ .stat-divider { display: none; } }
+
+    /* ── SECTION SHARED ── */
+    section { padding: 6rem 2.5rem; }
+    .section-inner { max-width: 1100px; margin: 0 auto; }
+    .section-label { font-size: 0.7rem; letter-spacing: 4px; text-transform: uppercase; color: var(--orange); margin-bottom: 1rem; }
+    .section-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.8rem,6vw,5rem); line-height: 0.9; margin-bottom: 1.5rem; }
+    .section-intro { font-size: 1.1rem; color: rgba(245,245,245,0.7); max-width: 700px; line-height: 1.9; margin-bottom: 3.5rem; font-weight: 300; }
+
+    /* ── CORE FRAME ── */
+    .frame-section { background: linear-gradient(135deg, var(--navy) 0%, rgba(14,58,91,0.4) 100%); border-top: 1px solid rgba(212,175,55,0.2); border-bottom: 1px solid rgba(212,175,55,0.2); }
+    .frame-quote {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2rem,5vw,4rem);
+      line-height: 1.1; letter-spacing: 2px;
+      color: var(--white); max-width: 900px; margin-bottom: 1.5rem;
+    }
+    .frame-quote span { color: var(--orange); }
+    .frame-body { font-size: 1.05rem; color: rgba(245,245,245,0.72); max-width: 750px; line-height: 1.9; font-weight: 300; }
+
+    /* ── ISSUE CARDS ── */
+    .issues-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.5rem; }
+    .issue-card {
+      background: var(--card-bg); border: 1px solid var(--card-border);
+      border-radius: 2px; padding: 2rem; position: relative; overflow: hidden;
+      transition: all 0.3s; cursor: default;
+    }
+    .issue-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--orange); transform: scaleX(0); transform-origin: left; transition: transform 0.3s; }
+    .issue-card:hover { border-color: rgba(214,107,45,0.4); transform: translateY(-3px); box-shadow: 0 12px 40px rgba(0,0,0,0.4); }
+    .issue-card:hover::before { transform: scaleX(1); }
+    .issue-card.priority-1::before { background: var(--orange); transform: scaleX(1); }
+    .issue-card.priority-2::before { background: var(--gold); transform: scaleX(1); }
+    .issue-num { font-family: 'Bebas Neue', sans-serif; font-size: 3.5rem; color: rgba(214,107,45,0.12); line-height: 1; position: absolute; top: 1rem; right: 1.5rem; letter-spacing: 2px; }
+    .issue-tag { display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.65rem; letter-spacing: 2.5px; text-transform: uppercase; padding: 0.3rem 0.7rem; border-radius: 1px; margin-bottom: 1rem; }
+    .tag-live { background: rgba(214,107,45,0.15); color: var(--orange); border: 1px solid rgba(214,107,45,0.3); }
+    .tag-live::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: var(--orange); animation: pdot 1.5s infinite; }
+    .tag-systemic { background: rgba(14,58,91,0.6); color: #7FB3D3; border: 1px solid rgba(127,179,211,0.3); }
+    .tag-urgent { background: rgba(192,57,43,0.15); color: #E74C3C; border: 1px solid rgba(192,57,43,0.3); }
+    .issue-headline { font-family: 'Bebas Neue', sans-serif; font-size: 1.7rem; letter-spacing: 1px; line-height: 1.1; margin-bottom: 0.8rem; color: var(--white); }
+    .issue-campaign { font-size: 0.72rem; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; }
+    .issue-body { font-size: 0.88rem; color: rgba(245,245,245,0.65); line-height: 1.8; margin-bottom: 1.4rem; }
+    .issue-hook { font-size: 0.85rem; color: var(--orange); font-style: italic; padding: 0.8rem 1rem; border-left: 2px solid var(--orange); background: rgba(214,107,45,0.06); margin-bottom: 1.4rem; line-height: 1.6; }
+    .issue-audiences { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.2rem; }
+    .audience-tag { font-size: 0.62rem; letter-spacing: 1px; text-transform: uppercase; padding: 0.25rem 0.6rem; background: rgba(245,245,245,0.06); border: 1px solid rgba(245,245,245,0.1); border-radius: 1px; color: rgba(245,245,245,0.55); }
+    .issue-keywords { font-size: 0.65rem; color: var(--text-muted); line-height: 1.8; }
+    .issue-keywords strong { color: rgba(245,245,245,0.45); }
+    .issue-source { font-size: 0.62rem; color: rgba(245,245,245,0.3); margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(245,245,245,0.07); }
+
+    /* ── NARRATIVE FRAMES ── */
+    .frames-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px,1fr)); gap: 1.2rem; }
+    .frame-card { background: rgba(14,58,91,0.25); border: 1px solid rgba(14,58,91,0.6); border-radius: 2px; padding: 1.8rem; transition: all 0.3s; }
+    .frame-card:hover { border-color: rgba(212,175,55,0.4); background: rgba(14,58,91,0.4); }
+    .frame-icon { font-size: 1.8rem; margin-bottom: 1rem; display: block; }
+    .frame-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.2rem; letter-spacing: 1px; color: var(--gold); margin-bottom: 0.6rem; line-height: 1.2; }
+    .frame-desc { font-size: 0.85rem; color: rgba(245,245,245,0.6); line-height: 1.7; }
+
+    /* ── DEMOGRAPHIC HOOKS ── */
+    .hooks-section { background: var(--card-bg); border-top: 1px solid rgba(214,107,45,0.1); }
+    .hooks-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(260px,1fr)); gap: 1.2rem; }
+    .hook-card { border-left: 3px solid var(--orange); padding: 1.4rem 1.6rem; background: rgba(214,107,45,0.04); }
+    .hook-demo { font-size: 0.65rem; letter-spacing: 3px; text-transform: uppercase; color: var(--orange); margin-bottom: 0.5rem; }
+    .hook-text { font-size: 1.05rem; color: var(--white); line-height: 1.6; font-weight: 500; }
+
+    /* ── CAMPAIGN ANGLES ── */
+    .angles-section {}
+    .angles-list { list-style: none; max-width: 900px; }
+    .angles-list li {
+      padding: 1.5rem 0; border-bottom: 1px solid rgba(245,245,245,0.07);
+      display: grid; grid-template-columns: 200px 1fr; gap: 2rem; align-items: start;
+    }
+    .angles-list li:last-child { border-bottom: none; }
+    .angle-name { font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem; letter-spacing: 1px; color: var(--orange); line-height: 1.2; }
+    .angle-copy { font-size: 0.9rem; color: rgba(245,245,245,0.65); line-height: 1.7; }
+    .angle-copy strong { color: var(--white); }
+    @media(max-width:600px){ .angles-list li { grid-template-columns: 1fr; gap: 0.5rem; } }
+
+    /* ── CTA BLOCK ── */
+    .cta-block {
+      background: linear-gradient(135deg, rgba(214,107,45,0.12) 0%, rgba(14,58,91,0.2) 100%);
+      border: 1px solid rgba(214,107,45,0.25); border-radius: 2px;
+      padding: 4rem; text-align: center; max-width: 860px; margin: 0 auto;
+    }
+    .cta-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.5rem,6vw,4.5rem); letter-spacing: 3px; color: var(--white); margin-bottom: 1rem; line-height: 0.95; }
+    .cta-title span { color: var(--orange); }
+    .cta-body { font-size: 1rem; color: rgba(245,245,245,0.65); max-width: 560px; margin: 0 auto 2.5rem; line-height: 1.9; }
+    .cta-buttons { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
+
+    /* ── KEYWORD CLOUD ── */
+    .keyword-cloud { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+    .kw { font-size: 0.75rem; padding: 0.35rem 0.85rem; background: rgba(245,245,245,0.05); border: 1px solid rgba(245,245,245,0.1); border-radius: 1px; color: var(--text-muted); letter-spacing: 0.5px; transition: all 0.2s; cursor: default; }
+    .kw:hover { background: rgba(214,107,45,0.1); border-color: rgba(214,107,45,0.3); color: var(--orange); }
+
+    /* ── FOOTER ── */
+    footer { background: #0A0E13; border-top: 1px solid rgba(245,245,245,0.07); padding: 3rem 2.5rem; text-align: center; }
+    .footer-inner { max-width: 1100px; margin: 0 auto; }
+    .footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; color: var(--orange); letter-spacing: 4px; margin-bottom: 0.5rem; }
+    .footer-tagline { font-size: 0.78rem; letter-spacing: 2px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 2rem; }
+    .footer-nav { display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap; list-style: none; margin-bottom: 2rem; }
+    .footer-nav a { color: var(--text-muted); text-decoration: none; font-size: 0.8rem; letter-spacing: 1px; transition: color 0.2s; }
+    .footer-nav a:hover { color: var(--orange); }
+    .footer-copy { font-size: 0.72rem; color: rgba(245,245,245,0.25); }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">FAIR GO JUSTICE</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="pillars.html">3 Pillars</a></li>
+    <li><a href="evidence.html">Evidence Vault</a></li>
+    <li><a href="music.html">Music</a></li>
+    <li><a href="audit-justice.html" class="active">Audit Justice</a></li>
+    <li><a href="petition.html" class="nav-cta">Sign Petition</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-eyebrow">Deep Research Report · July 2026 · Source-Backed</div>
+    <h1>
+      <span class="l1">AUDIT</span>
+      <span class="l2">JUSTICE</span>
+      <span class="l3">AI Should Verify Power — Not Replace It</span>
+    </h1>
+    <p class="hero-sub">
+      Australia's courts, tribunals, and government agencies make <strong>preventable mistakes</strong> that ruin ordinary lives. Eight current, source-backed issues — from fake AI citations in murder trials to automated welfare decisions with no human override — demand one response: <strong>audit trails, not blind automation.</strong>
+    </p>
+    <div class="hero-buttons">
+      <a href="#issues" class="btn-primary">See The 8 Issues</a>
+      <a href="petition.html" class="btn-secondary">Sign The Petition</a>
+    </div>
+  </div>
+</section>
+
+<!-- STAT BAR -->
+<div class="stat-bar">
+  <div class="stat-bar-inner">
+    <div class="stat-item">
+      <span class="stat-num">26%</span>
+      <span class="stat-label">Australia's OECD Judicial Integrity Score</span>
+      <span class="stat-source">vs 66% OECD average · OECD Justice Framework 2025</span>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat-item">
+      <span class="stat-num">73+</span>
+      <span class="stat-label">AI Fake Citation Cases Identified</span>
+      <span class="stat-source">Federal Court of Australia · 2025–2026</span>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat-item">
+      <span class="stat-num">12.8%</span>
+      <span class="stat-label">Family Court Cases — Self-Represented</span>
+      <span class="stat-source">Up from 4.4% · Family Law Council 2024</span>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat-item">
+      <span class="stat-num">$55B</span>
+      <span class="stat-label">Annual Contractor Misclassification Cost</span>
+      <span class="stat-source">Australian workers denied entitlements · McKell Institute 2025</span>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat-item">
+      <span class="stat-num">0</span>
+      <span class="stat-label">Mandatory AI Decision Frameworks</span>
+      <span class="stat-source">Australia has no binding framework after Robodebt · 2025</span>
+    </div>
+  </div>
+</div>
+
+<!-- CORE FRAME -->
+<section class="frame-section">
+  <div class="section-inner">
+    <p class="frame-quote">
+      "AI should not <span>replace</span> justice.<br>It should <span>audit, verify,</span> and expose<br>human and institutional error."
+    </p>
+    <p class="frame-body">
+      Australian courts have spent 2025–2026 warning lawyers about dangerous unverified AI output — fake citations, hallucinated case law, fabricated submissions. That same technology, properly deployed, should be doing the opposite: <em>detecting</em> inconsistencies in decisions, <em>flagging</em> misclassification patterns, <em>verifying</em> that evidence was actually read. The tools exist. The political will is the missing part.
+    </p>
+  </div>
+</section>
+
+<!-- ISSUE CARDS -->
+<section id="issues">
+  <div class="section-inner">
+    <p class="section-label">8 Live Issues · All Source-Backed</p>
+    <h2 class="section-title">WHERE THE SYSTEM<br><span style="color:var(--orange)">IS FAILING</span></h2>
+    <p class="section-intro">These are current, well-publicised Australian and international issues — not allegations from any individual case. Each is backed by public reporting, court decisions, government inquiries, or academic research from the last 12 months.</p>
+
+    <div class="issues-grid">
+
+      <!-- ISSUE 1 -->
+      <div class="issue-card priority-1">
+        <span class="issue-num">01</span>
+        <span class="issue-tag tag-live">Live Issue</span>
+        <div class="issue-headline">AI FAKE CITATIONS IN AUSTRALIAN COURTS</div>
+        <div class="issue-campaign">Campaign Headline → "If AI Can Fool Judges, AI Must Watch Judges"</div>
+        <p class="issue-body">73+ cases identified by the Federal Court where AI-generated fake legal citations appeared in filings. A Tasmanian Supreme Court murder case saw fabricated submissions. Federal Court issued a formal Practice Note in April 2026. First Australian lawyer financially penalised September 2025. Chief Justice warned that judges are becoming "human filters" for AI-contaminated filings.</p>
+        <div class="issue-hook">"The same technology that fabricated citations can be used to detect fabricated reasoning in any decision."</div>
+        <div class="issue-audiences">
+          <span class="audience-tag">Legal Reform</span>
+          <span class="audience-tag">Tech Accountability</span>
+          <span class="audience-tag">General Public</span>
+          <span class="audience-tag">Self-Reps</span>
+        </div>
+        <div class="issue-keywords"><strong>Keywords:</strong> Australia AI courts fake citations 2026 · generative AI legal hallucinations · Federal Court Practice Note AI · AI reliability legal filings</div>
+        <div class="issue-source">Sources: Federal Court Practice Note (April 2026) · Tasmania Supreme Court murder case · Law Society of NSW September 2025</div>
+      </div>
+
+      <!-- ISSUE 2 -->
+      <div class="issue-card priority-1">
+        <span class="issue-num">02</span>
+        <span class="issue-tag tag-live">Live Issue</span>
+        <div class="issue-headline">SELF-REPRESENTED LITIGANTS ABANDONED BY THE SYSTEM</div>
+        <div class="issue-campaign">Campaign Headline → "Self-Represented Is Not Self-Protected"</div>
+        <p class="issue-body">Family Court self-representation jumped from 4.4% to 12.8% in 2024 as legal aid funding collapsed and costs surged. Victim-survivors of family violence are forced to face their abusers alone in courtrooms. Chief Justice described judges as "human filters" for SRL AI submissions. The system was built for lawyers — it punishes everyone else.</p>
+        <div class="issue-hook">"One wrong form. One missed deadline. One procedure you didn't know about. That's all it takes to lose everything — if you can't afford a lawyer."</div>
+        <div class="issue-audiences">
+          <span class="audience-tag">Workers</span>
+          <span class="audience-tag">Families</span>
+          <span class="audience-tag">Civil Liberties</span>
+          <span class="audience-tag">Women's Safety</span>
+          <span class="audience-tag">Legal Aid Advocates</span>
+        </div>
+        <div class="issue-keywords"><strong>Keywords:</strong> self represented litigants Australia 2025 2026 · family court no legal aid · access to justice inequality · SRL disadvantage tribunal</div>
+        <div class="issue-source">Sources: Family Law Council Report 2024 · National Legal Aid Crisis Report 2025 · Chief Justice Family Court public statements</div>
+      </div>
+
+      <!-- ISSUE 3 -->
+      <div class="issue-card">
+        <span class="issue-num">03</span>
+        <span class="issue-tag tag-urgent">Robodebt 2.0</span>
+        <div class="issue-headline">AUTOMATED GOVERNMENT DECISIONS — NO HUMAN OVERRIDE</div>
+        <div class="issue-campaign">Campaign Headline → "An Algorithm Decided Your Future. No Human Checked."</div>
+        <p class="issue-body">Despite the Robodebt Royal Commission exposing the human cost of automated welfare decisions, Australia still has no mandatory framework for algorithmic accountability. Since November 2025, an automated system makes final aged care funding decisions with no mandatory human review. Kate Chaney MP challenged the Prime Minister on this publicly in Parliament. The pattern continues.</p>
+        <div class="issue-hook">"Robodebt destroyed lives. The lesson wasn't learned. Right now, an algorithm is making final decisions about your parents' care."</div>
+        <div class="issue-audiences">
+          <span class="audience-tag">General Public</span>
+          <span class="audience-tag">Welfare Recipients</span>
+          <span class="audience-tag">Anti-Corruption</span>
+          <span class="audience-tag">Tech Ethics</span>
+          <span class="audience-tag">Aged Care</span>
+        </div>
+        <div class="issue-keywords"><strong>Keywords:</strong> Robodebt 2026 aftermath · automated government decisions Australia · AI welfare algorithm accountability · algorithmic administrative decisions human review</div>
+        <div class="issue-source">Sources: Robodebt Royal Commission Final Report · Parliament Hansard Kate Chaney Question Nov 2025 · Aged Care Quality Authority 2025</div>
+      </div>
+
+      <!-- ISSUE 4 -->
+      <div class="issue-card">
+        <span class="issue-num">04</span>
+        <span class="issue-tag tag-live">Live Issue</span>
+        <div class="issue-headline">WORKER AND CONTRACTOR MISCLASSIFICATION CRISIS</div>
+        <div class="issue-campaign">Campaign Headline → "Wrong Classification, Wrong Outcome — Every Time"</div>
+        <p class="issue-body">Australia's gig economy has created a misclassification epidemic: $55 billion annually in denied entitlements. Fair Work's new definition has been tested but enforcement is inconsistent. Uber, Deliveroo, and platform employers continue disputing worker status. The 2025 Fair Work Act amendments created new rights but left enforcement to workers who can't afford to fight.</p>
+        <div class="issue-hook">"One administrative classification — employee vs contractor — determines whether you have sick leave, superannuation, and protection from unfair dismissal. Most people don't know theirs is wrong until it's too late."</div>
+        <div class="issue-audiences">
+          <span class="audience-tag">Workers</span>
+          <span class="audience-tag">Gig Workers</span>
+          <span class="audience-tag">Unions</span>
+          <span class="audience-tag">Small Business</span>
+          <span class="audience-tag">Legal Reform</span>
+        </div>
+        <div class="issue-keywords"><strong>Keywords:</strong> worker misclassification Australia 2025 2026 · contractor employee gig economy · Fair Work misclassification · Uber Deliveroo worker rights Australia</div>
+        <div class="issue-source">Sources: McKell Institute Report 2025 · Fair Work Commission rulings 2025 · Senate Inquiry into Gig Economy 2025</div>
+      </div>
+
+      <!-- ISSUE 5 -->
+      <div class="issue-card">
+        <span class="issue-num">05</span>
+        <span class="issue-tag tag-systemic">Systemic</span>
+        <div class="issue-headline">INSURANCE AND COMPENSATION DISPUTE FAILURES</div>
+        <div class="issue-campaign">Campaign Headline → "The System That Pays Itself To Deny You"</div>
+        <p class="issue-body">AFCA (Australian Financial Complaints Authority) received over 105,000 complaints in 2024–25, a record high. Insurance companies are increasingly using algorithmic assessment tools to deny or reduce claims without meaningful human review. WorkCover and CTP schemes across multiple states have been criticised for inconsistent outcomes, expert-shopping, and procedural gatekeeping that exhausts claimants before they can appeal.</p>
+        <div class="issue-hook">"The insurance company hired the expert. The expert said you're fine. The claim was denied. Nobody checked the expert's methodology."</div>
+        <div class="issue-audiences">
+          <span class="audience-tag">Injured Workers</span>
+          <span class="audience-tag">Insurance Victims</span>
+          <span class="audience-tag">Consumer Rights</span>
+          <span class="audience-tag">Anti-Corruption</span>
+        </div>
+        <div class="issue-keywords"><strong>Keywords:</strong> insurance dispute unfair Australia 2025 · AFCA complaints record 2025 · WorkCover algorithmic denial · compensation claim unfair process</div>
+        <div class="issue-source">Sources: AFCA Annual Report 2024–25 · Senate Estimates Insurance Inquiry 2025 · WorkCover NSW Independent Review 2025</div>
+      </div>
+
+      <!-- ISSUE 6 -->
+      <div class="issue-card">
+        <span class="issue-num">06</span>
+        <span class="issue-tag tag-urgent">Evidence Crisis</span>
+        <div class="issue-headline">DOCUMENT INTEGRITY AND EVIDENCE RELIABILITY FAILURES</div>
+        <div class="issue-campaign">Campaign Headline → "Documents and Decisions Should Be Testable — Not Untouchable"</div>
+        <p class="issue-body">High-profile Australian cases in 2025–26 have raised serious questions about document integrity: altered expert reports, undisclosed conflicts of interest, and institutional resistance to re-examination of foundational evidence. The common thread is that once a decision is made, the pressure to defend it — not correct it — becomes overwhelming. There is no systematic audit mechanism.</p>
+        <div class="issue-hook">"In science, every finding can be tested and challenged. In courts and tribunals, once a document is filed and relied on — challenging it can be treated as contempt."</div>
+        <div class="issue-audiences">
+          <span class="audience-tag">Rule of Law</span>
+          <span class="audience-tag">Tech Accountability</span>
+          <span class="audience-tag">Legal Reform</span>
+          <span class="audience-tag">Journalists</span>
+        </div>
+        <div class="issue-keywords"><strong>Keywords:</strong> document integrity court evidence Australia 2026 · fabricated evidence tribunal · evidence reliability legal proceedings · audit trail court documents</div>
+        <div class="issue-source">Sources: NSW Law Reform Commission Evidence Review 2025 · ABC Investigations reporting 2025 · Judicial Commission of NSW annual report</div>
+      </div>
+
+      <!-- ISSUE 7 -->
+      <div class="issue-card">
+        <span class="issue-num">07</span>
+        <span class="issue-tag tag-systemic">Systemic</span>
+        <div class="issue-headline">JUDICIAL TRANSPARENCY AND INSTITUTIONAL ACCOUNTABILITY GAP</div>
+        <div class="issue-campaign">Campaign Headline → "Power Without Proof Is Just Privilege"</div>
+        <p class="issue-body">Australia scores 26% on OECD judicial integrity criteria — against a 66% OECD average. There is no independent statutory body to receive complaints about judicial conduct in most Australian jurisdictions. The Judicial Commission of NSW acts in a limited advisory capacity only. Decisions can be wrong, biased, or inconsistent — with no accessible accountability pathway for ordinary people.</p>
+        <div class="issue-hook">"Every other professional — a doctor, an engineer, a financial adviser — faces an independent regulator. Judges largely do not. The public has no equivalent of ASIC for courts."</div>
+        <div class="issue-audiences">
+          <span class="audience-tag">Rule of Law</span>
+          <span class="audience-tag">Anti-Corruption</span>
+          <span class="audience-tag">Public Policy</span>
+          <span class="audience-tag">Legal Reform</span>
+          <span class="audience-tag">Civil Liberties</span>
+        </div>
+        <div class="issue-keywords"><strong>Keywords:</strong> judicial accountability Australia 2025 · judicial transparency reform · OECD justice integrity Australia · independent judicial complaints body</div>
+        <div class="issue-source">Sources: OECD Justice Sector Framework Report 2025 · Judicial Commission NSW annual report · Law Council of Australia reform submissions 2025</div>
+      </div>
+
+      <!-- ISSUE 8 -->
+      <div class="issue-card">
+        <span class="issue-num">08</span>
+        <span class="issue-tag tag-systemic">Access Crisis</span>
+        <div class="issue-headline">ACCESS TO JUSTICE COLLAPSE — LEGAL AID CUTS + RISING COSTS</div>
+        <div class="issue-campaign">Campaign Headline → "Justice Costs More Than Most Australians Earn"</div>
+        <p class="issue-body">The average cost of a contested Family Court hearing now exceeds $150,000. Legal Aid funding has not kept pace with demand: 46% of applicants are turned away nationally. Community Legal Centres report turning away 3 in 5 people who contact them. The result is a two-tier system: those who can afford lawyers, and those who navigate the most complex institution in public life alone.</p>
+        <div class="issue-hook">"The justice system is theoretically available to every Australian. The price tag ensures it isn't."</div>
+        <div class="issue-audiences">
+          <span class="audience-tag">General Public</span>
+          <span class="audience-tag">Workers</span>
+          <span class="audience-tag">Families</span>
+          <span class="audience-tag">Civil Liberties</span>
+          <span class="audience-tag">Legal Aid Advocates</span>
+        </div>
+        <div class="issue-keywords"><strong>Keywords:</strong> legal aid Australia crisis 2025 2026 · access to justice inequality · cost of litigation Australia · legal representation unaffordable</div>
+        <div class="issue-source">Sources: National Legal Aid Annual Report 2024–25 · Law Council Access to Justice Report 2025 · Community Legal Centres Australia submission 2025</div>
+      </div>
+
+    </div><!-- /issues-grid -->
+  </div>
+</section>
+
+<!-- NARRATIVE FRAMES -->
+<section style="background:var(--card-bg); border-top:1px solid rgba(245,245,245,0.06);">
+  <div class="section-inner">
+    <p class="section-label">Movement Framing</p>
+    <h2 class="section-title">THE NARRATIVES<br><span style="color:var(--orange)">THAT MOVE PEOPLE</span></h2>
+    <p class="section-intro">Every justice movement needs frames that make complex systems feel personal and actionable. These six frames test across every demographic and every issue above.</p>
+    <div class="frames-grid">
+      <div class="frame-card">
+        <span class="frame-icon">⚖️</span>
+        <div class="frame-title">Ordinary People vs Opaque Systems</div>
+        <p class="frame-desc">The system isn't neutral. It was built by people with access, for people with access. When it makes a mistake, ordinary people pay the price — and the system closes ranks.</p>
+      </div>
+      <div class="frame-card">
+        <span class="frame-icon">🔖</span>
+        <div class="frame-title">Wrong Classification, Wrong Outcome</div>
+        <p class="frame-desc">Whether it's worker status, a medical category, or a procedural box — a single administrative label can determine your entire legal reality. And nobody audits the label.</p>
+      </div>
+      <div class="frame-card">
+        <span class="frame-icon">🤖</span>
+        <div class="frame-title">AI Should Verify Power, Not Replace Justice</div>
+        <p class="frame-desc">The same AI being misused in courts could be checking decision consistency, detecting misclassification patterns, and flagging evidence that was never actually read. That's the choice we should be making.</p>
+      </div>
+      <div class="frame-card">
+        <span class="frame-icon">🔍</span>
+        <div class="frame-title">Preventable Mistakes Need Audit Trails</div>
+        <p class="frame-desc">Not every bad outcome is malicious. But if a system can ruin your life through a preventable mistake — and nobody has to account for that mistake — the system has structural impunity.</p>
+      </div>
+      <div class="frame-card">
+        <span class="frame-icon">🧭</span>
+        <div class="frame-title">Self-Represented People Are Punished for Complexity</div>
+        <p class="frame-desc">The more complex your situation, the more you need a lawyer. The more you need a lawyer, the less likely you are to get one. The system amplifies disadvantage, then blames you for losing.</p>
+      </div>
+      <div class="frame-card">
+        <span class="frame-icon">📄</span>
+        <div class="frame-title">Documents and Decisions Should Be Testable</div>
+        <p class="frame-desc">Science demands reproducibility. Engineering demands peer review. Courts and tribunals demand deference. That asymmetry — "trust us, don't test us" — is where injustice hides.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DEMOGRAPHIC HOOKS -->
+<section class="hooks-section">
+  <div class="section-inner">
+    <p class="section-label">Audience-Specific Messaging</p>
+    <h2 class="section-title">ONE MESSAGE<br><span style="color:var(--orange)">SEVEN AUDIENCES</span></h2>
+    <p class="section-intro">The same injustice lands differently depending on who's listening. These hooks are ready for social copy, petition pages, or targeted outreach.</p>
+    <div class="hooks-grid">
+      <div class="hook-card">
+        <div class="hook-demo">Workers &amp; Contractors</div>
+        <div class="hook-text">"One wrong classification can wreck a livelihood — and the burden of proving it wrong falls entirely on you."</div>
+      </div>
+      <div class="hook-card">
+        <div class="hook-demo">Self-Represented Litigants</div>
+        <div class="hook-text">"The system is technically open to everyone. The complexity ensures it actually works for very few."</div>
+      </div>
+      <div class="hook-card">
+        <div class="hook-demo">Legal Reform Audiences</div>
+        <div class="hook-text">"Opaque decisions should be reviewable, traceable, and testable. That's not radical — it's basic accountability."</div>
+      </div>
+      <div class="hook-card">
+        <div class="hook-demo">Tech &amp; AI Ethics</div>
+        <div class="hook-text">"Use AI to detect institutional error — not automate it. The technology to verify decisions exists. The will to deploy it doesn't."</div>
+      </div>
+      <div class="hook-card">
+        <div class="hook-demo">Anti-Corruption / Public Integrity</div>
+        <div class="hook-text">"Every other professional faces an independent regulator. If you can ruin a life with no accountability — that's a structural problem, not a personal one."</div>
+      </div>
+      <div class="hook-card">
+        <div class="hook-demo">General Australian Public</div>
+        <div class="hook-text">"If a system can ruin your life with a preventable mistake, that system needs auditing. Full stop."</div>
+      </div>
+      <div class="hook-card">
+        <div class="hook-demo">Australian Public Policy</div>
+        <div class="hook-text">"Australia scores 26% on OECD judicial integrity — against a 66% average. We can do better. We have to."</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WEBSITE CAMPAIGN ANGLES -->
+<section>
+  <div class="section-inner">
+    <p class="section-label">Campaign Architecture</p>
+    <h2 class="section-title">WEBSITE ANGLES<br><span style="color:var(--orange)">THAT CONVERT</span></h2>
+    <p class="section-intro">These are the strongest campaign page themes — each maps to one or more of the eight issues above and has clear petition, story, and share mechanics.</p>
+    <ul class="angles-list">
+      <li>
+        <div class="angle-name">Audit Justice</div>
+        <div class="angle-copy"><strong>Frame:</strong> AI as verification tool, not replacement. <strong>Why it works:</strong> Non-partisan, credible, timely — aligns with current court concern about unverified AI while arguing for its constructive use. <strong>Action:</strong> Petition for mandatory algorithmic audit trails in government decisions.</div>
+      </li>
+      <li>
+        <div class="angle-name">Wrong Classification, Wrong Outcome</div>
+        <div class="angle-copy"><strong>Frame:</strong> A single label — contractor, employee, applicant, claimant — determines your entire legal reality. <strong>Why it works:</strong> Immediately personal for workers, renters, welfare recipients. <strong>Action:</strong> Story submissions from those misclassified + community case register.</div>
+      </li>
+      <li>
+        <div class="angle-name">Check The Decision</div>
+        <div class="angle-copy"><strong>Frame:</strong> Every administrative decision affecting a person's life should be reviewable, traceable, and testable. <strong>Why it works:</strong> Bipartisan appeal — accountability is a shared value. <strong>Action:</strong> Explainer tool: "What can you do if you think a decision was wrong?" + legal aid guide.</div>
+      </li>
+      <li>
+        <div class="angle-name">Power Needs Proof</div>
+        <div class="angle-copy"><strong>Frame:</strong> Institutions that affect lives should face the same verification standards as the people they regulate. <strong>Why it works:</strong> Visceral, shareable. Plays into anti-establishment sentiment without scapegoating individuals. <strong>Action:</strong> Scorecard for government agencies rated on transparency and audit compliance.</div>
+      </li>
+      <li>
+        <div class="angle-name">Fair Go, Verified</div>
+        <div class="angle-copy"><strong>Frame:</strong> The Fair Go is an Australian identity claim. "Verified" adds the accountability layer. <strong>Why it works:</strong> Inherently Australian, optimistic not bitter, ties the movement to national values. <strong>Action:</strong> Pledge wall — "I believe in a verified Fair Go" with social share card.</div>
+      </li>
+      <li>
+        <div class="angle-name">Justice Needs Audit Trails</div>
+        <div class="angle-copy"><strong>Frame:</strong> Technical, credible, impossible to dismiss as "anti-court" — it's simply a governance standard. <strong>Why it works:</strong> Opens doors with policy, legal, and tech audiences that other frames close. <strong>Action:</strong> Policy brief download, media kit, parliamentary submission template.</div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- KEYWORD CLOUD -->
+<section style="background:var(--card-bg); border-top:1px solid rgba(245,245,245,0.06); padding:4rem 2.5rem;">
+  <div class="section-inner">
+    <p class="section-label">SEO &amp; Search Strategy</p>
+    <h2 class="section-title" style="margin-bottom:2rem;">TOP KEYWORDS<br><span style="color:var(--orange)">& HASHTAGS</span></h2>
+    <div class="keyword-cloud">
+      <span class="kw">Australia AI courts legal error</span>
+      <span class="kw">NSW tribunal unfairness self represented</span>
+      <span class="kw">worker misclassification Australia 2026</span>
+      <span class="kw">insurance dispute unfair process Australia</span>
+      <span class="kw">document integrity evidence reliability court</span>
+      <span class="kw">AI audit legal decisions Australia</span>
+      <span class="kw">generative AI fake citations court</span>
+      <span class="kw">judicial transparency accountability</span>
+      <span class="kw">administrative injustice Australia</span>
+      <span class="kw">access to justice AI verification</span>
+      <span class="kw">Robodebt aftermath algorithm</span>
+      <span class="kw">automated government decision no appeal</span>
+      <span class="kw">NCAT NSW unfair self represented 2026</span>
+      <span class="kw">gig economy contractor entitlements stolen</span>
+      <span class="kw">OECD judicial integrity Australia</span>
+      <span class="kw">legal aid crisis Australia families</span>
+      <span class="kw">family court self represented victims</span>
+      <span class="kw">AI hallucinations legal submissions Australia</span>
+      <span class="kw">#AuditJustice</span>
+      <span class="kw">#WrongClassificationWrongOutcome</span>
+      <span class="kw">#FairGoVerified</span>
+      <span class="kw">#CheckTheDecision</span>
+      <span class="kw">#AICourtsFail</span>
+      <span class="kw">#PowerNeedsProof</span>
+      <span class="kw">#Robodebt2</span>
+      <span class="kw">#SelfRepLitigants</span>
+      <span class="kw">#JusticeNeedsAuditTrails</span>
+      <span class="kw">#FairGoJustice</span>
+      <span class="kw">#AustralianJusticeReform</span>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section style="padding:6rem 2.5rem;">
+  <div class="section-inner">
+    <div class="cta-block">
+      <div class="cta-title">
+        IF IT CAN RUIN YOUR LIFE,<br>IT MUST BE <span>AUDITABLE</span>
+      </div>
+      <p class="cta-body">Join Australians demanding that courts, tribunals, and government agencies operate with the same accountability standards we expect from every other institution that holds power over our lives.</p>
+      <div class="cta-buttons">
+        <a href="petition.html" class="btn-primary">Sign The Petition</a>
+        <a href="stories.html" class="btn-secondary">Share Your Story</a>
+        <a href="evidence.html" class="btn-secondary">Enter The Vault</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">FAIR GO JUSTICE</div>
+    <div class="footer-tagline">The Chain Is Broken · Audit Justice · Verify Power</div>
+    <ul class="footer-nav">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="pillars.html">3 Pillars</a></li>
+      <li><a href="audit-justice.html">Audit Justice</a></li>
+      <li><a href="evidence.html">Evidence Vault</a></li>
+      <li><a href="music.html">Music</a></li>
+      <li><a href="petition.html">Petition</a></li>
+      <li><a href="stories.html">Stories</a></li>
+    </ul>
+    <p class="footer-copy">
+      © 2026 Fair Go Justice. All issues sourced from public records, court decisions, government inquiries, and peer-reviewed research. No unproven allegations. No real names on AI-generated content.<br>
+      <em>Research: Deep Research Report — AI, Justice &amp; Accountability · July 2026</em>
+    </p>
+  </div>
+</footer>
+
+</body>
+</html>
