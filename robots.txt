@@ -3,9 +3,10 @@ Allow: /
 
 Sitemap: https://fairgojustice.com.au/sitemap.xml
 
-# Block old/dev variants
+# Block dev/draft variants
 Disallow: /index_v2.html
 Disallow: /index_v3.html
+Disallow: /index_v4.html
 Disallow: /main_v2.css
 Disallow: /main_v3.css
 Disallow: /evidence_v2.html
@@ -25,3 +26,8 @@ Disallow: /site_index.html
 Disallow: /site_music.html
 Disallow: /site_pillars.html
 Disallow: /site_stories.html
+Disallow: /graphics-guide.html
+Disallow: /tiktok-callback.html
+Disallow: /youtube_daily_queue.json
+Disallow: /youtube_upload_manifest.json
+Disallow: /youtube_setup.md
