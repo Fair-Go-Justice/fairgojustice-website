@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Fabricated Citations in Australian Courts — What the Data Shows | Fair Go Justice</title>
+  <meta name="description" content="73+ documented cases of AI-fabricated fake citations in Australian courtrooms. Hallucinated case law, phantom precedents and zero accountability. Fair Go Justice demands mandatory AI auditing in courts.">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="Fair Go Justice">
+  <link rel="canonical" href="https://fairgojustice.com.au/ai-citations.html">
+  <meta property="og:title" content="AI Fabricated Citations in Australian Courts | Fair Go Justice">
+  <meta property="og:description" content="73+ documented cases of AI-fabricated fake citations in Australian courts. Phantom precedents, hallucinated case law — and why nothing has been done about it.">
+  <meta property="og:image" content="https://raw.githubusercontent.com/Fair-Go-Justice/fairgojustice-website/main/thumbnails/fgj_master_poster_web.jpg">
+  <meta property="og:url" content="https://fairgojustice.com.au/ai-citations.html">
+  <meta property="og:type" content="article">
+  <meta property="og:locale" content="en_AU">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="AI Fake Citations: Australian Courts | Fair Go Justice">
+  <meta name="twitter:description" content="73+ AI-hallucinated citations found in Australian courts. No audit trail. No accountability. Fair Go Justice demands algorithmic integrity.">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "AI Fabricated Citations in Australian Courts — What the Data Shows",
+    "description": "73+ documented cases of AI-fabricated fake citations in Australian courtrooms. Hallucinated case law and zero accountability.",
+    "author": { "@type": "Organization", "name": "Fair Go Justice", "url": "https://fairgojustice.com.au" },
+    "publisher": { "@type": "Organization", "name": "Fair Go Justice", "logo": { "@type": "ImageObject", "url": "https://fairgojustice.com.au/logo.png" } },
+    "url": "https://fairgojustice.com.au/ai-citations.html",
+    "datePublished": "2026-07-17",
+    "inLanguage": "en-AU",
+    "about": [
+      { "@type": "Thing", "name": "Artificial Intelligence" },
+      { "@type": "Thing", "name": "Australian Courts" },
+      { "@type": "Thing", "name": "Legal Citation" },
+      { "@type": "Thing", "name": "Algorithmic Accountability" }
+    ]
+  }
+  </script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DRTFE1VZYP"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-DRTFE1VZYP');</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0D1117; --navy: #0E3A5B; --orange: #D66B2D; --gold: #D4AF37;
+      --white: #F5F5F5; --red: #C0392B; --green: #27AE60; --text-muted: #8B9DB0;
+      --card-bg: #111820; --card-border: rgba(214,107,45,0.15);
+    }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--white); font-family: 'Space Grotesk', sans-serif; overflow-x: hidden; line-height: 1.7; }
+
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      background: rgba(13,17,23,0.97); backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(214,107,45,0.2);
+      padding: 0 2.5rem; height: 68px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; color: var(--orange); letter-spacing: 3px; text-decoration: none; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
+    .nav-links a { color: var(--white); text-decoration: none; font-size: 0.78rem; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase; opacity: 0.8; transition: all 0.2s; }
+    .nav-links a:hover { opacity: 1; color: var(--orange); }
+    .nav-cta { padding: 0.45rem 1.3rem; background: var(--orange); color: #fff !important; border-radius: 1px; opacity: 1 !important; }
+    @media(max-width:768px){ .nav-links { display: none; } }
+
+    .hero {
+      min-height: 85vh;
+      background:
+        linear-gradient(160deg, rgba(13,17,23,0.6) 0%, rgba(192,57,43,0.18) 40%, rgba(13,17,23,0.95) 80%, var(--bg) 100%),
+        repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(192,57,43,0.03) 2px, rgba(192,57,43,0.03) 4px);
+      display: flex; align-items: center;
+      padding-top: 68px; position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse 60% 50% at 65% 40%, rgba(192,57,43,0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-content { max-width: 1100px; margin: 0 auto; padding: 5rem 2.5rem 4rem; position: relative; z-index: 2; }
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 0.7rem;
+      font-size: 0.72rem; letter-spacing: 4px; text-transform: uppercase; color: var(--red);
+      border: 1px solid rgba(192,57,43,0.4); padding: 0.4rem 1rem; border-radius: 1px; margin-bottom: 2rem;
+    }
+    .hero-eyebrow::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--red); animation: pdot 2s infinite; }
+    @keyframes pdot { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(1.3)} }
+    .hero h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3.8rem, 10vw, 8rem);
+      line-height: 0.88; letter-spacing: 2px; margin-bottom: 1.5rem;
+    }
+    .hero h1 .l1 { display: block; color: var(--white); }
+    .hero h1 .l2 { display: block; color: #E74C3C; text-shadow: 0 0 60px rgba(231,76,60,0.5); }
+    .hero h1 .l3 { display: block; color: var(--white); font-size: 0.45em; letter-spacing: 6px; margin-top: 0.4em; opacity: 0.85; }
+    .hero-sub { font-size: clamp(1rem,2vw,1.15rem); color: rgba(245,245,245,0.72); max-width: 640px; line-height: 1.9; margin-bottom: 2.8rem; font-weight: 300; }
+    .hero-sub strong { color: #E74C3C; font-weight: 600; }
+    .hero-buttons { display: flex; gap: 1.2rem; flex-wrap: wrap; margin-bottom: 3.5rem; }
+    .btn-primary { padding: 1.05rem 2.6rem; background: var(--orange); color: #fff; font-family: 'Bebas Neue', sans-serif; font-size: 1.15rem; letter-spacing: 3px; text-decoration: none; border-radius: 1px; transition: all 0.25s; display: inline-block; }
+    .btn-primary:hover { background: #e8793a; transform: translateY(-2px); box-shadow: 0 8px 30px rgba(214,107,45,0.4); }
+    .btn-secondary { padding: 1.05rem 2.6rem; background: transparent; color: var(--white); font-family: 'Bebas Neue', sans-serif; font-size: 1.15rem; letter-spacing: 3px; text-decoration: none; border: 1px solid rgba(245,245,245,0.35); border-radius: 1px; transition: all 0.25s; display: inline-block; }
+    .btn-secondary:hover { border-color: var(--white); transform: translateY(-2px); }
+
+    .stat-bar { background: rgba(192,57,43,0.08); border-top: 1px solid rgba(192,57,43,0.2); border-bottom: 1px solid rgba(192,57,43,0.2); padding: 1.6rem 2.5rem; }
+    .stat-bar-inner { max-width: 1100px; margin: 0 auto; display: flex; gap: 2rem; flex-wrap: wrap; justify-content: space-between; align-items: center; }
+    .stat-item { text-align: center; flex: 1; min-width: 140px; }
+    .stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 2.6rem; color: #E74C3C; letter-spacing: 2px; display: block; line-height: 1; }
+    .stat-label { font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; color: var(--text-muted); margin-top: 0.3rem; }
+    .stat-source { font-size: 0.6rem; color: rgba(245,245,245,0.3); display: block; margin-top: 0.2rem; }
+    .stat-divider { width: 1px; height: 50px; background: rgba(245,245,245,0.08); }
+    @media(max-width:600px){ .stat-divider { display: none; } }
+
+    section { padding: 6rem 2.5rem; }
+    .section-inner { max-width: 1100px; margin: 0 auto; }
+    .section-label { font-size: 0.7rem; letter-spacing: 4px; text-transform: uppercase; color: var(--orange); margin-bottom: 1rem; }
+    .section-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.8rem,6vw,5rem); line-height: 0.9; margin-bottom: 1.5rem; }
+    .section-intro { font-size: 1.05rem; color: rgba(245,245,245,0.7); max-width: 700px; line-height: 1.9; margin-bottom: 3.5rem; font-weight: 300; }
+
+    .explainer { background: var(--card-bg); border-top: 1px solid rgba(214,107,45,0.1); border-bottom: 1px solid rgba(214,107,45,0.1); }
+    .explainer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+    @media(max-width:768px){ .explainer-grid { grid-template-columns: 1fr; gap: 2.5rem; } }
+    .explainer-lead { font-size: 1.25rem; color: var(--white); font-weight: 500; line-height: 1.7; margin-bottom: 1.5rem; }
+    .explainer-body { font-size: 0.95rem; color: rgba(245,245,245,0.65); line-height: 1.9; }
+    .explainer-body p + p { margin-top: 1rem; }
+
+    .explainer-steps { list-style: none; display: flex; flex-direction: column; gap: 1.2rem; }
+    .step { display: flex; gap: 1.2rem; align-items: flex-start; padding: 1.2rem; background: rgba(192,57,43,0.06); border: 1px solid rgba(192,57,43,0.15); border-radius: 2px; }
+    .step-num { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; color: #E74C3C; line-height: 1; min-width: 2rem; }
+    .step-content { flex: 1; }
+    .step-title { font-size: 0.85rem; font-weight: 600; color: var(--white); letter-spacing: 0.5px; margin-bottom: 0.3rem; }
+    .step-desc { font-size: 0.82rem; color: rgba(245,245,245,0.55); line-height: 1.6; }
+
+    .cases-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; }
+    .case-card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 2px; padding: 1.8rem; position: relative; overflow: hidden; transition: all 0.3s; }
+    .case-card:hover { border-color: rgba(231,76,60,0.4); transform: translateY(-3px); box-shadow: 0 12px 40px rgba(0,0,0,0.4); }
+    .case-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: #E74C3C; }
+    .case-jurisdiction { font-size: 0.65rem; letter-spacing: 2.5px; text-transform: uppercase; padding: 0.25rem 0.6rem; background: rgba(192,57,43,0.12); border: 1px solid rgba(192,57,43,0.25); color: #E74C3C; border-radius: 1px; display: inline-block; margin-bottom: 1rem; }
+    .case-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; letter-spacing: 1px; color: var(--white); margin-bottom: 0.6rem; line-height: 1.2; }
+    .case-body { font-size: 0.84rem; color: rgba(245,245,245,0.6); line-height: 1.75; margin-bottom: 1rem; }
+    .case-impact { font-size: 0.8rem; color: #E74C3C; font-style: italic; padding: 0.6rem 0.9rem; border-left: 2px solid #E74C3C; background: rgba(231,76,60,0.05); line-height: 1.5; }
+
+    .demand-section { background: linear-gradient(135deg, var(--navy) 0%, rgba(14,58,91,0.35) 100%); border-top: 1px solid rgba(212,175,55,0.2); border-bottom: 1px solid rgba(212,175,55,0.2); }
+    .demand-list { list-style: none; display: flex; flex-direction: column; gap: 0; max-width: 860px; }
+    .demand-item { display: grid; grid-template-columns: 60px 1fr; gap: 1.5rem; align-items: start; padding: 2rem 0; border-bottom: 1px solid rgba(245,245,245,0.07); }
+    .demand-item:last-child { border-bottom: none; }
+    .demand-num { font-family: 'Bebas Neue', sans-serif; font-size: 2.5rem; color: var(--gold); line-height: 1; }
+    .demand-text h3 { font-family: 'Bebas Neue', sans-serif; font-size: 1.35rem; letter-spacing: 1px; color: var(--white); margin-bottom: 0.5rem; }
+    .demand-text p { font-size: 0.88rem; color: rgba(245,245,245,0.6); line-height: 1.8; }
+
+    .music-section { background: var(--card-bg); border-top: 1px solid rgba(214,107,45,0.1); }
+    .music-card { background: linear-gradient(135deg, rgba(214,107,45,0.1) 0%, rgba(14,58,91,0.15) 100%); border: 1px solid rgba(214,107,45,0.25); border-radius: 2px; padding: 2.5rem; display: flex; gap: 2rem; align-items: flex-start; flex-wrap: wrap; }
+    .music-icon { font-size: 3rem; }
+    .music-body { flex: 1; min-width: 240px; }
+    .music-label { font-size: 0.65rem; letter-spacing: 3px; text-transform: uppercase; color: var(--orange); margin-bottom: 0.5rem; }
+    .music-title { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; letter-spacing: 2px; color: var(--white); margin-bottom: 0.8rem; }
+    .music-desc { font-size: 0.9rem; color: rgba(245,245,245,0.65); line-height: 1.75; margin-bottom: 1.5rem; }
+    .music-embed { width: 100%; border-radius: 2px; overflow: hidden; }
+    .music-embed iframe { width: 100%; height: 166px; border: none; }
+
+    .faq-section {}
+    .faq-list { max-width: 800px; }
+    .faq-item { border-bottom: 1px solid rgba(245,245,245,0.08); padding: 1.8rem 0; }
+    .faq-item:last-child { border-bottom: none; }
+    .faq-q { font-family: 'Bebas Neue', sans-serif; font-size: 1.3rem; letter-spacing: 1px; color: var(--white); margin-bottom: 0.8rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
+    .faq-q::after { content: '+'; color: var(--orange); font-size: 1.8rem; line-height: 1; min-width: 1rem; text-align: right; }
+    .faq-a { font-size: 0.9rem; color: rgba(245,245,245,0.65); line-height: 1.85; }
+    .faq-a a { color: var(--orange); }
+    .faq-a strong { color: var(--white); }
+
+    .cta-section { background: linear-gradient(135deg, rgba(214,107,45,0.08) 0%, rgba(14,58,91,0.15) 100%); border-top: 1px solid rgba(214,107,45,0.15); }
+    .cta-block { border: 1px solid rgba(214,107,45,0.25); border-radius: 2px; padding: 4rem; text-align: center; max-width: 860px; margin: 0 auto; }
+    .cta-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.5rem,6vw,4.5rem); letter-spacing: 3px; color: var(--white); margin-bottom: 1rem; line-height: 0.95; }
+    .cta-title span { color: var(--orange); }
+    .cta-body { font-size: 1rem; color: rgba(245,245,245,0.65); max-width: 560px; margin: 0 auto 2.5rem; line-height: 1.9; }
+    .cta-buttons { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
+
+    footer { background: #0A0E13; border-top: 1px solid rgba(245,245,245,0.07); padding: 3rem 2.5rem; text-align: center; }
+    .footer-inner { max-width: 1100px; margin: 0 auto; }
+    .footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; color: var(--orange); letter-spacing: 4px; margin-bottom: 0.5rem; }
+    .footer-tagline { font-size: 0.78rem; letter-spacing: 2px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 2rem; }
+    .footer-nav { display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap; list-style: none; margin-bottom: 2rem; }
+    .footer-nav a { color: var(--text-muted); text-decoration: none; font-size: 0.78rem; letter-spacing: 1px; text-transform: uppercase; transition: color 0.2s; }
+    .footer-nav a:hover { color: var(--orange); }
+    .footer-copy { font-size: 0.72rem; color: rgba(245,245,245,0.2); }
+  </style>
+</head>
+<body>
+
+<a href="#main" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;">Skip to content</a>
+
+<nav aria-label="Main navigation">
+  <a href="/" class="nav-logo">FAIR GO JUSTICE</a>
+  <ul class="nav-links">
+    <li><a href="/pillars.html">Three Pillars</a></li>
+    <li><a href="/evidence-vault.html">Evidence Vault</a></li>
+    <li><a href="/music.html">Music</a></li>
+    <li><a href="/stories.html">Stories</a></li>
+    <li><a href="/audit-justice.html" class="active">Audit Justice</a></li>
+    <li><a href="/petition.html" class="nav-cta">Sign Petition</a></li>
+  </ul>
+</nav>
+
+<main id="main">
+
+  <!-- HERO -->
+  <section class="hero" aria-labelledby="hero-heading">
+    <div class="hero-content">
+      <div class="hero-eyebrow">⚠ Verified Research Finding — UNSW Law 2025–2026</div>
+      <h1 id="hero-heading">
+        <span class="l1">73 CASES.</span>
+        <span class="l2">FAKE CITATIONS.</span>
+        <span class="l3">AI HALLUCINATIONS IN AUSTRALIAN COURTS — AND COUNTING</span>
+      </h1>
+      <p class="hero-sub">
+        Lawyers are submitting AI-generated legal citations that <strong>do not exist</strong>. Judges are reading them. Cases are being decided on them. There is no national audit trail. There is no mandatory disclosure. There are no penalties. <strong>Fair Go Justice demands algorithmic integrity in every courtroom.</strong>
+      </p>
+      <div class="hero-buttons">
+        <a href="/petition.html" class="btn-primary">Sign the Petition</a>
+        <a href="/audit-justice.html" class="btn-secondary">Audit Justice Campaign</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- STAT BAR -->
+  <div class="stat-bar" role="region" aria-label="Key statistics">
+    <div class="stat-bar-inner">
+      <div class="stat-item">
+        <span class="stat-num">73+</span>
+        <span class="stat-label">Documented AI citation failures</span>
+        <span class="stat-source">UNSW Law — AI in Courts Research, 2025–2026</span>
+      </div>
+      <div class="stat-divider" aria-hidden="true"></div>
+      <div class="stat-item">
+        <span class="stat-num">0</span>
+        <span class="stat-label">National AI disclosure rules</span>
+        <span class="stat-source">No federal mandatory AI-use policy in courts as at Jul 2026</span>
+      </div>
+      <div class="stat-divider" aria-hidden="true"></div>
+      <div class="stat-item">
+        <span class="stat-num">26%</span>
+        <span class="stat-label">Australia's OECD judicial trust rating</span>
+        <span class="stat-source">OECD Justice Index — among lowest in developed world</span>
+      </div>
+      <div class="stat-divider" aria-hidden="true"></div>
+      <div class="stat-item">
+        <span class="stat-num">$548M</span>
+        <span class="stat-label">Robodebt settlement — algorithmic harm</span>
+        <span class="stat-source">Federal Court — Justice Beach, 23 Jun 2026</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- WHAT IS AN AI HALLUCINATION? -->
+  <section class="explainer" aria-labelledby="explainer-heading">
+    <div class="section-inner">
+      <div class="explainer-grid">
+        <div>
+          <p class="section-label">Plain Language Explainer</p>
+          <h2 class="section-title" id="explainer-heading" style="font-size:clamp(2.2rem,5vw,3.8rem);">WHAT IS AN AI FAKE CITATION?</h2>
+          <p class="explainer-lead">An AI model — like ChatGPT — generates a legal case reference that looks real but does not exist. Lawyers submit it in court documents. Judges read it. Nobody checks.</p>
+          <div class="explainer-body">
+            <p>Large language models are trained to produce fluent, authoritative-sounding text. When asked to find supporting case law, they will invent plausible-sounding case names, neutral citations, and even fake summaries — a process researchers call "hallucination."</p>
+            <p>In a legal context, this is catastrophic. A barrister submitting <em>Smith v Commonwealth [2019] NSWCA 142</em> when no such case exists has potentially misled the court. Yet without a mandatory audit trail or AI disclosure obligation, there is currently no systematic way to catch this.</p>
+            <p>Research from UNSW Law has documented over 73 such incidents in Australian courts and legal submissions between 2025 and 2026. The actual number is almost certainly higher — because no one is required to disclose AI use.</p>
+          </div>
+        </div>
+        <div>
+          <p style="font-size:0.72rem;letter-spacing:3px;text-transform:uppercase;color:var(--orange);margin-bottom:1.2rem;">How It Happens — Step by Step</p>
+          <ol class="explainer-steps" aria-label="How AI citation fraud occurs">
+            <li class="step">
+              <span class="step-num">1</span>
+              <div class="step-content">
+                <p class="step-title">Legal professional uses AI to draft submissions</p>
+                <p class="step-desc">AI tools like ChatGPT, Copilot or Gemini are used to speed up research and drafting — often without adequate supervision.</p>
+              </div>
+            </li>
+            <li class="step">
+              <span class="step-num">2</span>
+              <div class="step-content">
+                <p class="step-title">AI invents a convincing but fake case reference</p>
+                <p class="step-desc">The model generates a citation that looks authentic — correct format, plausible name, realistic date. It does not exist in any law database.</p>
+              </div>
+            </li>
+            <li class="step">
+              <span class="step-num">3</span>
+              <div class="step-content">
+                <p class="step-title">Submission is filed without independent verification</p>
+                <p class="step-desc">Under pressure, practitioners fail to cross-check every citation against AustLII, Jade or LexisNexis. The phantom case enters the record.</p>
+              </div>
+            </li>
+            <li class="step">
+              <span class="step-num">4</span>
+              <div class="step-content">
+                <p class="step-title">Judge may rely on it. Opposing party is disadvantaged.</p>
+                <p class="step-desc">If the hallucination is not caught, it may influence a decision. If it is caught, proceedings are disrupted — at cost to the other party.</p>
+              </div>
+            </li>
+            <li class="step">
+              <span class="step-num">5</span>
+              <div class="step-content">
+                <p class="step-title">No audit trail. No mandatory disclosure. No sanction.</p>
+                <p class="step-desc">Australia has no federal rule requiring practitioners to disclose AI use in court documents. Accountability is entirely voluntary.</p>
+              </div>
+            </li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DOCUMENTED PATTERNS -->
+  <section aria-labelledby="cases-heading">
+    <div class="section-inner">
+      <p class="section-label">Documented Pattern Analysis</p>
+      <h2 class="section-title" id="cases-heading">WHERE IT HAS GONE WRONG</h2>
+      <p class="section-intro">These documented patterns reflect the systemic nature of AI citation failures across Australian jurisdictions. No real names, case numbers or findings of fact are reproduced here — all represent verified systemic patterns from research literature.</p>
+      <div class="cases-grid" role="list">
+
+        <article class="case-card" role="listitem">
+          <span class="case-jurisdiction">Civil Proceedings</span>
+          <h3 class="case-title">The Phantom Precedent</h3>
+          <p class="case-body">A civil matter where the submissions filed by one party included two citations to cases later confirmed to have no existence in any Australian law database. The opposing party's legal team identified the discrepancy during trial preparation — causing substantial delays and additional costs.</p>
+          <p class="case-impact">Impact: Hearing adjourned; opposing party bore unnecessary preparation costs. No disciplinary outcome recorded.</p>
+        </article>
+
+        <article class="case-card" role="listitem">
+          <span class="case-jurisdiction">Administrative Review</span>
+          <h3 class="case-title">The Self-Represented Trap</h3>
+          <p class="case-body">Self-represented litigants using free AI tools to research their cases are particularly exposed. Unable to pay for legal database access, they rely on AI-generated summaries that may contain fabricated precedents — then submit these without knowing the citations are non-existent.</p>
+          <p class="case-impact">Impact: Unrepresented parties penalised for errors that better-resourced parties would catch before filing.</p>
+        </article>
+
+        <article class="case-card" role="listitem">
+          <span class="case-jurisdiction">Employment Law</span>
+          <h3 class="case-title">The High-Volume Risk</h3>
+          <p class="case-body">In jurisdictions processing high volumes of routine matters — Fair Work, NCAT, VCAT — AI-assisted drafting is common. Practitioners under time pressure in high-volume settings show the highest correlation with unverified AI-generated citations in documented research.</p>
+          <p class="case-impact">Impact: Systemic pressure on tribunals to verify citations that practitioners have failed to check themselves.</p>
+        </article>
+
+        <article class="case-card" role="listitem">
+          <span class="case-jurisdiction">Family Law</span>
+          <h3 class="case-title">Parenting Matter Submissions</h3>
+          <p class="case-body">In matters where parenting arrangements are contested, submissions have been identified containing AI-generated citations to Federal Circuit Court decisions that do not appear in any case law database. Family law matters involve some of the highest personal stakes in the entire justice system.</p>
+          <p class="case-impact">Impact: Risk that parenting outcomes may be shaped by phantom authority — with no mechanism to retrospectively audit AI use.</p>
+        </article>
+
+        <article class="case-card" role="listitem">
+          <span class="case-jurisdiction">Criminal Appeal</span>
+          <h3 class="case-title">Sentencing Submissions</h3>
+          <p class="case-body">Research identifies patterns where AI-assisted sentencing submissions — designed to argue for leniency — include comparative sentences from cases that cannot be verified as existing. The inability to cross-examine a non-existent precedent creates a one-sided evidentiary environment.</p>
+          <p class="case-impact">Impact: Sentencing may be influenced by fabricated comparisons that cannot be challenged by prosecution.</p>
+        </article>
+
+        <article class="case-card" role="listitem">
+          <span class="case-jurisdiction">Class Actions</span>
+          <h3 class="case-title">The Scale Problem</h3>
+          <p class="case-body">As class actions grow in scale and complexity, AI drafting tools are increasingly used to manage the volume. A single hallucinated citation in a lead submission affects every member of the class — potentially thousands of people who have no visibility into the AI tools being used on their behalf.</p>
+          <p class="case-impact">Impact: Class member outcomes affected by practitioner AI use they cannot see, query or consent to.</p>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- DEMANDS -->
+  <section class="demand-section" aria-labelledby="demands-heading">
+    <div class="section-inner">
+      <p class="section-label">Fair Go Justice — Reform Demands</p>
+      <h2 class="section-title" id="demands-heading">WHAT WE DEMAND</h2>
+      <p class="section-intro">These are not abstract policy proposals. They are minimum standards that any honest justice system must meet if it chooses to permit AI use in legal proceedings.</p>
+      <ol class="demand-list" aria-label="Reform demands">
+        <li class="demand-item">
+          <span class="demand-num">01</span>
+          <div class="demand-text">
+            <h3>Mandatory AI Disclosure</h3>
+            <p>Any legal submission that used AI assistance in drafting or research must include a disclosure to that effect. This is a basic professional obligation — not a burden. Courts cannot assess reliability without knowing the source.</p>
+          </div>
+        </li>
+        <li class="demand-item">
+          <span class="demand-num">02</span>
+          <div class="demand-text">
+            <h3>Citation Verification Requirement</h3>
+            <p>Every case citation must be independently verified against an authoritative legal database (AustLII, Jade, LexisNexis) before filing. The practitioner's signature on a document must certify that citations have been checked — not assumed.</p>
+          </div>
+        </li>
+        <li class="demand-item">
+          <span class="demand-num">03</span>
+          <div class="demand-text">
+            <h3>National Audit Protocol</h3>
+            <p>A structured annual audit — conducted by an independent body — must sample court filings and test citations against verified databases. Without measurement, there is no accountability and no way to quantify the true scale of the problem.</p>
+          </div>
+        </li>
+        <li class="demand-item">
+          <span class="demand-num">04</span>
+          <div class="demand-text">
+            <h3>Practitioner Sanctions for Unchecked AI Submissions</h3>
+            <p>The Legal Services Commissioner and equivalent state bodies must treat the submission of unverified AI-generated citations as a conduct matter. Currently, voluntary guidelines are not enough — there must be real consequences.</p>
+          </div>
+        </li>
+        <li class="demand-item">
+          <span class="demand-num">05</span>
+          <div class="demand-text">
+            <h3>Equality of Access to Verification Tools</h3>
+            <p>Self-represented litigants cannot afford legal database subscriptions. If AI tools are in widespread use, government must fund free public access to citation verification — or the burden of AI errors falls entirely on those who can least afford it.</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- MUSIC -->
+  <section class="music-section" aria-labelledby="music-heading">
+    <div class="section-inner">
+      <p class="section-label">From the Fair Go Justice Music Catalogue</p>
+      <h2 class="section-title" id="music-heading" style="font-size:clamp(2.2rem,5vw,3.8rem);">THE MUSIC OF ALGORITHMIC FAILURE</h2>
+      <p class="section-intro" style="margin-bottom:2rem;">Three tracks from the Fair Go Justice catalogue that speak directly to AI in the justice system — part of a 99-song documentary music project exposing systemic failures.</p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.5rem;">
+        <div class="music-card">
+          <span class="music-icon">🎵</span>
+          <div class="music-body">
+            <p class="music-label">Electronic / Justice Anthem</p>
+            <p class="music-title">ALGORITHMIC LIES</p>
+            <p class="music-desc">When the machine writes the law and no one checks its work — this track tears apart algorithmic decision-making in Australian courts and welfare systems.</p>
+            <a href="https://www.youtube.com/watch?v=svJ7cEuAv9c" class="btn-secondary" style="font-size:0.9rem;padding:0.7rem 1.4rem;" target="_blank" rel="noopener">Watch on YouTube ↗</a>
+          </div>
+        </div>
+        <div class="music-card">
+          <span class="music-icon">🎵</span>
+          <div class="music-body">
+            <p class="music-label">Electronic / Justice Anthem</p>
+            <p class="music-title">THE AI PRECEDENT</p>
+            <p class="music-desc">A direct response to the AI citations crisis — demanding that systems which can ruin lives must be auditable, transparent and accountable to the people they govern.</p>
+            <a href="https://www.youtube.com/watch?v=NqGvxyQPlsw" class="btn-secondary" style="font-size:0.9rem;padding:0.7rem 1.4rem;" target="_blank" rel="noopener">Watch on YouTube ↗</a>
+          </div>
+        </div>
+        <div class="music-card">
+          <span class="music-icon">🎵</span>
+          <div class="music-body">
+            <p class="music-label">Electronic / Justice Anthem</p>
+            <p class="music-title">INVISIBLE CATASTROPHIC</p>
+            <p class="music-desc">The failures that don't make headlines — quiet algorithmic decisions that destroy applications, deny benefits and upend lives without any human review.</p>
+            <a href="https://www.youtube.com/watch?v=rBlV82sgZ-k" class="btn-secondary" style="font-size:0.9rem;padding:0.7rem 1.4rem;" target="_blank" rel="noopener">Watch on YouTube ↗</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq-section" aria-labelledby="faq-heading">
+    <div class="section-inner">
+      <p class="section-label">Common Questions</p>
+      <h2 class="section-title" id="faq-heading" style="font-size:clamp(2.2rem,5vw,3.8rem);">AI IN COURTS — EXPLAINED</h2>
+      <div class="faq-list" role="list">
+        <div class="faq-item" role="listitem">
+          <p class="faq-q" tabindex="0">Is using AI to write legal submissions legal in Australia?</p>
+          <p class="faq-a">There is currently no federal law prohibiting AI use in legal drafting. Some state courts and tribunals have issued guidelines recommending disclosure, but these are not binding in most jurisdictions. <strong>The legal framework has not kept pace with the technology.</strong></p>
+        </div>
+        <div class="faq-item" role="listitem">
+          <p class="faq-q" tabindex="0">Who is responsible when an AI citation turns out to be fake?</p>
+          <p class="faq-a">The practitioner who signed the filing bears professional responsibility. However, without mandatory verification obligations, enforcement is inconsistent. Self-represented litigants using AI tools have no professional obligations — and face consequences alone.</p>
+        </div>
+        <div class="faq-item" role="listitem">
+          <p class="faq-q" tabindex="0">Has any Australian court taken action over fake AI citations?</p>
+          <p class="faq-a">Individual courts have noted the issue in decisions and some jurisdictions have issued practice directions. However, as at mid-2026 there is no national enforcement framework, no published sanctions register, and no centralised data on the scale of the problem.</p>
+        </div>
+        <div class="faq-item" role="listitem">
+          <p class="faq-q" tabindex="0">What is UNSW's research on this issue?</p>
+          <p class="faq-a">Researchers at the University of New South Wales School of Law have been tracking AI-generated citation errors in Australian court filings. Their work, including collaboration with <strong>Professor Lyria Bennett Moses</strong>, documents over 73 incidents and argues for mandatory disclosure and verification standards. Fair Go Justice supports and amplifies this research.</p>
+        </div>
+        <div class="faq-item" role="listitem">
+          <p class="faq-q" tabindex="0">What can I do if I think AI was used improperly in my case?</p>
+          <p class="faq-a">You can request that opposing party submissions be verified, raise the concern with the presiding judge or magistrate, and lodge a complaint with the relevant Legal Services Commissioner. You can also <a href="/stories.html">submit your story</a> to Fair Go Justice — your account helps document the systemic pattern.</p>
+        </div>
+        <div class="faq-item" role="listitem">
+          <p class="faq-q" tabindex="0">How does this connect to the Robodebt scandal?</p>
+          <p class="faq-a">Robodebt demonstrated what happens when automated systems make life-altering decisions without adequate human oversight or audit trails — and the $548.5 million settlement confirmed the consequences. AI citation errors in courts are a manifestation of the same root failure: <strong>algorithmic systems deployed without accountability mechanisms.</strong> See our <a href="/audit-justice.html">Audit Justice campaign</a> for the full picture.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section" aria-labelledby="cta-heading">
+    <div class="section-inner">
+      <div class="cta-block">
+        <h2 class="cta-title" id="cta-heading">DEMAND<br><span>ALGORITHMIC INTEGRITY</span></h2>
+        <p class="cta-body">If AI can determine the outcome of your case, you have the right to know it was used — and the right to have it verified. Sign the petition and join 12,000+ Australians demanding accountable courts.</p>
+        <div class="cta-buttons">
+          <a href="/petition.html" class="btn-primary">Sign the Petition</a>
+          <a href="/evidence-vault.html" class="btn-secondary">Evidence Vault</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <p class="footer-logo">FAIR GO JUSTICE</p>
+    <p class="footer-tagline">Verify the Record — Australia's Justice Reform Movement</p>
+    <nav aria-label="Footer navigation">
+      <ul class="footer-nav">
+        <li><a href="/">Home</a></li>
+        <li><a href="/pillars.html">Three Pillars</a></li>
+        <li><a href="/evidence-vault.html">Evidence Vault</a></li>
+        <li><a href="/music.html">Music</a></li>
+        <li><a href="/audit-justice.html">Audit Justice</a></li>
+        <li><a href="/ai-citations.html" aria-current="page">AI Citations</a></li>
+        <li><a href="/srl-hub.html">SRL Resource Hub</a></li>
+        <li><a href="/petition.html">Petition</a></li>
+      </ul>
+    </nav>
+    <p class="footer-copy">© 2026 Fair Go Justice. All rights reserved. All statistics sourced from publicly available research and government data. No individual is named or identified on this page. This page is for advocacy and education purposes only.</p>
+  </div>
+</footer>
+
+</body>
+</html>
