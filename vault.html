@@ -626,6 +626,158 @@ html, body {
 .panel-ver-badge.ver-review    { background: rgba(0,191,255,0.12); color: #00BFFF; border: 1px solid rgba(0,191,255,0.28); }
 .panel-ver-badge.ver-disputed  { background: rgba(255,59,59,0.12); color: #FF3B3B; border: 1px solid rgba(255,59,59,0.28); }
 
+/* ============================
+   GUIDED TOUR BUTTON
+   ============================ */
+#tour-btn {
+  position: fixed;
+  bottom: 72px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 300;
+  background: rgba(0,191,255,0.08);
+  border: 1px solid rgba(0,191,255,0.55);
+  color: #00BFFF;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 0.95rem;
+  letter-spacing: 0.22em;
+  padding: 10px 28px;
+  cursor: pointer;
+  border-radius: 2px;
+  backdrop-filter: blur(8px);
+  transition: background 0.2s, box-shadow 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+}
+#tour-btn:hover {
+  background: rgba(0,191,255,0.18);
+  box-shadow: 0 0 24px rgba(0,191,255,0.35);
+}
+#tour-btn.hidden { display: none; }
+
+/* ============================
+   TOUR NARRATOR PANEL
+   ============================ */
+#tour-narrator {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  z-index: 500;
+  background: linear-gradient(180deg, rgba(2,4,8,0.0) 0%, rgba(0,0,0,0.97) 100%);
+  backdrop-filter: blur(16px);
+  border-top: 1px solid rgba(0,191,255,0.2);
+  padding: 18px 24px 24px;
+  transform: translateY(100%);
+  transition: transform 0.5s cubic-bezier(0.22,1,0.36,1);
+}
+#tour-narrator.open { transform: translateY(0); }
+
+.tn-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+.tn-room-tag {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.3em;
+  color: rgba(0,191,255,0.6);
+}
+.tn-progress {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+.tn-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.15);
+  transition: background 0.3s;
+}
+.tn-dot.active { background: #00BFFF; box-shadow: 0 0 6px rgba(0,191,255,0.8); }
+.tn-dot.done   { background: rgba(0,191,255,0.3); }
+
+.tn-body {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* Waveform */
+.tn-wave {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  flex-shrink: 0;
+}
+.tn-bar {
+  width: 3px;
+  border-radius: 2px;
+  background: #00BFFF;
+  animation: waveAnim 0.6s ease-in-out infinite alternate;
+}
+.tn-bar:nth-child(1) { height: 8px;  animation-delay: 0.0s; }
+.tn-bar:nth-child(2) { height: 20px; animation-delay: 0.1s; }
+.tn-bar:nth-child(3) { height: 30px; animation-delay: 0.2s; }
+.tn-bar:nth-child(4) { height: 22px; animation-delay: 0.15s; }
+.tn-bar:nth-child(5) { height: 12px; animation-delay: 0.05s; }
+.tn-bar:nth-child(6) { height: 26px; animation-delay: 0.25s; }
+.tn-bar:nth-child(7) { height: 16px; animation-delay: 0.12s; }
+@keyframes waveAnim {
+  from { transform: scaleY(0.35); opacity: 0.5; }
+  to   { transform: scaleY(1);    opacity: 1;   }
+}
+.tn-wave.paused .tn-bar { animation-play-state: paused; opacity: 0.3; }
+
+.tn-subtitle {
+  flex: 1;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(0.78rem, 2.2vw, 1rem);
+  font-weight: 300;
+  color: rgba(245,245,245,0.9);
+  line-height: 1.55;
+  min-height: 48px;
+}
+.tn-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(1.1rem, 3.5vw, 1.6rem);
+  letter-spacing: 0.12em;
+  color: #00BFFF;
+  margin-bottom: 4px;
+}
+
+.tn-controls {
+  display: flex;
+  gap: 10px;
+  flex-shrink: 0;
+  align-items: center;
+}
+.tn-ctrl {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.15);
+  color: #F5F5F5;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 0.8rem;
+  letter-spacing: 0.15em;
+  padding: 8px 16px;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: background 0.2s;
+  white-space: nowrap;
+}
+.tn-ctrl:hover { background: rgba(255,255,255,0.12); }
+.tn-ctrl.primary { border-color: rgba(0,191,255,0.5); color: #00BFFF; }
+.tn-ctrl.danger  { border-color: rgba(255,59,59,0.4); color: #FF3B3B; }
+
+@media (max-width: 600px) {
+  .tn-title { font-size: 1rem; }
+  .tn-subtitle { font-size: 0.75rem; min-height: 56px; }
+  .tn-ctrl { padding: 7px 10px; font-size: 0.72rem; }
+  .tn-wave { display: none; }
+}
+
 </style>
   <link rel="canonical" href="https://fairgojustice.com.au/vault.html">
   <link rel="alternate" hreflang="en-AU" href="https://fairgojustice.com.au/vault.html" />
@@ -736,6 +888,39 @@ html, body {
         <div class="hud-stat-v">9</div>
         <div class="hud-stat-l">Active Nodes</div>
       </div>
+    </div>
+  </div>
+</div>
+
+<!-- GUIDED TOUR BUTTON -->
+<button id="tour-btn" onclick="startGuidedTour()">
+  🎧 GUIDED TOUR
+</button>
+
+<!-- TOUR NARRATOR PANEL -->
+<div id="tour-narrator">
+  <div class="tn-header">
+    <div class="tn-room-tag" id="tn-room-tag">FAIR GO JUSTICE · EVIDENCE VAULT</div>
+    <div class="tn-progress" id="tn-progress"></div>
+  </div>
+  <div class="tn-body">
+    <div class="tn-wave" id="tn-wave">
+      <div class="tn-bar"></div>
+      <div class="tn-bar"></div>
+      <div class="tn-bar"></div>
+      <div class="tn-bar"></div>
+      <div class="tn-bar"></div>
+      <div class="tn-bar"></div>
+      <div class="tn-bar"></div>
+    </div>
+    <div class="tn-subtitle">
+      <div class="tn-title" id="tn-title">GUIDED TOUR</div>
+      <div id="tn-text">Preparing your walkthrough of the Evidence Vault…</div>
+    </div>
+    <div class="tn-controls">
+      <button class="tn-ctrl primary" id="tn-pause-btn" onclick="toggleTourPause()">⏸ PAUSE</button>
+      <button class="tn-ctrl" onclick="skipTourRoom()">NEXT ▶</button>
+      <button class="tn-ctrl danger" onclick="endTour()">✕ EXIT</button>
     </div>
   </div>
 </div>
@@ -1415,6 +1600,209 @@ function openPanel(room) {
 function closePanel() {
   document.getElementById('room-panel').classList.remove('open');
   if (controls) controls.autoRotate = true;
+}
+
+/* ============================
+   GUIDED TOUR ENGINE
+   ============================ */
+const TOUR_SCRIPTS = [
+  {
+    tag: 'INTRODUCTION',
+    title: 'WELCOME TO THE VAULT',
+    text: 'Welcome to the Evidence Vault. What you are about to walk through is not a story. It is a documented record — verified, catalogued, and classified. Nine rooms. Nine dimensions of systemic failure. I will guide you through each one. You can enter any room at any time. Let\'s begin.',
+  },
+  {
+    tag: 'ROOM 01 · EVIDENCE INTAKE',
+    title: 'EVIDENCE INTAKE',
+    text: 'Room One. Evidence Intake. This is where the paper trail begins. Over two hundred and fifty verified source documents, photographs, and records — each one catalogued, cross-referenced, and classified. When institutions fail, documents remember. Every file in this room passed verification. The evidence speaks for itself. Start here.',
+  },
+  {
+    tag: 'ROOM 02 · TIMELINE CHAMBER',
+    title: 'TIMELINE CHAMBER',
+    text: 'Room Two. The Timeline Chamber. Forty-seven documented events, placed in sequence. Twelve contradictions shown in red. Thirty-eight corroborating records glowing gold. This is not an opinion. It is a sequence. Walk it. The moment the record contradicts itself — you will see exactly where the system broke.',
+  },
+  {
+    tag: 'ROOM 03 · CHAIN OF CUSTODY',
+    title: 'CHAIN OF CUSTODY',
+    text: 'Room Three. Chain of Custody. Seven stages. Two breaches detected. This room tracks whether evidence stayed intact from collection to court. Where the chain holds — it glows. Where it breaks — it burns red. Ask yourself: if two breaks exist in one record, how many exist across the whole system?',
+  },
+  {
+    tag: 'ROOM 04 · REFORM CATHEDRAL',
+    title: 'REFORM CATHEDRAL',
+    text: 'Room Four. The Reform Cathedral. Three pillars — Audit Justice, Human Override, Sovereign Ground. They rise from the documented evidence. As failures accumulate, the pillars grow brighter. Fifteen active reform proposals. Twelve submissions already lodged. This room maps the path from systemic failure to structural change. The architecture of accountability.',
+  },
+  {
+    tag: 'ROOM 05 · MUSIC NEXUS',
+    title: 'MUSIC NEXUS',
+    text: 'Room Five. The Music Nexus. One hundred and fifty-seven original tracks. Every one court-safe. Every one authentic. Country. Hip hop. Hard techno. When words in a courtroom go unheard — music crosses every border. Each track is a document set to sound. Walk in. The world changes around you.',
+  },
+  {
+    tag: 'ROOM 06 · AUSTRALIA NETWORK',
+    title: 'AUSTRALIA NETWORK',
+    text: 'Room Six. The Australia Network. Eight cities, glowing on a live accountability map. National reach. Active petitions. This is not an isolated case — it is a pattern visible across the country. Every node contains stories, submissions, and evidence. The movement is geographic. It is real. It is growing.',
+  },
+  {
+    tag: 'ROOM 07 · DOCUMENTARY ARCHIVE',
+    title: 'DOCUMENTARY ARCHIVE',
+    text: 'Room Seven. Documentary Archive. Two episodes live. Sixty-seven minutes of court-safe, AI-narrated audio documentary. Eight episodes in production. This is the Evidence Engine — raw documents transformed into narrative that cannot be ignored. Every claim is sourced. Every episode structured for legal accountability. This is where the record becomes impossible to dismiss.',
+  },
+  {
+    tag: 'ROOM 08 · WITNESS THEATRE',
+    title: 'WITNESS THEATRE',
+    text: 'Room Eight. Witness Theatre. Anonymous community testimony — the lived experience of systemic failure. Open submissions. Twelve documented themes. Every story strengthens the evidentiary record. You are not alone in this system. Patterns only become visible when people speak. If your story belongs here — this room is for you.',
+  },
+  {
+    tag: 'ROOM 09 · FORENSICS LAB',
+    title: 'FORENSICS LAB',
+    text: 'Room Nine. The Forensics Lab. Forty-five questions across four assessment modes. Hard. Clinical. Confronting. This room tests your knowledge of systemic failure points — the traps that catch people before they know they\'re caught. Knowledge is the armour. Understand the system before it understands you.',
+  },
+  {
+    tag: 'TOUR COMPLETE',
+    title: 'THE VAULT IS OPEN',
+    text: 'That completes the guided tour. All nine rooms are open. The evidence does not expire. Return any time. Share what you found. The chain is broken — and now you have seen exactly where.',
+  },
+];
+
+const tourState = {
+  active: false,
+  paused: false,
+  step: 0,       // 0 = intro, 1-9 = rooms, 10 = outro
+  timer: null,
+};
+
+function startGuidedTour() {
+  // Hide the button, show narrator
+  document.getElementById('tour-btn').classList.add('hidden');
+  document.getElementById('tour-narrator').classList.add('open');
+
+  // Build progress dots (9 room dots)
+  const prog = document.getElementById('tn-progress');
+  prog.innerHTML = '';
+  for (let i = 0; i < 9; i++) {
+    const d = document.createElement('div');
+    d.className = 'tn-dot';
+    d.id = 'tn-dot-' + i;
+    prog.appendChild(d);
+  }
+
+  tourState.active = true;
+  tourState.paused = false;
+  tourState.step = 0;
+
+  narrateTourStep();
+}
+
+function narrateTourStep() {
+  if (!tourState.active) return;
+  if (tourState.step >= TOUR_SCRIPTS.length) { endTour(); return; }
+
+  const script = TOUR_SCRIPTS[tourState.step];
+
+  // Update UI
+  document.getElementById('tn-room-tag').textContent = script.tag;
+  document.getElementById('tn-title').textContent = script.title;
+  document.getElementById('tn-text').textContent = script.text;
+
+  // Update progress dots (steps 1-9 are rooms 0-8)
+  for (let i = 0; i < 9; i++) {
+    const dot = document.getElementById('tn-dot-' + i);
+    if (!dot) continue;
+    const roomStep = i + 1;
+    dot.className = 'tn-dot' +
+      (tourState.step === roomStep ? ' active' :
+       tourState.step > roomStep  ? ' done' : '');
+  }
+
+  // Speak
+  speakTourLine(script.text, () => {
+    // After speech ends, pause 2.2s then advance
+    tourState.timer = setTimeout(() => {
+      if (!tourState.paused && tourState.active) {
+        tourState.step++;
+        narrateTourStep();
+      }
+    }, 2200);
+  });
+}
+
+function speakTourLine(text, onEndCb) {
+  if (!('speechSynthesis' in window)) { if (onEndCb) onEndCb(); return; }
+  window.speechSynthesis.cancel();
+
+  const u = new SpeechSynthesisUtterance(text);
+  u.rate  = 0.86;
+  u.pitch = 0.84;
+  u.volume = 0.9;
+
+  const voices = window.speechSynthesis.getVoices();
+  // Prefer deep male voices; fallback to any English
+  const v = voices.find(x => /daniel|alex|fred|bruce|oliver|arthur/i.test(x.name))
+         || voices.find(x => x.lang === 'en-AU')
+         || voices.find(x => x.lang.startsWith('en-') && /male/i.test(x.name))
+         || voices.find(x => x.lang.startsWith('en'));
+  if (v) u.voice = v;
+
+  u.onstart = () => {
+    document.getElementById('tn-wave').classList.remove('paused');
+  };
+  u.onend = () => {
+    document.getElementById('tn-wave').classList.add('paused');
+    if (onEndCb) onEndCb();
+  };
+  u.onerror = () => {
+    document.getElementById('tn-wave').classList.add('paused');
+    if (onEndCb) onEndCb();
+  };
+
+  window.speechSynthesis.speak(u);
+}
+
+function toggleTourPause() {
+  if (!tourState.active) return;
+  const btn = document.getElementById('tn-pause-btn');
+  const wave = document.getElementById('tn-wave');
+
+  if (tourState.paused) {
+    // Resume
+    tourState.paused = false;
+    btn.textContent = '⏸ PAUSE';
+    wave.classList.remove('paused');
+    window.speechSynthesis.resume();
+    // If speech already ended and timer cleared, re-narrate current step
+    if (!window.speechSynthesis.speaking && !window.speechSynthesis.pending) {
+      narrateTourStep();
+    }
+  } else {
+    // Pause
+    tourState.paused = true;
+    btn.textContent = '▶ RESUME';
+    wave.classList.add('paused');
+    window.speechSynthesis.pause();
+    clearTimeout(tourState.timer);
+  }
+}
+
+function skipTourRoom() {
+  if (!tourState.active) return;
+  clearTimeout(tourState.timer);
+  window.speechSynthesis.cancel();
+  document.getElementById('tn-wave').classList.add('paused');
+  tourState.paused = false;
+  document.getElementById('tn-pause-btn').textContent = '⏸ PAUSE';
+  tourState.step++;
+  if (tourState.step >= TOUR_SCRIPTS.length) { endTour(); return; }
+  setTimeout(() => narrateTourStep(), 300);
+}
+
+function endTour() {
+  tourState.active = false;
+  clearTimeout(tourState.timer);
+  window.speechSynthesis.cancel();
+  document.getElementById('tour-narrator').classList.remove('open');
+  document.getElementById('tn-wave').classList.add('paused');
+  setTimeout(() => {
+    document.getElementById('tour-btn').classList.remove('hidden');
+  }, 600);
 }
 
 /* ============================
