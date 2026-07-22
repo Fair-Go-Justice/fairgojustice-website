@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Verified Signatures — Fair Go Justice</title>
+  <meta name="description" content="Fair Go Justice is transitioning to a verified signature system using myGov and Australia Post Digital Identity. Our commitment to petition integrity.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0D1117;
+      --blue: #0E3A5B;
+      --orange: #D66B2D;
+      --white: #F5F5F5;
+      --gold: #D4AF37;
+      --text-muted: #8B949E;
+      --border: rgba(212,175,55,0.2);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--bg); color: var(--white); font-family: 'Space Grotesk', sans-serif; line-height: 1.7; }
+    a { color: var(--orange); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* NAV */
+    nav { background: rgba(13,17,23,0.97); border-bottom: 1px solid var(--border); padding: 1.2rem 2.5rem; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; }
+    .nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; color: var(--white); letter-spacing: 2px; }
+    .nav-logo span { color: var(--orange); }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { color: var(--text-muted); font-size: 0.9rem; font-weight: 500; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--white); text-decoration: none; }
+
+    /* HERO */
+    .hero {
+      padding: 6rem 2.5rem 4rem;
+      max-width: 860px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: rgba(14,58,91,0.5); border: 1px solid var(--border);
+      color: var(--gold); font-size: 0.78rem; font-weight: 600; letter-spacing: 2px;
+      text-transform: uppercase; padding: 0.45rem 1rem; border-radius: 4px; margin-bottom: 2rem;
+    }
+    .hero h1 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(3rem, 7vw, 5rem); letter-spacing: 3px; line-height: 1; color: var(--white); margin-bottom: 1.5rem; }
+    .hero h1 span { color: var(--gold); }
+    .hero p { font-size: 1.15rem; color: var(--text-muted); max-width: 680px; margin: 0 auto 2rem; }
+
+    /* CURRENT STATUS BAR */
+    .status-bar {
+      background: rgba(214,107,45,0.08); border: 1px solid rgba(214,107,45,0.25);
+      border-left: 4px solid var(--orange);
+      padding: 1.2rem 1.8rem; border-radius: 6px;
+      max-width: 860px; margin: 0 auto 4rem; font-size: 0.95rem;
+    }
+    .status-bar strong { color: var(--orange); }
+
+    /* SECTION */
+    section { max-width: 860px; margin: 0 auto; padding: 0 2.5rem 5rem; }
+    section h2 {
+      font-family: 'Bebas Neue', sans-serif; font-size: 2.2rem; letter-spacing: 2px;
+      color: var(--white); margin-bottom: 1.5rem; padding-bottom: 0.8rem;
+      border-bottom: 1px solid var(--border);
+    }
+    section h2 span { color: var(--orange); }
+    section p { color: var(--text-muted); margin-bottom: 1.2rem; }
+    section p strong { color: var(--white); }
+
+    /* INFO CARDS */
+    .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; margin: 2rem 0; }
+    .card {
+      background: rgba(14,58,91,0.2); border: 1px solid var(--border);
+      border-radius: 8px; padding: 1.8rem;
+    }
+    .card-icon { font-size: 1.8rem; margin-bottom: 1rem; }
+    .card h3 { font-size: 1rem; font-weight: 700; color: var(--white); margin-bottom: 0.6rem; }
+    .card p { font-size: 0.88rem; color: var(--text-muted); margin: 0; }
+
+    /* ROADMAP */
+    .roadmap { margin: 2rem 0; }
+    .roadmap-step {
+      display: grid; grid-template-columns: 60px 1fr; gap: 1.5rem;
+      margin-bottom: 1.8rem; align-items: start;
+    }
+    .step-num {
+      width: 52px; height: 52px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Bebas Neue', sans-serif; font-size: 1.3rem;
+      flex-shrink: 0;
+    }
+    .step-num.done { background: rgba(34,197,94,0.15); border: 2px solid #22C55E; color: #22C55E; }
+    .step-num.active { background: rgba(214,107,45,0.15); border: 2px solid var(--orange); color: var(--orange); }
+    .step-num.upcoming { background: rgba(139,148,158,0.1); border: 2px solid rgba(139,148,158,0.3); color: var(--text-muted); }
+    .step-content h3 { font-size: 1rem; font-weight: 700; color: var(--white); margin-bottom: 0.4rem; }
+    .step-content p { font-size: 0.88rem; color: var(--text-muted); margin: 0; }
+    .step-tag {
+      display: inline-block; font-size: 0.72rem; font-weight: 700; letter-spacing: 1px;
+      padding: 0.2rem 0.6rem; border-radius: 3px; margin-bottom: 0.5rem; text-transform: uppercase;
+    }
+    .tag-done { background: rgba(34,197,94,0.1); color: #22C55E; border: 1px solid rgba(34,197,94,0.3); }
+    .tag-active { background: rgba(214,107,45,0.1); color: var(--orange); border: 1px solid rgba(214,107,45,0.3); }
+    .tag-upcoming { background: rgba(139,148,158,0.08); color: var(--text-muted); border: 1px solid rgba(139,148,158,0.2); }
+
+    /* COMPARISON TABLE */
+    .compare-table { width: 100%; border-collapse: collapse; margin: 2rem 0; font-size: 0.9rem; }
+    .compare-table th { background: rgba(14,58,91,0.5); color: var(--gold); font-weight: 700; text-align: left; padding: 0.9rem 1rem; border-bottom: 2px solid var(--border); }
+    .compare-table td { padding: 0.85rem 1rem; border-bottom: 1px solid rgba(255,255,255,0.06); color: var(--text-muted); vertical-align: top; }
+    .compare-table tr:hover td { background: rgba(255,255,255,0.02); }
+    .compare-table td:first-child { color: var(--white); font-weight: 600; }
+    .check { color: #22C55E; font-weight: 700; }
+    .cross { color: #EF4444; font-weight: 700; }
+    .pending { color: var(--gold); font-weight: 700; }
+
+    /* COMMITMENT BLOCK */
+    .commitment {
+      background: linear-gradient(135deg, rgba(14,58,91,0.3), rgba(13,17,23,0.8));
+      border: 1px solid var(--border); border-top: 3px solid var(--gold);
+      border-radius: 8px; padding: 2.5rem; margin: 2rem 0;
+    }
+    .commitment h3 { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; letter-spacing: 2px; color: var(--gold); margin-bottom: 1rem; }
+    .commitment p { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 0.8rem; }
+    .commitment ul { margin: 1rem 0 0 1.2rem; }
+    .commitment ul li { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 0.5rem; }
+    .commitment ul li strong { color: var(--white); }
+
+    /* CTA */
+    .cta-row { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 2rem; }
+    .btn { display: inline-block; padding: 0.85rem 2rem; border-radius: 6px; font-weight: 700; font-size: 0.9rem; transition: all 0.2s; }
+    .btn-primary { background: var(--orange); color: var(--white); }
+    .btn-primary:hover { background: #c05a20; text-decoration: none; }
+    .btn-ghost { background: transparent; border: 1px solid var(--border); color: var(--white); }
+    .btn-ghost:hover { border-color: var(--gold); color: var(--gold); text-decoration: none; }
+
+    /* FOOTER */
+    footer { background: #080b10; border-top: 1px solid var(--border); padding: 2.5rem; text-align: center; color: var(--text-muted); font-size: 0.85rem; }
+    footer a { color: var(--orange); }
+
+    @media (max-width: 600px) {
+      .nav-links { display: none; }
+      .roadmap-step { grid-template-columns: 44px 1fr; gap: 1rem; }
+      .step-num { width: 40px; height: 40px; font-size: 1.1rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">FAIR GO <span>JUSTICE</span></div>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="take-action.html">Take Action</a></li>
+    <li><a href="transparency.html">Transparency</a></li>
+    <li><a href="legislation.html">Legislation</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">&#128274; Integrity Framework</div>
+  <h1>VERIFIED<br><span>SIGNATURES</span></h1>
+  <p>We believe petition integrity matters as much as petition numbers. Here is our roadmap to a fully verified, government-grade signature system — and exactly where we stand today.</p>
+</div>
+
+<!-- STATUS BAR -->
+<div class="status-bar" style="padding: 1.2rem 2.5rem;">
+  <strong>Current Status (July 2026):</strong> We are actively transitioning from email-engagement tracking to a verified digital identity system. Current supporter count: <strong>12,847</strong>. These are real people who engaged with this campaign — we are now building the infrastructure to formally verify and count each one.
+</div>
+
+<!-- SECTION 1: Why This Matters -->
+<section>
+  <h2>WHY <span>INTEGRITY</span> MATTERS</h2>
+  <p>Any movement calling for accountability in the justice system must hold itself to the same standard. That means being transparent about what our numbers represent — and building towards a system where every signature is cryptographically verified to a real Australian identity.</p>
+  <p>We are not inflating numbers. We are not hiding methodology. We are <strong>publicly committing to a higher standard</strong> than most petitions in Australia operate under.</p>
+
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-icon">&#128202;</div>
+      <h3>Current Count: 12,847</h3>
+      <p>Individuals who have directly engaged with the Fair Go Justice campaign via email submission, social action, or verified outreach contact.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">&#128275;</div>
+      <h3>What "Supporter" Means Now</h3>
+      <p>A supporter is someone who took a deliberate action to associate with this campaign. This is not a passive view count or social impression.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">&#9989;</div>
+      <h3>What "Verified" Will Mean</h3>
+      <p>A verified signature is linked to a confirmed Australian identity via myGov Digital Identity or Australia Post Digital ID — one person, one signature.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 2: The Roadmap -->
+<section>
+  <h2>THE <span>ROADMAP</span></h2>
+  <p>Four phases from current state to full parliamentary-grade verification:</p>
+
+  <div class="roadmap">
+
+    <div class="roadmap-step">
+      <div class="step-num done">1</div>
+      <div class="step-content">
+        <div class="step-tag tag-done">Complete</div>
+        <h3>Phase 1 — Engagement Tracking</h3>
+        <p>Email and social engagement tracked. Supporter count maintained at 12,847. Methodology published on Transparency page. No inflation; no removal of existing numbers.</p>
+      </div>
+    </div>
+
+    <div class="roadmap-step">
+      <div class="step-num active">2</div>
+      <div class="step-content">
+        <div class="step-tag tag-active">Active — Q3 2026</div>
+        <h3>Phase 2 — myGov Digital Identity Integration</h3>
+        <p>Integration with the <strong>Australian Government's myGov Digital Identity framework</strong> (legislated under the Digital ID Act 2024). Supporters will be able to re-verify their existing engagement as a formal, identity-linked signature. One Australian Government ID, one verified signature. Existing count is preserved; verified count grows alongside it.</p>
+      </div>
+    </div>
+
+    <div class="roadmap-step">
+      <div class="step-num upcoming">3</div>
+      <div class="step-content">
+        <div class="step-tag tag-upcoming">Q4 2026</div>
+        <h3>Phase 3 — Australia Post Digital ID Pathway</h3>
+        <p>Australia Post Digital ID provides an alternative verification pathway for Australians who do not use myGov. In-person verification at <strong>4,400+ Australia Post outlets</strong> nationally — ensuring rural, regional, and ATSI community members are not excluded by digital-only access.</p>
+      </div>
+    </div>
+
+    <div class="roadmap-step">
+      <div class="step-num upcoming">4</div>
+      <div class="step-content">
+        <div class="step-tag tag-upcoming">Q1 2027</div>
+        <h3>Phase 4 — Parliamentary Submission Format</h3>
+        <p>Verified signature data compiled and formatted to meet the <strong>Joint Standing Committee on Electoral Matters (JSCEM)</strong> standards for parliamentary petition submission. Verified count formally tabled with the Senate committee as part of the Fair Go Justice legislative reform campaign.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SECTION 3: Comparison Table -->
+<section>
+  <h2>HOW WE <span>COMPARE</span></h2>
+  <p>Where Fair Go Justice sits against standard petition platforms and the proposed verified system:</p>
+
+  <table class="compare-table">
+    <thead>
+      <tr>
+        <th>Feature</th>
+        <th>Change.org / Standard Petitions</th>
+        <th>FGJ Current</th>
+        <th>FGJ Verified (Target)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Identity verification</td>
+        <td><span class="cross">&#10007;</span> Email only</td>
+        <td><span class="cross">&#10007;</span> Email only</td>
+        <td><span class="check">&#10003;</span> myGov / AusPost Digital ID</td>
+      </tr>
+      <tr>
+        <td>Duplicate prevention</td>
+        <td><span class="cross">&#10007;</span> Limited</td>
+        <td><span class="pending">&#8764;</span> Manual</td>
+        <td><span class="check">&#10003;</span> Cryptographic unique ID</td>
+      </tr>
+      <tr>
+        <td>Methodology published</td>
+        <td><span class="cross">&#10007;</span> No</td>
+        <td><span class="check">&#10003;</span> Yes — transparency.html</td>
+        <td><span class="check">&#10003;</span> Yes + audit trail</td>
+      </tr>
+      <tr>
+        <td>Parliamentary submission ready</td>
+        <td><span class="cross">&#10007;</span> No</td>
+        <td><span class="pending">&#8764;</span> Partial</td>
+        <td><span class="check">&#10003;</span> JSCEM format</td>
+      </tr>
+      <tr>
+        <td>Rural / ATSI access</td>
+        <td><span class="cross">&#10007;</span> Digital only</td>
+        <td><span class="cross">&#10007;</span> Digital only</td>
+        <td><span class="check">&#10003;</span> 4,400+ AusPost outlets</td>
+      </tr>
+      <tr>
+        <td>Existing supporters preserved</td>
+        <td>N/A</td>
+        <td><span class="check">&#10003;</span> Never reset</td>
+        <td><span class="check">&#10003;</span> Carried forward + upgraded</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- SECTION 4: Our Commitment -->
+<section>
+  <h2>OUR <span>COMMITMENT</span></h2>
+
+  <div class="commitment">
+    <h3>The Integrity Pledge</h3>
+    <p>Fair Go Justice makes the following public commitments regarding petition numbers and verification:</p>
+    <ul>
+      <li><strong>We will never reset the supporter count to zero.</strong> 12,847 people engaged with this campaign. That is a fact. It stays.</li>
+      <li><strong>We will never inflate numbers.</strong> Every supporter in our count took a deliberate action.</li>
+      <li><strong>We will always publish our methodology</strong> on the <a href="transparency.html">Transparency page</a>.</li>
+      <li><strong>We will transition to identity-verified signatures</strong> before any formal parliamentary tabling.</li>
+      <li><strong>We will not exclude rural and regional Australians</strong> by offering digital-only verification — Australia Post outlets provide the physical pathway.</li>
+      <li><strong>All existing supporters will be offered the opportunity to upgrade</strong> their engagement to a formally verified signature — no one is removed, everyone can upgrade.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- SECTION 5: Legislative Basis -->
+<section>
+  <h2>LEGISLATIVE <span>BASIS</span></h2>
+  <p>The verification infrastructure we are building upon is grounded in existing Australian law:</p>
+
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-icon">&#128218;</div>
+      <h3>Digital ID Act 2024 (Cth)</h3>
+      <p>Establishes the Australian Government Digital ID System. myGov operates under this framework. Legally mandates privacy protections and prohibits misuse of identity data.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">&#128274;</div>
+      <h3>Privacy Act 1988 (Cth)</h3>
+      <p>Australian Privacy Principles (APPs) apply to all identity data collected. We will not store identity data beyond what is required for verification confirmation.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">&#127981;</div>
+      <h3>Australia Post Digital ID</h3>
+      <p>Australia Post's Digital Identity service is accredited under the Trusted Digital Identity Framework (TDIF). In-person verification available nationally.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">&#127963;</div>
+      <h3>JSCEM Petition Standards</h3>
+      <p>The Joint Standing Committee on Electoral Matters sets standards for parliamentary petitions. Phase 4 targets full compliance with these standards.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section>
+  <h2>GET <span>INVOLVED</span></h2>
+  <p>Want to be among the first to verify your signature when Phase 2 launches? Register your interest and we will notify you the moment the verified pathway opens.</p>
+  <div class="cta-row">
+    <a href="take-action.html" class="btn btn-primary">Register as a Supporter Now</a>
+    <a href="transparency.html" class="btn btn-ghost">Read Our Full Methodology</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p style="margin-bottom:0.5rem;">
+    <a href="index.html">Home</a> &bull;
+    <a href="take-action.html">Take Action</a> &bull;
+    <a href="transparency.html">Transparency</a> &bull;
+    <a href="legislation.html">Legislation</a>
+  </p>
+  <p style="margin-top:1rem;">&copy; 2026 Fair Go Justice. All rights reserved. &bull; <a href="transparency.html">AI Disclosure</a></p>
+  <p style="margin-top:0.6rem;font-size:0.8rem;color:#555;">This page does not collect, store or process personal identity data. Integration with myGov and Australia Post Digital ID is planned subject to technical development and legal compliance review.</p>
+</footer>
+
+</body>
+</html>
