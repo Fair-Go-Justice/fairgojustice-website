@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Four Draft Acts — Australian Justice Legislation 2026 | Fair Go Justice</title>
+  <meta name="description" content="Four proposed Australian justice reform acts: Judicial Integrity Commission Act 2026, Legal Aid and Access to Justice Act 2026, Evidence Integrity and Digital Security Act 2026, AI Accountability in Justice Act 2026.">
+  <link rel="canonical" href="https://fairgojustice.com.au/legislation.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{--black:#0D1117;--navy:#0E3A5B;--orange:#D66B2D;--gold:#D4AF37;--white:#F5F5F5;--grey:rgba(245,245,245,0.65);--muted:rgba(245,245,245,0.45);--p1:#5B9BD5;--p2:#D4AF37;--p3:#D66B2D;--ai:#7C3AED;--ai-light:#A78BFA;}
+    *{margin:0;padding:0;box-sizing:border-box;}
+    body{background:var(--black);color:var(--white);font-family:'Space Grotesk',sans-serif;}
+    nav{position:sticky;top:0;z-index:100;background:rgba(13,17,23,0.97);backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:space-between;padding:0 2rem;height:64px;}
+    .nav-logo{font-family:'Bebas Neue',sans-serif;font-size:1.7rem;color:var(--orange);letter-spacing:3px;text-decoration:none;}
+    .nav-links{display:flex;list-style:none;gap:1.5rem;align-items:center;}
+    .nav-links a{color:var(--white);text-decoration:none;font-size:0.8rem;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;opacity:0.85;transition:opacity 0.2s;}
+    .nav-links a:hover{opacity:1;color:var(--orange);}
+    .nav-cta{padding:0.5rem 1.4rem;background:var(--orange);color:#fff!important;border-radius:1px;opacity:1!important;}
+    @media(max-width:768px){.nav-links{display:none;}}
+
+    .hero{background:linear-gradient(135deg,rgba(14,58,91,0.4) 0%,rgba(13,17,23,1) 100%);padding:5rem 2rem 4rem;border-bottom:1px solid rgba(14,58,91,0.3);}
+    .hero-inner{max-width:1100px;margin:0 auto;}
+    .eyebrow{font-size:0.62rem;letter-spacing:4px;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:1rem;}
+    .hero h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.5rem,7vw,5rem);letter-spacing:3px;color:var(--white);line-height:1;margin-bottom:1rem;}
+    .hero h1 span{color:var(--gold);}
+    .hero p{font-size:1rem;color:var(--grey);line-height:1.75;max-width:700px;}
+
+    .container{max-width:1100px;margin:0 auto;padding:4rem 2rem;}
+    .section-eyebrow{font-size:0.62rem;letter-spacing:4px;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:0.75rem;}
+    h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(1.8rem,4vw,2.5rem);letter-spacing:2px;color:var(--white);margin-bottom:1rem;}
+    p{font-size:0.9rem;color:var(--grey);line-height:1.8;margin-bottom:1rem;}
+    ul li{font-size:0.88rem;color:var(--grey);line-height:1.7;margin-bottom:0.4rem;}
+
+    .act-card{margin-bottom:3rem;border:1px solid rgba(255,255,255,0.07);}
+    .act-header{padding:2rem 2rem 1.5rem;border-bottom:1px solid rgba(255,255,255,0.06);}
+    .act-num{font-family:'Bebas Neue',sans-serif;font-size:5rem;letter-spacing:4px;line-height:1;opacity:0.12;}
+    .act-tag{font-size:0.6rem;letter-spacing:3px;text-transform:uppercase;margin:0.3rem 0 0.5rem;display:block;}
+    .act-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(1.5rem,3vw,2.2rem);letter-spacing:2px;line-height:1.1;margin-bottom:0.75rem;}
+    .act-subtitle{font-size:0.82rem;line-height:1.6;}
+    .act-body{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:rgba(255,255,255,0.04);}
+    @media(max-width:700px){.act-body{grid-template-columns:1fr;}}
+    .act-section{background:var(--black);padding:1.75rem;}
+    .act-section-label{font-size:0.6rem;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:0.75rem;display:block;}
+    .act-section h3{font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:2px;color:var(--white);margin-bottom:0.75rem;}
+    .act-footer{padding:1.5rem 2rem;background:rgba(255,255,255,0.02);display:flex;flex-wrap:wrap;gap:1.5rem;align-items:center;}
+    .act-meta{font-size:0.72rem;color:var(--muted);}
+    .act-meta strong{color:var(--white);}
+    .act-link{display:inline-block;padding:0.5rem 1.5rem;font-family:'Bebas Neue',sans-serif;font-size:0.85rem;letter-spacing:2px;text-decoration:none;margin-left:auto;}
+
+    /* Act 1 — blue */
+    .act-1 .act-num{color:var(--p1);}
+    .act-1 .act-tag{color:var(--p1);}
+    .act-1 .act-title{color:var(--p1);}
+    .act-1 .act-section-label{color:var(--p1);}
+    .act-1 .act-header{background:rgba(91,155,213,0.05);border-color:rgba(91,155,213,0.15);}
+    .act-1{border-color:rgba(91,155,213,0.2);}
+    .act-1 .act-link{background:rgba(91,155,213,0.15);border:1px solid rgba(91,155,213,0.4);color:var(--p1);}
+
+    /* Act 2 — gold */
+    .act-2 .act-num{color:var(--p2);}
+    .act-2 .act-tag{color:var(--p2);}
+    .act-2 .act-title{color:var(--p2);}
+    .act-2 .act-section-label{color:var(--p2);}
+    .act-2 .act-header{background:rgba(212,175,55,0.05);border-color:rgba(212,175,55,0.15);}
+    .act-2{border-color:rgba(212,175,55,0.2);}
+    .act-2 .act-link{background:rgba(212,175,55,0.15);border:1px solid rgba(212,175,55,0.4);color:var(--gold);}
+
+    /* Act 3 — orange */
+    .act-3 .act-num{color:var(--p3);}
+    .act-3 .act-tag{color:var(--p3);}
+    .act-3 .act-title{color:var(--p3);}
+    .act-3 .act-section-label{color:var(--p3);}
+    .act-3 .act-header{background:rgba(214,107,45,0.05);border-color:rgba(214,107,45,0.15);}
+    .act-3{border-color:rgba(214,107,45,0.2);}
+    .act-3 .act-link{background:rgba(214,107,45,0.15);border:1px solid rgba(214,107,45,0.4);color:var(--orange);}
+
+    /* Act 4 — purple */
+    .act-4 .act-num{color:var(--ai-light);}
+    .act-4 .act-tag{color:var(--ai-light);}
+    .act-4 .act-title{color:var(--ai-light);}
+    .act-4 .act-section-label{color:var(--ai-light);}
+    .act-4 .act-header{background:rgba(124,58,237,0.07);border-color:rgba(167,139,250,0.2);}
+    .act-4{border-color:rgba(167,139,250,0.25);}
+    .act-4 .act-link{background:rgba(124,58,237,0.2);border:1px solid rgba(167,139,250,0.5);color:var(--ai-light);}
+
+    .roi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;margin:2rem 0;background:rgba(212,175,55,0.1);}
+    @media(max-width:700px){.roi-grid{grid-template-columns:repeat(2,1fr);}}
+    .roi-cell{background:var(--black);padding:1.5rem;text-align:center;}
+    .roi-num{font-family:'Bebas Neue',sans-serif;font-size:2.5rem;color:var(--gold);letter-spacing:2px;line-height:1;}
+    .roi-label{font-size:0.65rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-top:0.4rem;line-height:1.4;}
+
+    .pathway-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin:1.5rem 0;}
+    @media(max-width:600px){.pathway-grid{grid-template-columns:1fr;}}
+    .pathway-item{background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.07);padding:1.5rem;}
+    .pathway-num{font-family:'Bebas Neue',sans-serif;font-size:2rem;color:var(--gold);letter-spacing:2px;line-height:1;margin-bottom:0.4rem;}
+    .pathway-label{font-size:0.68rem;letter-spacing:2px;text-transform:uppercase;color:var(--white);margin-bottom:0.35rem;}
+    .pathway-desc{font-size:0.8rem;color:var(--grey);line-height:1.55;}
+
+    footer{background:rgba(0,0,0,0.5);border-top:1px solid rgba(255,255,255,0.06);padding:2rem;text-align:center;}
+    footer p{font-size:0.78rem;color:var(--muted);}
+    footer a{color:var(--orange);text-decoration:none;}
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">FAIR GO JUSTICE</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="pillars.html">The Four Reforms</a></li>
+    <li><a href="pillar-four.html">Pillar 4 — AI</a></li>
+    <li><a href="senate-briefing.html">Senate</a></li>
+    <li><a href="take-action.html" class="nav-cta">Take Action</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="hero-inner">
+    <span class="eyebrow">Fair Go Justice — Legislative Framework 2026</span>
+    <h1>FOUR ACTS. <span>ONE JUST AUSTRALIA.</span></h1>
+    <p>Four targeted, costed, politically viable legislative proposals — the minimum standard every Australian deserves from their justice system. Ready for Parliament in 2026.</p>
+  </div>
+</section>
+
+<div class="container">
+
+  <!-- Act 1 -->
+  <div class="act-card act-1">
+    <div class="act-header">
+      <div class="act-num">01</div>
+      <span class="act-tag">Pillar One — Proposed Legislation</span>
+      <div class="act-title">Judicial Integrity Commission Act 2026</div>
+      <p class="act-subtitle" style="color:rgba(245,245,245,0.6);">An independent, fully-funded body with real powers to investigate judicial misconduct at every level of Australia's court system.</p>
+    </div>
+    <div class="act-body">
+      <div class="act-section">
+        <span class="act-section-label">The Problem</span>
+        <h3>No Independent Oversight</h3>
+        <ul>
+          <li>Australia is the only common-law nation with no independent judicial oversight body</li>
+          <li>94% of complaints dismissed without investigation by the courts themselves</li>
+          <li>$0 ever paid in compensation for judicial misconduct in Australia</li>
+          <li>23+ comparable nations already have equivalent independent bodies</li>
+        </ul>
+      </div>
+      <div class="act-section">
+        <span class="act-section-label">Key Provisions</span>
+        <h3>What the Act Does</h3>
+        <ul>
+          <li>Independent investigation of complaints from any person against any judicial officer</li>
+          <li>Power to compel documents and testimony from courts</li>
+          <li>Public reporting — no sealed decisions, no self-investigation</li>
+          <li>Binding power to recommend suspension, removal, or criminal referral</li>
+          <li>Annual transparency reports tabled in Parliament</li>
+        </ul>
+      </div>
+    </div>
+    <div class="act-footer">
+      <div class="act-meta"><strong>International Models:</strong> UK Judicial Conduct Investigations Office, Canadian Judicial Council, New Zealand Judicial Conduct Commissioner</div>
+      <a href="pillars.html#jic" class="act-link">Full Detail →</a>
+    </div>
+  </div>
+
+  <!-- Act 2 -->
+  <div class="act-card act-2">
+    <div class="act-header">
+      <div class="act-num">02</div>
+      <span class="act-tag">Pillar Two — Proposed Legislation</span>
+      <div class="act-title">Legal Aid and Access to Justice Act 2026</div>
+      <p class="act-subtitle" style="color:rgba(245,245,245,0.6);">A comprehensive rebuild of Australia's legal assistance infrastructure — funded, accessible, and genuinely equal for every Australian.</p>
+    </div>
+    <div class="act-body">
+      <div class="act-section">
+        <span class="act-section-label">The Problem</span>
+        <h3>Wealth-Gated Justice</h3>
+        <ul>
+          <li>SRL rate tripled from 4.4% to 12.8% since 2019</li>
+          <li>NLAP expired 30 June 2025 — 388,000 CLC turn-aways annually</li>
+          <li>Means test thresholds unchanged since 2005</li>
+          <li>Australia spends 26% of the OECD average on legal aid per capita</li>
+        </ul>
+      </div>
+      <div class="act-section">
+        <span class="act-section-label">Key Provisions</span>
+        <h3>What the Act Does</h3>
+        <ul>
+          <li>Double federal Legal Aid funding within five years</li>
+          <li>Raise income thresholds to 2025 cost-of-living benchmarks</li>
+          <li>Mandatory duty lawyers at every Magistrates' Court in Australia</li>
+          <li>National AI-augmented legal assistance portal for self-represented litigants</li>
+          <li>Expand Community Legal Centre networks — especially regional/remote</li>
+        </ul>
+      </div>
+    </div>
+    <div class="act-footer">
+      <div class="act-meta"><strong>ROI Evidence:</strong> $2.25–$7 returned per $1 invested in legal aid (National Legal Aid data). 50% more clients served with AI-augmented delivery at the same budget.</div>
+      <a href="pillars.html#legal-aid" class="act-link">Full Detail →</a>
+    </div>
+  </div>
+
+  <!-- Act 3 -->
+  <div class="act-card act-3">
+    <div class="act-header">
+      <div class="act-num">03</div>
+      <span class="act-tag">Pillar Three — Proposed Legislation</span>
+      <div class="act-title">Evidence Integrity and Digital Security Act 2026</div>
+      <p class="act-subtitle" style="color:rgba(245,245,245,0.6);">Mandatory chain-of-custody protocols for all evidence in judicial proceedings, with criminal penalties for digital tampering.</p>
+    </div>
+    <div class="act-body">
+      <div class="act-section">
+        <span class="act-section-label">The Problem</span>
+        <h3>Tampered Evidence, Zero Accountability</h3>
+        <ul>
+          <li>No mandatory digital chain-of-custody standard exists in Australian courts</li>
+          <li>Bodycam and CCTV footage frequently reported "unavailable" without documented cause</li>
+          <li>AI deepfakes now technically capable of generating plausible court evidence</li>
+          <li>Discovery processes have no digital audit trail requirement</li>
+        </ul>
+      </div>
+      <div class="act-section">
+        <span class="act-section-label">Key Provisions</span>
+        <h3>What the Act Does</h3>
+        <ul>
+          <li>Mandatory digital chain-of-custody for all physical and digital evidence from point of collection</li>
+          <li>Blockchain-based immutable audit trail — tamper-detection built in</li>
+          <li>Criminal penalty for evidence deletion, concealment, or unrecorded modification</li>
+          <li>Mandatory AI deepfake detection protocol for video evidence</li>
+          <li>Independent Evidence Integrity Officer at every court level</li>
+        </ul>
+      </div>
+    </div>
+    <div class="act-footer">
+      <div class="act-meta"><strong>Technology Model:</strong> Estonia's blockchain national legal record system (since 2012); UK Police Digital Evidence Standards.</div>
+      <a href="pillars.html#eip" class="act-link">Full Detail →</a>
+    </div>
+  </div>
+
+  <!-- Act 4 -->
+  <div class="act-card act-4">
+    <div class="act-header">
+      <div class="act-num">04</div>
+      <span class="act-tag">Pillar Four — Australia's First Civil Society AI Accountability Proposal</span>
+      <div class="act-title">AI Accountability in Justice Act 2026</div>
+      <p class="act-subtitle" style="color:rgba(245,245,245,0.6);">Binding AI oversight for Australia's justice system — mandatory disclosure, human-in-the-loop, right to explanation, and an independent AI oversight panel with court-level powers.</p>
+    </div>
+    <div class="act-body">
+      <div class="act-section">
+        <span class="act-section-label">The Problem</span>
+        <h3>Unchecked Algorithmic Power</h3>
+        <ul>
+          <li>73+ AI-fabricated citations in Australian courts — zero criminal charges</li>
+          <li>18,000+ denied aged care by algorithm — no human review, no appeal</li>
+          <li>Robodebt: $548.5M settlement; automated system with no legal authority</li>
+          <li>AG Rowland's framework is voluntary — FGJ makes it binding in justice</li>
+        </ul>
+      </div>
+      <div class="act-section">
+        <span class="act-section-label">Key Provisions</span>
+        <h3>What the Act Does</h3>
+        <ul>
+          <li>Mandatory AI disclosure in all court and tribunal proceedings</li>
+          <li>Human-in-the-loop for all AI decisions affecting individual rights</li>
+          <li>Binding right to explanation for all automated government decisions</li>
+          <li>Independent AI Oversight Panel with criminal referral powers</li>
+          <li>Retroactive audit of all AI-assisted decisions since January 2020</li>
+        </ul>
+      </div>
+    </div>
+    <div class="act-footer">
+      <div class="act-meta"><strong>Economic case:</strong> Creates 1,050+ new legal positions; $150M efficiency savings fund expansion; $2.25–$7 ROI per $1. Legal profession: beneficiary, not opponent.</div>
+      <a href="pillar-four.html" class="act-link">Full Pillar 4 →</a>
+    </div>
+  </div>
+
+  <!-- Cost-Benefit -->
+  <div style="margin-bottom:3rem;">
+    <span class="section-eyebrow">Cost-Benefit Analysis</span>
+    <h2>THE ECONOMIC CASE FOR <span>ALL FOUR ACTS</span></h2>
+    <div class="roi-grid">
+      <div class="roi-cell">
+        <div class="roi-num">$2.25–$7</div>
+        <div class="roi-label">ROI per $1 invested<br>in legal aid</div>
+      </div>
+      <div class="roi-cell">
+        <div class="roi-num">$150M</div>
+        <div class="roi-label">Annual AI efficiency<br>savings (projected)</div>
+      </div>
+      <div class="roi-cell">
+        <div class="roi-num">1,050+</div>
+        <div class="roi-label">New legal positions<br>created</div>
+      </div>
+      <div class="roi-cell">
+        <div class="roi-num">50%</div>
+        <div class="roi-label">More clients served<br>same legal aid budget</div>
+      </div>
+    </div>
+    <p>By contrast: the cost of <em>not</em> reforming is $548.5M (Robodebt), $55B in gig worker wage theft, and the immeasurable human cost of 388,000 Australians turned away from legal help every year.</p>
+  </div>
+
+  <!-- Senate Pathways -->
+  <div style="margin-bottom:3rem;">
+    <span class="section-eyebrow">Legislative Pathways</span>
+    <h2>HOW THESE BILLS <span>REACH PARLIAMENT</span></h2>
+    <div class="pathway-grid">
+      <div class="pathway-item">
+        <div class="pathway-num">01</div>
+        <div class="pathway-label">Senate Committee Referral</div>
+        <div class="pathway-desc">Legal and Constitutional Affairs Committee or the Select Committee on AI — formal inquiry with public submissions, expert witnesses, and binding recommendation.</div>
+      </div>
+      <div class="pathway-item">
+        <div class="pathway-num">02</div>
+        <div class="pathway-label">Cross-Party Private Members Bill</div>
+        <div class="pathway-desc">Independent or minor party Senator introduces legislation — Greens, crossbench support builds coalition. Robodebt precedent shows this is achievable.</div>
+      </div>
+      <div class="pathway-item">
+        <div class="pathway-num">03</div>
+        <div class="pathway-label">Government Adoption</div>
+        <div class="pathway-desc">AG Rowland's automated decision-making workstream is live — FGJ framework aligns exactly. Government adopts and expands as binding legislation.</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="background:rgba(14,58,91,0.2);border:1px solid rgba(14,58,91,0.5);padding:3rem 2rem;text-align:center;">
+    <h2>FOUR BILLS. <span>ONE JUST AUSTRALIA.</span></h2>
+    <p style="max-width:560px;margin:0 auto 2rem;">These aren't radical ideas. They are minimum standards. Australia already has the ICAC, NACC, and ASIC. We just need the same accountability applied to the courts and the algorithms that are supposed to hold everyone else to account.</p>
+    <a href="take-action.html" style="display:inline-block;padding:0.9rem 2.5rem;background:var(--gold);color:#0D1117;font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:3px;text-decoration:none;margin:0.5rem;">✊ Join the Movement</a>
+    <a href="senate-briefing.html" style="display:inline-block;padding:0.9rem 2.5rem;background:transparent;color:var(--white);border:1px solid rgba(255,255,255,0.3);font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:3px;text-decoration:none;margin:0.5rem;">Senate Briefing →</a>
+  </div>
+
+</div>
+
+<footer>
+  <p>© 2025 Fair Go Justice Movement | <a href="transparency.html">Transparency</a> | <a href="pillars.html">The Four Reforms</a> | <a href="take-action.html">Take Action</a></p>
+  <p style="margin-top:0.5rem;">This platform uses AI-assisted research. All statistics are sourced from government reports, academic research, and court records. <a href="transparency.html">Full methodology →</a></p>
+</footer>
+
+</body>
+</html>

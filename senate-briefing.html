@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Senate Engagement — Fair Go Justice Reform Briefing</title>
+  <meta name="description" content="Fair Go Justice's Senate engagement strategy — briefing materials, the four-pillar reform framework, the AI Accountability in Justice Act 2026, and the national pilot program proposal.">
+  <link rel="canonical" href="https://fairgojustice.com.au/senate-briefing.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root { --black:#0D1117;--navy:#0E3A5B;--orange:#D66B2D;--gold:#D4AF37;--white:#F5F5F5;--grey:rgba(245,245,245,0.6);--muted:rgba(245,245,245,0.45);--ai-purple:#7C3AED;--ai-light:#A78BFA; }
+    *{margin:0;padding:0;box-sizing:border-box;}
+    body{background:var(--black);color:var(--white);font-family:'Space Grotesk',sans-serif;}
+    nav{position:sticky;top:0;z-index:100;background:rgba(13,17,23,0.97);backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:space-between;padding:0 2rem;height:64px;}
+    .nav-logo{font-family:'Bebas Neue',sans-serif;font-size:1.7rem;color:var(--orange);letter-spacing:3px;text-decoration:none;}
+    .nav-links{display:flex;list-style:none;gap:1.5rem;align-items:center;}
+    .nav-links a{color:var(--white);text-decoration:none;font-size:0.8rem;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;opacity:0.85;transition:opacity 0.2s;}
+    .nav-links a:hover{opacity:1;color:var(--orange);}
+    .nav-cta{padding:0.5rem 1.4rem;background:var(--orange);color:#fff!important;border-radius:1px;opacity:1!important;}
+    @media(max-width:768px){.nav-links{display:none;}}
+
+    .hero{background:linear-gradient(135deg,rgba(14,58,91,0.6) 0%,rgba(13,17,23,1) 100%);padding:5rem 2rem 4rem;border-bottom:1px solid rgba(14,58,91,0.4);}
+    .hero-inner{max-width:1100px;margin:0 auto;}
+    .hero-badge{display:inline-block;background:rgba(14,58,91,0.5);border:1px solid rgba(14,58,91,1);color:#7BC8F6;font-size:0.62rem;letter-spacing:3px;text-transform:uppercase;padding:0.3rem 0.9rem;margin-bottom:1.5rem;font-weight:600;}
+    .hero h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.8rem,7vw,5rem);letter-spacing:3px;color:var(--white);line-height:1;margin-bottom:1rem;}
+    .hero h1 span{color:var(--gold);}
+    .hero p{font-size:1rem;color:var(--grey);line-height:1.75;max-width:700px;margin-bottom:2rem;}
+    .hero-meta{display:flex;flex-wrap:wrap;gap:2rem;}
+    .meta-item{font-size:0.8rem;color:var(--muted);}
+    .meta-item strong{color:var(--white);display:block;font-size:0.75rem;letter-spacing:1px;text-transform:uppercase;margin-bottom:0.2rem;}
+
+    .container{max-width:1100px;margin:0 auto;padding:4rem 2rem;}
+    .section-eyebrow{font-size:0.65rem;letter-spacing:4px;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:0.75rem;}
+    h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(1.8rem,4vw,2.8rem);letter-spacing:2px;color:var(--white);margin-bottom:1rem;}
+    h2 span{color:var(--gold);}
+    p{font-size:0.92rem;color:var(--grey);line-height:1.8;margin-bottom:1.1rem;}
+
+    .card{background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.07);padding:2rem;margin-bottom:1rem;}
+    .card.navy{background:rgba(14,58,91,0.15);border-color:rgba(14,58,91,0.5);}
+    .card.gold{background:rgba(212,175,55,0.05);border-color:rgba(212,175,55,0.25);}
+    .card.purple{background:rgba(124,58,237,0.07);border-color:rgba(167,139,250,0.25);}
+
+    .pillars-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2px;margin:2rem 0;}
+    @media(max-width:700px){.pillars-grid{grid-template-columns:1fr;}}
+    .pillar-box{padding:1.75rem;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);}
+    .pillar-num{font-family:'Bebas Neue',sans-serif;font-size:3rem;letter-spacing:2px;line-height:1;}
+    .pillar-act{font-size:0.68rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin:0.4rem 0 0.6rem;}
+    .pillar-title{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;letter-spacing:2px;color:var(--white);margin-bottom:0.5rem;}
+    .pillar-desc{font-size:0.82rem;color:var(--grey);line-height:1.6;}
+
+    .asks-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin:2rem 0;}
+    @media(max-width:700px){.asks-grid{grid-template-columns:1fr;}}
+    .ask-box{padding:1.75rem;background:rgba(212,175,55,0.04);border:1px solid rgba(212,175,55,0.2);text-align:center;}
+    .ask-num{font-family:'Bebas Neue',sans-serif;font-size:3rem;color:var(--gold);letter-spacing:2px;line-height:1;}
+    .ask-title{font-size:0.72rem;letter-spacing:2px;text-transform:uppercase;color:var(--white);margin:0.5rem 0 0.5rem;}
+    .ask-desc{font-size:0.8rem;color:var(--grey);line-height:1.55;}
+
+    .stakeholder-table{width:100%;border-collapse:collapse;margin:1.5rem 0;}
+    .stakeholder-table th{background:rgba(14,58,91,0.4);font-size:0.65rem;letter-spacing:2px;text-transform:uppercase;color:var(--gold);padding:0.75rem 1rem;text-align:left;}
+    .stakeholder-table td{padding:0.9rem 1rem;border-bottom:1px solid rgba(255,255,255,0.06);font-size:0.83rem;color:var(--grey);}
+    .stakeholder-table td:first-child{color:var(--white);font-weight:600;}
+    .stakeholder-table tr:hover td{background:rgba(255,255,255,0.02);}
+
+    .pilot-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin:1.5rem 0;}
+    @media(max-width:600px){.pilot-grid{grid-template-columns:1fr;}}
+    .pilot-item{padding:1.25rem;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);text-align:center;}
+    .pilot-icon{font-size:1.8rem;margin-bottom:0.75rem;}
+    .pilot-label{font-size:0.72rem;letter-spacing:2px;text-transform:uppercase;color:var(--white);margin-bottom:0.35rem;}
+    .pilot-detail{font-size:0.8rem;color:var(--muted);line-height:1.5;}
+
+    .cta-block{background:rgba(14,58,91,0.2);border:1px solid rgba(14,58,91,0.5);padding:3rem 2rem;text-align:center;margin-top:3rem;}
+    .cta-block h2{margin-bottom:1rem;}
+    .btn-primary{display:inline-block;padding:0.9rem 2.5rem;background:var(--gold);color:#0D1117;font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:3px;text-decoration:none;border-radius:1px;margin:0.5rem;}
+    .btn-secondary{display:inline-block;padding:0.9rem 2.5rem;background:transparent;color:var(--white);border:1px solid rgba(255,255,255,0.3);font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:3px;text-decoration:none;border-radius:1px;margin:0.5rem;}
+    .btn-secondary:hover{border-color:var(--gold);color:var(--gold);}
+
+    footer{background:rgba(0,0,0,0.5);border-top:1px solid rgba(255,255,255,0.06);padding:2rem;text-align:center;}
+    footer p{font-size:0.78rem;color:var(--muted);}
+    footer a{color:var(--orange);text-decoration:none;}
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">FAIR GO JUSTICE</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="pillars.html">The Reforms</a></li>
+    <li><a href="pillar-four.html">Pillar 4 — AI</a></li>
+    <li><a href="legislation.html">Legislation</a></li>
+    <li><a href="audit-justice.html">Audit Justice</a></li>
+    <li><a href="take-action.html" class="nav-cta">Take Action</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge">🏛️ Government Engagement — Senate Reform Briefing</div>
+    <h1>SENATE <span>ENGAGEMENT</span><br>FRAMEWORK</h1>
+    <p>Fair Go Justice is engaging directly with Australian Senators and Members of Parliament to advance four legislative reforms — building a world-leading, evidence-based justice system that serves all Australians, not just those who can afford it.</p>
+    <div class="hero-meta">
+      <div class="meta-item"><strong>Current Engagement</strong>Senator D. Shoebridge — Greens NSW</div>
+      <div class="meta-item"><strong>Reform Bills Proposed</strong>Four Acts — 2026</div>
+      <div class="meta-item"><strong>Framework Status</strong>Evidence-Based Civil Society Proposal</div>
+      <div class="meta-item"><strong>Pilot Jurisdiction</strong>Queensland / NSW — proposed</div>
+    </div>
+  </div>
+</section>
+
+<div class="container">
+
+  <!-- Why We're Here -->
+  <div style="margin-bottom:3rem;">
+    <span class="section-eyebrow">Purpose of This Engagement</span>
+    <h2>WHY FAIR GO JUSTICE IS <span>IN PARLIAMENT</span></h2>
+    <p>Australia is the only comparable common-law nation with no independent judicial integrity body. Our Legal Aid system is chronically underfunded. Evidence integrity protocols are non-existent. And AI is now making life-altering decisions in justice contexts — with zero mandatory oversight.</p>
+    <p>These aren't future risks. They are documented, measurable failures — backed by royal commission findings, court data, and academic research. Fair Go Justice brings these failures to Parliament with a specific, costed, politically viable solution: four targeted Acts that can be introduced in the 2026 legislative year.</p>
+  </div>
+
+  <!-- Four Pillars -->
+  <div style="margin-bottom:3rem;">
+    <span class="section-eyebrow">The Legislative Package</span>
+    <h2>FOUR ACTS. <span>ONE MOVEMENT.</span></h2>
+    <div class="pillars-grid">
+      <div class="pillar-box">
+        <div class="pillar-num" style="color:#5B9BD5;">01</div>
+        <div class="pillar-act">Proposed Legislation</div>
+        <div class="pillar-title">Judicial Integrity Commission Act 2026</div>
+        <div class="pillar-desc">An independent, fully-funded body to investigate complaints against judicial officers at all levels. Modelled on ICAC — applied to the bench. 23+ comparable nations already have equivalent bodies.</div>
+      </div>
+      <div class="pillar-box">
+        <div class="pillar-num" style="color:var(--gold);">02</div>
+        <div class="pillar-act">Proposed Legislation</div>
+        <div class="pillar-title">Legal Aid and Access to Justice Act 2026</div>
+        <div class="pillar-desc">Rebuild Australia's legal assistance infrastructure — doubled funding, modernised means tests, mandatory duty lawyers at every Magistrates' Court, and an AI-augmented online portal for self-represented litigants.</div>
+      </div>
+      <div class="pillar-box">
+        <div class="pillar-num" style="color:var(--orange);">03</div>
+        <div class="pillar-act">Proposed Legislation</div>
+        <div class="pillar-title">Evidence Integrity and Digital Security Act 2026</div>
+        <div class="pillar-desc">Mandatory digital chain-of-custody protocols for all evidence in judicial proceedings. Criminalise evidence tampering with digital audit trails. Extend to AI-generated and AI-processed evidence.</div>
+      </div>
+      <div class="pillar-box" style="background:rgba(124,58,237,0.08);border-color:rgba(167,139,250,0.3);">
+        <div class="pillar-num" style="color:var(--ai-light);">04</div>
+        <div class="pillar-act" style="color:var(--ai-light);">NEW — Australia's First</div>
+        <div class="pillar-title" style="color:var(--ai-light);">AI Accountability in Justice Act 2026</div>
+        <div class="pillar-desc">Mandatory AI disclosure, human-in-the-loop requirements, and binding right to explanation for all automated decisions affecting individual rights. Aligns with PM's AI agenda — makes accountability binding, not voluntary.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Three Specific Asks -->
+  <div style="margin-bottom:3rem;">
+    <span class="section-eyebrow">Three Specific Asks</span>
+    <h2>WHAT WE'RE <span>ASKING FOR</span></h2>
+    <div class="asks-grid">
+      <div class="ask-box">
+        <div class="ask-num">01</div>
+        <div class="ask-title">Senate Committee Referral</div>
+        <div class="ask-desc">Refer the AI Accountability in Justice Act 2026 framework to the relevant Senate committee — Legal and Constitutional Affairs, or the Select Committee on AI.</div>
+      </div>
+      <div class="ask-box">
+        <div class="ask-num">02</div>
+        <div class="ask-desc">Co-sponsor a public inquiry into algorithmic decision-making in the Australian justice system — building on the Robodebt Royal Commission's findings with a forward-looking scope.</div>
+        <div class="ask-title">Co-Sponsor Public Inquiry</div>
+      </div>
+      <div class="ask-box">
+        <div class="ask-num">03</div>
+        <div class="ask-title">Champion the Pilot Program</div>
+        <div class="ask-desc">Advocate for a 12-month national pilot of AI-assisted legal aid services in Queensland and NSW — delivering 50% more clients served at the same cost, with full evaluation reporting.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stakeholder Matrix -->
+  <div class="card navy" style="margin-bottom:3rem;">
+    <span class="section-eyebrow">Political Economy</span>
+    <h2>WHY THIS WORKS <span>POLITICALLY</span></h2>
+    <p>Fair Go Justice's four-pillar package is designed to build a broad coalition — not a narrow advocacy niche. Here is how each stakeholder group benefits:</p>
+    <table class="stakeholder-table">
+      <thead>
+        <tr><th>Stakeholder</th><th>Why They Support Reform</th><th>Key Message</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Greens — Senator Shoebridge</td>
+          <td>Progressive values, access to justice, technology ethics leadership</td>
+          <td>"World-leading ethical AI reform — Australia's first civil society proposal"</td>
+        </tr>
+        <tr>
+          <td>Attorney-General's Department</td>
+          <td>National AI Plan alignment, AG Rowland's automated decision-making framework</td>
+          <td>"Fiscally responsible — AI efficiency funds 1,050 new legal positions"</td>
+        </tr>
+        <tr>
+          <td>Law Council of Australia</td>
+          <td>Professional standards, human-in-the-loop mandate creates new work</td>
+          <td>"1,050+ new lawyer positions — legal profession as beneficiary, not opponent"</td>
+        </tr>
+        <tr>
+          <td>National Legal Aid</td>
+          <td>Chronic funding crisis — AI efficiency savings fund service expansion</td>
+          <td>"50% more clients served, same budget — pilot in QLD/NSW"</td>
+        </tr>
+        <tr>
+          <td>Technology Sector</td>
+          <td>Regulatory certainty, Australian-made AI in justice contexts</td>
+          <td>"Clear accountability rules reduce legal risk — enables industry growth"</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Pilot Program -->
+  <div style="margin-bottom:3rem;">
+    <span class="section-eyebrow">The Pilot Program Proposal</span>
+    <h2>A NATIONAL PILOT — <span>QLD &amp; NSW</span></h2>
+    <p>Fair Go Justice proposes a 12-month national pilot of AI-assisted legal aid services, beginning in Queensland and NSW — the two largest Legal Aid jurisdictions by client volume.</p>
+    <div class="pilot-grid">
+      <div class="pilot-item">
+        <div class="pilot-icon">📍</div>
+        <div class="pilot-label">Jurisdiction</div>
+        <div class="pilot-detail">Queensland and New South Wales Legal Aid Commissions — largest client volume states</div>
+      </div>
+      <div class="pilot-item">
+        <div class="pilot-icon">📅</div>
+        <div class="pilot-label">Duration</div>
+        <div class="pilot-detail">12 months with independent evaluation report tabled in Parliament at conclusion</div>
+      </div>
+      <div class="pilot-item">
+        <div class="pilot-icon">💰</div>
+        <div class="pilot-label">Funding Model</div>
+        <div class="pilot-detail">Funded by AI efficiency savings — $150M annually — with $2.25–$7 ROI per dollar invested</div>
+      </div>
+      <div class="pilot-item">
+        <div class="pilot-icon">👥</div>
+        <div class="pilot-label">Client Outcome</div>
+        <div class="pilot-detail">50% more clients served per existing staff member — AI handles triage, humans handle advice</div>
+      </div>
+      <div class="pilot-item">
+        <div class="pilot-icon">⚖️</div>
+        <div class="pilot-label">Safeguards</div>
+        <div class="pilot-detail">Human-in-the-loop mandatory for all advice — AI triages and prepares; lawyer signs off</div>
+      </div>
+      <div class="pilot-item">
+        <div class="pilot-icon">📊</div>
+        <div class="pilot-label">Evaluation</div>
+        <div class="pilot-detail">Independent review by UNSW Law and ANU Centre for AI — public report to Parliament</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Evidence Base -->
+  <div class="card gold" style="margin-bottom:3rem;">
+    <span class="section-eyebrow">Evidence Base</span>
+    <h2>THE DATA BEHIND <span>THE REFORMS</span></h2>
+    <p>Every FGJ proposal is backed by primary sources — not opinion. Key evidence underpinning this engagement:</p>
+    <ul style="margin:1rem 0;padding-left:1.5rem;">
+      <li style="margin-bottom:0.6rem;color:var(--grey);"><strong style="color:var(--white);">73+ AI-fabricated citations</strong> submitted to Australian courts (UNSW Law, April 2026) — Federal Court issued formal warning</li>
+      <li style="margin-bottom:0.6rem;color:var(--grey);"><strong style="color:var(--white);">SRL rate tripled</strong> from 4.4% to 12.8% since 2019 (Federal Circuit Court Statistical Report 2024)</li>
+      <li style="margin-bottom:0.6rem;color:var(--grey);"><strong style="color:var(--white);">$548.5M Robodebt settlement</strong> — largest class action in Australian history (Royal Commission, 2023)</li>
+      <li style="margin-bottom:0.6rem;color:var(--grey);"><strong style="color:var(--white);">NLAP expired 30 June 2025</strong> — 388,000 CLC turn-aways annually (National Association of Community Legal Centres)</li>
+      <li style="margin-bottom:0.6rem;color:var(--grey);"><strong style="color:var(--white);">Australia 26% / OECD 66%</strong> on judicial integrity criteria (OECD Justice at a Glance 2024)</li>
+      <li style="margin-bottom:0.6rem;color:var(--grey);"><strong style="color:var(--white);">Luck v Secretary, Services Australia [2025] FCAFC 26</strong> — first Federal Court AI evidence case, February 2025</li>
+      <li style="margin-bottom:0.6rem;color:var(--grey);"><strong style="color:var(--white);">18,000+ aged care recipients</strong> denied by algorithm without human review (AIHW 2025)</li>
+    </ul>
+  </div>
+
+  <div class="cta-block">
+    <span class="section-eyebrow">Support the Reform</span>
+    <h2>HISTORY IS MADE BY THOSE <span>WHO SHOW UP</span></h2>
+    <p style="max-width:600px;margin:0 auto 2rem;">This is not a complaint. It is a costed, evidence-based, politically viable legislative framework. Four bills. One movement. Ready for Parliament.</p>
+    <a href="take-action.html" class="btn-primary">✊ Join the Movement</a>
+    <a href="pillars.html" class="btn-secondary">Read the Four Pillars →</a>
+  </div>
+
+</div>
+
+<footer>
+  <p>© 2025 Fair Go Justice Movement | <a href="transparency.html">Transparency</a> | <a href="take-action.html">Take Action</a> | <a href="pillars.html">The Four Reforms</a></p>
+  <p style="margin-top:0.5rem;">This platform uses AI-assisted research. All statistics are sourced from government reports, academic research, and court records. <a href="transparency.html">Full methodology →</a></p>
+</footer>
+
+</body>
+</html>

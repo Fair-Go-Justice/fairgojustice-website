@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Technology in Justice — Legislative-Grade Reference | Fair Go Justice</title>
+  <meta name="description" content="Legislative-grade reference on AI technology in Australia's justice system. LLMs, NLP, AI Agents, Computer Vision, Blockchain — what they are, what they do in courts, and what oversight is needed.">
+  <link rel="canonical" href="https://fairgojustice.com.au/ai-technology.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{--black:#0D1117;--navy:#0E3A5B;--orange:#D66B2D;--gold:#D4AF37;--white:#F5F5F5;--grey:rgba(245,245,245,0.65);--muted:rgba(245,245,245,0.45);--ai:#7C3AED;--ai-light:#A78BFA;}
+    *{margin:0;padding:0;box-sizing:border-box;}
+    body{background:var(--black);color:var(--white);font-family:'Space Grotesk',sans-serif;}
+    nav{position:sticky;top:0;z-index:100;background:rgba(13,17,23,0.97);backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:space-between;padding:0 2rem;height:64px;}
+    .nav-logo{font-family:'Bebas Neue',sans-serif;font-size:1.7rem;color:var(--orange);letter-spacing:3px;text-decoration:none;}
+    .nav-links{display:flex;list-style:none;gap:1.5rem;align-items:center;}
+    .nav-links a{color:var(--white);text-decoration:none;font-size:0.8rem;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;opacity:0.85;transition:opacity 0.2s;}
+    .nav-links a:hover{opacity:1;color:var(--ai-light);}
+    .nav-cta{padding:0.5rem 1.4rem;background:var(--orange);color:#fff!important;border-radius:1px;opacity:1!important;}
+    @media(max-width:768px){.nav-links{display:none;}}
+
+    .hero{background:linear-gradient(135deg,rgba(124,58,237,0.2) 0%,rgba(13,17,23,1) 100%);padding:5rem 2rem 4rem;border-bottom:1px solid rgba(167,139,250,0.12);}
+    .hero-inner{max-width:1100px;margin:0 auto;}
+    .eyebrow{font-size:0.62rem;letter-spacing:4px;text-transform:uppercase;color:var(--ai-light);display:block;margin-bottom:1rem;}
+    h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.5rem,7vw,4.5rem);letter-spacing:3px;color:var(--white);line-height:1;margin-bottom:1rem;}
+    h1 span{color:var(--ai-light);}
+    .hero p{font-size:1rem;color:var(--grey);line-height:1.75;max-width:700px;margin-bottom:1.5rem;}
+
+    .container{max-width:1100px;margin:0 auto;padding:4rem 2rem;}
+    .section-label{font-size:0.62rem;letter-spacing:4px;text-transform:uppercase;color:var(--ai-light);display:block;margin-bottom:0.75rem;}
+    h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(1.8rem,4vw,2.5rem);letter-spacing:2px;color:var(--white);margin-bottom:1rem;}
+    h2 span{color:var(--ai-light);}
+    h3{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:2px;color:var(--ai-light);margin-bottom:0.75rem;}
+    p{font-size:0.9rem;color:var(--grey);line-height:1.8;margin-bottom:1rem;}
+    ul{margin:0.75rem 0 1rem 1.25rem;}
+    ul li{font-size:0.88rem;color:var(--grey);line-height:1.7;margin-bottom:0.4rem;}
+    strong{color:var(--white);}
+
+    .tech-card{background:rgba(124,58,237,0.05);border:1px solid rgba(167,139,250,0.15);padding:2rem;margin-bottom:1.5rem;}
+    .tech-card:hover{border-color:rgba(167,139,250,0.35);background:rgba(124,58,237,0.08);}
+    .tech-header{display:flex;align-items:center;gap:1rem;margin-bottom:1rem;}
+    .tech-icon{width:48px;height:48px;background:rgba(124,58,237,0.2);border:1px solid rgba(167,139,250,0.3);display:flex;align-items:center;justify-content:center;font-size:1.5rem;flex-shrink:0;}
+    .tech-tag{font-size:0.6rem;letter-spacing:2.5px;text-transform:uppercase;color:var(--ai-light);display:block;margin-bottom:0.25rem;}
+    .tech-title{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;letter-spacing:2px;color:var(--white);line-height:1;}
+    .risk-badge{display:inline-block;padding:0.2rem 0.6rem;font-size:0.6rem;letter-spacing:2px;text-transform:uppercase;font-weight:600;border-radius:2px;margin-bottom:0.75rem;}
+    .risk-high{background:rgba(248,113,113,0.12);border:1px solid rgba(248,113,113,0.4);color:#F87171;}
+    .risk-medium{background:rgba(251,191,36,0.12);border:1px solid rgba(251,191,36,0.4);color:#FBBF24;}
+    .risk-emerging{background:rgba(167,139,250,0.12);border:1px solid rgba(167,139,250,0.4);color:var(--ai-light);}
+
+    .uses-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;margin:1rem 0;background:rgba(167,139,250,0.1);}
+    @media(max-width:600px){.uses-grid{grid-template-columns:1fr;}}
+    .use-item{background:var(--black);padding:1rem;}
+    .use-label{font-size:0.6rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:0.25rem;}
+    .use-text{font-size:0.82rem;color:var(--grey);line-height:1.5;}
+
+    .framework-table{width:100%;border-collapse:collapse;margin:1.5rem 0;}
+    .framework-table th{background:rgba(124,58,237,0.2);font-size:0.6rem;letter-spacing:2px;text-transform:uppercase;color:var(--ai-light);padding:0.75rem 1rem;text-align:left;}
+    .framework-table td{padding:0.85rem 1rem;border-bottom:1px solid rgba(255,255,255,0.05);font-size:0.82rem;color:var(--grey);}
+    .framework-table td:first-child{color:var(--white);font-weight:600;}
+
+    .aus-spotlight{background:rgba(14,58,91,0.15);border:1px solid rgba(14,58,91,0.5);padding:2rem;margin:2rem 0;}
+    .aus-label{font-size:0.6rem;letter-spacing:3px;text-transform:uppercase;color:#7BC8F6;margin-bottom:0.75rem;display:block;}
+
+    footer{background:rgba(0,0,0,0.5);border-top:1px solid rgba(255,255,255,0.06);padding:2rem;text-align:center;}
+    footer p{font-size:0.78rem;color:var(--muted);}
+    footer a{color:var(--orange);text-decoration:none;}
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">FAIR GO JUSTICE</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="pillars.html">The Four Reforms</a></li>
+    <li><a href="pillar-four.html">Pillar 4 — AI</a></li>
+    <li><a href="legislation.html">Legislation</a></li>
+    <li><a href="senate-briefing.html">Senate</a></li>
+    <li><a href="take-action.html" class="nav-cta">Take Action</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="hero-inner">
+    <span class="eyebrow">Fair Go Justice — Legislative-Grade AI Reference</span>
+    <h1>AI TECHNOLOGY <span>IN JUSTICE</span></h1>
+    <p>A comprehensive, plain-language guide to every major category of artificial intelligence deployed in — or proposed for — Australia's legal system. Written for Senators, lawyers, journalists, and the public who deserve to understand the technology making decisions about their lives.</p>
+  </div>
+</section>
+
+<div class="container">
+
+  <!-- Intro -->
+  <div style="background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.07);padding:2rem;margin-bottom:3rem;">
+    <span class="section-label">Why This Reference Exists</span>
+    <h2>YOU CANNOT GOVERN <span>WHAT YOU DON'T UNDERSTAND</span></h2>
+    <p>In April 2026, the Federal Court of Australia issued a formal warning after lawyers submitted AI-generated fake case citations in real proceedings. Algorithms are determining welfare eligibility, bail decisions, aged care allocations, and family court outcomes — with no mandatory disclosure, no right to explanation, and no independent oversight.</p>
+    <p>This page exists so that every Australian — from a Senator on the Legal and Constitutional Affairs Committee to a self-represented litigant preparing for court — has access to accurate, legislative-grade information about the technology shaping their rights.</p>
+  </div>
+
+  <!-- LLMs -->
+  <div class="tech-card">
+    <div class="tech-header">
+      <div class="tech-icon">🤖</div>
+      <div>
+        <span class="tech-tag">Category 01</span>
+        <div class="tech-title">LARGE LANGUAGE MODELS (LLMs)</div>
+      </div>
+    </div>
+    <div class="risk-badge risk-high">⚠ High Risk — Court Citation Integrity</div>
+    <h3>What They Are</h3>
+    <p>Large Language Models (LLMs) — including ChatGPT, Claude, Gemini, and Llama — are AI systems trained on billions of text documents that generate human-like text in response to prompts. They predict the most statistically likely next word based on patterns in their training data. They do not reason. They do not look up information. They generate plausible-sounding text.</p>
+    <h3>The Justice System Risk</h3>
+    <p>LLMs <strong>hallucinate</strong> — they generate false information with complete confidence. In legal contexts, this means fabricated case citations, invented statutory provisions, and non-existent judicial authorities submitted to courts as real. In Australia, 73+ documented cases occurred before the Federal Court issued its warning.</p>
+    <div class="uses-grid">
+      <div class="use-item">
+        <div class="use-label">Current Justice Uses</div>
+        <div class="use-text">Legal research assistance, document drafting, court submission preparation, victim communications (Services Australia), tribunal decision summaries</div>
+      </div>
+      <div class="use-item">
+        <div class="use-label">FGJ Required Safeguards</div>
+        <div class="use-text">Mandatory disclosure of LLM use in any court document; citation verification requirement; human lawyer sign-off on all AI-assisted submissions</div>
+      </div>
+    </div>
+    <p style="font-size:0.78rem;color:var(--muted);margin-top:0.75rem;margin-bottom:0;"><strong style="color:var(--ai-light);">Key Australian case:</strong> Luck v Secretary, Services Australia [2025] FCAFC 26 — first Federal Court case explicitly addressing AI-assisted decision-making (February 2025).</p>
+  </div>
+
+  <!-- NLP -->
+  <div class="tech-card">
+    <div class="tech-header">
+      <div class="tech-icon">📝</div>
+      <div>
+        <span class="tech-tag">Category 02</span>
+        <div class="tech-title">NATURAL LANGUAGE PROCESSING (NLP)</div>
+      </div>
+    </div>
+    <div class="risk-badge risk-medium">⚠ Medium Risk — Automated Decision Classification</div>
+    <h3>What It Is</h3>
+    <p>Natural Language Processing (NLP) is a branch of AI that enables computers to read, analyse, and interpret human language — including legal documents, transcripts, affidavits, and correspondence. NLP classifies text, extracts key information, and identifies patterns at scale.</p>
+    <h3>The Justice System Risk</h3>
+    <p>NLP is used in automated triage systems to classify legal claims, identify risk categories for bail decisions, and process welfare applications. When NLP misclassifies — due to training data bias or domain mismatch — it produces systemic discrimination at industrial scale without any single human making a discriminatory decision.</p>
+    <div class="uses-grid">
+      <div class="use-item">
+        <div class="use-label">Current Justice Uses</div>
+        <div class="use-text">Bail risk assessment tools, child protection case classification, welfare eligibility triage, court document management, transcript analysis</div>
+      </div>
+      <div class="use-item">
+        <div class="use-label">FGJ Required Safeguards</div>
+        <div class="use-text">Mandatory bias audit of all NLP classification systems used in justice contexts; human review of any NLP-assisted adverse determination; disclosure to affected parties</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- AI Agents -->
+  <div class="tech-card">
+    <div class="tech-header">
+      <div class="tech-icon">⚙️</div>
+      <div>
+        <span class="tech-tag">Category 03</span>
+        <div class="tech-title">AI AGENTS &amp; AUTOMATED DECISION SYSTEMS</div>
+      </div>
+    </div>
+    <div class="risk-badge risk-high">⚠ High Risk — Autonomous Rights Decisions</div>
+    <h3>What They Are</h3>
+    <p>AI Agents are systems that take autonomous actions in the world — not just generating text, but making decisions, triggering workflows, and acting without human input at each step. Automated Decision Systems (ADS) apply rules and AI outputs to make administrative decisions at scale.</p>
+    <h3>The Robodebt Lesson</h3>
+    <p><strong>Robodebt was Australia's first mass-scale ADS disaster.</strong> An automated income-averaging algorithm sent 433,000 debt notices without legal authority. $548.5 million was repaid. Lives were destroyed. The Royal Commission found the system was designed to avoid human review — because human review would have identified the illegality immediately.</p>
+    <p>In November 2025, an aged care allocation algorithm denied services to 18,000+ eligible recipients with no human review pathway and no appeal mechanism. Robodebt did not end. It evolved.</p>
+    <div class="uses-grid">
+      <div class="use-item">
+        <div class="use-label">Current Justice Uses</div>
+        <div class="use-text">Welfare debt assessment (former Robodebt, current systems), aged care allocation, visa processing, parole condition monitoring, child protection risk scoring</div>
+      </div>
+      <div class="use-item">
+        <div class="use-label">FGJ Required Safeguards</div>
+        <div class="use-text">Human-in-the-loop mandatory for all rights-affecting decisions; right to explanation; independent algorithmic audit; retroactive review since January 2020</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Computer Vision -->
+  <div class="tech-card">
+    <div class="tech-header">
+      <div class="tech-icon">👁️</div>
+      <div>
+        <span class="tech-tag">Category 04</span>
+        <div class="tech-title">COMPUTER VISION &amp; BIOMETRIC SYSTEMS</div>
+      </div>
+    </div>
+    <div class="risk-badge risk-high">⚠ High Risk — Evidence and Identity</div>
+    <h3>What It Is</h3>
+    <p>Computer vision enables AI to interpret images and video — including CCTV footage, facial recognition, body camera analysis, and document authentication. Biometric systems use facial features, gait, voice, and other biological characteristics to identify individuals.</p>
+    <h3>The Justice System Risk</h3>
+    <p>Computer vision is now used in evidence analysis — identifying individuals in CCTV footage, assessing vehicle registration in traffic offences, and verifying document authenticity. Facial recognition systems have documented error rates of 10–35% for people of colour. In criminal justice contexts, these errors are not statistical abstractions. They are wrongful convictions.</p>
+    <div class="uses-grid">
+      <div class="use-item">
+        <div class="use-label">Current Justice Uses</div>
+        <div class="use-text">CCTV evidence analysis, facial recognition for suspect identification, document fraud detection, deepfake detection in evidence (emerging), border security biometrics</div>
+      </div>
+      <div class="use-item">
+        <div class="use-label">FGJ Required Safeguards</div>
+        <div class="use-text">Mandatory disclosure of computer vision use in criminal proceedings; independent validation of any biometric evidence; prohibition on sole reliance on facial recognition for identification</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Blockchain -->
+  <div class="tech-card">
+    <div class="tech-header">
+      <div class="tech-icon">🔗</div>
+      <div>
+        <span class="tech-tag">Category 05</span>
+        <div class="tech-title">BLOCKCHAIN &amp; DISTRIBUTED LEDGER TECHNOLOGY</div>
+      </div>
+    </div>
+    <div class="risk-badge risk-emerging">🔵 Emerging — Evidence Integrity Solution</div>
+    <h3>What It Is</h3>
+    <p>Blockchain is a distributed, tamper-resistant ledger — a record of transactions or events that cannot be altered after the fact without detection. Unlike centralised databases, blockchain records are verified by multiple independent nodes, making tampering computationally infeasible.</p>
+    <h3>The Justice Opportunity</h3>
+    <p>Blockchain is the technological solution to the evidence tampering problem at the heart of Pillar 3. A blockchain-based chain-of-custody system would create an unbreakable digital record from the moment evidence is collected — time-stamped, independently verified, and impossible to alter without detection. This is not theoretical. Estonia has used blockchain for national legal records since 2012.</p>
+    <div class="uses-grid">
+      <div class="use-item">
+        <div class="use-label">Proposed Justice Uses</div>
+        <div class="use-text">Digital chain-of-custody for all physical and digital evidence; immutable court record archive; transparent petition and submission verification; judicial appointment records</div>
+      </div>
+      <div class="use-item">
+        <div class="use-label">FGJ Reform Alignment</div>
+        <div class="use-text">Pillar 3 — Evidence Integrity: blockchain as mandatory chain-of-custody standard; Pillar 4 — AI Accountability: algorithmic audit trails on distributed ledger</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Australian AI Ecosystem -->
+  <div class="aus-spotlight">
+    <span class="aus-label">🇦🇺 Australian AI in Justice — Current Landscape</span>
+    <h2>WHO IS <span style="color:#7BC8F6;">ALREADY WORKING ON THIS</span></h2>
+    <p>Australia is not starting from zero. A growing ecosystem of organisations is building responsible AI tools for justice contexts — and they should be partners in, not obstacles to, reform:</p>
+    <ul>
+      <li><strong style="color:#7BC8F6;">Habeas AI</strong> — Australian AI platform for legal research with built-in citation verification; direct FGJ partnership potential</li>
+      <li><strong style="color:#7BC8F6;">Justice Connect AI Project</strong> — deploying AI-assisted intake and triage for community legal centres across Australia</li>
+      <li><strong style="color:#7BC8F6;">UNSW Law Technology and Innovation Centre</strong> — leading academic research on AI in Australian courts</li>
+      <li><strong style="color:#7BC8F6;">ANU Centre for AI and Digital Ethics</strong> — policy research and framework development for ethical AI governance</li>
+      <li><strong style="color:#7BC8F6;">AUSTRAC</strong> — already using AI for financial crime detection — a model for justice sector deployment</li>
+    </ul>
+  </div>
+
+  <!-- International Frameworks -->
+  <div style="margin-bottom:3rem;">
+    <span class="section-label">International Context</span>
+    <h2>WHERE THE WORLD IS <span>GOING</span></h2>
+    <table class="framework-table">
+      <thead>
+        <tr><th>Framework</th><th>Jurisdiction</th><th>Key Provision</th><th>Status</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>EU AI Act</td><td>European Union</td><td>Prohibits AI in criminal justice without human oversight; mandatory transparency for high-risk uses</td><td>In force 2024</td></tr>
+        <tr><td>UNESCO AI Ethics Recommendation</td><td>193 nations</td><td>Human rights-centred AI; right to explanation; algorithmic accountability</td><td>Adopted 2021</td></tr>
+        <tr><td>OECD AI Principles</td><td>OECD members incl. Australia</td><td>Transparency, explainability, human-centred values — Australia is a signatory</td><td>Active</td></tr>
+        <tr><td>UK Justice AI Framework</td><td>United Kingdom</td><td>Court rules for AI disclosure; Law Society AI Ethics guidelines</td><td>Published 2023</td></tr>
+        <tr><td>NCSC AI Readiness Framework</td><td>United States</td><td>Government AI readiness standards — model for Australian adoption</td><td>Published 2024</td></tr>
+        <tr style="background:rgba(124,58,237,0.07);"><td style="color:var(--ai-light);">AI Accountability in Justice Act 2026</td><td style="color:var(--ai-light);">Australia — Proposed</td><td>Binding AI disclosure + human-in-the-loop + right to explanation + oversight panel</td><td style="color:var(--ai-light);">FGJ Proposal — 2026</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div style="background:rgba(124,58,237,0.1);border:1px solid rgba(167,139,250,0.3);padding:2.5rem;text-align:center;">
+    <h2>UNDERSTAND THE TECHNOLOGY. <span>DEMAND THE SAFEGUARDS.</span></h2>
+    <p style="max-width:560px;margin:0 auto 1.5rem;">Every Australian has the right to know when AI is making decisions about their life — and the right to challenge it. Join the movement demanding that right become law.</p>
+    <a href="pillar-four.html" style="display:inline-block;padding:0.9rem 2.2rem;background:var(--ai);color:#fff;font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:3px;text-decoration:none;margin:0.5rem;">Read Pillar 4 →</a>
+    <a href="take-action.html" style="display:inline-block;padding:0.9rem 2.2rem;background:transparent;color:var(--white);border:1px solid rgba(255,255,255,0.3);font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:3px;text-decoration:none;margin:0.5rem;">Join the Movement →</a>
+  </div>
+
+</div>
+
+<footer>
+  <p>© 2025 Fair Go Justice Movement | <a href="transparency.html">Transparency</a> | <a href="pillar-four.html">Pillar 4 — AI</a> | <a href="take-action.html">Take Action</a></p>
+  <p style="margin-top:0.5rem;">This platform uses AI-assisted research. All statistics are sourced from government reports, academic research, and court records. <a href="transparency.html">Full methodology →</a></p>
+</footer>
+
+</body>
+</html>

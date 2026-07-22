@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI and the Legal Profession — Jobs, Not Redundancies | Fair Go Justice</title>
+  <meta name="description" content="AI creates 1,050+ new legal jobs in Australia's justice system. Fair Go Justice's economic framework shows how AI efficiency savings fund the largest expansion of publicly-funded legal roles in history.">
+  <link rel="canonical" href="https://fairgojustice.com.au/legal-profession.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{--black:#0D1117;--navy:#0E3A5B;--orange:#D66B2D;--gold:#D4AF37;--white:#F5F5F5;--grey:rgba(245,245,245,0.65);--muted:rgba(245,245,245,0.45);--ai:#7C3AED;--ai-light:#A78BFA;}
+    *{margin:0;padding:0;box-sizing:border-box;}
+    body{background:var(--black);color:var(--white);font-family:'Space Grotesk',sans-serif;}
+    nav{position:sticky;top:0;z-index:100;background:rgba(13,17,23,0.97);backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:space-between;padding:0 2rem;height:64px;}
+    .nav-logo{font-family:'Bebas Neue',sans-serif;font-size:1.7rem;color:var(--orange);letter-spacing:3px;text-decoration:none;}
+    .nav-links{display:flex;list-style:none;gap:1.5rem;align-items:center;}
+    .nav-links a{color:var(--white);text-decoration:none;font-size:0.8rem;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;opacity:0.85;transition:opacity 0.2s;}
+    .nav-links a:hover{opacity:1;color:var(--orange);}
+    .nav-cta{padding:0.5rem 1.4rem;background:var(--orange);color:#fff!important;border-radius:1px;opacity:1!important;}
+    @media(max-width:768px){.nav-links{display:none;}}
+
+    .hero{background:linear-gradient(135deg,rgba(34,197,94,0.1) 0%,rgba(13,17,23,1) 100%);padding:5rem 2rem 4rem;border-bottom:1px solid rgba(34,197,94,0.15);}
+    .hero-inner{max-width:1100px;margin:0 auto;}
+    .eyebrow{font-size:0.62rem;letter-spacing:4px;text-transform:uppercase;color:#4ADE80;display:block;margin-bottom:1rem;}
+    .hero h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.5rem,7vw,5rem);letter-spacing:3px;color:var(--white);line-height:1;margin-bottom:1rem;}
+    .hero h1 span{color:#4ADE80;}
+    .hero p{font-size:1rem;color:var(--grey);line-height:1.75;max-width:700px;}
+
+    .stat-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;}
+    @media(max-width:700px){.stat-strip{grid-template-columns:repeat(2,1fr);}}
+    .stat-cell{padding:2rem 1.5rem;text-align:center;background:rgba(34,197,94,0.04);border:1px solid rgba(34,197,94,0.1);}
+    .stat-num{font-family:'Bebas Neue',sans-serif;font-size:3rem;color:#4ADE80;letter-spacing:2px;line-height:1;display:block;}
+    .stat-label{font-size:0.65rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-top:0.4rem;display:block;line-height:1.4;}
+
+    .container{max-width:1100px;margin:0 auto;padding:4rem 2rem;}
+    .section-eyebrow{font-size:0.62rem;letter-spacing:4px;text-transform:uppercase;color:#4ADE80;display:block;margin-bottom:0.75rem;}
+    h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(1.8rem,4vw,2.5rem);letter-spacing:2px;color:var(--white);margin-bottom:1rem;}
+    h2 span{color:#4ADE80;}
+    p{font-size:0.9rem;color:var(--grey);line-height:1.8;margin-bottom:1rem;}
+    ul li{font-size:0.88rem;color:var(--grey);line-height:1.7;margin-bottom:0.4rem;}
+    strong{color:var(--white);}
+
+    .block{padding:2.5rem;margin-bottom:2rem;border:1px solid rgba(255,255,255,0.07);}
+    .block.green{background:rgba(34,197,94,0.04);border-color:rgba(34,197,94,0.2);}
+    .block.dark{background:rgba(255,255,255,0.02);}
+    .block.purple{background:rgba(124,58,237,0.05);border-color:rgba(167,139,250,0.2);}
+
+    .role-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin:1.5rem 0;}
+    @media(max-width:700px){.role-grid{grid-template-columns:1fr;}}
+    .role-card{background:rgba(34,197,94,0.05);border:1px solid rgba(34,197,94,0.15);padding:1.75rem;}
+    .role-count{font-family:'Bebas Neue',sans-serif;font-size:3rem;color:#4ADE80;letter-spacing:2px;line-height:1;}
+    .role-title{font-size:0.75rem;font-weight:600;color:var(--white);letter-spacing:1.5px;text-transform:uppercase;margin:0.5rem 0 0.75rem;}
+    .role-salary{font-size:0.72rem;color:rgba(74,222,128,0.7);margin-bottom:0.75rem;}
+    .role-desc{font-size:0.82rem;color:var(--grey);line-height:1.55;}
+
+    .savings-table{width:100%;border-collapse:collapse;margin:1.5rem 0;}
+    .savings-table th{background:rgba(34,197,94,0.12);font-size:0.6rem;letter-spacing:2px;text-transform:uppercase;color:#4ADE80;padding:0.75rem 1rem;text-align:left;}
+    .savings-table td{padding:0.85rem 1rem;border-bottom:1px solid rgba(255,255,255,0.05);font-size:0.83rem;color:var(--grey);}
+    .savings-table td:first-child{color:var(--white);font-weight:600;}
+    .savings-table .green-text{color:#4ADE80;font-weight:600;}
+
+    .coalition-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;margin:1.5rem 0;}
+    @media(max-width:600px){.coalition-grid{grid-template-columns:1fr;}}
+    .coalition-item{padding:1.5rem;background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.07);}
+    .coalition-org{font-size:0.85rem;font-weight:600;color:var(--white);margin-bottom:0.3rem;}
+    .coalition-why{font-size:0.78rem;color:var(--grey);line-height:1.55;margin-bottom:0.4rem;}
+    .coalition-msg{font-size:0.75rem;color:rgba(74,222,128,0.7);font-style:italic;line-height:1.5;}
+
+    .pilot-box{background:rgba(14,58,91,0.2);border:1px solid rgba(14,58,91,0.5);padding:2.5rem;margin-bottom:2rem;}
+
+    footer{background:rgba(0,0,0,0.5);border-top:1px solid rgba(255,255,255,0.06);padding:2rem;text-align:center;}
+    footer p{font-size:0.78rem;color:var(--muted);}
+    footer a{color:var(--orange);text-decoration:none;}
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">FAIR GO JUSTICE</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="pillars.html">The Four Reforms</a></li>
+    <li><a href="pillar-four.html">Pillar 4 — AI</a></li>
+    <li><a href="legislation.html">Legislation</a></li>
+    <li><a href="senate-briefing.html">Senate</a></li>
+    <li><a href="take-action.html" class="nav-cta">Take Action</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="hero-inner">
+    <span class="eyebrow">Fair Go Justice — Legal Profession Partnership</span>
+    <h1>AI CREATES <span>JOBS</span>.<br>NOT REDUNDANCIES.</h1>
+    <p>The legal profession is not threatened by the AI Accountability in Justice Act 2026. It is the greatest beneficiary. Here is the economic case for why Australia's lawyers, law societies, and legal aid bodies should be champions of this reform — not opponents of it.</p>
+  </div>
+</section>
+
+<div class="stat-strip">
+  <div class="stat-cell">
+    <span class="stat-num">1,050+</span>
+    <span class="stat-label">New legal positions<br>created by the Act</span>
+  </div>
+  <div class="stat-cell">
+    <span class="stat-num">$150M</span>
+    <span class="stat-label">Annual AI efficiency<br>savings fund expansion</span>
+  </div>
+  <div class="stat-cell">
+    <span class="stat-num">50%</span>
+    <span class="stat-label">More clients served<br>per existing staff</span>
+  </div>
+  <div class="stat-cell">
+    <span class="stat-num">$7:1</span>
+    <span class="stat-label">Maximum ROI per<br>$1 invested (NLA data)</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- The Economic Case -->
+  <div class="block green" style="margin-top:2rem;">
+    <span class="section-eyebrow">The Economic Framework</span>
+    <h2>WHY AI EXPANDS THE PROFESSION — <span>NOT SHRINKS IT</span></h2>
+    <p>Every major AI transformation in professional services has followed the same pattern: AI handles high-volume, low-judgment tasks — freeing professionals for higher-value, higher-volume work. In legal aid contexts, demand is essentially unlimited. There are 388,000 Australians turned away from legal help every year. AI doesn't take lawyer jobs. It creates the capacity to finally serve that unmet demand.</p>
+    <p>The AI Accountability in Justice Act 2026 mandates human-in-the-loop for all rights-affecting decisions — meaning <strong>every AI-assisted legal process requires a qualified lawyer</strong>. The Act creates jobs by law, not just by economic logic.</p>
+  </div>
+
+  <!-- New Role Categories -->
+  <div style="margin-bottom:3rem;">
+    <span class="section-eyebrow">1,050+ New Government-Funded Legal Positions</span>
+    <h2>THE <span>NEW ROLES</span></h2>
+    <div class="role-grid">
+      <div class="role-card">
+        <div class="role-count">200</div>
+        <div class="role-title">AI Ethics &amp; Oversight Lawyers</div>
+        <div class="role-salary">$180,000 – $220,000 per year</div>
+        <div class="role-desc">Specialist counsel advising agencies on AI deployment compliance, reviewing algorithmic systems for rights-affecting decisions, and representing the public interest in AI Oversight Panel proceedings.</div>
+      </div>
+      <div class="role-card">
+        <div class="role-count">600</div>
+        <div class="role-title">AI-Assisted Client Advocates</div>
+        <div class="role-salary">$120,000 – $150,000 per year</div>
+        <div class="role-desc">Legal aid advocates using AI-augmented triage and research tools to serve three times the current client load — the primary vehicle for ending the 388,000 annual turn-away crisis.</div>
+      </div>
+      <div class="role-card">
+        <div class="role-count">150</div>
+        <div class="role-title">Senior AI Review Counsel</div>
+        <div class="role-salary">$160,000 – $200,000 per year</div>
+        <div class="role-desc">Senior lawyers reviewing and signing off on all AI-assisted determinations affecting individual rights — the human-in-the-loop mandate creates this tier permanently in legislation.</div>
+      </div>
+      <div class="role-card" style="background:rgba(124,58,237,0.08);border-color:rgba(167,139,250,0.25);">
+        <div class="role-count" style="color:var(--ai-light);">100+</div>
+        <div class="role-title">Additional Roles</div>
+        <div class="role-salary">Varied — specialist and support</div>
+        <div class="role-desc">Evidence Integrity Officers at each court level; AI training specialists; community legal centre expansion roles; regional and remote access coordinators.</div>
+      </div>
+      <div class="role-card" style="background:rgba(212,175,55,0.05);border-color:rgba(212,175,55,0.2);grid-column:span 2;" >
+        <div class="role-count" style="color:var(--gold);">1,050+</div>
+        <div class="role-title">Total New Positions — The Largest Expansion of Publicly-Funded Legal Roles in Australian History</div>
+        <div class="role-salary" style="color:rgba(212,175,55,0.7);">Funded by $150M annual AI efficiency savings — budget neutral within three years</div>
+        <div class="role-desc">Every position is publicly funded. Every position requires Australian legal qualifications. Every position is created by the Act — not subject to future budget cuts without legislative amendment. This is structural, permanent job creation for the legal profession.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- How It's Funded -->
+  <div style="margin-bottom:3rem;">
+    <span class="section-eyebrow">Funding Model</span>
+    <h2>HOW WE PAY FOR <span>ALL OF THIS</span></h2>
+    <table class="savings-table">
+      <thead>
+        <tr><th>Source</th><th>Annual Saving / Revenue</th><th>How Reinvested</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>AI-assisted document processing in courts</td>
+          <td class="green-text">$45M savings</td>
+          <td>Client advocate positions (200 FTE)</td>
+        </tr>
+        <tr>
+          <td>Automated triage — legal aid intake</td>
+          <td class="green-text">$38M savings</td>
+          <td>Regional/remote expansion + duty lawyers</td>
+        </tr>
+        <tr>
+          <td>Reduced appeals and errors (human-in-the-loop compliance)</td>
+          <td class="green-text">$42M savings</td>
+          <td>AI ethics counsel + oversight panel</td>
+        </tr>
+        <tr>
+          <td>Welfare and Centrelink AI audit recoupment</td>
+          <td class="green-text">$25M+ savings</td>
+          <td>Retroactive audit program + senior counsel</td>
+        </tr>
+        <tr style="background:rgba(34,197,94,0.05);">
+          <td style="color:#4ADE80;">Total Annual Efficiency Savings</td>
+          <td class="green-text" style="font-size:1rem;">$150M+</td>
+          <td style="color:#4ADE80;">Funds all 1,050+ positions — budget neutral Year 3</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Coalition Strategy -->
+  <div style="margin-bottom:3rem;">
+    <span class="section-eyebrow">Building the Coalition</span>
+    <h2>WHO NEEDS TO <span>COME ON BOARD</span></h2>
+    <div class="coalition-grid">
+      <div class="coalition-item">
+        <div class="coalition-org">Law Council of Australia</div>
+        <div class="coalition-why">The Law Council represents 70,000 Australian lawyers. Their endorsement of the human-in-the-loop mandate transforms this from an advocacy campaign into professional consensus.</div>
+        <div class="coalition-msg">"1,050 new lawyer positions — professional standards elevated, not reduced."</div>
+      </div>
+      <div class="coalition-item">
+        <div class="coalition-org">National Legal Aid</div>
+        <div class="coalition-why">The peak body for Legal Aid Commissions has been seeking funding relief for 15 years. The AI efficiency funding model is the first fiscally credible path to meaningful expansion.</div>
+        <div class="coalition-msg">"50% more clients served — the turn-away crisis ends within a pilot year."</div>
+      </div>
+      <div class="coalition-item">
+        <div class="coalition-org">Australian Bar Association</div>
+        <div class="coalition-why">Barristers face direct exposure to AI hallucination liability — the mandatory disclosure requirement protects them from being held responsible for AI errors they didn't know existed.</div>
+        <div class="coalition-msg">"Mandatory disclosure protects the Bar from AI liability they can't see."</div>
+      </div>
+      <div class="coalition-item">
+        <div class="coalition-org">Community Legal Centres Australia</div>
+        <div class="coalition-why">CLCs are turning away 388,000 Australians annually. The AI-augmented delivery model and new advocate positions are designed specifically around the CLC service structure.</div>
+        <div class="coalition-msg">"The capacity crisis solved — with more lawyers, not fewer."</div>
+      </div>
+      <div class="coalition-item">
+        <div class="coalition-org">Maurice Blackburn Lawyers</div>
+        <div class="coalition-why">Australia's largest plaintiff firm champions access to justice causes. The jobs-creation narrative aligns exactly with their institutional values and public positioning.</div>
+        <div class="coalition-msg">"AI creates the scale to reach every Australian who needs representation."</div>
+      </div>
+      <div class="coalition-item">
+        <div class="coalition-org">LIV, Queensland Law Society, NSWLRS</div>
+        <div class="coalition-why">State law societies influence professional standards and government consultation processes — their engagement is critical for state-level pilot program implementation.</div>
+        <div class="coalition-msg">"Pilot program in QLD and NSW — local jobs, local impact, national model."</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pilot Invitation -->
+  <div class="pilot-box">
+    <span class="section-eyebrow">An Invitation to the Profession</span>
+    <h2>JOIN THE PILOT. <span>SHAPE THE FUTURE.</span></h2>
+    <p>Fair Go Justice is inviting legal professional bodies, law firms, and legal aid commissions to co-design the national pilot program. The pilot — proposed to commence in Queensland and NSW in Q4 2026 — needs legal profession partners to:</p>
+    <ul style="margin:1rem 0 1.5rem 1.5rem;">
+      <li><strong>Co-design the AI-assisted triage model</strong> — ensuring it meets professional obligations and client outcomes</li>
+      <li><strong>Train and place the first cohort of AI-Assisted Client Advocates</strong> — working within existing Legal Aid structures</li>
+      <li><strong>Evaluate outcomes independently</strong> — client satisfaction, access expansion, accuracy of AI-assisted research</li>
+      <li><strong>Report to Parliament</strong> — building the evidence base for national legislative reform</li>
+    </ul>
+    <p>This is not a threat to the legal profession. It is the biggest opportunity in a generation to expand access, create careers, and demonstrate that lawyers — not algorithms — are the cornerstone of Australian justice.</p>
+    <a href="mailto:fairgojustice@gmail.com" style="display:inline-block;padding:0.9rem 2.5rem;background:#4ADE80;color:#0D1117;font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:3px;text-decoration:none;">Express Interest in the Pilot →</a>
+  </div>
+
+  <div style="text-align:center;margin-top:2rem;">
+    <a href="pillar-four.html" style="display:inline-block;padding:0.9rem 2.2rem;background:var(--ai);color:#fff;font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:3px;text-decoration:none;margin:0.5rem;">Read Pillar 4 →</a>
+    <a href="legislation.html" style="display:inline-block;padding:0.9rem 2.2rem;background:transparent;color:var(--white);border:1px solid rgba(255,255,255,0.3);font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:3px;text-decoration:none;margin:0.5rem;">The Four Acts →</a>
+  </div>
+
+</div>
+
+<footer>
+  <p>© 2025 Fair Go Justice Movement | <a href="transparency.html">Transparency</a> | <a href="pillars.html">The Four Reforms</a> | <a href="take-action.html">Take Action</a></p>
+  <p style="margin-top:0.5rem;">This platform uses AI-assisted research. All statistics are sourced from government reports, academic research, and court records. <a href="transparency.html">Full methodology →</a></p>
+</footer>
+
+</body>
+</html>

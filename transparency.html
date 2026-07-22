@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Transparency Commitment | Fair Go Justice</title>
+  <meta name="description" content="Fair Go Justice's transparency commitment — how we use AI-assisted research, how statistics are sourced, what is documented vs illustrative, and our full content methodology.">
+  <link rel="canonical" href="https://fairgojustice.com.au/transparency.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --black: #0D1117; --navy: #0E3A5B; --orange: #D66B2D; --gold: #D4AF37;
+      --white: #F5F5F5; --grey: rgba(245,245,245,0.6); --text-muted: rgba(245,245,245,0.5);
+      --ai-purple: #7C3AED; --ai-light: #A78BFA;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: var(--black); color: var(--white); font-family: 'Space Grotesk', sans-serif; }
+    nav { position: sticky; top: 0; z-index: 100; background: rgba(13,17,23,0.97); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255,255,255,0.06); display: flex; align-items: center; justify-content: space-between; padding: 0 2rem; height: 64px; }
+    .nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.7rem; color: var(--orange); letter-spacing: 3px; text-decoration: none; }
+    .nav-links { display: flex; list-style: none; gap: 1.5rem; align-items: center; }
+    .nav-links a { color: var(--white); text-decoration: none; font-size: 0.8rem; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase; opacity: 0.85; transition: opacity 0.2s; }
+    .nav-links a:hover { opacity: 1; color: var(--orange); }
+    .nav-cta { padding: 0.5rem 1.4rem; background: var(--orange); color: #fff !important; border-radius: 1px; opacity: 1 !important; }
+    @media(max-width:768px) { .nav-links { display: none; } }
+
+    .page-hero { background: linear-gradient(135deg, rgba(212,175,55,0.15) 0%, rgba(13,17,23,1) 100%); padding: 5rem 2rem 4rem; text-align: center; border-bottom: 1px solid rgba(212,175,55,0.15); }
+    .page-hero .eyebrow { font-size: 0.65rem; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: 1rem; }
+    .page-hero h1 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(3rem,7vw,5rem); letter-spacing: 3px; color: var(--white); margin-bottom: 1rem; line-height: 1; }
+    .page-hero h1 span { color: var(--gold); }
+    .page-hero p { font-size: 1rem; color: var(--grey); line-height: 1.7; max-width: 680px; margin: 0 auto; }
+
+    .container { max-width: 900px; margin: 0 auto; padding: 4rem 2rem; }
+    .section-label { font-size: 0.65rem; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: 0.75rem; }
+    h2 { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; letter-spacing: 2px; color: var(--white); margin-bottom: 1rem; }
+    h2 span { color: var(--gold); }
+    p { font-size: 0.92rem; color: var(--grey); line-height: 1.8; margin-bottom: 1.25rem; }
+    ul { margin: 1rem 0 1.5rem 1.25rem; }
+    ul li { font-size: 0.9rem; color: var(--grey); line-height: 1.7; margin-bottom: 0.5rem; }
+
+    .block { background: rgba(255,255,255,0.025); border: 1px solid rgba(255,255,255,0.07); padding: 2.5rem; margin-bottom: 2rem; }
+    .block.gold { border-color: rgba(212,175,55,0.25); background: rgba(212,175,55,0.04); }
+    .block.orange { border-color: rgba(214,107,45,0.25); background: rgba(214,107,45,0.04); }
+    .block.purple { border-color: rgba(167,139,250,0.25); background: rgba(124,58,237,0.06); }
+
+    .badge { display: inline-block; padding: 0.3rem 0.9rem; font-size: 0.62rem; letter-spacing: 3px; text-transform: uppercase; font-weight: 600; border-radius: 2px; margin-bottom: 0.75rem; }
+    .badge-gold { background: rgba(212,175,55,0.12); border: 1px solid rgba(212,175,55,0.4); color: var(--gold); }
+    .badge-orange { background: rgba(214,107,45,0.12); border: 1px solid rgba(214,107,45,0.4); color: var(--orange); }
+    .badge-green { background: rgba(34,197,94,0.1); border: 1px solid rgba(34,197,94,0.4); color: #4ADE80; }
+    .badge-purple { background: rgba(167,139,250,0.12); border: 1px solid rgba(167,139,250,0.4); color: var(--ai-light); }
+
+    .rule-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.5rem 0; }
+    @media(max-width:600px) { .rule-grid { grid-template-columns: 1fr; } }
+    .rule-item { padding: 1.25rem; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); }
+    .rule-num { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; color: var(--gold); letter-spacing: 2px; line-height: 1; }
+    .rule-title { font-size: 0.78rem; font-weight: 600; color: var(--white); letter-spacing: 1px; text-transform: uppercase; margin: 0.4rem 0 0.3rem; }
+    .rule-desc { font-size: 0.78rem; color: var(--text-muted); line-height: 1.5; }
+
+    footer { background: rgba(0,0,0,0.5); border-top: 1px solid rgba(255,255,255,0.06); padding: 2rem; text-align: center; }
+    footer p { font-size: 0.78rem; color: var(--text-muted); }
+    footer a { color: var(--orange); text-decoration: none; }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">FAIR GO JUSTICE</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="pillars.html">The Reforms</a></li>
+    <li><a href="stories.html">Stories</a></li>
+    <li><a href="audit-justice.html">Audit Justice</a></li>
+    <li><a href="pillar-four.html">Pillar 4 — AI</a></li>
+    <li><a href="senate-briefing.html">Senate</a></li>
+    <li><a href="take-action.html" class="nav-cta">Take Action</a></li>
+  </ul>
+</nav>
+
+<div class="page-hero">
+  <span class="eyebrow">Fair Go Justice — Accountability in practice</span>
+  <h1>OUR <span>TRANSPARENCY</span><br>COMMITMENT</h1>
+  <p>We hold the system to account. That means holding ourselves to the same standard. Here is exactly how this platform works, what AI does and doesn't do here, and how every statistic is sourced.</p>
+</div>
+
+<div class="container">
+
+  <!-- BLOCK 1: Why we publish this -->
+  <div class="block gold">
+    <span class="badge badge-gold">Why This Page Exists</span>
+    <h2>GOVERNMENT-GRADE <span>INTEGRITY</span></h2>
+    <p>Fair Go Justice is not a backyard community website. It is positioning itself as a world-leading civil society reform platform — engaging Senators, government ministers, courts, and the public. That requires a transparency standard that matches the ambition.</p>
+    <p>This page documents every methodology decision so that any journalist, senator, researcher, or member of the public can understand exactly what they are reading and why they can trust it — or challenge it.</p>
+  </div>
+
+  <!-- BLOCK 2: AI use -->
+  <div class="block purple">
+    <span class="badge badge-purple">AI-Assisted Research — What That Means</span>
+    <h2>HOW WE USE <span style="color:var(--ai-light);">ARTIFICIAL INTELLIGENCE</span></h2>
+    <p>Fair Go Justice uses AI-assisted research methodology as a <strong style="color:var(--white);">research and synthesis tool</strong> — not as a source of truth. Every AI-assisted output is subject to the following eight-rule court-safe filter before publication:</p>
+    <div class="rule-grid">
+      <div class="rule-item">
+        <div class="rule-num">01</div>
+        <div class="rule-title">Source Verification</div>
+        <div class="rule-desc">Every statistic must trace to a government report, peer-reviewed research, or primary court record. AI does not create statistics — it finds and synthesises them.</div>
+      </div>
+      <div class="rule-item">
+        <div class="rule-num">02</div>
+        <div class="rule-title">No Real Names</div>
+        <div class="rule-desc">No real individuals are named in any AI-generated content. All accounts use role-based descriptions only (e.g. "a self-represented litigant", "a public sector worker").</div>
+      </div>
+      <div class="rule-item">
+        <div class="rule-num">03</div>
+        <div class="rule-title">Documented Patterns</div>
+        <div class="rule-desc">Illustrative accounts on this site are documented systemic patterns — not verbatim testimonies. They are clearly labelled as such on every page they appear.</div>
+      </div>
+      <div class="rule-item">
+        <div class="rule-num">04</div>
+        <div class="rule-title">No Findings of Fact</div>
+        <div class="rule-desc">This site does not make findings of fact about any specific case. It documents systemic patterns and publicly available data.</div>
+      </div>
+      <div class="rule-item">
+        <div class="rule-num">05</div>
+        <div class="rule-title">No Legal Advice</div>
+        <div class="rule-desc">Nothing on this site constitutes legal advice. Content is educational, advocacy-based, and documentary in nature.</div>
+      </div>
+      <div class="rule-item">
+        <div class="rule-num">06</div>
+        <div class="rule-title">Systemic Framing</div>
+        <div class="rule-desc">All analysis refers to systemic failures — not individual wrongdoing — unless supported by verifiable public record (e.g. royal commission findings, court judgments).</div>
+      </div>
+      <div class="rule-item">
+        <div class="rule-num">07</div>
+        <div class="rule-title">Citation on Request</div>
+        <div class="rule-desc">Full source citations for any statistic or data point are available on request at fairgojustice@gmail.com. We publish what we can verify.</div>
+      </div>
+      <div class="rule-item">
+        <div class="rule-num">08</div>
+        <div class="rule-title">No Raw AI Output</div>
+        <div class="rule-desc">No AI output is published without human review, editing, and verification against our methodology. AI assists — humans decide what is published.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BLOCK 3: Stories -->
+  <div class="block orange">
+    <span class="badge badge-orange">Community Stories — Methodology</span>
+    <h2>DOCUMENTED PATTERNS <span style="color:var(--orange);">vs REAL STORIES</span></h2>
+    <p>The accounts on our <a href="stories.html" style="color:var(--orange);">Stories page</a> are labelled clearly as <strong style="color:var(--white);">"Documented Patterns / Illustrative Accounts"</strong>. They are:</p>
+    <ul>
+      <li>Drawn from publicly documented systemic failures (royal commissions, court data, Legal Aid reports, NACC findings)</li>
+      <li>Written using AI-assisted research methodology, then reviewed against the eight-rule filter</li>
+      <li>Representative of real patterns — not invented scenarios</li>
+      <li>Not attributable to any specific individual</li>
+    </ul>
+    <p>We are actively building a <strong style="color:var(--white);">Verified Community Stories</strong> section. Real personal accounts submitted via our story form will be reviewed, consent-confirmed, and published separately with full transparency about their verified status. If you have a real story to share, <a href="stories.html#submit" style="color:var(--orange);">submit it here →</a></p>
+  </div>
+
+  <!-- BLOCK 4: Petition / Movement Supporters -->
+  <div class="block gold">
+    <span class="badge badge-gold">Movement Supporters — Methodology</span>
+    <h2>PETITION &amp; SUPPORTER <span>NUMBERS</span></h2>
+    <p>The "Movement Supporters" figure reflects the number of individuals who have engaged with this campaign through petition registration, email sign-ups, social media engagement, and direct outreach responses.</p>
+    <p>We are building toward a <strong style="color:var(--white);">verified digital signature system</strong> with plans to integrate with government-recognised identity verification. Until that system is operational, movement supporters should be understood as campaign reach — not a formally verified petition count.</p>
+    <p>We do not inflate, fabricate, or reset movement supporter numbers. Numbers will only increase as real engagement grows.</p>
+  </div>
+
+  <!-- BLOCK 5: Statistics sourcing -->
+  <div class="block">
+    <span class="badge badge-green">Statistics — Source List</span>
+    <h2>WHERE OUR <span>DATA COMES FROM</span></h2>
+    <p>Every statistic published on this site is sourced from one of the following:</p>
+    <ul>
+      <li><strong style="color:var(--white);">Australian Government reports</strong> — Robodebt Royal Commission, NACC Annual Reports, Legal Aid Commission data, ABS justice statistics</li>
+      <li><strong style="color:var(--white);">Federal and Supreme Court judgments</strong> — publicly accessible via AustLII and court websites</li>
+      <li><strong style="color:var(--white);">Academic research</strong> — UNSW Law, University of Melbourne, ANU Centre for AI and Digital Ethics</li>
+      <li><strong style="color:var(--white);">Parliamentary records</strong> — Hansard, Senate committee reports, joint committee findings</li>
+      <li><strong style="color:var(--white);">OECD and international bodies</strong> — OECD Justice Indicators, UNESCO AI Ethics framework, EU AI Act documentation</li>
+      <li><strong style="color:var(--white);">Major Australian journalism</strong> — ABC Investigations, Guardian Australia, Sydney Morning Herald verified investigative reports</li>
+    </ul>
+    <p>Key sourced statistics include: SRL rate tripled 4.4%→12.8% (Federal Circuit Court statistical report 2024); 73+ AI fake citations (UNSW Law, April 2026); Robodebt $548.5M settlement (Royal Commission into Robodebt, 2023); NLAP expired 30 June 2025, 388,000 CLC turn-aways (National Association of Community Legal Centres); OECD judicial integrity score 26% vs 66% average (OECD Justice at a Glance 2024).</p>
+  </div>
+
+  <!-- BLOCK 6: Contact -->
+  <div class="block gold" style="text-align:center;">
+    <span class="badge badge-gold">Questions &amp; Challenges</span>
+    <h2>CHALLENGE US. <span>WE WELCOME IT.</span></h2>
+    <p>If you believe any content on this site is inaccurate, misattributed, or insufficiently sourced, we want to know. This platform exists to advance the truth — not to protect itself from scrutiny.</p>
+    <p style="margin-bottom:2rem;">Contact us at <a href="mailto:fairgojustice@gmail.com" style="color:var(--gold);">fairgojustice@gmail.com</a> with your specific concern, and we will respond within 5 business days with a source citation or a correction.</p>
+    <a href="take-action.html" style="display:inline-block;padding:0.9rem 2.5rem;background:var(--gold);color:#0D1117;font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:3px;text-decoration:none;">JOIN THE MOVEMENT →</a>
+  </div>
+
+</div>
+
+<footer>
+  <p>© 2025 Fair Go Justice Movement | <a href="transparency.html">Transparency</a> | <a href="take-action.html">Take Action</a> | <a href="pillars.html">The Four Reforms</a></p>
+  <p style="margin-top:0.5rem;">This site documents systemic failures in Australia's justice system. All individuals referred to by role or description only. No content constitutes legal advice.</p>
+</footer>
+
+</body>
+</html>

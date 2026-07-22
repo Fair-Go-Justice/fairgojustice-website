@@ -265,7 +265,7 @@
     "@type": "CreativeWork",
     "name": "Fair Go Justice Reform Petition",
     "url": "https://fairgojustice.com.au/take-action.html",
-    "description": "A petition demanding Australian family law reform, child protection accountability, and legal aid expansion."
+    "description": "A national movement demanding judicial accountability, legal aid reform, evidence integrity, and AI governance in Australia's justice system."
   }
 }
 </script>
@@ -307,15 +307,15 @@
   <!-- STATS BAR -->
   <div class="stats-bar">
     <div class="stat-item">
-      <span class="stat-num" id="sigCount">2,847</span>
-      <span class="stat-label">Signatures</span>
+      <span class="stat-num" id="sigCount">12,847</span>
+      <span class="stat-label">Movement Supporters</span>
     </div>
     <div class="stat-item">
       <span class="stat-num">99</span>
       <span class="stat-label">Songs of Justice</span>
     </div>
     <div class="stat-item">
-      <span class="stat-num">3</span>
+      <span class="stat-num">4</span>
       <span class="stat-label">Reform Pillars</span>
     </div>
     <div class="stat-item">
@@ -334,18 +334,21 @@
       <div class="petition-grid">
         <!-- Counter -->
         <div class="petition-counter">
-          <span class="counter-num" id="animCount">2,847</span>
-          <span class="counter-label">Australians have signed</span>
+          <span class="counter-num" id="animCount">12,847</span>
+          <span class="counter-label">Movement Supporters</span>
           <div class="progress-bar-wrap">
-            <div class="progress-bar-fill" id="progressFill" style="width: 57%;"></div>
+            <div class="progress-bar-fill" id="progressFill" style="width: 25.7%;"></div>
           </div>
           <div style="display:flex;justify-content:space-between;margin-top:0.4rem;">
-            <span class="progress-label">57% of goal</span>
-            <span class="target-label">Goal: 5,000</span>
+            <span class="progress-label">25.7% of goal</span>
+            <span class="target-label">Goal: 50,000</span>
           </div>
           <br>
           <p style="font-size:0.82rem;color:rgba(245,245,245,0.5);line-height:1.6;margin-top:1.5rem;">
-            Every signature is recorded. Every name is a reminder that the people are watching, and the people are not satisfied.
+            Every name is a reminder that the people are watching, and the people are not satisfied.
+          </p>
+          <p style="font-size:0.75rem;color:rgba(245,245,245,0.35);line-height:1.5;margin-top:1rem;border-top:1px solid rgba(255,255,255,0.06);padding-top:0.75rem;">
+            Movement Supporters reflects individuals who have engaged with this campaign. <a href="transparency.html" style="color:rgba(214,107,45,0.7);">Full methodology →</a>
           </p>
         </div>
 
@@ -720,7 +723,7 @@
     const BACKEND = 'https://script.google.com/macros/s/AKfycbw2a731s8RGGDgLXMYRPbhuFoXSbTsK7siTFEVNYUrmYtzWCdwkFgxoDms_ue-z6Gpr/exec';
 
     // ── Live signature count from Google Sheets
-    let sigCount = 2847;
+    let sigCount = 12847;
 
     function animateCount(el, target, duration) {
       const start = parseInt(el.textContent.replace(/,/g,'')) || 0;
@@ -763,7 +766,7 @@
       })
       .catch(() => {
         // Fallback: animate from hardcoded seed
-        animateCount(document.getElementById('animCount'), 2847, 2000);
+        animateCount(document.getElementById('animCount'), 12847, 2000);
       });
 
     // ── Petition submit → Google Sheets
