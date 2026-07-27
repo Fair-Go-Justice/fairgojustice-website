@@ -1102,6 +1102,42 @@ const ROOMS = [
     ],
     link: 'forensics-lab.html', linkLabel: 'ENTER FORENSICS LAB',
   },
+  {
+    id: 'exhibit-unsw-001', label: 'EXHIBIT UNSW-001', room: 'EXHIBIT UNSW-001',
+    tier: 3,
+    titleLine1: 'UNSW Sydney —', titleLine2: 'AI in Courts',
+    color: 0xD4AF37, glowColor: '#D4AF37',
+    orbitRadius: 24, orbitSpeed: 0.0027, orbitOffset: Math.PI * 0.45,
+    orbitTilt: 0.22, size: 1.3,
+    verStatus: 'verified', estTime: '4 MIN',
+    hoverLines: ['84 Reported AI Court Cases', '66/84 (78.5%) Self-Represented', 'Verified — 28 Sep 2025'],
+    description: 'UNSW Centre for the Future of the Legal Profession research, prepared for the Australian Academy of Law. Prof Michael Legg and Selena Shannon document 84 reported cases of Advanced Intelligence use in Australian courts since the launch of ChatGPT — 66 of them (78.5%) involving self-represented litigants. The research exposes a stark asymmetry: "When someone representing themselves makes the error, they only have themselves to blame" — while a lawyer relying on fake AI-generated cases faces likely negligence, and their client can sue. Pull-quote: "AI is being used to address an access to justice problem that it is not well-suited to – at least, not yet." — Prof Michael Legg, UNSW Sydney.',
+    stats: [
+      { label: 'Cases', value: '84', cls: 'v-gold' },
+      { label: 'Self-Represented', value: '78.5%', cls: 'v-gold' },
+      { label: 'Migration SRLs (2023–24)', value: '79%', cls: 'v-orange' },
+      { label: 'Status', value: 'VERIFIED', cls: 'v-green' },
+    ],
+    link: 'https://www.unsw.edu.au/newsroom/news/2025/09/more-people-are-using-ai-in-court-not-a-lawyer-it-could-cost-you-money-and-your-case', linkLabel: 'VIEW SOURCE — UNSW SYDNEY',
+  },
+  {
+    id: 'exhibit-qld-ai-001', label: 'EXHIBIT QLD-AI-001', room: 'EXHIBIT QLD-AI-001',
+    tier: 3,
+    titleLine1: 'Queensland Courts —', titleLine2: 'AI Guidelines',
+    color: 0x00FF88, glowColor: '#00FF88',
+    orbitRadius: 31, orbitSpeed: 0.0021, orbitOffset: Math.PI * 1.15,
+    orbitTilt: -0.28, size: 1.3,
+    verStatus: 'verified', estTime: '3 MIN',
+    hoverLines: ['Official Court Guidance', 'Revised 15 Sep 2025', 'Applies to All QLD Courts'],
+    description: 'Queensland Courts — covering the Supreme Court, District Court, QCAT and all Queensland tribunals — were forced to issue formal guidance for self-represented litigants and lay advocates because Advanced Intelligence hallucination in proceedings is no longer hypothetical. In the courts\' own words: "These tools have no genuine understanding of what a word actually means or any idea of truth." And on the financial risk to litigants: "If you rely on a document which contains non-existent or fake citations… a costs order may be made against you." The guidance also warns these tools "make up fake cases, citations and quotes" — placing the legal and financial risk of system failure squarely on the most vulnerable litigants.',
+    stats: [
+      { label: 'Issued', value: '13 MAY 2024', cls: '' },
+      { label: 'Revised', value: '15 SEP 2025', cls: 'v-gold' },
+      { label: 'Scope', value: 'ALL QLD COURTS', cls: '' },
+      { label: 'Status', value: 'VERIFIED', cls: 'v-green' },
+    ],
+    link: 'https://www.courts.qld.gov.au/__data/assets/pdf_file/0012/798375/Artificial-Intelligence_Guidelines-for-Non-Lawyers.pdf', linkLabel: 'VIEW SOURCE — QLD COURTS',
+  },
 ];
 
 /* ============================
@@ -1373,7 +1409,7 @@ function buildNode(room, idx) {
 }
 
 const CONNECTIONS = [
-  [0,1],[1,2],[0,2],[3,0],[3,1],[4,0],[6,0],[7,0],[5,7],[8,0],[8,4]
+  [0,1],[1,2],[0,2],[3,0],[3,1],[4,0],[6,0],[7,0],[5,7],[8,0],[8,4],[9,0],[10,0]
 ];
 let connLines = [];
 
