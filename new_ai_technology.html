@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Technology in Justice — Legislative-Grade Reference | Fair Go Justice</title>
+  <meta name="description" content="Legislative-grade reference on AI technology in Australia's justice system. LLMs, NLP, AI Agents, Computer Vision, Blockchain — what they are, what they do in courts, and what oversight is needed.">
+  <link rel="canonical" href="https://fairgojustice.com.au/ai-technology.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{--black:#0D1117;--navy:#0E3A5B;--orange:#D66B2D;--gold:#D4AF37;--white:#F5F5F5;--grey:rgba(245,245,245,0.65);--muted:rgba(245,245,245,0.45);--ai:#7C3AED;--ai-light:#A78BFA;}
+    *{margin:0;padding:0;box-sizing:border-box;}
+    body{background:var(--black);color:var(--white);font-family:'Space Grotesk',sans-serif;}
+    nav{position:sticky;top:0;z-index:100;background:rgba(13,17,23,0.97);backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:space-between;padding:0 2rem;height:64px;}
+    .nav-logo{font-family:'Bebas Neue',sans-serif;font-size:1.7rem;color:var(--orange);letter-spacing:3px;text-decoration:none;}
+    .nav-links{display:flex;list-style:none;gap:1.5rem;align-items:center;}
+    .nav-links a{color:var(--white);text-decoration:none;font-size:0.8rem;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;opacity:0.85;transition:opacity 0.2s;}
+    .nav-links a:hover{opacity:1;color:var(--ai-light);}
+    .nav-cta{padding:0.5rem 1.4rem;background:var(--orange);color:#fff!important;border-radius:1px;opacity:1!important;}
+    @media(max-width:768px){.nav-links{display:none;}}
+
+    .hero{background:linear-gradient(135deg,rgba(124,58,237,0.2) 0%,rgba(13,17,23,1) 100%);padding:5rem 2rem 4rem;border-bottom:1px solid rgba(167,139,250,0.12);}
+    .hero-inner{max-width:1100px;margin:0 auto;}
+    .eyebrow{font-size:0.62rem;letter-spacing:4px;text-transform:uppercase;color:var(--ai-light);display:block;margin-bottom:1rem;}
+    h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.5rem,7vw,4.5rem);letter-spacing:3px;color:var(--white);line-height:1;margin-bottom:1rem;}
+    h1 span{color:var(--ai-light);}
+    .hero p{font-size:1rem;color:var(--grey);line-height:1.75;max-width:700px;margin-bottom:1.5rem;}
+
+    .container{max-width:1100px;margin:0 auto;padding:4rem 2rem;}
+    .section-label{font-size:0.62rem;letter-spacing:4px;text-transform:uppercase;color:var(--ai-light);display:block;margin-bottom:0.75rem;}
+    h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(1.8rem,4vw,2.5rem);letter-spacing:2px;color:var(--white);margin-bottom:1rem;}
+    h2 span{color:var(--ai-light);}
+    h3{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:2px;color:var(--ai-light);margin-bottom:0.75rem;}
+    p{font-size:0.9rem;color:var(--grey);line-height:1.8;margin-bottom:1rem;}
+    ul{margin:0.75rem 0 1rem 1.25rem;}
+    ul li{font-size:0.88rem;color:var(--grey);line-height:1.7;margin-bottom:0.4rem;}
+    strong{color:var(--white);}
+
+    .tech-card{background:rgba(124,58,237,0.05);border:1px solid rgba(167,139,250,0.15);padding:2rem;margin-bottom:1.5rem;}
+    .tech-card:hover{border-color:rgba(167,139,250,0.35);background:rgba(124,58,237,0.08);}
+    .tech-header{display:flex;align-items:center;gap:1rem;margin-bottom:1rem;}
+    .tech-icon{width:48px;height:48px;background:rgba(124,58,237,0.2);border:1px solid rgba(167,139,250,0.3);display:flex;align-items:center;justify-content:center;font-size:1.5rem;flex-shrink:0;}
+    .tech-tag{font-size:0.6rem;letter-spacing:2.5px;text-transform:uppercase;color:var(--ai-light);display:block;margin-bottom:0.25rem;}
+    .tech-title{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;letter-spacing:2px;color:var(--white);line-height:1;}
+    .risk-badge{display:inline-block;padding:0.2rem 0.6rem;font-size:0.6rem;letter-spacing:2px;text-transform:uppercase;font-weight:600;border-radius:2px;margin-bottom:0.75rem;}
+    .risk-high{background:rgba(248,113,113,0.12);border:1px solid rgba(248,113,113,0.4);color:#F87171;}
+    .risk-medium{background:rgba(251,191,36,0.12);border:1px solid rgba(251,191,36,0.4);color:#FBBF24;}
+    .risk-emerging{background:rgba(167,139,250,0.12);border:1px solid rgba(167,139,250,0.4);color:var(--ai-light);}
+
+    .uses-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;margin:1rem 0;background:rgba(167,139,250,0.1);}
+    @media(max-width:600px){.uses-grid{grid-template-columns:1fr;}}
+    .use-item{background:var(--black);padding:1rem;}
+    .use-label{font-size:0.6rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:0.25rem;}
+    .use-text{font-size:0.82rem;color:var(--grey);line-height:1.5;}
+
+    .framework-table{width:100%;border-collapse:collapse;margin:1.5rem 0;}
+    .framework-table th{background:rgba(124,58,237,0.2);font-size:0.6rem;letter-spacing:2px;text-transform:uppercase;color:var(--ai-light);padding:0.75rem 1rem;text-align:left;}
+    .framework-table td{padding:0.85rem 1rem;border-bottom:1px solid rgba(255,255,255,0.05);font-size:0.82rem;color:var(--grey);}
+    .framework-table td:first-child{color:var(--white);font-weight:600;}
+
+    .aus-spotlight{background:rgba(14,58,91,0.15);border:1px solid rgba(14,58,91,0.5);padding:2rem;margin:2rem 0;}
+    .aus-label{font-size:0.6rem;letter-spacing:3px;text-transform:uppercase;color:#7BC8F6;margin-bottom:0.75rem;display:block;}
+
+    footer{background:rgba(0,0,0,0.5);border-top:1px solid rgba(255,255,255,0.06);padding:2rem;text-align:center;}
+    footer p{font-size:0.78rem;color:var(--muted);}
+    footer a{color:var(--orange);text-decoration:none;}
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">FAIR GO JUSTICE</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="pillars.html">The Four Reforms</a></li>
+    <li><a href="pillar-four.html">Pillar 4 — AI</a></li>
+    <li><a href="legislation.html">Legislation</a></li>
+    <li><a href="senate-briefing.html">Senate</a></li>
+    <li><a href="take-action.html" class="nav-cta">Take Action</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="hero-inner">
+    <span class="eyebrow">Fair Go Justice — Legislative-Grade AI Reference</span>
+    <h1>AI TECHNOLOGY <span>IN JUSTICE</span></h1>
+    <p>A comprehensive, plain-language guide to every major category of advanced intelligence deployed in — or proposed for — Australia's legal system. Written for Senators, lawyers, journalists, and the public who deserve to understand the technology making decisions about their lives.</p>
+  </div>
+</section>
+
+<div class="container">
+
+  <!-- Intro -->
+  <div style="background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.07);padding:2rem;margin-bottom:3rem;">
+    <span class="section-label">Why This Reference Exists</span>
+    <h2>YOU CANNOT GOVERN <span>WHAT YOU DON'T UNDERSTAND</span></h2>
+    <p>In April 2026, the Federal Court of Australia issued a formal warning after lawyers submitted AI-generated fake case citations in real proceedings. Algorithms are determining welfare eligibility, bail decisions, aged care allocations, and family court outcomes — with no mandatory disclosure, no right to explanation, and no independent oversight.</p>
+    <p>This page exists so that every Australian — from a Senator on the Legal and Constitutional Affairs Committee to a self-represented litigant preparing for court — has access to accurate, legislative-grade information about the technology shaping their rights.</p>
+  </div>
+
+  <!-- LLMs -->
+  <div class="tech-card">
+    <div class="tech-header">
+      <div class="tech-icon">🤖</div>
+      <div>
+        <span class="tech-tag">Category 01</span>
+        <div class="tech-title">LARGE LANGUAGE MODELS (LLMs)</div>
+      </div>
+    </div>
+    <div class="risk-badge risk-high">⚠ High Risk — Court Citation Integrity</div>
+    <h3>What They Are</h3>
+    <p>Large Language Models (LLMs) — including ChatGPT, Claude, Gemini, and Llama — are AI systems trained on billions of text documents that generate human-like text in response to prompts. They predict the most statistically likely next word based on patterns in their training data. They do not reason. They do not look up information. They generate plausible-sounding text.</p>
+    <h3>The Justice System Risk</h3>
+    <p>LLMs <strong>hallucinate</strong> — they generate false information with complete confidence. In legal contexts, this means fabricated case citations, invented statutory provisions, and non-existent judicial authorities submitted to courts as real. In Australia, 73+ documented cases occurred before the Federal Court issued its warning.</p>
+    <div class="uses-grid">
+      <div class="use-item">
+        <div class="use-label">Current Justice Uses</div>
+        <div class="use-text">Legal research assistance, document drafting, court submission preparation, victim communications (Services Australia), tribunal decision summaries</div>
+      </div>
+      <div class="use-item">
+        <div class="use-label">FGJ Required Safeguards</div>
+        <div class="use-text">Mandatory disclosure of LLM use in any court document; citation verification requirement; human lawyer sign-off on all AI-assisted submissions</div>
+      </div>
+    </div>
+    <p style="font-size:0.78rem;color:var(--muted);margin-top:0.75rem;margin-bottom:0;"><strong style="color:var(--ai-light);">Key Australian case:</strong> Luck v Secretary, Services Australia [2025] FCAFC 26 — first Federal Court case explicitly addressing AI-assisted decision-making (February 2025).</p>
+  </div>
+
+  <!-- NLP -->
+  <div class="tech-card">
+    <div class="tech-header">
+      <div class="tech-icon">📝</div>
+      <div>
+        <span class="tech-tag">Category 02</span>
+        <div class="tech-title">NATURAL LANGUAGE PROCESSING (NLP)</div>
+      </div>
+    </div>
+    <div class="risk-badge risk-medium">⚠ Medium Risk — Automated Decision Classification</div>
+    <h3>What It Is</h3>
+    <p>Natural Language Processing (NLP) is a branch of AI that enables computers to read, analyse, and interpret human language — including legal documents, transcripts, affidavits, and correspondence. NLP classifies text, extracts key information, and identifies patterns at scale.</p>
+    <h3>The Justice System Risk</h3>
+    <p>NLP is used in automated triage systems to classify legal claims, identify risk categories for bail decisions, and process welfare applications. When NLP misclassifies — due to training data bias or domain mismatch — it produces systemic discrimination at industrial scale without any single human making a discriminatory decision.</p>
+    <div class="uses-grid">
+      <div class="use-item">
+        <div class="use-label">Current Justice Uses</div>
+        <div class="use-text">Bail risk assessment tools, child protection case classification, welfare eligibility triage, court document management, transcript analysis</div>
+      </div>
+      <div class="use-item">
+        <div class="use-label">FGJ Required Safeguards</div>
+        <div class="use-text">Mandatory bias audit of all NLP classification systems used in justice contexts; human review of any NLP-assisted adverse determination; disclosure to affected parties</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- AI Agents -->
+  <div class="tech-card">
+    <div class="tech-header">
+      <div class="tech-icon">⚙️</div>
+      <div>
+        <span class="tech-tag">Category 03</span>
+        <div class="tech-title">AI AGENTS &amp; AUTOMATED DECISION SYSTEMS</div>
+      </div>
+    </div>
+    <div class="risk-badge risk-high">⚠ High Risk — Autonomous Rights Decisions</div>
+    <h3>What They Are</h3>
+    <p>AI Agents are systems that take autonomous actions in the world — not just generating text, but making decisions, triggering workflows, and acting without human input at each step. Automated Decision Systems (ADS) apply rules and AI outputs to make administrative decisions at scale.</p>
+    <h3>The Robodebt Lesson</h3>
+    <p><strong>Robodebt was Australia's first mass-scale ADS disaster.</strong> An automated income-averaging algorithm sent 433,000 debt notices without legal authority. $548.5 million was repaid. Lives were destroyed. The Royal Commission found the system was designed to avoid human review — because human review would have identified the illegality immediately.</p>
+    <p>In November 2025, an aged care allocation algorithm denied services to 18,000+ eligible recipients with no human review pathway and no appeal mechanism. Robodebt did not end. It evolved.</p>
+    <div class="uses-grid">
+      <div class="use-item">
+        <div class="use-label">Current Justice Uses</div>
+        <div class="use-text">Welfare debt assessment (former Robodebt, current systems), aged care allocation, visa processing, parole condition monitoring, child protection risk scoring</div>
+      </div>
+      <div class="use-item">
+        <div class="use-label">FGJ Required Safeguards</div>
+        <div class="use-text">Human-in-the-loop mandatory for all rights-affecting decisions; right to explanation; independent algorithmic audit; retroactive review since January 2020</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Computer Vision -->
+  <div class="tech-card">
+    <div class="tech-header">
+      <div class="tech-icon">👁️</div>
+      <div>
+        <span class="tech-tag">Category 04</span>
+        <div class="tech-title">COMPUTER VISION &amp; BIOMETRIC SYSTEMS</div>
+      </div>
+    </div>
+    <div class="risk-badge risk-high">⚠ High Risk — Evidence and Identity</div>
+    <h3>What It Is</h3>
+    <p>Computer vision enables AI to interpret images and video — including CCTV footage, facial recognition, body camera analysis, and document authentication. Biometric systems use facial features, gait, voice, and other biological characteristics to identify individuals.</p>
+    <h3>The Justice System Risk</h3>
+    <p>Computer vision is now used in evidence analysis — identifying individuals in CCTV footage, assessing vehicle registration in traffic offences, and verifying document authenticity. Facial recognition systems have documented error rates of 10–35% for people of colour. In criminal justice contexts, these errors are not statistical abstractions. They are wrongful convictions.</p>
+    <div class="uses-grid">
+      <div class="use-item">
+        <div class="use-label">Current Justice Uses</div>
+        <div class="use-text">CCTV evidence analysis, facial recognition for suspect identification, document fraud detection, deepfake detection in evidence (emerging), border security biometrics</div>
+      </div>
+      <div class="use-item">
+        <div class="use-label">FGJ Required Safeguards</div>
+        <div class="use-text">Mandatory disclosure of computer vision use in criminal proceedings; independent validation of any biometric evidence; prohibition on sole reliance on facial recognition for identification</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Blockchain -->
+  <div class="tech-card">
+    <div class="tech-header">
+      <div class="tech-icon">🔗</div>
+      <div>
+        <span class="tech-tag">Category 05</span>
+        <div class="tech-title">BLOCKCHAIN &amp; DISTRIBUTED LEDGER TECHNOLOGY</div>
+      </div>
+    </div>
+    <div class="risk-badge risk-emerging">🔵 Emerging — Evidence Integrity Solution</div>
+    <h3>What It Is</h3>
+    <p>Blockchain is a distributed, tamper-resistant ledger — a record of transactions or events that cannot be altered after the fact without detection. Unlike centralised databases, blockchain records are verified by multiple independent nodes, making tampering computationally infeasible.</p>
+    <h3>The Justice Opportunity</h3>
+    <p>Blockchain is the technological solution to the evidence tampering problem at the heart of Pillar 3. A blockchain-based chain-of-custody system would create an unbreakable digital record from the moment evidence is collected — time-stamped, independently verified, and impossible to alter without detection. This is not theoretical. Estonia has used blockchain for national legal records since 2012.</p>
+    <div class="uses-grid">
+      <div class="use-item">
+        <div class="use-label">Proposed Justice Uses</div>
+        <div class="use-text">Digital chain-of-custody for all physical and digital evidence; immutable court record archive; transparent petition and submission verification; judicial appointment records</div>
+      </div>
+      <div class="use-item">
+        <div class="use-label">FGJ Reform Alignment</div>
+        <div class="use-text">Pillar 3 — Evidence Integrity: blockchain as mandatory chain-of-custody standard; Pillar 4 — AI Accountability: algorithmic audit trails on distributed ledger</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Australian AI Ecosystem -->
+  <div class="aus-spotlight">
+    <span class="aus-label">🇦🇺 Australian AI in Justice — Current Landscape</span>
+    <h2>WHO IS <span style="color:#7BC8F6;">ALREADY WORKING ON THIS</span></h2>
+    <p>Australia is not starting from zero. A growing ecosystem of organisations is building responsible AI tools for justice contexts — and they should be partners in, not obstacles to, reform:</p>
+    <ul>
+      <li><strong style="color:#7BC8F6;">Habeas AI</strong> — Australian AI platform for legal research with built-in citation verification; direct FGJ partnership potential</li>
+      <li><strong style="color:#7BC8F6;">Justice Connect AI Project</strong> — deploying AI-assisted intake and triage for community legal centres across Australia</li>
+      <li><strong style="color:#7BC8F6;">UNSW Law Technology and Innovation Centre</strong> — leading academic research on AI in Australian courts</li>
+      <li><strong style="color:#7BC8F6;">ANU Centre for AI and Digital Ethics</strong> — policy research and framework development for ethical AI governance</li>
+      <li><strong style="color:#7BC8F6;">AUSTRAC</strong> — already using AI for financial crime detection — a model for justice sector deployment</li>
+    </ul>
+  </div>
+
+  <!-- International Frameworks -->
+  <div style="margin-bottom:3rem;">
+    <span class="section-label">International Context</span>
+    <h2>WHERE THE WORLD IS <span>GOING</span></h2>
+    <table class="framework-table">
+      <thead>
+        <tr><th>Framework</th><th>Jurisdiction</th><th>Key Provision</th><th>Status</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>EU AI Act</td><td>European Union</td><td>Prohibits AI in criminal justice without human oversight; mandatory transparency for high-risk uses</td><td>In force 2024</td></tr>
+        <tr><td>UNESCO AI Ethics Recommendation</td><td>193 nations</td><td>Human rights-centred AI; right to explanation; algorithmic accountability</td><td>Adopted 2021</td></tr>
+        <tr><td>OECD AI Principles</td><td>OECD members incl. Australia</td><td>Transparency, explainability, human-centred values — Australia is a signatory</td><td>Active</td></tr>
+        <tr><td>UK Justice AI Framework</td><td>United Kingdom</td><td>Court rules for AI disclosure; Law Society AI Ethics guidelines</td><td>Published 2023</td></tr>
+        <tr><td>NCSC AI Readiness Framework</td><td>United States</td><td>Government AI readiness standards — model for Australian adoption</td><td>Published 2024</td></tr>
+        <tr style="background:rgba(124,58,237,0.07);"><td style="color:var(--ai-light);">AI Accountability in Justice Act 2026</td><td style="color:var(--ai-light);">Australia — Proposed</td><td>Binding AI disclosure + human-in-the-loop + right to explanation + oversight panel</td><td style="color:var(--ai-light);">FGJ Proposal — 2026</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div style="background:rgba(124,58,237,0.1);border:1px solid rgba(167,139,250,0.3);padding:2.5rem;text-align:center;">
+    <h2>UNDERSTAND THE TECHNOLOGY. <span>DEMAND THE SAFEGUARDS.</span></h2>
+    <p style="max-width:560px;margin:0 auto 1.5rem;">Every Australian has the right to know when AI is making decisions about their life — and the right to challenge it. Join the movement demanding that right become law.</p>
+    <a href="pillar-four.html" style="display:inline-block;padding:0.9rem 2.2rem;background:var(--ai);color:#fff;font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:3px;text-decoration:none;margin:0.5rem;">Read Pillar 4 →</a>
+    <a href="take-action.html" style="display:inline-block;padding:0.9rem 2.2rem;background:transparent;color:var(--white);border:1px solid rgba(255,255,255,0.3);font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:3px;text-decoration:none;margin:0.5rem;">Join the Movement →</a>
+  </div>
+
+</div>
+
+
+  <!-- Live Pilot Results — NLP in Legal Aid -->
+  <section style="padding:5rem 0;background:rgba(14,58,91,0.06);border-top:1px solid rgba(14,58,91,0.2);">
+    <div style="max-width:1100px;margin:0 auto;padding:0 2rem;">
+      <div style="color:var(--burnt-orange);font-size:0.75rem;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:1rem;font-family:'Space Grotesk',sans-serif;">Field Evidence — NLP & AI in Live Legal Aid Deployments</div>
+      <h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,4vw,3rem);color:var(--white);margin-bottom:1rem;">Real World Results: NLP Transforms Legal Aid Delivery</h2>
+      <p style="color:rgba(245,245,245,0.7);max-width:700px;margin-bottom:3rem;">The following results are drawn from the OECD's 2025 report on AI in justice administration — the gold standard reference for policymakers and Senate committee submissions globally.</p>
+
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;margin-bottom:3rem;">
+        <div style="background:rgba(13,17,23,0.9);border:1px solid rgba(74,222,128,0.2);padding:2rem;">
+          <div style="color:#4ADE80;font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:0.05em;margin-bottom:0.5rem;">🇧🇷 Brazil — Appeal Evaluation (NLP)</div>
+          <div style="display:flex;justify-content:space-between;margin-bottom:1rem;">
+            <div style="text-align:center;">
+              <div style="font-family:'Bebas Neue',sans-serif;font-size:2rem;color:rgba(245,245,245,0.4);">44 min</div>
+              <div style="color:rgba(245,245,245,0.5);font-size:0.7rem;">Human-only</div>
+            </div>
+            <div style="display:flex;align-items:center;color:var(--gold);font-size:1.5rem;">→</div>
+            <div style="text-align:center;">
+              <div style="font-family:'Bebas Neue',sans-serif;font-size:2rem;color:#4ADE80;">2–3 sec</div>
+              <div style="color:rgba(245,245,245,0.5);font-size:0.7rem;">With AI</div>
+            </div>
+          </div>
+          <div style="background:rgba(74,222,128,0.1);text-align:center;padding:0.5rem;color:#4ADE80;font-weight:700;font-size:0.9rem;">98.5% time reduction</div>
+        </div>
+
+        <div style="background:rgba(13,17,23,0.9);border:1px solid rgba(212,175,55,0.2);padding:2rem;">
+          <div style="color:var(--gold);font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:0.05em;margin-bottom:0.5rem;">🇵🇪 Peru — Protection Measures (NLP)</div>
+          <div style="display:flex;justify-content:space-between;margin-bottom:1rem;">
+            <div style="text-align:center;">
+              <div style="font-family:'Bebas Neue',sans-serif;font-size:2rem;color:rgba(245,245,245,0.4);">3 hrs</div>
+              <div style="color:rgba(245,245,245,0.5);font-size:0.7rem;">Human-only</div>
+            </div>
+            <div style="display:flex;align-items:center;color:var(--gold);font-size:1.5rem;">→</div>
+            <div style="text-align:center;">
+              <div style="font-family:'Bebas Neue',sans-serif;font-size:2rem;color:var(--gold);">40 sec</div>
+              <div style="color:rgba(245,245,245,0.5);font-size:0.7rem;">With AI</div>
+            </div>
+          </div>
+          <div style="background:rgba(212,175,55,0.1);text-align:center;padding:0.5rem;color:var(--gold);font-weight:700;font-size:0.9rem;">99.6% time reduction</div>
+        </div>
+
+        <div style="background:rgba(13,17,23,0.9);border:1px solid rgba(214,107,45,0.2);padding:2rem;">
+          <div style="color:var(--burnt-orange);font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:0.05em;margin-bottom:0.5rem;">🌐 Global — Lawyer Time Savings (GenAI)</div>
+          <div style="text-align:center;margin-bottom:1rem;">
+            <div style="font-family:'Bebas Neue',sans-serif;font-size:3rem;color:var(--burnt-orange);">32.5</div>
+            <div style="color:rgba(245,245,245,0.6);font-size:0.9rem;">Working days saved per lawyer per year</div>
+          </div>
+          <div style="background:rgba(214,107,45,0.1);text-align:center;padding:0.5rem;color:var(--burnt-orange);font-weight:700;font-size:0.9rem;">6–20% weekly time savings (Everlaw, 2024)</div>
+        </div>
+
+        <div style="background:rgba(13,17,23,0.9);border:1px solid rgba(14,58,91,0.4);padding:2rem;">
+          <div style="color:var(--white);font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:0.05em;margin-bottom:0.5rem;">🇦🇺 Australia — Justice Connect NLP</div>
+          <div style="text-align:center;margin-bottom:1rem;">
+            <div style="font-family:'Bebas Neue',sans-serif;font-size:2rem;color:var(--white);">245</div>
+            <div style="color:rgba(245,245,245,0.6);font-size:0.9rem;">Lawyers made 90,000+ annotations<br>across 9,000+ NLP training samples</div>
+          </div>
+          <div style="background:rgba(14,58,91,0.2);text-align:center;padding:0.5rem;color:rgba(245,245,245,0.7);font-size:0.85rem;">Lawyers trained the AI — not replaced by it</div>
+        </div>
+      </div>
+
+      <div style="background:rgba(13,17,23,0.8);border-left:4px solid var(--burnt-orange);padding:2rem;">
+        <p style="color:var(--white);font-size:1rem;margin-bottom:0.5rem;"><strong>Source:</strong> OECD — <em>Governing with Artificial Intelligence (2025): AI in Justice Administration and Access to Justice</em></p>
+        <p style="color:rgba(245,245,245,0.6);font-size:0.88rem;margin:0;">This report forms the primary international benchmarking reference for the AI Accountability in Justice Act 2026. It is the same framework cited by the European Commission and the UN Office on Drugs and Crime in their respective AI justice guidance documents.</p>
+      </div>
+    </div>
+  </section>
+
+<footer>
+  <p>© 2025 Fair Go Justice Movement | <a href="transparency.html">Transparency</a> | <a href="pillar-four.html">Pillar 4 — AI</a> | <a href="take-action.html">Take Action</a></p>
+  <p style="margin-top:0.5rem;">This platform uses AI-assisted research. All statistics are sourced from government reports, academic research, and court records. <a href="transparency.html">Full methodology →</a></p>
+</footer>
+
+
+        <!-- ===== OECD AI PRINCIPLES COMPLIANCE ===== -->
+        <section class="section-block" style="background:#0a1628;padding:60px 40px;">
+          <div class="container">
+            <h2 class="section-title" style="color:#D4AF37;text-align:center;margin-bottom:12px;">OECD AI Principles — Compliance Mapping</h2>
+            <p style="color:#ccc;text-align:center;max-width:780px;margin:0 auto 40px;">The AI Accountability in Justice Act 2026 maps directly to all five OECD AI Principles and Australian Government AI Policy v2.0. This is not speculative policy — it is alignment with international standards already in force.</p>
+
+            <div style="overflow-x:auto;margin-bottom:48px;">
+              <table style="width:100%;border-collapse:collapse;font-size:0.88rem;">
+                <thead>
+                  <tr style="background:#0E3A5B;">
+                    <th style="padding:14px 18px;text-align:left;color:#D4AF37;font-family:'Bebas Neue',sans-serif;">OECD AI Principle</th>
+                    <th style="padding:14px 18px;text-align:left;color:#D4AF37;font-family:'Bebas Neue',sans-serif;">FGJ Act 2026 Measure</th>
+                    <th style="padding:14px 18px;text-align:center;color:#D4AF37;font-family:'Bebas Neue',sans-serif;">Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr style="border-bottom:1px solid #1a2a3a;">
+                    <td style="padding:12px 18px;color:#F5F5F5;font-weight:600;">1. Inclusive Growth &amp; Well-Being</td>
+                    <td style="padding:12px 18px;color:#ccc;">Universal legal access mandate; 22,000 new positions; regional expansion coordinators</td>
+                    <td style="padding:12px 18px;text-align:center;"><span style="background:#1a4a1a;color:#4CAF50;padding:4px 12px;border-radius:20px;font-size:0.8rem;font-weight:700;">COMPLIANT</span></td>
+                  </tr>
+                  <tr style="border-bottom:1px solid #1a2a3a;background:#0a1420;">
+                    <td style="padding:12px 18px;color:#F5F5F5;font-weight:600;">2. Human-Centred Values &amp; Fairness</td>
+                    <td style="padding:12px 18px;color:#ccc;">3-tier human oversight; Ethics Review Committee; ATSI cultural protocols; bias audit requirements</td>
+                    <td style="padding:12px 18px;text-align:center;"><span style="background:#1a4a1a;color:#4CAF50;padding:4px 12px;border-radius:20px;font-size:0.8rem;font-weight:700;">COMPLIANT</span></td>
+                  </tr>
+                  <tr style="border-bottom:1px solid #1a2a3a;">
+                    <td style="padding:12px 18px;color:#F5F5F5;font-weight:600;">3. Transparency &amp; Explainability</td>
+                    <td style="padding:12px 18px;color:#ccc;">Mandatory public reporting; algorithm audit logs; explainable AI requirement; annual independent auditor report</td>
+                    <td style="padding:12px 18px;text-align:center;"><span style="background:#1a4a1a;color:#4CAF50;padding:4px 12px;border-radius:20px;font-size:0.8rem;font-weight:700;">COMPLIANT</span></td>
+                  </tr>
+                  <tr style="border-bottom:1px solid #1a2a3a;background:#0a1420;">
+                    <td style="padding:12px 18px;color:#F5F5F5;font-weight:600;">4. Robustness, Security &amp; Safety</td>
+                    <td style="padding:12px 18px;color:#ccc;">5-step incident response; sovereign infrastructure requirement; Privacy Act 1988 + 13 APPs enforcement; PIA mandatory</td>
+                    <td style="padding:12px 18px;text-align:center;"><span style="background:#1a4a1a;color:#4CAF50;padding:4px 12px;border-radius:20px;font-size:0.8rem;font-weight:700;">COMPLIANT</span></td>
+                  </tr>
+                  <tr style="border-bottom:1px solid #1a2a3a;">
+                    <td style="padding:12px 18px;color:#F5F5F5;font-weight:600;">5. Accountability</td>
+                    <td style="padding:12px 18px;color:#ccc;">Named accountability structure; 5 specific roles; Senior AI Review Counsel sign-off; Parliamentary reporting obligations</td>
+                    <td style="padding:12px 18px;text-align:center;"><span style="background:#1a4a1a;color:#4CAF50;padding:4px 12px;border-radius:20px;font-size:0.8rem;font-weight:700;">COMPLIANT</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- 3-Tier Oversight Architecture -->
+            <h3 style="color:#F5F5F5;font-family:'Bebas Neue',sans-serif;font-size:1.6rem;margin-bottom:24px;text-align:center;">3-Tier Human-in-the-Loop Oversight Architecture</h3>
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px;margin-bottom:48px;">
+              <div style="background:#0D1117;border:1px solid #D4AF37;border-radius:12px;padding:28px;position:relative;">
+                <div style="position:absolute;top:-14px;left:24px;background:#D4AF37;color:#0D1117;font-family:'Bebas Neue',sans-serif;font-size:0.9rem;padding:4px 14px;border-radius:20px;">TIER 1</div>
+                <h4 style="color:#D4AF37;margin:12px 0 10px;">Client Level</h4>
+                <p style="color:#ccc;font-size:0.9rem;line-height:1.6;">AI output presented to client with plain-language explanation. Client consent required before any AI-assisted advice is relied upon. Voluntary participation framework — no client is forced into an AI-assisted process.</p>
+              </div>
+              <div style="background:#0D1117;border:1px solid #0E3A5B;border-radius:12px;padding:28px;position:relative;">
+                <div style="position:absolute;top:-14px;left:24px;background:#0E3A5B;color:#F5F5F5;font-family:'Bebas Neue',sans-serif;font-size:0.9rem;padding:4px 14px;border-radius:20px;">TIER 2</div>
+                <h4 style="color:#D4AF37;margin:12px 0 10px;">Lawyer Level</h4>
+                <p style="color:#ccc;font-size:0.9rem;line-height:1.6;">Qualified lawyer reviews, modifies and certifies every AI output before it reaches a client or court. The AI is a research and drafting tool — the lawyer makes every consequential decision. Professional obligations fully intact.</p>
+              </div>
+              <div style="background:#0D1117;border:1px solid #D66B2D;border-radius:12px;padding:28px;position:relative;">
+                <div style="position:absolute;top:-14px;left:24px;background:#D66B2D;color:#F5F5F5;font-family:'Bebas Neue',sans-serif;font-size:0.9rem;padding:4px 14px;border-radius:20px;">TIER 3</div>
+                <h4 style="color:#D4AF37;margin:12px 0 10px;">Institutional Level</h4>
+                <p style="color:#ccc;font-size:0.9rem;line-height:1.6;">Senior AI Review Counsel holds final sign-off authority for high-stakes determinations. National AI Justice Board oversight. Algorithm audit logs retained. Annual public reporting to Parliament.</p>
+              </div>
+            </div>
+
+            <!-- Training Requirements -->
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:48px;">
+              <div style="background:#0D1117;border:1px solid #D4AF37;border-radius:12px;padding:28px;">
+                <h4 style="color:#D4AF37;font-family:'Bebas Neue',sans-serif;font-size:1.2rem;margin-bottom:16px;">Mandatory Training — Lawyers</h4>
+                <div style="font-size:2.5rem;font-weight:900;color:#F5F5F5;font-family:'Bebas Neue',sans-serif;margin-bottom:8px;">16 Hours</div>
+                <p style="color:#ccc;font-size:0.85rem;line-height:1.6;">CPD-accredited curriculum covering: AI fundamentals for lawyers (4h), Ethical oversight and bias detection (4h), Practical AI tools and workflow (4h), Privacy, confidentiality and liability (4h). Required before deployment access granted.</p>
+              </div>
+              <div style="background:#0D1117;border:1px solid #0E3A5B;border-radius:12px;padding:28px;">
+                <h4 style="color:#D4AF37;font-family:'Bebas Neue',sans-serif;font-size:1.2rem;margin-bottom:16px;">Mandatory Training — Support Staff</h4>
+                <div style="font-size:2.5rem;font-weight:900;color:#F5F5F5;font-family:'Bebas Neue',sans-serif;margin-bottom:8px;">8 Hours</div>
+                <p style="color:#ccc;font-size:0.85rem;line-height:1.6;">CPD-accredited curriculum covering: Understanding AI tool outputs and limitations (2h), Data handling, privacy and consent (2h), Escalation pathways and when to flag for lawyer review (2h), Incident identification and reporting (2h).</p>
+              </div>
+            </div>
+
+            <!-- Incident Response Protocol -->
+            <div style="background:#0D1117;border:1px solid #D66B2D;border-radius:12px;padding:32px;">
+              <h4 style="color:#D66B2D;font-family:'Bebas Neue',sans-serif;font-size:1.3rem;margin-bottom:24px;text-align:center;">5-Step Incident Response Protocol</h4>
+              <div style="display:flex;flex-direction:column;gap:16px;">
+                <div style="display:flex;align-items:flex-start;gap:20px;">
+                  <div style="min-width:36px;height:36px;background:#D66B2D;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;color:#0D1117;font-size:1rem;">1</div>
+                  <div><strong style="color:#F5F5F5;">Identify &amp; Flag</strong> — Any lawyer, support staff or client may flag a suspected AI error or bias incident. Mandatory escalation within 2 hours.</div>
+                </div>
+                <div style="display:flex;align-items:flex-start;gap:20px;">
+                  <div style="min-width:36px;height:36px;background:#D66B2D;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;color:#0D1117;font-size:1rem;">2</div>
+                  <div><strong style="color:#F5F5F5;">Immediate Isolation</strong> — Affected AI process suspended within 4 hours pending review. No further outputs from the affected module until cleared.</div>
+                </div>
+                <div style="display:flex;align-items:flex-start;gap:20px;">
+                  <div style="min-width:36px;height:36px;background:#D66B2D;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;color:#0D1117;font-size:1rem;">3</div>
+                  <div><strong style="color:#F5F5F5;">Senior Review Counsel Assessment</strong> — Senior AI Review Counsel assesses all affected determinations within 24 hours. Human decision substituted where required.</div>
+                </div>
+                <div style="display:flex;align-items:flex-start;gap:20px;">
+                  <div style="min-width:36px;height:36px;background:#D66B2D;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;color:#0D1117;font-size:1rem;">4</div>
+                  <div><strong style="color:#F5F5F5;">Technical Audit</strong> — Technical Standards Panel root-cause investigation within 72 hours. Corrective action plan published.</div>
+                </div>
+                <div style="display:flex;align-items:flex-start;gap:20px;">
+                  <div style="min-width:36px;height:36px;background:#D66B2D;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;color:#0D1117;font-size:1rem;">5</div>
+                  <div><strong style="color:#F5F5F5;">Public Disclosure</strong> — Material incidents disclosed in next annual Parliamentary report. Major incidents disclosed publicly within 30 days. No suppression. No exceptions.</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Privacy Framework -->
+            <div style="background:#0a1628;border:1px solid #D4AF37;border-radius:12px;padding:32px;margin-top:28px;">
+              <h4 style="color:#D4AF37;font-family:'Bebas Neue',sans-serif;font-size:1.3rem;margin-bottom:16px;text-align:center;">Privacy &amp; Data Sovereignty Framework</h4>
+              <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;">
+                <div style="text-align:center;padding:16px;background:#0D1117;border-radius:8px;"><div style="color:#D4AF37;font-weight:700;margin-bottom:6px;">Privacy Act 1988</div><div style="color:#aaa;font-size:0.8rem;">Full compliance + all 13 Australian Privacy Principles enforced at system level</div></div>
+                <div style="text-align:center;padding:16px;background:#0D1117;border-radius:8px;"><div style="color:#D4AF37;font-weight:700;margin-bottom:6px;">Sovereign Infrastructure</div><div style="color:#aaa;font-size:0.8rem;">No client data stored offshore. Australian cloud/data centres only.</div></div>
+                <div style="text-align:center;padding:16px;background:#0D1117;border-radius:8px;"><div style="color:#D4AF37;font-weight:700;margin-bottom:6px;">Mandatory PIA</div><div style="color:#aaa;font-size:0.8rem;">Privacy Impact Assessment required before any AI system deployment</div></div>
+                <div style="text-align:center;padding:16px;background:#0D1117;border-radius:8px;"><div style="color:#D4AF37;font-weight:700;margin-bottom:6px;">AU Gov AI Policy v2.0</div><div style="color:#aaa;font-size:0.8rem;">Full alignment with Australian Government AI Ethics Principles — all 8 mapped</div></div>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+</body>
+</html>
