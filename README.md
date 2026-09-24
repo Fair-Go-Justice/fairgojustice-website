@@ -17,6 +17,43 @@ This is a static HTML/CSS/JS website. Simply open `index.html` in a browser or:
 npx serve .
 ```
 
+## 🚀 Deployment
+
+### Google Cloud Platform (Firebase)
+
+The website is configured for deployment to Google Cloud Platform using Firebase Hosting.
+
+**Prerequisites:**
+- Firebase CLI: `npm install -g firebase-tools`
+- Google Cloud project access
+
+**Deploy Static Site:**
+```bash
+firebase login
+./deploy-static.sh
+```
+
+**Deploy API Backend:**
+```bash
+cd api
+./deploy.sh
+```
+
+**Custom Domain Setup:**
+1. Go to [Firebase Console](https://console.firebase.google.com/)
+2. Navigate to Hosting section
+3. Add custom domain: `www.fairgojustice.com.au`
+4. Follow DNS configuration instructions
+
+### Netlify (Alternative)
+
+The site can also be deployed to Netlify:
+
+1. Connect GitHub repository to Netlify
+2. Set build command: (leave empty)
+3. Set publish directory: `.`
+4. Add custom domain in Netlify dashboard
+
 ## 📁 Structure
 
 ```

@@ -349,6 +349,12 @@
           errorMessage = 'Please enter a valid 4-digit postcode.';
         }
       }
+
+      // Checkbox validation
+      if (field.type === 'checkbox' && field.hasAttribute('required') && !field.checked) {
+        isValid = false;
+        errorMessage = 'This checkbox is required.';
+      }
       
       // Update UI
       if (errorElement) {
